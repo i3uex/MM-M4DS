@@ -91,6 +91,143 @@ print('[l.target.name/]')		#TARGET
 [/for]		
 
 [/file]
+
+
+
+
+
+
+
+
+
+[file ('DebugWorkflow.py', false, 'UTF-8')]		
+[for (d : DataProcessing | aWorkflow.dataprocessing)]
+print([d.name/])	#ProcessedName
+[if (d.incoming.source.name.toString().equalsIgnoreCase('invalid'))]
+print('NO SOURCE')         					#SOURCE
+[else]
+print('[d.incoming.source.name/]')         #SOURCE
+[/if]
+[if (d.outgoing.target.name.toString().equalsIgnoreCase('invalid'))]
+print('NO TARGET')         					#TARGET
+[else]
+print('[d.outgoing.target.name/]')         #TARGET
+[/if]
+[for (p : Parameter | d.parameter)]
+[if (p.oclIsTypeOf(DerivedValue))]
+[let derivedValue : DerivedValue = p.oclAsType(DerivedValue)]
+	print('[derivedValue.name/]')			#Parameters, defines the operation to apply
+	print('[derivedValue.imputeValue/]')
+	print('[derivedValue.type/]')
+	print('[derivedValue.derivedValueDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(NumOp))]
+[let numOp : NumOp = p.oclAsType(NumOp)]
+	print('[numOp.name/]')			#Parameters, defines the operation to apply
+	print('[numOp.imputeValue/]')
+	print('[numOp.operation/]')
+	print('[numOp.numOpDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(FixValue))]
+[let fixValue : FixValue = p.oclAsType(FixValue)]
+	print('[fixValue.name/]')			#Parameters, defines the operation to apply
+	print('[fixValue.imputeValue/]')
+	print('[fixValue.value/]')			#Es unknown porque el valor concreto no se ha definido, se define en la llamada
+	print('[fixValue.fixValueDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(Map))]
+[let map : Map = p.oclAsType(Map)]
+	print('[map.name/]')			#Parameters, defines the operation to apply
+	print('[map.outvalue/]')
+	print('[map.mapDefinition.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(DerivedField))]
+[let derivedField : DerivedField = p.oclAsType(DerivedField)]
+	print('[derivedField.name/]')			#Parameters, defines the operation to apply
+	print('[derivedField.der_name/]')
+	print('[derivedField.der_dataType/]')
+	print('[derivedField.derivedFieldDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(Primitive))]
+[let primitive : Primitive = p.oclAsType(Primitive)]
+	print('[primitive.name/]')			#Parameters, defines the operation to apply
+	print('[primitive.value/]')
+	print('[primitive.primitiveDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(FilterValue))]
+[let filterValue : FilterValue = p.oclAsType(FilterValue)]
+	print('[filterValue.name/]')			#Parameters, defines the operation to apply
+	print('[filterValue.filterValueDef.name/]')
+	[for (p : Primitive | filterValue.primitive)]
+		print('[p.name/]')
+		print('[p.value/]')
+		print('[p.primitiveDef.name/]')
+	[/for]
+	[for (mv : MatchingValue | filterValue.matchingvalue)]
+		print('[mv.name/]')
+		[if (mv.oclIsTypeOf(MissingValues))]
+		[let missingValues : MissingValues = mv.oclAsType(MissingValues)]
+		print('[missingValues.missingValuesDef.name/]')
+		[/let]
+		[elseif (mv.oclIsTypeOf(Range))]
+		[let range : Range = mv.oclAsType(Range)]
+		print('[range.min/]')
+		print('[range.max/]')
+		print('[range.rangeDef.name/]')
+		[/let]
+		[/if]
+	[/for]
+[/let]
+[elseif (p.oclIsTypeOf(MissingValues))]
+[let missingValues : MissingValues = p.oclAsType(MissingValues)]
+	print('[missingValues.name/]')
+	print('[missingValues.missingValuesDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(Range))]
+[let range : Range = p.oclAsType(Range)]
+	print('[range.name/]')
+	print('[range.min/]')
+	print('[range.max/]')
+	print('[range.rangeDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(DiscretizeBin))]
+[let discretizeBin : DiscretizeBin = p.oclAsType(DiscretizeBin)]
+	print('[discretizeBin.name/]')
+	print('[discretizeBin.binValue/]')
+	print('[discretizeBin.discretizeBinDef.name/]')
+[/let]
+[elseif (p.oclIsTypeOf(Field))]
+[let field : Field = p.oclAsType(Field)]
+	print('[field.name/]')
+	print('[field.operator/]')
+	print('[field.fieldDef.name/]')
+	[for (df : DataField | field.dataField)]
+		print('[df.name/]')
+		print('[df.id/]')
+		print('[df.dataType/]')
+		print('[df.target/]')
+		print('[df.displayName/]')
+		#-----------------------------------
+	[/for]
+[/let]
+[/if]
+[/for]
+#-----------------------------------------------------------------------------
+[for (c : Contract | d.contract)]
+print('[c.name/]')
+[/for]
+############################################################
+[/for]
+
+
+
+
+
+
+
+
+[/file]
+
 [/template]
 
 
