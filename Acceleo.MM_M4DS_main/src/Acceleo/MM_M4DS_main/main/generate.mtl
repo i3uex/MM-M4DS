@@ -1,0 +1,62 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module generate('http://www.example.org/Library', 'https://www.example.org/workflow', 'https://www.example.org/contractDef', 'https://www.example.org/contract')]
+[import Acceleo::MM_M4DS_Workflow::main::generate/]
+[**
+ * The documentation of the template generateElement.
+ * @param aLibrary
+ */]
+
+[template public generateElement(aWorkflow : Workflow)]
+[comment @main/]
+
+[generateWorkflow(aWorkflow)/]
+
+
+[/template]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

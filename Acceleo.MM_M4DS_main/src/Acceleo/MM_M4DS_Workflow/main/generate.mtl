@@ -1,0 +1,136 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module generate('https://www.example.org/workflow')]
+
+[import Acceleo::MM_M4DS_contract::main::generate /] 
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aLibrary
+ */]
+
+[template public generateWorkflow(aWorkflow : Workflow)]
+// Esto son instancias, no clases. 
+// No se debe crear un archivo para cada una, se debe crear un archivo de clase 
+// y en el main (o donde sea) crear la instancia.
+[generateDataProcessing(aWorkflow)/]
+[generateDebug(aWorkflow)/]
+
+[file (aWorkflow.name.trim() + '.py', false, 'UTF-8')]
+from DataProcessing import DataProcessing
+#Clase main (por ahora)
+print('[aWorkflow.name/] tested')
+print()
+print()
+dataProcessing=DataProcessing()
+dataProcessing.generateDataProcessing()
+[/file]
+[/template]
+
+
+
+[template public generateDataProcessing(aWorkflow : Workflow)]
+[file ('DataProcessing.py', false, 'UTF-8')]
+class DataProcessing:
+	def generateDataProcessing(self):
+	
+
+[/file]
+[/template]
+
+
+[template public generateDebug(aWorkflow : Workflow)]
+[file ('Debug.py', false, 'UTF-8')]
+#DATA PROCESSING
+
+[for (d : DataProcessing | aWorkflow.dataprocessing)]
+print([d.name/])	#ProcessedName
+[if (d.incoming.source.name.toString().equalsIgnoreCase('invalid'))]
+print('NO SOURCE')         					#SOURCE
+[else]
+print('[d.incoming.source.name/]')         #SOURCE
+[/if]
+[if (d.outgoing.target.name.toString().equalsIgnoreCase('invalid'))]
+print('NO TARGET')         					#TARGET
+[else]
+print('[d.outgoing.target.name/]')         #TARGET
+[/if]
+[for (p : Parameter | d.parameter)]
+print([p.name/])	#Parameters, defines the operation to apply
+[/for]
+#-----------------------------------------------------------------------------
+[for (c : Contract | d.contract)]
+print('[c.name/]')
+print('[c.contractDefinition.name/]')
+
+print('[c.contract.name/]')
+print('[c.contract.type/]')
+print('[c.contractDefinition.contractDefinition.type/]')
+[generateContract(c.contract)/]
+print('[c.contract.eClass().name/]')
+print('[c.contract._in.eClass().name/]')
+
+""""""
+
+[/for]
+#######
+
+[/for]
+
+
+
+#LINKS		
+
+[for (l : Link | aWorkflow.link)]
+print('[l.source.name/]')		#SOURCE
+print('[l.target.name/]')		#TARGET
+
+[/for]		
+
+[/file]
+[/template]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
