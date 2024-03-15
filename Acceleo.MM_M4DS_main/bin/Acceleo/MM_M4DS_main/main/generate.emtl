@@ -16,12 +16,12 @@
     <input>
       <takesTypesFrom href="https://www.example.org/contract#/"/>
     </input>
-    <imports href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0"/>
+    <imports href="../../MM_M4DS_Workflow/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateElement" visibility="Public" main="true">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <body xsi:type="mtl:TemplateInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0/generateWorkflow"/>
+        <definition href="../../MM_M4DS_Workflow/main/generate.emtl#/0/generateWorkflow"/>
         <argument xsi:type="ocl.ecore:VariableExp" name="aWorkflow" referredVariable="/0/generateElement/aWorkflow">
           <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
         </argument>
@@ -73,7 +73,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0/generateWorkflow"/>
+          <references href="../../MM_M4DS_Workflow/main/generate.emtl#/0/generateWorkflow"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aWorkflow">

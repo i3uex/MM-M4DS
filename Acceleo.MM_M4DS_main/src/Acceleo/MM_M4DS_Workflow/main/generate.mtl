@@ -58,20 +58,15 @@ print('NO TARGET')         					#TARGET
 [else]
 print('[d.outgoing.target.name/]')         #TARGET
 [/if]
-[for (p : Parameter | d.parameter)]
-print([p.name/])	#Parameters, defines the operation to apply
-[/for]
 #-----------------------------------------------------------------------------
 [for (c : Contract | d.contract)]
-print('[c.name/]')
-print('[c.contractDefinition.name/]')
-
-print('[c.contract.name/]')
-print('[c.contract.type/]')
-print('[c.contractDefinition.contractDefinition.type/]')
-[generateContract(c.contract)/]
-print('[c.contract.eClass().name/]')
-print('[c.contract._in.eClass().name/]')
+print('[c.name/]')				#Contract en workflow
+print('[c.contractDefinition.name/]')			#ContractDefinition name en ContractDefinition
+print('[c.contract.name/]')				#Contract name en CONTRACT
+print('[c.contract.type/]')				#Contract type en CONTRACT
+[llamadaACONTRACT(c.contract)/]				#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS
+[if (c.contract.oclIsTypeOf(ValueRange))]#Esto se hace en CONTRACT
+[/if]
 
 """"""
 
@@ -100,9 +95,31 @@ print('[l.target.name/]')		#TARGET
 
 
 
-[file ('DebugWorkflow.py', false, 'UTF-8')]		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[file ('DebugWorkflow.py', false, 'UTF-8')]					#ESTE YA ESTA TERMINADO A FALTA DE ACCEDER A DATADICTIONARY Y ARGUMENT DESDE DATAPROCESSING
 [for (d : DataProcessing | aWorkflow.dataprocessing)]
-print([d.name/])	#ProcessedName
+print([d.name/])	#DataProcessing name
 [if (d.incoming.source.name.toString().equalsIgnoreCase('invalid'))]
 print('NO SOURCE')         					#SOURCE
 [else]
@@ -116,62 +133,97 @@ print('[d.outgoing.target.name/]')         #TARGET
 [for (p : Parameter | d.parameter)]
 [if (p.oclIsTypeOf(DerivedValue))]
 [let derivedValue : DerivedValue = p.oclAsType(DerivedValue)]
-	print('[derivedValue.name/]')			#Parameters, defines the operation to apply
+	print('[derivedValue.name/]')			#DerivedValue
 	print('[derivedValue.imputeValue/]')
 	print('[derivedValue.type/]')
 	print('[derivedValue.derivedValueDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(NumOp))]
 [let numOp : NumOp = p.oclAsType(NumOp)]
-	print('[numOp.name/]')			#Parameters, defines the operation to apply
+	print('[numOp.name/]')			#NumOp
 	print('[numOp.imputeValue/]')
 	print('[numOp.operation/]')
 	print('[numOp.numOpDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(FixValue))]
 [let fixValue : FixValue = p.oclAsType(FixValue)]
-	print('[fixValue.name/]')			#Parameters, defines the operation to apply
+	print('[fixValue.name/]')			#FixValue
 	print('[fixValue.imputeValue/]')
 	print('[fixValue.value/]')			#Es unknown porque el valor concreto no se ha definido, se define en la llamada
 	print('[fixValue.fixValueDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(Map))]
 [let map : Map = p.oclAsType(Map)]
-	print('[map.name/]')			#Parameters, defines the operation to apply
+	print('[map.name/]')			#Map
 	print('[map.outvalue/]')
 	print('[map.mapDefinition.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(DerivedField))]
 [let derivedField : DerivedField = p.oclAsType(DerivedField)]
-	print('[derivedField.name/]')			#Parameters, defines the operation to apply
+	print('[derivedField.name/]')			#DerivedField
 	print('[derivedField.der_name/]')
 	print('[derivedField.der_dataType/]')
 	print('[derivedField.derivedFieldDef.name/]')
+	print('[derivedField.der_dataField.name/]')
+	print('[derivedField.der_dataField.id/]')
+	print('[derivedField.der_dataField.dataType/]')
+	print('[derivedField.der_dataField.target/]')
+	print('[derivedField.der_dataField.displayName/]')
+	[if (derivedField.oclIsTypeOf(Categorical))]
+	[let cat : Categorical = derivedField.oclAsType(Categorical)]
+		print('[cat.ordinal/]')		#Categorical
+		print('[cat.categoricalDef.name/]')
+	[/let]
+	[elseif (derivedField.oclIsTypeOf(Continuous))]
+	[let cont : Continuous = derivedField.oclAsType(Continuous)]
+		print('[cont.continuousDef.name/]')		#Continuous
+		[for (i : Interval | cont.interval)]
+			print('[i.leftMargin/]')		#Interval
+			print('[i.rightMargin/]')
+			print('[i.clousure/]')
+		[/for]
+	[/let]
+	[/if]
+	[for (val : ValueField | derivedField.der_dataField.validValues)]
+		print('[val.value/]')		#ValidValues
+		print('[val.count/]')
+#-------------------------____________________________
+	[/for]
+	[for (inval : ValueField | derivedField.der_dataField.invalidValues)]
+		print('[inval.value/]')		#InvalidValues
+		print('[inval.count/]')
+#-------------------------____________________________
+	[/for]
+	[for (miss : ValueField | derivedField.der_dataField.missingValues)]
+		print('[miss.value/]')		#MissingValues
+		print('[miss.count/]')
+#-------------------------____________________________
+	[/for]
 [/let]
 [elseif (p.oclIsTypeOf(Primitive))]
 [let primitive : Primitive = p.oclAsType(Primitive)]
-	print('[primitive.name/]')			#Parameters, defines the operation to apply
+	print('[primitive.name/]')			#Primitive
 	print('[primitive.value/]')
 	print('[primitive.primitiveDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(FilterValue))]
 [let filterValue : FilterValue = p.oclAsType(FilterValue)]
-	print('[filterValue.name/]')			#Parameters, defines the operation to apply
+	print('[filterValue.name/]')			#FilterValue
 	print('[filterValue.filterValueDef.name/]')
 	[for (p : Primitive | filterValue.primitive)]
-		print('[p.name/]')
+		print('[p.name/]')			#Primitive
 		print('[p.value/]')
 		print('[p.primitiveDef.name/]')
 	[/for]
 	[for (mv : MatchingValue | filterValue.matchingvalue)]
-		print('[mv.name/]')
+		print('[mv.name/]')			#MatchingValue
 		[if (mv.oclIsTypeOf(MissingValues))]
 		[let missingValues : MissingValues = mv.oclAsType(MissingValues)]
-		print('[missingValues.missingValuesDef.name/]')
+		print('[missingValues.missingValuesDef.name/]')			#MissingValues
 		[/let]
 		[elseif (mv.oclIsTypeOf(Range))]
 		[let range : Range = mv.oclAsType(Range)]
-		print('[range.min/]')
+		print('[range.min/]')			#Range
 		print('[range.max/]')
 		print('[range.rangeDef.name/]')
 		[/let]
@@ -180,34 +232,70 @@ print('[d.outgoing.target.name/]')         #TARGET
 [/let]
 [elseif (p.oclIsTypeOf(MissingValues))]
 [let missingValues : MissingValues = p.oclAsType(MissingValues)]
-	print('[missingValues.name/]')
+	print('[missingValues.name/]')				#MissingValues
 	print('[missingValues.missingValuesDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(Range))]
 [let range : Range = p.oclAsType(Range)]
-	print('[range.name/]')
+	print('[range.name/]')		#Range
 	print('[range.min/]')
 	print('[range.max/]')
 	print('[range.rangeDef.name/]')
 [/let]
 [elseif (p.oclIsTypeOf(DiscretizeBin))]
 [let discretizeBin : DiscretizeBin = p.oclAsType(DiscretizeBin)]
-	print('[discretizeBin.name/]')
+	print('[discretizeBin.name/]')		#DiscretizeBin
 	print('[discretizeBin.binValue/]')
 	print('[discretizeBin.discretizeBinDef.name/]')
+	[for (i : Interval | discretizeBin.interval)]
+		print('[i.leftMargin/]')		#Interval
+		print('[i.rightMargin/]')
+		print('[i.clousure/]')
+	[/for]
 [/let]
 [elseif (p.oclIsTypeOf(Field))]
 [let field : Field = p.oclAsType(Field)]
-	print('[field.name/]')
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	print('[field.name/]')			#Field
 	print('[field.operator/]')
 	print('[field.fieldDef.name/]')
 	[for (df : DataField | field.dataField)]
-		print('[df.name/]')
+		print('[df.name/]')		#DataField
 		print('[df.id/]')
 		print('[df.dataType/]')
 		print('[df.target/]')
 		print('[df.displayName/]')
-		#-----------------------------------
+		[if (df.oclIsTypeOf(Categorical))]
+		[let cat : Categorical = df.oclAsType(Categorical)]
+			print('[cat.ordinal/]')			#Categorical
+			print('[cat.categoricalDef.name/]')
+		[/let]
+		[elseif (df.oclIsTypeOf(Continuous))]
+		[let cont : Continuous = df.oclAsType(Continuous)]
+			print('[cont.continuousDef.name/]')			#Continuous
+			[for (i : Interval | cont.interval)]
+				print('[i.leftMargin/]')			#Interval
+				print('[i.rightMargin/]')
+				print('[i.clousure/]')
+			[/for]
+		[/let]
+		[/if]
+		[for (val : ValueField | df.validValues)]
+		print('[val.value/]')		#ValidValues
+		print('[val.count/]')
+	#-------------------------____________________________
+		[/for]
+		[for (inval : ValueField | df.invalidValues)]
+			print('[inval.value/]')		#InvalidValues
+			print('[inval.count/]')
+	#-------------------------____________________________
+		[/for]
+		[for (miss : ValueField | df.missingValues)]
+			print('[miss.value/]')		#MissingValues
+			print('[miss.count/]')
+	#-------------------------____________________________
+		[/for]
+			#-----------------------------------
 	[/for]
 [/let]
 [/if]
