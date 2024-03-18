@@ -5,13 +5,114 @@
 [module generate('https://www.example.org/contract')]
 
 
-[**
- * The documentation of the template generateElement.
- * @param aLibrary
- */]
-
 [template public generateContract(aContract : Contract)]
-print('[aContract._in.eClass().name/]')
+
+[/template]
+
+[template public generateDebugContract(aContract : Contract)]
+
+[if (aContract._in.oclIsTypeOf(DataDictionary))]
+[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
+print('[dd.dataDictionary.name/]')		#DataDictionary _in
+print('[dd.dataDictionaryDef.name/]')		#DataDictionaryDef _in
+[/let]
+[elseif (aContract._in.oclIsTypeOf(DataField))]
+[let df : DataField = aContract._in.oclAsType(DataField)]
+print('[df.name/]')		#dataField name _in
+print('[df.dataField.name/]')		#dataField _in
+print('[df.dataFieldDef.name/]')		#dataFieldDef _in
+[/let]
+[/if]
+[if (aContract.out <> null)]
+	[if (aContract.out.oclIsTypeOf(DataDictionary))]
+[let dd : DataDictionary = aContract.out.oclAsType(DataDictionary)]
+print('[dd.dataDictionary.name/]')		#DataDictionary out
+print('[dd.dataDictionaryDef.name/]')		#DataDictionaryDef out
+[/let]
+	[elseif (aContract.out.oclIsTypeOf(DataField))]
+[let df : DataField = aContract.out.oclAsType(DataField)]
+print('[df.name/]')		#dataField name out
+print('[df.dataField.name/]')		#dataField out
+print('[df.dataFieldDef.name/]')		#dataFieldDef out
+[/let]
+	[/if]
+[/if]
+
+
+[if (aContract.oclIsTypeOf(Condition))]
+[let cond : Condition = aContract.oclAsType(Condition)]
+print('[cond.conditionDef.name/]')			#Condition
+[/let]
+[elseif (aContract.oclIsTypeOf(FieldRange))]
+[let fr : FieldRange = aContract.oclAsType(FieldRange)]
+print('[fr.belongOp/]')			#FieldRange
+print('[fr.type/]')				#Type in Contract
+print('[fr.name/]')		#Name in Contract
+print('[fr.fieldRangeDef.name/]')		#FieldRangeDef name
+[for (f : Field | fr.field)]
+print('[f.dataField.name/]')		#Field in Field/FieldRange
+[/for]
+[/let]
+[elseif (aContract.oclIsTypeOf(ValueRange))]
+[let vr : ValueRange = aContract.oclAsType(ValueRange)]
+print('[vr.belongOp/]')			#ValueRange
+print('[vr.type/]')		#Type in Contract
+print('[vr.name/]')		#Name in Contract
+print('[vr.valueRangeDef.name/]')	#ValueRangeDef name
+[for (v : Value | vr.value)]
+[if (v.oclIsTypeOf(FixValue))]
+	[let fv : FixValue = v.oclAsType(FixValue)]
+	print('[fv.value/]')	#FixValue value
+	print('[fv.dataType/]')	#FixValue DataType
+	print('[fv.valueFieldDef.name/]')	#FixValue valueFieldDef name
+	[/let]
+[elseif (v.oclIsTypeOf(Interval))]
+	[let inter : Interval = v.oclAsType(Interval)]
+	print('[inter.leftMargin/]')	#Interval leftMargin
+	print('[inter.rightMargin/]')	#Interval rightMargin
+	print('[inter.closureType/]')	#Interval ClosureType
+	print('[inter.intervalDef.name/]')	#Interval intervalDef name
+	[/let]
+[elseif (v.oclIsTypeOf(DerivedValue))]
+	[let inter : DerivedValue = v.oclAsType(DerivedValue)]
+	print('[inter.type/]')		#DerivedValue type
+	print('[inter.derivedValueDef.name/]')	#DerivedValue derivedValueDef name
+	[/let]
+[elseif (v.oclIsTypeOf(NumOp))]
+	[let nop : NumOp = v.oclAsType(NumOp)]
+	print('[nop.operation/]')		#NumOp operation
+	print('[nop.numOpDef.name/]')	#NumOp numOpDef name
+	[/let]
+[elseif (v.oclIsTypeOf(SpecialValue))]
+	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
+	print('[sv.specialType/]')		#SpecialValue specialType
+	print('[sv.specialValueDef.name/]')	#SpecialValue specialValueDef name
+	[/let]
+[/if]
+[if (v.quantity <> null)]
+	print('[v.quantity.operator/]')
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+		print('[av.value/]')	#AbsoluteValue value
+		print('[av.absoluteValueDef.name/]')	#AbsoluteValueDef name
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+		print('[per.percent/]')		#Percent percent
+		print('[per.percentDef.name/]')		#PercentDef name
+		[/let]
+	[/if]
+[/if]
+[/for]
+[/let]
+[elseif (aContract.oclIsTypeOf(Condition))]
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[let condition : Condition = aContract.oclAsType(Condition)]
+print('[condition.conditionDef.name/]')		#Condition conditionDef name
+[/let]
+[/if]
+
+
 [/template]
 
 

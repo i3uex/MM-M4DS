@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
-  <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_contract::main::generate" startHeaderPosition="83" endHeaderPosition="218">
+  <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_contract::main::generate" startHeaderPosition="83" endHeaderPosition="420">
     <documentation xsi:type="mtl:ModuleDocumentation">
       <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
     </documentation>
@@ -8,29 +8,936 @@
       <takesTypesFrom href="https://www.example.org/contract#/"/>
     </input>
     <ownedModuleElement xsi:type="mtl:Template" name="generateContract" visibility="Public">
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
-      <body xsi:type="ocl.ecore:PropertyCallExp">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <source xsi:type="ocl.ecore:OperationCallExp">
-          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+      <parameter name="aContract">
+        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+      </parameter>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateDebugContract" visibility="Public">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+      <body xsi:type="mtl:IfBlock">
+        <body xsi:type="mtl:LetBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataDictionary"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="dd" referredVariable="/0/generateDebugContract/%.1/%/dd">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataDictionary/dataDictionary"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataDictionary/name"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#DataDictionary _in&#xA;print('"/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//DataDictionaryDef"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="dd" referredVariable="/0/generateDebugContract/%.1/%/dd">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataDictionary/dataDictionaryDef"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//DataDictionaryDef/name"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#DataDictionaryDef _in&#xA;"/>
+          <letVariable name="dd">
+            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+            <initExpression xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/in"/>
+              </source>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataDictionary">
+                <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+            </initExpression>
+          </letVariable>
+        </body>
+        <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
           <source xsi:type="ocl.ecore:PropertyCallExp">
             <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
-            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateContract/aContract">
+            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
               <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/in"/>
           </source>
-          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/emf/2002/Ecore#//EObject/eClass"/>
-        </source>
-        <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+          <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataDictionary">
+            <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+        </ifExpr>
+        <elseIf>
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.1/%.2/%/df">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//DataField/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataField name _in&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataField"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.1/%.2/%/df">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataField/dataField"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataField/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataField _in&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//DataFieldDef"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.1/%.2/%/df">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataField/dataFieldDef"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//DataFieldDef/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataFieldDef _in&#xA;"/>
+            <letVariable name="df">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/in"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataField">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/in"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataField">
+              <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+          </ifExpr>
+        </elseIf>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')"/>
-      <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="142" endPosition="218" value="&#xA;The documentation of the template generateElement.&#xA;@param aLibrary&#xA;&#xA;"/>
-        <parametersDocumentation name="aLibrary">
-          <body value=""/>
-        </parametersDocumentation>
-      </documentation>
+      <body xsi:type="mtl:IfBlock">
+        <body xsi:type="mtl:IfBlock">
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataDictionary"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="dd" referredVariable="/0/generateDebugContract/%.2/%/%/dd">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataDictionary/dataDictionary"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataDictionary/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#DataDictionary out&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//DataDictionaryDef"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="dd" referredVariable="/0/generateDebugContract/%.2/%/%/dd">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataDictionary/dataDictionaryDef"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//DataDictionaryDef/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#DataDictionaryDef out&#xA;"/>
+            <letVariable name="dd">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/out"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataDictionary">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/out"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataDictionary">
+              <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+          </ifExpr>
+          <elseIf>
+            <body xsi:type="mtl:LetBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.2/%/%.2/%/df">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//DataField/name"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataField name out&#xA;print('"/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataField"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.2/%/%.2/%/df">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataField/dataField"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataField/name"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataField out&#xA;print('"/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//DataFieldDef"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="df" referredVariable="/0/generateDebugContract/%.2/%/%.2/%/df">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DataField/dataFieldDef"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//DataFieldDef/name"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#dataFieldDef out&#xA;"/>
+              <letVariable name="df">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/out"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataField">
+                    <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                </initExpression>
+              </letVariable>
+            </body>
+            <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/out"/>
+              </source>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DataField">
+                <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+            </ifExpr>
+          </elseIf>
+        </body>
+        <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Object"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Contract/out"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
+        </ifExpr>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+      <body xsi:type="mtl:IfBlock">
+        <body xsi:type="mtl:LetBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//ConditionDef"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="cond" referredVariable="/0/generateDebugContract/%.4/%/cond">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Condition/conditionDef"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ContractDefinition/name"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;&#x9;#Condition&#xA;"/>
+          <letVariable name="cond">
+            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+            <initExpression xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+              </source>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Condition">
+                <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+            </initExpression>
+          </letVariable>
+        </body>
+        <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+          </source>
+          <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Condition">
+            <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+        </ifExpr>
+        <elseIf>
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//BelongOp"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="fr" referredVariable="/0/generateDebugContract/%.4/%.2/%/fr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Range/belongOp"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;&#x9;#FieldRange&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//ContractType"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="fr" referredVariable="/0/generateDebugContract/%.4/%.2/%/fr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Contract/type"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;&#x9;&#x9;#Type in Contract&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="fr" referredVariable="/0/generateDebugContract/%.4/%.2/%/fr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Contract/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Name in Contract&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//FieldRangeDefinition"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="fr" referredVariable="/0/generateDebugContract/%.4/%.2/%/fr">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//FieldRange/fieldRangeDef"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ContractDefinition/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#FieldRangeDef name&#xA;"/>
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataField"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="f" referredVariable="/0/generateDebugContract/%.4/%.2/%/%.9/f">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Field"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Field/dataField"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataField/name"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Field in Field/FieldRange&#xA;"/>
+              <loopVariable name="f">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Field"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/39/OrderedSet(Field)">
+                <source xsi:type="ocl.ecore:VariableExp" name="fr" referredVariable="/0/generateDebugContract/%.4/%.2/%/fr">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//FieldRange/field"/>
+              </iterSet>
+            </body>
+            <letVariable name="fr">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/10/FieldRange">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/10/FieldRange">
+              <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+          </ifExpr>
+        </elseIf>
+        <elseIf>
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//BelongOp"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="vr" referredVariable="/0/generateDebugContract/%.4/%.3/%/vr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Range/belongOp"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;&#x9;#ValueRange&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//ContractType"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="vr" referredVariable="/0/generateDebugContract/%.4/%.3/%/vr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Contract/type"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Type in Contract&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="vr" referredVariable="/0/generateDebugContract/%.4/%.3/%/vr">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Contract/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Name in Contract&#xA;print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//ValueRangeDefinition"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="vr" referredVariable="/0/generateDebugContract/%.4/%.3/%/vr">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//ValueRange/valueRangeDef"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ContractDefinition/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#ValueRangeDef name&#xA;"/>
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="mtl:LetBlock">
+                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                  <body xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="fv" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//FixValue/value"/>
+                  </body>
+                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#FixValue value&#xA;&#x9;print('"/>
+                  <body xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//DataType"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="fv" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//FixValue/dataType"/>
+                  </body>
+                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#FixValue DataType&#xA;&#x9;print('"/>
+                  <body xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//FixValueDef"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="fv" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//FixValue/valueFieldDef"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ValueDefinition/name"/>
+                  </body>
+                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#FixValue valueFieldDef name&#xA;"/>
+                  <letVariable name="fv">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                    <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                      </source>
+                      <argument xsi:type="ocl.ecore:TypeExp" eType="/10/FixValue">
+                        <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                      </argument>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                    </initExpression>
+                  </letVariable>
+                </body>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="/10/FixValue">
+                    <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                </ifExpr>
+                <elseIf>
+                  <body xsi:type="mtl:LetBlock">
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Interval/leftMargin"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#Interval leftMargin&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Interval/rightMargin"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#Interval rightMargin&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//ClosureType"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Interval/closureType"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#Interval ClosureType&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//IntervalDef"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Interval/intervalDef"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ValueDefinition/name"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#Interval intervalDef name&#xA;"/>
+                    <letVariable name="inter">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                      <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Interval">
+                          <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                        </argument>
+                        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                      </initExpression>
+                    </letVariable>
+                  </body>
+                  <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Interval">
+                      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+                    </argument>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                  </ifExpr>
+                </elseIf>
+                <elseIf>
+                  <body xsi:type="mtl:LetBlock">
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//DerivedType"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//DerivedValue/type"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#DerivedValue type&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//DerivedValueDef"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="inter" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//DerivedValue/derivedValueDef"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ValueDefinition/name"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#DerivedValue derivedValueDef name&#xA;"/>
+                    <letVariable name="inter">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                      <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DerivedValue">
+                          <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                        </argument>
+                        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                      </initExpression>
+                    </letVariable>
+                  </body>
+                  <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:TypeExp" eType="/10/DerivedValue">
+                      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+                    </argument>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                  </ifExpr>
+                </elseIf>
+                <elseIf>
+                  <body xsi:type="mtl:LetBlock">
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//Operation"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="nop" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//NumOp/operation"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#NumOp operation&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//NumOpDef"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="nop" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//NumOp/numOpDef"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ValueDefinition/name"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#NumOp numOpDef name&#xA;"/>
+                    <letVariable name="nop">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                      <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/10/NumOp">
+                          <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                        </argument>
+                        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                      </initExpression>
+                    </letVariable>
+                  </body>
+                  <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:TypeExp" eType="/10/NumOp">
+                      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+                    </argument>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                  </ifExpr>
+                </elseIf>
+                <elseIf>
+                  <body xsi:type="mtl:LetBlock">
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//SpecialType"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="sv" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//SpecialValue/specialType"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#SpecialValue specialType&#xA;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//SpecialValueDef"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="sv" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//SpecialValue/specialValueDef"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ValueDefinition/name"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#SpecialValue specialValueDef name&#xA;"/>
+                    <letVariable name="sv">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                      <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/10/SpecialValue">
+                          <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                        </argument>
+                        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                      </initExpression>
+                    </letVariable>
+                  </body>
+                  <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:TypeExp" eType="/10/SpecialValue">
+                      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+                    </argument>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                  </ifExpr>
+                </elseIf>
+              </body>
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;print('"/>
+                <body xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//Operator"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Quantity/operator"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#xA;"/>
+                <body xsi:type="mtl:IfBlock">
+                  <body xsi:type="mtl:LetBlock">
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="av" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//AbsoluteValue/value"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#AbsoluteValue value&#xA;&#x9;&#x9;print('"/>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//AbsoluteValueDef"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="av" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//AbsoluteValue/absoluteValueDef"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//QuantityDef/name"/>
+                    </body>
+                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;#AbsoluteValueDef name&#xA;"/>
+                    <letVariable name="av">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                      <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                        <source xsi:type="ocl.ecore:PropertyCallExp">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                          <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/10/AbsoluteValue">
+                          <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                        </argument>
+                        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                      </initExpression>
+                    </letVariable>
+                  </body>
+                  <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                    <source xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:TypeExp" eType="/10/AbsoluteValue">
+                      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+                    </argument>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                  </ifExpr>
+                  <elseIf>
+                    <body xsi:type="mtl:LetBlock">
+                      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;print('"/>
+                      <body xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="per" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contract#//Percent/percent"/>
+                      </body>
+                      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Percent percent&#xA;&#x9;&#x9;print('"/>
+                      <body xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                        <source xsi:type="ocl.ecore:PropertyCallExp">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//PercentDef"/>
+                          <source xsi:type="ocl.ecore:VariableExp" name="per" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per">
+                            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Percent/percentDef"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//QuantityDef/name"/>
+                      </body>
+                      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#PercentDef name&#xA;"/>
+                      <letVariable name="per">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                        <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                          <source xsi:type="ocl.ecore:PropertyCallExp">
+                            <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                            <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                            </source>
+                            <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                          </source>
+                          <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Percent">
+                            <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                          </argument>
+                          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                        </initExpression>
+                      </letVariable>
+                    </body>
+                    <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                      </source>
+                      <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Percent">
+                        <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+                      </argument>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+                    </ifExpr>
+                  </elseIf>
+                </body>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Quantity"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="v" referredVariable="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Value/quantity"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:NullLiteralExp">
+                    <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
+                </ifExpr>
+              </body>
+              <loopVariable name="v">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/39/OrderedSet(Value)">
+                <source xsi:type="ocl.ecore:VariableExp" name="vr" referredVariable="/0/generateDebugContract/%.4/%.3/%/vr">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//ValueRange/value"/>
+              </iterSet>
+            </body>
+            <letVariable name="vr">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/10/ValueRange">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/10/ValueRange">
+              <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+          </ifExpr>
+        </elseIf>
+        <elseIf>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!&#xA;"/>
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="print('"/>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contractDef#//ConditionDef"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="condition" referredVariable="/0/generateDebugContract/%.4/%.4/%.1/condition">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/contract#//Condition/conditionDef"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/contractDef#//ContractDefinition/name"/>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;#Condition conditionDef name&#xA;"/>
+            <letVariable name="condition">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Condition">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateDebugContract/aContract">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/10/Condition">
+              <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+          </ifExpr>
+        </elseIf>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <parameter name="aContract">
         <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
       </parameter>
@@ -61,6 +968,16 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL" references="/0/generateContract"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aContract">
+          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateDebugContract">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateDebugContract"/>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aContract">
           <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
@@ -106,6 +1023,298 @@
     <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="types">
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="DataDictionary">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataDictionary"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="DataField">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DataField"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Condition">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Condition"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="FieldRange">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FieldRange"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="ValueRange">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//ValueRange"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="FixValue">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//FixValue"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Interval">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Interval"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="DerivedValue">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//DerivedValue"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="NumOp">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//NumOp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="SpecialValue">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//SpecialValue"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="AbsoluteValue">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Percent">
+      <referredType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Percent"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="collections">
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Field)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Field"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Value)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Field"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Field"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Value"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
@@ -118,54 +1327,1649 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateContract">
-      <details key="start" value="222"/>
-      <details key="end" value="330"/>
-      <details key="line" value="13"/>
+      <details key="start" value="139"/>
+      <details key="end" value="208"/>
+      <details key="line" value="8"/>
     </eAnnotations>
     <eAnnotations source="positions.2" references="/0/generateContract/%">
-      <details key="start" value="279"/>
-      <details key="end" value="286"/>
-      <details key="line" value="14"/>
+      <details key="start" value="196"/>
+      <details key="end" value="197"/>
+      <details key="line" value="9"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/generateContract/%.1">
-      <details key="start" value="287"/>
-      <details key="end" value="314"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.3" references="/0/generateContract/aContract">
+      <details key="start" value="173"/>
+      <details key="end" value="193"/>
+      <details key="line" value="8"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/generateContract/%.1/%">
-      <details key="start" value="287"/>
-      <details key="end" value="309"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.4" references="/0/generateDebugContract">
+      <details key="start" value="210"/>
+      <details key="end" value="4096"/>
+      <details key="line" value="12"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/generateContract/%.1/%/%">
-      <details key="start" value="287"/>
-      <details key="end" value="300"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/generateContract/%.1/%/%/aContract">
-      <details key="start" value="287"/>
-      <details key="end" value="296"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/generateContract/%.2">
-      <details key="start" value="316"/>
-      <details key="end" value="318"/>
-      <details key="line" value="14"/>
-    </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/generateContract/%.3">
-      <details key="start" value="139"/>
-      <details key="end" value="220"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/generateContract/%.3/aLibrary">
-      <details key="start" value="-1"/>
-      <details key="end" value="-1"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/generateContract/aContract">
-      <details key="start" value="256"/>
-      <details key="end" value="276"/>
+    <eAnnotations source="positions.5" references="/0/generateDebugContract/%">
+      <details key="start" value="272"/>
+      <details key="end" value="273"/>
       <details key="line" value="13"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateDebugContract/%.1">
+      <details key="start" value="273"/>
+      <details key="end" value="772"/>
+      <details key="line" value="14"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateDebugContract/%.1/%">
+      <details key="start" value="322"/>
+      <details key="end" value="514"/>
+      <details key="line" value="15"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateDebugContract/%.1/%/%">
+      <details key="start" value="390"/>
+      <details key="end" value="397"/>
+      <details key="line" value="16"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateDebugContract/%.1/%/%.1">
+      <details key="start" value="398"/>
+      <details key="end" value="420"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateDebugContract/%.1/%/%.1/%">
+      <details key="start" value="398"/>
+      <details key="end" value="415"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateDebugContract/%.1/%/%.1/%/dd">
+      <details key="start" value="398"/>
+      <details key="end" value="400"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateDebugContract/%.1/%/%.2">
+      <details key="start" value="422"/>
+      <details key="end" value="453"/>
+      <details key="line" value="16"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateDebugContract/%.1/%/%.3">
+      <details key="start" value="454"/>
+      <details key="end" value="479"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/generateDebugContract/%.1/%/%.3/%">
+      <details key="start" value="454"/>
+      <details key="end" value="474"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/generateDebugContract/%.1/%/%.3/%/dd">
+      <details key="start" value="454"/>
+      <details key="end" value="456"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateDebugContract/%.1/%/%.4">
+      <details key="start" value="481"/>
+      <details key="end" value="508"/>
+      <details key="line" value="17"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateDebugContract/%.1/%/dd">
+      <details key="start" value="327"/>
+      <details key="end" value="388"/>
+      <details key="line" value="15"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateDebugContract/%.1/%/dd/%">
+      <details key="start" value="350"/>
+      <details key="end" value="389"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateDebugContract/%.1/%/dd/%/%">
+      <details key="start" value="350"/>
+      <details key="end" value="363"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateDebugContract/%.1/%/dd/%/%/aContract">
+      <details key="start" value="350"/>
+      <details key="end" value="359"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateDebugContract/%.1/%/dd/%/%.1">
+      <details key="start" value="374"/>
+      <details key="end" value="388"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateDebugContract/%.1/%.1">
+      <details key="start" value="277"/>
+      <details key="end" value="320"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateDebugContract/%.1/%.1/%">
+      <details key="start" value="278"/>
+      <details key="end" value="291"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateDebugContract/%.1/%.1/%/aContract">
+      <details key="start" value="278"/>
+      <details key="end" value="287"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateDebugContract/%.1/%.1/%.1">
+      <details key="start" value="304"/>
+      <details key="end" value="318"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateDebugContract/%.1/%.2">
+      <details key="start" value="515"/>
+      <details key="end" value="767"/>
+      <details key="line" value="19"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateDebugContract/%.1/%.2/%">
+      <details key="start" value="563"/>
+      <details key="end" value="766"/>
+      <details key="line" value="20"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateDebugContract/%.1/%.2/%/%">
+      <details key="start" value="621"/>
+      <details key="end" value="628"/>
+      <details key="line" value="21"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateDebugContract/%.1/%.2/%/%.1">
+      <details key="start" value="629"/>
+      <details key="end" value="636"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateDebugContract/%.1/%.2/%/%.1/df">
+      <details key="start" value="629"/>
+      <details key="end" value="631"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateDebugContract/%.1/%.2/%/%.2">
+      <details key="start" value="638"/>
+      <details key="end" value="669"/>
+      <details key="line" value="21"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateDebugContract/%.1/%.2/%/%.3">
+      <details key="start" value="670"/>
+      <details key="end" value="687"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateDebugContract/%.1/%.2/%/%.3/%">
+      <details key="start" value="670"/>
+      <details key="end" value="682"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/generateDebugContract/%.1/%.2/%/%.3/%/df">
+      <details key="start" value="670"/>
+      <details key="end" value="672"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.35" references="/0/generateDebugContract/%.1/%.2/%/%.4">
+      <details key="start" value="689"/>
+      <details key="end" value="715"/>
+      <details key="line" value="22"/>
+    </eAnnotations>
+    <eAnnotations source="positions.36" references="/0/generateDebugContract/%.1/%.2/%/%.5">
+      <details key="start" value="716"/>
+      <details key="end" value="736"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.37" references="/0/generateDebugContract/%.1/%.2/%/%.5/%">
+      <details key="start" value="716"/>
+      <details key="end" value="731"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.38" references="/0/generateDebugContract/%.1/%.2/%/%.5/%/df">
+      <details key="start" value="716"/>
+      <details key="end" value="718"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.39" references="/0/generateDebugContract/%.1/%.2/%/%.6">
+      <details key="start" value="738"/>
+      <details key="end" value="760"/>
+      <details key="line" value="23"/>
+    </eAnnotations>
+    <eAnnotations source="positions.40" references="/0/generateDebugContract/%.1/%.2/%/df">
+      <details key="start" value="568"/>
+      <details key="end" value="619"/>
+      <details key="line" value="20"/>
+    </eAnnotations>
+    <eAnnotations source="positions.41" references="/0/generateDebugContract/%.1/%.2/%/df/%">
+      <details key="start" value="586"/>
+      <details key="end" value="620"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.42" references="/0/generateDebugContract/%.1/%.2/%/df/%/%">
+      <details key="start" value="586"/>
+      <details key="end" value="599"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.43" references="/0/generateDebugContract/%.1/%.2/%/df/%/%/aContract">
+      <details key="start" value="586"/>
+      <details key="end" value="595"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.44" references="/0/generateDebugContract/%.1/%.2/%/df/%/%.1">
+      <details key="start" value="610"/>
+      <details key="end" value="619"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.45" references="/0/generateDebugContract/%.1/%.2/%.1">
+      <details key="start" value="523"/>
+      <details key="end" value="561"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.46" references="/0/generateDebugContract/%.1/%.2/%.1/%">
+      <details key="start" value="524"/>
+      <details key="end" value="537"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.47" references="/0/generateDebugContract/%.1/%.2/%.1/%/aContract">
+      <details key="start" value="524"/>
+      <details key="end" value="533"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.48" references="/0/generateDebugContract/%.1/%.2/%.1/%.1">
+      <details key="start" value="550"/>
+      <details key="end" value="559"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.49" references="/0/generateDebugContract/%.2">
+      <details key="start" value="773"/>
+      <details key="end" value="1310"/>
+      <details key="line" value="26"/>
+    </eAnnotations>
+    <eAnnotations source="positions.50" references="/0/generateDebugContract/%.2/%">
+      <details key="start" value="803"/>
+      <details key="end" value="1304"/>
+      <details key="line" value="27"/>
+    </eAnnotations>
+    <eAnnotations source="positions.51" references="/0/generateDebugContract/%.2/%/%">
+      <details key="start" value="852"/>
+      <details key="end" value="1044"/>
+      <details key="line" value="28"/>
+    </eAnnotations>
+    <eAnnotations source="positions.52" references="/0/generateDebugContract/%.2/%/%/%">
+      <details key="start" value="920"/>
+      <details key="end" value="927"/>
+      <details key="line" value="29"/>
+    </eAnnotations>
+    <eAnnotations source="positions.53" references="/0/generateDebugContract/%.2/%/%/%.1">
+      <details key="start" value="928"/>
+      <details key="end" value="950"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.54" references="/0/generateDebugContract/%.2/%/%/%.1/%">
+      <details key="start" value="928"/>
+      <details key="end" value="945"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.55" references="/0/generateDebugContract/%.2/%/%/%.1/%/dd">
+      <details key="start" value="928"/>
+      <details key="end" value="930"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.56" references="/0/generateDebugContract/%.2/%/%/%.2">
+      <details key="start" value="952"/>
+      <details key="end" value="983"/>
+      <details key="line" value="29"/>
+    </eAnnotations>
+    <eAnnotations source="positions.57" references="/0/generateDebugContract/%.2/%/%/%.3">
+      <details key="start" value="984"/>
+      <details key="end" value="1009"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.58" references="/0/generateDebugContract/%.2/%/%/%.3/%">
+      <details key="start" value="984"/>
+      <details key="end" value="1004"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.59" references="/0/generateDebugContract/%.2/%/%/%.3/%/dd">
+      <details key="start" value="984"/>
+      <details key="end" value="986"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.60" references="/0/generateDebugContract/%.2/%/%/%.4">
+      <details key="start" value="1011"/>
+      <details key="end" value="1038"/>
+      <details key="line" value="30"/>
+    </eAnnotations>
+    <eAnnotations source="positions.61" references="/0/generateDebugContract/%.2/%/%/dd">
+      <details key="start" value="857"/>
+      <details key="end" value="918"/>
+      <details key="line" value="28"/>
+    </eAnnotations>
+    <eAnnotations source="positions.62" references="/0/generateDebugContract/%.2/%/%/dd/%">
+      <details key="start" value="880"/>
+      <details key="end" value="919"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.63" references="/0/generateDebugContract/%.2/%/%/dd/%/%">
+      <details key="start" value="880"/>
+      <details key="end" value="893"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.64" references="/0/generateDebugContract/%.2/%/%/dd/%/%/aContract">
+      <details key="start" value="880"/>
+      <details key="end" value="889"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.65" references="/0/generateDebugContract/%.2/%/%/dd/%/%.1">
+      <details key="start" value="904"/>
+      <details key="end" value="918"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.66" references="/0/generateDebugContract/%.2/%/%.1">
+      <details key="start" value="807"/>
+      <details key="end" value="850"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.67" references="/0/generateDebugContract/%.2/%/%.1/%">
+      <details key="start" value="808"/>
+      <details key="end" value="821"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.68" references="/0/generateDebugContract/%.2/%/%.1/%/aContract">
+      <details key="start" value="808"/>
+      <details key="end" value="817"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.69" references="/0/generateDebugContract/%.2/%/%.1/%.1">
+      <details key="start" value="834"/>
+      <details key="end" value="848"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.70" references="/0/generateDebugContract/%.2/%/%.2">
+      <details key="start" value="1046"/>
+      <details key="end" value="1299"/>
+      <details key="line" value="32"/>
+    </eAnnotations>
+    <eAnnotations source="positions.71" references="/0/generateDebugContract/%.2/%/%.2/%">
+      <details key="start" value="1094"/>
+      <details key="end" value="1297"/>
+      <details key="line" value="33"/>
+    </eAnnotations>
+    <eAnnotations source="positions.72" references="/0/generateDebugContract/%.2/%/%.2/%/%">
+      <details key="start" value="1152"/>
+      <details key="end" value="1159"/>
+      <details key="line" value="34"/>
+    </eAnnotations>
+    <eAnnotations source="positions.73" references="/0/generateDebugContract/%.2/%/%.2/%/%.1">
+      <details key="start" value="1160"/>
+      <details key="end" value="1167"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.74" references="/0/generateDebugContract/%.2/%/%.2/%/%.1/df">
+      <details key="start" value="1160"/>
+      <details key="end" value="1162"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.75" references="/0/generateDebugContract/%.2/%/%.2/%/%.2">
+      <details key="start" value="1169"/>
+      <details key="end" value="1200"/>
+      <details key="line" value="34"/>
+    </eAnnotations>
+    <eAnnotations source="positions.76" references="/0/generateDebugContract/%.2/%/%.2/%/%.3">
+      <details key="start" value="1201"/>
+      <details key="end" value="1218"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.77" references="/0/generateDebugContract/%.2/%/%.2/%/%.3/%">
+      <details key="start" value="1201"/>
+      <details key="end" value="1213"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.78" references="/0/generateDebugContract/%.2/%/%.2/%/%.3/%/df">
+      <details key="start" value="1201"/>
+      <details key="end" value="1203"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.79" references="/0/generateDebugContract/%.2/%/%.2/%/%.4">
+      <details key="start" value="1220"/>
+      <details key="end" value="1246"/>
+      <details key="line" value="35"/>
+    </eAnnotations>
+    <eAnnotations source="positions.80" references="/0/generateDebugContract/%.2/%/%.2/%/%.5">
+      <details key="start" value="1247"/>
+      <details key="end" value="1267"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.81" references="/0/generateDebugContract/%.2/%/%.2/%/%.5/%">
+      <details key="start" value="1247"/>
+      <details key="end" value="1262"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.82" references="/0/generateDebugContract/%.2/%/%.2/%/%.5/%/df">
+      <details key="start" value="1247"/>
+      <details key="end" value="1249"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.83" references="/0/generateDebugContract/%.2/%/%.2/%/%.6">
+      <details key="start" value="1269"/>
+      <details key="end" value="1291"/>
+      <details key="line" value="36"/>
+    </eAnnotations>
+    <eAnnotations source="positions.84" references="/0/generateDebugContract/%.2/%/%.2/%/df">
+      <details key="start" value="1099"/>
+      <details key="end" value="1150"/>
+      <details key="line" value="33"/>
+    </eAnnotations>
+    <eAnnotations source="positions.85" references="/0/generateDebugContract/%.2/%/%.2/%/df/%">
+      <details key="start" value="1117"/>
+      <details key="end" value="1151"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.86" references="/0/generateDebugContract/%.2/%/%.2/%/df/%/%">
+      <details key="start" value="1117"/>
+      <details key="end" value="1130"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.87" references="/0/generateDebugContract/%.2/%/%.2/%/df/%/%/aContract">
+      <details key="start" value="1117"/>
+      <details key="end" value="1126"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.88" references="/0/generateDebugContract/%.2/%/%.2/%/df/%/%.1">
+      <details key="start" value="1141"/>
+      <details key="end" value="1150"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.89" references="/0/generateDebugContract/%.2/%/%.2/%.1">
+      <details key="start" value="1054"/>
+      <details key="end" value="1092"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.90" references="/0/generateDebugContract/%.2/%/%.2/%.1/%">
+      <details key="start" value="1055"/>
+      <details key="end" value="1068"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.91" references="/0/generateDebugContract/%.2/%/%.2/%.1/%/aContract">
+      <details key="start" value="1055"/>
+      <details key="end" value="1064"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.92" references="/0/generateDebugContract/%.2/%/%.2/%.1/%.1">
+      <details key="start" value="1081"/>
+      <details key="end" value="1090"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.93" references="/0/generateDebugContract/%.2/%.1">
+      <details key="start" value="777"/>
+      <details key="end" value="800"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.94" references="/0/generateDebugContract/%.2/%.1/%">
+      <details key="start" value="778"/>
+      <details key="end" value="791"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.95" references="/0/generateDebugContract/%.2/%.1/%/aContract">
+      <details key="start" value="778"/>
+      <details key="end" value="787"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.96" references="/0/generateDebugContract/%.2/%.1/%.1">
+      <details key="start" value="795"/>
+      <details key="end" value="799"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.97" references="/0/generateDebugContract/%.3">
+      <details key="start" value="1311"/>
+      <details key="end" value="1313"/>
+      <details key="line" value="40"/>
+    </eAnnotations>
+    <eAnnotations source="positions.98" references="/0/generateDebugContract/%.4">
+      <details key="start" value="1313"/>
+      <details key="end" value="4082"/>
+      <details key="line" value="42"/>
+    </eAnnotations>
+    <eAnnotations source="positions.99" references="/0/generateDebugContract/%.4/%">
+      <details key="start" value="1353"/>
+      <details key="end" value="1463"/>
+      <details key="line" value="43"/>
+    </eAnnotations>
+    <eAnnotations source="positions.100" references="/0/generateDebugContract/%.4/%/%">
+      <details key="start" value="1409"/>
+      <details key="end" value="1416"/>
+      <details key="line" value="44"/>
+    </eAnnotations>
+    <eAnnotations source="positions.101" references="/0/generateDebugContract/%.4/%/%.1">
+      <details key="start" value="1417"/>
+      <details key="end" value="1439"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.102" references="/0/generateDebugContract/%.4/%/%.1/%">
+      <details key="start" value="1417"/>
+      <details key="end" value="1434"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.103" references="/0/generateDebugContract/%.4/%/%.1/%/cond">
+      <details key="start" value="1417"/>
+      <details key="end" value="1421"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.104" references="/0/generateDebugContract/%.4/%/%.2">
+      <details key="start" value="1441"/>
+      <details key="end" value="1457"/>
+      <details key="line" value="44"/>
+    </eAnnotations>
+    <eAnnotations source="positions.105" references="/0/generateDebugContract/%.4/%/cond">
+      <details key="start" value="1358"/>
+      <details key="end" value="1407"/>
+      <details key="line" value="43"/>
+    </eAnnotations>
+    <eAnnotations source="positions.106" references="/0/generateDebugContract/%.4/%/cond/%">
+      <details key="start" value="1378"/>
+      <details key="end" value="1408"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.107" references="/0/generateDebugContract/%.4/%/cond/%/aContract">
+      <details key="start" value="1378"/>
+      <details key="end" value="1387"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.108" references="/0/generateDebugContract/%.4/%/cond/%/%">
+      <details key="start" value="1398"/>
+      <details key="end" value="1407"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.109" references="/0/generateDebugContract/%.4/%.1">
+      <details key="start" value="1317"/>
+      <details key="end" value="1351"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.110" references="/0/generateDebugContract/%.4/%.1/aContract">
+      <details key="start" value="1318"/>
+      <details key="end" value="1327"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.111" references="/0/generateDebugContract/%.4/%.1/%">
+      <details key="start" value="1340"/>
+      <details key="end" value="1349"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.112" references="/0/generateDebugContract/%.4/%.2">
+      <details key="start" value="1464"/>
+      <details key="end" value="1838"/>
+      <details key="line" value="46"/>
+    </eAnnotations>
+    <eAnnotations source="positions.113" references="/0/generateDebugContract/%.4/%.2/%">
+      <details key="start" value="1509"/>
+      <details key="end" value="1837"/>
+      <details key="line" value="47"/>
+    </eAnnotations>
+    <eAnnotations source="positions.114" references="/0/generateDebugContract/%.4/%.2/%/%">
+      <details key="start" value="1565"/>
+      <details key="end" value="1572"/>
+      <details key="line" value="48"/>
+    </eAnnotations>
+    <eAnnotations source="positions.115" references="/0/generateDebugContract/%.4/%.2/%/%.1">
+      <details key="start" value="1573"/>
+      <details key="end" value="1584"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.116" references="/0/generateDebugContract/%.4/%.2/%/%.1/fr">
+      <details key="start" value="1573"/>
+      <details key="end" value="1575"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.117" references="/0/generateDebugContract/%.4/%.2/%/%.2">
+      <details key="start" value="1586"/>
+      <details key="end" value="1610"/>
+      <details key="line" value="48"/>
+    </eAnnotations>
+    <eAnnotations source="positions.118" references="/0/generateDebugContract/%.4/%.2/%/%.3">
+      <details key="start" value="1611"/>
+      <details key="end" value="1618"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.119" references="/0/generateDebugContract/%.4/%.2/%/%.3/fr">
+      <details key="start" value="1611"/>
+      <details key="end" value="1613"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.120" references="/0/generateDebugContract/%.4/%.2/%/%.4">
+      <details key="start" value="1620"/>
+      <details key="end" value="1651"/>
+      <details key="line" value="49"/>
+    </eAnnotations>
+    <eAnnotations source="positions.121" references="/0/generateDebugContract/%.4/%.2/%/%.5">
+      <details key="start" value="1652"/>
+      <details key="end" value="1659"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.122" references="/0/generateDebugContract/%.4/%.2/%/%.5/fr">
+      <details key="start" value="1652"/>
+      <details key="end" value="1654"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.123" references="/0/generateDebugContract/%.4/%.2/%/%.6">
+      <details key="start" value="1661"/>
+      <details key="end" value="1690"/>
+      <details key="line" value="50"/>
+    </eAnnotations>
+    <eAnnotations source="positions.124" references="/0/generateDebugContract/%.4/%.2/%/%.7">
+      <details key="start" value="1691"/>
+      <details key="end" value="1712"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.125" references="/0/generateDebugContract/%.4/%.2/%/%.7/%">
+      <details key="start" value="1691"/>
+      <details key="end" value="1707"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.126" references="/0/generateDebugContract/%.4/%.2/%/%.7/%/fr">
+      <details key="start" value="1691"/>
+      <details key="end" value="1693"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.127" references="/0/generateDebugContract/%.4/%.2/%/%.8">
+      <details key="start" value="1714"/>
+      <details key="end" value="1738"/>
+      <details key="line" value="51"/>
+    </eAnnotations>
+    <eAnnotations source="positions.128" references="/0/generateDebugContract/%.4/%.2/%/%.9">
+      <details key="start" value="1738"/>
+      <details key="end" value="1830"/>
+      <details key="line" value="52"/>
+    </eAnnotations>
+    <eAnnotations source="positions.129" references="/0/generateDebugContract/%.4/%.2/%/%.9/%">
+      <details key="start" value="1767"/>
+      <details key="end" value="1774"/>
+      <details key="line" value="53"/>
+    </eAnnotations>
+    <eAnnotations source="positions.130" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.1">
+      <details key="start" value="1775"/>
+      <details key="end" value="1791"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.131" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.1/%">
+      <details key="start" value="1775"/>
+      <details key="end" value="1786"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.132" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.1/%/f">
+      <details key="start" value="1775"/>
+      <details key="end" value="1776"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.133" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.2">
+      <details key="start" value="1793"/>
+      <details key="end" value="1824"/>
+      <details key="line" value="53"/>
+    </eAnnotations>
+    <eAnnotations source="positions.134" references="/0/generateDebugContract/%.4/%.2/%/%.9/f">
+      <details key="start" value="1744"/>
+      <details key="end" value="1753"/>
+      <details key="line" value="52"/>
+    </eAnnotations>
+    <eAnnotations source="positions.135" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.3">
+      <details key="start" value="1756"/>
+      <details key="end" value="1764"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.136" references="/0/generateDebugContract/%.4/%.2/%/%.9/%.3/fr">
+      <details key="start" value="1756"/>
+      <details key="end" value="1758"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.137" references="/0/generateDebugContract/%.4/%.2/%/fr">
+      <details key="start" value="1514"/>
+      <details key="end" value="1563"/>
+      <details key="line" value="47"/>
+    </eAnnotations>
+    <eAnnotations source="positions.138" references="/0/generateDebugContract/%.4/%.2/%/fr/%">
+      <details key="start" value="1533"/>
+      <details key="end" value="1564"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.139" references="/0/generateDebugContract/%.4/%.2/%/fr/%/aContract">
+      <details key="start" value="1533"/>
+      <details key="end" value="1542"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.140" references="/0/generateDebugContract/%.4/%.2/%/fr/%/%">
+      <details key="start" value="1553"/>
+      <details key="end" value="1563"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.141" references="/0/generateDebugContract/%.4/%.2/%.1">
+      <details key="start" value="1472"/>
+      <details key="end" value="1507"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.142" references="/0/generateDebugContract/%.4/%.2/%.1/aContract">
+      <details key="start" value="1473"/>
+      <details key="end" value="1482"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.143" references="/0/generateDebugContract/%.4/%.2/%.1/%">
+      <details key="start" value="1495"/>
+      <details key="end" value="1505"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.144" references="/0/generateDebugContract/%.4/%.3">
+      <details key="start" value="1838"/>
+      <details key="end" value="3825"/>
+      <details key="line" value="56"/>
+    </eAnnotations>
+    <eAnnotations source="positions.145" references="/0/generateDebugContract/%.4/%.3/%">
+      <details key="start" value="1883"/>
+      <details key="end" value="3824"/>
+      <details key="line" value="57"/>
+    </eAnnotations>
+    <eAnnotations source="positions.146" references="/0/generateDebugContract/%.4/%.3/%/%">
+      <details key="start" value="1939"/>
+      <details key="end" value="1946"/>
+      <details key="line" value="58"/>
+    </eAnnotations>
+    <eAnnotations source="positions.147" references="/0/generateDebugContract/%.4/%.3/%/%.1">
+      <details key="start" value="1947"/>
+      <details key="end" value="1958"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.148" references="/0/generateDebugContract/%.4/%.3/%/%.1/vr">
+      <details key="start" value="1947"/>
+      <details key="end" value="1949"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.149" references="/0/generateDebugContract/%.4/%.3/%/%.2">
+      <details key="start" value="1960"/>
+      <details key="end" value="1984"/>
+      <details key="line" value="58"/>
+    </eAnnotations>
+    <eAnnotations source="positions.150" references="/0/generateDebugContract/%.4/%.3/%/%.3">
+      <details key="start" value="1985"/>
+      <details key="end" value="1992"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.151" references="/0/generateDebugContract/%.4/%.3/%/%.3/vr">
+      <details key="start" value="1985"/>
+      <details key="end" value="1987"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.152" references="/0/generateDebugContract/%.4/%.3/%/%.4">
+      <details key="start" value="1994"/>
+      <details key="end" value="2023"/>
+      <details key="line" value="59"/>
+    </eAnnotations>
+    <eAnnotations source="positions.153" references="/0/generateDebugContract/%.4/%.3/%/%.5">
+      <details key="start" value="2024"/>
+      <details key="end" value="2031"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.154" references="/0/generateDebugContract/%.4/%.3/%/%.5/vr">
+      <details key="start" value="2024"/>
+      <details key="end" value="2026"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.155" references="/0/generateDebugContract/%.4/%.3/%/%.6">
+      <details key="start" value="2033"/>
+      <details key="end" value="2062"/>
+      <details key="line" value="60"/>
+    </eAnnotations>
+    <eAnnotations source="positions.156" references="/0/generateDebugContract/%.4/%.3/%/%.7">
+      <details key="start" value="2063"/>
+      <details key="end" value="2084"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.157" references="/0/generateDebugContract/%.4/%.3/%/%.7/%">
+      <details key="start" value="2063"/>
+      <details key="end" value="2079"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.158" references="/0/generateDebugContract/%.4/%.3/%/%.7/%/vr">
+      <details key="start" value="2063"/>
+      <details key="end" value="2065"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.159" references="/0/generateDebugContract/%.4/%.3/%/%.8">
+      <details key="start" value="2086"/>
+      <details key="end" value="2109"/>
+      <details key="line" value="61"/>
+    </eAnnotations>
+    <eAnnotations source="positions.160" references="/0/generateDebugContract/%.4/%.3/%/%.9">
+      <details key="start" value="2109"/>
+      <details key="end" value="3817"/>
+      <details key="line" value="62"/>
+    </eAnnotations>
+    <eAnnotations source="positions.161" references="/0/generateDebugContract/%.4/%.3/%/%.9/%">
+      <details key="start" value="2138"/>
+      <details key="end" value="3310"/>
+      <details key="line" value="63"/>
+    </eAnnotations>
+    <eAnnotations source="positions.162" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%">
+      <details key="start" value="2170"/>
+      <details key="end" value="2367"/>
+      <details key="line" value="64"/>
+    </eAnnotations>
+    <eAnnotations source="positions.163" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%">
+      <details key="start" value="2214"/>
+      <details key="end" value="2222"/>
+      <details key="line" value="65"/>
+    </eAnnotations>
+    <eAnnotations source="positions.164" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.1">
+      <details key="start" value="2223"/>
+      <details key="end" value="2231"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.165" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.1/fv">
+      <details key="start" value="2223"/>
+      <details key="end" value="2225"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.166" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.2">
+      <details key="start" value="2233"/>
+      <details key="end" value="2260"/>
+      <details key="line" value="65"/>
+    </eAnnotations>
+    <eAnnotations source="positions.167" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.3">
+      <details key="start" value="2261"/>
+      <details key="end" value="2272"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.168" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.3/fv">
+      <details key="start" value="2261"/>
+      <details key="end" value="2263"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.169" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.4">
+      <details key="start" value="2274"/>
+      <details key="end" value="2304"/>
+      <details key="line" value="66"/>
+    </eAnnotations>
+    <eAnnotations source="positions.170" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.5">
+      <details key="start" value="2305"/>
+      <details key="end" value="2326"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.171" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.5/%">
+      <details key="start" value="2305"/>
+      <details key="end" value="2321"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.172" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.5/%/fv">
+      <details key="start" value="2305"/>
+      <details key="end" value="2307"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.173" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/%.6">
+      <details key="start" value="2328"/>
+      <details key="end" value="2360"/>
+      <details key="line" value="67"/>
+    </eAnnotations>
+    <eAnnotations source="positions.174" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv">
+      <details key="start" value="2175"/>
+      <details key="end" value="2212"/>
+      <details key="line" value="64"/>
+    </eAnnotations>
+    <eAnnotations source="positions.175" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv/%">
+      <details key="start" value="2192"/>
+      <details key="end" value="2213"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.176" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv/%/v">
+      <details key="start" value="2192"/>
+      <details key="end" value="2193"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.177" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%/fv/%/%">
+      <details key="start" value="2204"/>
+      <details key="end" value="2212"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.178" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.1">
+      <details key="start" value="2142"/>
+      <details key="end" value="2167"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.179" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.1/v">
+      <details key="start" value="2143"/>
+      <details key="end" value="2144"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.180" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.1/%">
+      <details key="start" value="2157"/>
+      <details key="end" value="2165"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.181" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2">
+      <details key="start" value="2368"/>
+      <details key="end" value="2679"/>
+      <details key="line" value="69"/>
+    </eAnnotations>
+    <eAnnotations source="positions.182" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%">
+      <details key="start" value="2404"/>
+      <details key="end" value="2678"/>
+      <details key="line" value="70"/>
+    </eAnnotations>
+    <eAnnotations source="positions.183" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%">
+      <details key="start" value="2451"/>
+      <details key="end" value="2459"/>
+      <details key="line" value="71"/>
+    </eAnnotations>
+    <eAnnotations source="positions.184" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.1">
+      <details key="start" value="2460"/>
+      <details key="end" value="2476"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.185" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.1/inter">
+      <details key="start" value="2460"/>
+      <details key="end" value="2465"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.186" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.2">
+      <details key="start" value="2478"/>
+      <details key="end" value="2510"/>
+      <details key="line" value="71"/>
+    </eAnnotations>
+    <eAnnotations source="positions.187" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.3">
+      <details key="start" value="2511"/>
+      <details key="end" value="2528"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.188" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.3/inter">
+      <details key="start" value="2511"/>
+      <details key="end" value="2516"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.189" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.4">
+      <details key="start" value="2530"/>
+      <details key="end" value="2563"/>
+      <details key="line" value="72"/>
+    </eAnnotations>
+    <eAnnotations source="positions.190" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.5">
+      <details key="start" value="2564"/>
+      <details key="end" value="2581"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.191" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.5/inter">
+      <details key="start" value="2564"/>
+      <details key="end" value="2569"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.192" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.6">
+      <details key="start" value="2583"/>
+      <details key="end" value="2616"/>
+      <details key="line" value="73"/>
+    </eAnnotations>
+    <eAnnotations source="positions.193" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.7">
+      <details key="start" value="2617"/>
+      <details key="end" value="2639"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.194" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.7/%">
+      <details key="start" value="2617"/>
+      <details key="end" value="2634"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.195" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.7/%/inter">
+      <details key="start" value="2617"/>
+      <details key="end" value="2622"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.196" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/%.8">
+      <details key="start" value="2641"/>
+      <details key="end" value="2671"/>
+      <details key="line" value="74"/>
+    </eAnnotations>
+    <eAnnotations source="positions.197" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter">
+      <details key="start" value="2409"/>
+      <details key="end" value="2449"/>
+      <details key="line" value="70"/>
+    </eAnnotations>
+    <eAnnotations source="positions.198" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter/%">
+      <details key="start" value="2429"/>
+      <details key="end" value="2450"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.199" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter/%/v">
+      <details key="start" value="2429"/>
+      <details key="end" value="2430"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.200" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%/inter/%/%">
+      <details key="start" value="2441"/>
+      <details key="end" value="2449"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.201" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%.1">
+      <details key="start" value="2376"/>
+      <details key="end" value="2401"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.202" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%.1/v">
+      <details key="start" value="2377"/>
+      <details key="end" value="2378"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.203" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.2/%.1/%">
+      <details key="start" value="2391"/>
+      <details key="end" value="2399"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.204" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3">
+      <details key="start" value="2679"/>
+      <details key="end" value="2901"/>
+      <details key="line" value="76"/>
+    </eAnnotations>
+    <eAnnotations source="positions.205" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%">
+      <details key="start" value="2719"/>
+      <details key="end" value="2900"/>
+      <details key="line" value="77"/>
+    </eAnnotations>
+    <eAnnotations source="positions.206" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%">
+      <details key="start" value="2774"/>
+      <details key="end" value="2782"/>
+      <details key="line" value="78"/>
+    </eAnnotations>
+    <eAnnotations source="positions.207" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.1">
+      <details key="start" value="2783"/>
+      <details key="end" value="2793"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.208" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.1/inter">
+      <details key="start" value="2783"/>
+      <details key="end" value="2788"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.209" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.2">
+      <details key="start" value="2795"/>
+      <details key="end" value="2826"/>
+      <details key="line" value="78"/>
+    </eAnnotations>
+    <eAnnotations source="positions.210" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.3">
+      <details key="start" value="2827"/>
+      <details key="end" value="2853"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.211" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.3/%">
+      <details key="start" value="2827"/>
+      <details key="end" value="2848"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.212" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.3/%/inter">
+      <details key="start" value="2827"/>
+      <details key="end" value="2832"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.213" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/%.4">
+      <details key="start" value="2855"/>
+      <details key="end" value="2893"/>
+      <details key="line" value="79"/>
+    </eAnnotations>
+    <eAnnotations source="positions.214" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter">
+      <details key="start" value="2724"/>
+      <details key="end" value="2772"/>
+      <details key="line" value="77"/>
+    </eAnnotations>
+    <eAnnotations source="positions.215" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter/%">
+      <details key="start" value="2748"/>
+      <details key="end" value="2773"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.216" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter/%/v">
+      <details key="start" value="2748"/>
+      <details key="end" value="2749"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.217" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%/inter/%/%">
+      <details key="start" value="2760"/>
+      <details key="end" value="2772"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.218" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%.1">
+      <details key="start" value="2687"/>
+      <details key="end" value="2716"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.219" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%.1/v">
+      <details key="start" value="2688"/>
+      <details key="end" value="2689"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.220" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.3/%.1/%">
+      <details key="start" value="2702"/>
+      <details key="end" value="2714"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.221" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4">
+      <details key="start" value="2901"/>
+      <details key="end" value="3078"/>
+      <details key="line" value="81"/>
+    </eAnnotations>
+    <eAnnotations source="positions.222" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%">
+      <details key="start" value="2934"/>
+      <details key="end" value="3077"/>
+      <details key="line" value="82"/>
+    </eAnnotations>
+    <eAnnotations source="positions.223" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%">
+      <details key="start" value="2973"/>
+      <details key="end" value="2981"/>
+      <details key="line" value="83"/>
+    </eAnnotations>
+    <eAnnotations source="positions.224" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.1">
+      <details key="start" value="2982"/>
+      <details key="end" value="2995"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.225" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.1/nop">
+      <details key="start" value="2982"/>
+      <details key="end" value="2985"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.226" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.2">
+      <details key="start" value="2997"/>
+      <details key="end" value="3026"/>
+      <details key="line" value="83"/>
+    </eAnnotations>
+    <eAnnotations source="positions.227" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.3">
+      <details key="start" value="3027"/>
+      <details key="end" value="3044"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.228" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.3/%">
+      <details key="start" value="3027"/>
+      <details key="end" value="3039"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.229" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.3/%/nop">
+      <details key="start" value="3027"/>
+      <details key="end" value="3030"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.230" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/%.4">
+      <details key="start" value="3046"/>
+      <details key="end" value="3070"/>
+      <details key="line" value="84"/>
+    </eAnnotations>
+    <eAnnotations source="positions.231" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop">
+      <details key="start" value="2939"/>
+      <details key="end" value="2971"/>
+      <details key="line" value="82"/>
+    </eAnnotations>
+    <eAnnotations source="positions.232" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop/%">
+      <details key="start" value="2954"/>
+      <details key="end" value="2972"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.233" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop/%/v">
+      <details key="start" value="2954"/>
+      <details key="end" value="2955"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.234" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%/nop/%/%">
+      <details key="start" value="2966"/>
+      <details key="end" value="2971"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.235" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%.1">
+      <details key="start" value="2909"/>
+      <details key="end" value="2931"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.236" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%.1/v">
+      <details key="start" value="2910"/>
+      <details key="end" value="2911"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.237" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.4/%.1/%">
+      <details key="start" value="2924"/>
+      <details key="end" value="2929"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.238" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5">
+      <details key="start" value="3078"/>
+      <details key="end" value="3305"/>
+      <details key="line" value="86"/>
+    </eAnnotations>
+    <eAnnotations source="positions.239" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%">
+      <details key="start" value="3118"/>
+      <details key="end" value="3304"/>
+      <details key="line" value="87"/>
+    </eAnnotations>
+    <eAnnotations source="positions.240" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%">
+      <details key="start" value="3170"/>
+      <details key="end" value="3178"/>
+      <details key="line" value="88"/>
+    </eAnnotations>
+    <eAnnotations source="positions.241" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.1">
+      <details key="start" value="3179"/>
+      <details key="end" value="3193"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.242" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.1/sv">
+      <details key="start" value="3179"/>
+      <details key="end" value="3181"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.243" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.2">
+      <details key="start" value="3195"/>
+      <details key="end" value="3233"/>
+      <details key="line" value="88"/>
+    </eAnnotations>
+    <eAnnotations source="positions.244" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.3">
+      <details key="start" value="3234"/>
+      <details key="end" value="3257"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.245" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.3/%">
+      <details key="start" value="3234"/>
+      <details key="end" value="3252"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.246" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.3/%/sv">
+      <details key="start" value="3234"/>
+      <details key="end" value="3236"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.247" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/%.4">
+      <details key="start" value="3259"/>
+      <details key="end" value="3297"/>
+      <details key="line" value="89"/>
+    </eAnnotations>
+    <eAnnotations source="positions.248" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv">
+      <details key="start" value="3123"/>
+      <details key="end" value="3168"/>
+      <details key="line" value="87"/>
+    </eAnnotations>
+    <eAnnotations source="positions.249" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv/%">
+      <details key="start" value="3144"/>
+      <details key="end" value="3169"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.250" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv/%/v">
+      <details key="start" value="3144"/>
+      <details key="end" value="3145"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.251" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%/sv/%/%">
+      <details key="start" value="3156"/>
+      <details key="end" value="3168"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.252" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%.1">
+      <details key="start" value="3086"/>
+      <details key="end" value="3115"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.253" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%.1/v">
+      <details key="start" value="3087"/>
+      <details key="end" value="3088"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.254" references="/0/generateDebugContract/%.4/%.3/%/%.9/%/%.5/%.1/%">
+      <details key="start" value="3101"/>
+      <details key="end" value="3113"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.255" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1">
+      <details key="start" value="3311"/>
+      <details key="end" value="3810"/>
+      <details key="line" value="92"/>
+    </eAnnotations>
+    <eAnnotations source="positions.256" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%">
+      <details key="start" value="3337"/>
+      <details key="end" value="3345"/>
+      <details key="line" value="93"/>
+    </eAnnotations>
+    <eAnnotations source="positions.257" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.1">
+      <details key="start" value="3346"/>
+      <details key="end" value="3365"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.258" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.1/%">
+      <details key="start" value="3346"/>
+      <details key="end" value="3356"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.259" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.1/%/v">
+      <details key="start" value="3346"/>
+      <details key="end" value="3347"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.260" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.2">
+      <details key="start" value="3367"/>
+      <details key="end" value="3370"/>
+      <details key="line" value="93"/>
+    </eAnnotations>
+    <eAnnotations source="positions.261" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3">
+      <details key="start" value="3371"/>
+      <details key="end" value="3804"/>
+      <details key="line" value="94"/>
+    </eAnnotations>
+    <eAnnotations source="positions.262" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%">
+      <details key="start" value="3417"/>
+      <details key="end" value="3594"/>
+      <details key="line" value="95"/>
+    </eAnnotations>
+    <eAnnotations source="positions.263" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%">
+      <details key="start" value="3480"/>
+      <details key="end" value="3489"/>
+      <details key="line" value="96"/>
+    </eAnnotations>
+    <eAnnotations source="positions.264" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.1">
+      <details key="start" value="3490"/>
+      <details key="end" value="3498"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.265" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.1/av">
+      <details key="start" value="3490"/>
+      <details key="end" value="3492"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.266" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.2">
+      <details key="start" value="3500"/>
+      <details key="end" value="3533"/>
+      <details key="line" value="96"/>
+    </eAnnotations>
+    <eAnnotations source="positions.267" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.3">
+      <details key="start" value="3534"/>
+      <details key="end" value="3558"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.268" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.3/%">
+      <details key="start" value="3534"/>
+      <details key="end" value="3553"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.269" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.3/%/av">
+      <details key="start" value="3534"/>
+      <details key="end" value="3536"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.270" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/%.4">
+      <details key="start" value="3560"/>
+      <details key="end" value="3586"/>
+      <details key="line" value="97"/>
+    </eAnnotations>
+    <eAnnotations source="positions.271" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av">
+      <details key="start" value="3422"/>
+      <details key="end" value="3478"/>
+      <details key="line" value="95"/>
+    </eAnnotations>
+    <eAnnotations source="positions.272" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av/%">
+      <details key="start" value="3444"/>
+      <details key="end" value="3479"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.273" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av/%/%">
+      <details key="start" value="3444"/>
+      <details key="end" value="3454"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.274" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av/%/%/v">
+      <details key="start" value="3444"/>
+      <details key="end" value="3445"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.275" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%/av/%/%.1">
+      <details key="start" value="3465"/>
+      <details key="end" value="3478"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.276" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.1">
+      <details key="start" value="3374"/>
+      <details key="end" value="3413"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.277" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.1/%">
+      <details key="start" value="3375"/>
+      <details key="end" value="3385"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.278" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.1/%/v">
+      <details key="start" value="3375"/>
+      <details key="end" value="3376"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.279" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.1/%.1">
+      <details key="start" value="3398"/>
+      <details key="end" value="3411"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.280" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2">
+      <details key="start" value="3596"/>
+      <details key="end" value="3799"/>
+      <details key="line" value="99"/>
+    </eAnnotations>
+    <eAnnotations source="positions.281" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%">
+      <details key="start" value="3641"/>
+      <details key="end" value="3797"/>
+      <details key="line" value="100"/>
+    </eAnnotations>
+    <eAnnotations source="positions.282" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%">
+      <details key="start" value="3693"/>
+      <details key="end" value="3702"/>
+      <details key="line" value="101"/>
+    </eAnnotations>
+    <eAnnotations source="positions.283" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.1">
+      <details key="start" value="3703"/>
+      <details key="end" value="3714"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.284" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.1/per">
+      <details key="start" value="3703"/>
+      <details key="end" value="3706"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.285" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.2">
+      <details key="start" value="3716"/>
+      <details key="end" value="3746"/>
+      <details key="line" value="101"/>
+    </eAnnotations>
+    <eAnnotations source="positions.286" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.3">
+      <details key="start" value="3747"/>
+      <details key="end" value="3766"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.287" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.3/%">
+      <details key="start" value="3747"/>
+      <details key="end" value="3761"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.288" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.3/%/per">
+      <details key="start" value="3747"/>
+      <details key="end" value="3750"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.289" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/%.4">
+      <details key="start" value="3768"/>
+      <details key="end" value="3789"/>
+      <details key="line" value="102"/>
+    </eAnnotations>
+    <eAnnotations source="positions.290" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per">
+      <details key="start" value="3646"/>
+      <details key="end" value="3691"/>
+      <details key="line" value="100"/>
+    </eAnnotations>
+    <eAnnotations source="positions.291" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per/%">
+      <details key="start" value="3663"/>
+      <details key="end" value="3692"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.292" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per/%/%">
+      <details key="start" value="3663"/>
+      <details key="end" value="3673"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.293" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per/%/%/v">
+      <details key="start" value="3663"/>
+      <details key="end" value="3664"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.294" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%/per/%/%.1">
+      <details key="start" value="3684"/>
+      <details key="end" value="3691"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.295" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%.1">
+      <details key="start" value="3604"/>
+      <details key="end" value="3637"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.296" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%.1/%">
+      <details key="start" value="3605"/>
+      <details key="end" value="3615"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.297" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%.1/%/v">
+      <details key="start" value="3605"/>
+      <details key="end" value="3606"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.298" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.3/%.2/%.1/%.1">
+      <details key="start" value="3628"/>
+      <details key="end" value="3635"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.299" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.4">
+      <details key="start" value="3315"/>
+      <details key="end" value="3335"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.300" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.4/%">
+      <details key="start" value="3316"/>
+      <details key="end" value="3326"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.301" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.4/%/v">
+      <details key="start" value="3316"/>
+      <details key="end" value="3317"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.302" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.1/%.4/%.1">
+      <details key="start" value="3330"/>
+      <details key="end" value="3334"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.303" references="/0/generateDebugContract/%.4/%.3/%/%.9/v">
+      <details key="start" value="2115"/>
+      <details key="end" value="2124"/>
+      <details key="line" value="62"/>
+    </eAnnotations>
+    <eAnnotations source="positions.304" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.2">
+      <details key="start" value="2127"/>
+      <details key="end" value="2135"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.305" references="/0/generateDebugContract/%.4/%.3/%/%.9/%.2/vr">
+      <details key="start" value="2127"/>
+      <details key="end" value="2129"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.306" references="/0/generateDebugContract/%.4/%.3/%/vr">
+      <details key="start" value="1888"/>
+      <details key="end" value="1937"/>
+      <details key="line" value="57"/>
+    </eAnnotations>
+    <eAnnotations source="positions.307" references="/0/generateDebugContract/%.4/%.3/%/vr/%">
+      <details key="start" value="1907"/>
+      <details key="end" value="1938"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.308" references="/0/generateDebugContract/%.4/%.3/%/vr/%/aContract">
+      <details key="start" value="1907"/>
+      <details key="end" value="1916"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.309" references="/0/generateDebugContract/%.4/%.3/%/vr/%/%">
+      <details key="start" value="1927"/>
+      <details key="end" value="1937"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.310" references="/0/generateDebugContract/%.4/%.3/%.1">
+      <details key="start" value="1846"/>
+      <details key="end" value="1881"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.311" references="/0/generateDebugContract/%.4/%.3/%.1/aContract">
+      <details key="start" value="1847"/>
+      <details key="end" value="1856"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.312" references="/0/generateDebugContract/%.4/%.3/%.1/%">
+      <details key="start" value="1869"/>
+      <details key="end" value="1879"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.313" references="/0/generateDebugContract/%.4/%.4">
+      <details key="start" value="3825"/>
+      <details key="end" value="4077"/>
+      <details key="line" value="108"/>
+    </eAnnotations>
+    <eAnnotations source="positions.314" references="/0/generateDebugContract/%.4/%.4/%">
+      <details key="start" value="3869"/>
+      <details key="end" value="3939"/>
+      <details key="line" value="109"/>
+    </eAnnotations>
+    <eAnnotations source="positions.315" references="/0/generateDebugContract/%.4/%.4/%.1">
+      <details key="start" value="3939"/>
+      <details key="end" value="4076"/>
+      <details key="line" value="110"/>
+    </eAnnotations>
+    <eAnnotations source="positions.316" references="/0/generateDebugContract/%.4/%.4/%.1/%">
+      <details key="start" value="4000"/>
+      <details key="end" value="4007"/>
+      <details key="line" value="111"/>
+    </eAnnotations>
+    <eAnnotations source="positions.317" references="/0/generateDebugContract/%.4/%.4/%.1/%.1">
+      <details key="start" value="4008"/>
+      <details key="end" value="4035"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.318" references="/0/generateDebugContract/%.4/%.4/%.1/%.1/%">
+      <details key="start" value="4008"/>
+      <details key="end" value="4030"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.319" references="/0/generateDebugContract/%.4/%.4/%.1/%.1/%/condition">
+      <details key="start" value="4008"/>
+      <details key="end" value="4017"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.320" references="/0/generateDebugContract/%.4/%.4/%.1/%.2">
+      <details key="start" value="4037"/>
+      <details key="end" value="4070"/>
+      <details key="line" value="111"/>
+    </eAnnotations>
+    <eAnnotations source="positions.321" references="/0/generateDebugContract/%.4/%.4/%.1/condition">
+      <details key="start" value="3944"/>
+      <details key="end" value="3998"/>
+      <details key="line" value="110"/>
+    </eAnnotations>
+    <eAnnotations source="positions.322" references="/0/generateDebugContract/%.4/%.4/%.1/condition/%">
+      <details key="start" value="3969"/>
+      <details key="end" value="3999"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.323" references="/0/generateDebugContract/%.4/%.4/%.1/condition/%/aContract">
+      <details key="start" value="3969"/>
+      <details key="end" value="3978"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.324" references="/0/generateDebugContract/%.4/%.4/%.1/condition/%/%">
+      <details key="start" value="3989"/>
+      <details key="end" value="3998"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.325" references="/0/generateDebugContract/%.4/%.4/%.2">
+      <details key="start" value="3833"/>
+      <details key="end" value="3867"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.326" references="/0/generateDebugContract/%.4/%.4/%.2/aContract">
+      <details key="start" value="3834"/>
+      <details key="end" value="3843"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.327" references="/0/generateDebugContract/%.4/%.4/%.2/%">
+      <details key="start" value="3856"/>
+      <details key="end" value="3865"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.328" references="/0/generateDebugContract/%.5">
+      <details key="start" value="4083"/>
+      <details key="end" value="4084"/>
+      <details key="line" value="114"/>
+    </eAnnotations>
+    <eAnnotations source="positions.329" references="/0/generateDebugContract/aContract">
+      <details key="start" value="249"/>
+      <details key="end" value="269"/>
+      <details key="line" value="12"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>
