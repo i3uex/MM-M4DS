@@ -4,7 +4,7 @@
  */]
 [module generate('https://www.example.org/workflow')]
 
-[import Acceleo::MM_M4DS_contract::main::generate /] 
+[import Acceleo::MM_M4DS_contract::main::generate/]
 
 
 [**
@@ -23,10 +23,6 @@
 from DataProcessing import DataProcessing
 #Clase main (por ahora)
 print('[aWorkflow.name/] tested')
-print()
-print()
-dataProcessing=DataProcessing()
-dataProcessing.generateDataProcessing()
 [/file]
 [/template]
 
@@ -34,9 +30,24 @@ dataProcessing.generateDataProcessing()
 
 [template public generateDataProcessing(aWorkflow : Workflow)]
 [file ('DataProcessing.py', false, 'UTF-8')]
+import pandas as pd
 class DataProcessing:
 	def generateDataProcessing(self):
-	
+
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]
+			[for (dc : DataDictionary | d.inputPort)]
+#||||||||||||||||||||||||||||||||||||||||||||||||||||
+			[dc.name/]=pd.read_csv('[dc.path/]')
+#||||||||||||||||||||||||||||||||||||||||||||||||||||
+			[/for]
+		[for (c : Contract | d.contract)]
+			[for (dc : DataDictionary | d.inputPort)]
+				[for (df : DataField | dc.datafield)]
+				[generateCallContract(c.contract, df.displayName, dc.name)/]
+				[/for]
+			[/for]
+		[/for]
+	[/for]
 
 [/file]
 [/template]

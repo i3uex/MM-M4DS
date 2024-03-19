@@ -4,10 +4,40 @@
  */]
 [module generate('https://www.example.org/contract')]
 
+[import Acceleo::MM_M4DS_Workflow::main::generate/]
+
 
 [template public generateContract(aContract : Contract)]
 
 [/template]
+
+[template public generateCallContract(aContract : Contract, fieldName : String, dc_name : String)]
+[if (aContract.name.contains(fieldName))]
+print('[aContract.name/]')
+print('[fieldName/]')
+print([dc_name/])
+[/if]
+#--------------------------------------------------------------
+[/template]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [template public generateDebugContract(aContract : Contract)]
 
