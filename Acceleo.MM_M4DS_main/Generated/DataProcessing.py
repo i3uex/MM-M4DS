@@ -5,181 +5,169 @@ class DataProcessing:
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_sex_columns')
-				print('sex')
-				print(data_model_impute_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_in, field='sex', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_IRSCHOOL_columns')
-				print('IRSCHOOL')
-				print(data_model_impute_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_in, field='IRSCHOOL', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_ETHNICITY_columns')
-				print('ETHNICITY')
-				print(data_model_impute_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_in, field='ETHNICITY', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_sex_columns')
-				print('sex')
-				print(data_model_impute_in)
-				#--------------------------------------------------------------
-				#--------------------------------------------------------------
-				#--------------------------------------------------------------
-				#--------------------------------------------------------------
-				print('POST_value_range_impute_IRSCHOOL_columns')
-				print('IRSCHOOL')
-				print(data_model_impute_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_ETHNICITY_columns')
-				print('ETHNICITY')
-				print(data_model_impute_in)
-				#--------------------------------------------------------------
-				print('INV_condition_impute_sex_columns')
-				print('sex')
-				print(data_model_impute_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_impute_IRSCHOOL_columns')
-				print('IRSCHOOL')
-				print(data_model_impute_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_impute_ETHNICITY_columns')
-				print('ETHNICITY')
-				print(data_model_impute_in)
+				#--------------------------------------------------------------
+				#--------------------------------------------------------------
+				#--------------------------------------------------------------
+				#--------------------------------------------------------------
+				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_sex_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_sex')
-				print('sex')
-				print(data_model_impute_sex_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_sex_in, field='sex', quant_op=Operator(lessEqual), quant_rel=70.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_sex')
-				print('sex')
-				print(data_model_impute_sex_in)
+				
+				
 				#--------------------------------------------------------------
-				print('INV_condition_impute_sex')
-				print('sex')
-				print(data_model_impute_sex_in)
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_IRSCHOOL_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_IRSCHOOL')
-				print('IRSCHOOL')
-				print(data_model_impute_IRSCHOOL_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_IRSCHOOL_in, field='IRSCHOOL', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_IRSCHOOL')
-				print('IRSCHOOL')
-				print(data_model_impute_IRSCHOOL_in)
+				
+				
 				#--------------------------------------------------------------
-				print('INV_condition_impute_IRSCHOOL')
-				print('IRSCHOOL')
-				print(data_model_impute_IRSCHOOL_in)
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_ETHNICITY_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_ETHNICITY')
-				print('ETHNICITY')
-				print(data_model_impute_ETHNICITY_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_ETHNICITY')
-				print('ETHNICITY')
-				print(data_model_impute_ETHNICITY_in)
+				
+				
 				#--------------------------------------------------------------
-				print('INV_condition_impute_ETHNICITY')
-				print('ETHNICITY')
-				print(data_model_impute_ETHNICITY_in)
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_ACADEMIC_INTEREST_2')
-				print('ACADEMIC_INTEREST_2')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_in, field='ACADEMIC_INTEREST_2', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_ACADEMIC_INTEREST_2')
-				print('ACADEMIC_INTEREST_2')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
-				#--------------------------------------------------------------
-				#--------------------------------------------------------------
-				print('INV_condition_impute_ACADEMIC_INTEREST_2')
-				print('ACADEMIC_INTEREST_2')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_ACADEMIC_INTEREST_1')
-				print('ACADEMIC_INTEREST_1')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_ACADEMIC_INTEREST_1')
-				print('ACADEMIC_INTEREST_1')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
+				
+				##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+				if(checkMissingRange(belongOp=Belong(BELONG), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_in, field='ACADEMIC_INTEREST_1', quant_op=Operator(lessEqual), quant_rel=30.0/100))
+					print('Llamada a precondición realizada con éxito')
+				
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_impute_ACADEMIC_INTEREST_1')
-				print('ACADEMIC_INTEREST_1')
-				print(data_model_impute_ACADEMIC_INTEREST_2_in)
+				
+				
+				#--------------------------------------------------------------
+				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_mean_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_mean_avg_income')
-				print('avg_income')
-				print(data_model_impute_mean_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_mean_distance')
-				print('distance')
-				print(data_model_impute_mean_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_mean_avg_income')
-				print('avg_income')
-				print(data_model_impute_mean_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_mean_distance')
-				print('distance')
-				print(data_model_impute_mean_in)
-				#--------------------------------------------------------------
-				print('INV_condition_avg_income')
-				print('avg_income')
-				print(data_model_impute_mean_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_distance')
-				print('distance')
-				print(data_model_impute_mean_in)
+				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_linear_interpolation_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_linear_interpolation_satscore')
-				print('satscore')
-				print(data_model_impute_linear_interpolation_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_linear_interpolation_satscore')
-				print('satscore')
-				print(data_model_impute_linear_interpolation_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -214,64 +202,46 @@ class DataProcessing:
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_map_Instate_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model_map_territory_out.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_Instate')
-				print('Instate')
-				print(data_model_map_Instate_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_Instate')
-				print('Instate')
-				print(data_model_map_Instate_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_stringToNumber_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model_map_instate_out.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('INV_condition_TERRITORY')
-				print('TERRITORY')
-				print(data_model_stringToNumber_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_init1rat')
-				print('init1rat')
-				print(data_model_stringToNumber_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_init2rat')
-				print('init2rat')
-				print(data_model_stringToNumber_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_hscrat')
-				print('hscrat')
-				print(data_model_stringToNumber_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_Instate')
-				print('Instate')
-				print(data_model_stringToNumber_in)
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_impute_outlier_closest_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model_stringToNumber_in.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_value_range_impute_outliers_closest_avg_income')
-				print('avg_income')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -279,9 +249,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_outliers_closest_distance')
-				print('distance')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -289,9 +258,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_outliers_closest_premiere')
-				print('premiere')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -299,9 +267,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_outliers_closest_sex')
-				print('sex')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -309,9 +276,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_outliers_closest_Enroll')
-				print('Enroll')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -319,13 +285,11 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_value_range_impute_outliers_closest_Instate')
-				print('Instate')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_avg_income')
-				print('avg_income')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -333,9 +297,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_distance')
-				print('distance')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -343,9 +306,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_premiere')
-				print('premiere')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -353,9 +315,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_sex')
-				print('sex')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -363,9 +324,8 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_Enroll')
-				print('Enroll')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -373,13 +333,9 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_value_range_impute_outliers_closest_Instate')
-				print('Instate')
-				print(data_model_impute_outlier_closest_in)
+				
+				
 				#--------------------------------------------------------------
-				print('INV_condition_avg_income')
-				print('avg_income')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -387,9 +343,6 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_distance')
-				print('distance')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -397,9 +350,6 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_premiere')
-				print('premiere')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -407,9 +357,6 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_sex')
-				print('sex')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -417,9 +364,6 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_Enroll')
-				print('Enroll')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
@@ -427,77 +371,57 @@ class DataProcessing:
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_condition_Instate')
-				print('Instate')
-				print(data_model_impute_outlier_closest_in)
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_binner_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model_stringToNumber_in.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_binner_valueRange_TOTAL_CONTACTS')
-				print('TOTAL_CONTACTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_binner_valueRange_SELF_INIT_CNTCTS')
-				print('SELF_INIT_CNTCTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('PRE_binner_valueRange_SOLICITED_CNTCTS')
-				print('SOLICITED_CNTCTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_binner_valueRange_TOTAL_CONTACTS')
-				print('TOTAL_CONTACTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_binner_valueRange_SELF_INIT_CNTCTS')
-				print('SELF_INIT_CNTCTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('POST_binner_valueRange_SOLICITED_CNTCTS')
-				print('SOLICITED_CNTCTS')
-				print(data_model_binner_in)
-				#--------------------------------------------------------------
-				print('INV_binner_condition_TOTAL_CONTACTS')
-				print('TOTAL_CONTACTS')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_binner_condition_SELF_INIT_CNTCTS')
-				print('SELF_INIT_CNTCTS')
-				print(data_model_binner_in)
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
-				print('INV_binner_condition_SOLICITED_CNTCTS')
-				print('SOLICITED_CNTCTS')
-				print(data_model_binner_in)
+				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
 			data_model_binner_in=pd.read_csv('C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\modelDataProcessing-CAISE23\validation_example_23\python_pipeline\data_model_stringToNumber_in.csv')
 #||||||||||||||||||||||||||||||||||||||||||||||||||||
-				print('PRE_binner_valueRange_TERRITORY')
-				print('TERRITORY')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
-				print('POST_binner_valueRange_TERRITORY')
-				print('TERRITORY')
-				print(data_model_binner_in)
+				
+				
 				#--------------------------------------------------------------
 				#--------------------------------------------------------------
 

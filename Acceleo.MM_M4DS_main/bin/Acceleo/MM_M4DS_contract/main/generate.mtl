@@ -13,9 +13,80 @@
 
 [template public generateCallContract(aContract : Contract, fieldName : String, dc_name : String)]
 [if (aContract.name.contains(fieldName))]
-print('[aContract.name/]')
+[comment]print('[aContract.name/]')
 print('[fieldName/]')
-print([dc_name/])
+print([dc_name/])[/comment]
+[if (aContract.oclIsTypeOf(ValueRange))]
+[let vr : ValueRange = aContract.oclAsType(ValueRange)]
+[comment]print('[vr.belongOp/]')		#ValueRange[/comment]
+
+[for (v : Value | vr.value)]
+[if (v.oclIsTypeOf(FixValue))]
+[comment]	[let fv : FixValue = v.oclAsType(FixValue)]
+	print('[fv.value/]')	#FixValue value
+	print('[fv.dataType/]')	#FixValue DataType
+	print('[fv.valueFieldDef.name/]')	#FixValue valueFieldDef name
+	[/let][/comment]
+[elseif (v.oclIsTypeOf(Interval))]
+[comment]	[let inter : Interval = v.oclAsType(Interval)]
+	print('[inter.leftMargin/]')	#Interval leftMargin
+	print('[inter.rightMargin/]')	#Interval rightMargin
+	print('[inter.closureType/]')	#Interval ClosureType
+	print('[inter.intervalDef.name/]')	#Interval intervalDef name
+	[/let][/comment]
+[elseif (v.oclIsTypeOf(DerivedValue))]
+[comment]	[let inter : DerivedValue = v.oclAsType(DerivedValue)]
+	print('[inter.type/]')		#DerivedValue type
+	print('[inter.derivedValueDef.name/]')	#DerivedValue derivedValueDef name
+	[/let][/comment]
+[elseif (v.oclIsTypeOf(NumOp))]
+[comment]	[let nop : NumOp = v.oclAsType(NumOp)]
+	print('[nop.operation/]')		#NumOp operation
+	print('[nop.numOpDef.name/]')	#NumOp numOpDef name
+	[/let][/comment]
+[elseif (v.oclIsTypeOf(SpecialValue))]
+	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
+[comment]	print('[sv.specialType/]')		#SpecialValue specialType
+	print('[sv.specialValueDef.name/]')	#SpecialValue specialValueDef name[/comment]
+[if (v.quantity <> null)]
+[comment]	print('[v.quantity.operator/]')[/comment]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+[comment]		print('[av.value/]')	#AbsoluteValue value
+		print('[av.absoluteValueDef.name/]')	#AbsoluteValueDef name[/comment]
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+[comment]		print('[per.percent/]')		#Percent percent
+		print('[per.percentDef.name/]')		#PercentDef name[/comment]
+##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
+if(checkMissingRange(belongOp=Belong([vr.belongOp/]), dataDictionary=[dc_name/], field='[fieldName/]', quant_op=Operator([v.quantity.operator/]), quant_rel=[per.percent/]/100))
+	print('Llamada a precondición realizada con éxito')
+
+
+		[/let]
+	[/if]
+[/if]
+	[/let]
+[/if]
+[comment][if (v.quantity <> null)]
+	print('[v.quantity.operator/]')
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+		print('[av.value/]')	#AbsoluteValue value
+		print('[av.absoluteValueDef.name/]')	#AbsoluteValueDef name
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+		print('[per.percent/]')		#Percent percent
+		print('[per.percentDef.name/]')		#PercentDef name
+		[/let]
+	[/if]
+[/if][/comment]
+[/for]
+
+[/let]
+[/if]
 [/if]
 #--------------------------------------------------------------
 [/template]
