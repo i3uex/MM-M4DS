@@ -32,6 +32,7 @@ class DataProcessing:
 		pre_post=contract_pre_post.ContractsPrePost()
 		invariants=contract_invariants.ContractsInvariants()
 	[for (d : DataProcessing | aWorkflow.dataprocessing)]
+#-----------------New DataProcessing-----------------
 			[for (dc : DataDictionary | d.inputPort)]
 		[dc.name/]=pd.read_csv('[dc.path/]')
 			[/for]
