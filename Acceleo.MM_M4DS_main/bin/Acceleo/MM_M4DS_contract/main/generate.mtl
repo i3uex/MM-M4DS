@@ -59,9 +59,12 @@ print([dc_name/])[/comment]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
 [comment]		print('[per.percent/]')		#Percent percent
 		print('[per.percentDef.name/]')		#PercentDef name[/comment]
-##PRUEBA DE LA PRIMERA LLAMADA A PRECONDICION##
-if(checkMissingRange(belongOp=Belong([vr.belongOp/]), dataDictionary=[dc_name/], field='[fieldName/]', quant_op=Operator([v.quantity.operator/]), quant_rel=[per.percent/]/100))
-	print('Llamada a precondición realizada con éxito')
+
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], 
+							 field='[fieldName/]', quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
 
 
 		[/let]

@@ -13,17 +13,9 @@
  */]
 
 [template public generateWorkflow(aWorkflow : Workflow)]
-// Esto son instancias, no clases. 
-// No se debe crear un archivo para cada una, se debe crear un archivo de clase 
-// y en el main (o donde sea) crear la instancia.
 [generateDataProcessing(aWorkflow)/]
 [generateDebug(aWorkflow)/]
 
-[file (aWorkflow.name.trim() + '.py', false, 'UTF-8')]
-from DataProcessing import DataProcessing
-#Clase main (por ahora)
-print('[aWorkflow.name/] tested')
-[/file]
 [/template]
 
 
@@ -31,24 +23,28 @@ print('[aWorkflow.name/] tested')
 [template public generateDataProcessing(aWorkflow : Workflow)]
 [file ('DataProcessing.py', false, 'UTF-8')]
 import pandas as pd
+import functions.contract_invariants as contract_invariants
+import functions.contract_pre_post as contract_pre_post
+from helpers.enumerations import Belong, Operator
+
 class DataProcessing:
 	def generateDataProcessing(self):
-
+		pre_post=contract_pre_post.ContractsPrePost()
+		invariants=contract_invariants.ContractsInvariants()
 	[for (d : DataProcessing | aWorkflow.dataprocessing)]
 			[for (dc : DataDictionary | d.inputPort)]
-#||||||||||||||||||||||||||||||||||||||||||||||||||||
-			[dc.name/]=pd.read_csv('[dc.path/]')
-#||||||||||||||||||||||||||||||||||||||||||||||||||||
+		[dc.name/]=pd.read_csv('[dc.path/]')
 			[/for]
 		[for (c : Contract | d.contract)]
 			[for (dc : DataDictionary | d.inputPort)]
 				[for (df : DataField | dc.datafield)]
-				[generateCallContract(c.contract, df.displayName, dc.name)/]
+		[generateCallContract(c.contract, df.displayName, dc.name)/]
 				[/for]
 			[/for]
 		[/for]
 	[/for]
-
+dp=DataProcessing()
+dp.generateDataProcessing()
 [/file]
 [/template]
 
