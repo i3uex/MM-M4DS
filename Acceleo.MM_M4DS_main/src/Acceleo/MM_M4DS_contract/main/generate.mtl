@@ -41,7 +41,8 @@ else:
 	print('Precondition call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
-missing_values_[aContract.name/]=['['']'/]
+[comment]missing_values_[aContract.name/]=['['']'/][/comment]
+
 		[let per : Percent = v.quantity.oclAsType(Percent)]
 if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
 								missing_values=missing_values_[aContract.name/],

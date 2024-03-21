@@ -34,14 +34,13 @@ class DataProcessing:
 	[for (d : DataProcessing | aWorkflow.dataprocessing)]
 #-----------------New DataProcessing-----------------
 			[for (dc : DataDictionary | d.inputPort)]
-[if (dc.path.equalsIgnoreCase('../data_model.csv'))]
 		[dc.name/]=pd.read_csv('[dc.path/]')
-[/if]
 			[/for]
 		[for (c : Contract | d.contract)]
 			[for (dc : DataDictionary | d.inputPort)]
 				[for (df : DataField | dc.datafield)]
 		[if (c.contract.name.contains(df.displayName))]
+		missing_values_[c.contract.name/]=['['/][for (mv : ValueField | df.missingValues) separator(', ')][mv.value/][/for][']'/]
 		[generateCallContract(c.contract, df.displayName, dc.name)/]
 		[/if]
 				[/for]
