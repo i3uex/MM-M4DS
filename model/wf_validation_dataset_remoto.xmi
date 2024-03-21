@@ -340,6 +340,10 @@
           name="sex_in_cols_impute"
           displayName="sex"
           out="//@dataprocessing.0/@outputPort.0/@datafield.0">
+        <missingValues
+            value="'D'"/>
+        <missingValues
+            value="4"/>
         <categoricalDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
       </datafield>
