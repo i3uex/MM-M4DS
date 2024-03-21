@@ -12,7 +12,6 @@
 [/template]
 
 [template public generateCallContract(aContract : Contract, fieldName : String, dc_name : String)]
-[if (aContract.name.contains(fieldName))]
 [if (aContract.oclIsTypeOf(ValueRange))]
 [let vr : ValueRange = aContract.oclAsType(ValueRange)]
 [for (v : Value | vr.value)]
@@ -31,29 +30,36 @@
 [elseif (v.oclIsTypeOf(SpecialValue))]
 	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
 [if (v.quantity <> null)]
+[if (sv.specialType=SpecialType::MISSING)]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], 
-								field='[fieldName/]', quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[av.value/]):
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								missing_values=missing_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('Precondition call returned TRUE')
 else:
 	print('Precondition call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
+missing_values_[aContract.name/]=['['']'/]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], 
-								field='[fieldName/]', quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								missing_values=missing_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('Precondition call returned TRUE')
 else:
 	print('Precondition call returned FALSE')
 		[/let]
 	[/if]
 [/if]
+[elseif (sv.specialType=SpecialType::INVALID)]
+#HACER LO MISMO QUE PARA MISSING PERO CON LA FUNCION checkInvalidValues()
+
+[/if]
 	[/let]
 [/if]
 [/for]
 [/let]
-[/if]
 [/if]
 [/template]
 
