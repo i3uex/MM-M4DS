@@ -40,7 +40,7 @@ class DataProcessing:
 			[for (dc : DataDictionary | d.inputPort)]
 				[for (df : DataField | dc.datafield)]
 		[if (c.contract.name.contains(df.displayName))]
-		missing_values_[c.contract.name/]=['['/][for (mv : ValueField | df.missingValues) separator(', ')][mv.value/][/for][']'/]
+[comment]		missing_values_[c.contract.name/]=['['/][for (mv : ValueField | df.missingValues) separator(', ')][mv.value/][/for][']'/][/comment]
 		[generateCallContract(c.contract, df.displayName, dc.name)/]
 		[/if]
 				[/for]

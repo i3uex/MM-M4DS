@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('https://www.example.org/contract')]
+[module generate('https://www.example.org/contract', 'https://www.example.org/workflow')]
 
 [import Acceleo::MM_M4DS_Workflow::main::generate/]
 
@@ -17,6 +17,34 @@
 [for (v : Value | vr.value)]
 [if (v.oclIsTypeOf(FixValue))]
 	[let fv : FixValue = v.oclAsType(FixValue)]
+[if (v.quantity <> null)]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[fieldName/]',
+								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[fieldName/]',
+								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+
+		[/let]
+	[/if]
+	[else]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[fieldName/]',
+								quant_abs=None, quant_rel=None, quant_op=None):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+
+[/if]
 	[/let]
 [elseif (v.oclIsTypeOf(Interval))]
 	[let inter : Interval = v.oclAsType(Interval)]
@@ -31,6 +59,7 @@
 	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
 [if (v.quantity <> null)]
 [if (sv.specialType=SpecialType::MISSING)]
+missing_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][/let][']'/][/if]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
 if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
@@ -41,8 +70,6 @@ else:
 	print('Precondition call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
-[comment]missing_values_[aContract.name/]=['['']'/][/comment]
-
 		[let per : Percent = v.quantity.oclAsType(Percent)]
 if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
 								missing_values=missing_values_[aContract.name/],
@@ -52,10 +79,46 @@ else:
 	print('Precondition call returned FALSE')
 		[/let]
 	[/if]
-[/if]
 [elseif (sv.specialType=SpecialType::INVALID)]
-#HACER LO MISMO QUE PARA MISSING PERO CON LA FUNCION checkInvalidValues()
-
+invalid_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.invalidValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								invalid_values=invalid_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								invalid_values=invalid_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+		[/let]
+	[/if]
+[elseif (sv.specialType=SpecialType::OUTLIER)]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[fieldName/]', 
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('Precondition call returned TRUE')
+else:
+	print('Precondition call returned FALSE')
+		[/let]
+	[/if]
+[/if]
 [/if]
 	[/let]
 [/if]
