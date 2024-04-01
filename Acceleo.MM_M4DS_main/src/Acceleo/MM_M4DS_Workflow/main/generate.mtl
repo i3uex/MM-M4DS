@@ -9,10 +9,11 @@
 
 [**
  * The documentation of the template generateElement.
- * @param aLibrary
+ * @param aWorkflow
  */]
 
 [template public generateWorkflow(aWorkflow : Workflow)]
+[comment @main/]
 [generateDataProcessing(aWorkflow)/]
 [generateDebug(aWorkflow)/]
 
@@ -40,7 +41,6 @@ class DataProcessing:
 			[for (dc : DataDictionary | d.inputPort)]
 				[for (df : DataField | dc.datafield)]
 		[if (c.contract.name.contains(df.displayName))]
-[comment]		missing_values_[c.contract.name/]=['['/][for (mv : ValueField | df.missingValues) separator(', ')][mv.value/][/for][']'/][/comment]
 		[generateCallContract(c.contract, df.displayName, dc.name)/]
 		[/if]
 				[/for]

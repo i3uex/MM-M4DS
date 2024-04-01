@@ -13,9 +13,6 @@ print('def_impute_categorical_columns_input_dataDictionary')         #INPUTPORT 
 	print('sex')         #DataField displayName((((()))))
 	print('false')		#Categorical
 	print('def_impute_categorical_columns_input_dataField')
-		print('D')		#MissingValues
-		print('0')
-	#-------------------------____________________________
 		print('4')		#MissingValues
 		print('0')
 	#-------------------------____________________________
@@ -177,12 +174,6 @@ print('def_impute_categorical_input_dataDictionary')         #INPUTPORT dataDict
 	print('ETHNICITY')         #DataField displayName((((()))))
 	print('false')		#Categorical
 	print('def_impute_categorical_input_dataField')
-		print(''N'')		#InvalidValues
-		print('0')
-	#-------------------------____________________________
-		print(''L'')		#InvalidValues
-		print('0')
-	#-------------------------____________________________
 		print('14')		#InvalidValues
 		print('0')
 	#-------------------------____________________________

@@ -9,7 +9,7 @@ class DataProcessing:
 		invariants=contract_invariants.ContractsInvariants()
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
-		missing_values_PRE_value_range_impute_sex_columns=[D, 4]
+		missing_values_PRE_value_range_impute_sex_columns=[4]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex_columns,
 										quant_op=Operator(2), quant_rel=30.0/100):
@@ -63,7 +63,7 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
-		invalid_values_PRE_value_range_impute_ETHNICITY=['N', 'L', 14]
+		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
 		if pre_post.checkInvalidValues(belongOp=Belong(0), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
 										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
 										quant_op=Operator(3), quant_rel=30.0/100):
