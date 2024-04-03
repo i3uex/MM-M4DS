@@ -11,41 +11,41 @@
 
 [/template]
 
-[template public generateCallContract(aContract : Contract, dc_name : String)]
-[if (aContract._in.oclIsTypeOf(DataField))]
+[template public generateCallContract(aContract : Contract)]
+[if (aContract._in.oclIsTypeOf(DataField))]			[comment Intentar acceder al datadic padre al obtener el datafield del contrato/]
 [let df : DataField = aContract._in.oclAsType(DataField)]
 
 [if (aContract.oclIsTypeOf(ValueRange))]
-[let vr : ValueRange = aContract.oclAsType(ValueRange)]
+[let vr : ValueRange = aContract.oclAsType(ValueRange)]		[comment ValueRange contracts/]
 [for (v : Value | vr.value)]
 [if (v.oclIsTypeOf(FixValue))]
 	[let fv : FixValue = v.oclAsType(FixValue)]
 [if (v.quantity <> null)]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 		[/let]
 	[/if]
 	[else]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dc_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 [/if]
 	[/let]
@@ -65,107 +65,125 @@ else:
 missing_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][/let][']'/][/if]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [elseif (sv.specialType=SpecialType::INVALID)]
 invalid_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.invalidValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [elseif (sv.specialType=SpecialType::OUTLIER)]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [/if]
 [elseif (v.quantity = null)]
 	[if (sv.specialType=SpecialType::MISSING)]
 missing_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][/let][']'/][/if]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[aContract.name/],
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[elseif (sv.specialType=SpecialType::INVALID)]
 invalid_values_[aContract.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.invalidValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[elseif (sv.specialType=SpecialType::OUTLIER)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dc_name/], field='[df.dataField.displayName/]', 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/], field='[df.dataField.displayName/]', 
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[/if]
 [/if]
 	[/let]
 [/if]
 [/for]
 [/let]
+[comment]Contracts of type Condition (Invariants)[/comment]
+[elseif (aContract.oclIsTypeOf(Condition))]
+[generateCallConditionContract(aContract)/]
 [/if]
 
 [/let]
 [elseif ((aContract._in.oclIsTypeOf(DataDictionary)))]
-[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
-[generateCallDataDicContract(aContract, dd.dataDictionary.name)/]
-[/let]
+[generateCallDataDicContract(aContract)/]
 [/if]
 [/template]
 
 
 
+[template public generateCallConditionContract(aContract : Contract)]
+[let cond : Condition = aContract.oclAsType(Condition)]		[comment Condition contracts/]
+[for (if_cond : If | cond._if)]
+[if (cond._in.oclIsTypeOf(DataField))]
+[let df : DataField = cond._in.oclAsType(DataField)]
+print('[df.dataField.eContainer(Workflow::DataDictionary).name/]')
+[/let]
+[/if]
+[/for]
 
 
-[template public generateCallDataDicContract(aContract : Contract, dataDic_name : String)]
+
+
+[/let]
+[/template]
+
+
+
+[template public generateCallDataDicContract(aContract : Contract)]
+[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
 [if (aContract.oclIsTypeOf(ValueRange))]
 [let vr : ValueRange = aContract.oclAsType(ValueRange)]
 [for (v : Value | vr.value)]
@@ -174,29 +192,29 @@ else:
 [if (v.quantity <> null)]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dataDic_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dataDic_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 		[/let]
 	[/if]
 	[else]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dataDic_name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 
 [/if]
 	[/let]
@@ -216,86 +234,86 @@ else:
 missing_values_[aContract.name/]=None
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								missing_values=missing_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								missing_values=missing_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [elseif (sv.specialType=SpecialType::INVALID)]
 invalid_values_[aContract.name/]=None
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [elseif (sv.specialType=SpecialType::OUTLIER)]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[elseif (v.quantity.oclIsTypeOf(Percent))]
 		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 		[/let]
 	[/if]
 [/if]
 [elseif (v.quantity = null)]
 	[if (sv.specialType=SpecialType::MISSING)]
 missing_values_[aContract.name/]=None
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								missing_values=missing_values_[aContract.name/],
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[elseif (sv.specialType=SpecialType::INVALID)]
 invalid_values_[aContract.name/]=None
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								invalid_values=invalid_values_[aContract.name/],
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[elseif (sv.specialType=SpecialType::OUTLIER)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dataDic_name/], field=None, 
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
 								quant_abs=None, quant_rel=None, quant_op=None):
-	print('Precondition call returned TRUE')
+	print('[aContract.type/] call returned TRUE')
 else:
-	print('Precondition call returned FALSE')
+	print('[aContract.type/] call returned FALSE')
 	[/if]
 [/if]
 	[/let]
@@ -303,6 +321,7 @@ else:
 [/for]
 [/let]
 [/if]
+[/let]
 [/template]
 
 

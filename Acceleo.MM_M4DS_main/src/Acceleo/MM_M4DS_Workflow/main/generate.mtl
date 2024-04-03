@@ -38,9 +38,7 @@ class DataProcessing:
 		[dc.name/]=pd.read_csv('[dc.path/]')
 			[/for]
 		[for (c : Contract | d.contract)]
-			[for (dc : DataDictionary | d.inputPort)]
-		[generateCallContract(c.contract, dc.name)/]
-			[/for]
+		[generateCallContract(c.contract)/]
 		[/for]
 	[/for]
 dp=DataProcessing()
