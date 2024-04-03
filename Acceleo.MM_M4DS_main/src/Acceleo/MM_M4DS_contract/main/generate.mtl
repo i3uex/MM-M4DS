@@ -167,15 +167,72 @@ else:
 [template public generateCallConditionContract(aContract : Contract)]
 [let cond : Condition = aContract.oclAsType(Condition)]		[comment Condition contracts/]
 [for (if_cond : If | cond._if)]
-[if (cond._in.oclIsTypeOf(DataField))]
+[if (cond._in.oclIsTypeOf(DataField))]		[comment Checks that the input is a DataField/]
 [let df : DataField = cond._in.oclAsType(DataField)]
-print('[df.dataField.eContainer(Workflow::DataDictionary).name/]')
+[let th : Then = if_cond._then.oclAsType(Then)]
+[for (v : Value | if_cond.valueCondition)]
+[if (v.oclIsTypeOf(FixValue))]
+	[let fv : FixValue = v.oclAsType(FixValue)]
+	[if (th.valueResult.oclIsTypeOf(FixValue))]
+		[let fvt : FixValue = th.valueResult.oclAsType(FixValue)]
+[if (aContract.out.oclIsTypeOf(DataDictionary))]
+[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]
+[dd_out.dataDictionary.name/]=invariants.checkInv_FixValue_FixValue(dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/]
+												fixValueInput=[fv.value/], fixValueOutput=[fvt.value/],
+												dataTypeInput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+												dataTypeOutput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+												field='[df.dataField.displayName/]')
+print('[aContract.type/] call')
 [/let]
-[/if]
+[elseif (aContract.out.oclIsTypeOf(DataField))]
+[let df_out : DataField = aContract.out.oclAsType(DataField)]
+[df_out.dataField.eContainer(Workflow::DataDictionary).name/]=invariants.checkInv_FixValue_FixValue(dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/]
+												fixValueInput=[fv.value/], fixValueOutput=[fvt.value/],
+												dataTypeInput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+												dataTypeOutput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+												field='[df.dataField.displayName/]')
+print('[aContract.type/] call')
+[/let]
+[/if]		[comment If function calls/]
+		[/let]
+	[/if]		[comment If th.valueResult.oclIsTypeOf()/]
+	[/let]
+[elseif (v.oclIsTypeOf(SpecialValue))]
+[let sv : SpecialValue = v.oclAsType(SpecialValue)]
+	[if (th.valueResult.oclIsTypeOf(NumOp))]
+		[let nop : NumOp = th.valueResult.oclAsType(NumOp)]
+			[if (aContract.out.oclIsTypeOf(DataDictionary))]
+				[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]
+[dd_out.dataDictionary.name/]=invariants.checkInv_SpecialValue_NumOp(dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+												specialTypeInput=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
+												numOpOutput=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
+												missingValues=None, axis_param=0, field='[df.dataField.displayName/]')
+print('[aContract.type/] call')
+
+[dd_out.dataDictionary.name/].to_csv('[dd_out.dataDictionary.path/]')
+				[/let]
+			[elseif (aContract.out.oclIsTypeOf(DataField))]
+				[let df_out : DataField = aContract.out.oclAsType(DataField)]
+[df_out.dataField.eContainer(Workflow::DataDictionary).name/]=invariants.checkInv_SpecialValue_NumOp(dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+												specialTypeInput=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
+												numOpOutput=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
+												missingValues=None, axis_param=0, field='[df.dataField.displayName/]')
+print('[aContract.type/] call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
+
+[df_out.dataField.eContainer(Workflow::DataDictionary).name/].to_csv('[df_out.dataField.eContainer(Workflow::DataDictionary).path/]')
+
+				[/let]
+			[/if]		[comment If function calls/]
+		[/let]
+	[/if]		[comment If th.valueResult.oclIsTypeOf()/]
+[/let]
+[/if]		[comment v.oclIsTypeOf()/]
 [/for]
 
-
-
+[/let]
+[/let]
+[/if]		[comment cond._in.oclIsTypeOf()/]
+[/for]
 
 [/let]
 [/template]

@@ -68,7 +68,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_in')
 		
 		
 		
@@ -77,16 +76,8 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_in')
 		
 		
-		
-		
-		
-		
-		
-		
-		print('data_model_impute_in')
 		
 		
 		
@@ -117,9 +108,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_sex_in')
-		
-		
 		
 		
 		
@@ -146,9 +134,6 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION call returned FALSE')
 		
-		
-		
-		print('data_model_impute_IRSCHOOL_in')
 		
 		
 		
@@ -179,9 +164,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_ETHNICITY_in')
-		
-		
 		
 		
 		
@@ -210,9 +192,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_ACADEMIC_INTEREST_2_in')
-		
-		
 		
 		
 		
@@ -237,9 +216,6 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION call returned FALSE')
 		
-		
-		
-		print('data_model_impute_ACADEMIC_INTEREST_2_in')
 		
 		
 		
@@ -299,7 +275,13 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_mean_in')
+		data_model_impute_mean_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_mean_in,
+														specialTypeInput=SpecialType(0),
+														numOpOutput=Operation(1),
+														missingValues=None, axis_param=0, field='avg_income')
+		print('INVARIANT call')
+		
+		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
 		
 		
 		
@@ -307,9 +289,13 @@ class DataProcessing:
 		
 		
 		
+		data_model_impute_mean_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_mean_in,
+														specialTypeInput=SpecialType(0),
+														numOpOutput=Operation(1),
+														missingValues=None, axis_param=0, field='distance')
+		print('INVARIANT call')
 		
-		print('data_model_impute_mean_in')
-		
+		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
 		
 		
 		
@@ -339,8 +325,13 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_linear_interpolation_in')
+		data_model_impute_linear_interpolation_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_linear_interpolation_in,
+														specialTypeInput=SpecialType(0),
+														numOpOutput=Operation(0),
+														missingValues=None, axis_param=0, field='satscore')
+		print('INVARIANT call')
 		
+		data_model_impute_linear_interpolation_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
 		
 		
 		
@@ -412,10 +403,19 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_map_territory_in')
-		print('data_model_map_territory_in')
+		data_model_map_territory_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_territory_in
+														fixValueInput=A, fixValueOutput=0,
+														dataTypeInput=DataType(0)),
+														dataTypeOutput=DataType(0)),
+														field='TERRITORY')
+		print('PRECONDITION call')
 		
-		
+		data_model_map_territory_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_territory_in
+														fixValueInput=N, fixValueOutput=0,
+														dataTypeInput=DataType(0)),
+														dataTypeOutput=DataType(0)),
+														field='TERRITORY')
+		print('PRECONDITION call')
 		
 		
 		
@@ -454,10 +454,19 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_map_Instate_in')
-		print('data_model_map_Instate_in')
+		data_model_map_Instate_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_Instate_in
+														fixValueInput=Y, fixValueOutput=1,
+														dataTypeInput=DataType(0)),
+														dataTypeOutput=DataType(0)),
+														field='Instate')
+		print('PRECONDITION call')
 		
-		
+		data_model_map_Instate_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_Instate_in
+														fixValueInput=N, fixValueOutput=0,
+														dataTypeInput=DataType(0)),
+														dataTypeOutput=DataType(0)),
+														field='Instate')
+		print('PRECONDITION call')
 		
 		
 		
@@ -466,7 +475,6 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 		
-		print('data_model_stringToNumber_in')
 		
 		
 		
@@ -475,7 +483,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_stringToNumber_in')
 		
 		
 		
@@ -484,25 +491,12 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_stringToNumber_in')
 		
 		
 		
 		
 		
 		
-		
-		
-		print('data_model_stringToNumber_in')
-		
-		
-		
-		
-		
-		
-		
-		
-		print('data_model_stringToNumber_in')
 		
 		
 		
@@ -609,7 +603,13 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_impute_outlier_closest_in')
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='avg_income')
+		print('INVARIANT call')
+		
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
 		
 		
@@ -617,17 +617,13 @@ class DataProcessing:
 		
 		
 		
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='distance')
+		print('INVARIANT call')
 		
-		print('data_model_impute_outlier_closest_in')
-		
-		
-		
-		
-		
-		
-		
-		
-		print('data_model_impute_outlier_closest_in')
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
 		
 		
@@ -635,17 +631,13 @@ class DataProcessing:
 		
 		
 		
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='premiere')
+		print('INVARIANT call')
 		
-		print('data_model_impute_outlier_closest_in')
-		
-		
-		
-		
-		
-		
-		
-		
-		print('data_model_impute_outlier_closest_in')
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
 		
 		
@@ -653,9 +645,41 @@ class DataProcessing:
 		
 		
 		
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='sex')
+		print('INVARIANT call')
 		
-		print('data_model_impute_outlier_closest_in')
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
+		
+		
+		
+		
+		
+		
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='Enroll')
+		print('INVARIANT call')
+		
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
+		
+		
+		
+		
+		
+		
+		
+		data_model_impute_outlier_closest_out=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in,
+														specialTypeInput=SpecialType(2),
+														numOpOutput=Operation(3),
+														missingValues=None, axis_param=0, field='Instate')
+		print('INVARIANT call')
+		
+		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
 		
 		
@@ -683,9 +707,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
 		
 		
 		
@@ -694,9 +715,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
 		
 		
 		
@@ -705,9 +723,6 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
 		
 		
 		
@@ -724,11 +739,8 @@ class DataProcessing:
 		
 		
 		
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
-		print('data_model_binner_in')
+		
+		
 		
 		
 		
