@@ -2,7 +2,6 @@ import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator
-
 class DataProcessing:
 	def generateDataProcessing(self):
 		pre_post=contract_pre_post.ContractsPrePost()
@@ -279,10 +278,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(0),
 														numOpOutput=Operation(1),
 														missingValues=None, axis_param=0, field='avg_income')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
-		
 		
 		
 		
@@ -293,10 +291,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(0),
 														numOpOutput=Operation(1),
 														missingValues=None, axis_param=0, field='distance')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
-		
 		
 		
 		
@@ -329,10 +326,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(0),
 														numOpOutput=Operation(0),
 														missingValues=None, axis_param=0, field='satscore')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_linear_interpolation_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
-		
 		
 		
 		
@@ -349,13 +345,11 @@ class DataProcessing:
 		
 		
 		
-		
 		if pre_post.checkFixValueRange(value='0', dataDictionary=data_model_row_filter_out, belongOp=Belong(1), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
-		
 		
 		
 #-----------------New DataProcessing-----------------
@@ -378,7 +372,6 @@ class DataProcessing:
 			print('PRECONDITION call returned TRUE')
 		else:
 			print('PRECONDITION call returned FALSE')
-		
 		if pre_post.checkFixValueRange(value='N', dataDictionary=data_model_map_territory_in, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION call returned TRUE')
@@ -387,19 +380,16 @@ class DataProcessing:
 		
 		
 		
-		
 		if pre_post.checkFixValueRange(value='A', dataDictionary=data_model_map_territory_out, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
-		
 		if pre_post.checkFixValueRange(value='N', dataDictionary=data_model_map_territory_out, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
-		
 		
 		
 		
@@ -429,7 +419,6 @@ class DataProcessing:
 			print('PRECONDITION call returned TRUE')
 		else:
 			print('PRECONDITION call returned FALSE')
-		
 		if pre_post.checkFixValueRange(value='N', dataDictionary=data_model_map_Instate_in, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION call returned TRUE')
@@ -438,19 +427,16 @@ class DataProcessing:
 		
 		
 		
-		
 		if pre_post.checkFixValueRange(value='Y', dataDictionary=data_model_map_Instate_out, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
-		
 		if pre_post.checkFixValueRange(value='N', dataDictionary=data_model_map_Instate_out, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
-		
 		
 		
 		
@@ -607,10 +593,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='avg_income')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
@@ -621,10 +606,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='distance')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
@@ -635,10 +619,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='premiere')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
@@ -649,10 +632,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='sex')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
@@ -663,10 +645,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='Enroll')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
@@ -677,10 +658,9 @@ class DataProcessing:
 														specialTypeInput=SpecialType(2),
 														numOpOutput=Operation(3),
 														missingValues=None, axis_param=0, field='Instate')
-		print('INVARIANT call')
+		print('INVARIANT call')			#FALTA RECORRER LA LISTA DE MISSING VALUES
 		
 		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
-		
 		
 		
 		
