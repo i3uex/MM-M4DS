@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('https://www.example.org/workflow')]
+[module generate('https://www.example.org/workflow', 'https://www.example.org/contract')]
 
 [import Acceleo::MM_M4DS_contract::main::generate/]
 
@@ -36,9 +36,22 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 			[for (dc : DataDictionary | d.inputPort)]	[comment read all the input datasets and store them/]
 		[dc.name/]=pd.read_csv('[dc.path/]')
+		[dc.name/]_copy=[dc.name/].copy()
 			[/for]
 		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::PRECONDITION)]
 		[generateCallContract(c.contract)/]
+		[/if]
+		[/for]
+		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::INVARIANT)]
+		[generateCallContract(c.contract)/]
+		[/if]
+		[/for]
+		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::POSTCONDITION)]
+		[generateCallContract(c.contract)/]
+		[/if]
 		[/for]
 	[/for]
 dp=DataProcessing()

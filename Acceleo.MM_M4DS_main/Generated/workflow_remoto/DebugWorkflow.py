@@ -324,10 +324,10 @@ print('def_impute_cont_columns_output_dataDictionary')         #INPUTPORT dataDi
 print('PRECONDITION_impute_mean_avg_income')
 print('test')
 print('PRECONDITION_impute_mean_distance')
-print('POSTCONDITION_impute_mean_avg_income')
-print('POSTCONDITION_impute_mean_distance')
 print('INVARIANT_impute_mean_avg_income')
 print('INVARIANT_impute_mean_distance')
+print('POSTCONDITION_impute_mean_distance')
+print('POSTCONDITION_impute_mean_avg_income')
 ############################################################
 print(impute_linear_interpolation(satscore))	#DataProcessing name
 print('impute_mean(avg_income, distance)')         #SOURCE

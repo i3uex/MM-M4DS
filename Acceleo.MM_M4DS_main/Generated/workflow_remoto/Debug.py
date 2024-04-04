@@ -662,52 +662,6 @@ print('PRE_value_range_impute_cont_columns')	#ValueRangeDef name
 #//////////////////////////////////////////////////////////////////////////
 """"""
 
-print('POSTCONDITION_impute_mean_avg_income')				#Contract en workflow
-print('def_POSTCONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
-print('POST_value_range_impute_mean_avg_income')				#Contract name en CONTRACT
-print('POSTCONDITION')				#Contract type en CONTRACT
-
-#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
-
-print('POST_impute_mean_input_datafield_avg_income')		#dataField name _in
-print('avg_income_out_impute')		#dataField _in
-print('POST_input_datafield_impute_cont_columns')		#dataFieldDef _in
-
-
-print('NOTBELONG')			#ValueRange
-print('POSTCONDITION')		#Type in Contract
-print('POST_value_range_impute_mean_avg_income')		#Name in Contract
-print('POST_value_range_impute_cont_columns')	#ValueRangeDef name
-	print('MISSING')		#SpecialValue specialType
-	print('POST_special_value_impute_cont_columns')	#SpecialValue specialValueDef name
-
-
-#//////////////////////////////////////////////////////////////////////////
-""""""
-
-print('POSTCONDITION_impute_mean_distance')				#Contract en workflow
-print('def_POSTCONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
-print('POST_value_range_impute_mean_distance')				#Contract name en CONTRACT
-print('POSTCONDITION')				#Contract type en CONTRACT
-
-#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
-
-print('POST_impute_mean_input_datafield_distance')		#dataField name _in
-print('distance_out_impute')		#dataField _in
-print('POST_input_datafield_impute_cont_columns')		#dataFieldDef _in
-
-
-print('NOTBELONG')			#ValueRange
-print('POSTCONDITION')		#Type in Contract
-print('POST_value_range_impute_mean_distance')		#Name in Contract
-print('POST_value_range_impute_cont_columns')	#ValueRangeDef name
-	print('MISSING')		#SpecialValue specialType
-	print('POST_special_value_impute_cont_columns')	#SpecialValue specialValueDef name
-
-
-#//////////////////////////////////////////////////////////////////////////
-""""""
-
 print('INVARIANT_impute_mean_avg_income')				#Contract en workflow
 print('def_INVARIANT_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
 print('INV_condition_avg_income')				#Contract name en CONTRACT
@@ -745,6 +699,52 @@ print('INV_output_dataField_impute_cont_columns')		#dataFieldDef out
 
 
 print('INV_condition_impute_cont_columns')			#Condition
+
+
+#//////////////////////////////////////////////////////////////////////////
+""""""
+
+print('POSTCONDITION_impute_mean_distance')				#Contract en workflow
+print('def_POSTCONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
+print('POST_value_range_impute_mean_distance')				#Contract name en CONTRACT
+print('POSTCONDITION')				#Contract type en CONTRACT
+
+#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
+
+print('POST_impute_mean_input_datafield_distance')		#dataField name _in
+print('distance_out_impute')		#dataField _in
+print('POST_input_datafield_impute_cont_columns')		#dataFieldDef _in
+
+
+print('NOTBELONG')			#ValueRange
+print('POSTCONDITION')		#Type in Contract
+print('POST_value_range_impute_mean_distance')		#Name in Contract
+print('POST_value_range_impute_cont_columns')	#ValueRangeDef name
+	print('MISSING')		#SpecialValue specialType
+	print('POST_special_value_impute_cont_columns')	#SpecialValue specialValueDef name
+
+
+#//////////////////////////////////////////////////////////////////////////
+""""""
+
+print('POSTCONDITION_impute_mean_avg_income')				#Contract en workflow
+print('def_POSTCONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
+print('POST_value_range_impute_mean_avg_income')				#Contract name en CONTRACT
+print('POSTCONDITION')				#Contract type en CONTRACT
+
+#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
+
+print('POST_impute_mean_input_datafield_avg_income')		#dataField name _in
+print('avg_income_out_impute')		#dataField _in
+print('POST_input_datafield_impute_cont_columns')		#dataFieldDef _in
+
+
+print('NOTBELONG')			#ValueRange
+print('POSTCONDITION')		#Type in Contract
+print('POST_value_range_impute_mean_avg_income')		#Name in Contract
+print('POST_value_range_impute_cont_columns')	#ValueRangeDef name
+	print('MISSING')		#SpecialValue specialType
+	print('POST_special_value_impute_cont_columns')	#SpecialValue specialValueDef name
 
 
 #//////////////////////////////////////////////////////////////////////////
