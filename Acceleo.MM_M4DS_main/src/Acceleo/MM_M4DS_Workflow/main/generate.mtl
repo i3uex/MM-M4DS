@@ -26,7 +26,7 @@
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType
 [comment generate the imports and the class/]
 class DataProcessing:
 	def generateDataProcessing(self):
@@ -37,6 +37,7 @@ class DataProcessing:
 			[for (dc : DataDictionary | d.inputPort)]	[comment read all the input datasets and store them/]
 		[dc.name/]=pd.read_csv('[dc.path/]')
 		[dc.name/]_copy=[dc.name/].copy()
+
 			[/for]
 		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
 		[if (c.contract.type=ContractType::PRECONDITION)]

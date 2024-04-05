@@ -68,13 +68,13 @@ print('ETHNICITY_in_cols_impute')		#dataField _in
 print('def_PRE_input_datafield_impute_categorical_columns')		#dataFieldDef _in
 
 
-print('NOTBELONG')			#ValueRange
+print('BELONG')			#ValueRange
 print('PRECONDITION')		#Type in Contract
 print('PRE_value_range_impute_ETHNICITY_columns')		#Name in Contract
 print('def_PRE_value_range_impute_categorical_columns')	#ValueRangeDef name
-	print('OUTLIER')		#SpecialValue specialType
+	print('MISSING')		#SpecialValue specialType
 	print('def_PRE_special_value_impute_categorical_columns')	#SpecialValue specialValueDef name
-	print('greather')
+	print('lessEqual')
 		print('30.0')		#Percent percent
 		print('def_PRE_percent_impute_categorical_columns')		#PercentDef name
 
