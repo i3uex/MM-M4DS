@@ -37,10 +37,13 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
 		missing_values_POST_value_range_impute_sex_columns=[]
@@ -83,6 +86,7 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		
 		
 		missing_values_POST_value_range_impute_sex=[]
@@ -107,6 +111,7 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		
 		
 		missing_values_POST_value_range_impute_IRSCHOOL=[]
@@ -131,6 +136,7 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		
 		
 		missing_values_POST_value_range_impute_ETHNICITY=[]
@@ -164,8 +170,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
 		missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2=[]
@@ -217,28 +225,34 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		missing_values_INV_condition_avg_income=[]
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_mean_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_mean_in_copy,
-														specialTypeInput=SpecialType(0),
-														numOpOutput=Operation(1),
-														missing_values=missing_values_INV_condition_avg_income, axis_param=0, field='avg_income')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_mean_in,
+												dataDictionary_out=data_model_impute_mean_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(0),
+												numOpOutput=Operation(1),
+												missing_values=missing_values_INV_condition_avg_income, axis_param=0, field='avg_income')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_mean_out=data_model_impute_mean_in_copy.copy()
-		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
 		
-		
+		printeacion
 		missing_values_INV_condition_distance=[]
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_mean_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_mean_in_copy,
-														specialTypeInput=SpecialType(0),
-														numOpOutput=Operation(1),
-														missing_values=missing_values_INV_condition_distance, axis_param=0, field='distance')
-		print('INVARIANT call')
-		
-		data_model_impute_mean_out=data_model_impute_mean_in_copy.copy()
-		data_model_impute_mean_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_mean_in,
+												dataDictionary_out=data_model_impute_mean_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(0),
+												numOpOutput=Operation(1),
+												missing_values=missing_values_INV_condition_distance, axis_param=0, field='distance')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 		missing_values_POST_value_range_impute_mean_distance=[]
@@ -272,16 +286,19 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		missing_values_INV_condition_distance=[]
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_linear_interpolation_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_linear_interpolation_in_copy,
-														specialTypeInput=SpecialType(0),
-														numOpOutput=Operation(0),
-														missing_values=missing_values_INV_condition_distance, axis_param=0, field='satscore')
-		print('INVARIANT call')
-		
-		data_model_impute_linear_interpolation_out=data_model_impute_linear_interpolation_in_copy.copy()
-		data_model_impute_linear_interpolation_out.to_csv('../workflow_datasets/data_model_impute_out.csv')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_linear_interpolation_in,
+												dataDictionary_out=data_model_impute_linear_interpolation_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(0),
+												numOpOutput=Operation(0),
+												missing_values=missing_values_INV_condition_distance, axis_param=0, field='satscore')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 		missing_values_POST_value_range_impute_linear_interpolation_satscore=[]
@@ -344,18 +361,30 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		data_model_map_territory_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_territory_in,
-														fixValueInput=A, fixValueOutput=0,
-														dataTypeInput=DataType(0),
-														dataTypeOutput=DataType(0),
-														field='TERRITORY')
-		print('PRECONDITION call')
-		data_model_map_territory_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_territory_in,
-														fixValueInput=N, fixValueOutput=0,
-														dataTypeInput=DataType(0),
-														dataTypeOutput=DataType(0),
-														field='TERRITORY')
-		print('PRECONDITION call')
+		printeacion
+		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
+												dataDictionary_out=data_model_map_territory_out,
+												fixValueInput=A, fixValueOutput=0,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												dataTypeInput=DataType(0)),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		else:
+			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		printeacion
+		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
+												dataDictionary_out=data_model_map_territory_out,
+												fixValueInput=N, fixValueOutput=0,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												dataTypeInput=DataType(0)),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		else:
+			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
 		
 		
 		if pre_post.checkFixValueRange(value='A', dataDictionary=data_model_map_territory_out, belongOp=Belong(0), field='TERRITORY',
@@ -388,18 +417,30 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		data_model_map_Instate_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_Instate_in,
-														fixValueInput=Y, fixValueOutput=1,
-														dataTypeInput=DataType(0),
-														dataTypeOutput=DataType(0),
-														field='Instate')
-		print('PRECONDITION call')
-		data_model_map_Instate_out=invariants.checkInv_FixValue_FixValue(dataDictionary=data_model_map_Instate_in,
-														fixValueInput=N, fixValueOutput=0,
-														dataTypeInput=DataType(0),
-														dataTypeOutput=DataType(0),
-														field='Instate')
-		print('PRECONDITION call')
+		printeacion
+		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
+												dataDictionary_out=data_model_map_Instate_out,
+												fixValueInput=Y, fixValueOutput=1,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												dataTypeInput=DataType(0)),
+												dataTypeOutput=DataType(0)),
+												field='Instate')
+			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		else:
+			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		printeacion
+		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
+												dataDictionary_out=data_model_map_Instate_out,
+												fixValueInput=N, fixValueOutput=0,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												dataTypeInput=DataType(0)),
+												dataTypeOutput=DataType(0)),
+												field='Instate')
+			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+		else:
+			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
 		
 		
 		if pre_post.checkFixValueRange(value='Y', dataDictionary=data_model_map_Instate_out, belongOp=Belong(0), field='Instate',
@@ -419,14 +460,19 @@ class DataProcessing:
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 		data_model_stringToNumber_in_copy=data_model_stringToNumber_in.copy()
 
+		printeacion
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
+		printeacion
 		
 		
 #-----------------New DataProcessing-----------------
@@ -475,70 +521,88 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='avg_income')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='avg_income')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
-		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='distance')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='distance')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
-		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='premiere')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='premiere')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
-		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='sex')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='sex')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
-		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='Enroll')
-		print('INVARIANT call')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='Enroll')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
 		
-		
+		printeacion
 		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
-		data_model_impute_outlier_closest_in_copy=invariants.checkInv_SpecialValue_NumOp(dataDictionary=data_model_impute_outlier_closest_in_copy,
-														specialTypeInput=SpecialType(2),
-														numOpOutput=Operation(3),
-														missing_values=None, axis_param=0, field='Instate')
-		print('INVARIANT call')
-		
-		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_copy.copy()
-		data_model_impute_outlier_closest_out.to_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
+		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
+												dataDictionary_out=data_model_impute_outlier_closest_out,
+												belongOp_in=Belong(0),
+												belongOp_out=Belong(0),
+												specialTypeInput=SpecialType(2),
+												numOpOutput=Operation(3),
+												missing_values=None, axis_param=0, field='Instate')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='avg_income', 
@@ -590,10 +654,19 @@ class DataProcessing:
 		
 		
 		
+		printeacion
+		printeacion
+		printeacion
 		
 		
+		printeacion
+		printeacion
+		printeacion
 		
 		
+		printeacion
+		printeacion
+		printeacion
 		
 		
 		
@@ -604,6 +677,11 @@ class DataProcessing:
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
 		
+		printeacion
+		printeacion
+		printeacion
+		printeacion
+		printeacion
 		
 		
 		
