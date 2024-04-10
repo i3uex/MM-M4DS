@@ -7,6 +7,79 @@ class DataProcessing:
 		pre_post=contract_pre_post.ContractsPrePost()
 		invariants=contract_invariants.ContractsInvariants()
 #-----------------New DataProcessing-----------------
+		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
+		data_model_impute_sex_in_copy=data_model_impute_sex_in.copy()
+
+		missing_values_PRE_value_range_impute_sex=[]
+		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_sex_in, field='sex', 
+										missing_values=missing_values_PRE_value_range_impute_sex,
+										quant_op=Operator(2), quant_rel=70.0/100):
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
+		
+		
+		
+		
+		missing_values_POST_value_range_impute_sex=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_sex_out, field='sex', 
+										missing_values=missing_values_POST_value_range_impute_sex,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+#-----------------New DataProcessing-----------------
+		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
+		data_model_impute_IRSCHOOL_in_copy=data_model_impute_IRSCHOOL_in.copy()
+
+		missing_values_PRE_value_range_impute_IRSCHOOL=[]
+		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_IRSCHOOL_in, field='IRSCHOOL', 
+										missing_values=missing_values_PRE_value_range_impute_IRSCHOOL,
+										quant_op=Operator(2), quant_rel=30.0/100):
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
+		
+		
+		
+		
+		missing_values_POST_value_range_impute_IRSCHOOL=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_IRSCHOOL_out, field='IRSCHOOL', 
+										missing_values=missing_values_POST_value_range_impute_IRSCHOOL,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+#-----------------New DataProcessing-----------------
+		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
+		data_model_impute_ETHNICITY_in_copy=data_model_impute_ETHNICITY_in.copy()
+
+		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
+		if pre_post.checkInvalidValues(belongOp=Belong(0), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
+										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
+										quant_op=Operator(3), quant_rel=30.0/100):
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
+		
+		
+		
+		
+		missing_values_POST_value_range_impute_ETHNICITY=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ETHNICITY_out, field='ETHNICITY', 
+										missing_values=missing_values_POST_value_range_impute_ETHNICITY,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+
+#-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 		data_model_impute_in_copy=data_model_impute_in.copy()
 
@@ -37,13 +110,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
 		missing_values_POST_value_range_impute_sex_columns=[]
@@ -74,81 +144,6 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
-		data_model_impute_sex_in_copy=data_model_impute_sex_in.copy()
-
-		missing_values_PRE_value_range_impute_sex=[]
-		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_sex_in, field='sex', 
-										missing_values=missing_values_PRE_value_range_impute_sex,
-										quant_op=Operator(2), quant_rel=70.0/100):
-			print('PRECONDITION call returned TRUE')
-		else:
-			print('PRECONDITION call returned FALSE')
-		
-		
-		printeacion
-		
-		
-		missing_values_POST_value_range_impute_sex=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_sex_out, field='sex', 
-										missing_values=missing_values_POST_value_range_impute_sex,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-#-----------------New DataProcessing-----------------
-		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
-		data_model_impute_IRSCHOOL_in_copy=data_model_impute_IRSCHOOL_in.copy()
-
-		missing_values_PRE_value_range_impute_IRSCHOOL=[]
-		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_IRSCHOOL_in, field='IRSCHOOL', 
-										missing_values=missing_values_PRE_value_range_impute_IRSCHOOL,
-										quant_op=Operator(2), quant_rel=30.0/100):
-			print('PRECONDITION call returned TRUE')
-		else:
-			print('PRECONDITION call returned FALSE')
-		
-		
-		printeacion
-		
-		
-		missing_values_POST_value_range_impute_IRSCHOOL=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_IRSCHOOL_out, field='IRSCHOOL', 
-										missing_values=missing_values_POST_value_range_impute_IRSCHOOL,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-#-----------------New DataProcessing-----------------
-		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
-		data_model_impute_ETHNICITY_in_copy=data_model_impute_ETHNICITY_in.copy()
-
-		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
-		if pre_post.checkInvalidValues(belongOp=Belong(0), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
-										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
-										quant_op=Operator(3), quant_rel=30.0/100):
-			print('PRECONDITION call returned TRUE')
-		else:
-			print('PRECONDITION call returned FALSE')
-		
-		
-		printeacion
-		
-		
-		missing_values_POST_value_range_impute_ETHNICITY=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ETHNICITY_out, field='ETHNICITY', 
-										missing_values=missing_values_POST_value_range_impute_ETHNICITY,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-#-----------------New DataProcessing-----------------
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ACADEMIC_INTEREST_2_in_copy=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
 
@@ -170,10 +165,8 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
 		missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2=[]
@@ -207,15 +200,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		missing_values_dfbdf=None
-		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_mean_in, field=None, 
-										missing_values=missing_values_dfbdf,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('PRECONDITION call returned TRUE')
-		else:
-			print('PRECONDITION call returned FALSE')
-		
-		
 		missing_values_PRE_value_range_impute_mean_distance=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_mean_in, field='distance', 
 										missing_values=missing_values_PRE_value_range_impute_mean_distance,
@@ -225,9 +209,7 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		missing_values_INV_condition_avg_income=[]
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_mean_in,
 												dataDictionary_out=data_model_impute_mean_out,
 												belongOp_in=Belong(0),
@@ -240,9 +222,7 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
 		missing_values_INV_condition_distance=[]
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_mean_in,
 												dataDictionary_out=data_model_impute_mean_out,
 												belongOp_in=Belong(0),
@@ -286,9 +266,7 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		missing_values_INV_condition_distance=[]
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_linear_interpolation_in,
 												dataDictionary_out=data_model_impute_linear_interpolation_out,
 												belongOp_in=Belong(0),
@@ -361,10 +339,9 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
 												dataDictionary_out=data_model_map_territory_out,
-												fixValueInput=A, fixValueOutput=0,
+												value='A', fixValueOutput=value='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -373,10 +350,9 @@ class DataProcessing:
 			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
 		else:
 			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
-		printeacion
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
 												dataDictionary_out=data_model_map_territory_out,
-												fixValueInput=N, fixValueOutput=0,
+												value='N', fixValueOutput=value='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -417,10 +393,9 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
 												dataDictionary_out=data_model_map_Instate_out,
-												fixValueInput=Y, fixValueOutput=1,
+												value='Y', fixValueOutput=value='1',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -429,10 +404,9 @@ class DataProcessing:
 			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
 		else:
 			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
-		printeacion
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
 												dataDictionary_out=data_model_map_Instate_out,
-												fixValueInput=N, fixValueOutput=0,
+												value='N', fixValueOutput=value='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -460,19 +434,14 @@ class DataProcessing:
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 		data_model_stringToNumber_in_copy=data_model_stringToNumber_in.copy()
 
-		printeacion
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
-		printeacion
 		
 		
 #-----------------New DataProcessing-----------------
@@ -521,8 +490,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -535,8 +502,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -549,8 +514,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -563,8 +526,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -577,8 +538,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -591,8 +550,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		printeacion
-		#FALTA MIRAR LO DEL BELONG OP DE LAS INVARIANTES
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -654,19 +611,10 @@ class DataProcessing:
 		
 		
 		
-		printeacion
-		printeacion
-		printeacion
 		
 		
-		printeacion
-		printeacion
-		printeacion
 		
 		
-		printeacion
-		printeacion
-		printeacion
 		
 		
 		
@@ -677,13 +625,36 @@ class DataProcessing:
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
 		
-		printeacion
-		printeacion
-		printeacion
-		printeacion
-		printeacion
 		
 		
 		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 dp=DataProcessing()
 dp.generateDataProcessing()

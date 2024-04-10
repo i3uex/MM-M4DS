@@ -283,6 +283,11 @@
         <references href="https://www.example.org/workflow#//Workflow"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Workflow_DataProcessing_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="https://www.example.org/workflow#//DataProcessing"/>
+      </eAnnotations>
+    </eClassifiers>
   </ecore:EPackage>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>

@@ -33,6 +33,7 @@ class DataProcessing:
 		pre_post=contract_pre_post.ContractsPrePost()
 		invariants=contract_invariants.ContractsInvariants()
 	[for (d : DataProcessing | aWorkflow.dataprocessing)]	[comment traverse the DataProcessing/]
+	[if (d.incoming = null and d.outgoing=null)]
 #-----------------New DataProcessing-----------------
 			[for (dc : DataDictionary | d.inputPort)]	[comment read all the input datasets and store them/]
 		[dc.name/]=pd.read_csv('[dc.path/]')
@@ -54,11 +55,61 @@ class DataProcessing:
 		[generateCallContract(c.contract)/]
 		[/if]
 		[/for]
+	[/if]
 	[/for]
+
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]	[comment traverse the DataProcessing/]
+	[if (d.incoming = null and d.outgoing<>null)]
+[callRecursiveTemplate(d)/]
+	[/if]
+	[/for]
+
+
 dp=DataProcessing()
 dp.generateDataProcessing()
 [/file]
 [/template]
+
+
+[template public callRecursiveTemplate(d : DataProcessing)]
+#-----------------New DataProcessing-----------------
+[for (dc : DataDictionary | d.inputPort)]	[comment read all the input datasets and store them/]
+		[dc.name/]=pd.read_csv('[dc.path/]')
+		[dc.name/]_copy=[dc.name/].copy()
+
+[/for]
+		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::PRECONDITION)]
+		[generateCallContract(c.contract)/]
+		[/if]
+		[/for]
+		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::INVARIANT)]
+		[generateCallContract(c.contract)/]
+		[/if]
+		[/for]
+		[for (c : Contract | d.contract)]		[comment call to the function that generates the calls to the contracts/]
+		[if (c.contract.type=ContractType::POSTCONDITION)]
+		[generateCallContract(c.contract)/]
+		[/if]
+		[/for]
+	[if (d.outgoing<>null)]
+[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]
+[callRecursiveTemplate(nextDp)/]
+[/let]
+	[/if]
+
+[/template]
+
+
+
+
+
+
+
+
+
+
 
 
 [template public generateDebug(aWorkflow : Workflow)]

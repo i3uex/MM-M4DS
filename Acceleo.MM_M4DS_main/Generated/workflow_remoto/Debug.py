@@ -617,28 +617,6 @@ print('PRE_value_range_impute_cont_columns')	#ValueRangeDef name
 #//////////////////////////////////////////////////////////////////////////
 """"""
 
-print('test')				#Contract en workflow
-print('def_PRECONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
-print('dfbdf')				#Contract name en CONTRACT
-print('PRECONDITION')				#Contract type en CONTRACT
-
-#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
-
-print('data_model_impute_mean_in')		#DataDictionary _in
-print('def_PRE_in_dataDictionary_column_cont_filter')		#DataDictionaryDef _in
-
-
-print('BELONG')			#ValueRange
-print('PRECONDITION')		#Type in Contract
-print('dfbdf')		#Name in Contract
-print('PRE_value_range_impute_cont_columns')	#ValueRangeDef name
-	print('MISSING')		#SpecialValue specialType
-	print('PRE_special_value_impute_cont_columns')	#SpecialValue specialValueDef name
-
-
-#//////////////////////////////////////////////////////////////////////////
-""""""
-
 print('PRECONDITION_impute_mean_distance')				#Contract en workflow
 print('def_PRECONDITION_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
 print('PRE_value_range_impute_mean_distance')				#Contract name en CONTRACT
