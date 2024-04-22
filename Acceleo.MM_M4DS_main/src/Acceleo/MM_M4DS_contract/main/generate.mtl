@@ -178,6 +178,7 @@ else:
 [for (v : Value | if_cond.valueCondition)]									[comment OPEN traverse all the values associated to the contract/]
 [if (v.oclIsTypeOf(FixValue))]												[comment OPEN checks that the type of the value is FixValue/]
 	[let fv : FixValue = v.oclAsType(FixValue)]								[comment OPEN assigns the variable to be of type FixValue/]
+[comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
 	[if (th.valueResult.oclIsTypeOf(FixValue))]								[comment OPEN checks that the variable is of type FixValue/]
 		[let fvt : FixValue = th.valueResult.oclAsType(FixValue)]			[comment OPEN assigns the variable to be of type FixValue/]
 [if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
@@ -575,6 +576,23 @@ print('[condition.conditionDef.name/]')		#Condition conditionDef name
 
 [/template]
 
+
+[template public generateCallTransformation(aParameter : Parameter)]
+[comment]Fix the ifs[/comment]
+[if (aParameter.oclIsTypeOf(FixValue))]
+print('Transformation of type SpecialValue-FixValue')
+[/if]
+[if (aParameter.oclIsTypeOf(DerivedValue))]
+print('Transformation of type SpecialValue-DerivedValue')
+[/if]
+[if (aParameter.oclIsTypeOf(NumOp))]
+print('Transformation of type SpecialValue-NumOp')
+[/if]
+[if (aParameter.oclIsTypeOf(Map))]
+print('Transformation of type FixValue-FixValue')
+[/if]
+
+[/template]
 
 
 

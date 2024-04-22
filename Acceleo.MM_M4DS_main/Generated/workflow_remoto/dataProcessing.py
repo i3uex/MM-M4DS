@@ -10,6 +10,10 @@ class DataProcessing:
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
 		data_model_impute_sex_in_copy=data_model_impute_sex_in.copy()
 
+
+		
+		
+
 		missing_values_PRE_value_range_impute_sex=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_sex_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex,
@@ -44,6 +48,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
 		data_model_impute_IRSCHOOL_in_copy=data_model_impute_IRSCHOOL_in.copy()
+
+
+		
+		
 
 		missing_values_PRE_value_range_impute_IRSCHOOL=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_IRSCHOOL_in, field='IRSCHOOL', 
@@ -80,6 +88,10 @@ class DataProcessing:
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ETHNICITY_in_copy=data_model_impute_ETHNICITY_in.copy()
 
+
+		
+		
+
 		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
 		if pre_post.checkInvalidValues(belongOp=Belong(0), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
 										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
@@ -115,6 +127,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 		data_model_impute_in_copy=data_model_impute_in.copy()
+
+
+		
+		
 
 		missing_values_PRE_value_range_impute_sex_columns=[4]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_in, field='sex', 
@@ -213,6 +229,10 @@ class DataProcessing:
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ACADEMIC_INTEREST_2_in_copy=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
 
+
+		
+		
+
 		missing_values_PRE_value_range_impute_ACADEMIC_INTEREST_2=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_in, field='ACADEMIC_INTEREST_2', 
 										missing_values=missing_values_PRE_value_range_impute_ACADEMIC_INTEREST_2,
@@ -256,6 +276,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_mean_in=pd.read_csv('../data_model.csv')
 		data_model_impute_mean_in_copy=data_model_impute_mean_in.copy()
+
+
+		
+		
 
 		missing_values_PRE_value_range_impute_mean_avg_income=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_mean_in, field='avg_income', 
@@ -323,6 +347,10 @@ class DataProcessing:
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
 		data_model_impute_linear_interpolation_in_copy=data_model_impute_linear_interpolation_in.copy()
 
+
+		
+		
+
 		missing_values_PRE_value_range_impute_linear_interpolation_satscore=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_linear_interpolation_in, field='satscore', 
 										missing_values=missing_values_PRE_value_range_impute_linear_interpolation_satscore,
@@ -358,6 +386,12 @@ class DataProcessing:
 		data_model_row_filter_in=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
 		data_model_row_filter_in_copy=data_model_row_filter_in.copy()
 
+
+		
+		
+		
+		
+
 		if pre_post.checkFixValueRange(value=0, dataDictionary=data_model_row_filter_in, belongOp=Belong(0), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION call returned TRUE')
@@ -376,6 +410,10 @@ class DataProcessing:
 		data_model_column_cont_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cont_filter_in_copy=data_model_column_cont_filter_in.copy()
 
+
+		
+		
+
 		
 		
 		
@@ -384,6 +422,10 @@ class DataProcessing:
 		data_model_column_cat_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cat_filter_in_copy=data_model_column_cat_filter_in.copy()
 
+
+		
+		
+
 		
 		
 		
@@ -391,6 +433,14 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_map_territory_in=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
 		data_model_map_territory_in_copy=data_model_map_territory_in.copy()
+
+
+		print('Transformation of type FixValue-FixValue')
+		
+		
+		print('Transformation of type FixValue-FixValue')
+		
+		
 
 		if pre_post.checkFixValueRange(value='A', dataDictionary=data_model_map_territory_in, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -446,6 +496,14 @@ class DataProcessing:
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
 		data_model_map_Instate_in_copy=data_model_map_Instate_in.copy()
 
+
+		print('Transformation of type FixValue-FixValue')
+		
+		
+		print('Transformation of type FixValue-FixValue')
+		
+		
+
 		if pre_post.checkFixValueRange(value='Y', dataDictionary=data_model_map_Instate_in, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION call returned TRUE')
@@ -500,6 +558,8 @@ class DataProcessing:
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 		data_model_stringToNumber_in_copy=data_model_stringToNumber_in.copy()
 
+
+
 		
 		
 		
@@ -513,6 +573,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_outlier_closest_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_impute_outlier_closest_in_copy=data_model_impute_outlier_closest_in.copy()
+
+
+		
+		
 
 		if pre_post.checkOutliers(belongOp=Belong(0), dataDictionary=data_model_impute_outlier_closest_in, field='avg_income', 
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -674,6 +738,20 @@ class DataProcessing:
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		
 		
 		
@@ -689,6 +767,20 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		
 		

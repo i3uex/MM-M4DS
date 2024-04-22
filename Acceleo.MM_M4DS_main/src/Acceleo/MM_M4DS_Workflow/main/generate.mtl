@@ -40,6 +40,11 @@ class DataProcessing:
 		[dc.name/]_copy=[dc.name/].copy()
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
+
+		[for (p : Parameter | d.parameter)]
+		[generateCallTransformation(p)/]
+		[/for]
+
 		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
 		[if (c.contract.type=ContractType::PRECONDITION)]				[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
@@ -78,6 +83,11 @@ dp.generateDataProcessing()
 		[dc.name/]_copy=[dc.name/].copy()
 
 [/for]																		[comment CLOSE read all the input datasets and store them/]
+
+[for (p : Parameter | d.parameter)]
+		[generateCallTransformation(p)/]
+[/for]
+
 [for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
