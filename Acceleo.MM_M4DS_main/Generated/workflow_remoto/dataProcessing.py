@@ -19,8 +19,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		
-		
 		missing_values_POST_value_range_impute_sex=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_sex_out, field='sex', 
 										missing_values=missing_values_POST_value_range_impute_sex,
@@ -28,6 +26,19 @@ class DataProcessing:
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
+		
+		
+		missing_values_INV_condition_impute_sex=[]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_sex_in,
+									dataDictionary_out=data_model_impute_sex_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_sex, axis_param=0, field='sex')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
@@ -43,8 +54,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		
-		
 		missing_values_POST_value_range_impute_IRSCHOOL=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_IRSCHOOL_out, field='IRSCHOOL', 
 										missing_values=missing_values_POST_value_range_impute_IRSCHOOL,
@@ -52,6 +61,19 @@ class DataProcessing:
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
+		
+		
+		missing_values_INV_condition_impute_IRSCHOOL=[]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_IRSCHOOL_in,
+									dataDictionary_out=data_model_impute_IRSCHOOL_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_IRSCHOOL, axis_param=0, field='IRSCHOOL')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
@@ -67,8 +89,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		
-		
 		missing_values_POST_value_range_impute_ETHNICITY=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ETHNICITY_out, field='ETHNICITY', 
 										missing_values=missing_values_POST_value_range_impute_ETHNICITY,
@@ -76,6 +96,19 @@ class DataProcessing:
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
+		
+		
+		missing_values_INV_condition_impute_ETHNICITY=[]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_ETHNICITY_in,
+									dataDictionary_out=data_model_impute_ETHNICITY_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_ETHNICITY, axis_param=0, field='ETHNICITY')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 
@@ -110,12 +143,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		
-		
-		
-		
-		
-		
 		missing_values_POST_value_range_impute_sex_columns=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_out, field='sex', 
 										missing_values=missing_values_POST_value_range_impute_sex_columns,
@@ -143,6 +170,45 @@ class DataProcessing:
 			print('POSTCONDITION call returned FALSE')
 		
 		
+		missing_values_INV_condition_impute_sex_columns=[4]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+									dataDictionary_out=data_model_impute_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_sex_columns, axis_param=0, field='sex')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
+		
+		
+		missing_values_INV_condition_impute_IRSCHOOL_columns=[]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+									dataDictionary_out=data_model_impute_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_IRSCHOOL_columns, axis_param=0, field='IRSCHOOL')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
+		
+		
+		missing_values_INV_condition_impute_ETHNICITY_columns=[]
+		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+									dataDictionary_out=data_model_impute_out,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									specialTypeInput=SpecialType(0),
+									derivedTypeOutput=DerivedType(0),
+									missing_values=missing_values_INV_condition_impute_ETHNICITY_columns, axis_param=0, field='ETHNICITY')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
+		
+		
 #-----------------New DataProcessing-----------------
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ACADEMIC_INTEREST_2_in_copy=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
@@ -165,10 +231,6 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
-		
-		
-		
-		
 		missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_out, field='ACADEMIC_INTEREST_2', 
 										missing_values=missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2,
@@ -185,6 +247,10 @@ class DataProcessing:
 			print('POSTCONDITION call returned TRUE')
 		else:
 			print('POSTCONDITION call returned FALSE')
+		
+		
+		
+		
 		
 		
 #-----------------New DataProcessing-----------------
@@ -207,6 +273,24 @@ class DataProcessing:
 			print('PRECONDITION call returned TRUE')
 		else:
 			print('PRECONDITION call returned FALSE')
+		
+		
+		missing_values_POST_value_range_impute_mean_distance=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_mean_out, field='distance', 
+										missing_values=missing_values_POST_value_range_impute_mean_distance,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		missing_values_POST_value_range_impute_mean_avg_income=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_mean_out, field='avg_income', 
+										missing_values=missing_values_POST_value_range_impute_mean_avg_income,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
 		
 		missing_values_INV_condition_avg_income=[]
@@ -235,24 +319,6 @@ class DataProcessing:
 			print('INVARIANT call returned FALSE')
 		
 		
-		missing_values_POST_value_range_impute_mean_distance=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_mean_out, field='distance', 
-										missing_values=missing_values_POST_value_range_impute_mean_distance,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		missing_values_POST_value_range_impute_mean_avg_income=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_mean_out, field='avg_income', 
-										missing_values=missing_values_POST_value_range_impute_mean_avg_income,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
 #-----------------New DataProcessing-----------------
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
 		data_model_impute_linear_interpolation_in_copy=data_model_impute_linear_interpolation_in.copy()
@@ -266,6 +332,15 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		missing_values_POST_value_range_impute_linear_interpolation_satscore=[]
+		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_linear_interpolation_out, field='satscore', 
+										missing_values=missing_values_POST_value_range_impute_linear_interpolation_satscore,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
 		missing_values_INV_condition_distance=[]
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_linear_interpolation_in,
 												dataDictionary_out=data_model_impute_linear_interpolation_out,
@@ -277,15 +352,6 @@ class DataProcessing:
 			print('INVARIANT call returned TRUE')
 		else:
 			print('INVARIANT call returned FALSE')
-		
-		
-		missing_values_POST_value_range_impute_linear_interpolation_satscore=[]
-		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_linear_interpolation_out, field='satscore', 
-										missing_values=missing_values_POST_value_range_impute_linear_interpolation_satscore,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
@@ -490,6 +556,48 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='avg_income', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='distance', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_in, field='premiere', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='sex', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='Enroll', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
+		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='Instate', 
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
+		
+		
 		if invariants.checkInv_SpecialValue_NumOp(dataDictionary_in=data_model_impute_outlier_closest_in,
 												dataDictionary_out=data_model_impute_outlier_closest_out,
 												belongOp_in=Belong(0),
@@ -560,48 +668,6 @@ class DataProcessing:
 			print('INVARIANT call returned TRUE')
 		else:
 			print('INVARIANT call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='avg_income', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='distance', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_in, field='premiere', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='sex', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='Enroll', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
-		
-		
-		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='Instate', 
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION call returned TRUE')
-		else:
-			print('POSTCONDITION call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------

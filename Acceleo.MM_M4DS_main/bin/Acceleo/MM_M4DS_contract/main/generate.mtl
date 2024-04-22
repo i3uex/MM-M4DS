@@ -214,6 +214,44 @@ else:
 	[/let]																	[comment CLOSE assigns the variable to be of type FixValue/]
 [elseif (v.oclIsTypeOf(SpecialValue))]										[comment OPEN checks that the type of the value is SpecialValue/]
 [let sv : SpecialValue = v.oclAsType(SpecialValue)]							[comment OPEN assigns the variable to be of type SpecialValue/]
+[comment]The code below generates the call to invariants of type SpecialValue-DerivedValue[/comment]
+	[if (th.valueResult.oclIsTypeOf(DerivedValue))]								[comment OPEN checks that the type of the result is DerivedValue/]
+		[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)]	[comment OPEN assigns the variable to be of type DerivedValue/]
+[if (sv.specialType=SpecialType::MISSING)]										[comment OPEN checks that SpecialType is MISSING/]
+missing_values_[aContract.name/]=['['/][if (aContract._in.oclIsTypeOf(DataField))][let dfa : DataField = aContract._in.oclAsType(DataField)][for (mv : ValueField | dfa.dataField.missingValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
+[elseif (sv.specialType=SpecialType::INVALID)]
+invalid_values_[aContract.name/]=['['/][if (aContract._in.oclIsTypeOf(DataField))][let dfa : DataField = aContract._in.oclAsType(DataField)][for (mv : ValueField | dfa.dataField.invalidValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
+[/if]																			[comment OPEN checks that SpecialType is MISSING or INVALID/]
+			[if (aContract.out.oclIsTypeOf(DataDictionary))]					[comment OPEN checks that the output is a DataDictionary/]
+				[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+							dataDictionary_out=[dd_out.dataDictionary.name/],
+							belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							specialTypeInput=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
+							derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]')
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+				[/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
+			[elseif (aContract.out.oclIsTypeOf(DataField))]						[comment OPEN checks that the output is a DataField/]
+				[let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+if invariants.DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+							dataDictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
+							belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							specialTypeInput=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
+							derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]')
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+				[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+			[/if]																[comment CLOSE checks that the output is a DataField/]
+		[/let]																	[comment CLOSE assigns the variable to be of type DerivedValue/]
+	[/if]																		[comment CLOSE checks that the type of the result is DerivedValue/]
+[comment]The code below generates the call to invariants of type SpecialValue-NumOp[/comment]
 	[if (th.valueResult.oclIsTypeOf(NumOp))]								[comment OPEN checks that the type of the result is NumOp/]
 		[let nop : NumOp = th.valueResult.oclAsType(NumOp)]					[comment OPEN assigns the variable to be of type NumOp/]
 [if (sv.specialType=SpecialType::MISSING)]									[comment OPEN checks that SpecialType is MISSING/]
