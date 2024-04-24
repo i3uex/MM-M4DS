@@ -436,24 +436,52 @@ class DataProcessing:
 		data_model_column_cont_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cont_filter_in_copy=data_model_column_cont_filter_in.copy()
 
+		field_list_PRE_field_range_column_cont_filter=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
+		if pre_post.checkFieldRange(fields=field_list_PRE_field_range_column_cont_filter,
+									dataDictionary=data_model_column_cont_filter_in,
+									belongOp=Belong(0))
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
 		
 
 		
 		
 
+		field_list_POST_field_range_column_cont_filter=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
+		if pre_post.checkFieldRange(fields=field_list_POST_field_range_column_cont_filter,
+									dataDictionary=data_model_column_cont_filter_out,
+									belongOp=Belong(1))
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cat_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cat_filter_in_copy=data_model_column_cat_filter_in.copy()
 
+		field_list_PRE_field_range_column_cat_filter=['CONTACT_CODE1']
+		if pre_post.checkFieldRange(fields=field_list_PRE_field_range_column_cat_filter,
+									dataDictionary=data_model_column_cat_filter_in,
+									belongOp=Belong(0))
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
 		
 
 		
 		
 
+		field_list_POST_field_range_column_cat_filter=['CONTACT_CODE1']
+		if pre_post.checkFieldRange(fields=field_list_POST_field_range_column_cat_filter,
+									dataDictionary=data_model_column_cat_filter_out,
+									belongOp=Belong(1))
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
@@ -764,8 +792,23 @@ class DataProcessing:
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_in,
+		                                	closureType=Closure(0), belongOp=Belong(0), field='TOTAL_CONTACTS')
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_in,
+		                                	closureType=Closure(0), belongOp=Belong(0), field='SELF_INIT_CNTCTS')
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_in,
+		                                	closureType=Closure(0), belongOp=Belong(0), field='SOLICITED_CNTCTS')
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
 
 		
@@ -781,8 +824,23 @@ class DataProcessing:
 		
 		
 
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_out,
+		                                	closureType=Closure(0), belongOp=Belong(1), field='TOTAL_CONTACTS_binned')
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_out,
+		                                	closureType=Closure(0), belongOp=Belong(1), field='SELF_INIT_CNTCTS_binned')
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
+		if pre_post.checkIntervalRangeFloat(left_margin=-1000.0, rigth_margin=1.0, dataDictionary=data_model_binner_in,
+		                                	closureType=Closure(0), belongOp=Belong(1), field='SOLICITED_CNTCTS')
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
 		
 		
@@ -794,6 +852,11 @@ class DataProcessing:
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
+		if pre_post.checkIntervalRangeFloat(left_margin=0.0, rigth_margin=1000.0, dataDictionary=data_model_binner_in,
+		                                	closureType=Closure(3), belongOp=Belong(0), field='TERRITORY')
+			print('PRECONDITION call returned TRUE')
+		else:
+			print('PRECONDITION call returned FALSE')
 		
 
 		
@@ -809,6 +872,11 @@ class DataProcessing:
 		
 		
 
+		if pre_post.checkIntervalRangeFloat(left_margin=0.0, rigth_margin=1000.0, dataDictionary=data_model_binner_out,
+		                                	closureType=Closure(0), belongOp=Belong(1), field='TERRITORY_binned')
+			print('POSTCONDITION call returned TRUE')
+		else:
+			print('POSTCONDITION call returned FALSE')
 		
 		
 		

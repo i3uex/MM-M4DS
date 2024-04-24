@@ -14,9 +14,19 @@
 [template public generateCallContract(aContract : Contract)]
 [if (aContract._in.oclIsTypeOf(DataField))]						[comment OPEN checks that the contract data input is a DataField/]
 [let df : DataField = aContract._in.oclAsType(DataField)]		[comment OPEN assigns the variable to be of type DataField/]
-
-[comment]HACER AQUI LOS CONTRATOS DE TIPO FieldRange (checkFieldRange)[/comment]
-
+[comment]The contracts below are of type FieldRange[/comment]
+[if (aContract.oclIsTypeOf(FieldRange))]						[comment OPEN checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
+[let fr : FieldRange = aContract.oclAsType(FieldRange)]			[comment OPEN assigns the variable to be of type FieldRange/]
+field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
+if pre_post.checkFieldRange(fields=field_list_[aContract.name/],
+							dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+							belongOp=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+[/let]															[comment CLOSE assigns the variable to be of type FieldRange/]
+[/if]															[comment CLOSE checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
+[comment]The contracts below are of type ValueRange[/comment]
 [if (aContract.oclIsTypeOf(ValueRange))]						[comment OPEN checks that the contract is of type ValueRange (usually a Pre or Post condition)/]
 [let vr : ValueRange = aContract.oclAsType(ValueRange)]			[comment OPEN assigns the variable to be of type ValueRange/]
 [for (v : Value | vr.value)]									[comment OPEN traverse all the values in the contract to know which pre-post contract call/]
@@ -52,13 +62,12 @@ else:
 	[/let]														[comment CLOSE assigns the variable to be of type FixValue/]
 [elseif (v.oclIsTypeOf(Interval))]								[comment OPEN checks that the variable is of type Interval/]
 	[let inter : Interval = v.oclAsType(Interval)]				[comment OPEN assigns the variable to be of type Interval/]
+if pre_post.checkIntervalRangeFloat(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], dataDictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+                                	closureType=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]')
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
 	[/let]														[comment CLOSE assigns the variable to be of type Interval/]
-[elseif (v.oclIsTypeOf(DerivedValue))]							[comment OPEN checks that the variable is of type DerivedValue/]
-	[let inter : DerivedValue = v.oclAsType(DerivedValue)]		[comment OPEN assigns the variable to be of type DerivedValue/]
-	[/let]														[comment CLOSE assigns the variable to be of type DerivedValue/]
-[elseif (v.oclIsTypeOf(NumOp))]									[comment OPEN checks that the variable is of type NumOp/]
-	[let nop : NumOp = v.oclAsType(NumOp)]						[comment OPEN assigns the variable to be of type NumOp/]
-	[/let]														[comment CLOSE assigns the variable to be of type DerivedValue/]
 [elseif (v.oclIsTypeOf(SpecialValue))]							[comment OPEN checks that the variable is of type SpecialValue/]
 	[let sv : SpecialValue = v.oclAsType(SpecialValue)]			[comment OPEN assigns the variable to be of type SpecialValue/]
 [if (v.quantity <> null)]										[comment OPEN checks that the quantity is not null (there are not operators or quants)/]
@@ -347,6 +356,18 @@ else:
 
 [template public generateCallDataDicContract(aContract : Contract)] [comment IT IS THE SAME AS generateCallContract(aContract : Contract) but the data input to the contract is a DataDictionary instead of a DataField/]
 [let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
+[comment]The contracts below are of type FieldRange[/comment]
+[if (aContract.oclIsTypeOf(FieldRange))]						[comment OPEN checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
+[let fr : FieldRange = aContract.oclAsType(FieldRange)]			[comment OPEN assigns the variable to be of type FieldRange/]
+field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
+if pre_post.checkFieldRange(fields=field_list_[aContract.name/],
+							dataDictionary=[dd.dataDictionary.name/],
+							belongOp=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+[/let]															[comment CLOSE assigns the variable to be of type FieldRange/]
+[/if]															[comment CLOSE checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
 [if (aContract.oclIsTypeOf(ValueRange))]
 [let vr : ValueRange = aContract.oclAsType(ValueRange)]
 [for (v : Value | vr.value)]
@@ -383,12 +404,11 @@ else:
 	[/let]
 [elseif (v.oclIsTypeOf(Interval))]
 	[let inter : Interval = v.oclAsType(Interval)]
-	[/let]
-[elseif (v.oclIsTypeOf(DerivedValue))]
-	[let inter : DerivedValue = v.oclAsType(DerivedValue)]
-	[/let]
-[elseif (v.oclIsTypeOf(NumOp))]
-	[let nop : NumOp = v.oclAsType(NumOp)]
+if pre_post.checkIntervalRangeFloat(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], dataDictionary=[dd.dataDictionary.name/],
+                               closureType=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None)
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
 	[/let]
 [elseif (v.oclIsTypeOf(SpecialValue))]
 	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
