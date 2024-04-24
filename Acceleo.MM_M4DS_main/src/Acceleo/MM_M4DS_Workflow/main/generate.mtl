@@ -40,16 +40,16 @@ class DataProcessing:
 		[dc.name/]_copy=[dc.name/].copy()
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
-
-		[for (p : Parameter | d.parameter)]
-		[generateCallTransformation(p)/]
-		[/for]
-
 		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
 		[if (c.contract.type=ContractType::PRECONDITION)]				[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
 		[/if]															[comment CLOSE checks if the if the contract is a Precondition/]
 		[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
+
+		[for (p : Parameter | d.parameter)]								[comment OPEN traverse all the parameters in the dataProcessing to generate the transformations/]
+		[generateCallTransformation(p)/]
+		[/for]															[comment CLOSE traverse all the parameters in the dataProcessing to generate the transformations/]
+
 		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
 		[if (c.contract.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
 		[generateCallContract(c.contract)/]
@@ -83,16 +83,16 @@ dp.generateDataProcessing()
 		[dc.name/]_copy=[dc.name/].copy()
 
 [/for]																		[comment CLOSE read all the input datasets and store them/]
-
-[for (p : Parameter | d.parameter)]
-		[generateCallTransformation(p)/]
-[/for]
-
 [for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
 	[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
 [/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+
+[for (p : Parameter | d.parameter)]											[comment OPEN traverse all the parameters in the dataProcessing to generate the transformations/]
+		[generateCallTransformation(p)/]
+[/for]																		[comment CLOSE traverse all the parameters in the dataProcessing to generate the transformations/]
+
 [for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
 		[generateCallContract(c.contract)/]

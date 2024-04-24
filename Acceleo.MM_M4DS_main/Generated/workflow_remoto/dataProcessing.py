@@ -10,10 +10,6 @@ class DataProcessing:
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
 		data_model_impute_sex_in_copy=data_model_impute_sex_in.copy()
 
-
-		
-		
-
 		missing_values_PRE_value_range_impute_sex=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_sex_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex,
@@ -23,6 +19,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_sex=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_sex_out, field='sex', 
 										missing_values=missing_values_POST_value_range_impute_sex,
@@ -33,7 +33,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_sex=[]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_sex_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_sex_in,
 									dataDictionary_out=data_model_impute_sex_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -49,10 +49,6 @@ class DataProcessing:
 		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
 		data_model_impute_IRSCHOOL_in_copy=data_model_impute_IRSCHOOL_in.copy()
 
-
-		
-		
-
 		missing_values_PRE_value_range_impute_IRSCHOOL=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_IRSCHOOL_in, field='IRSCHOOL', 
 										missing_values=missing_values_PRE_value_range_impute_IRSCHOOL,
@@ -62,6 +58,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_IRSCHOOL=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_IRSCHOOL_out, field='IRSCHOOL', 
 										missing_values=missing_values_POST_value_range_impute_IRSCHOOL,
@@ -72,7 +72,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_IRSCHOOL=[]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_IRSCHOOL_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_IRSCHOOL_in,
 									dataDictionary_out=data_model_impute_IRSCHOOL_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -88,10 +88,6 @@ class DataProcessing:
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ETHNICITY_in_copy=data_model_impute_ETHNICITY_in.copy()
 
-
-		
-		
-
 		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
 		if pre_post.checkInvalidValues(belongOp=Belong(0), dataDictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
 										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
@@ -101,6 +97,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_ETHNICITY=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ETHNICITY_out, field='ETHNICITY', 
 										missing_values=missing_values_POST_value_range_impute_ETHNICITY,
@@ -111,7 +111,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_ETHNICITY=[]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_ETHNICITY_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_ETHNICITY_in,
 									dataDictionary_out=data_model_impute_ETHNICITY_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -127,10 +127,6 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 		data_model_impute_in_copy=data_model_impute_in.copy()
-
-
-		
-		
 
 		missing_values_PRE_value_range_impute_sex_columns=[4]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_in, field='sex', 
@@ -159,6 +155,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_sex_columns=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_out, field='sex', 
 										missing_values=missing_values_POST_value_range_impute_sex_columns,
@@ -187,7 +187,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_sex_columns=[4]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_in,
 									dataDictionary_out=data_model_impute_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -200,7 +200,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_IRSCHOOL_columns=[]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_in,
 									dataDictionary_out=data_model_impute_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -213,7 +213,7 @@ class DataProcessing:
 		
 		
 		missing_values_INV_condition_impute_ETHNICITY_columns=[]
-		if invariants.DerivedValue(dataDictionary_in=data_model_impute_in,
+		if invariants.checkInv_SpecialValue_DerivedValue(dataDictionary_in=data_model_impute_in,
 									dataDictionary_out=data_model_impute_out,
 									belongOp_in=Belong(0),
 									belongOp_out=Belong(0),
@@ -228,10 +228,6 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ACADEMIC_INTEREST_2_in_copy=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
-
-
-		
-		
 
 		missing_values_PRE_value_range_impute_ACADEMIC_INTEREST_2=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_in, field='ACADEMIC_INTEREST_2', 
@@ -251,6 +247,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_ACADEMIC_INTEREST_2_out, field='ACADEMIC_INTEREST_2', 
 										missing_values=missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2,
@@ -269,17 +269,39 @@ class DataProcessing:
 			print('POSTCONDITION call returned FALSE')
 		
 		
+		missing_values_INV_condition_impute_ACADEMIC_INTEREST_2=[]
+		if invariants.checkInv_SpecialValue_FixValue(dataDictionary_in=data_model_impute_ACADEMIC_INTEREST_2_in,
+									dataDictionary_out=data_model_impute_ACADEMIC_INTEREST_2_out,
+									specialTypeInput=SpecialType(0),
+									fixValueOutput=Unknown,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									dataTypeOutput=DataType(0)),
+									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_2, 
+									axis_param=0, field='ACADEMIC_INTEREST_2')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
+		missing_values_INV_condition_impute_ACADEMIC_INTEREST_1=[]
+		if invariants.checkInv_SpecialValue_FixValue(dataDictionary_in=data_model_impute_ACADEMIC_INTEREST_2_in,
+									dataDictionary_out=data_model_impute_ACADEMIC_INTEREST_2_out,
+									specialTypeInput=SpecialType(0),
+									fixValueOutput=Unknown,
+									belongOp_in=Belong(0),
+									belongOp_out=Belong(0),
+									dataTypeOutput=DataType(0)),
+									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_1, 
+									axis_param=0, field='ACADEMIC_INTEREST_1')
+			print('INVARIANT call returned TRUE')
+		else:
+			print('INVARIANT call returned FALSE')
 		
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_mean_in=pd.read_csv('../data_model.csv')
 		data_model_impute_mean_in_copy=data_model_impute_mean_in.copy()
-
-
-		
-		
 
 		missing_values_PRE_value_range_impute_mean_avg_income=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_mean_in, field='avg_income', 
@@ -299,6 +321,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_mean_distance=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_mean_out, field='distance', 
 										missing_values=missing_values_POST_value_range_impute_mean_distance,
@@ -347,10 +373,6 @@ class DataProcessing:
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
 		data_model_impute_linear_interpolation_in_copy=data_model_impute_linear_interpolation_in.copy()
 
-
-		
-		
-
 		missing_values_PRE_value_range_impute_linear_interpolation_satscore=[]
 		if pre_post.checkMissingRange(belongOp=Belong(0), dataDictionary=data_model_impute_linear_interpolation_in, field='satscore', 
 										missing_values=missing_values_PRE_value_range_impute_linear_interpolation_satscore,
@@ -360,6 +382,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		missing_values_POST_value_range_impute_linear_interpolation_satscore=[]
 		if pre_post.checkMissingRange(belongOp=Belong(1), dataDictionary=data_model_impute_linear_interpolation_out, field='satscore', 
 										missing_values=missing_values_POST_value_range_impute_linear_interpolation_satscore,
@@ -386,12 +412,6 @@ class DataProcessing:
 		data_model_row_filter_in=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
 		data_model_row_filter_in_copy=data_model_row_filter_in.copy()
 
-
-		
-		
-		
-		
-
 		if pre_post.checkFixValueRange(value=0, dataDictionary=data_model_row_filter_in, belongOp=Belong(0), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION call returned TRUE')
@@ -399,6 +419,12 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+		
+		
+
 		if pre_post.checkFixValueRange(value='0', dataDictionary=data_model_row_filter_out, belongOp=Belong(1), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
@@ -410,37 +436,29 @@ class DataProcessing:
 		data_model_column_cont_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cont_filter_in_copy=data_model_column_cont_filter_in.copy()
 
-
 		
 		
 
 		
 		
+
 		
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cat_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
 		data_model_column_cat_filter_in_copy=data_model_column_cat_filter_in.copy()
 
-
 		
 		
 
 		
 		
+
 		
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_territory_in=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
 		data_model_map_territory_in_copy=data_model_map_territory_in.copy()
-
-
-		print('Transformation of type FixValue-FixValue')
-		
-		
-		print('Transformation of type FixValue-FixValue')
-		
-		
 
 		if pre_post.checkFixValueRange(value='A', dataDictionary=data_model_map_territory_in, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -462,10 +480,10 @@ class DataProcessing:
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
 												dataTypeOutput=DataType(0)),
-												field='TERRITORY')
-			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+												axis_param=0, field='TERRITORY')
+			print('PRECONDITION call returned TRUE')
 		else:
-			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+			print('PRECONDITION call returned FALSE')
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
 												dataDictionary_out=data_model_map_territory_out,
 												value='N', fixValueOutput=value='0',
@@ -473,12 +491,20 @@ class DataProcessing:
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
 												dataTypeOutput=DataType(0)),
-												field='TERRITORY')
-			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+												axis_param=0, field='TERRITORY')
+			print('PRECONDITION call returned TRUE')
 		else:
-			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+			print('PRECONDITION call returned FALSE')
 		
 		
+
+		print('Transformation of type FixValue-FixValue')
+		
+		
+		print('Transformation of type FixValue-FixValue')
+		
+		
+
 		if pre_post.checkFixValueRange(value='A', dataDictionary=data_model_map_territory_out, belongOp=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
@@ -495,14 +521,6 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
 		data_model_map_Instate_in_copy=data_model_map_Instate_in.copy()
-
-
-		print('Transformation of type FixValue-FixValue')
-		
-		
-		print('Transformation of type FixValue-FixValue')
-		
-		
 
 		if pre_post.checkFixValueRange(value='Y', dataDictionary=data_model_map_Instate_in, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -524,10 +542,10 @@ class DataProcessing:
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
 												dataTypeOutput=DataType(0)),
-												field='Instate')
-			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+												axis_param=0, field='Instate')
+			print('PRECONDITION call returned TRUE')
 		else:
-			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+			print('PRECONDITION call returned FALSE')
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
 												dataDictionary_out=data_model_map_Instate_out,
 												value='N', fixValueOutput=value='0',
@@ -535,12 +553,20 @@ class DataProcessing:
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
 												dataTypeOutput=DataType(0)),
-												field='Instate')
-			print('PRECONDITION call returned TRUE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+												axis_param=0, field='Instate')
+			print('PRECONDITION call returned TRUE')
 		else:
-			print('PRECONDITION call returned FALSE')#HACER EL IF EN LOS PARAMETROS FIXVALUEINPUT
+			print('PRECONDITION call returned FALSE')
 		
 		
+
+		print('Transformation of type FixValue-FixValue')
+		
+		
+		print('Transformation of type FixValue-FixValue')
+		
+		
+
 		if pre_post.checkFixValueRange(value='Y', dataDictionary=data_model_map_Instate_out, belongOp=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
@@ -573,10 +599,6 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_outlier_closest_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_impute_outlier_closest_in_copy=data_model_impute_outlier_closest_in.copy()
-
-
-		
-		
 
 		if pre_post.checkOutliers(belongOp=Belong(0), dataDictionary=data_model_impute_outlier_closest_in, field='avg_income', 
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -620,6 +642,10 @@ class DataProcessing:
 			print('PRECONDITION call returned FALSE')
 		
 		
+
+		
+		
+
 		if pre_post.checkOutliers(belongOp=Belong(1), dataDictionary=data_model_impute_outlier_closest_out, field='avg_income', 
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION call returned TRUE')
@@ -738,16 +764,6 @@ class DataProcessing:
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -755,6 +771,16 @@ class DataProcessing:
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		
 		
 		
@@ -768,21 +794,21 @@ class DataProcessing:
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_binner_in_copy=data_model_binner_in.copy()
 
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		
 		
 		
