@@ -180,6 +180,160 @@ else:
 [/template]
 
 
+[template public generateCallDataDicContract(aContract : Contract)] [comment IT IS THE SAME AS generateCallContract(aContract : Contract) but the data input to the contract is a DataDictionary instead of a DataField/]
+[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
+[comment]The contracts below are of type FieldRange[/comment]
+[if (aContract.oclIsTypeOf(FieldRange))]						[comment OPEN checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
+[let fr : FieldRange = aContract.oclAsType(FieldRange)]			[comment OPEN assigns the variable to be of type FieldRange/]
+field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
+if pre_post.checkFieldRange(fields=field_list_[aContract.name/],
+							dataDictionary=[dd.dataDictionary.name/],
+							belongOp=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+[/let]															[comment CLOSE assigns the variable to be of type FieldRange/]
+[/if]															[comment CLOSE checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
+[if (aContract.oclIsTypeOf(ValueRange))]
+[let vr : ValueRange = aContract.oclAsType(ValueRange)]
+[for (v : Value | vr.value)]
+[if (v.oclIsTypeOf(FixValue))]
+	[let fv : FixValue = v.oclAsType(FixValue)]
+[if (v.quantity <> null)]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+
+		[/let]
+	[/if]
+	[else]
+if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+								quant_abs=None, quant_rel=None, quant_op=None):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+
+[/if]
+	[/let]
+[elseif (v.oclIsTypeOf(Interval))]
+	[let inter : Interval = v.oclAsType(Interval)]
+if pre_post.checkIntervalRangeFloat(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], dataDictionary=[dd.dataDictionary.name/],
+                               closureType=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None)
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+	[/let]
+[elseif (v.oclIsTypeOf(SpecialValue))]
+	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
+[if (v.quantity <> null)]
+[if (sv.specialType=SpecialType::MISSING)]
+missing_values_[aContract.name/]=None
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								missing_values=missing_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								missing_values=missing_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[/if]
+[elseif (sv.specialType=SpecialType::INVALID)]
+invalid_values_[aContract.name/]=None
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								invalid_values=invalid_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								invalid_values=invalid_values_[aContract.name/],
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[/if]
+[elseif (sv.specialType=SpecialType::OUTLIER)]
+	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
+		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[elseif (v.quantity.oclIsTypeOf(Percent))]
+		[let per : Percent = v.quantity.oclAsType(Percent)]
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+		[/let]
+	[/if]
+[/if]
+[elseif (v.quantity = null)]
+	[if (sv.specialType=SpecialType::MISSING)]
+missing_values_[aContract.name/]=None
+if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								missing_values=missing_values_[aContract.name/],
+								quant_abs=None, quant_rel=None, quant_op=None):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+	[elseif (sv.specialType=SpecialType::INVALID)]
+invalid_values_[aContract.name/]=None
+if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								invalid_values=invalid_values_[aContract.name/],
+								quant_abs=None, quant_rel=None, quant_op=None):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+	[elseif (sv.specialType=SpecialType::OUTLIER)]
+if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
+								quant_abs=None, quant_rel=None, quant_op=None):
+	print('[aContract.type/] call returned TRUE')
+else:
+	print('[aContract.type/] call returned FALSE')
+	[/if]
+[/if]
+	[/let]
+[/if]
+[/for]
+[/let]
+[/if]
+[/let]
+[/template]
+
+
 
 [template public generateCallConditionContract(aContract : Contract)]
 [let cond : Condition = aContract.oclAsType(Condition)]						[comment OPEN assigns the contract to be of type Condition (Invariants)/]
@@ -354,158 +508,95 @@ else:
 
 
 
-[template public generateCallDataDicContract(aContract : Contract)] [comment IT IS THE SAME AS generateCallContract(aContract : Contract) but the data input to the contract is a DataDictionary instead of a DataField/]
-[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
-[comment]The contracts below are of type FieldRange[/comment]
-[if (aContract.oclIsTypeOf(FieldRange))]						[comment OPEN checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
-[let fr : FieldRange = aContract.oclAsType(FieldRange)]			[comment OPEN assigns the variable to be of type FieldRange/]
-field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
-if pre_post.checkFieldRange(fields=field_list_[aContract.name/],
-							dataDictionary=[dd.dataDictionary.name/],
-							belongOp=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-[/let]															[comment CLOSE assigns the variable to be of type FieldRange/]
-[/if]															[comment CLOSE checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
-[if (aContract.oclIsTypeOf(ValueRange))]
-[let vr : ValueRange = aContract.oclAsType(ValueRange)]
-[for (v : Value | vr.value)]
-[if (v.oclIsTypeOf(FixValue))]
-	[let fv : FixValue = v.oclAsType(FixValue)]
-[if (v.quantity <> null)]
-	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
 
-		[/let]
-	[elseif (v.quantity.oclIsTypeOf(Percent))]
-		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
 
-		[/let]
-	[/if]
-	[else]
-if pre_post.checkFixValueRange([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], dataDictionary=[dd.dataDictionary.name/], belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=None, quant_rel=None, quant_op=None):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
 
-[/if]
-	[/let]
-[elseif (v.oclIsTypeOf(Interval))]
-	[let inter : Interval = v.oclAsType(Interval)]
-if pre_post.checkIntervalRangeFloat(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], dataDictionary=[dd.dataDictionary.name/],
-                               closureType=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None)
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-	[/let]
-[elseif (v.oclIsTypeOf(SpecialValue))]
-	[let sv : SpecialValue = v.oclAsType(SpecialValue)]
-[if (v.quantity <> null)]
-[if (sv.specialType=SpecialType::MISSING)]
-missing_values_[aContract.name/]=None
-	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								missing_values=missing_values_[aContract.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[elseif (v.quantity.oclIsTypeOf(Percent))]
-		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								missing_values=missing_values_[aContract.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[/if]
-[elseif (sv.specialType=SpecialType::INVALID)]
-invalid_values_[aContract.name/]=None
-	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								invalid_values=invalid_values_[aContract.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[elseif (v.quantity.oclIsTypeOf(Percent))]
-		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								invalid_values=invalid_values_[aContract.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[/if]
-[elseif (sv.specialType=SpecialType::OUTLIER)]
-	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[elseif (v.quantity.oclIsTypeOf(Percent))]
-		[let per : Percent = v.quantity.oclAsType(Percent)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-		[/let]
-	[/if]
-[/if]
-[elseif (v.quantity = null)]
-	[if (sv.specialType=SpecialType::MISSING)]
-missing_values_[aContract.name/]=None
-if pre_post.checkMissingRange(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								missing_values=missing_values_[aContract.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-	[elseif (sv.specialType=SpecialType::INVALID)]
-invalid_values_[aContract.name/]=None
-if pre_post.checkInvalidValues(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								invalid_values=invalid_values_[aContract.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-	[elseif (sv.specialType=SpecialType::OUTLIER)]
-if pre_post.checkOutliers(belongOp=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), dataDictionary=[dd.dataDictionary.name/], field=None, 
-								quant_abs=None, quant_rel=None, quant_op=None):
-	print('[aContract.type/] call returned TRUE')
-else:
-	print('[aContract.type/] call returned FALSE')
-	[/if]
-[/if]
-	[/let]
-[/if]
-[/for]
-[/let]
-[/if]
-[/let]
-[/template]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

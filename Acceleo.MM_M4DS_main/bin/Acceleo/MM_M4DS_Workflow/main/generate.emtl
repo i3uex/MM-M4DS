@@ -10,7 +10,7 @@
     <input>
       <takesTypesFrom href="https://www.example.org/contract#/"/>
     </input>
-    <imports href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0"/>
+    <imports href="../../MM_M4DS_contract/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateWorkflow" visibility="Public" main="true">
       <body xsi:type="mtl:TemplateInvocation" definition="/0/generateDataProcessing">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
@@ -92,7 +92,7 @@
                 <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
                 <body xsi:type="mtl:TemplateInvocation">
                   <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-                  <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+                  <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
                   <argument xsi:type="ocl.ecore:PropertyCallExp">
                     <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
                     <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateDataProcessing/%/%.2/%/%.2/c">
@@ -137,7 +137,7 @@
               <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
               <body xsi:type="mtl:TemplateInvocation">
                 <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-                <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
+                <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
                 <argument xsi:type="ocl.ecore:VariableExp" name="p" referredVariable="/0/generateDataProcessing/%/%.2/%/%.4/p">
                   <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Parameter"/>
                 </argument>
@@ -159,7 +159,7 @@
                 <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
                 <body xsi:type="mtl:TemplateInvocation">
                   <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-                  <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+                  <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
                   <argument xsi:type="ocl.ecore:PropertyCallExp">
                     <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
                     <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateDataProcessing/%/%.2/%/%.6/c">
@@ -204,7 +204,7 @@
                 <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
                 <body xsi:type="mtl:TemplateInvocation">
                   <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-                  <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+                  <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
                   <argument xsi:type="ocl.ecore:PropertyCallExp">
                     <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
                     <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateDataProcessing/%/%.2/%/%.7/c">
@@ -403,7 +403,7 @@
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
           <body xsi:type="mtl:TemplateInvocation">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+            <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
               <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
               <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/callRecursiveTemplate/%.2/c">
@@ -448,7 +448,7 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
         <body xsi:type="mtl:TemplateInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
+          <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
           <argument xsi:type="ocl.ecore:VariableExp" name="p" referredVariable="/0/callRecursiveTemplate/%.4/p">
             <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Parameter"/>
           </argument>
@@ -470,7 +470,7 @@
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
           <body xsi:type="mtl:TemplateInvocation">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+            <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
               <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
               <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/callRecursiveTemplate/%.6/c">
@@ -515,7 +515,7 @@
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;"/>
           <body xsi:type="mtl:TemplateInvocation">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+            <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
             <argument xsi:type="ocl.ecore:PropertyCallExp">
               <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
               <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/callRecursiveTemplate/%.7/c">
@@ -762,7 +762,7 @@
             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#x9;&#x9;&#x9;&#x9;#Contract type en CONTRACT&#xA;&#xA;#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------&#xA;"/>
             <body xsi:type="mtl:TemplateInvocation">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-              <definition href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateDebugContract"/>
+              <definition href="../../MM_M4DS_contract/main/generate.emtl#/0/generateDebugContract"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
                 <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateDebug/%/%.1/%.6/c">
@@ -3068,7 +3068,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
+          <references href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallContract"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aContract">
@@ -3080,7 +3080,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateDebugContract"/>
+          <references href="../../MM_M4DS_contract/main/generate.emtl#/0/generateDebugContract"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aContract">
@@ -3092,7 +3092,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
+          <references href="../../MM_M4DS_contract/main/generate.emtl#/0/generateCallTransformation"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aParameter">
