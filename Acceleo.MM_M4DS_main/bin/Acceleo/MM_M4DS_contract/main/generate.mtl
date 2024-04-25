@@ -8,7 +8,6 @@
 
 
 [template public generateContract(aContract : Contract)]
-
 [/template]
 
 [template public generateCallContract(aContract : Contract)]
@@ -365,6 +364,38 @@ else:
 [/if]																		[comment CLOSE checks that the variable is of type DataDictionary or DataField/]
 		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
+[comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
+	[if (th.valueResult.oclIsTypeOf(DerivedValue))]							[comment OPEN checks that the variable is of type DerivedValue/]
+		[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)][comment OPEN assigns the variable to be of type DerivedValue/]
+[if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
+[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+if invariants.checkInv_FixValue_DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[dd_out.dataDictionary.name/],
+										fixValueInput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if],
+										belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+										axis_param=0, field=none)
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
+[elseif (aContract.out.oclIsTypeOf(DataField))]								[comment OPEN checks that the variable is of type DataField/]
+[let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+if invariants.checkInv_FixValue_DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
+										fixValueInput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if],
+										belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+										axis_param=0, field='[df.dataField.displayName/]')
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[/if]																		[comment CLOSE checks that the variable is of type DataDictionary or DataField/]
+		[/let]																[comment CLOSE assigns the variable to be of type DerivedValue/]
+	[/if]																	[comment CLOSE checks that the variable is of type DerivedValue/]
 	[/let]																	[comment CLOSE assigns the variable to be of type FixValue/]
 [/if]																		[comment CLOSE checks that the type of the value is FixValue/]
 [if (v.oclIsTypeOf(Interval))]												[comment OPEN checks that the type of the value is Interval/]
@@ -399,9 +430,39 @@ if invariants.checkInv_Interval_FixValue(dataDictionary_in=[df.dataField.eContai
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 [/let]																		[comment CLOSE assigns the variable to be of type DataField/]
-[/if]
+[/if]																		[comment CLOSE checks that the output is DataDictionary or DataField/]
 		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
+[comment]The code below generates the call to invariants of type Interval-FixValue[/comment]
+	[if (th.valueResult.oclIsTypeOf(DerivedValue))]								[comment OPEN checks that the variable is of type DerivedValue/]
+		[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)]	[comment OPEN assigns the variable to be of type DerivedValue/]
+[if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
+[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+if invariants.checkInv_Interval_DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[dd_out.dataDictionary.name/],
+										left_margin=[int.leftMargin/], right_margin=[int.rightMargin/],
+										closureType=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
+										derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+										axis_param=0, field=None)
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
+[elseif (aContract.out.oclIsTypeOf(DataField))]								[comment OPEN checks that the variable is of type DataField/]
+[let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+if invariants.checkInv_Interval_DerivedValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
+										left_margin=[int.leftMargin/], right_margin=[int.rightMargin/],
+										closureType=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
+										derivedTypeOutput=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
+										axis_param=0, field='[df.dataField.displayName/]')
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[/if]																		[comment CLOSE checks that the output is DataDictionary or DataField/]
+		[/let]																[comment CLOSE assigns the variable to be of type DerivedValue/]
+	[/if]																	[comment CLOSE checks that the variable is of type derivedValue/]
 [/let]																		[comment CLOSE assigns the variable to be of type Interval/]
 [/if]																		[comment CLOSE checks that the type of the value is Interval/]
 [if (v.oclIsTypeOf(SpecialValue))]											[comment OPEN checks that the type of the value is SpecialValue/]
