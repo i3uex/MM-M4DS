@@ -327,6 +327,7 @@ print('INVARIANT_impute_mean_avg_income')
 print('INVARIANT_impute_mean_distance')
 print('POSTCONDITION_impute_mean_distance')
 print('POSTCONDITION_impute_mean_avg_income')
+print('INVARIANT_PRUEBA')
 ############################################################
 print(impute_linear_interpolation(satscore))	#DataProcessing name
 print('impute_mean(avg_income, distance)')         #SOURCE

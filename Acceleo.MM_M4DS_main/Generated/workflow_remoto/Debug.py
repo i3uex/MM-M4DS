@@ -728,6 +728,27 @@ print('POST_value_range_impute_cont_columns')	#ValueRangeDef name
 #//////////////////////////////////////////////////////////////////////////
 """"""
 
+print('INVARIANT_PRUEBA')				#Contract en workflow
+print('def_INVARIANT_impute_cont_columns_param_numOp')			#ContractDefinition name en ContractDefinition
+print('INV_PRUEBA')				#Contract name en CONTRACT
+print('INVARIANT')				#Contract type en CONTRACT
+
+#QUIZA SE DEBAN PASAR BASTANTES MAS PARAMETROS-------------------------------------------
+
+print('INV_input_datafield_avg_income')		#dataField name _in
+print('avg_income_in_impute')		#dataField _in
+print('INV_input_dataField_impute_cont_columns')		#dataFieldDef _in
+print('INV_output_datafield_avg_income')		#dataField name out
+print('avg_income_out_impute')		#dataField out
+print('INV_output_dataField_impute_cont_columns')		#dataFieldDef out
+
+
+print('INV_condition_impute_cont_columns')			#Condition
+
+
+#//////////////////////////////////////////////////////////////////////////
+""""""
+
 #######
 
 print(impute_linear_interpolation(satscore))	#ProcessedName

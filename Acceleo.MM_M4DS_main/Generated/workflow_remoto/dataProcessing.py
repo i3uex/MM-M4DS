@@ -336,6 +336,17 @@ class DataProcessing:
 			print('INVARIANT INV_condition_distance NOT VALIDATED')
 		
 		
+		if invariants.checkInv_Interval_NumOp(dataDictionary_in=data_model_impute_mean_in,
+												dataDictionary_out=data_model_impute_mean_out,
+												left_margin=-5.0, right_margin=73.6,
+												closureType=Closure(2),
+												numOpOutput=Operation(1),
+												axis_param=0, field='avg_income')
+			print('INVARIANT INV_PRUEBA VALIDATED')
+		else:
+			print('INVARIANT INV_PRUEBA NOT VALIDATED')
+		
+		
 #-----------------New DataProcessing-----------------
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
 		data_model_impute_linear_interpolation_in_copy=data_model_impute_linear_interpolation_in.copy()
