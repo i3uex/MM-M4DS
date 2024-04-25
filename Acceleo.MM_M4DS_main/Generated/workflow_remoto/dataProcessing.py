@@ -456,7 +456,7 @@ class DataProcessing:
 		
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
 												dataDictionary_out=data_model_map_territory_out,
-												value='A', fixValueOutput=value='0',
+												fixValueInput='A', fixValueOutput='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -467,7 +467,7 @@ class DataProcessing:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_territory_in,
 												dataDictionary_out=data_model_map_territory_out,
-												value='N', fixValueOutput=value='0',
+												fixValueInput='N', fixValueOutput='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -512,7 +512,7 @@ class DataProcessing:
 		
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
 												dataDictionary_out=data_model_map_Instate_out,
-												value='Y', fixValueOutput=value='1',
+												fixValueInput='Y', fixValueOutput='1',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -523,7 +523,7 @@ class DataProcessing:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
 		if invariants.checkInv_FixValue_FixValue(dataDictionary_in=data_model_map_Instate_in,
 												dataDictionary_out=data_model_map_Instate_out,
-												value='N', fixValueOutput=value='0',
+												fixValueInput='N', fixValueOutput='0',
 												belongOp_in=Belong(0),
 												belongOp_out=Belong(0),
 												dataTypeInput=DataType(0)),
@@ -767,10 +767,109 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_binner_valueRange_SOLICITED_CNTCTS NOT VALIDATED')
 		
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=-1000.0, right_margin=1.0,
+												closureType=Closure(0),
+												fixValueOutput='Low', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TOTAL_CONTACTS')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=1.0, right_margin=4.0,
+												closureType=Closure(2),
+												fixValueOutput='Moderate', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TOTAL_CONTACTS')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=4.0, right_margin=1000.0,
+												closureType=Closure(2),
+												fixValueOutput='High', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TOTAL_CONTACTS')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
 		
 		
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=-1000.0, right_margin=1.0,
+												closureType=Closure(0),
+												fixValueOutput='Low', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SELF_INIT_CNTCTS')
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=1.0, right_margin=4.0,
+												closureType=Closure(2),
+												fixValueOutput='Moderate', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SELF_INIT_CNTCTS')
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=4.0, right_margin=1000.0,
+												closureType=Closure(2),
+												fixValueOutput='High', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SELF_INIT_CNTCTS')
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 		
 		
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=-1000.0, right_margin=1.0,
+												closureType=Closure(0),
+												fixValueOutput='Low', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SOLICITED_CNTCTS')
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=1.0, right_margin=4.0,
+												closureType=Closure(2),
+												fixValueOutput='Moderate', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SOLICITED_CNTCTS')
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=4.0, right_margin=1000.0,
+												closureType=Closure(2),
+												fixValueOutput='High', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='SOLICITED_CNTCTS')
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
 		
 		
 #-----------------New DataProcessing-----------------
@@ -801,6 +900,61 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_binner_valueRange_TERRITORY NOT VALIDATED')
 		
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=-1000.0, right_margin=1.0,
+												closureType=Closure(0),
+												fixValueOutput='Unknown', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=1.0, right_margin=3.0,
+												closureType=Closure(2),
+												fixValueOutput='Zone 1', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=3.0, right_margin=5.0,
+												closureType=Closure(2),
+												fixValueOutput='Zone 2', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=5.0, right_margin=7.0,
+												closureType=Closure(2),
+												fixValueOutput='Zone 3', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		if invariants.checkInv_Interval_FixValue(dataDictionary_in=data_model_binner_in,
+												dataDictionary_out=data_model_binner_out,
+												left_margin=7.0, right_margin=1000.0,
+												closureType=Closure(2),
+												fixValueOutput='Zone 4', belongOp_in=Belong(0), belongOp_out=Belong(0),
+												belongOp_in=Belong(0), belongOp_out=Belong(0),
+												dataTypeOutput=DataType(0)),
+												field='TERRITORY')
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
+		else:
+			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
 		
 		
 

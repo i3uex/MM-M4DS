@@ -338,7 +338,7 @@ else:
 [let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
 if invariants.checkInv_FixValue_FixValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 										dataDictionary_out=[dd_out.dataDictionary.name/],
-										fixValueInput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], fixValueOutput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fvt.value/]'[else]value=[fvt.value/][/if],
+										fixValueInput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fixValueOutput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										dataTypeInput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
@@ -352,7 +352,7 @@ else:
 [let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
 if invariants.checkInv_FixValue_FixValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 										dataDictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
-										[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], fixValueOutput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fvt.value/]'[else]value=[fvt.value/][/if],
+										fixValueInput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fixValueOutput=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										dataTypeInput=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
@@ -366,7 +366,45 @@ else:
 		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
 	[/let]																	[comment CLOSE assigns the variable to be of type FixValue/]
-[elseif (v.oclIsTypeOf(SpecialValue))]										[comment OPEN checks that the type of the value is SpecialValue/]
+[/if]																		[comment CLOSE checks that the type of the value is FixValue/]
+[if (v.oclIsTypeOf(Interval))]												[comment OPEN checks that the type of the value is Interval/]
+[let int : Interval = v.oclAsType(Interval)]								[comment OPEN assigns the variable to be of type Interval/]
+[comment]The code below generates the call to invariants of type Interval-FixValue[/comment]
+	[if (th.valueResult.oclIsTypeOf(FixValue))]								[comment OPEN checks that the variable is of type FixValue/]
+		[let fvt : FixValue = th.valueResult.oclAsType(FixValue)]			[comment OPEN assigns the variable to be of type FixValue/]
+[if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
+[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+if invariants.checkInv_Interval_FixValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[dd_out.dataDictionary.name/],
+										left_margin=[int.leftMargin/], right_margin=[int.rightMargin/],
+										closureType=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
+										fixValueOutput=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if], belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										dataTypeOutput=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+										field=None)
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
+[elseif (aContract.out.oclIsTypeOf(DataField))]								[comment OPEN checks that the variable is of type DataField/]
+[let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+if invariants.checkInv_Interval_FixValue(dataDictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										dataDictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
+										left_margin=[int.leftMargin/], right_margin=[int.rightMargin/],
+										closureType=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
+										fixValueOutput=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if], belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belongOp_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belongOp_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										dataTypeOutput=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+										field='[df.dataField.displayName/]')
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[/if]
+		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
+	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
+[/let]																		[comment CLOSE assigns the variable to be of type Interval/]
+[/if]																		[comment CLOSE checks that the type of the value is Interval/]
+[if (v.oclIsTypeOf(SpecialValue))]											[comment OPEN checks that the type of the value is SpecialValue/]
 [let sv : SpecialValue = v.oclAsType(SpecialValue)]							[comment OPEN assigns the variable to be of type SpecialValue/]
 [comment]The code below generates the call to invariants of type SpecialValue-FixValue[/comment]
 	[if (th.valueResult.oclIsTypeOf(FixValue))]									[comment OPEN checks that the type of the result is FixValue/]
