@@ -7426,7 +7426,7 @@
                                     <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
                                   </ifExpr>
                                   <else>
-                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None9"/>
+                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None)"/>
                                   </else>
                                   <elseIf>
                                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="DataType(1)"/>
@@ -9292,7 +9292,7 @@
                                   <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
                                 </ifExpr>
                                 <else>
-                                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None"/>
+                                  <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None)"/>
                                 </else>
                                 <elseIf>
                                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="DataType(1)"/>
@@ -9403,7 +9403,7 @@
                                   </ifExpr>
                                 </elseIf>
                               </body>
-                              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;field=None):&#xA;&#x9;print('"/>
+                              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=",&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;field=None):&#xA;&#x9;print('"/>
                               <body xsi:type="ocl.ecore:PropertyCallExp">
                                 <eType xsi:type="ecore:EEnum" href="https://www.example.org/contract#//ContractType"/>
                                 <source xsi:type="ocl.ecore:VariableExp" name="aContract" referredVariable="/0/generateCallConditionContract/aContract">
@@ -9732,7 +9732,7 @@
                                     <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
                                   </ifExpr>
                                   <else>
-                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None"/>
+                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None)"/>
                                   </else>
                                   <elseIf>
                                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="DataType(1)"/>
@@ -9843,7 +9843,7 @@
                                     </ifExpr>
                                   </elseIf>
                                 </body>
-                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;field='"/>
+                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=",&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;field='"/>
                                 <body xsi:type="ocl.ecore:PropertyCallExp">
                                   <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
                                   <source xsi:type="ocl.ecore:PropertyCallExp">
@@ -12370,7 +12370,7 @@
                                     <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
                                   </ifExpr>
                                   <else>
-                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None"/>
+                                    <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="None)"/>
                                   </else>
                                   <elseIf>
                                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="DataType(1)"/>
@@ -12481,7 +12481,7 @@
                                     </ifExpr>
                                   </elseIf>
                                 </body>
-                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;missing_values="/>
+                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=",&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;missing_values="/>
                                 <body xsi:type="mtl:IfBlock">
                                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="missing_values_"/>
                                   <body xsi:type="ocl.ecore:PropertyCallExp">
@@ -34504,7 +34504,7 @@
     </eAnnotations>
     <eAnnotations source="positions.3200" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.17">
       <details key="start" value="41688"/>
-      <details key="end" value="42057"/>
+      <details key="end" value="42058"/>
       <details key="line" value="445"/>
     </eAnnotations>
     <eAnnotations source="positions.3201" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.17/%">
@@ -34534,12 +34534,12 @@
     </eAnnotations>
     <eAnnotations source="positions.3206" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.17/%.2">
       <details key="start" value="42042"/>
-      <details key="end" value="42052"/>
+      <details key="end" value="42053"/>
       <details key="line" value="445"/>
     </eAnnotations>
     <eAnnotations source="positions.3207" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.17/%.2/%">
       <details key="start" value="42048"/>
-      <details key="end" value="42052"/>
+      <details key="end" value="42053"/>
       <details key="line" value="445"/>
     </eAnnotations>
     <eAnnotations source="positions.3208" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.17/%.3">
@@ -34723,7 +34723,7 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.3244" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%/%.18">
-      <details key="start" value="42057"/>
+      <details key="start" value="42058"/>
       <details key="end" value="42091"/>
       <details key="line" value="445"/>
     </eAnnotations>
@@ -35269,7 +35269,7 @@
     </eAnnotations>
     <eAnnotations source="positions.3353" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.17">
       <details key="start" value="43419"/>
-      <details key="end" value="43788"/>
+      <details key="end" value="43789"/>
       <details key="line" value="459"/>
     </eAnnotations>
     <eAnnotations source="positions.3354" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.17/%">
@@ -35299,12 +35299,12 @@
     </eAnnotations>
     <eAnnotations source="positions.3359" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.17/%.2">
       <details key="start" value="43773"/>
-      <details key="end" value="43783"/>
+      <details key="end" value="43784"/>
       <details key="line" value="459"/>
     </eAnnotations>
     <eAnnotations source="positions.3360" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.17/%.2/%">
       <details key="start" value="43779"/>
-      <details key="end" value="43783"/>
+      <details key="end" value="43784"/>
       <details key="line" value="459"/>
     </eAnnotations>
     <eAnnotations source="positions.3361" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.17/%.3">
@@ -35488,7 +35488,7 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.3397" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.1/%/%/%/%/%.2/%/%.18">
-      <details key="start" value="43788"/>
+      <details key="start" value="43789"/>
       <details key="end" value="43808"/>
       <details key="line" value="459"/>
     </eAnnotations>
@@ -39834,7 +39834,7 @@
     </eAnnotations>
     <eAnnotations source="positions.4266" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.13">
       <details key="start" value="56198"/>
-      <details key="end" value="56588"/>
+      <details key="end" value="56589"/>
       <details key="line" value="572"/>
     </eAnnotations>
     <eAnnotations source="positions.4267" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.13/%">
@@ -39864,12 +39864,12 @@
     </eAnnotations>
     <eAnnotations source="positions.4272" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.13/%.2">
       <details key="start" value="56573"/>
-      <details key="end" value="56583"/>
+      <details key="end" value="56584"/>
       <details key="line" value="572"/>
     </eAnnotations>
     <eAnnotations source="positions.4273" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.13/%.2/%">
       <details key="start" value="56579"/>
-      <details key="end" value="56583"/>
+      <details key="end" value="56584"/>
       <details key="line" value="572"/>
     </eAnnotations>
     <eAnnotations source="positions.4274" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.13/%.3">
@@ -40053,7 +40053,7 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.4310" references="/0/generateCallConditionContract/%/%/%/%/%/%/%.2/%/%/%/%.2/%.2/%/%.14">
-      <details key="start" value="56588"/>
+      <details key="start" value="56589"/>
       <details key="end" value="56613"/>
       <details key="line" value="572"/>
     </eAnnotations>

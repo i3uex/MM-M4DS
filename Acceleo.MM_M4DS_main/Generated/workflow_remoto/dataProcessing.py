@@ -244,7 +244,7 @@ class DataProcessing:
 									fix_value_output='Unknown',
 									belong_op_in=Belong(0),
 									belong_op_out=Belong(0),
-									data_type_output=DataType(0)),
+									data_type_output=DataType(0),
 									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_2, 
 									axis_param=0, field='ACADEMIC_INTEREST_2'):
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_2 VALIDATED')
@@ -259,7 +259,7 @@ class DataProcessing:
 									fix_value_output='Unknown',
 									belong_op_in=Belong(0),
 									belong_op_out=Belong(0),
-									data_type_output=DataType(0)),
+									data_type_output=DataType(0),
 									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_1, 
 									axis_param=0, field='ACADEMIC_INTEREST_1'):
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_1 VALIDATED')
@@ -758,7 +758,7 @@ class DataProcessing:
 												closure_type=Closure(0),
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -769,7 +769,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -780,7 +780,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -793,7 +793,7 @@ class DataProcessing:
 												closure_type=Closure(0),
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
@@ -804,7 +804,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
@@ -815,7 +815,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
@@ -828,7 +828,7 @@ class DataProcessing:
 												closure_type=Closure(0),
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
@@ -839,7 +839,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
@@ -850,7 +850,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
@@ -890,7 +890,7 @@ class DataProcessing:
 												closure_type=Closure(0),
 												fix_value_output='Unknown',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -901,7 +901,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Zone 1',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -912,7 +912,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Zone 2',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -923,7 +923,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Zone 3',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
@@ -934,7 +934,7 @@ class DataProcessing:
 												closure_type=Closure(2),
 												fix_value_output='Zone 4',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
-												data_type_output=DataType(0)),
+												data_type_output=DataType(0),
 												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
