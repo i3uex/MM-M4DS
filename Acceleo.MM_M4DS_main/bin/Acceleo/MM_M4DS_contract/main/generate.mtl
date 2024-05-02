@@ -19,7 +19,7 @@
 field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if pre_post.check_field_range(fields=field_list_[aContract.name/],
 							data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
-							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
+							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if])):
 	print('[aContract.type/] call returned TRUE')
 else:
 	print('[aContract.type/] call returned FALSE')
@@ -176,7 +176,7 @@ else:
 field_list_[aContract.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if pre_post.check_field_range(fields=field_list_[aContract.name/],
 							data_dictionary=[dd.dataDictionary.name/],
-							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]))
+							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if])):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -216,7 +216,7 @@ else:
 [elseif (v.oclIsTypeOf(Interval))]
 	[let inter : Interval = v.oclAsType(Interval)]
 if pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], data_dictionary=[dd.dataDictionary.name/],
-                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None)
+                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -340,9 +340,9 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										fix_value_input=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fix_value_output=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										axis_param=0, field=none)
+										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
+										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
+										axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -354,9 +354,9 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										fix_value_input=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fix_value_output=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										axis_param=0, field='[df.dataField.displayName/]')
+										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None9[/if],
+										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
+										axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -375,7 +375,7 @@ if invariants.check_inv_fix_value_derived_value(data_dictionary_in=[df.dataField
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field=none)
+										axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -388,7 +388,7 @@ if invariants.check_inv_fix_value_derived_value(data_dictionary_in=[df.dataField
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field='[df.dataField.displayName/]')
+										axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -407,7 +407,7 @@ if invariants.check_inv_fix_value_num_op(data_dictionary_in=[df.dataField.eConta
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field=none)
+										axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -420,7 +420,7 @@ if invariants.check_inv_fix_value_num_op(data_dictionary_in=[df.dataField.eConta
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field='[df.dataField.displayName/]')
+										axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -443,7 +443,7 @@ if invariants.check_inv_interval_fix_value(data_dictionary_in=[df.dataField.eCon
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										fix_value_output=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if], belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_output=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										field=None)
+										field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -457,7 +457,7 @@ if invariants.check_inv_interval_fix_value(data_dictionary_in=[df.dataField.eCon
 										fix_value_output=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_output=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None[/if]),
-										field='[df.dataField.displayName/]')
+										field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -476,7 +476,7 @@ if invariants.check_inv_interval_derived_value(data_dictionary_in=[df.dataField.
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field=None)
+										axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -489,7 +489,7 @@ if invariants.check_inv_interval_derived_value(data_dictionary_in=[df.dataField.
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field='[df.dataField.displayName/]')
+										axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -508,7 +508,7 @@ if invariants.check_inv_interval_num_op(data_dictionary_in=[df.dataField.eContai
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field=None)
+										axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -521,7 +521,7 @@ if invariants.check_inv_interval_num_op(data_dictionary_in=[df.dataField.eContai
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field='[df.dataField.displayName/]')
+										axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -551,12 +551,12 @@ invalid_[aContract.name/]=['['/][let dd_in : DataDictionary = aContract._in.oclA
 if invariants.check_inv_special_value_fix_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 							data_dictionary_out=[dd_out.dataDictionary.name/],
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
-							fix_value_output=[fixVal.value/],
+							fix_value_output=[if (fixVal.dataType=DataType::String or fixVal.dataType=DataType::Time or fixVal.dataType=DataType::DateTime)]'[fixVal.value/]'[else][fixVal.value/][/if],
 							belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-							data_type_output=[if (fixVal.dataType=DataType::String)]DataType(0)[elseif (fixVal.dataType=DataType::Time)]DataType(1)[elseif (fixVal.dataType=DataType::Integer)]DataType(2)[elseif (fixVal.dataType=DataType::DateTime)]DataType(3)[elseif (fixVal.dataType=DataType::Boolean)]DataType(4)[elseif (fixVal.dataType=DataType::Double)]DataType(5)[elseif (fixVal.dataType=DataType::Float)]DataType(6)[else]None[/if]),
+							data_type_output=[if (fixVal.dataType=DataType::String)]DataType(0)[elseif (fixVal.dataType=DataType::Time)]DataType(1)[elseif (fixVal.dataType=DataType::Integer)]DataType(2)[elseif (fixVal.dataType=DataType::DateTime)]DataType(3)[elseif (fixVal.dataType=DataType::Boolean)]DataType(4)[elseif (fixVal.dataType=DataType::Double)]DataType(5)[elseif (fixVal.dataType=DataType::Float)]DataType(6)[else]None)[/if],
 							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], 
-							axis_param=0, field=None)
+							axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -566,12 +566,12 @@ else:
 if invariants.check_inv_special_value_fix_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 							data_dictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
-							fix_value_output=[fixVal.value/],
+							fix_value_output=[if (fixVal.dataType=DataType::String or fixVal.dataType=DataType::Time or fixVal.dataType=DataType::DateTime)]'[fixVal.value/]'[else][fixVal.value/][/if],
 							belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							data_type_output=[if (fixVal.dataType=DataType::String)]DataType(0)[elseif (fixVal.dataType=DataType::Time)]DataType(1)[elseif (fixVal.dataType=DataType::Integer)]DataType(2)[elseif (fixVal.dataType=DataType::DateTime)]DataType(3)[elseif (fixVal.dataType=DataType::Boolean)]DataType(4)[elseif (fixVal.dataType=DataType::Double)]DataType(5)[elseif (fixVal.dataType=DataType::Float)]DataType(6)[else]None[/if]),
 							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], 
-							axis_param=0, field='[df.dataField.displayName/]')
+							axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -600,7 +600,7 @@ if invariants.check_inv_special_value_derived_value(data_dictionary_in=[df.dataF
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 							derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field=None)
+							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -613,7 +613,7 @@ if invariants.check_inv_special_value_derived_value(data_dictionary_in=[df.dataF
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 							derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]')
+							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -642,7 +642,7 @@ if invariants.check_inv_special_value_num_op(data_dictionary_in=[df.dataField.eC
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field=None)
+										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -655,7 +655,7 @@ if invariants.check_inv_special_value_num_op(data_dictionary_in=[df.dataField.eC
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]')
+										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[aContract.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[aContract.name/][else]None[/if], axis_param=0, field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')

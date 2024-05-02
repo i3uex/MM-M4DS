@@ -1,11 +1,11 @@
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType
 class DataProcessing:
 	def generateDataProcessing(self):
 		pre_post=contract_pre_post.ContractsPrePost()
-		invariants=contract_invariants.ContractsInvariants()
+		invariants=contract_invariants.Invariants()
 #-----------------New DataProcessing-----------------
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
 
@@ -34,7 +34,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_sex, axis_param=0, field='sex')
+									missing_values=missing_values_INV_condition_impute_sex, axis_param=0, field='sex'):
 			print('INVARIANT INV_condition_impute_sex VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_sex NOT VALIDATED')
@@ -68,7 +68,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_IRSCHOOL, axis_param=0, field='IRSCHOOL')
+									missing_values=missing_values_INV_condition_impute_IRSCHOOL, axis_param=0, field='IRSCHOOL'):
 			print('INVARIANT INV_condition_impute_IRSCHOOL VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_IRSCHOOL NOT VALIDATED')
@@ -102,7 +102,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_ETHNICITY, axis_param=0, field='ETHNICITY')
+									missing_values=missing_values_INV_condition_impute_ETHNICITY, axis_param=0, field='ETHNICITY'):
 			print('INVARIANT INV_condition_impute_ETHNICITY VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_ETHNICITY NOT VALIDATED')
@@ -168,7 +168,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_sex_columns, axis_param=0, field='sex')
+									missing_values=missing_values_INV_condition_impute_sex_columns, axis_param=0, field='sex'):
 			print('INVARIANT INV_condition_impute_sex_columns VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_sex_columns NOT VALIDATED')
@@ -181,7 +181,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_IRSCHOOL_columns, axis_param=0, field='IRSCHOOL')
+									missing_values=missing_values_INV_condition_impute_IRSCHOOL_columns, axis_param=0, field='IRSCHOOL'):
 			print('INVARIANT INV_condition_impute_IRSCHOOL_columns VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_IRSCHOOL_columns NOT VALIDATED')
@@ -194,7 +194,7 @@ class DataProcessing:
 									belong_op_out=Belong(0),
 									special_type_input=SpecialType(0),
 									derived_type_output=DerivedType(0),
-									missing_values=missing_values_INV_condition_impute_ETHNICITY_columns, axis_param=0, field='ETHNICITY')
+									missing_values=missing_values_INV_condition_impute_ETHNICITY_columns, axis_param=0, field='ETHNICITY'):
 			print('INVARIANT INV_condition_impute_ETHNICITY_columns VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_ETHNICITY_columns NOT VALIDATED')
@@ -241,12 +241,12 @@ class DataProcessing:
 		if invariants.check_inv_special_value_fix_value(data_dictionary_in=data_model_impute_ACADEMIC_INTEREST_2_in,
 									data_dictionary_out=data_model_impute_ACADEMIC_INTEREST_2_out,
 									special_type_input=SpecialType(0),
-									fix_value_output=Unknown,
+									fix_value_output='Unknown',
 									belong_op_in=Belong(0),
 									belong_op_out=Belong(0),
 									data_type_output=DataType(0)),
 									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_2, 
-									axis_param=0, field='ACADEMIC_INTEREST_2')
+									axis_param=0, field='ACADEMIC_INTEREST_2'):
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_2 VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_2 NOT VALIDATED')
@@ -256,12 +256,12 @@ class DataProcessing:
 		if invariants.check_inv_special_value_fix_value(data_dictionary_in=data_model_impute_ACADEMIC_INTEREST_2_in,
 									data_dictionary_out=data_model_impute_ACADEMIC_INTEREST_2_out,
 									special_type_input=SpecialType(0),
-									fix_value_output=Unknown,
+									fix_value_output='Unknown',
 									belong_op_in=Belong(0),
 									belong_op_out=Belong(0),
 									data_type_output=DataType(0)),
 									missing_values=missing_values_INV_condition_impute_ACADEMIC_INTEREST_1, 
-									axis_param=0, field='ACADEMIC_INTEREST_1')
+									axis_param=0, field='ACADEMIC_INTEREST_1'):
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_1 VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_1 NOT VALIDATED')
@@ -311,7 +311,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(0),
 												num_op_output=Operation(1),
-												missing_values=missing_values_INV_condition_avg_income, axis_param=0, field='avg_income')
+												missing_values=missing_values_INV_condition_avg_income, axis_param=0, field='avg_income'):
 			print('INVARIANT INV_condition_avg_income VALIDATED')
 		else:
 			print('INVARIANT INV_condition_avg_income NOT VALIDATED')
@@ -324,7 +324,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(0),
 												num_op_output=Operation(1),
-												missing_values=missing_values_INV_condition_distance, axis_param=0, field='distance')
+												missing_values=missing_values_INV_condition_distance, axis_param=0, field='distance'):
 			print('INVARIANT INV_condition_distance VALIDATED')
 		else:
 			print('INVARIANT INV_condition_distance NOT VALIDATED')
@@ -358,7 +358,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(0),
 												num_op_output=Operation(0),
-												missing_values=missing_values_INV_condition_distance, axis_param=0, field='satscore')
+												missing_values=missing_values_INV_condition_distance, axis_param=0, field='satscore'):
 			print('INVARIANT INV_condition_distance VALIDATED')
 		else:
 			print('INVARIANT INV_condition_distance NOT VALIDATED')
@@ -389,7 +389,7 @@ class DataProcessing:
 		field_list_PRE_field_range_column_cont_filter=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
 		if pre_post.check_field_range(fields=field_list_PRE_field_range_column_cont_filter,
 									data_dictionary=data_model_column_cont_filter_in,
-									belong_op=Belong(0))
+									belong_op=Belong(0)):
 			print('PRECONDITION PRE_field_range_column_cont_filter VALIDATED')
 		else:
 			print('PRECONDITION PRE_field_range_column_cont_filter NOT VALIDATED')
@@ -400,7 +400,7 @@ class DataProcessing:
 		field_list_POST_field_range_column_cont_filter=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
 		if pre_post.check_field_range(fields=field_list_POST_field_range_column_cont_filter,
 									data_dictionary=data_model_column_cont_filter_out,
-									belong_op=Belong(1))
+									belong_op=Belong(1)):
 			print('POSTCONDITION POST_field_range_column_cont_filter VALIDATED')
 		else:
 			print('POSTCONDITION POST_field_range_column_cont_filter NOT VALIDATED')
@@ -412,7 +412,7 @@ class DataProcessing:
 		field_list_PRE_field_range_column_cat_filter=['CONTACT_CODE1']
 		if pre_post.check_field_range(fields=field_list_PRE_field_range_column_cat_filter,
 									data_dictionary=data_model_column_cat_filter_in,
-									belong_op=Belong(0))
+									belong_op=Belong(0)):
 			print('PRECONDITION PRE_field_range_column_cat_filter VALIDATED')
 		else:
 			print('PRECONDITION PRE_field_range_column_cat_filter NOT VALIDATED')
@@ -423,7 +423,7 @@ class DataProcessing:
 		field_list_POST_field_range_column_cat_filter=['CONTACT_CODE1']
 		if pre_post.check_field_range(fields=field_list_POST_field_range_column_cat_filter,
 									data_dictionary=data_model_column_cat_filter_out,
-									belong_op=Belong(1))
+									belong_op=Belong(1)):
 			print('POSTCONDITION POST_field_range_column_cat_filter VALIDATED')
 		else:
 			print('POSTCONDITION POST_field_range_column_cat_filter NOT VALIDATED')
@@ -443,30 +443,6 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
-												data_dictionary_out=data_model_map_territory_out,
-												fix_value_input='A', fix_value_output='0',
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input=DataType(0)),
-												data_type_output=DataType(0)),
-												axis_param=0, field='TERRITORY')
-			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
-		else:
-			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
-												data_dictionary_out=data_model_map_territory_out,
-												fix_value_input='N', fix_value_output='0',
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input=DataType(0)),
-												data_type_output=DataType(0)),
-												axis_param=0, field='TERRITORY')
-			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
-		else:
-			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
-		
-		
 		print('Transformation of type FixValue-FixValue')
 		
 		
@@ -483,6 +459,30 @@ class DataProcessing:
 			print('POSTCONDITION POST_value_range_territory VALIDATED')
 		else:
 			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												fix_value_input='A', fix_value_output='0',
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input=DataType(0),
+												data_type_output=DataType(0),
+												axis_param=0, field='TERRITORY'):
+			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												fix_value_input='N', fix_value_output='0',
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input=DataType(0),
+												data_type_output=DataType(0),
+												axis_param=0, field='TERRITORY'):
+			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
+		
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
@@ -503,9 +503,9 @@ class DataProcessing:
 												fix_value_input='Y', fix_value_output='1',
 												belong_op_in=Belong(0),
 												belong_op_out=Belong(0),
-												data_type_input=DataType(0)),
-												data_type_output=DataType(0)),
-												axis_param=0, field='Instate')
+												data_type_input=DataType(0),
+												data_type_output=DataType(0),
+												axis_param=0, field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
@@ -514,9 +514,9 @@ class DataProcessing:
 												fix_value_input='N', fix_value_output='0',
 												belong_op_in=Belong(0),
 												belong_op_out=Belong(0),
-												data_type_input=DataType(0)),
-												data_type_output=DataType(0)),
-												axis_param=0, field='Instate')
+												data_type_input=DataType(0),
+												data_type_output=DataType(0),
+												axis_param=0, field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
@@ -635,7 +635,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='avg_income')
+												missing_values=None, axis_param=0, field='avg_income'):
 			print('INVARIANT INV_condition_avg_income VALIDATED')
 		else:
 			print('INVARIANT INV_condition_avg_income NOT VALIDATED')
@@ -647,7 +647,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='distance')
+												missing_values=None, axis_param=0, field='distance'):
 			print('INVARIANT INV_condition_distance VALIDATED')
 		else:
 			print('INVARIANT INV_condition_distance NOT VALIDATED')
@@ -659,7 +659,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='premiere')
+												missing_values=None, axis_param=0, field='premiere'):
 			print('INVARIANT INV_condition_premiere VALIDATED')
 		else:
 			print('INVARIANT INV_condition_premiere NOT VALIDATED')
@@ -671,7 +671,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='sex')
+												missing_values=None, axis_param=0, field='sex'):
 			print('INVARIANT INV_condition_sex VALIDATED')
 		else:
 			print('INVARIANT INV_condition_sex NOT VALIDATED')
@@ -683,7 +683,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='Enroll')
+												missing_values=None, axis_param=0, field='Enroll'):
 			print('INVARIANT INV_condition_Enroll VALIDATED')
 		else:
 			print('INVARIANT INV_condition_Enroll NOT VALIDATED')
@@ -695,7 +695,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field='Instate')
+												missing_values=None, axis_param=0, field='Instate'):
 			print('INVARIANT INV_condition_Instate VALIDATED')
 		else:
 			print('INVARIANT INV_condition_Instate NOT VALIDATED')
@@ -759,7 +759,7 @@ class DataProcessing:
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TOTAL_CONTACTS')
+												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -770,7 +770,7 @@ class DataProcessing:
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TOTAL_CONTACTS')
+												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -781,7 +781,7 @@ class DataProcessing:
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TOTAL_CONTACTS')
+												field='TOTAL_CONTACTS'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -794,7 +794,7 @@ class DataProcessing:
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SELF_INIT_CNTCTS')
+												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
@@ -805,7 +805,7 @@ class DataProcessing:
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SELF_INIT_CNTCTS')
+												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
@@ -816,7 +816,7 @@ class DataProcessing:
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SELF_INIT_CNTCTS')
+												field='SELF_INIT_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
@@ -829,7 +829,7 @@ class DataProcessing:
 												fix_value_output='Low',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SOLICITED_CNTCTS')
+												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
@@ -840,7 +840,7 @@ class DataProcessing:
 												fix_value_output='Moderate',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SOLICITED_CNTCTS')
+												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
@@ -851,7 +851,7 @@ class DataProcessing:
 												fix_value_output='High',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='SOLICITED_CNTCTS')
+												field='SOLICITED_CNTCTS'):
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
@@ -891,7 +891,7 @@ class DataProcessing:
 												fix_value_output='Unknown',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TERRITORY')
+												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -902,7 +902,7 @@ class DataProcessing:
 												fix_value_output='Zone 1',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TERRITORY')
+												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -913,7 +913,7 @@ class DataProcessing:
 												fix_value_output='Zone 2',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TERRITORY')
+												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -924,7 +924,7 @@ class DataProcessing:
 												fix_value_output='Zone 3',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TERRITORY')
+												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
@@ -935,7 +935,7 @@ class DataProcessing:
 												fix_value_output='Zone 4',
 												belong_op_in=Belong(0), belong_op_out=Belong(0),
 												data_type_output=DataType(0)),
-												field='TERRITORY')
+												field='TERRITORY'):
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
