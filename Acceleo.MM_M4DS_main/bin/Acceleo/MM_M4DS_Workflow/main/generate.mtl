@@ -29,6 +29,7 @@ class DataProcessing:
 	def generateDataProcessing(self):
 		pre_post=contract_pre_post.ContractsPrePost()
 		invariants=contract_invariants.Invariants()
+		transformations=data_transformations.DataTransformations()
 	[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]						[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------

@@ -6,6 +6,7 @@ class DataProcessing:
 	def generateDataProcessing(self):
 		pre_post=contract_pre_post.ContractsPrePost()
 		invariants=contract_invariants.Invariants()
+		transformations=data_transformations.DataTransformations()
 #-----------------New DataProcessing-----------------
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
 
@@ -444,9 +445,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
 		print('Transformation of type FixValue-FixValue')
+		data_model_map_territory_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_territory_in, fix_value_input=A, fix_value_output=0,
+		                                      data_type_input = None,
+		                                      data_type_output = None, field = 'TERRITORY')
 		
 		
 		print('Transformation of type FixValue-FixValue')
+		data_model_map_territory_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_territory_in, fix_value_input=N, fix_value_output=0,
+		                                      data_type_input = None,
+		                                      data_type_output = None, field = 'TERRITORY')
 		
 		
 		if pre_post.check_fix_value_range(value='A', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
@@ -523,9 +530,15 @@ class DataProcessing:
 		
 		
 		print('Transformation of type FixValue-FixValue')
+		data_model_map_Instate_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_Instate_in, fix_value_input=Y, fix_value_output=1,
+		                                      data_type_input = None,
+		                                      data_type_output = None, field = 'Instate')
 		
 		
 		print('Transformation of type FixValue-FixValue')
+		data_model_map_Instate_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_Instate_in, fix_value_input=N, fix_value_output=0,
+		                                      data_type_input = None,
+		                                      data_type_output = None, field = 'Instate')
 		
 		
 		if pre_post.check_fix_value_range(value='Y', data_dictionary=data_model_map_Instate_out, belong_op=Belong(0), field='Instate',
