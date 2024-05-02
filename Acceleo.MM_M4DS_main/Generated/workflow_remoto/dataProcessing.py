@@ -1,7 +1,7 @@
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
 class DataProcessing:
 	def generateDataProcessing(self):
 		pre_post=contract_pre_post.ContractsPrePost()
@@ -467,7 +467,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												data_type_input=DataType(0),
 												data_type_output=DataType(0),
-												axis_param=0, field='TERRITORY'):
+												field='TERRITORY'):
 			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
@@ -478,7 +478,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												data_type_input=DataType(0),
 												data_type_output=DataType(0),
-												axis_param=0, field='TERRITORY'):
+												field='TERRITORY'):
 			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
@@ -505,7 +505,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												data_type_input=DataType(0),
 												data_type_output=DataType(0),
-												axis_param=0, field='Instate'):
+												field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
@@ -516,7 +516,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												data_type_input=DataType(0),
 												data_type_output=DataType(0),
-												axis_param=0, field='Instate'):
+												field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
@@ -704,20 +704,20 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_in,
-		                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_in,
+		                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS'):
 			print('PRECONDITION PRE_binner_valueRange_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('PRECONDITION PRE_binner_valueRange_TOTAL_CONTACTS NOT VALIDATED')
 		
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_in,
-		                                	closure_type=Closure(0), belong_op=Belong(0), field='SELF_INIT_CNTCTS')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_in,
+		                                	closure_type=Closure(0), belong_op=Belong(0), field='SELF_INIT_CNTCTS'):
 			print('PRECONDITION PRE_binner_valueRange_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('PRECONDITION PRE_binner_valueRange_SELF_INIT_CNTCTS NOT VALIDATED')
 		
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_in,
-		                                	closure_type=Closure(0), belong_op=Belong(0), field='SOLICITED_CNTCTS')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_in,
+		                                	closure_type=Closure(0), belong_op=Belong(0), field='SOLICITED_CNTCTS'):
 			print('PRECONDITION PRE_binner_valueRange_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('PRECONDITION PRE_binner_valueRange_SOLICITED_CNTCTS NOT VALIDATED')
@@ -734,20 +734,20 @@ class DataProcessing:
 		
 		
 		
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_out,
-		                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_out,
+		                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned'):
 			print('POSTCONDITION POST_binner_valueRange_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('POSTCONDITION POST_binner_valueRange_TOTAL_CONTACTS NOT VALIDATED')
 		
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_out,
-		                                	closure_type=Closure(0), belong_op=Belong(1), field='SELF_INIT_CNTCTS_binned')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_out,
+		                                	closure_type=Closure(0), belong_op=Belong(1), field='SELF_INIT_CNTCTS_binned'):
 			print('POSTCONDITION POST_binner_valueRange_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('POSTCONDITION POST_binner_valueRange_SELF_INIT_CNTCTS NOT VALIDATED')
 		
-		if pre_post.check_interval_range_float(left_margin=-1000.0, rigth_margin=1.0, data_dictionary=data_model_binner_in,
-		                                	closure_type=Closure(0), belong_op=Belong(1), field='SOLICITED_CNTCTS')
+		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_in,
+		                                	closure_type=Closure(0), belong_op=Belong(1), field='SOLICITED_CNTCTS'):
 			print('POSTCONDITION POST_binner_valueRange_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('POSTCONDITION POST_binner_valueRange_SOLICITED_CNTCTS NOT VALIDATED')
@@ -860,8 +860,8 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 
-		if pre_post.check_interval_range_float(left_margin=0.0, rigth_margin=1000.0, data_dictionary=data_model_binner_in,
-		                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY')
+		if pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=data_model_binner_in,
+		                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY'):
 			print('PRECONDITION PRE_binner_valueRange_TERRITORY VALIDATED')
 		else:
 			print('PRECONDITION PRE_binner_valueRange_TERRITORY NOT VALIDATED')
@@ -878,8 +878,8 @@ class DataProcessing:
 		
 		
 		
-		if pre_post.check_interval_range_float(left_margin=0.0, rigth_margin=1000.0, data_dictionary=data_model_binner_out,
-		                                	closure_type=Closure(0), belong_op=Belong(1), field='TERRITORY_binned')
+		if pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=data_model_binner_out,
+		                                	closure_type=Closure(0), belong_op=Belong(1), field='TERRITORY_binned'):
 			print('POSTCONDITION POST_binner_valueRange_TERRITORY VALIDATED')
 		else:
 			print('POSTCONDITION POST_binner_valueRange_TERRITORY NOT VALIDATED')

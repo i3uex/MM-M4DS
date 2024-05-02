@@ -59,8 +59,8 @@ else:
 	[/let]														[comment CLOSE assigns the variable to be of type FixValue/]
 [elseif (v.oclIsTypeOf(Interval))]								[comment OPEN checks that the variable is of type Interval/]
 	[let inter : Interval = v.oclAsType(Interval)]				[comment OPEN assigns the variable to be of type Interval/]
-if pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
-                                	closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]')
+if pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+                                	closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -215,7 +215,7 @@ else:
 	[/let]
 [elseif (v.oclIsTypeOf(Interval))]
 	[let inter : Interval = v.oclAsType(Interval)]
-if pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], rigth_margin=[inter.rightMargin/], data_dictionary=[dd.dataDictionary.name/],
+if pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd.dataDictionary.name/],
                                closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
@@ -342,7 +342,7 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
 										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										axis_param=0, field=None):
+										field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -356,7 +356,7 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
 										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										axis_param=0, field='[df.dataField.displayName/]'):
+										field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
