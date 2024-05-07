@@ -15,6 +15,8 @@
 [template public generateWorkflow(aWorkflow : Workflow)]
 [comment @main/]
 [generateDataProcessing(aWorkflow)/]
+[generateContractsDataProcessing(aWorkflow)/]
+[generateTransformationsDataProcessing(aWorkflow)/]
 [/template]
 
 
@@ -101,8 +103,134 @@ dp.generateDataProcessing()
 	[/if]																	[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
+[comment]################################################################################################################################################################[/comment]
+
+[template public generateContractsDataProcessing(aWorkflow : Workflow)]
+[file ('contracts.py', false, 'UTF-8')]
+import pandas as pd
+import functions.contract_invariants as contract_invariants
+import functions.contract_pre_post as contract_pre_post
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+[comment generate the imports and the class/]
+class DataProcessing:
+	def generateDataProcessing(self):
+		pre_post=contract_pre_post.ContractsPrePost()
+		invariants=contract_invariants.Invariants()
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing=null)]						[comment OPEN checks if the DataProcessing is isolated (no links)/]
+#-----------------New DataProcessing-----------------
+			[for (dc : DataDictionary | d.inputPort)]					[comment OPEN read all the input datasets and store them/]
+		[dc.name/]=pd.read_csv('[dc.path/]')
+
+			[/for]														[comment CLOSE read all the input datasets and store them/]
+		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::PRECONDITION)]				[comment OPEN checks if the if the contract is a Precondition/]
+		[generateCallContract(c.contract)/]
+		[/if]															[comment CLOSE checks if the if the contract is a Precondition/]
+		[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
+		[generateCallContract(c.contract)/]
+		[/if]															[comment CLOSE checks if the if the contract is a Postcondition/]
+		[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::INVARIANT)]					[comment OPEN checks if the if the contract is a Invariant/]
+		[generateCallContract(c.contract)/]
+		[/if]															[comment CLOSE checks if the if the contract is a Invariant/]
+		[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[/if]																[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+	[/for]																[comment CLOSE traverse all the DataProcessings/]
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing<>null)]						[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+[callContractsRecursiveTemplate(d)/]
+	[/if]																[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+	[/for]																[comment CLOSE traverse all the DataProcessings/]
 
 
+dp=DataProcessing()
+dp.generateDataProcessing()
+[/file]
+[/template]
 
+
+[template public callContractsRecursiveTemplate(d : DataProcessing)]
+#-----------------New DataProcessing-----------------
+[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[dc.name/]=pd.read_csv('[dc.path/]')
+
+[/for]																		[comment CLOSE read all the input datasets and store them/]
+[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+		[generateCallContract(c.contract)/]
+	[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
+[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
+		[generateCallContract(c.contract)/]
+	[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
+[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
+		[generateCallContract(c.contract)/]
+	[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
+[/for]
+	[if (d.outgoing<>null)]													[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
+[callContractsRecursiveTemplate(nextDp)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
+[/let]																		[comment OPEN assigns the next DataProcessing to a variable/]
+	[/if]																	[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+[/template]
+
+[comment]################################################################################################################################################################[/comment]
+
+[template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
+[file ('transformations.py', false, 'UTF-8')]
+import pandas as pd
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+[comment generate the imports and the class/]
+class DataProcessing:
+	def generateDataProcessing(self):
+		transformations=data_transformations.DataTransformations()
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing=null)]						[comment OPEN checks if the DataProcessing is isolated (no links)/]
+#-----------------New DataProcessing-----------------
+			[for (dc : DataDictionary | d.inputPort)]					[comment OPEN read all the input datasets and store them/]
+		[dc.name/]=pd.read_csv('[dc.path/]')
+
+			[/for]														[comment CLOSE read all the input datasets and store them/]
+		[for (p : Parameter | d.parameter)]								[comment OPEN traverse all the parameters in the dataProcessing to generate the transformations/]
+		[generateCallTransformation(p)/]
+		[/for]															[comment CLOSE traverse all the parameters in the dataProcessing to generate the transformations/]
+	[/if]																[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+	[/for]																[comment CLOSE traverse all the DataProcessings/]
+	[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing<>null)]						[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+[callTransformationsRecursiveTemplate(d)/]
+	[/if]																[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+	[/for]																[comment CLOSE traverse all the DataProcessings/]
+
+
+dp=DataProcessing()
+dp.generateDataProcessing()
+[/file]
+[/template]
+
+
+[template public callTransformationsRecursiveTemplate(d : DataProcessing)]
+#-----------------New DataProcessing-----------------
+[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[dc.name/]=pd.read_csv('[dc.path/]')
+
+[/for]																		[comment CLOSE read all the input datasets and store them/]
+
+[for (p : Parameter | d.parameter)]											[comment OPEN traverse all the parameters in the dataProcessing to generate the transformations/]
+		[generateCallTransformation(p)/]
+[/for]																		[comment CLOSE traverse all the parameters in the dataProcessing to generate the transformations/]
+[if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
+[callTransformationsRecursiveTemplate(nextDp)/]				[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
+	[/let]																	[comment OPEN assigns the next DataProcessing to a variable/]
+[/if]																		[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+[/template]
 
 
