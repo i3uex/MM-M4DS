@@ -323,17 +323,13 @@ else:
 
 [template public generateCallConditionContract(aContract : Contract)]
 [let cond : Condition = aContract.oclAsType(Condition)]						[comment OPEN assigns the contract to be of type Condition (Invariants)/]
-[for (if_cond : If | cond._if)]												[comment OPEN traverse all the If class in the contract/]
-[if (cond._in.oclIsTypeOf(DataField))]										[comment OPEN checks that the input is a DataField/]
 [let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
-[let th : Then = if_cond._then.oclAsType(Then)]								[comment OPEN assigns the variable to be of type Then/]
-[for (v : Value | if_cond.valueCondition)]									[comment OPEN traverse all the values associated to the contract/]
-
-[if (v.oclIsTypeOf(FixValue))]												[comment OPEN checks that the type of the value is FixValue/]
-	[let fv : FixValue = v.oclAsType(FixValue)]								[comment OPEN assigns the variable to be of type FixValue/]
+[let firstIf : If = cond._if->first()]										[comment OPEN assigns the variable to be the first If/]
 [comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
-	[if (th.valueResult.oclIsTypeOf(FixValue))]								[comment OPEN checks that the variable is of type FixValue/]
-		[let fvt : FixValue = th.valueResult.oclAsType(FixValue)]			[comment OPEN assigns the variable to be of type FixValue/]
+[if (firstIf.valueCondition->first().oclIsTypeOf(FixValue))]				[comment OPEN checks that the type of the value is FixValue/]
+[let fv : FixValue = firstIf.valueCondition->first().oclAsType(FixValue)]	[comment OPEN assigns the variable to be of type FixValue/]
+[if (firstIf._then.valueResult.oclIsTypeOf(FixValue))]						[comment OPEN checks that the variable is of type FixValue/]
+		[let fvt : FixValue = firstIf._then.valueResult.oclAsType(FixValue)][comment OPEN assigns the variable to be of type FixValue/]
 [if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
 [let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
 
@@ -347,8 +343,8 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										data_dictionary_out=[dd_out.dataDictionary.name/],
 										input_values_list=input_values_list_[aContract.name/], 
 										output_values_list=output_values_list_[aContract.name/],
-										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belong_op_in=Belong([if (firstIf.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[aContract.name/],
 										data_type_output_list=data_type_output_list_[aContract.name/],
 										field=None):
@@ -369,8 +365,8 @@ if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eCo
 										data_dictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
 										input_values_list=input_values_list_[aContract.name/], 
 										output_values_list=output_values_list_[aContract.name/],
-										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belong_op_in=Belong([if (firstIf.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[aContract.name/],
 										data_type_output_list=data_type_output_list_[aContract.name/],
 										field='[df.dataField.displayName/]'):
@@ -381,7 +377,17 @@ else:
 [/if]																		[comment CLOSE checks that the variable is of type DataDictionary or DataField/]
 		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
-
+[/let]																		[comment CLOSE assigns the variable to be of type FixValue/]
+[/if]																		[comment CLOSE checks that the type of the value is FixValue/]
+[/let]																		[comment CLOSE assigns the variable to be the first If/]
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[for (if_cond : If | cond._if)]												[comment OPEN traverse all the If class in the contract/]
+[if (cond._in.oclIsTypeOf(DataField))]										[comment OPEN checks that the input is a DataField/]
+[let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
+[let th : Then = if_cond._then.oclAsType(Then)]								[comment OPEN assigns the variable to be of type Then/]
+[for (v : Value | if_cond.valueCondition)]									[comment OPEN traverse all the values associated to the contract/]
+[if (v.oclIsTypeOf(FixValue))]												[comment OPEN checks that the type of the value is FixValue/]
+	[let fv : FixValue = v.oclAsType(FixValue)]								[comment OPEN assigns the variable to be of type FixValue/]
 [comment]The code below generates the call to invariants of type FixValue-DerivedValue[/comment]
 	[if (th.valueResult.oclIsTypeOf(DerivedValue))]							[comment OPEN checks that the variable is of type DerivedValue/]
 		[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)][comment OPEN assigns the variable to be of type DerivedValue/]
