@@ -549,14 +549,49 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 
+		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
+												data_dictionary_out=data_model_stringToNumber_out,
+												belong_op_out=Belong(1),
+												axis_param=0, field='TERRITORY'):
+			print('INVARIANT INV_condition_TERRITORY VALIDATED')
+		else:
+			print('INVARIANT INV_condition_TERRITORY NOT VALIDATED')
 		
 		
+		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
+												data_dictionary_out=data_model_stringToNumber_out,
+												belong_op_out=Belong(1),
+												axis_param=0, field='init1rat'):
+			print('INVARIANT INV_condition_init1rat VALIDATED')
+		else:
+			print('INVARIANT INV_condition_init1rat NOT VALIDATED')
 		
 		
+		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
+												data_dictionary_out=data_model_stringToNumber_out,
+												belong_op_out=Belong(1),
+												axis_param=0, field='init2rat'):
+			print('INVARIANT INV_condition_init2rat VALIDATED')
+		else:
+			print('INVARIANT INV_condition_init2rat NOT VALIDATED')
 		
 		
+		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
+												data_dictionary_out=data_model_stringToNumber_out,
+												belong_op_out=Belong(1),
+												axis_param=0, field='hscrat'):
+			print('INVARIANT INV_condition_hscrat VALIDATED')
+		else:
+			print('INVARIANT INV_condition_hscrat NOT VALIDATED')
 		
 		
+		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
+												data_dictionary_out=data_model_stringToNumber_out,
+												belong_op_out=Belong(1),
+												axis_param=0, field='Instate'):
+			print('INVARIANT INV_condition_Instate VALIDATED')
+		else:
+			print('INVARIANT INV_condition_Instate NOT VALIDATED')
 		
 		
 #-----------------New DataProcessing-----------------

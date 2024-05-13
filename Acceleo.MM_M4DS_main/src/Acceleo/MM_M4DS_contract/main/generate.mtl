@@ -325,6 +325,7 @@ else:
 [let cond : Condition = aContract.oclAsType(Condition)]						[comment OPEN assigns the contract to be of type Condition (Invariants)/]
 [let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
 [let firstIf : If = cond._if->first()]										[comment OPEN assigns the variable to be the first If/]
+[if (firstIf.belongOp=BelongOp::BELONG)]									[comment OPEN checks that belongOp_in is BELONG/]
 [comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
 [if (firstIf.valueCondition->first().oclIsTypeOf(FixValue))]				[comment OPEN checks that the type of the value is FixValue/]
 [let fv : FixValue = firstIf.valueCondition->first().oclAsType(FixValue)]	[comment OPEN assigns the variable to be of type FixValue/]
@@ -379,9 +380,38 @@ else:
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
 [/let]																		[comment CLOSE assigns the variable to be of type FixValue/]
 [/if]																		[comment CLOSE checks that the type of the value is FixValue/]
+[/if]																		[comment CLOSE checks that belongOp_in is BELONG/]
 [/let]																		[comment CLOSE assigns the variable to be the first If/]
 [/let]																		[comment CLOSE assigns the variable to be of type DataField/]
 [for (if_cond : If | cond._if)]												[comment OPEN traverse all the If class in the contract/]
+[if (if_cond.belongOp=BelongOp::NOTBELONG)]									[comment OPEN checks that belongOp_in is NOTBELONG/]
+[let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
+[let th : Then = if_cond._then.oclAsType(Then)]								[comment OPEN assigns the variable to be of type Then/]
+[if (cond._in.oclIsTypeOf(DataField))]										[comment OPEN checks that the input is a DataField/]
+[let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+if invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										data_dictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										axis_param=0, field='[df.dataField.displayName/]'):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[elseif (cond._in.oclIsTypeOf(DataDictionary))]								[comment OPEN checks that the input is a DataDictionary/]
+[let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+if invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
+										data_dictionary_out=[dd_out.dataDictionary.name/],
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+										axis_param=0, field=None):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+[/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
+[/if]																		[comment CLOSE checks that the input is a DataField or a DataDictionary/]
+[/let]																		[comment CLOSE assigns the variable to be of type Then/]
+[/let]																		[comment CLOSE assigns the variable to be of type DataField/]
+[/if]																		[comment CLOSE checks that belongOp_in is NOTBELONG/]
+[if (if_cond.belongOp=BelongOp::BELONG)]									[comment OPEN checks that belongOp_in is BELONG/]
 [if (cond._in.oclIsTypeOf(DataField))]										[comment OPEN checks that the input is a DataField/]
 [let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
 [let th : Then = if_cond._then.oclAsType(Then)]								[comment OPEN assigns the variable to be of type Then/]
@@ -557,6 +587,8 @@ else:
 [/if]																		[comment CLOSE checks that the type of the value is Interval/]
 [if (v.oclIsTypeOf(SpecialValue))]											[comment OPEN checks that the type of the value is SpecialValue/]
 [let sv : SpecialValue = v.oclAsType(SpecialValue)]							[comment OPEN assigns the variable to be of type SpecialValue/]
+[if (if_cond.belongOp=BelongOp::NOTBELONG)]									[comment OPEN checks that belongOp_in is NOTBELONG/]
+[/if]																		[comment CLOSE checks that belongOp_in is NOTBELONG/]
 [comment]The code below generates the call to invariants of type SpecialValue-FixValue[/comment]
 	[if (th.valueResult.oclIsTypeOf(FixValue))]									[comment OPEN checks that the type of the result is FixValue/]
 		[let fixVal : FixValue = th.valueResult.oclAsType(FixValue)]			[comment OPEN assigns the variable to be of type FixValue/]
@@ -693,6 +725,7 @@ else:
 [/let]																		[comment CLOSE assigns the variable to be of type Then/]
 [/let]																		[comment CLOSE assigns the variable to be of type DataField/]
 [/if]																		[comment CLOSE checks that the input is a DataField/]
+[/if]																		[comment CLOSE checks that belongOp_in is BELONG/]
 [/for]																		[comment CLOSE traverse all the If class in the contract/]
 [/let]																		[comment CLOSE  assigns the contract to be of type Condition (Invariants)/]
 [/template]
