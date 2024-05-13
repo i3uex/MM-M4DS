@@ -328,6 +328,7 @@ else:
 [let df : DataField = cond._in.oclAsType(DataField)]						[comment OPEN assigns the variable to be of type DataField/]
 [let th : Then = if_cond._then.oclAsType(Then)]								[comment OPEN assigns the variable to be of type Then/]
 [for (v : Value | if_cond.valueCondition)]									[comment OPEN traverse all the values associated to the contract/]
+
 [if (v.oclIsTypeOf(FixValue))]												[comment OPEN checks that the type of the value is FixValue/]
 	[let fv : FixValue = v.oclAsType(FixValue)]								[comment OPEN assigns the variable to be of type FixValue/]
 [comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
@@ -335,13 +336,21 @@ else:
 		[let fvt : FixValue = th.valueResult.oclAsType(FixValue)]			[comment OPEN assigns the variable to be of type FixValue/]
 [if (aContract.out.oclIsTypeOf(DataDictionary))]							[comment OPEN checks that the variable is of type DataDictionary/]
 [let dd_out : DataDictionary = aContract.out.oclAsType(DataDictionary)]		[comment OPEN assigns the variable to be of type DataDictionary/]
+
+input_values_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fval.dataType=DataType::String or fval.dataType=DataType::Time or fval.dataType=DataType::DateTime)]'[fval.value/]'[else][fval.value/][/if][/let][/if][/for][/for][']'/]
+output_values_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String or fval.dataType=DataType::Time or fval.dataType=DataType::DateTime)]'[fval.value/]'[else][fval.value/][/if][/let][/if][/if][/for][/for][']'/]
+
+data_type_input_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fv.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/for][/for][']'/]
+data_type_output_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/if][/for][/for][']'/]
+
 if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 										data_dictionary_out=[dd_out.dataDictionary.name/],
-										fix_value_input=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fix_value_output=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
+										input_values_list=input_values_list_[aContract.name/], 
+										output_values_list=output_values_list_[aContract.name/],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
+										data_type_input_list=data_type_input_list_[aContract.name/],
+										data_type_output_list=data_type_output_list_[aContract.name/],
 										field=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
@@ -349,13 +358,21 @@ else:
 [/let]																		[comment CLOSE assigns the variable to be of type DataDictionary/]
 [elseif (aContract.out.oclIsTypeOf(DataField))]								[comment OPEN checks that the variable is of type DataField/]
 [let df_out : DataField = aContract.out.oclAsType(DataField)]				[comment OPEN assigns the variable to be of type DataField/]
+
+input_values_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fval.dataType=DataType::String or fval.dataType=DataType::Time or fval.dataType=DataType::DateTime)]'[fval.value/]'[else][fval.value/][/if][/let][/if][/for][/for][']'/]
+output_values_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String or fval.dataType=DataType::Time or fval.dataType=DataType::DateTime)]'[fval.value/]'[else][fval.value/][/if][/let][/if][/if][/for][/for][']'/]
+
+data_type_input_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fv.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/for][/for][']'/]
+data_type_output_list_[aContract.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/if][/for][/for][']'/]
+
 if invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name/],
 										data_dictionary_out=[df_out.dataField.eContainer(Workflow::DataDictionary).name/],
-										fix_value_input=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fv.value/]'[else][fv.value/][/if], fix_value_output=[if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
+										input_values_list=input_values_list_[aContract.name/], 
+										output_values_list=output_values_list_[aContract.name/],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										data_type_input=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										data_type_output=[if (fv.dataType=DataType::String)]DataType(0)[elseif (fv.dataType=DataType::Time)]DataType(1)[elseif (fv.dataType=DataType::Integer)]DataType(2)[elseif (fv.dataType=DataType::DateTime)]DataType(3)[elseif (fv.dataType=DataType::Boolean)]DataType(4)[elseif (fv.dataType=DataType::Double)]DataType(5)[elseif (fv.dataType=DataType::Float)]DataType(6)[else]None)[/if],
+										data_type_input_list=data_type_input_list_[aContract.name/],
+										data_type_output_list=data_type_output_list_[aContract.name/],
 										field='[df.dataField.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
@@ -364,6 +381,7 @@ else:
 [/if]																		[comment CLOSE checks that the variable is of type DataDictionary or DataField/]
 		[/let]																[comment CLOSE assigns the variable to be of type FixValue/]
 	[/if]																	[comment CLOSE checks that the variable is of type FixValue/]
+
 [comment]The code below generates the call to invariants of type FixValue-DerivedValue[/comment]
 	[if (th.valueResult.oclIsTypeOf(DerivedValue))]							[comment OPEN checks that the variable is of type DerivedValue/]
 		[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)][comment OPEN assigns the variable to be of type DerivedValue/]

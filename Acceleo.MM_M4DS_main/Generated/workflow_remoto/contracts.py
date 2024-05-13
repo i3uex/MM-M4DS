@@ -25,6 +25,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_sex NOT VALIDATED')
 		
+		
 		missing_values_INV_condition_impute_sex=[]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_sex_in,
 									data_dictionary_out=data_model_impute_sex_out,
@@ -57,6 +58,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_IRSCHOOL NOT VALIDATED')
 		
+		
 		missing_values_INV_condition_impute_IRSCHOOL=[]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_IRSCHOOL_in,
 									data_dictionary_out=data_model_impute_IRSCHOOL_out,
@@ -73,10 +75,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
 
-		invalid_values_PRE_value_range_impute_ETHNICITY=[14]
-		if pre_post.check_invalid_values(belong_op=Belong(0), data_dictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
-										invalid_values=invalid_values_PRE_value_range_impute_ETHNICITY,
-										quant_op=Operator(3), quant_rel=30.0/100):
+		missing_values_PRE_value_range_impute_ETHNICITY=[]
+		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=data_model_impute_ETHNICITY_in, field='ETHNICITY', 
+										missing_values=missing_values_PRE_value_range_impute_ETHNICITY,
+										quant_op=Operator(2), quant_rel=30.0/100):
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY VALIDATED')
 		else:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY NOT VALIDATED')
@@ -88,6 +90,7 @@ class DataProcessing:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY VALIDATED')
 		else:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY NOT VALIDATED')
+		
 		
 		missing_values_INV_condition_impute_ETHNICITY=[]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_ETHNICITY_in,
@@ -105,7 +108,7 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 
-		missing_values_PRE_value_range_impute_sex_columns=[4]
+		missing_values_PRE_value_range_impute_sex_columns=['D', 4]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=data_model_impute_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex_columns,
 										quant_op=Operator(2), quant_rel=30.0/100):
@@ -153,7 +156,8 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 		
-		missing_values_INV_condition_impute_sex_columns=[4]
+		
+		missing_values_INV_condition_impute_sex_columns=['D', 4]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_in,
 									data_dictionary_out=data_model_impute_out,
 									belong_op_in=Belong(0),
@@ -164,6 +168,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_impute_sex_columns VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_sex_columns NOT VALIDATED')
+		
 		
 		
 		missing_values_INV_condition_impute_IRSCHOOL_columns=[]
@@ -177,6 +182,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_impute_IRSCHOOL_columns VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_IRSCHOOL_columns NOT VALIDATED')
+		
 		
 		
 		missing_values_INV_condition_impute_ETHNICITY_columns=[]
@@ -227,6 +233,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_ACADEMIC_INTEREST_1 NOT VALIDATED')
 		
+		
 		missing_values_INV_condition_impute_ACADEMIC_INTEREST_2=[]
 		if invariants.check_inv_special_value_fix_value(data_dictionary_in=data_model_impute_ACADEMIC_INTEREST_2_in,
 									data_dictionary_out=data_model_impute_ACADEMIC_INTEREST_2_out,
@@ -240,6 +247,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_2 VALIDATED')
 		else:
 			print('INVARIANT INV_condition_impute_ACADEMIC_INTEREST_2 NOT VALIDATED')
+		
 		
 		
 		missing_values_INV_condition_impute_ACADEMIC_INTEREST_1=[]
@@ -276,6 +284,14 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_impute_mean_distance NOT VALIDATED')
 		
+		missing_values_POST_value_range_impute_mean_avg_income=[]
+		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_mean_out, field='avg_income', 
+										missing_values=missing_values_POST_value_range_impute_mean_avg_income,
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION POST_value_range_impute_mean_avg_income VALIDATED')
+		else:
+			print('POSTCONDITION POST_value_range_impute_mean_avg_income NOT VALIDATED')
+		
 		missing_values_POST_value_range_impute_mean_distance=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_mean_out, field='distance', 
 										missing_values=missing_values_POST_value_range_impute_mean_distance,
@@ -284,13 +300,6 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_mean_distance NOT VALIDATED')
 		
-		missing_values_POST_value_range_impute_mean_avg_income=[]
-		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_mean_out, field='avg_income', 
-										missing_values=missing_values_POST_value_range_impute_mean_avg_income,
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION POST_value_range_impute_mean_avg_income VALIDATED')
-		else:
-			print('POSTCONDITION POST_value_range_impute_mean_avg_income NOT VALIDATED')
 		
 		missing_values_INV_condition_avg_income=[]
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_mean_in,
@@ -303,6 +312,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_avg_income VALIDATED')
 		else:
 			print('INVARIANT INV_condition_avg_income NOT VALIDATED')
+		
 		
 		
 		missing_values_INV_condition_distance=[]
@@ -336,6 +346,7 @@ class DataProcessing:
 			print('POSTCONDITION POST_value_range_impute_linear_interpolation_satscore VALIDATED')
 		else:
 			print('POSTCONDITION POST_value_range_impute_linear_interpolation_satscore NOT VALIDATED')
+		
 		
 		missing_values_INV_condition_distance=[]
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_linear_interpolation_in,
@@ -421,6 +432,71 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
+		
+		
+		input_values_list_INV_condition_map_categorical_col=['A', 'B', 'N']
+		output_values_list_INV_condition_map_categorical_col=['0', '0', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
+												field='TERRITORY'):
+			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
+		
+		
+		input_values_list_INV_condition_map_categorical_col=['A', 'B', 'N']
+		output_values_list_INV_condition_map_categorical_col=['0', '0', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
+												field='TERRITORY'):
+			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
+		
+		
+		input_values_list_INV_condition_map_categorical_col=['A', 'B', 'N']
+		output_values_list_INV_condition_map_categorical_col=['0', '0', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
+												field='TERRITORY'):
+			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
+		
+		
 		if pre_post.check_fix_value_range(value='A', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('POSTCONDITION POST_value_range_territory VALIDATED')
@@ -431,30 +507,6 @@ class DataProcessing:
 			print('POSTCONDITION POST_value_range_territory VALIDATED')
 		else:
 			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
-		
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
-												data_dictionary_out=data_model_map_territory_out,
-												fix_value_input='A', fix_value_output='0',
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input=DataType(0),
-												data_type_output=DataType(0),
-												field='TERRITORY'):
-			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
-		else:
-			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
-												data_dictionary_out=data_model_map_territory_out,
-												fix_value_input='N', fix_value_output='0',
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input=DataType(0),
-												data_type_output=DataType(0),
-												field='TERRITORY'):
-			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
-		else:
-			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
-		
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
@@ -470,28 +522,48 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_Instate NOT VALIDATED')
 		
+		
+		
+		input_values_list_INV_condition_map_categorical_col=['Y', 'N']
+		output_values_list_INV_condition_map_categorical_col=['1', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		
 		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_Instate_in,
 												data_dictionary_out=data_model_map_Instate_out,
-												fix_value_input='Y', fix_value_output='1',
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
 												belong_op_in=Belong(0),
 												belong_op_out=Belong(0),
-												data_type_input=DataType(0),
-												data_type_output=DataType(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
 												field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
+		
+		
+		input_values_list_INV_condition_map_categorical_col=['Y', 'N']
+		output_values_list_INV_condition_map_categorical_col=['1', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		
 		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_Instate_in,
 												data_dictionary_out=data_model_map_Instate_out,
-												fix_value_input='N', fix_value_output='0',
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
 												belong_op_in=Belong(0),
 												belong_op_out=Belong(0),
-												data_type_input=DataType(0),
-												data_type_output=DataType(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
 												field='Instate'):
 			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
 		
 		
 		if pre_post.check_fix_value_range(value='Y', data_dictionary=data_model_map_Instate_out, belong_op=Belong(0), field='Instate',
@@ -508,6 +580,11 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 
+		
+		
+		
+		
+		
 		
 		
 		
@@ -593,6 +670,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_outliers_closest_Instate NOT VALIDATED')
 		
+		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
 												data_dictionary_out=data_model_impute_outlier_closest_out,
 												belong_op_in=Belong(0),
@@ -603,6 +681,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_avg_income VALIDATED')
 		else:
 			print('INVARIANT INV_condition_avg_income NOT VALIDATED')
+		
 		
 		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
@@ -617,6 +696,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_distance NOT VALIDATED')
 		
 		
+		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
 												data_dictionary_out=data_model_impute_outlier_closest_out,
 												belong_op_in=Belong(0),
@@ -627,6 +707,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_premiere VALIDATED')
 		else:
 			print('INVARIANT INV_condition_premiere NOT VALIDATED')
+		
 		
 		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
@@ -641,6 +722,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_sex NOT VALIDATED')
 		
 		
+		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
 												data_dictionary_out=data_model_impute_outlier_closest_out,
 												belong_op_in=Belong(0),
@@ -651,6 +733,7 @@ class DataProcessing:
 			print('INVARIANT INV_condition_Enroll VALIDATED')
 		else:
 			print('INVARIANT INV_condition_Enroll NOT VALIDATED')
+		
 		
 		
 		if invariants.check_inv_special_value_num_op(data_dictionary_in=data_model_impute_outlier_closest_in,
@@ -704,6 +787,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_binner_valueRange_SOLICITED_CNTCTS NOT VALIDATED')
 		
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=-1000.0, right_margin=1.0,
@@ -715,6 +799,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=1.0, right_margin=4.0,
@@ -726,6 +811,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=4.0, right_margin=1000.0,
@@ -739,6 +825,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
 		
 		
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=-1000.0, right_margin=1.0,
@@ -750,6 +837,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=1.0, right_margin=4.0,
@@ -761,6 +849,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=4.0, right_margin=1000.0,
@@ -774,6 +863,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 		
 		
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=-1000.0, right_margin=1.0,
@@ -785,6 +875,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=1.0, right_margin=4.0,
@@ -796,6 +887,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_SOLICITED_CNTCTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=4.0, right_margin=1000.0,
@@ -824,6 +916,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_binner_valueRange_TERRITORY NOT VALIDATED')
 		
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=-1000.0, right_margin=1.0,
@@ -835,6 +928,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=1.0, right_margin=3.0,
@@ -846,6 +940,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=3.0, right_margin=5.0,
@@ -857,6 +952,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=5.0, right_margin=7.0,
@@ -868,6 +964,7 @@ class DataProcessing:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS VALIDATED')
 		else:
 			print('INVARIANT INV_binner_condition_TOTAL_CONTACTS NOT VALIDATED')
+		
 		if invariants.check_inv_interval_fix_value(data_dictionary_in=data_model_binner_in,
 												data_dictionary_out=data_model_binner_out,
 												left_margin=7.0, right_margin=1000.0,
