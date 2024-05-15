@@ -19,6 +19,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_sex NOT VALIDATED')
 		
 		
+		print('parameter_impute_sex')
+		print('Missing') #SpecialTypeInput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
+		
+		
 		
 		missing_values_POST_value_range_impute_sex=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_sex_out, field='sex', 
@@ -53,6 +62,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_IRSCHOOL NOT VALIDATED')
 		
 		
+		print('parameter_impute_IRSCHOOL')
+		print('Missing') #SpecialTypeInput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
+		
+		
 		
 		missing_values_POST_value_range_impute_IRSCHOOL=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_IRSCHOOL_out, field='IRSCHOOL', 
@@ -85,6 +103,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY VALIDATED')
 		else:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY NOT VALIDATED')
+		
+		
+		print('parameter_impute_ETHNICITY')
+		print('Missing') #SpecialTypeInput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
 		
 		
 		
@@ -135,6 +162,23 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY_columns VALIDATED')
 		else:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY_columns NOT VALIDATED')
+		
+		
+		print('parameter_derivedValue_impute_mostFrequent')
+		print('Missing') #SpecialTypeInput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
+		
+		print('DerivedValue') #Function to call
+		print('MostFrequent') #derivedTypeOutput
+		
 		
 		
 		
@@ -221,6 +265,25 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ACADEMIC_INTEREST_1 NOT VALIDATED')
 		
 		
+		print('parameter_fixValue_impute_fixValue')
+		print('Missing') #SpecialTypeInput
+		
+		print('FixValue') #Function to call
+		print('Unknown') #FixValueOutput
+		data_model_impute_ACADEMIC_INTEREST_2_out=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in, special_type_input=SpecialType(0),
+																	  fix_value_output=Unknown, missing_values_list=None
+								                                      data_type_output = None, axis_param=0, field = 'ACADEMIC_INTEREST_2')
+		
+		
+		print('FixValue') #Function to call
+		print('Unknown') #FixValueOutput
+		data_model_impute_ACADEMIC_INTEREST_2_out=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in, special_type_input=SpecialType(0),
+																	  fix_value_output=Unknown, missing_values_list=None
+								                                      data_type_output = None, axis_param=0, field = 'ACADEMIC_INTEREST_1')
+		
+		
+		
+		
 		
 		missing_values_POST_value_range_impute_ACADEMIC_INTEREST_2=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_out, field='ACADEMIC_INTEREST_2', 
@@ -288,6 +351,19 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_mean_distance NOT VALIDATED')
 		
 		
+		print('parameter_num_op_impute_mean')
+		print('Missing') #SpecialTypeInput
+		
+		
+		
+		print('NumOp') #Function to call
+		print('Mean') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Mean') #NumOpOutput
+		
+		
 		
 		missing_values_POST_value_range_impute_mean_avg_income=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=data_model_impute_mean_out, field='avg_income', 
@@ -341,6 +417,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_linear_interpolation_satscore VALIDATED')
 		else:
 			print('PRECONDITION PRE_value_range_impute_linear_interpolation_satscore NOT VALIDATED')
+		
+		
+		print('parameter_num_op_impute_mean')
+		print('Missing') #SpecialTypeInput
+		
+		
+		
+		print('NumOp') #Function to call
+		print('Mean') #NumOpOutput
 		
 		
 		
@@ -398,6 +483,8 @@ class DataProcessing:
 		
 		
 		
+		
+		
 		field_list_POST_field_range_column_cont_filter=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
 		if pre_post.check_field_range(fields=field_list_POST_field_range_column_cont_filter,
 									data_dictionary=data_model_column_cont_filter_out,
@@ -417,6 +504,8 @@ class DataProcessing:
 			print('PRECONDITION PRE_field_range_column_cat_filter VALIDATED')
 		else:
 			print('PRECONDITION PRE_field_range_column_cat_filter NOT VALIDATED')
+		
+		
 		
 		
 		
@@ -444,16 +533,20 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
-		print('Transformation of type FixValue-FixValue')
-		data_model_map_territory_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_territory_in, fix_value_input=A, fix_value_output=0,
-		                                      data_type_input = None,
-		                                      data_type_output = None, field = 'TERRITORY')
-		
 		
 		print('Transformation of type FixValue-FixValue')
-		data_model_map_territory_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_territory_in, fix_value_input=N, fix_value_output=0,
-		                                      data_type_input = None,
-		                                      data_type_output = None, field = 'TERRITORY')
+		
+		input_values_list_parameter_map_territory_A=['A', 'N']
+		output_values_list_parameter_map_territory_A=['0', '0']
+		data_type_input_list_parameter_map_territory_A=[DataType(0), DataType(0)]
+		data_type_output_list_parameter_map_territory_A=[DataType(0), DataType(0)]
+		
+		
+		data_model_map_territory_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_territory_in, input_values_list=input_values_list_parameter_map_territory_A,
+																	  output_values_list=output_values_list_parameter_map_territory_A,
+								                                      data_type_input_list = data_type_input_list_parameter_map_territory_A,
+								                                      data_type_output_list = data_type_output_list_parameter_map_territory_A, field = 'TERRITORY')
+		
 		
 		
 		if pre_post.check_fix_value_range(value='A', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
@@ -523,16 +616,20 @@ class DataProcessing:
 			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
 		
 		
-		print('Transformation of type FixValue-FixValue')
-		data_model_map_Instate_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_Instate_in, fix_value_input=Y, fix_value_output=1,
-		                                      data_type_input = None,
-		                                      data_type_output = None, field = 'Instate')
-		
 		
 		print('Transformation of type FixValue-FixValue')
-		data_model_map_Instate_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_Instate_in, fix_value_input=N, fix_value_output=0,
-		                                      data_type_input = None,
-		                                      data_type_output = None, field = 'Instate')
+		
+		input_values_list_parameter_map_instate_Y=['Y', 'N']
+		output_values_list_parameter_map_instate_Y=['1', '0']
+		data_type_input_list_parameter_map_instate_Y=[DataType(0), DataType(0)]
+		data_type_output_list_parameter_map_instate_Y=[DataType(0), DataType(0)]
+		
+		
+		data_model_map_Instate_out=transformations.transform_fix_value_fix_value(data_dictionary=data_model_map_Instate_in, input_values_list=input_values_list_parameter_map_instate_Y,
+																	  output_values_list=output_values_list_parameter_map_instate_Y,
+								                                      data_type_input_list = data_type_input_list_parameter_map_instate_Y,
+								                                      data_type_output_list = data_type_output_list_parameter_map_instate_Y, field = 'Instate')
+		
 		
 		
 		if pre_post.check_fix_value_range(value='Y', data_dictionary=data_model_map_Instate_out, belong_op=Belong(0), field='Instate',
@@ -549,10 +646,13 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
 
+		
+		
+		
+		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='TERRITORY'):
+												belong_op_out=Belong(1), field='TERRITORY'):
 			print('INVARIANT INV_condition_TERRITORY VALIDATED')
 		else:
 			print('INVARIANT INV_condition_TERRITORY NOT VALIDATED')
@@ -560,8 +660,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='init1rat'):
+												belong_op_out=Belong(1), field='init1rat'):
 			print('INVARIANT INV_condition_init1rat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_init1rat NOT VALIDATED')
@@ -569,8 +668,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='init2rat'):
+												belong_op_out=Belong(1), field='init2rat'):
 			print('INVARIANT INV_condition_init2rat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_init2rat NOT VALIDATED')
@@ -578,8 +676,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='hscrat'):
+												belong_op_out=Belong(1), field='hscrat'):
 			print('INVARIANT INV_condition_hscrat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_hscrat NOT VALIDATED')
@@ -587,8 +684,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='Instate'):
+												belong_op_out=Belong(1), field='Instate'):
 			print('INVARIANT INV_condition_Instate VALIDATED')
 		else:
 			print('INVARIANT INV_condition_Instate NOT VALIDATED')
@@ -632,6 +728,35 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_outliers_closest_Instate VALIDATED')
 		else:
 			print('PRECONDITION PRE_value_range_impute_outliers_closest_Instate NOT VALIDATED')
+		
+		
+		print('parameter_num_op_impute_mean')
+		print('Outlier') #SpecialTypeInput
+		
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
+		
+		
+		print('NumOp') #Function to call
+		print('Closest') #NumOpOutput
 		
 		
 		
@@ -768,14 +893,6 @@ class DataProcessing:
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_out,
 		                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned'):
 			print('POSTCONDITION POST_binner_valueRange_TOTAL_CONTACTS VALIDATED')
@@ -907,14 +1024,6 @@ class DataProcessing:
 			print('PRECONDITION PRE_binner_valueRange_TERRITORY VALIDATED')
 		else:
 			print('PRECONDITION PRE_binner_valueRange_TERRITORY NOT VALIDATED')
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

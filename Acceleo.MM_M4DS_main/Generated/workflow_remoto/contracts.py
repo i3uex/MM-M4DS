@@ -504,8 +504,7 @@ class DataProcessing:
 
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='TERRITORY'):
+												belong_op_out=Belong(1), field='TERRITORY'):
 			print('INVARIANT INV_condition_TERRITORY VALIDATED')
 		else:
 			print('INVARIANT INV_condition_TERRITORY NOT VALIDATED')
@@ -513,8 +512,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='init1rat'):
+												belong_op_out=Belong(1), field='init1rat'):
 			print('INVARIANT INV_condition_init1rat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_init1rat NOT VALIDATED')
@@ -522,8 +520,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='init2rat'):
+												belong_op_out=Belong(1), field='init2rat'):
 			print('INVARIANT INV_condition_init2rat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_init2rat NOT VALIDATED')
@@ -531,8 +528,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='hscrat'):
+												belong_op_out=Belong(1), field='hscrat'):
 			print('INVARIANT INV_condition_hscrat VALIDATED')
 		else:
 			print('INVARIANT INV_condition_hscrat NOT VALIDATED')
@@ -540,8 +536,7 @@ class DataProcessing:
 		
 		if invariants.check_inv_missing_value_missing_value(data_dictionary_in=data_model_stringToNumber_in,
 												data_dictionary_out=data_model_stringToNumber_out,
-												belong_op_out=Belong(1),
-												axis_param=0, field='Instate'):
+												belong_op_out=Belong(1), field='Instate'):
 			print('INVARIANT INV_condition_Instate VALIDATED')
 		else:
 			print('INVARIANT INV_condition_Instate NOT VALIDATED')
