@@ -105,7 +105,7 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 
-		missing_values_PRE_value_range_impute_sex_columns=['D', 4]
+		missing_values_PRE_value_range_impute_sex_columns=[D, 4]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=data_model_impute_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex_columns,
 										quant_op=Operator(2), quant_rel=30.0/100):
@@ -153,7 +153,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 		
-		missing_values_INV_condition_impute_sex_columns=['D', 4]
+		missing_values_INV_condition_impute_sex_columns=[D, 4]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_in,
 									data_dictionary_out=data_model_impute_out,
 									belong_op_in=Belong(0),

@@ -214,7 +214,6 @@ dp.generateDataProcessing()
 #-----------------New DataProcessing-----------------
 [for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 		[dc.name/]=pd.read_csv('[dc.path/]')
-
 [/for]																		[comment CLOSE read all the input datasets and store them/]
 		[generateCallTransformation(d)/]
 [if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]

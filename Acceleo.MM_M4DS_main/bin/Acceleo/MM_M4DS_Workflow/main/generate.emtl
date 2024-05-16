@@ -1220,7 +1220,7 @@
           </source>
           <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/workflow#//DataDictionary/path"/>
         </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#xA;&#xA;"/>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="')&#xA;"/>
         <loopVariable name="dc">
           <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataDictionary"/>
         </loopVariable>
@@ -4127,7 +4127,7 @@
     </eAnnotations>
     <eAnnotations source="positions.418" references="/0/callTransformationsRecursiveTemplate">
       <details key="start" value="13279"/>
-      <details key="end" value="14295"/>
+      <details key="end" value="14294"/>
       <details key="line" value="213"/>
     </eAnnotations>
     <eAnnotations source="positions.419" references="/0/callTransformationsRecursiveTemplate/%">
@@ -4137,7 +4137,7 @@
     </eAnnotations>
     <eAnnotations source="positions.420" references="/0/callTransformationsRecursiveTemplate/%.1">
       <details key="start" value="13408"/>
-      <details key="end" value="13563"/>
+      <details key="end" value="13562"/>
       <details key="line" value="215"/>
     </eAnnotations>
     <eAnnotations source="positions.421" references="/0/callTransformationsRecursiveTemplate/%.1/%">
@@ -4172,7 +4172,7 @@
     </eAnnotations>
     <eAnnotations source="positions.427" references="/0/callTransformationsRecursiveTemplate/%.1/%.4">
       <details key="start" value="13553"/>
-      <details key="end" value="13557"/>
+      <details key="end" value="13556"/>
       <details key="line" value="216"/>
     </eAnnotations>
     <eAnnotations source="positions.428" references="/0/callTransformationsRecursiveTemplate/%.1/dc">
@@ -4191,98 +4191,98 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.431" references="/0/callTransformationsRecursiveTemplate/%.2">
-      <details key="start" value="13641"/>
-      <details key="end" value="13643"/>
-      <details key="line" value="219"/>
+      <details key="start" value="13640"/>
+      <details key="end" value="13642"/>
+      <details key="line" value="218"/>
     </eAnnotations>
     <eAnnotations source="positions.432" references="/0/callTransformationsRecursiveTemplate/%.3">
-      <details key="start" value="13644"/>
-      <details key="end" value="13673"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.433" references="/0/callTransformationsRecursiveTemplate/%.3/d">
-      <details key="start" value="13671"/>
+      <details key="start" value="13643"/>
       <details key="end" value="13672"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.434" references="/0/callTransformationsRecursiveTemplate/%.4">
-      <details key="start" value="13675"/>
-      <details key="end" value="13676"/>
-      <details key="line" value="220"/>
-    </eAnnotations>
-    <eAnnotations source="positions.435" references="/0/callTransformationsRecursiveTemplate/%.5">
-      <details key="start" value="13676"/>
-      <details key="end" value="14179"/>
-      <details key="line" value="220"/>
-    </eAnnotations>
-    <eAnnotations source="positions.436" references="/0/callTransformationsRecursiveTemplate/%.5/%">
-      <details key="start" value="13800"/>
-      <details key="end" value="14095"/>
-      <details key="line" value="221"/>
-    </eAnnotations>
-    <eAnnotations source="positions.437" references="/0/callTransformationsRecursiveTemplate/%.5/%/%">
-      <details key="start" value="13939"/>
-      <details key="end" value="13983"/>
+    <eAnnotations source="positions.433" references="/0/callTransformationsRecursiveTemplate/%.3/d">
+      <details key="start" value="13670"/>
+      <details key="end" value="13671"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.438" references="/0/callTransformationsRecursiveTemplate/%.5/%/%/nextDp">
-      <details key="start" value="13976"/>
+    <eAnnotations source="positions.434" references="/0/callTransformationsRecursiveTemplate/%.4">
+      <details key="start" value="13674"/>
+      <details key="end" value="13675"/>
+      <details key="line" value="219"/>
+    </eAnnotations>
+    <eAnnotations source="positions.435" references="/0/callTransformationsRecursiveTemplate/%.5">
+      <details key="start" value="13675"/>
+      <details key="end" value="14178"/>
+      <details key="line" value="219"/>
+    </eAnnotations>
+    <eAnnotations source="positions.436" references="/0/callTransformationsRecursiveTemplate/%.5/%">
+      <details key="start" value="13799"/>
+      <details key="end" value="14094"/>
+      <details key="line" value="220"/>
+    </eAnnotations>
+    <eAnnotations source="positions.437" references="/0/callTransformationsRecursiveTemplate/%.5/%/%">
+      <details key="start" value="13938"/>
       <details key="end" value="13982"/>
       <details key="line" value="0"/>
     </eAnnotations>
+    <eAnnotations source="positions.438" references="/0/callTransformationsRecursiveTemplate/%.5/%/%/nextDp">
+      <details key="start" value="13975"/>
+      <details key="end" value="13981"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
     <eAnnotations source="positions.439" references="/0/callTransformationsRecursiveTemplate/%.5/%/%.1">
-      <details key="start" value="14087"/>
-      <details key="end" value="14088"/>
-      <details key="line" value="223"/>
+      <details key="start" value="14086"/>
+      <details key="end" value="14087"/>
+      <details key="line" value="222"/>
     </eAnnotations>
     <eAnnotations source="positions.440" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp">
-      <details key="start" value="13805"/>
-      <details key="end" value="13874"/>
-      <details key="line" value="221"/>
+      <details key="start" value="13804"/>
+      <details key="end" value="13873"/>
+      <details key="line" value="220"/>
     </eAnnotations>
     <eAnnotations source="positions.441" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp/%">
-      <details key="start" value="13832"/>
-      <details key="end" value="13875"/>
+      <details key="start" value="13831"/>
+      <details key="end" value="13874"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.442" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp/%/%">
-      <details key="start" value="13832"/>
-      <details key="end" value="13849"/>
+      <details key="start" value="13831"/>
+      <details key="end" value="13848"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.443" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp/%/%/%">
-      <details key="start" value="13832"/>
-      <details key="end" value="13842"/>
+      <details key="start" value="13831"/>
+      <details key="end" value="13841"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.444" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp/%/%/%/d">
-      <details key="start" value="13832"/>
-      <details key="end" value="13833"/>
+      <details key="start" value="13831"/>
+      <details key="end" value="13832"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.445" references="/0/callTransformationsRecursiveTemplate/%.5/%/nextDp/%/%.1">
-      <details key="start" value="13860"/>
-      <details key="end" value="13874"/>
+      <details key="start" value="13859"/>
+      <details key="end" value="13873"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.446" references="/0/callTransformationsRecursiveTemplate/%.5/%.1">
-      <details key="start" value="13680"/>
-      <details key="end" value="13698"/>
+      <details key="start" value="13679"/>
+      <details key="end" value="13697"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.447" references="/0/callTransformationsRecursiveTemplate/%.5/%.1/%">
-      <details key="start" value="13681"/>
-      <details key="end" value="13691"/>
+      <details key="start" value="13680"/>
+      <details key="end" value="13690"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.448" references="/0/callTransformationsRecursiveTemplate/%.5/%.1/%/d">
-      <details key="start" value="13681"/>
-      <details key="end" value="13682"/>
+      <details key="start" value="13680"/>
+      <details key="end" value="13681"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.449" references="/0/callTransformationsRecursiveTemplate/%.5/%.1/%.1">
-      <details key="start" value="13693"/>
-      <details key="end" value="13697"/>
+      <details key="start" value="13692"/>
+      <details key="end" value="13696"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.450" references="/0/callTransformationsRecursiveTemplate/d">
