@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
@@ -6,6 +7,9 @@ class DataProcessing:
 		transformations=data_transformations.DataTransformations()
 #-----------------New DataProcessing-----------------
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
+
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_sex_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
 
 		data_model_impute_sex_in_transformed=data_model_impute_sex_in.copy()
 		missing_values_list_parameter_impute_sex=[]
@@ -20,6 +24,9 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
 
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_IRSCHOOL_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_IRSCHOOL_in_transformed=data_model_impute_IRSCHOOL_in.copy()
 		missing_values_list_parameter_impute_IRSCHOOL=[]
 		data_model_impute_IRSCHOOL_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_IRSCHOOL_in_transformed,
@@ -33,6 +40,9 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
 
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_ETHNICITY_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_ETHNICITY_in_transformed=data_model_impute_ETHNICITY_in.copy()
 		missing_values_list_parameter_impute_ETHNICITY=[]
 		data_model_impute_ETHNICITY_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_ETHNICITY_in_transformed,
@@ -45,8 +55,11 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_in_transformed=data_model_impute_in.copy()
-		missing_values_list_parameter_derivedValue_impute_mostFrequent=['4']
+		missing_values_list_parameter_derivedValue_impute_mostFrequent=[]
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
@@ -67,6 +80,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_ACADEMIC_INTEREST_2_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
 		missing_values_list_parameter_fixValue_impute_fixValue=[]
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in_transformed,
@@ -86,6 +102,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_mean_in=pd.read_csv('../data_model.csv')
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_mean_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_mean_in_transformed=data_model_impute_mean_in.copy()
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_mean_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_mean_in_transformed,
@@ -103,6 +122,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
+		if path.exists('../workflow_datasets/data_model_impute_out.csv'):
+			data_model_impute_linear_interpolation_out=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+
 		data_model_impute_linear_interpolation_in_transformed=data_model_impute_linear_interpolation_in.copy()
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_linear_interpolation_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_linear_interpolation_in_transformed,
@@ -115,18 +137,30 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_row_filter_in=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+		if path.exists('../workflow_datasets/data_model_row_filter_out.csv'):
+			data_model_row_filter_out=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
+
 		data_model_row_filter_in_transformed=data_model_row_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cont_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
+		if path.exists('../workflow_datasets/data_model_col_filter_out.csv'):
+			data_model_column_cont_filter_out=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
+
 		data_model_column_cont_filter_in_transformed=data_model_column_cont_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cat_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
+		if path.exists('../workflow_datasets/data_model_col_filter_out.csv'):
+			data_model_column_cat_filter_out=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
+
 		data_model_column_cat_filter_in_transformed=data_model_column_cat_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_territory_in=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
+		if path.exists('../workflow_datasets/data_model_map_territory_out.csv'):
+			data_model_map_territory_out=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
+
 		input_values_list_parameter_map_territory_A=['A', 'N']
 		output_values_list_parameter_map_territory_A=['0', '0']
 		data_type_input_list_parameter_map_territory_A=[DataType(0), DataType(0)]
@@ -142,6 +176,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
+		if path.exists('../workflow_datasets/data_model_map_instate_out.csv'):
+			data_model_map_Instate_out=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
+
 		input_values_list_parameter_map_instate_Y=['Y', 'N']
 		output_values_list_parameter_map_instate_Y=['1', '0']
 		data_type_input_list_parameter_map_instate_Y=[DataType(0), DataType(0)]
@@ -157,9 +194,15 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_stringToNumber_in=pd.read_csv('../workflow_datasets/data_model_map_instate_out.csv')
+		if path.exists('../workflow_datasets/data_model_stringToNumber_out.csv'):
+			data_model_stringToNumber_out=pd.read_csv('../workflow_datasets/data_model_stringToNumber_out.csv')
+
 		
 #-----------------New DataProcessing-----------------
 		data_model_impute_outlier_closest_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
+		if path.exists('../workflow_datasets/data_model_imputeOutliers_out.csv'):
+			data_model_impute_outlier_closest_out=pd.read_csv('../workflow_datasets/data_model_imputeOutliers_out.csv')
+
 		data_model_impute_outlier_closest_in_transformed=data_model_impute_outlier_closest_in.copy()
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
@@ -197,6 +240,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
+		if path.exists('../workflow_datasets/data_model_binner_out.csv'):
+			data_model_binner_out=pd.read_csv('../workflow_datasets/data_model_binner_out.csv')
+
 		data_model_binner_in_transformed=data_model_binner_in.copy()
 		print('This is a DerivedField')
 		print('This is a DerivedField')
@@ -273,6 +319,9 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
+		if path.exists('../workflow_datasets/data_model_binner_out.csv'):
+			data_model_binner_out=pd.read_csv('../workflow_datasets/data_model_binner_out.csv')
+
 		data_model_binner_in_transformed=data_model_binner_in.copy()
 		print('This is a DerivedField')
 		
