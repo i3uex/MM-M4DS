@@ -105,7 +105,7 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 
-		missing_values_PRE_value_range_impute_sex_columns=[D, 4]
+		missing_values_PRE_value_range_impute_sex_columns=[4]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=data_model_impute_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex_columns,
 										quant_op=Operator(2), quant_rel=30.0/100):
@@ -153,7 +153,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 		
-		missing_values_INV_condition_impute_sex_columns=[D, 4]
+		missing_values_INV_condition_impute_sex_columns=[4]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_in,
 									data_dictionary_out=data_model_impute_out,
 									belong_op_in=Belong(0),
@@ -421,23 +421,12 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
-		if pre_post.check_fix_value_range(value='A', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION POST_value_range_territory VALIDATED')
-		else:
-			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
-		if pre_post.check_fix_value_range(value='N', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION POST_value_range_territory VALIDATED')
-		else:
-			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
 		
+		input_values_list_INV_condition_map_categorical_col=['A', 'N']
+		output_values_list_INV_condition_map_categorical_col=['0', '0']
 		
-		input_values_list_INV_condition_map_categorical_col=['A', 'B', 'N']
-		output_values_list_INV_condition_map_categorical_col=['0', '0', '0']
-		
-		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
-		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
 		
 		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
 												data_dictionary_out=data_model_map_territory_out,
@@ -448,10 +437,21 @@ class DataProcessing:
 												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
 												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
 												field='TERRITORY'):
-			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
+			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
 		else:
-			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
+			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
 		
+		
+		if pre_post.check_fix_value_range(value='A', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION POST_value_range_territory VALIDATED')
+		else:
+			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
+		if pre_post.check_fix_value_range(value='N', data_dictionary=data_model_map_territory_out, belong_op=Belong(0), field='TERRITORY',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION POST_value_range_territory VALIDATED')
+		else:
+			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')

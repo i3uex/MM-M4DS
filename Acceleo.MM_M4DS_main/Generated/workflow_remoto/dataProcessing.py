@@ -1,6 +1,7 @@
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
+import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
 class DataProcessing:
 	def generateDataProcessing(self):
@@ -19,11 +20,10 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_sex NOT VALIDATED')
 		
 		data_model_impute_sex_in_transformed=data_model_impute_sex_in.copy()
-		
 		missing_values_list_parameter_impute_sex=[]
 		data_model_impute_sex_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_sex_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_sex,
+																	  missing_values=missing_values_list_parameter_impute_sex,
 																	  axis_param=0, field = 'sex')
 		
 		data_model_impute_sex_out=data_model_impute_sex_in_transformed
@@ -62,11 +62,10 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_IRSCHOOL NOT VALIDATED')
 		
 		data_model_impute_IRSCHOOL_in_transformed=data_model_impute_IRSCHOOL_in.copy()
-		
 		missing_values_list_parameter_impute_IRSCHOOL=[]
 		data_model_impute_IRSCHOOL_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_IRSCHOOL_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_IRSCHOOL,
+																	  missing_values=missing_values_list_parameter_impute_IRSCHOOL,
 																	  axis_param=0, field = 'IRSCHOOL')
 		
 		data_model_impute_IRSCHOOL_out=data_model_impute_IRSCHOOL_in_transformed
@@ -105,11 +104,10 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY NOT VALIDATED')
 		
 		data_model_impute_ETHNICITY_in_transformed=data_model_impute_ETHNICITY_in.copy()
-		
 		missing_values_list_parameter_impute_ETHNICITY=[]
 		data_model_impute_ETHNICITY_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_ETHNICITY_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_ETHNICITY,
+																	  missing_values=missing_values_list_parameter_impute_ETHNICITY,
 																	  axis_param=0, field = 'ETHNICITY')
 		
 		data_model_impute_ETHNICITY_out=data_model_impute_ETHNICITY_in_transformed
@@ -139,7 +137,7 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 
-		missing_values_PRE_value_range_impute_sex_columns=[D, 4]
+		missing_values_PRE_value_range_impute_sex_columns=[4]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=data_model_impute_in, field='sex', 
 										missing_values=missing_values_PRE_value_range_impute_sex_columns,
 										quant_op=Operator(2), quant_rel=30.0/100):
@@ -164,21 +162,20 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 		
 		data_model_impute_in_transformed=data_model_impute_in.copy()
-		
-		missing_values_list_parameter_derivedValue_impute_mostFrequent=['D', '4']
+		missing_values_list_parameter_derivedValue_impute_mostFrequent=['4']
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'sex')
 		missing_values_list_parameter_derivedValue_impute_mostFrequent=[]
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'IRSCHOOL')
 		missing_values_list_parameter_derivedValue_impute_mostFrequent=[]
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'ETHNICITY')
 		
 		data_model_impute_out=data_model_impute_in_transformed
@@ -208,7 +205,7 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 		
-		missing_values_INV_condition_impute_sex_columns=[D, 4]
+		missing_values_INV_condition_impute_sex_columns=[4]
 		if invariants.check_inv_special_value_derived_value(data_dictionary_in=data_model_impute_in,
 									data_dictionary_out=data_model_impute_out,
 									belong_op_in=Belong(0),
@@ -267,17 +264,16 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_ACADEMIC_INTEREST_1 NOT VALIDATED')
 		
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
-		
 		missing_values_list_parameter_fixValue_impute_fixValue=[]
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in_transformed,
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values_list=missing_values_list_parameter_fixValue_impute_fixValue,
+																	  missing_values=missing_values_list_parameter_fixValue_impute_fixValue,
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field = 'ACADEMIC_INTEREST_2')
 		missing_values_list_parameter_fixValue_impute_fixValue=[]
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in_transformed,
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values_list=missing_values_list_parameter_fixValue_impute_fixValue,
+																	  missing_values=missing_values_list_parameter_fixValue_impute_fixValue,
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field = 'ACADEMIC_INTEREST_1')
 		
@@ -350,16 +346,15 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_mean_distance NOT VALIDATED')
 		
 		data_model_impute_mean_in_transformed=data_model_impute_mean_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_mean_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_mean_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'avg_income')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_mean_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_mean_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'distance')
 		
 		data_model_impute_mean_out=data_model_impute_mean_in_transformed
@@ -419,11 +414,10 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_linear_interpolation_satscore NOT VALIDATED')
 		
 		data_model_impute_linear_interpolation_in_transformed=data_model_impute_linear_interpolation_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_linear_interpolation_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_linear_interpolation_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'satscore')
 		
 		data_model_impute_linear_interpolation_out=data_model_impute_linear_interpolation_in_transformed
@@ -459,6 +453,7 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_row_filter NOT VALIDATED')
 		
+		data_model_row_filter_in_transformed=data_model_row_filter_in.copy()
 		
 		if pre_post.check_fix_value_range(value='0', data_dictionary=data_model_row_filter_out, belong_op=Belong(1), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
@@ -478,6 +473,7 @@ class DataProcessing:
 			print('PRECONDITION PRE_field_range_column_cont_filter NOT VALIDATED')
 		
 		
+		data_model_column_cont_filter_in_transformed=data_model_column_cont_filter_in.copy()
 		
 		field_list_POST_field_range_column_cont_filter=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
 		if pre_post.check_field_range(fields=field_list_POST_field_range_column_cont_filter,
@@ -500,6 +496,7 @@ class DataProcessing:
 			print('PRECONDITION PRE_field_range_column_cat_filter NOT VALIDATED')
 		
 		
+		data_model_column_cat_filter_in_transformed=data_model_column_cat_filter_in.copy()
 		
 		field_list_POST_field_range_column_cat_filter=['CONTACT_CODE1']
 		if pre_post.check_field_range(fields=field_list_POST_field_range_column_cat_filter,
@@ -524,6 +521,27 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_value_range_territory NOT VALIDATED')
 		
+		
+		input_values_list_INV_condition_map_categorical_col=['A', 'N']
+		output_values_list_INV_condition_map_categorical_col=['0', '0']
+		
+		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
+												data_dictionary_out=data_model_map_territory_out,
+												input_values_list=input_values_list_INV_condition_map_categorical_col, 
+												output_values_list=output_values_list_INV_condition_map_categorical_col,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
+												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
+												field='TERRITORY'):
+			print('PRECONDITION INV_condition_map_categorical_col VALIDATED')
+		else:
+			print('PRECONDITION INV_condition_map_categorical_col NOT VALIDATED')
+		
+		
 		input_values_list_parameter_map_territory_A=['A', 'N']
 		output_values_list_parameter_map_territory_A=['0', '0']
 		data_type_input_list_parameter_map_territory_A=[DataType(0), DataType(0)]
@@ -547,27 +565,6 @@ class DataProcessing:
 			print('POSTCONDITION POST_value_range_territory VALIDATED')
 		else:
 			print('POSTCONDITION POST_value_range_territory NOT VALIDATED')
-		
-		
-		input_values_list_INV_condition_map_categorical_col=['A', 'B', 'N']
-		output_values_list_INV_condition_map_categorical_col=['0', '0', '0']
-		
-		data_type_input_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
-		data_type_output_list_INV_condition_map_categorical_col=[DataType(0), DataType(0), DataType(0)]
-		
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=data_model_map_territory_in,
-												data_dictionary_out=data_model_map_territory_out,
-												input_values_list=input_values_list_INV_condition_map_categorical_col, 
-												output_values_list=output_values_list_INV_condition_map_categorical_col,
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input_list=data_type_input_list_INV_condition_map_categorical_col,
-												data_type_output_list=data_type_output_list_INV_condition_map_categorical_col,
-												field='TERRITORY'):
-			print('INVARIANT INV_condition_map_categorical_col VALIDATED')
-		else:
-			print('INVARIANT INV_condition_map_categorical_col NOT VALIDATED')
-		
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_Instate_in=pd.read_csv('../workflow_datasets/data_model_map_territory_out.csv')
@@ -712,36 +709,35 @@ class DataProcessing:
 			print('PRECONDITION PRE_value_range_impute_outliers_closest_Instate NOT VALIDATED')
 		
 		data_model_impute_outlier_closest_in_transformed=data_model_impute_outlier_closest_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'avg_income')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'distance')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'premiere')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'sex')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'Enroll')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'Instate')
 		
 		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_transformed
@@ -876,6 +872,79 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_binner_valueRange_SOLICITED_CNTCTS NOT VALIDATED')
 		
+		data_model_binner_in_transformed=data_model_binner_in.copy()
+		print('This is a DerivedField')
+		print('This is a DerivedField')
+		print('This is a DerivedField')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
 		
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=data_model_binner_out,
 		                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned'):
@@ -1009,6 +1078,53 @@ class DataProcessing:
 		else:
 			print('PRECONDITION PRE_binner_valueRange_TERRITORY NOT VALIDATED')
 		
+		data_model_binner_in_transformed=data_model_binner_in.copy()
+		print('This is a DerivedField')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=Unknown,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=3.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 1,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=3.0, right_margin=5.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 2,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=5.0, right_margin=7.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 3,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=7.0, right_margin=1000.0,
+																	  closure_type=Closure(3),
+																	  fix_value_output=Zone 4,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
 		
 		if pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=data_model_binner_out,
 		                                	closure_type=Closure(0), belong_op=Belong(1), field='TERRITORY_binned'):

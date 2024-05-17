@@ -1,4 +1,5 @@
 import pandas as pd
+import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
 class DataProcessing:
 	def generateDataProcessing(self):
@@ -7,11 +8,10 @@ class DataProcessing:
 		data_model_impute_sex_in=pd.read_csv('../data_model.csv')
 
 		data_model_impute_sex_in_transformed=data_model_impute_sex_in.copy()
-		
 		missing_values_list_parameter_impute_sex=[]
 		data_model_impute_sex_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_sex_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_sex,
+																	  missing_values=missing_values_list_parameter_impute_sex,
 																	  axis_param=0, field = 'sex')
 		
 		data_model_impute_sex_out=data_model_impute_sex_in_transformed
@@ -21,11 +21,10 @@ class DataProcessing:
 		data_model_impute_IRSCHOOL_in=pd.read_csv('../data_model.csv')
 
 		data_model_impute_IRSCHOOL_in_transformed=data_model_impute_IRSCHOOL_in.copy()
-		
 		missing_values_list_parameter_impute_IRSCHOOL=[]
 		data_model_impute_IRSCHOOL_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_IRSCHOOL_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_IRSCHOOL,
+																	  missing_values=missing_values_list_parameter_impute_IRSCHOOL,
 																	  axis_param=0, field = 'IRSCHOOL')
 		
 		data_model_impute_IRSCHOOL_out=data_model_impute_IRSCHOOL_in_transformed
@@ -35,11 +34,10 @@ class DataProcessing:
 		data_model_impute_ETHNICITY_in=pd.read_csv('../data_model.csv')
 
 		data_model_impute_ETHNICITY_in_transformed=data_model_impute_ETHNICITY_in.copy()
-		
 		missing_values_list_parameter_impute_ETHNICITY=[]
 		data_model_impute_ETHNICITY_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_ETHNICITY_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_impute_ETHNICITY,
+																	  missing_values=missing_values_list_parameter_impute_ETHNICITY,
 																	  axis_param=0, field = 'ETHNICITY')
 		
 		data_model_impute_ETHNICITY_out=data_model_impute_ETHNICITY_in_transformed
@@ -48,21 +46,20 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_in=pd.read_csv('../data_model.csv')
 		data_model_impute_in_transformed=data_model_impute_in.copy()
-		
-		missing_values_list_parameter_derivedValue_impute_mostFrequent=['D', '4']
+		missing_values_list_parameter_derivedValue_impute_mostFrequent=['4']
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'sex')
 		missing_values_list_parameter_derivedValue_impute_mostFrequent=[]
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'IRSCHOOL')
 		missing_values_list_parameter_derivedValue_impute_mostFrequent=[]
 		data_model_impute_in_transformed=transformations.transform_special_value_derived_value(data_dictionary=data_model_impute_in_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values_list=missing_values_list_parameter_derivedValue_impute_mostFrequent,
+																	  missing_values=missing_values_list_parameter_derivedValue_impute_mostFrequent,
 																	  axis_param=0, field = 'ETHNICITY')
 		
 		data_model_impute_out=data_model_impute_in_transformed
@@ -71,17 +68,16 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_ACADEMIC_INTEREST_2_in=pd.read_csv('../data_model.csv')
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=data_model_impute_ACADEMIC_INTEREST_2_in.copy()
-		
 		missing_values_list_parameter_fixValue_impute_fixValue=[]
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in_transformed,
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values_list=missing_values_list_parameter_fixValue_impute_fixValue,
+																	  missing_values=missing_values_list_parameter_fixValue_impute_fixValue,
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field = 'ACADEMIC_INTEREST_2')
 		missing_values_list_parameter_fixValue_impute_fixValue=[]
 		data_model_impute_ACADEMIC_INTEREST_2_in_transformed=transformations.transform_special_value_fix_value(data_dictionary=data_model_impute_ACADEMIC_INTEREST_2_in_transformed,
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values_list=missing_values_list_parameter_fixValue_impute_fixValue,
+																	  missing_values=missing_values_list_parameter_fixValue_impute_fixValue,
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field = 'ACADEMIC_INTEREST_1')
 		
@@ -91,16 +87,15 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_mean_in=pd.read_csv('../data_model.csv')
 		data_model_impute_mean_in_transformed=data_model_impute_mean_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_mean_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_mean_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'avg_income')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_mean_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_mean_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'distance')
 		
 		data_model_impute_mean_out=data_model_impute_mean_in_transformed
@@ -109,11 +104,10 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_linear_interpolation_in=pd.read_csv('../data_model.csv')
 		data_model_impute_linear_interpolation_in_transformed=data_model_impute_linear_interpolation_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_linear_interpolation_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_linear_interpolation_in_transformed,
 																	  special_type_input=SpecialType(0), num_op_output=Operation(1),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'satscore')
 		
 		data_model_impute_linear_interpolation_out=data_model_impute_linear_interpolation_in_transformed
@@ -121,12 +115,15 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_row_filter_in=pd.read_csv('../workflow_datasets/data_model_impute_out.csv')
+		data_model_row_filter_in_transformed=data_model_row_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cont_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
+		data_model_column_cont_filter_in_transformed=data_model_column_cont_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_column_cat_filter_in=pd.read_csv('../workflow_datasets/data_model_row_filter_out.csv')
+		data_model_column_cat_filter_in_transformed=data_model_column_cat_filter_in.copy()
 		
 #-----------------New DataProcessing-----------------
 		data_model_map_territory_in=pd.read_csv('../workflow_datasets/data_model_col_filter_out.csv')
@@ -164,36 +161,35 @@ class DataProcessing:
 #-----------------New DataProcessing-----------------
 		data_model_impute_outlier_closest_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
 		data_model_impute_outlier_closest_in_transformed=data_model_impute_outlier_closest_in.copy()
-		
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'avg_income')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'distance')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'premiere')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'sex')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'Enroll')
 		missing_values_list_parameter_num_op_impute_mean=[]
 		data_model_impute_outlier_closest_in_transformed=transformations.transform_special_value_num_op(data_dictionary=data_model_impute_outlier_closest_in_transformed,
 																	  special_type_input=SpecialType(2), num_op_output=Operation(3),
-																	  missing_values_list=missing_values_list_parameter_num_op_impute_mean,
+																	  missing_values=missing_values_list_parameter_num_op_impute_mean,
 																	  axis_param=0, field = 'Instate')
 		
 		data_model_impute_outlier_closest_out=data_model_impute_outlier_closest_in_transformed
@@ -201,9 +197,129 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
+		data_model_binner_in_transformed=data_model_binner_in.copy()
+		print('This is a DerivedField')
+		print('This is a DerivedField')
+		print('This is a DerivedField')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=low,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=4.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Moderate,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TOTAL_CONTACTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SELF_INIT_CNTCTS')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=4.0, right_margin=1000.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=High,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'SOLICITED_CNTCTS')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
 		
 #-----------------New DataProcessing-----------------
 		data_model_binner_in=pd.read_csv('../workflow_datasets/data_model_stringToNumber_in.csv')
+		data_model_binner_in_transformed=data_model_binner_in.copy()
+		print('This is a DerivedField')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=-1000.0, right_margin=1.0,
+																	  closure_type=Closure(0),
+																	  fix_value_output=Unknown,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=1.0, right_margin=3.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 1,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=3.0, right_margin=5.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 2,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=5.0, right_margin=7.0,
+																	  closure_type=Closure(2),
+																	  fix_value_output=Zone 3,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
+		
+		data_model_binner_in_transformed=transformations.transform_interval_fix_value(data_dictionary=data_model_binner_in_transformed,
+																	  left_margin=7.0, right_margin=1000.0,
+																	  closure_type=Closure(3),
+																	  fix_value_output=Zone 4,
+								                                      data_type_output = DataType(2),
+																	  axis_param=0, field = 'TERRITORY')
+		data_model_binner_out=data_model_binner_in_transformed
+		data_model_binner_out.to_csv('data_model_binner_out.csv')
 		
 
 
