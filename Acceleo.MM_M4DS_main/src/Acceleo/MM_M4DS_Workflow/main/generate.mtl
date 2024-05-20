@@ -41,11 +41,6 @@ class DataProcessing:
 		[dc.name/]=pd.read_csv('[dc.path/]')
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
-			[for (dc : DataDictionary | d.outputPort)]					[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
-			[dc.name/]=pd.read_csv('[dc.path/]')
-
-			[/for]														[comment CLOSE read all the output datasets and store them/]
 		[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
 		[if (c.contract.type=ContractType::PRECONDITION)]				[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
@@ -83,11 +78,6 @@ dp.generateDataProcessing()
 		[dc.name/]=pd.read_csv('[dc.path/]')
 
 [/for]																		[comment CLOSE read all the input datasets and store them/]
-[for (dc : DataDictionary | d.outputPort)]									[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
-			[dc.name/]=pd.read_csv('[dc.path/]')
-
-[/for]																		[comment CLOSE read all the output datasets and store them/]
 [for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
@@ -133,7 +123,7 @@ class DataProcessing:
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
 			[for (dc : DataDictionary | d.outputPort)]					[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
+		if path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 			[dc.name/]=pd.read_csv('[dc.path/]')
 
 			[/for]														[comment CLOSE read all the output datasets and store them/]
@@ -174,7 +164,7 @@ dp.generateDataProcessing()
 
 [/for]																		[comment CLOSE read all the input datasets and store them/]
 [for (dc : DataDictionary | d.outputPort)]									[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
+		if path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 			[dc.name/]=pd.read_csv('[dc.path/]')
 
 [/for]																		[comment CLOSE read all the output datasets and store them/]
@@ -219,11 +209,6 @@ class DataProcessing:
 		[dc.name/]=pd.read_csv('[dc.path/]')
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
-			[for (dc : DataDictionary | d.outputPort)]					[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
-			[dc.name/]=pd.read_csv('[dc.path/]')
-
-			[/for]														[comment CLOSE read all the output datasets and store them/]
 		[generateCallTransformation(d)/]
 	[/if]																[comment CLOSE checks if the DataProcessing is isolated (no links)/]
 	[/for]																[comment CLOSE traverse all the DataProcessings/]
@@ -245,11 +230,6 @@ dp.generateDataProcessing()
 [for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 		[dc.name/]=pd.read_csv('[dc.path/]')
 [/for]																		[comment CLOSE read all the input datasets and store them/]
-[for (dc : DataDictionary | d.outputPort)]									[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):
-			[dc.name/]=pd.read_csv('[dc.path/]')
-
-[/for]																		[comment CLOSE read all the output datasets and store them/]
 		[generateCallTransformation(d)/]
 [if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
 	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
@@ -368,46 +348,50 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 		[/let]																							[comment CLOSE assigns the parameter to be an ImputeType/]
 	[/if]																								[comment CLOSE checks that the parameter is an ImputeType/]
 	[if (p.oclIsKindOf(DiscretizeBin))]																	[comment OPEN checks that the parameter is an DiscretizeBin/]
-		[let binner : DiscretizeBin = p.oclAsType(DiscretizeBin)]										[comment OPEN assigns the parameter to be an ImputeType/]
+		[let binner : DiscretizeBin = p.oclAsType(DiscretizeBin)]										[comment OPEN assigns the parameter to be a DiscretizeBin/]
 			[for (dd_out : DataDictionary | dataProcessing.outputPort)]									[comment OPEN traverse all the output DataDictionaries (in theory there is only 1)/]
 				[for (dd_in : DataDictionary | dataProcessing.inputPort)]								[comment OPEN traverse all the input DataDictionaries (in theory there is only 1)/]
 					[if dd_in.datafield->notEmpty()]													[comment OPEN checks that there is at least DataField/]
-						[for (df : DataField | dd_in.datafield)]
-							[for (interval : Interval | binner.interval)]
+						[for (df : DataField | dd_in.datafield)]										[comment OPEN traverse all the DataFields in the input DataDictionary/]
+							[for (interval : Interval | binner.interval)]								[comment OPEN traverse all the intervals in the binner/]
 
 [dd_in.name/]_transformed=transformations.transform_interval_fix_value(data_dictionary=[dd_in.name/]_transformed,
 															  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 															  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
-															  fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[binner.binValue/]'[else][binner.binValue/][/if],
-						                                      data_type_output = [if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  axis_param=0, field = '[df.displayName/]')
-							[/for]
-						[/for]
-					[else]
-						[for (interval : Interval | binner.interval)]
+															  fix_value_output=[if (df.out.dataType=DataType::String or df.out.dataType=DataType::DateTime or df.out.dataType=DataType::Time)]'[binner.binValue/]'[else][binner.binValue/][/if],
+						                                      data_type_output = [if (df.out.dataType=DataType::String)]DataType(0)[elseif (df.out.dataType=DataType::Time)]DataType(1)[elseif (df.out.dataType=DataType::Integer)]DataType(2)[elseif (df.out.dataType=DataType::DateTime)]DataType(3)[elseif (df.out.dataType=DataType::Boolean)]DataType(4)[elseif (df.out.dataType=DataType::Double)]DataType(5)[elseif (df.out.dataType=DataType::Float)]DataType(6)[else]None[/if],
+															  axis_param=0, field_in = '[df.displayName/]',
+															  field_out = '[df.out.displayName/]')
+							[/for]																		[comment CLOSE traverse all the intervals in the binner/]
+						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary/]
+					[else]																				[comment OPEN checks that there are not DataFields/]
+						[for (interval : Interval | binner.interval)]									[comment OPEN traverse all the intervals in the binner/]
 
 [dd_in.name/]_transformed=transformations.transform_interval_fix_value(data_dictionary=[dd_in.name/]_transformed,
 														  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 														  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
-														  fix_value_output='[binner.binValue/]', data_type_output = None, axis_param=0, field = None)
-						[/for]
-					[/if]
+														  fix_value_output='[binner.binValue/]', data_type_output = None, axis_param=0, field_in = None, field_out = None)
+						[/for]																			[comment CLOSE traverse all the intervals in the binner/]
+					[/if]																				[comment CLOSE checks if there are DataFields/]
 [dd_out.name/]=[dd_in.name/]_transformed
 [dd_out.name/].to_csv('[dd_out.name/].csv')
-				[/for]
-			[/for]
-		[/let]
+				[/for]																					[comment CLOSE traverse all the intervals in the binner/]
+			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary/]
+		[/let]																							[comment OPEN assigns the parameter to be an DiscretizeBin/]
 	[/if]																								[comment CLOSE checks that the parameter is an DiscretizeBin/]
 	[if (p.oclIsKindOf(DerivedField))]																	[comment OPEN checks that the parameter is a DerivedField/]
 		[let derf : DerivedField = p.oclAsType(DerivedField)]											[comment OPEN assigns the parameter to be a DerivedField/]
-print('This is a DerivedField')
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]												[comment OPEN traverse al the input DataDictionaries/]
+[dd_in.name/]_transformed=transformations.transform_derived_field(data_dictionary=[dd_in.name/]_transformed,
+															  data_type_output = [if (derf.der_dataType=DataType::String)]DataType(0)[elseif (derf.der_dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataType=DataType::Float)]DataType(6)[else]None[/if],
+															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_name/]')
+[/for]																									[comment CLOSE traverse al the input DataDictionaries/]
 		[/let]																							[comment CLOSE assigns the parameter to be a DerivedField/]
 	[/if]																								[comment CLOSE checks that the parameter is a DerivedField/]
 [/for]																									[comment CLOSE traverse all the parameters in the DataProcessing/]
 [/if]																									[comment CLOSE checks that the first parameter is not a Mapping/]
 [/if]																									[comment CLOSE checks that there are parameters in the DataProcessing/]
 [/template]
-
 
 
 
