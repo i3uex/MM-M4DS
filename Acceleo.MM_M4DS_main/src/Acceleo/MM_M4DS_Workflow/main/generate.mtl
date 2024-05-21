@@ -407,8 +407,8 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 		[let derf : DerivedField = p.oclAsType(DerivedField)]											[comment OPEN assigns the parameter to be a DerivedField/]
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]												[comment OPEN traverse al the input DataDictionaries/]
 [dd_in.name/]_transformed=transformations.transform_derived_field(data_dictionary=[dd_in.name/]_transformed,
-															  data_type_output = [if (derf.der_dataType=DataType::String)]DataType(0)[elseif (derf.der_dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_name/]')
+															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
+															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_dataField.displayName/]')
 [/for]																									[comment CLOSE traverse al the input DataDictionaries/]
 		[/let]																							[comment CLOSE assigns the parameter to be a DerivedField/]
 	[/if]																								[comment CLOSE checks that the parameter is a DerivedField/]
