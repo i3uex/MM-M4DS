@@ -23,6 +23,14 @@
 [template public generateDataProcessing(aWorkflow : Workflow)]
 [file ('dataProcessing.py', false, 'UTF-8')]
 import os
+import sys
+from pathlib import Path
+
+# Add the project's root to the python path
+script_location = Path(__file__).absolute().parent
+parent_directory = script_location.parent
+sys.path.append(str(parent_directory))
+
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
@@ -106,6 +114,14 @@ dp.generateDataProcessing()
 [template public generateContractsDataProcessing(aWorkflow : Workflow)]
 [file ('contracts.py', false, 'UTF-8')]
 import os
+import sys
+from pathlib import Path
+
+# Add the project's root to the python path
+script_location = Path(__file__).absolute().parent
+parent_directory = script_location.parent
+sys.path.append(str(parent_directory))
+
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
@@ -123,7 +139,7 @@ class DataProcessing:
 
 			[/for]														[comment CLOSE read all the input datasets and store them/]
 			[for (dc : DataDictionary | d.outputPort)]					[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
+		if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 			[dc.name/]=pd.read_csv('[dc.path/]')
 
 			[/for]														[comment CLOSE read all the output datasets and store them/]
@@ -164,7 +180,7 @@ dp.generateDataProcessing()
 
 [/for]																		[comment CLOSE read all the input datasets and store them/]
 [for (dc : DataDictionary | d.outputPort)]									[comment OPEN read all the output datasets and store them/]
-		if path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
+		if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 			[dc.name/]=pd.read_csv('[dc.path/]')
 
 [/for]																		[comment CLOSE read all the output datasets and store them/]
@@ -195,6 +211,14 @@ dp.generateDataProcessing()
 [template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
 [file ('transformations.py', false, 'UTF-8')]
 import os
+import sys
+from pathlib import Path
+
+# Add the project's root to the python path
+script_location = Path(__file__).absolute().parent
+parent_directory = script_location.parent
+sys.path.append(str(parent_directory))
+
 import pandas as pd
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
@@ -259,7 +283,7 @@ data_type_output_list_[dataProcessing.parameter->first().name/]=['['/][for (aPar
 						                                      data_type_input_list = data_type_input_list_[dataProcessing.parameter->first().name/],
 						                                      data_type_output_list = data_type_output_list_[dataProcessing.parameter->first().name/], field = '[df.displayName/]')
 
-[dd_out.name/].to_csv('[dd_out.name/].csv')
+[dd_out.name/].to_csv('[dd_out.path/]')
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 		[else]																							[comment OPEN checks that there are no DataField/]
 input_values_list_[dataProcessing.parameter->first().name/]=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.inValue/]'[/let][/if][/for][']'/]
@@ -270,7 +294,7 @@ output_values_list_[dataProcessing.parameter->first().name/]=['['/][for (aParame
 						                                      data_type_input_list = None,
 						                                      data_type_output_list = None, field = None)
 
-[dd_out.name/].to_csv('[dd_out.name/].csv')				
+[dd_out.name/].to_csv('[dd_out.path/]')				
 		[/if]																							[comment CLOSE checks that there are DataFields or not/]
 	[/for]																								[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 [/for]																									[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -316,7 +340,7 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 
 [dd_out.name/]=[dd_in.name/]_transformed
-[dd_out.name/].to_csv('[dd_out.name/].csv')
+[dd_out.name/].to_csv('[dd_out.path/]')
 [comment]The code below generates the same transformation generated above but for the whole dataframe instead of a field[/comment]
 					[else]																				[comment OPEN checks that there are no DataFields/]
 						[if (imType.oclIsKindOf(FixValue))]												[comment OPEN checks that the ImputeType is a FixValue/]
@@ -341,7 +365,7 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a NumOp/]
 			        	[/if]																			[comment CLOSE checks that the ImputeType is a NumOp/]
 
-[dd_out.name/].to_csv('[dd_out.name/].csv')
+[dd_out.name/].to_csv('[dd_out.path/]')
 					[/if]																				[comment CLOSE checks if there are DataFields or not/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 			[/for]																						[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -360,7 +384,7 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 															  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
 															  fix_value_output=[if (df.out.dataType=DataType::String or df.out.dataType=DataType::DateTime or df.out.dataType=DataType::Time)]'[binner.binValue/]'[else][binner.binValue/][/if],
 						                                      data_type_output = [if (df.out.dataType=DataType::String)]DataType(0)[elseif (df.out.dataType=DataType::Time)]DataType(1)[elseif (df.out.dataType=DataType::Integer)]DataType(2)[elseif (df.out.dataType=DataType::DateTime)]DataType(3)[elseif (df.out.dataType=DataType::Boolean)]DataType(4)[elseif (df.out.dataType=DataType::Double)]DataType(5)[elseif (df.out.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  axis_param=0, field_in = '[df.displayName/]',
+															  field_in = '[df.displayName/]',
 															  field_out = '[df.out.displayName/]')
 							[/for]																		[comment CLOSE traverse all the intervals in the binner/]
 						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary/]
@@ -370,11 +394,11 @@ missing_values_list_[p.name/]=['['/][for (mv : ValueField | df.missingValues) se
 [dd_in.name/]_transformed=transformations.transform_interval_fix_value(data_dictionary=[dd_in.name/]_transformed,
 														  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 														  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
-														  fix_value_output='[binner.binValue/]', data_type_output = None, axis_param=0, field_in = None, field_out = None)
+														  fix_value_output='[binner.binValue/]', data_type_output = None, field_in = None, field_out = None)
 						[/for]																			[comment CLOSE traverse all the intervals in the binner/]
 					[/if]																				[comment CLOSE checks if there are DataFields/]
 [dd_out.name/]=[dd_in.name/]_transformed
-[dd_out.name/].to_csv('[dd_out.name/].csv')
+[dd_out.name/].to_csv('[dd_out.path/]')
 				[/for]																					[comment CLOSE traverse all the intervals in the binner/]
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary/]
 		[/let]																							[comment OPEN assigns the parameter to be an DiscretizeBin/]

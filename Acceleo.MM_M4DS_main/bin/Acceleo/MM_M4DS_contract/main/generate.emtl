@@ -10,7 +10,7 @@
     <input>
       <takesTypesFrom href="https://www.example.org/workflow#/"/>
     </input>
-    <imports href="../../MM_M4DS_Workflow/main/generate.emtl#/0"/>
+    <imports href="platform:/resource/Acceleo.MM_M4DS_main/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateContract" visibility="Public">
       <parameter name="aContract">
         <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//Contract"/>
