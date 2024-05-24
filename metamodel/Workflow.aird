@@ -7,7 +7,7 @@
     <semanticResources>Contract.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_w8j1EHowEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1716316307494">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1716563569695">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Workflow.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -130,9 +130,9 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_4CXDAX8mEe67Z-Y0pklHtA" fontName="Segoe UI" fontHeight="8"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_4CXDAn8mEe67Z-Y0pklHtA"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_4CXDA38mEe67Z-Y0pklHtA" type="3010" element="_4CUmyn8mEe67Z-Y0pklHtA">
-              <styles xmi:type="notation:FontStyle" xmi:id="_4CXDBH8mEe67Z-Y0pklHtA" fontName="Segoe UI" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_4CXDBX8mEe67Z-Y0pklHtA"/>
+            <children xmi:type="notation:Node" xmi:id="_aR-HEBnfEe-D5Iahp-fDFA" type="3010" element="_aRrMIRnfEe-D5Iahp-fDFA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_aR-HERnfEe-D5Iahp-fDFA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_aR-uIBnfEe-D5Iahp-fDFA"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_4CXDBn8mEe67Z-Y0pklHtA" type="3010" element="_4CUmzH8mEe67Z-Y0pklHtA">
               <styles xmi:type="notation:FontStyle" xmi:id="_4CXDB38mEe67Z-Y0pklHtA" fontName="Segoe UI" fontHeight="8"/>
@@ -1500,10 +1500,10 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_4CUmyn8mEe67Z-Y0pklHtA" name="rows : EInt" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Workflow.ecore#//DataDictionary/rows"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Workflow.ecore#//DataDictionary/rows"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_4CUmy38mEe67Z-Y0pklHtA" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aRrMIRnfEe-D5Iahp-fDFA" name="columnDelimiter : EString = ," tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="Workflow.ecore#//DataDictionary/columnDelimiter"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="Workflow.ecore#//DataDictionary/columnDelimiter"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_aRrMIhnfEe-D5Iahp-fDFA" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
