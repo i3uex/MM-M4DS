@@ -34,6 +34,7 @@
         eType="#//DataProcessing" eOpposite="#//DataProcessing/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//DataProcessing" eOpposite="#//DataProcessing/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -50,8 +51,6 @@
         eType="ecore:EClass Library.ecore#//PrimitiveDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedField" eSuperTypes="#//Parameter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="der_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="der_dataType" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivedFieldDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//DerivedFieldDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="der_dataField" lowerBound="1"
@@ -89,7 +88,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataDictionaryDefinition"
         lowerBound="1" eType="ecore:EClass Library.ecore#//DataDictionaryDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rows" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=","/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataField" abstract="true" eSuperTypes="#//Argument">
@@ -150,6 +150,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImputeType" abstract="true" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imputeValue" eType="#//ImputeValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastType" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="castTypeDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//CastTypeDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValue" eSuperTypes="#//ImputeType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DerivedType"/>
