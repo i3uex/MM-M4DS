@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'https://www.example.org/library')]
+[module generate('https://www.example.org/workflow', 'https://www.example.org/contract')]
 
 [import Acceleo::MM_M4DS_contract::main::generate/]
 
@@ -82,10 +82,13 @@ dp.generateDataProcessing()
 
 [template public callRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
-[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+[if (d.incoming <> null)]
+		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[else]
+	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-
-[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[/for]																	[comment CLOSE read all the input datasets and store them/]
+[/if]
 [for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 		[generateCallContract(c.contract)/]
@@ -175,10 +178,13 @@ dp.generateDataProcessing()
 
 [template public callContractsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
-[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+[if (d.incoming <> null)]
+		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[else]
+	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-
-[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[/for]																	[comment CLOSE read all the input datasets and store them/]
+[/if]
 [for (dc : DataDictionary | d.outputPort)]									[comment OPEN read all the output datasets and store them/]
 		if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 			[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -251,9 +257,13 @@ dp.generateDataProcessing()
 
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
-[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+[if (d.incoming <> null)]
+		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[else]
+	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[/for]																	[comment CLOSE read all the input datasets and store them/]
+[/if]
 		[generateCallTransformation(d)/]
 [if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
 	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
@@ -304,7 +314,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [if (dataProcessing.dataProcessingDefinition.name<>'mapping')]											[comment OPEN checks that the first parameter is not a Mapping/]
 print('NO ES MAPPING')
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_dictionary.copy()
+[dd_in.dataDictionaryDefinition.name/]_transformed=[dd_in.dataDictionaryDefinition.name/].copy()
 [/for]
 [for (p : Parameter | dataProcessing.parameter)]														[comment OPEN traverse all the parameters in the DataProcessing/]
 
@@ -452,10 +462,10 @@ print('CategoricalToContinuous')
 		[let cast : CastType = p.oclAsType(CastType)]
 			[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]
-					[for (df : DataField | dd_out.datafield)]
+					[for (df : DataField | dd_in.datafield)]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_cast_type(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
-																field_in=[df._in.name/], field_out=[df.name/])
+																field_in=[df.name/])
 
 					[/for]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed

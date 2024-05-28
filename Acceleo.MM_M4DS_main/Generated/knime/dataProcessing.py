@@ -19,7 +19,6 @@ class DataProcessing:
 		transformations=data_transformations.DataTransformations()
 #-----------------New DataProcessing-----------------
 		imputeByDerivedValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
 		missing_values_imputeMissingByMostFrequent(sex)_PRE_value_range=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByDerivedValue_input_dataDictionary, field='sex', 
 										missing_values=missing_values_imputeMissingByMostFrequent(sex)_PRE_value_range,
@@ -45,7 +44,7 @@ class DataProcessing:
 			print('PRECONDITION imputeMissingByMostFrequent(ETHNICITY)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		imputeByDerivedValue_input_dataDictionary_transformed=data_dictionary.copy()
+		imputeByDerivedValue_input_dataDictionary_transformed=imputeByDerivedValue_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
@@ -72,7 +71,7 @@ class DataProcessing:
 																	  axis_param=0, field = 'ETHNICITY')
 		
 		imputeByDerivedValue_output_dataDictionary=imputeByDerivedValue_input_dataDictionary_transformed
-		imputeByDerivedValue_output_dataDictionary.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')
+		imputeByDerivedValue_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv')
 		
 		missing_values_POST_value_range_impute_sex_columns=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeByDerivedValue_output_dataDictionary, field='sex', 
@@ -138,8 +137,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByFixValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
+		imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_2', 
 										missing_values=missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange,
@@ -157,7 +155,7 @@ class DataProcessing:
 			print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		imputeByFixValue_input_dataDictionary_transformed=data_dictionary.copy()
+		imputeByFixValue_input_dataDictionary_transformed=imputeByFixValue_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
@@ -178,7 +176,7 @@ class DataProcessing:
 																	  axis_param=0, field = 'ACADEMIC_INTEREST_1')
 		
 		imputeByFixValue_output_dataDictionary=imputeByFixValue_input_dataDictionary_transformed
-		imputeByFixValue_output_dataDictionary.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')
+		imputeByFixValue_output_dataDictionary.to_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv')
 		
 		missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_POST_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeByFixValue_output_dataDictionary, field='ACADEMIC_INTEREST_2', 
@@ -227,8 +225,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
+		imputeByFixValue_output_dataDictionary=pd.read_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByMean(avg_income)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
 										missing_values=missing_values_imputeMissingByMean(avg_income)_PRE_valueRange,
@@ -246,14 +243,14 @@ class DataProcessing:
 			print('PRECONDITION imputeMissingByMean(distance)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		imputeByNumericOp_input_dataDictionary_transformed=data_dictionary.copy()
+		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
 		missing_values_list=[]
 		
 		imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
-		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')
+		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv')
 		
 		missing_values_imputeMissingByMean(avg_income)_POST_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeByNumericOp_output_dataDictionary, field='avg_income', 
@@ -298,8 +295,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByLinearInterpolation(satscore)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='satscore', 
 										missing_values=missing_values_imputeMissingByLinearInterpolation(satscore)_PRE_valueRange,
@@ -309,12 +305,12 @@ class DataProcessing:
 			print('PRECONDITION imputeMissingByLinearInterpolation(satscore)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		imputeByNumericOp_input_dataDictionary_transformed=data_dictionary.copy()
+		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
 		imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
-		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')
+		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv')
 		
 		missing_values_imputeMissingByLinearInterpolation(satscore)_POST_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeByNumericOp_output_dataDictionary, field='satscore', 
@@ -338,8 +334,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		rowFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value=0, data_dictionary=rowFilter_input_DataDictionary, belong_op=Belong(0), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION rowFilter(init_span)_PRE_valueRange VALIDATED')
@@ -347,7 +342,7 @@ class DataProcessing:
 			print('PRECONDITION rowFilter(init_span)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		rowFilter_input_DataDictionary_transformed=data_dictionary.copy()
+		rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 		
 		
 		
@@ -358,8 +353,7 @@ class DataProcessing:
 			print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
-		columnFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
-
+		rowFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
 		field_list_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRE_fieldRange=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
 		if pre_post.check_field_range(fields=field_list_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRE_fieldRange,
 									data_dictionary=columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField,
@@ -370,7 +364,7 @@ class DataProcessing:
 		
 		
 		print('NO ES MAPPING')
-		columnFilter_input_DataDictionary_transformed=data_dictionary.copy()
+		columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
 		
 		
 		field_list_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_POST_fieldRange=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
@@ -383,8 +377,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
-
+		columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value='A', data_dictionary=mapping_input_dataDictionary, belong_op=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
@@ -395,27 +388,6 @@ class DataProcessing:
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
 		else:
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange NOT VALIDATED')
-		
-		
-		input_values_list_Mapping(TERRITORY)_INV_condition=['A', 'N']
-		output_values_list_Mapping(TERRITORY)_INV_condition=['0', '0']
-		
-		data_type_input_list_Mapping(TERRITORY)_INV_condition=[DataType(0), DataType(0)]
-		data_type_output_list_Mapping(TERRITORY)_INV_condition=[DataType(0), DataType(0)]
-		
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
-												data_dictionary_out=mapping_output_dataDictionary,
-												input_values_list=input_values_list_Mapping(TERRITORY)_INV_condition, 
-												output_values_list=output_values_list_Mapping(TERRITORY)_INV_condition,
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input_list=data_type_input_list_Mapping(TERRITORY)_INV_condition,
-												data_type_output_list=data_type_output_list_Mapping(TERRITORY)_INV_condition,
-												field='TERRITORY'):
-			print('PRECONDITION Mapping(TERRITORY)_INV_condition VALIDATED')
-		else:
-			print('PRECONDITION Mapping(TERRITORY)_INV_condition NOT VALIDATED')
-		
 		
 		print('MAPPING')
 		input_values_list=['A', 'N']
@@ -442,9 +414,29 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
 		
+		
+		input_values_list_Mapping(TERRITORY)_INV_condition=['A', 'N']
+		output_values_list_Mapping(TERRITORY)_INV_condition=['0', '0']
+		
+		data_type_input_list_Mapping(TERRITORY)_INV_condition=[DataType(0), DataType(0)]
+		data_type_output_list_Mapping(TERRITORY)_INV_condition=[DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
+												data_dictionary_out=mapping_output_dataDictionary,
+												input_values_list=input_values_list_Mapping(TERRITORY)_INV_condition, 
+												output_values_list=output_values_list_Mapping(TERRITORY)_INV_condition,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_Mapping(TERRITORY)_INV_condition,
+												data_type_output_list=data_type_output_list_Mapping(TERRITORY)_INV_condition,
+												field='TERRITORY'):
+			print('INVARIANT Mapping(TERRITORY)_INV_condition VALIDATED')
+		else:
+			print('INVARIANT Mapping(TERRITORY)_INV_condition NOT VALIDATED')
+		
+		
 #-----------------New DataProcessing-----------------
-		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-
+		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_input_dataDictionary, belong_op=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION mapping(Instate)_PRE_valueRange VALIDATED')
@@ -455,27 +447,6 @@ class DataProcessing:
 			print('PRECONDITION mapping(Instate)_PRE_valueRange VALIDATED')
 		else:
 			print('PRECONDITION mapping(Instate)_PRE_valueRange NOT VALIDATED')
-		
-		
-		input_values_list_mapping(Instate)_INV_condition=['Y', 'N']
-		output_values_list_mapping(Instate)_INV_condition=['1', '0']
-		
-		data_type_input_list_mapping(Instate)_INV_condition=[DataType(0), DataType(0)]
-		data_type_output_list_mapping(Instate)_INV_condition=[DataType(0), DataType(0)]
-		
-		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
-												data_dictionary_out=mapping_output_dataDictionary,
-												input_values_list=input_values_list_mapping(Instate)_INV_condition, 
-												output_values_list=output_values_list_mapping(Instate)_INV_condition,
-												belong_op_in=Belong(0),
-												belong_op_out=Belong(0),
-												data_type_input_list=data_type_input_list_mapping(Instate)_INV_condition,
-												data_type_output_list=data_type_output_list_mapping(Instate)_INV_condition,
-												field='Instate'):
-			print('PRECONDITION mapping(Instate)_INV_condition VALIDATED')
-		else:
-			print('PRECONDITION mapping(Instate)_INV_condition NOT VALIDATED')
-		
 		
 		print('MAPPING')
 		input_values_list=['Y', 'N']
@@ -502,20 +473,40 @@ class DataProcessing:
 		else:
 			print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
 		
+		
+		input_values_list_mapping(Instate)_INV_condition=['Y', 'N']
+		output_values_list_mapping(Instate)_INV_condition=['1', '0']
+		
+		data_type_input_list_mapping(Instate)_INV_condition=[DataType(0), DataType(0)]
+		data_type_output_list_mapping(Instate)_INV_condition=[DataType(0), DataType(0)]
+		
+		if invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
+												data_dictionary_out=mapping_output_dataDictionary,
+												input_values_list=input_values_list_mapping(Instate)_INV_condition, 
+												output_values_list=output_values_list_mapping(Instate)_INV_condition,
+												belong_op_in=Belong(0),
+												belong_op_out=Belong(0),
+												data_type_input_list=data_type_input_list_mapping(Instate)_INV_condition,
+												data_type_output_list=data_type_output_list_mapping(Instate)_INV_condition,
+												field='Instate'):
+			print('INVARIANT mapping(Instate)_INV_condition VALIDATED')
+		else:
+			print('INVARIANT mapping(Instate)_INV_condition NOT VALIDATED')
+		
+		
 #-----------------New DataProcessing-----------------
-		categoricalToContinuous_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
-
+		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
 		print('NO ES MAPPING')
-		categoricalToContinuous_input_dataDictionary_transformed=data_dictionary.copy()
+		categoricalToContinuous_input_dataDictionary_transformed=categoricalToContinuous_input_dataDictionary.copy()
 		
 		print('CategoricalToContinuous')
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(TERRITORY)_input_dataField, field_out=stringToNumber(TERRITORY)_output_dataField)
+																		field_in=stringToNumber(TERRITORY)_input_dataField)
 		
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(Instate)_input_dataField, field_out=stringToNumber(Instate)_output_dataField)
+																		field_in=stringToNumber(Instate)_input_dataField)
 		
 		categoricalToContinuous_output_dataDictionary=categoricalToContinuous_input_dataDictionary_transformed
 		categoricalToContinuous_output_dataDictionary.to_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv')
@@ -537,8 +528,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
-
+		categoricalToContinuous_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_outliers(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION imputeOutlierByClosest(avg_income)_PRE_valueRange VALIDATED')
@@ -558,7 +548,7 @@ class DataProcessing:
 			print('PRECONDITION imputeOutlierByClosest(Instate)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		imputeByNumericOp_input_dataDictionary_transformed=data_dictionary.copy()
+		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
@@ -624,8 +614,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS'):
 			print('PRECONDITION binner(TOTAL_CONTACTS)_PRE_valueRange VALIDATED')
@@ -645,7 +634,7 @@ class DataProcessing:
 			print('PRECONDITION binner(SOLICITED_CNTCTS)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		binner_input_dataDictionary_transformed=data_dictionary.copy()
+		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
 		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -879,8 +868,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY'):
 			print('PRECONDITION binner(TERRITORY)_PRE_valueRange VALIDATED')
@@ -888,7 +876,7 @@ class DataProcessing:
 			print('PRECONDITION binner(TERRITORY)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		binner_input_dataDictionary_transformed=data_dictionary.copy()
+		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
 		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -1022,8 +1010,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
 			print('PRECONDITION binner(satscore)_PRE_valueRange VALIDATED')
@@ -1031,7 +1018,7 @@ class DataProcessing:
 			print('PRECONDITION binner(satscore)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		binner_input_dataDictionary_transformed=data_dictionary.copy()
+		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
 		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -1142,8 +1129,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='avg_income'):
 			print('PRECONDITION binner(avg_income)_PRE_valueRange VALIDATED')
@@ -1151,7 +1137,7 @@ class DataProcessing:
 			print('PRECONDITION binner(avg_income)_PRE_valueRange NOT VALIDATED')
 		
 		print('NO ES MAPPING')
-		binner_input_dataDictionary_transformed=data_dictionary.copy()
+		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
 		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,

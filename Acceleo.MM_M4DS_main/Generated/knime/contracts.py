@@ -17,9 +17,8 @@ class DataProcessing:
 		invariants=contract_invariants.Invariants()
 #-----------------New DataProcessing-----------------
 		imputeByDerivedValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
-		if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
-			imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
+		if os.path.exists('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
+			imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
 
 		missing_values_imputeMissingByMostFrequent(sex)_PRE_value_range=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByDerivedValue_input_dataDictionary, field='sex', 
@@ -109,10 +108,9 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByFixValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-		if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
-			imputeByFixValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
+		imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
+		if os.path.exists('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
+			imputeByFixValue_output_dataDictionary=pd.read_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
 
 		missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_2', 
@@ -177,10 +175,9 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-		if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
-			imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
+		imputeByFixValue_output_dataDictionary=pd.read_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
+		if os.path.exists('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
+			imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
 
 		missing_values_imputeMissingByMean(avg_income)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
@@ -241,10 +238,9 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-		if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
-			imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
+		if os.path.exists('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
+			imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
 
 		missing_values_imputeMissingByLinearInterpolation(satscore)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='satscore', 
@@ -276,8 +272,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		rowFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			rowFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
 
@@ -294,8 +289,7 @@ class DataProcessing:
 			print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
-		columnFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
-
+		rowFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
 
@@ -318,8 +312,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
-
+		columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 
@@ -333,6 +326,17 @@ class DataProcessing:
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
 		else:
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange NOT VALIDATED')
+		
+		if pre_post.check_fix_value_range(value='A', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
+		else:
+			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
+		if pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
+		else:
+			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
 		
 		
 		input_values_list_Mapping(TERRITORY)_INV_condition=['A', 'N']
@@ -350,25 +354,13 @@ class DataProcessing:
 												data_type_input_list=data_type_input_list_Mapping(TERRITORY)_INV_condition,
 												data_type_output_list=data_type_output_list_Mapping(TERRITORY)_INV_condition,
 												field='TERRITORY'):
-			print('PRECONDITION Mapping(TERRITORY)_INV_condition VALIDATED')
+			print('INVARIANT Mapping(TERRITORY)_INV_condition VALIDATED')
 		else:
-			print('PRECONDITION Mapping(TERRITORY)_INV_condition NOT VALIDATED')
+			print('INVARIANT Mapping(TERRITORY)_INV_condition NOT VALIDATED')
 		
-		
-		if pre_post.check_fix_value_range(value='A', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
-		else:
-			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
-		if pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
-		else:
-			print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
-		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-
+		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
 
@@ -382,6 +374,17 @@ class DataProcessing:
 			print('PRECONDITION mapping(Instate)_PRE_valueRange VALIDATED')
 		else:
 			print('PRECONDITION mapping(Instate)_PRE_valueRange NOT VALIDATED')
+		
+		if pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
+		else:
+			print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
+		if pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
+										quant_abs=None, quant_rel=None, quant_op=None):
+			print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
+		else:
+			print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
 		
 		
 		input_values_list_mapping(Instate)_INV_condition=['Y', 'N']
@@ -399,25 +402,13 @@ class DataProcessing:
 												data_type_input_list=data_type_input_list_mapping(Instate)_INV_condition,
 												data_type_output_list=data_type_output_list_mapping(Instate)_INV_condition,
 												field='Instate'):
-			print('PRECONDITION mapping(Instate)_INV_condition VALIDATED')
+			print('INVARIANT mapping(Instate)_INV_condition VALIDATED')
 		else:
-			print('PRECONDITION mapping(Instate)_INV_condition NOT VALIDATED')
+			print('INVARIANT mapping(Instate)_INV_condition NOT VALIDATED')
 		
-		
-		if pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
-		else:
-			print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
-		if pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
-										quant_abs=None, quant_rel=None, quant_op=None):
-			print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
-		else:
-			print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
-		categoricalToContinuous_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
-
+		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			categoricalToContinuous_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
 
@@ -438,8 +429,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
-
+		categoricalToContinuous_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
 
@@ -516,8 +506,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 
@@ -663,8 +652,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 
@@ -738,8 +726,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 
@@ -802,8 +789,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
+		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 
