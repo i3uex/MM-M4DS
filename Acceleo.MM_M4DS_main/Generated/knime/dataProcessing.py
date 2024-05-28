@@ -1,12 +1,3 @@
-import os
-import sys
-from pathlib import Path
-
-# Add the project's root to the python path
-script_location = Path(__file__).absolute().parent
-parent_directory = script_location.parent
-sys.path.append(str(parent_directory))
-
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
@@ -52,7 +43,7 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'sex')
+																	  axis_param=0, field_in = 'sex', field_out = 'sex')
 		
 		missing_values_list=[]
 		
@@ -60,7 +51,7 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'IRSCHOOL')
+																	  axis_param=0, field_in = 'IRSCHOOL', field_out = 'IRSCHOOL')
 		
 		missing_values_list=[]
 		
@@ -68,7 +59,7 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'ETHNICITY')
+																	  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 		
 		imputeByDerivedValue_output_dataDictionary=imputeByDerivedValue_input_dataDictionary_transformed
 		imputeByDerivedValue_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv')
@@ -137,7 +128,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
+		imputeByFixValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_2', 
 										missing_values=missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange,
@@ -164,7 +155,7 @@ class DataProcessing:
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,
 								                                      data_type_output = DataType(0),
-																	  axis_param=0, field = 'ACADEMIC_INTEREST_2')
+																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_2', field_out = 'ACADEMIC_INTEREST_2')
 		
 		missing_values_list=[]
 		
@@ -173,10 +164,10 @@ class DataProcessing:
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,
 								                                      data_type_output = DataType(0),
-																	  axis_param=0, field = 'ACADEMIC_INTEREST_1')
+																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
 		
 		imputeByFixValue_output_dataDictionary=imputeByFixValue_input_dataDictionary_transformed
-		imputeByFixValue_output_dataDictionary.to_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv')
+		imputeByFixValue_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv')
 		
 		missing_values_imputeMissingByFixValue(ACADEMIC_INTEREST_2)_POST_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeByFixValue_output_dataDictionary, field='ACADEMIC_INTEREST_2', 
@@ -225,7 +216,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByFixValue_output_dataDictionary=pd.read_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByMean(avg_income)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
 										missing_values=missing_values_imputeMissingByMean(avg_income)_PRE_valueRange,
@@ -295,7 +286,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
 		missing_values_imputeMissingByLinearInterpolation(satscore)_PRE_valueRange=[]
 		if pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='satscore', 
 										missing_values=missing_values_imputeMissingByLinearInterpolation(satscore)_PRE_valueRange,
@@ -334,7 +325,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
+		rowFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value=0, data_dictionary=rowFilter_input_DataDictionary, belong_op=Belong(0), field='init_span',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION rowFilter(init_span)_PRE_valueRange VALIDATED')
@@ -353,7 +344,7 @@ class DataProcessing:
 			print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 		
 #-----------------New DataProcessing-----------------
-		rowFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
+		columnFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
 		field_list_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRE_fieldRange=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
 		if pre_post.check_field_range(fields=field_list_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRE_fieldRange,
 									data_dictionary=columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField,
@@ -377,7 +368,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
+		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value='A', data_dictionary=mapping_input_dataDictionary, belong_op=Belong(0), field='TERRITORY',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
@@ -399,7 +390,7 @@ class DataProcessing:
 		mapping_output_dataDictionary=transformations.transform_fix_value_fix_value(data_dictionary=mapping_input_dataDictionary, input_values_list=input_values_list,
 																	  output_values_list=output_values_list,
 								                                      data_type_input_list = data_type_input_list,
-								                                      data_type_output_list = data_type_output_list, field = 'TERRITORY')
+								                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
 		
 		mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')
 		
@@ -436,7 +427,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
+		mapping_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_input_dataDictionary, belong_op=Belong(0), field='Instate',
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION mapping(Instate)_PRE_valueRange VALIDATED')
@@ -458,7 +449,7 @@ class DataProcessing:
 		mapping_output_dataDictionary=transformations.transform_fix_value_fix_value(data_dictionary=mapping_input_dataDictionary, input_values_list=input_values_list,
 																	  output_values_list=output_values_list,
 								                                      data_type_input_list = data_type_input_list,
-								                                      data_type_output_list = data_type_output_list, field = 'Instate')
+								                                      data_type_output_list = data_type_output_list, field_in = 'Instate', field_out = 'Instate')
 		
 		mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')
 		
@@ -495,18 +486,18 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
+		categoricalToContinuous_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
 		print('NO ES MAPPING')
 		categoricalToContinuous_input_dataDictionary_transformed=categoricalToContinuous_input_dataDictionary.copy()
 		
 		print('CategoricalToContinuous')
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(TERRITORY)_input_dataField)
+																		field='TERRITORY')
 		
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(Instate)_input_dataField)
+																		field='Instate')
 		
 		categoricalToContinuous_output_dataDictionary=categoricalToContinuous_input_dataDictionary_transformed
 		categoricalToContinuous_output_dataDictionary.to_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv')
@@ -528,7 +519,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		categoricalToContinuous_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_outliers(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
 										quant_abs=None, quant_rel=None, quant_op=None):
 			print('PRECONDITION imputeOutlierByClosest(avg_income)_PRE_valueRange VALIDATED')
@@ -614,7 +605,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS'):
 			print('PRECONDITION binner(TOTAL_CONTACTS)_PRE_valueRange VALIDATED')
@@ -868,7 +859,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY'):
 			print('PRECONDITION binner(TERRITORY)_PRE_valueRange VALIDATED')
@@ -1010,7 +1001,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
 			print('PRECONDITION binner(satscore)_PRE_valueRange VALIDATED')
@@ -1129,7 +1120,7 @@ class DataProcessing:
 		
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
 		if pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_input_dataDictionary,
 		                                	closure_type=Closure(3), belong_op=Belong(0), field='avg_income'):
 			print('PRECONDITION binner(avg_income)_PRE_valueRange VALIDATED')

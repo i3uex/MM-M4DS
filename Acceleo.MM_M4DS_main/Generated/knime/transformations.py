@@ -1,12 +1,3 @@
-import os
-import sys
-from pathlib import Path
-
-# Add the project's root to the python path
-script_location = Path(__file__).absolute().parent
-parent_directory = script_location.parent
-sys.path.append(str(parent_directory))
-
 import pandas as pd
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
@@ -24,7 +15,7 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'sex')
+																	  axis_param=0, field_in = 'sex', field_out = 'sex')
 		
 		missing_values_list=[]
 		
@@ -32,7 +23,7 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'IRSCHOOL')
+																	  axis_param=0, field_in = 'IRSCHOOL', field_out = 'IRSCHOOL')
 		
 		missing_values_list=[]
 		
@@ -40,13 +31,13 @@ class DataProcessing:
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
 																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,
-																	  axis_param=0, field = 'ETHNICITY')
+																	  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 		
 		imputeByDerivedValue_output_dataDictionary=imputeByDerivedValue_input_dataDictionary_transformed
 		imputeByDerivedValue_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		imputeByDerivedValue_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv', sep = ',')
+		imputeByFixValue_input_dataDictionary=imputeByDerivedValue_output_dataDictionary
 		print('NO ES MAPPING')
 		imputeByFixValue_input_dataDictionary_transformed=imputeByFixValue_input_dataDictionary.copy()
 		
@@ -57,7 +48,7 @@ class DataProcessing:
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,
 								                                      data_type_output = DataType(0),
-																	  axis_param=0, field = 'ACADEMIC_INTEREST_2')
+																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_2', field_out = 'ACADEMIC_INTEREST_2')
 		
 		missing_values_list=[]
 		
@@ -66,13 +57,13 @@ class DataProcessing:
 																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,
 								                                      data_type_output = DataType(0),
-																	  axis_param=0, field = 'ACADEMIC_INTEREST_1')
+																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
 		
 		imputeByFixValue_output_dataDictionary=imputeByFixValue_input_dataDictionary_transformed
-		imputeByFixValue_output_dataDictionary.to_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv')
+		imputeByFixValue_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		imputeByFixValue_output_dataDictionary=pd.read_csv('imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=imputeByFixValue_output_dataDictionary
 		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
@@ -84,7 +75,7 @@ class DataProcessing:
 		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=imputeByNumericOp_output_dataDictionary
 		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
@@ -94,20 +85,20 @@ class DataProcessing:
 		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep = ',')
+		rowFilter_input_DataDictionary=imputeByNumericOp_output_dataDictionary
 		print('NO ES MAPPING')
 		rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 		
 		
 		
 #-----------------New DataProcessing-----------------
-		rowFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
+		columnFilter_input_DataDictionary=rowFilter_output_DataDictionary
 		print('NO ES MAPPING')
 		columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
 		
 		
 #-----------------New DataProcessing-----------------
-		columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
+		mapping_input_dataDictionary=columnFilter_output_DataDictionary
 		print('MAPPING')
 		input_values_list=['A', 'N']
 		output_values_list=['0', '0']
@@ -118,12 +109,12 @@ class DataProcessing:
 		mapping_output_dataDictionary=transformations.transform_fix_value_fix_value(data_dictionary=mapping_input_dataDictionary, input_values_list=input_values_list,
 																	  output_values_list=output_values_list,
 								                                      data_type_input_list = data_type_input_list,
-								                                      data_type_output_list = data_type_output_list, field = 'TERRITORY')
+								                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
 		
 		mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
+		mapping_input_dataDictionary=mapping_output_dataDictionary
 		print('MAPPING')
 		input_values_list=['Y', 'N']
 		output_values_list=['1', '0']
@@ -134,29 +125,29 @@ class DataProcessing:
 		mapping_output_dataDictionary=transformations.transform_fix_value_fix_value(data_dictionary=mapping_input_dataDictionary, input_values_list=input_values_list,
 																	  output_values_list=output_values_list,
 								                                      data_type_input_list = data_type_input_list,
-								                                      data_type_output_list = data_type_output_list, field = 'Instate')
+								                                      data_type_output_list = data_type_output_list, field_in = 'Instate', field_out = 'Instate')
 		
 		mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		mapping_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
+		categoricalToContinuous_input_dataDictionary=mapping_output_dataDictionary
 		print('NO ES MAPPING')
 		categoricalToContinuous_input_dataDictionary_transformed=categoricalToContinuous_input_dataDictionary.copy()
 		
 		print('CategoricalToContinuous')
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(TERRITORY)_input_dataField)
+																		field='TERRITORY')
 		
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
-																		field_in=stringToNumber(Instate)_input_dataField)
+																		field='Instate')
 		
 		categoricalToContinuous_output_dataDictionary=categoricalToContinuous_input_dataDictionary_transformed
 		categoricalToContinuous_output_dataDictionary.to_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		categoricalToContinuous_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
+		imputeByNumericOp_input_dataDictionary=categoricalToContinuous_output_dataDictionary
 		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
@@ -170,7 +161,7 @@ class DataProcessing:
 		imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		imputeByNumericOp_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=imputeByNumericOp_output_dataDictionary
 		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
@@ -283,7 +274,7 @@ class DataProcessing:
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=binner_output_dataDictionary
 		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
@@ -356,7 +347,7 @@ class DataProcessing:
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=binner_output_dataDictionary
 		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
@@ -417,7 +408,7 @@ class DataProcessing:
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
-		binner_output_dataDictionary=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
+		binner_input_dataDictionary=binner_output_dataDictionary
 		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		

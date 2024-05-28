@@ -22,15 +22,6 @@
 
 [template public generateDataProcessing(aWorkflow : Workflow)]
 [file ('dataProcessing.py', false, 'UTF-8')]
-import os
-import sys
-from pathlib import Path
-
-# Add the project's root to the python path
-script_location = Path(__file__).absolute().parent
-parent_directory = script_location.parent
-sys.path.append(str(parent_directory))
-
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
@@ -83,7 +74,9 @@ dp.generateDataProcessing()
 [template public callRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
-		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[/for]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -117,13 +110,6 @@ dp.generateDataProcessing()
 [template public generateContractsDataProcessing(aWorkflow : Workflow)]
 [file ('contracts.py', false, 'UTF-8')]
 import os
-import sys
-from pathlib import Path
-
-# Add the project's root to the python path
-script_location = Path(__file__).absolute().parent
-parent_directory = script_location.parent
-sys.path.append(str(parent_directory))
 
 import pandas as pd
 import functions.contract_invariants as contract_invariants
@@ -179,7 +165,9 @@ dp.generateDataProcessing()
 [template public callContractsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
-		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[/for]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -216,15 +204,6 @@ dp.generateDataProcessing()
 
 [template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
 [file ('transformations.py', false, 'UTF-8')]
-import os
-import sys
-from pathlib import Path
-
-# Add the project's root to the python path
-script_location = Path(__file__).absolute().parent
-parent_directory = script_location.parent
-sys.path.append(str(parent_directory))
-
 import pandas as pd
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
@@ -258,7 +237,10 @@ dp.generateDataProcessing()
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
-		[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')
+[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+		[dc.dataDictionaryDefinition.name/]=[d.incoming.source.outputPort->first().dataDictionaryDefinition.name/]
+[comment][dc.dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep = '[d.incoming.source.outputPort->first().columnDelimiter/]')[/comment]
+[/for]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -292,7 +274,7 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/], input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = data_type_input_list,
-						                                      data_type_output_list = data_type_output_list, field = '[df.displayName/]')
+						                                      data_type_output_list = data_type_output_list, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
@@ -303,7 +285,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/], input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = None,
-						                                      data_type_output_list = None, field = None)
+						                                      data_type_output_list = None, field_in = None, filed_out = None)
 
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')				
 		[/if]																							[comment CLOSE checks that there are DataFields or not/]
@@ -334,7 +316,7 @@ print('Special a Fix')
 															  special_type_input=SpecialType([if (fv.imputeValue=ImputeValue::Missing)]0[elseif (fv.imputeValue=ImputeValue::Invalid)]1[elseif (fv.imputeValue=ImputeValue::Outlier)]2[/if]), fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[fv.value/]'[else][fv.value/][/if],
 															  missing_values=missing_values_list,
 						                                      data_type_output = [if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  axis_param=0, field = '[df.displayName/]')
+															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
 			                	[/let]																	[comment CLOSE assigns the ImputeType as a FixValue/]
 			            	[/if]																		[comment CLOSE checks that the ImputeType is a FixValue/]
@@ -346,7 +328,7 @@ print('Special a Derived')
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 															  special_type_input=SpecialType([if (dv.imputeValue=ImputeValue::Missing)]0[elseif (dv.imputeValue=ImputeValue::Invalid)]1[elseif (dv.imputeValue=ImputeValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=missing_values_list,
-															  axis_param=0, field = '[df.displayName/]')
+															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
 			                	[/let]																	[comment CLOSE assigns the ImputeType as a DerivedValue/]
 			            	[/if]
@@ -358,7 +340,7 @@ print('Special a NumOp')
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_num_op(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 															  special_type_input=SpecialType([if (nop.imputeValue=ImputeValue::Missing)]0[elseif (nop.imputeValue=ImputeValue::Invalid)]1[elseif (nop.imputeValue=ImputeValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=missing_values_list,
-															  axis_param=0, field = '[df.displayName/]')
+															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
 			                	[/let]																	[comment CLOSE assigns the ImputeType as a NumOp/]
 			            	[/if]	
@@ -374,7 +356,7 @@ print('Special a Fix')
 			            	[let fv : FixValue = imType.oclAsType(FixValue)]							[comment OPEN assigns the ImputeType as a FixValue/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
 															  special_type_input=SpecialType([if (imType.imputeValue=ImputeValue::Missing)]0[elseif (imType.imputeValue=ImputeValue::Invalid)]1[elseif (imType.imputeValue=ImputeValue::Outlier)]2[/if]), fix_value_output='[fv.value/]', missing_values=None
-						                                      data_type_output = None, axis_param=0, field = None)
+						                                      data_type_output = None, axis_param=0, field_in = None, field_out = None)
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a FixValue/]
 			        	[/if]																			[comment CLOSE checks that the ImputeType is a FixValue/]
@@ -385,7 +367,7 @@ print('Special a Derived')
             				[let dv : DerivedValue = imType.oclAsType(DerivedValue)]					[comment OPEN assigns the ImputeType as a DerivedValue/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
 															  special_type_input=SpecialType([if (dv.imputeValue=ImputeValue::Missing)]0[elseif (dv.imputeValue=ImputeValue::Invalid)]1[elseif (dv.imputeValue=ImputeValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
-															  missing_values=None, axis_param=0, field = None)
+															  missing_values=None, axis_param=0, field_in = None, field_out = None)
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a DerivedValue/]
 			        	[/if]																			[comment CLOSE checks that the ImputeType is a DerivedValue/]
@@ -396,7 +378,7 @@ print('Special a NumpOp')]
                 			[let nop : NumOp = imType.oclAsType(NumOp)]									[comment OPEN assigns the ImputeType as a NumOp/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_num_op(data_dictionary=[dd_out.dataDictionaryDefinition.name/],
 															  special_type_input=SpecialType([if (nop.imputeValue=ImputeValue::Missing)]0[elseif (nop.imputeValue=ImputeValue::Invalid)]1[elseif (nop.imputeValue=ImputeValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-															  missing_values=None, axis_param=0, field = None')
+															  missing_values=None, axis_param=0, field_in = None, field_out = None)
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a NumOp/]
 			        	[/if]																			[comment CLOSE checks that the ImputeType is a NumOp/]
@@ -465,7 +447,7 @@ print('CategoricalToContinuous')
 					[for (df : DataField | dd_in.datafield)]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_cast_type(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
-																field_in=[df.name/])
+																field='[df.displayName/]')
 
 					[/for]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
