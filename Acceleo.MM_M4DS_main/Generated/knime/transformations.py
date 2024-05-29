@@ -6,31 +6,27 @@ class DataProcessing:
 		transformations=data_transformations.DataTransformations()
 #-----------------New DataProcessing-----------------
 		imputeByDerivedValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-		print('NO ES MAPPING')
 		imputeByDerivedValue_input_dataDictionary_transformed=imputeByDerivedValue_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
-		print('Special a Derived')
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values=missing_values_list,
+																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'sex', field_out = 'sex')
 		
 		missing_values_list=[]
 		
-		print('Special a Derived')
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values=missing_values_list,
+																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'IRSCHOOL', field_out = 'IRSCHOOL')
 		
 		missing_values_list=[]
 		
-		print('Special a Derived')
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
-																	  missing_values=missing_values_list,
+																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 		
 		imputeByDerivedValue_output_dataDictionary=imputeByDerivedValue_input_dataDictionary_transformed
@@ -38,24 +34,21 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		imputeByFixValue_input_dataDictionary=imputeByDerivedValue_output_dataDictionary
-		print('NO ES MAPPING')
 		imputeByFixValue_input_dataDictionary_transformed=imputeByFixValue_input_dataDictionary.copy()
 		
 		missing_values_list=[]
 		
-		print('Special a Fix')
 		imputeByFixValue_input_dataDictionary_transformed=transformations.transform_special_value_fix_value(data_dictionary=imputeByFixValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values=missing_values_list,
+																	  special_type_input=SpecialType(), fix_value_output='Unknown',
+																	  missing_values=missing_values_list,		
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_2', field_out = 'ACADEMIC_INTEREST_2')
 		
 		missing_values_list=[]
 		
-		print('Special a Fix')
 		imputeByFixValue_input_dataDictionary_transformed=transformations.transform_special_value_fix_value(data_dictionary=imputeByFixValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
-																	  missing_values=missing_values_list,
+																	  special_type_input=SpecialType(), fix_value_output='Unknown',
+																	  missing_values=missing_values_list,		
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
 		
@@ -64,7 +57,6 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		imputeByNumericOp_input_dataDictionary=imputeByFixValue_output_dataDictionary
-		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
@@ -76,7 +68,6 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		imputeByNumericOp_input_dataDictionary=imputeByNumericOp_output_dataDictionary
-		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
@@ -86,20 +77,23 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		rowFilter_input_DataDictionary=imputeByNumericOp_output_dataDictionary
-		print('NO ES MAPPING')
 		rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 		
+		#REVISAR OPCIONES (1 FUNCIÓN CON TODO, 3 FUNCIONES CON LISTAS O 1 FUNCIÓN POR ELEMENTO)
+		#GENERAR LISTA DE PRIMITIVAS (fixValues)
+		rowFilter_output_DataDictionary=rowFilter_input_DataDictionary_transformed
+		rowFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
 		
 		
 #-----------------New DataProcessing-----------------
 		columnFilter_input_DataDictionary=rowFilter_output_DataDictionary
-		print('NO ES MAPPING')
 		columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
 		
+		columnFilter_output_DataDictionary=columnFilter_input_DataDictionary_transformed
+		columnFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv')
 		
 #-----------------New DataProcessing-----------------
 		mapping_input_dataDictionary=columnFilter_output_DataDictionary
-		print('MAPPING')
 		input_values_list=['A', 'N']
 		output_values_list=['0', '0']
 		data_type_input_list=[DataType(0), DataType(0)]
@@ -115,7 +109,6 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		mapping_input_dataDictionary=mapping_output_dataDictionary
-		print('MAPPING')
 		input_values_list=['Y', 'N']
 		output_values_list=['1', '0']
 		data_type_input_list=[DataType(0), DataType(0)]
@@ -131,10 +124,8 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		categoricalToContinuous_input_dataDictionary=mapping_output_dataDictionary
-		print('NO ES MAPPING')
 		categoricalToContinuous_input_dataDictionary_transformed=categoricalToContinuous_input_dataDictionary.copy()
 		
-		print('CategoricalToContinuous')
 		categoricalToContinuous_input_dataDictionary_transformed=transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
 																		data_type_output= DataType(6),
 																		field='TERRITORY')
@@ -148,7 +139,6 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		imputeByNumericOp_input_dataDictionary=categoricalToContinuous_output_dataDictionary
-		print('NO ES MAPPING')
 		imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 		
 		missing_values_list=[]
@@ -162,10 +152,8 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		binner_input_dataDictionary=imputeByNumericOp_output_dataDictionary
-		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'TOTAL_CONTACTS', field_out = 'TOTAL_CONTACTS_binned')
@@ -173,7 +161,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'SELF_INIT_CNTCTS', field_out = 'SELF_INIT_CNTCTS_binned')
@@ -181,7 +168,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'SOLICITED_CNTCTS', field_out = 'SOLICITED_CNTCTS_binned')
@@ -189,7 +175,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=-1000.0, right_margin=1.0,
 																	  closure_type=Closure(0),
@@ -217,7 +202,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1.0, right_margin=4.0,
 																	  closure_type=Closure(2),
@@ -245,7 +229,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=4.0, right_margin=1000.0,
 																	  closure_type=Closure(2),
@@ -275,10 +258,8 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		binner_input_dataDictionary=binner_output_dataDictionary
-		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'TERRITORY', field_out = 'TERRITORY_binned')
@@ -286,7 +267,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=-1000.0, right_margin=1.0,
 																	  closure_type=Closure(0),
@@ -298,7 +278,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1.0, right_margin=3.0,
 																	  closure_type=Closure(2),
@@ -310,7 +289,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=3.0, right_margin=5.0,
 																	  closure_type=Closure(2),
@@ -322,7 +300,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=5.0, right_margin=7.0,
 																	  closure_type=Closure(2),
@@ -334,7 +311,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=7.0, right_margin=1000.0,
 																	  closure_type=Closure(3),
@@ -348,10 +324,8 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		binner_input_dataDictionary=binner_output_dataDictionary
-		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'satscore', field_out = 'satscore_binned')
@@ -359,7 +333,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=-1000.0, right_margin=1040.0,
 																	  closure_type=Closure(1),
@@ -371,7 +344,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1040.0, right_margin=1160.0,
 																	  closure_type=Closure(1),
@@ -383,7 +355,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1160.0, right_margin=1340.0,
 																	  closure_type=Closure(2),
@@ -395,7 +366,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1340.0, right_margin=2000.0,
 																	  closure_type=Closure(2),
@@ -409,10 +379,8 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		binner_input_dataDictionary=binner_output_dataDictionary
-		print('NO ES MAPPING')
 		binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																	  data_type_output = DataType(0),
 																	  field_in = 'avg_income', field_out = 'avg_income_binned')
@@ -420,7 +388,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=-1000.0, right_margin=1040.0,
 																	  closure_type=Closure(1),
@@ -432,7 +399,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1040.0, right_margin=1160.0,
 																	  closure_type=Closure(1),
@@ -444,7 +410,6 @@ class DataProcessing:
 		binner_output_dataDictionary=binner_input_dataDictionary_transformed
 		binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 		
-		print('Binner')
 		binner_input_dataDictionary_transformed=transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																	  left_margin=1160.0, right_margin=1340.0,
 																	  closure_type=Closure(2),
