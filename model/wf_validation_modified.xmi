@@ -382,7 +382,7 @@
       </datafield>
       <datafield
           xsi:type="Workflow:Categorical"
-          name="imputeMissingByMostFrequent(IRSCHOOL)_output_dataField"
+          name="imputeMissingByMostFrequent(ETHNICITY)_output_dataField"
           displayName="ETHNICITY"
           in="//@dataprocessing.0/@inputPort.0/@datafield.2">
         <categoricalDef
@@ -639,7 +639,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
+        path="./knime_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -1166,7 +1166,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./knime_dataDictionaries/missing_output4_dataDictionary.csv"
         name="rowFilter(init_span)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1290,7 +1290,7 @@
       <datafield
           xsi:type="Workflow:Continuous"
           name="columnFilter(REFERRAL_CNCTS)_input_dataField"
-          displayName="REFERRAL_CNCTS">
+          displayName="REFERRAL_CNTCTS">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.3/@inputPort.0/@datafielddefinition.0"/>
         <interval
