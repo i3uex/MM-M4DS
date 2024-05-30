@@ -286,7 +286,7 @@ class DataProcessing:
 		if os.path.exists('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 			columnFilter_output_DataDictionary=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
 
-		field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
+		field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
 		if pre_post.check_field_range(fields=field_list_columnFilter_PRE_field_range,
 									data_dictionary=columnFilter_input_DataDictionary,
 									belong_op=Belong(0)):
@@ -295,7 +295,7 @@ class DataProcessing:
 			print('PRECONDITION columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRE_fieldRange NOT VALIDATED')
 		
 		
-		field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
+		field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
 		if pre_post.check_field_range(fields=field_list_columnFilter_POST_field_range,
 									data_dictionary=columnFilter_output_DataDictionary,
 									belong_op=Belong(1)):
@@ -492,7 +492,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field_in='Instate', field_out='invalid'):
+												missing_values=None, axis_param=0, field_in='Instate', field_out='Instate'):
 			print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition VALIDATED')
 		else:
 			print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition NOT VALIDATED')

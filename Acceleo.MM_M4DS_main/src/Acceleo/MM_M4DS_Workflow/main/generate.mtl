@@ -312,7 +312,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				            [if (imType.oclIsKindOf(FixValue))]											[comment OPEN checks that the ImputeType is a FixValue/]
             	    			[let fv : FixValue = imType.oclAsType(FixValue)]						[comment OPEN assigns the ImputeType as a FixValue/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-															  special_type_input=SpecialType([if (fv.imputeValue=ImputeValue::Missing)]0[elseif (fv.imputeValue=ImputeValue::Invalid)]1[elseif (fv.imputeValue=ImputeValue::Outlier)]2[/if]), fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[fv.value/]'[else][fv.value/][/if],
+															  special_type_input=SpecialType([if (fv.imputeValue=SpecialValue::Missing)]0[elseif (fv.imputeValue=SpecialValue::Invalid)]1[elseif (fv.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[fv.value/]'[else][fv.value/][/if],
 															  missing_values=missing_values_list,		
 						                                      data_type_output = [if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if],
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
@@ -324,7 +324,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 	        				[if (imType.oclIsKindOf(DerivedValue))]										[comment OPEN checks that the ImputeType is a DerivedValue/]
                 				[let dv : DerivedValue = imType.oclAsType(DerivedValue)]				[comment OPEN assigns the ImputeType as a DerivedValue/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-															  special_type_input=SpecialType([if (dv.imputeValue=ImputeValue::Missing)]0[elseif (dv.imputeValue=ImputeValue::Invalid)]1[elseif (dv.imputeValue=ImputeValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
+															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
@@ -335,7 +335,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
             				[if (imType.oclIsKindOf(NumOp))]											[comment OPEN checks that the ImputeType is a NumOp/]
                 				[let nop : NumOp = imType.oclAsType(NumOp)]								[comment OPEN assigns the ImputeType as a NumOp/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_num_op(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-															  special_type_input=SpecialType([if (nop.imputeValue=ImputeValue::Missing)]0[elseif (nop.imputeValue=ImputeValue::Invalid)]1[elseif (nop.imputeValue=ImputeValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
+															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
@@ -351,7 +351,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (imType.oclIsKindOf(FixValue))]												[comment OPEN checks that the ImputeType is a FixValue/]
 			            	[let fv : FixValue = imType.oclAsType(FixValue)]							[comment OPEN assigns the ImputeType as a FixValue/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
-															  special_type_input=SpecialType([if (imType.imputeValue=ImputeValue::Missing)]0[elseif (imType.imputeValue=ImputeValue::Invalid)]1[elseif (imType.imputeValue=ImputeValue::Outlier)]2[/if]), fix_value_output='[fv.value/]', missing_values=None
+															  special_type_input=SpecialType([if (imType.imputeValue=SpecialValue::Missing)]0[elseif (imType.imputeValue=SpecialValue::Invalid)]1[elseif (imType.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output='[fv.value/]', missing_values=None
 						                                      data_type_output = None, axis_param=0, field_in = None, field_out = None)		
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a FixValue/]
@@ -361,17 +361,17 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
         				[if (imType.oclIsKindOf(DerivedValue))]											[comment OPEN checks that the ImputeType is a DerivedValue/]
             				[let dv : DerivedValue = imType.oclAsType(DerivedValue)]					[comment OPEN assigns the ImputeType as a DerivedValue/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
-															  special_type_input=SpecialType([if (dv.imputeValue=ImputeValue::Missing)]0[elseif (dv.imputeValue=ImputeValue::Invalid)]1[elseif (dv.imputeValue=ImputeValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
+															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a DerivedValue/]
 			        	[/if]																			[comment CLOSE checks that the ImputeType is a DerivedValue/]
 [/if]
-[if (dataProcessing.dataProcessingDefinition.name='imputeByNumOp')]
+[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]
         				[if (imType.oclIsKindOf(NumOp))]												[comment OPEN checks that the ImputeType is a NumOp/]
                 			[let nop : NumOp = imType.oclAsType(NumOp)]									[comment OPEN assigns the ImputeType as a NumOp/]
 [dd_out.dataDictionaryDefinition.name/]=transformations.transform_special_value_num_op(data_dictionary=[dd_out.dataDictionaryDefinition.name/],
-															  special_type_input=SpecialType([if (nop.imputeValue=ImputeValue::Missing)]0[elseif (nop.imputeValue=ImputeValue::Invalid)]1[elseif (nop.imputeValue=ImputeValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
+															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
 			            	[/let]																		[comment CLOSE assigns the ImputeType as a NumOp/]
@@ -457,8 +457,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 #GENERAR LISTA DE PRIMITIVAS (fixValues)
 		[/for]
 		[for (match : MatchingValue | fValue.matchingvalue)]
-			[if (match.oclIsKindOf(MissingValues))]		#CAMBIAR EL TIPO DE MISSING VALUES A SPECIAL VALUES (Ahora no lo detecta)
-				[let SpVal : MissingValues = match.oclAsType(MissingValues)]		#CAMBIAR EL TIPO DE MISSING VALUES A SPECIAL VALUES (Ahora no lo detecta)
+			[if (match.oclIsKindOf(SpecialValues))]
+				[let SpVal : SpecialValues = match.oclAsType(SpecialValues)]
 #GENERAR UNA LISTA DE SPECIAL VALUES
 				[/let]
 			[/if]
@@ -478,12 +478,21 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [/if]
 [/if]
 [if (dataProcessing.dataProcessingDefinition.name='columnFilter')]
-	[for (dd_in : DataDictionary | dataProcessing.inputPort)]
-		[for (dd_out : DataDictionary | dataProcessing.outputPort)]
+	[if (p.oclIsKindOf(Field))]																		[comment OPEN checks that the parameter is a Field/]
+		[let field : Field = p.oclAsType(Field)]
+			[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+				[for (dd_out : DataDictionary | dataProcessing.outputPort)]
+field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
+
+[dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_filter_columns(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+																columns=field_list_[field.fieldDef.name/], belong_op=Belong.[field.operator/])
+
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-		[/for]
-	[/for]
+				[/for]
+			[/for]
+		[/let]
+	[/if]																							[comment CLOSE checks that the parameter is a Field/]
 [/if]
 [/for]																									[comment CLOSE traverse all the parameters in the DataProcessing/]
 [/if]																									[comment CLOSE checks that the first parameter is not a Mapping/]

@@ -39,21 +39,21 @@ class DataProcessing:
 		missing_values_list=[]
 		
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'sex', field_out = 'sex')
 		
 		missing_values_list=[]
 		
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'IRSCHOOL', field_out = 'IRSCHOOL')
 		
 		missing_values_list=[]
 		
 		imputeByDerivedValue_input_dataDictionary_transformed=transformations.transform_special_value_derived_value(data_dictionary=imputeByDerivedValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(), derived_type_output=DerivedType(0),
+																	  special_type_input=SpecialType(0), derived_type_output=DerivedType(0),
 																	  missing_values=missing_values_list,		
 																	  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 		
@@ -146,7 +146,7 @@ class DataProcessing:
 		missing_values_list=[]
 		
 		imputeByFixValue_input_dataDictionary_transformed=transformations.transform_special_value_fix_value(data_dictionary=imputeByFixValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(), fix_value_output='Unknown',
+																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,		
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_2', field_out = 'ACADEMIC_INTEREST_2')
@@ -154,7 +154,7 @@ class DataProcessing:
 		missing_values_list=[]
 		
 		imputeByFixValue_input_dataDictionary_transformed=transformations.transform_special_value_fix_value(data_dictionary=imputeByFixValue_input_dataDictionary_transformed,
-																	  special_type_input=SpecialType(), fix_value_output='Unknown',
+																	  special_type_input=SpecialType(0), fix_value_output='Unknown',
 																	  missing_values=missing_values_list,		
 								                                      data_type_output = DataType(0),
 																	  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
@@ -339,7 +339,7 @@ class DataProcessing:
 		
 #-----------------New DataProcessing-----------------
 		columnFilter_input_DataDictionary=rowFilter_output_DataDictionary
-		field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS', 'telecq', 'stuemail', 'interest']
+		field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
 		if pre_post.check_field_range(fields=field_list_columnFilter_PRE_field_range,
 									data_dictionary=columnFilter_input_DataDictionary,
 									belong_op=Belong(0)):
@@ -350,10 +350,15 @@ class DataProcessing:
 		
 		columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
 		
+		field_list_columnFilter_param_field=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
+		
+		columnFilter_input_DataDictionary_transformed=transformations.transform_filter_columns(data_dictionary=columnFilter_input_DataDictionary_transformed,
+																		columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
+		
 		columnFilter_output_DataDictionary=columnFilter_input_DataDictionary_transformed
 		columnFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv')
 		
-		field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
+		field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
 		if pre_post.check_field_range(fields=field_list_columnFilter_POST_field_range,
 									data_dictionary=columnFilter_output_DataDictionary,
 									belong_op=Belong(1)):
@@ -588,7 +593,7 @@ class DataProcessing:
 												belong_op_out=Belong(0),
 												special_type_input=SpecialType(2),
 												num_op_output=Operation(3),
-												missing_values=None, axis_param=0, field_in='Instate', field_out='invalid'):
+												missing_values=None, axis_param=0, field_in='Instate', field_out='Instate'):
 			print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition VALIDATED')
 		else:
 			print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition NOT VALIDATED')
