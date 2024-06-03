@@ -2240,7 +2240,8 @@
       <datafield
           xsi:type="Workflow:Continuous"
           name="imputeOutlierByClosest(Instate)_input_dataField"
-          displayName="Instate">
+          displayName="Instate"
+          out="//@dataprocessing.9/@outputPort.0/@datafield.2">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2281,7 +2282,8 @@
       <datafield
           xsi:type="Workflow:Continuous"
           name="imputeOutlierByClosest(Instate)_output_dataField"
-          displayName="Instate">
+          displayName="Instate"
+          in="//@dataprocessing.9/@inputPort.0/@datafield.2">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
