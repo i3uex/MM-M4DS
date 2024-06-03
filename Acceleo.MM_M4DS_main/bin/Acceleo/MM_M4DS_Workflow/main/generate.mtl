@@ -331,7 +331,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 			                	[/let]																	[comment CLOSE assigns the ImputeType as a DerivedValue/]
 			            	[/if]
 [/if]																		[comment CLOSE checks that the ImputeType is a DerivedValue/]
-[if (dataProcessing.dataProcessingDefinition.name='imputeByNumOp')]
+[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]
             				[if (imType.oclIsKindOf(NumOp))]											[comment OPEN checks that the ImputeType is a NumOp/]
                 				[let nop : NumOp = imType.oclAsType(NumOp)]								[comment OPEN assigns the ImputeType as a NumOp/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=transformations.transform_special_value_num_op(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
