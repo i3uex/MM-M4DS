@@ -338,15 +338,24 @@ class DataProcessing:
 		
 		rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 		
-		columns_rowFilter_param_filter=['init_span', 'sdfbghdg']
+		columns_rowFilter_param_filter=['init_span']
 		
-		filter_fix_value_list_rowFilter_param_filter=[0, 5]
+		filter_fix_value_list_rowFilter_param_filter=[0]
+		
 		rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=rowFilter_input_DataDictionary_transformed,
 											columns=columns_rowFilter_param_filter,
 		                                    filter_fix_value_list=filter_fix_value_list_rowFilter_param_filter)
+		#------------------------------------------------------------------------------------------------------------------#
+		filter_special_values_list_rowFilter_param_filter=[SpecialType(0), SpecialType(2)]
+		
+		filter_range_left_values_list_rowFilter_param_filter=[, , , ]
+		filter_range_right_values_list_rowFilter_param_filter=[, , , ]
 		
 		rowFilter_output_DataDictionary=rowFilter_input_DataDictionary_transformed
 		rowFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
+		
+		
+		
 		
 		
 		

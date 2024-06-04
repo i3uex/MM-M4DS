@@ -456,29 +456,36 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 	[let fValue : FilterValue = p.oclAsType(FilterValue)]
 columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dataProcessing.inputPort->first().datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
 
-[if (not fValue.primitive->isEmpty())]
+		[if (not fValue.primitive->isEmpty())]
 filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][prim.value/][/for][']'/]
 
-	[for (dd_in : DataDictionary | dataProcessing.inputPort)]
-		[for (dd_out : DataDictionary | dataProcessing.outputPort)]
+			[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+				[for (dd_out : DataDictionary | dataProcessing.outputPort)]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 									columns=columns_[fValue.filterValueDef.name/],
                                     filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/])
-		[/for]
-	[/for]
-[/if]
-		[for (match : MatchingValue | fValue.matchingvalue)]
-			[if (match.oclIsKindOf(SpecialValues))]
-				[let SpVal : SpecialValues = match.oclAsType(SpecialValues)]
-#GENERAR UNA LISTA DE SPECIAL VALUES
-				[/let]
-			[/if]
-			[if (match.oclIsKindOf(Range))]
-				[let range : Range = match.oclAsType(Range)]
-#GENERAR UNA LISTA DE RANGOS
-				[/let]
-			[/if]
-		[/for]
+				[/for]
+			[/for]
+		[/if]
+#------------------------------------------------------------------------------------------------------------------#
+		[if (not fValue.matchingvalue->isEmpty())]
+[let filteredSet : OrderedSet(SpecialValues) = fValue.matchingvalue->select(e | e.oclIsKindOf(SpecialValues))]
+filter_special_values_list_[fValue.filterValueDef.name/]=['['/][for (spVal : SpecialValues | filteredSet) separator (', ')]SpecialType([if (spVal.specialType=SpecialValue::Missing)]0)[elseif(spVal.specialType=SpecialValue::Invalid)]1)[elseif(spVal.specialType=SpecialValue::Outlier)]2)[/if][/for][']'/]
+
+[/let]
+filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (match : MatchingValue | fValue.matchingvalue) separator(', ')]
+				[if (match.oclIsKindOf(Range))]
+					[let range : Range = match.oclAsType(Range)]
+					[/let]
+				[/if]
+			[/for][']'/]
+filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (match : MatchingValue | fValue.matchingvalue) separator(', ')]
+				[if (match.oclIsKindOf(Range))]
+					[let range : Range = match.oclAsType(Range)]
+					[/let]
+				[/if]
+			[/for][']'/]
+		[/if]
 	[/let]
 
 	[for (dd_in : DataDictionary | dataProcessing.inputPort)]
