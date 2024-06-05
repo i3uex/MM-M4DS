@@ -345,15 +345,20 @@ class DataProcessing:
 		rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=rowFilter_input_DataDictionary_transformed,
 											columns=columns_rowFilter_param_filter,
 		                                    filter_fix_value_list=filter_fix_value_list_rowFilter_param_filter)
-		#------------------------------------------------------------------------------------------------------------------#
+		
 		dicc_rowFilter_param_filter={'init_span':{'missing': [14, 73], 'invalid': [32, 2] , 'outlier': True}}
 		
 		rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=rowFilter_input_DataDictionary_transformed,
-																												dictionary_filter=dicc_rowFilter_param_filter)
-		#------------------------------------------------------------------------------------------------------------------#
-		filter_range_left_values_list_rowFilter_param_filter=[, , , , ]
-		filter_range_right_values_list_rowFilter_param_filter=[, , , , ]
+																												cols_special_type_values=dicc_rowFilter_param_filter)
 		
+		filter_range_left_values_list_rowFilter_param_filter=[0.0, -5.0]
+		filter_range_right_values_list_rowFilter_param_filter=[34.0, -1.0]
+		
+		rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_range(data_dictionary=rowFilter_input_DataDictionary_transformed,
+																											columns=columns_rowFilter_param_filter,
+																											left_margin_list=filter_range_left_values_list_rowFilter_param_filter,
+																											right_margin_list=filter_range_right_values_list_rowFilter_param_filter,
+																											closure_type_list='PREGUNTAR FRAN')
 		rowFilter_output_DataDictionary=rowFilter_input_DataDictionary_transformed
 		rowFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
 		

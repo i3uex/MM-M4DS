@@ -467,7 +467,7 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 				[/for]
 			[/for]
 		[/if]
-#------------------------------------------------------------------------------------------------------------------#
+
 		[if (not fValue.matchingvalue->isEmpty())]
 [let filteredSet : OrderedSet(SpecialValues) = fValue.matchingvalue->select(e | e.oclIsKindOf(SpecialValues))]
 	[if (not filteredSet->isEmpty())]
@@ -476,27 +476,30 @@ dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dataProcessing.inputP
 		[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 			[for (dd_out : DataDictionary | dataProcessing.outputPort)]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-																										dictionary_filter=dicc_[fValue.filterValueDef.name/])
+																										cols_special_type_values=dicc_[fValue.filterValueDef.name/])
 			[/for]
 		[/for]
 	[/if]
 [/let]
-#------------------------------------------------------------------------------------------------------------------#
-filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (match : MatchingValue | fValue.matchingvalue) separator(', ')]
-				[if (match.oclIsKindOf(Range))]
-					[let range : Range = match.oclAsType(Range)]
-					[/let]
-				[/if]
-			[/for][']'/]
-filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (match : MatchingValue | fValue.matchingvalue) separator(', ')]
-				[if (match.oclIsKindOf(Range))]
-					[let range : Range = match.oclAsType(Range)]
-					[/let]
-				[/if]
-			[/for][']'/]
+
+[let filteredSet : OrderedSet(Range) = fValue.matchingvalue->select(e | e.oclIsKindOf(Range))]
+	[if (not filteredSet->isEmpty())]
+filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.min/][/for][']'/]
+filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.max/][/for][']'/]
+
+		[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+			[for (dd_out : DataDictionary | dataProcessing.outputPort)]
+[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+																									columns=columns_[fValue.filterValueDef.name/],
+																									left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
+																									right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
+																									closure_type_list='PREGUNTAR FRAN')
+			[/for]
+		[/for]
+	[/if]
+[/let]
 		[/if]
 	[/let]
-
 	[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 		[for (dd_out : DataDictionary | dataProcessing.outputPort)]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
