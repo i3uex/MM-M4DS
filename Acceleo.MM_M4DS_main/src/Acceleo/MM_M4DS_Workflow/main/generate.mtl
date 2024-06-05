@@ -470,9 +470,18 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 #------------------------------------------------------------------------------------------------------------------#
 		[if (not fValue.matchingvalue->isEmpty())]
 [let filteredSet : OrderedSet(SpecialValues) = fValue.matchingvalue->select(e | e.oclIsKindOf(SpecialValues))]
-filter_special_values_list_[fValue.filterValueDef.name/]=['['/][for (spVal : SpecialValues | filteredSet) separator (', ')]SpecialType([if (spVal.specialType=SpecialValue::Missing)]0)[elseif(spVal.specialType=SpecialValue::Invalid)]1)[elseif(spVal.specialType=SpecialValue::Outlier)]2)[/if][/for][']'/]
+	[if (not filteredSet->isEmpty())]
+dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dataProcessing.inputPort->first().datafield) separator (', ')]'[df.displayName/]':{[for (spVal : SpecialValues | filteredSet) separator (', ')][if (spVal.specialType=SpecialValue::Missing)]'missing': ['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialValue::Invalid)]'invalid': ['['/][for (iv : ValueField | df.invalidValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/] [elseif(spVal.specialType=SpecialValue::Outlier)]'outlier': True[/if][/for]}[/for]}
 
+		[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+			[for (dd_out : DataDictionary | dataProcessing.outputPort)]
+[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+																										dictionary_filter=dicc_[fValue.filterValueDef.name/])
+			[/for]
+		[/for]
+	[/if]
 [/let]
+#------------------------------------------------------------------------------------------------------------------#
 filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (match : MatchingValue | fValue.matchingvalue) separator(', ')]
 				[if (match.oclIsKindOf(Range))]
 					[let range : Range = match.oclAsType(Range)]
