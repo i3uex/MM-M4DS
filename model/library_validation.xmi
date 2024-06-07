@@ -1,284 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Library:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ContractDefinition="https://www.example.org/contractDef" xmlns:Library="http://www.example.org/Library" xsi:schemaLocation="https://www.example.org/contractDef ../metamodel/ContractDef.ecore http://www.example.org/Library ../metamodel/Library.ecore" name="library_validation_example">
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_impute_categorical_col_der_value" in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.0/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:DerivedValueDef" name="def_parameter_impute_categorical_col_der_value"/>
-    <contractdefinition name="def_PRECONDITION_impute_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_value_range_impute_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield_impute_categorical_col"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_PRE_special_value_impute_categorical_col">
-          <quantitydef xsi:type="ContractDefinition:PercentDef" name="def_PRE_percent_impute_categorical col"/>
+<Library:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ContractDefinition="https://www.example.org/contractDef" xmlns:Library="http://www.example.org/Library" xsi:schemaLocation="https://www.example.org/contractDef ../metamodel/ContractDef.ecore http://www.example.org/Library ../metamodel/Library.ecore" name="library">
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="imputeByDerivedValue" in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.0/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:DerivedValueDef" name="imputeByDerivedValue_param_derivedValue"/>
+    <contractdefinition name="imputeByDerivedValue_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="imputeByDerivedValue_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByDerivedValue_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByDerivedValue_PRE_specialValue">
+          <quantitydef xsi:type="ContractDefinition:PercentDef" name="imputeByDerivedValue_PRE_percent"/>
         </valuedefinition>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_impute_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_value_range_impute_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield_impute_categorical_col"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_POST_special_value_impute_categorical_col"/>
+    <contractdefinition name="imputeByDerivedValue_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="imputeByDerivedValue_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByDerivedValue_POST_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByDerivedValue_POST_specialValue"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_INVARIANT_impute_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_condition_impute_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_input_datafield_impute_categorical_col"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_output_datafield_impute_categorical_col"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_THEN_impute_categorical_col">
-          <valueResult xsi:type="ContractDefinition:DerivedValueDef" name="def_INV_derived_value_impute_categorical_col"/>
+    <contractdefinition name="imputeByDerivedValue_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="imputeByDerivedValue_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByDerivedValue_INV_input_datafield"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="imputeByDerivedValue_INV_output_datafield"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="imputeByDerivedValue_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:DerivedValueDef" name="imputeByDerivedValue_INV_derivedValue"/>
         </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_IF_impute_categorical_col">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="def_INV_special_value_impute_categorical_col"/>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="imputeByDerivedValue_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByDerivedValue_INV_specialValue"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_impute_categorical_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_input_dataField"/>
+    <inputPort name="imputeByDerivedValue_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="imputeByDerivedValue_input_dataField"/>
     </inputPort>
-    <outputPort name="def_impute_categorical_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_output_dataField"/>
+    <outputPort name="imputeByDerivedValue_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="imputeByDerivedValue_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_impute_categorical_col_fix_value" in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.0/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:FixValueDef" name="def_parameter_impute_categorical_col_fix_value"/>
-    <contractdefinition name="def_PRECONDITION_impute_categorical_col_fix_vlue">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_value_range_impute_categorical_col_fix_vlue">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield_impute_categorical_col_fix_vlue"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_PRE_special_value_impute_categorical_col_fix_vlue">
-          <quantitydef xsi:type="ContractDefinition:PercentDef" name="def_PRE_percent_impute_categorical col_fix_vlue"/>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="imputeByFixValue" in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.0/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:FixValueDef" name="imputeByFixValue_param_fixValue"/>
+    <contractdefinition name="imputeByFixValue_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="imputeByFixValue_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByFixValue_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByFixValue_PRE_specialValue">
+          <quantitydef xsi:type="ContractDefinition:PercentDef" name="imputeByFixValue_PRE_percent"/>
         </valuedefinition>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_impute_categorical_col_fix_value">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_value_range_impute_categorical_col_fix_vlue">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield_impute_categorical_col_fix_vlue"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_POST_special_value_impute_categorical_col_fix_vlue"/>
+    <contractdefinition name="imputeByFixValue_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="imputeByFixValue_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByFixValue_POST_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByFixValue_POST_specialValue"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_INVARIANT_impute_categorical_col_fix_value">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_condition_impute_categorical_col_fix_vlue">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_input_datafield_impute_categorical_col_fix_vlue"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_output_datafield_impute_categorical_col_fix_vlue"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_THEN_impute_categorical_col_fix_vlue">
-          <valueResult xsi:type="ContractDefinition:FixValueDef" name="def_INV_fix_value_impute_categorical_col_fix_vlue"/>
+    <contractdefinition name="imputeByFixValue_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="imputeByFixValue_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByFixValue_INV_input_datafield"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="imputeByFixValue_INV_output_datafield"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="imputeByFixValue_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:FixValueDef" name="imputeByFixValue_INV_fixValue"/>
         </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_IF_impute_categorical_col_fix_vlue">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="def_INV_special_value_impute_categorical_col_fix_value"/>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="imputeByFixValue_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByFixValue_INV_specialValue"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_impute_categorical_fix_value_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_fix_value_input_dataField"/>
+    <inputPort name="imputeByFixValue_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="imputeByFixValue_input_dataField"/>
     </inputPort>
-    <outputPort name="def_impute_categorical_fix_value_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_fix_value_output_dataField"/>
+    <outputPort name="imputeByFixValue_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="imputeByFixValue_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_row_filter" in="//@dataprocessingdefinition.2/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.2/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:FilterValueDef" name="def_parameter_filter_row_filter"/>
-    <parameterdefinition xsi:type="Library:PrimitiveDef" name="def_parameter_primitive_row_filter"/>
-    <contractdefinition name="def_PRECONDITION_row_filter">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_value_range_row_filter">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield_row_filter"/>
-        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_PRE_fix_value_row_filter"/>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="rowFilter" in="//@dataprocessingdefinition.2/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.2/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:FilterValueDef" name="rowFilter_param_filter"/>
+    <parameterdefinition xsi:type="Library:PrimitiveDef" name="rowFilter_param_primitive"/>
+    <parameterdefinition xsi:type="Library:SpecialValuesDef" name="specVal"/>
+    <parameterdefinition xsi:type="Library:RangeDef" name="rangedef"/>
+    <contractdefinition name="rowFilter_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="rowFilter_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilter_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="rowFilter_PRE_fixValue"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_row_filter">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_value_range_row_filter">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield_row_filter"/>
-        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_POST_fix_value_row_filter"/>
+    <contractdefinition name="rowFilter_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="rowFilter_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilter_POST_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="rowFilter_POST_fixValue"/>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_row_filter_input_DataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_row_filter_input_dataField"/>
+    <inputPort name="rowFilter_input_DataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="rowFilter_input_dataField"/>
     </inputPort>
-    <outputPort name="def_row_filter_output_DataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_row_filter_output_dataField"/>
+    <outputPort name="rowFilter_output_DataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="rowFilter_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_column_cont_filter" in="//@dataprocessingdefinition.3/@inputPort.0" out="//@dataprocessingdefinition.3/@outputPort.0">
-    <parameterdefinition xsi:type="Library:FieldDef" name="def_field_parameter_column_cont_filter"/>
-    <contractdefinition name="def_PRECONDITION_column_cont_filter">
-      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" name="def_PRE_field_range_column_cont_filter">
-        <in xsi:type="ContractDefinition:DataDictionaryDef" name="def_PRE_in_dataDictionary_column_cont_filter"/>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="columnFilter" in="//@dataprocessingdefinition.3/@inputPort.0" out="//@dataprocessingdefinition.3/@outputPort.0">
+    <parameterdefinition xsi:type="Library:FieldDef" name="columnFilter_param_field"/>
+    <contractdefinition name="columnFilter_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" name="columnFilter_PRE_field_range">
+        <in xsi:type="ContractDefinition:DataDictionaryDef" name="columnFilter_PRE_in_dataDictionary"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_column_cont_filter">
-      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" type="POSTCONDITION" name="def_POST_field_range_range_column_cont_filter">
-        <in xsi:type="ContractDefinition:DataDictionaryDef" name="def_POST_in_dataDictionary_column_cont_filter"/>
+    <contractdefinition name="columnFilter_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" type="POSTCONDITION" name="columnFilter_POST_field_range">
+        <in xsi:type="ContractDefinition:DataDictionaryDef" name="columnFilter_POST_in_dataDictionary"/>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_column_cont_filter_input_DataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_input_column_cont_filter"/>
+    <inputPort name="columnFilter_input_DataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="columnFilter_input_dataField"/>
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="columnFilter_input_dataField"/>
     </inputPort>
-    <outputPort name="def_column_cont_filter_output_DataDictionary"/>
+    <outputPort name="columnFilter_output_DataDictionary"/>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_column_cat_filter" in="//@dataprocessingdefinition.4/@inputPort.0" out="//@dataprocessingdefinition.4/@outputPort.0">
-    <parameterdefinition xsi:type="Library:FieldDef" name="def_field_parameter_column_cat_filter"/>
-    <contractdefinition name="def_PRECONDITION_column_cat_filter">
-      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" name="def_PRE_field_range_column_cat_filter">
-        <in xsi:type="ContractDefinition:DataDictionaryDef" name="def_PRE_in_dataDictionary_column_cat_filter"/>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="mapping" in="//@dataprocessingdefinition.4/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.4/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:MapDef" name="mapping_param_map"/>
+    <contractdefinition name="mapping_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_POST_fixValue"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_column_cont_filter">
-      <contractDefinition xsi:type="ContractDefinition:FieldRangeDefinition" type="POSTCONDITION" name="def_POST_field_range_range_column_cat_filter">
-        <in xsi:type="ContractDefinition:DataDictionaryDef" name="def_POST_in_dataDictionary_column_cat_filter"/>
+    <contractdefinition name="mapping_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_PRE_fixValue"/>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_column_cat_filter_input_DataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_column_cat_filter_input_dataField"/>
-    </inputPort>
-    <outputPort name="def_column_cat_filter_output_DataDictionary"/>
-  </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_impute_categorical_columns_der_value" in="//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:DerivedValueDef" name="def_parameter_impute_categorical_columns_der_value"/>
-    <contractdefinition name="def_PRECONDITION_impute_categorical_columns">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_value_range_impute_categorical_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield_impute_categorical_columns"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_PRE_special_value_impute_categorical_columns">
-          <quantitydef xsi:type="ContractDefinition:PercentDef" name="def_PRE_percent_impute_categorical_columns"/>
-        </valuedefinition>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_impute_categorical_columns">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_value_range_impute_categorical_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield_impute_categorical_columns"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="def_POST_special_value_impute_categorical_columns"/>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_INVARIANT_impute_categorical_columns">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_condition_impute_categorical_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_input_datafield_impute_categorical_columns"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_output_datafield_impute_categorical_columns"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_THEN_impute_categorical_columns">
-          <valueResult xsi:type="ContractDefinition:DerivedValueDef" name="def_POST_derived_value_impute_categorical_columns"/>
-        </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_IF_impute_categorical_columns">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="def_INV_special_value_impute_categorical_columns"/>
-        </ifdefinition>
-      </contractDefinition>
-    </contractdefinition>
-    <inputPort name="def_impute_categorical_columns_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_columns_input_dataField"/>
-    </inputPort>
-    <outputPort name="def_impute_categorical_columns_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_impute_categorical_columns_output_dataField"/>
-    </outputPort>
-  </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_map_categorical_col" in="//@dataprocessingdefinition.6/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.6/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:MapDef" name="def_parameter_map_categorical_col"/>
-    <contractdefinition name="def_POSTCONDITION_map_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_value_range_map_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_input_datafield_map_categorical_col"/>
-        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_POST_fix_value_map_categorical_col"/>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_PRECONDITION_map_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_value_range_map_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_input_datafield_map_categorical_col"/>
-        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="def_PRE_fix_value_map_categorical_col"/>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_INV_map_categorical_col">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_condition_map_categorical_col">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_input_datafield_map_categorical_col"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_output_datafield_map_categorical_col"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_THEN_map_categorical_col">
-          <valueResult xsi:type="ContractDefinition:FixValueDef" name="def_INV_value_result_fix_map_categorical_col"/>
-        </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_IF_map_categorical_col">
-          <valueCondition xsi:type="ContractDefinition:FixValueDef" name="def_INV_value_input_fix_map_categorical_col"/>
-        </ifdefinition>
-      </contractDefinition>
-    </contractdefinition>
-    <inputPort name="def_map_categorical_col_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_map_categorical_col_input_dataField"/>
-    </inputPort>
-    <outputPort name="def_map_categorical_col_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_map_categorical_col_output_dataField"/>
-    </outputPort>
-  </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_impute_cont_columns" in="//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.7/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:NumOpDef" name="def_impute_cont_columns_param_numOp" dataType="Float"/>
-    <contractdefinition name="def_PRECONDITION_impute_cont_columns_param_numOp">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="PRE_value_range_impute_cont_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="PRE_input_datafield_impute_cont_columns"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="PRE_special_value_impute_cont_columns"/>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_impute_cont_columns_param_numOp">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="POST_value_range_impute_cont_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="POST_input_datafield_impute_cont_columns"/>
-        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="POST_special_value_impute_cont_columns"/>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition name="def_INVARIANT_impute_cont_columns_param_numOp">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="INV_condition_impute_cont_columns">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="INV_input_dataField_impute_cont_columns"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="INV_output_dataField_impute_cont_columns"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="INV_THEN_impute_cont_columns">
-          <valueResult xsi:type="ContractDefinition:NumOpDef" name="INV_value_result_impute_cont_columns"/>
-        </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="INV_IF_impute_cont_columns">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="INV_value_input_impute_cont_columns"/>
-        </ifdefinition>
-      </contractDefinition>
-    </contractdefinition>
-    <inputPort name="def_impute_cont_columns_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_impute_cont_columns_input_dataField"/>
-    </inputPort>
-    <outputPort name="def_impute_cont_columns_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_impute_cont_columns_output_dataField"/>
-    </outputPort>
-  </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_stringToNumber" in="//@dataprocessingdefinition.8/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.8/@outputPort.0/@datafielddefinition.0">
-    <contractdefinition name="def_INVARIANT_stringToNumber">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="def_INV_condition_stringToNumber">
+    <contractdefinition name="mapping_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_condition">
         <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_input_datafield"/>
         <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_output_datafield"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@ifdefinition.0" name="def_INV_THEN_stringToNumber">
-          <valueResult xsi:type="ContractDefinition:SpecialValueDef" name="def_INV_valueResult_stringToNumber"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:FixValueDef" name="def_INV_value_result_fix"/>
         </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@thendefinition.0" name="def_INV_IF_stringToNumber">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="def_INV_valueCondition_stringToNumber"/>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:FixValueDef" name="def_INV_value_input_fix"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_input_stringToNumber">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_stringToNumber_input_datafield"/>
+    <inputPort name="mapping_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="mapping_input_dataField"/>
     </inputPort>
-    <outputPort name="def_output_stringToNumber">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_stringToNumber_output_datafield"/>
+    <outputPort name="mapping_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="mapping_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="def_binner" in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:DerivedFieldDef" name="def_binner_parameter_derived_field"/>
-    <parameterdefinition xsi:type="Library:DiscretizeBinDef" name="def_binner_parameter_bin"/>
-    <contractdefinition name="def_PRECONDITION_binner">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="def_PRE_binner_value_range">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_PRE_binner_input_dataField"/>
-        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="def_PRE_binner_interval"/>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="imputeByNumericOp" in="//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:NumOpDef" name="imputeByNumericOp_param_numOp" dataType="Float"/>
+    <contractdefinition name="imputeByNumericOp_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="imputeByNumericOp_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByNumericOp_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByNumericOp_PRE_specialValue">
+          <quantitydef xsi:type="ContractDefinition:PercentDef" name="imputeByNumericOp_PRE_percent"/>
+        </valuedefinition>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_POSTCONDITION_binner">
-      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="def_POST_binner_value_range">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_POST_binner_input_dataField"/>
-        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="def_POST_binner_interval"/>
+    <contractdefinition name="imputeByNumericOp_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="imputeByNumericOp_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByNumericOp_POST_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByNumericOp_POST_specialValue"/>
       </contractDefinition>
     </contractdefinition>
-    <contractdefinition name="def_INVARIANT_binner">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="def_INV_binner_condition">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="def_INV_binner_input_dataField"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="def_INV_binner_output_dataField"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="def_INV_binner_THEN">
-          <valueResult xsi:type="ContractDefinition:FixValueDef" name="def_INV_binner_valueResult"/>
+    <contractdefinition name="imputeByNumericOp_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="imputeByNumericOp_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="imputeByNumericOp_INV_input_dataField"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="imputeByNumericOp_INV_output_dataField"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="imputeByNumericOp_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:NumOpDef" name="imputeByNumericOp_INV_value_result"/>
         </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="def_INV_binner_IF">
-          <valueCondition xsi:type="ContractDefinition:IntervalDef" name="def_INV_binner_valueCondition"/>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="imputeByNumericOp_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="imputeByNumericOp_INV_value_input"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="def_binner_input_dataDictionary">
-      <datafielddefinition xsi:type="Library:ContinuousDef" name="def_binner_input_dataField"/>
+    <inputPort name="imputeByNumericOp_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="imputeByNumericOp_input_dataField"/>
     </inputPort>
-    <outputPort name="def_binner_output_dataDictionary">
-      <datafielddefinition xsi:type="Library:CategoricalDef" name="def_binner_output_dataField"/>
+    <outputPort name="imputeByNumericOp_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="imputeByNumericOp_output_dataField"/>
+    </outputPort>
+  </dataprocessingdefinition>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="categoricalToContinuous" in="//@dataprocessingdefinition.6/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.6/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:CastTypeDef" name="categoricalToContinuous_param_castType"/>
+    <contractdefinition name="categoricalToContinuous_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="categoricalToContinuous_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_INV_input_datafield"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_INV_output_datafield"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0" name="categoricalToContinuous_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_INV_valueResult"/>
+        </thendefinition>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0" name="categoricalToContinuous_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_INV_valueCondition"/>
+        </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <inputPort name="categoricalToContinuous_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="categoricalToContinuous_input_dataField"/>
+    </inputPort>
+    <outputPort name="categoricalToContinuous_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="categoricalToContinuous_output_dataField"/>
+    </outputPort>
+  </dataprocessingdefinition>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="binner" in="//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.7/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:DerivedFieldDef" name="binner_param_derived_field"/>
+    <parameterdefinition xsi:type="Library:DiscretizeBinDef" name="binner_param_bin"/>
+    <contractdefinition name="binner_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="binner_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="binner_PRE_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="binner_PRE_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="binner_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="binner_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="binner_POST_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="binner_POST_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="binner_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="binner_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="binner_INV_input_dataField"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="binner_INV_output_dataField"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="binner_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:FixValueDef" name="binner_INV_valueResult"/>
+        </thendefinition>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="binner_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:IntervalDef" name="binner_INV_valueCondition"/>
+        </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <inputPort name="binner_input_dataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="binner_input_dataField"/>
+    </inputPort>
+    <outputPort name="binner_output_dataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="binner_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
 </Library:Library>

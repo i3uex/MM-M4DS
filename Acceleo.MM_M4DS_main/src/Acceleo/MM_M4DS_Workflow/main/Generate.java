@@ -42,7 +42,7 @@ public class Generate extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "generateDataProcessing" };
+    public static final String[] TEMPLATE_NAMES = { "generateWorkflow" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
