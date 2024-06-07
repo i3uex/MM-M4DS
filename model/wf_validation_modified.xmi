@@ -1173,6 +1173,14 @@
           name="rowFilter(init_span)_input_dataField"
           dataType="Integer"
           displayName="init_span">
+        <invalidValues
+            value="32"/>
+        <invalidValues
+            value="2"/>
+        <missingValues
+            value="14"/>
+        <missingValues
+            value="73"/>
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.2/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2327,7 +2335,7 @@
     <parameter
         xsi:type="Workflow:DiscretizeBin"
         name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_param_bin_low"
-        binValue="low">
+        binValue="Low">
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
@@ -3248,7 +3256,7 @@
       <interval
           leftMargin="1160.0"
           rightMargin="1340.0"
-          clousure="closedOpen"/>
+          clousure="openClosed"/>
     </parameter>
     <parameter
         xsi:type="Workflow:DiscretizeBin"
@@ -3259,7 +3267,7 @@
       <interval
           leftMargin="1340.0"
           rightMargin="2000.0"
-          clousure="closedOpen"/>
+          clousure="openClosed"/>
     </parameter>
     <contract
         name="binner(satscore)_PRECONDITION">
@@ -3375,7 +3383,7 @@
               xsi:type="Contract:Interval"
               leftMargin="1160.0"
               rightMargin="1340.0"
-              closureType="closedOpen">
+              closureType="openClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
@@ -3389,7 +3397,7 @@
               xsi:type="Contract:Interval"
               leftMargin="1340.0"
               rightMargin="2000.0"
-              closureType="closedOpen">
+              closureType="openClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
@@ -3499,8 +3507,8 @@
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
-          leftMargin="-1000.0"
-          rightMargin="1040.0"
+          leftMargin="9.0"
+          rightMargin="42830.0"
           clousure="openClosed"/>
     </parameter>
     <parameter
@@ -3510,8 +3518,8 @@
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
-          leftMargin="1040.0"
-          rightMargin="1160.0"
+          leftMargin="42830.0"
+          rightMargin="55590.0"
           clousure="openClosed"/>
     </parameter>
     <parameter
@@ -3521,8 +3529,8 @@
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
-          leftMargin="1160.0"
-          rightMargin="1340.0"
+          leftMargin="55590.0"
+          rightMargin="100000.0"
           clousure="closedOpen"/>
     </parameter>
     <contract
@@ -3623,7 +3631,7 @@
           <valueCondition
               xsi:type="Contract:Interval"
               leftMargin="42830.0"
-              rightMargin="5559.0"
+              rightMargin="55590.0"
               closureType="closedOpen">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
@@ -3636,7 +3644,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <valueCondition
               xsi:type="Contract:Interval"
-              leftMargin="5559.0"
+              leftMargin="55590.0"
               rightMargin="100000.0"
               closureType="closedOpen">
             <intervalDef

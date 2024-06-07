@@ -73,6 +73,8 @@
   <dataprocessingdefinition xsi:type="Library:Transformation" name="rowFilter" in="//@dataprocessingdefinition.2/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.2/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition xsi:type="Library:FilterValueDef" name="rowFilter_param_filter"/>
     <parameterdefinition xsi:type="Library:PrimitiveDef" name="rowFilter_param_primitive"/>
+    <parameterdefinition xsi:type="Library:SpecialValuesDef" name="specVal"/>
+    <parameterdefinition xsi:type="Library:RangeDef" name="rangedef"/>
     <contractdefinition name="rowFilter_PRECONDITION">
       <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="rowFilter_PRE_valueRange">
         <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilter_PRE_input_datafield"/>
