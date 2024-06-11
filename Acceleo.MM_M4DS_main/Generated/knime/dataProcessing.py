@@ -5,7 +5,7 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
 from helpers.logger import set_logger
 
-def generateDataProcessing(self):
+def generateDataProcessing():
 #-----------------New DataProcessing-----------------
 	imputeByDerivedValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
@@ -1204,5 +1204,4 @@ def generateDataProcessing(self):
 
 
 set_logger("dataProcessing")
-
 generateDataProcessing()

@@ -6,7 +6,7 @@ import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
 from helpers.logger import set_logger
 
-def generateDataProcessing(self):
+def generateDataProcessing():
 #-----------------New DataProcessing-----------------
 	imputeByDerivedValue_input_dataDictionary=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
 	if os.path.exists('./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it

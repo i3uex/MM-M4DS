@@ -1981,7 +1981,7 @@
                             <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
                             <body xsi:type="mtl:IfBlock">
                               <body xsi:type="mtl:LetBlock">
-                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="if contract_pre_post.check_invalid_Values(belong_op=Belong("/>
+                                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="if contract_pre_post.check_invalid_values(belong_op=Belong("/>
                                 <body xsi:type="mtl:IfBlock">
                                   <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="0"/>
                                   <ifExpr xsi:type="ocl.ecore:OperationCallExp">

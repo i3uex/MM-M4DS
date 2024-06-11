@@ -88,7 +88,7 @@ else:
 invalid_values_[vr.valueRangeDef.name/]=['['/][if (vr._in.oclIsTypeOf(DataField))][let df : DataField = vr._in.oclAsType(DataField)][for (mv : ValueField | df.dataField.invalidValues) separator(', ')][mv.value/][/for][/let][']'/][/if]
 	[if(v.quantity.oclIsTypeOf(AbsoluteValue))]					[comment OPEN checks that the quantity is AbsoluteValue/]
 		[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]		[comment OPEN assigns the variable to be of type AbsoluteValue/]
-if contract_pre_post.check_invalid_Values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).dataDictionaryDefinition.name/], field='[df.dataField.displayName/]', 
+if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).dataDictionaryDefinition.name/], field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')

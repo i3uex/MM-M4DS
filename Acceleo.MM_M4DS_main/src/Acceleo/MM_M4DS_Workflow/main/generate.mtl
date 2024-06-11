@@ -30,7 +30,7 @@ from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataT
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
-def generateDataProcessing(self):
+def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
 [if (d.incoming = null and d.outgoing=null)]						[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
@@ -62,7 +62,6 @@ def generateDataProcessing(self):
 [/if]																[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
 [/for]																[comment CLOSE traverse all the DataProcessings/]
 set_logger("dataProcessing")
-
 generateDataProcessing()
 [/file]
 [/template]
@@ -116,7 +115,7 @@ from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataT
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
-def generateDataProcessing(self):
+def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]						[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]							[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
@@ -205,7 +204,7 @@ from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataT
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
-def generateDataProcessing(self):
+def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
