@@ -164,12 +164,12 @@ else:
 
 
 [template public generateCallDataDicContract(aContract : Contract)] 		[comment IT IS THE SAME AS generateCallContract(aContract : Contract) but the data input to the contract is a DataDictionary instead of a DataField/]
-[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]
+[let dd : DataDictionary = aContract._in.oclAsType(DataDictionary)]														[comment OPEN assigns the input in the contract to be of type DataDictionary/]
 [comment]The contracts below are of type FieldRange[/comment]
-	[if (aContract.oclIsTypeOf(FieldRange))]								[comment OPEN checks that the contract is of type FieldRange/]
-		[let fr : FieldRange = aContract.oclAsType(FieldRange)]				[comment OPEN assigns the variable to be of type FieldRange/]
-			[if (aContract.type=ContractType::PRECONDITION)]
-				[for (dd_in : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).inputPort)]
+	[if (aContract.oclIsTypeOf(FieldRange))]																			[comment OPEN checks that the contract is of type FieldRange/]
+		[let fr : FieldRange = aContract.oclAsType(FieldRange)]															[comment OPEN assigns the variable to be of type FieldRange/]
+			[if (aContract.type=ContractType::PRECONDITION)]															[comment OPEN checks if it is a Precondition/]					
+				[for (dd_in : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).inputPort)]		[comment OPEN traverse all the input DataDictionaries/]
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[dd_in.dataDictionaryDefinition.name/],
@@ -177,9 +177,9 @@ if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-				[/for]
-			[elseif (aContract.type=ContractType::POSTCONDITION)]
-				[for (dd_out : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).outputPort)]
+				[/for]																									[comment CLOSE traverse all the input DataDictionaries/]
+			[elseif (aContract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if it is a Postcondition/]
+				[for (dd_out : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).outputPort)]	[comment OPEN traverse all the output DataDictionaries/]
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[dd_out.dataDictionaryDefinition.name/],
@@ -187,43 +187,43 @@ if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-				[/for]
-			[/if]
-		[/let]																[comment CLOSE assigns the variable to be of type FieldRange/]
-	[/if]																	[comment CLOSE checks that the contract is of type FieldRange/]
-	[if (aContract.oclIsTypeOf(ValueRange))]
-		[let vr : ValueRange = aContract.oclAsType(ValueRange)]
-			[if (aContract.type=ContractType::PRECONDITION)]
-				[for (dd_in : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).inputPort)]
-					[for (v : Value | vr.value)]
-						[if (v.oclIsTypeOf(FixValue))]
-							[let fv : FixValue = v.oclAsType(FixValue)]
-								[if (v.quantity <> null)]
-									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+				[/for]																									[comment CLOSE traverse all the output DataDictionaries/]
+			[/if]																										[comment CLOSE checks if it is a Precondition or a Postcondition/]
+		[/let]																											[comment CLOSE assigns the variable to be of type FieldRange/]
+	[/if]																												[comment CLOSE checks that the contract is of type FieldRange/]
+	[if (aContract.oclIsTypeOf(ValueRange))]																			[comment OPEN checks if the contract is a ValueRange/]
+		[let vr : ValueRange = aContract.oclAsType(ValueRange)]															[comment OPEN assigns the contract to be a ValueRange/]
+			[if (aContract.type=ContractType::PRECONDITION)]															[comment OPEN checks if it is a Precondition/]
+				[for (dd_in : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).inputPort)]		[comment OPEN traverse all the input DataDictionaries/]
+					[for (v : Value | vr.value)]																		[comment OPEN traverse all the parameters/]
+						[if (v.oclIsTypeOf(FixValue))]																	[comment OPEN checks if the parameter is a FixValue/]
+							[let fv : FixValue = v.oclAsType(FixValue)]													[comment OPEN assigns the parameter to be a FixValue/]
+								[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
+									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
+										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-										[/let]
-									[elseif (v.quantity.oclIsTypeOf(Percent))]
-										[let per : Percent = v.quantity.oclAsType(Percent)]
+										[/let]																			[comment CLOSE assigns the variable to be an AbsoluteValue/]
+									[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the quantity is a Percent/]
+										[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-										[/let]
-									[/if]
-								[else]
+										[/let]																			[comment CLOSE assigns the variable to be a Percent/]
+									[/if]																				[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
+								[else]																					[comment OPEN checks if the quantity is null/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=None, quant_rel=None, quant_op=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-								[/if]
-							[/let]
+								[/if]																					[comment CLOSE checks if the quantity is null/]
+							[/let]																						[comment CLOSE assigns the parameter to be a FixValue/]
 						[elseif (v.oclIsTypeOf(Interval))]
 							[let inter : Interval = v.oclAsType(Interval)]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd_in.dataDictionaryDefinition.name/],
@@ -325,7 +325,7 @@ else:
 						[/if]
 					[/for]
 				[/for]
-			[elseif (aContract.type=ContractType::POSTCONDITION)]								[comment Separation between PRECONDITIONS and POSTCONDITIONS/]
+			[elseif (aContract.type=ContractType::POSTCONDITION)]														[comment Separation between PRECONDITIONS and POSTCONDITIONS/]
 				[for (dd_out : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).outputPort)]
 					[for (v : Value | vr.value)]
 						[if (v.oclIsTypeOf(FixValue))]
@@ -459,10 +459,10 @@ else:
 				[/for]
 			[/if]
 		[/let]
-	[elseif (aContract.oclIsTypeOf(Condition))]					[comment OPEN Contracts of type Condition (Invariants)/]
+	[elseif (aContract.oclIsTypeOf(Condition))]																			[comment OPEN Contracts of type Condition (Invariants)/]
 [generateCallConditionContract(aContract)/]
-	[/if]
-[/let]
+	[/if]																												[comment CLOSE Contracts of type FieldRange, ValueRange or Condition (Invariants)/]
+[/let]																													[comment CLOSE assigns the input in the contract to be of type DataDictionary/]
 [/template]
 
 
@@ -662,7 +662,7 @@ else:
 											[/if]																													[comment CLOSE checks that the output is DataDictionary or DataField/]
 										[/let]																														[comment CLOSE assigns the variable to be of type FixValue/]
 									[/if]																															[comment CLOSE checks that the variable is of type FixValue/]
-[comment]The code below generates the call to invariants of type Interval-FixValue[/comment]
+[comment]The code below generates the call to invariants of type Interval-DerivedValue[/comment]
 									[if (th.valueResult.oclIsTypeOf(DerivedValue))]																					[comment OPEN checks that the variable is of type DerivedValue/]
 										[let derVal : DerivedValue = th.valueResult.oclAsType(DerivedValue)]														[comment OPEN assigns the variable to be of type DerivedValue/]
 											[if (aContract.out.oclIsTypeOf(DataDictionary))]																		[comment OPEN checks that the variable is of type DataDictionary/]
@@ -694,7 +694,7 @@ else:
 											[/if]																													[comment CLOSE checks that the output is DataDictionary or DataField/]
 										[/let]																														[comment CLOSE assigns the variable to be of type DerivedValue/]
 									[/if]																															[comment CLOSE checks that the variable is of type derivedValue/]
-[comment]The code below generates the call to invariants of type Interval-FixValue[/comment]
+[comment]The code below generates the call to invariants of type Interval-NumOp[/comment]
 									[if (th.valueResult.oclIsTypeOf(NumOp))]																						[comment OPEN checks that the variable is of type NumOp/]
 										[let nop : NumOp = th.valueResult.oclAsType(NumOp)]																			[comment OPEN assigns the variable to be of type NumOp/]
 											[if (aContract.out.oclIsTypeOf(DataDictionary))]																		[comment OPEN checks that the variable is of type DataDictionary/]
