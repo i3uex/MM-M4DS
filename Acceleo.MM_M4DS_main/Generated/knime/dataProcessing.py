@@ -126,7 +126,7 @@ def generateDataProcessing():
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_2', 
 									missing_values=missing_values_imputeByFixValue_PRE_valueRange,
-									quant_op=Operator(2), quant_rel=30.0/100):
+									quant_op=Operator(2), quant_rel=70.0/100):
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange VALIDATED')
 	else:
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRE_valueRange NOT VALIDATED')
@@ -134,7 +134,7 @@ def generateDataProcessing():
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_1', 
 									missing_values=missing_values_imputeByFixValue_PRE_valueRange,
-									quant_op=Operator(2), quant_rel=30.0/100):
+									quant_op=Operator(2), quant_rel=70.0/100):
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_PRE_valueRange VALIDATED')
 	else:
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_PRE_valueRange NOT VALIDATED')
@@ -330,7 +330,7 @@ def generateDataProcessing():
 #-----------------New DataProcessing-----------------
 	rowFilter_input_DataDictionary=imputeByNumericOp_output_dataDictionary
 
-	if contract_pre_post.check_fix_value_range(value=0, data_dictionary=rowFilter_input_DataDictionary, belong_op=Belong(0), field='init_span',
+	if contract_pre_post.check_fix_value_range(value=-216, data_dictionary=rowFilter_input_DataDictionary, belong_op=Belong(0), field='init_span',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('PRECONDITION rowFilter(init_span)_PRE_valueRange VALIDATED')
 	else:
@@ -411,12 +411,12 @@ def generateDataProcessing():
 	
 	mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')
 	
-	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
 	else:
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
-	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
 	else:
@@ -470,12 +470,12 @@ def generateDataProcessing():
 	
 	mapping_output_dataDictionary.to_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')
 	
-	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
+	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
 	else:
 		print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
-	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(0), field='Instate',
+	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
 	else:
