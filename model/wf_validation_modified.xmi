@@ -427,7 +427,7 @@
           <quantity
               xsi:type="Contract:Percent"
               operator="lessEqual"
-              percent="30.0">
+              percent="70.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -531,7 +531,7 @@
           <quantity
               xsi:type="Contract:Percent"
               operator="lessEqual"
-              percent="30.0">
+              percent="70.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -1130,7 +1130,7 @@
         </in>
         <value
             xsi:type="Contract:FixValue"
-            value="0"
+            value="-216"
             dataType="Integer">
           <valueFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
@@ -1415,7 +1415,8 @@
       <contract
           xsi:type="Contract:ValueRange"
           type="POSTCONDITION"
-          name="mapping(TERRITORY)_POST_valueRange">
+          name="mapping(TERRITORY)_POST_valueRange"
+          belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
             dataField="//@dataprocessing.6/@outputPort.0/@datafield.0"
@@ -1604,7 +1605,8 @@
       <contract
           xsi:type="Contract:ValueRange"
           type="POSTCONDITION"
-          name="mapping(Instate)_POST_valueRange">
+          name="mapping(Instate)_POST_valueRange"
+          belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
             dataField="//@dataprocessing.7/@outputPort.0/@datafield.0"
