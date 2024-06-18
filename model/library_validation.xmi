@@ -233,4 +233,26 @@
       <datafielddefinition xsi:type="Library:CategoricalDef" name="binner_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="rowFilterRange" in="//@dataprocessingdefinition.8/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.8/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:FilterValueDef" name="rowFilterRange_param_filter"/>
+    <parameterdefinition xsi:type="Library:RangeDef" name="rowFilterRange_param_range"/>
+    <contractdefinition name="rowFilterRange_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="rowFilterRange_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilterRange_PRE_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="rowFilterRange_PRE_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="rowFilterRange_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="rowFilterRange_POST_valueRange" belongOp="NOTBELONG">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilterRange_POST_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:IntervalDef" name="rowFilterRange_POST_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <inputPort name="rowFilterRange_input_DataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="rowFilterRange_input_dataField"/>
+    </inputPort>
+    <outputPort name="rowFilterRange_output_DataDictionary">
+      <datafielddefinition xsi:type="Library:ContinuousDef" name="rowFilterRange_output_dataField"/>
+    </outputPort>
+  </dataprocessingdefinition>
 </Library:Library>
