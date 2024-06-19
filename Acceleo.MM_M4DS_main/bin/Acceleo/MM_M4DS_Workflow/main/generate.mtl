@@ -26,7 +26,7 @@ import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
@@ -120,7 +120,7 @@ import os
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
@@ -218,7 +218,7 @@ generateDataProcessing()
 [file ('transformations.py', false, 'UTF-8')]
 import pandas as pd
 import functions.data_transformations as data_transformations
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
@@ -475,12 +475,11 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 
 						[for (dd_out : DataDictionary | dataProcessing.outputPort)]						[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-									columns=columns_[fValue.filterValueDef.name/],
-                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/],
-									filter_type='Meter el filterType')
+																										columns=columns_[fValue.filterValueDef.name/],
+																	                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/],
+																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
 						[/for]																			[comment CLOSE traverse all the output DataDictionaries/]
 					[/if]																				[comment CLOSE checks that the list of primitives is not empty/]
-
 					[if (not fValue.matchingvalue->isEmpty())]											[comment OPEN checks that the list of MatchingValues is not empty/]
 						[let filteredSet : OrderedSet(SpecialValues) = fValue.matchingvalue->select(e | e.oclIsKindOf(SpecialValues))]	[comment OPEN assigns to a set only the SpecialValues/]
 							[if (not filteredSet->isEmpty())]											[comment OPEN checks that list of SpecialValues is not empty/]
@@ -489,11 +488,10 @@ dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) sepa
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 																										cols_special_type_values=dicc_[fValue.filterValueDef.name/],
-																										filter_type='Meter el filterType')
+																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
 							[/if]																		[comment CLOSE checks that list of SpecialValues is not empty/]
 						[/let]																											[comment CLOSE assigns to a set only the SpecialValues/]
-
 						[let filteredSet : OrderedSet(Range) = fValue.matchingvalue->select(e | e.oclIsKindOf(Range))]					[comment OPEN assigns to a set only the Range/]
 							[if (not filteredSet->isEmpty())]											[comment OPEN checks that the list of Range is not empty/]
 filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.min/][/for][']'/]
@@ -501,10 +499,10 @@ filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range :
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-																									columns=columns_[fValue.filterValueDef.name/],
-																									left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
-																									right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
-																									filter_type='Meter el filterType')
+																										columns=columns_[fValue.filterValueDef.name/],
+																										left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
+																										right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
+																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
 							[/if]																		[comment CLOSE checks that the list of Range is not empty/]
 						[/let]																											[comment CLOSE assigns to a set only the Range/]

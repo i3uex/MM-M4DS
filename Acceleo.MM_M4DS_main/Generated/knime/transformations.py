@@ -1,6 +1,6 @@
 import pandas as pd
 import functions.data_transformations as data_transformations
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 
 def generateDataProcessing():
@@ -95,16 +95,14 @@ def generateDataProcessing():
 	rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 	columns_rowFilterRange_param_filter=['init_span']
 	
-	
-	
 	filter_range_left_values_list_rowFilterRange_param_filter=[0.0]
 	filter_range_right_values_list_rowFilterRange_param_filter=[0.0]
 	
 	rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_range(data_dictionary=rowFilter_input_DataDictionary_transformed,
-																										columns=columns_rowFilterRange_param_filter,
-																										left_margin_list=filter_range_left_values_list_rowFilterRange_param_filter,
-																										right_margin_list=filter_range_right_values_list_rowFilterRange_param_filter,
-																										filter_type='Meter el filterType')
+																											columns=columns_rowFilterRange_param_filter,
+																											left_margin_list=filter_range_left_values_list_rowFilterRange_param_filter,
+																											right_margin_list=filter_range_right_values_list_rowFilterRange_param_filter,
+																											filter_type=FilterType(0))
 	rowFilterRange_output_DataDictionary=rowFilter_input_DataDictionary_transformed
 	rowFilterRange_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
 	

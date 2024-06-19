@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 
 def generateDataProcessing():
@@ -116,7 +116,7 @@ def generateDataProcessing():
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByFixValue_input_dataDictionary, field='ACADEMIC_INTEREST_1', 
 									missing_values=missing_values_imputeByFixValue_PRE_valueRange,
-									quant_op=Operator(2), quant_rel=30.0/100):
+									quant_op=Operator(2), quant_rel=70.0/100):
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_PRE_valueRange VALIDATED')
 	else:
 		print('PRECONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_PRE_valueRange NOT VALIDATED')
@@ -176,7 +176,7 @@ def generateDataProcessing():
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeByNumericOp_input_dataDictionary, field='avg_income', 
 									missing_values=missing_values_imputeByNumericOp_PRE_valueRange,
-									quant_op=Operator(0), quant_rel=70.0/100):
+									quant_op=Operator(2), quant_rel=30.0/100):
 		print('PRECONDITION imputeMissingByMean(avg_income)_PRE_valueRange VALIDATED')
 	else:
 		print('PRECONDITION imputeMissingByMean(avg_income)_PRE_valueRange NOT VALIDATED')
@@ -374,12 +374,12 @@ def generateDataProcessing():
 	else:
 		print('PRECONDITION mapping(Instate)_PRE_valueRange NOT VALIDATED')
 	
-	if contract_pre_post.check_fix_value_range(value=Y, data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
+	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
 	else:
 		print('POSTCONDITION mapping(Instate)_POST_valueRange NOT VALIDATED')
-	if contract_pre_post.check_fix_value_range(value=N, data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
+	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_output_dataDictionary, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
 	else:
@@ -542,8 +542,8 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION binner(SELF_INIT_CNTCTS)_POST_valueRange NOT VALIDATED')
 	
-	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_input_dataDictionary,
-	                                	closure_type=Closure(0), belong_op=Belong(1), field='SOLICITED_CNTCTS'):
+	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_output_dataDictionary,
+	                                	closure_type=Closure(0), belong_op=Belong(1), field='SOLICITED_CNTCTS_binned'):
 		print('POSTCONDITION binner(SOLICITED_CNTCTS)_POST_valueRange VALIDATED')
 	else:
 		print('POSTCONDITION binner(SOLICITED_CNTCTS)_POST_valueRange NOT VALIDATED')
