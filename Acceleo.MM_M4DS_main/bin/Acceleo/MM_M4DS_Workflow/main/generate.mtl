@@ -31,36 +31,36 @@ from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
 def generateDataProcessing():
-[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
-[if (d.incoming = null and d.outgoing=null)]						[comment OPEN checks if the DataProcessing is isolated (no links)/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
+[if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
-	[for (dc : DataDictionary | d.inputPort)]						[comment OPEN read all the input datasets and store them/]
+	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-	[/for]															[comment CLOSE read all the input datasets and store them/]
-	[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::PRECONDITION)]			[comment OPEN checks if the if the contract is a Precondition/]
+	[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract)/]
-		[/if]														[comment CLOSE checks if the if the contract is a Precondition/]
-	[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
+	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d)/]
-	[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::POSTCONDITION)]			[comment OPEN checks if the if the contract is a Postcondition/]
+	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract)/]
-		[/if]														[comment CLOSE checks if the if the contract is a Postcondition/]
-	[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
-	[for (c : Contract | d.contract)]								[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::INVARIANT)]				[comment OPEN checks if the if the contract is a Invariant/]
+		[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
+	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+		[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract)/]
-		[/if]														[comment CLOSE checks if the if the contract is a Invariant/]
-	[/for]															[comment CLOSE traverse all the contracts in the DataProcessing/]
-[/if]																[comment CLOSE checks if the DataProcessing is isolated (no links)/]
-[/for]																[comment CLOSE traverse all the DataProcessings/]
-[for (d : DataProcessing | aWorkflow.dataprocessing)]				[comment OPEN traverse all the DataProcessings/]
-[if (d.incoming = null and d.outgoing<>null)]						[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+		[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
+	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+[/if]																			[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+[/for]																			[comment CLOSE traverse all the DataProcessings/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
+[if (d.incoming = null and d.outgoing<>null)]									[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
 [callRecursiveTemplate(d)/]
-[/if]																[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
-[/for]																[comment CLOSE traverse all the DataProcessings/]
+[/if]																			[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+[/for]																			[comment CLOSE traverse all the DataProcessings/]
 set_logger("dataProcessing")
 generateDataProcessing()
 [/file]
@@ -70,40 +70,45 @@ generateDataProcessing()
 [template public callRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
-	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
-		[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-			[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.dataDictionaryDefinition.name/]=[dc_out.dataDictionaryDefinition.name/]
+	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
+	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep='[d.incoming.source.outputPort->first().columnDelimiter/]')
 
-			[/if]															[comment CLOSE checks that both datasets are the same/]
-		[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
-	[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[else]
+		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
+				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+
+				[/if]															[comment CLOSE checks that both datasets are the same/]
+			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
+		[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[/if]
 [else]
-	[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-	[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
-[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::PRECONDITION)]							[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract)/]
-	[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
-[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d)/]
-[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
+[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::POSTCONDITION)]							[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract)/]
-	[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
-[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
-[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
+	[/if]																		[comment CLOSE checks if the if the contract is a Postcondition/]
+[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
+[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+	[if (c.contract.type=ContractType::INVARIANT)]								[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract)/]
-	[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
+	[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
 [/for]
-	[if (d.outgoing<>null)]													[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
+	[if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]		[comment OPEN assigns the next DataProcessing to a variable/]
 [callRecursiveTemplate(nextDp)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
-[/let]																		[comment OPEN assigns the next DataProcessing to a variable/]
-	[/if]																	[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+[/let]																			[comment OPEN assigns the next DataProcessing to a variable/]
+	[/if]																		[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
 [comment]################################################################################################################################################################[/comment]
@@ -120,40 +125,40 @@ from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
 def generateDataProcessing():
-[for (d : DataProcessing | aWorkflow.dataprocessing)]						[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing=null)]							[comment OPEN checks if the DataProcessing is isolated (no links)/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
-		[for (dc : DataDictionary | d.inputPort)]							[comment OPEN read all the input datasets and store them/]
+		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-		[/for]																[comment CLOSE read all the input datasets and store them/]
-		[for (dc : DataDictionary | d.outputPort)]							[comment OPEN read all the output datasets and store them/]
+		[/for]																	[comment CLOSE read all the input datasets and store them/]
+		[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
 	if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-		[/for]																[comment CLOSE read all the output datasets and store them/]
-		[for (c : Contract | d.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::PRECONDITION)]				[comment OPEN checks if the if the contract is a Precondition/]
+		[/for]																	[comment CLOSE read all the output datasets and store them/]
+		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::PRECONDITION)	]				[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract)/]
-			[/if]															[comment CLOSE checks if the if the contract is a Precondition/]
-		[/for]																[comment CLOSE traverse all the contracts in the DataProcessing/]
-		[for (c : Contract | d.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
+			[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
+		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract)/]
-			[/if]															[comment CLOSE checks if the if the contract is a Postcondition/]
-		[/for]																[comment CLOSE traverse all the contracts in the DataProcessing/]
-		[for (c : Contract | d.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::INVARIANT)]					[comment OPEN checks if the if the contract is a Invariant/]
+			[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
+		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract)/]
-			[/if]															[comment CLOSE checks if the if the contract is a Invariant/]
-		[/for]																[comment CLOSE traverse all the contracts in the DataProcessing/]
-	[/if]																	[comment CLOSE checks if the DataProcessing is isolated (no links)/]
-[/for]																		[comment CLOSE traverse all the DataProcessings/]
-[for (d : DataProcessing | aWorkflow.dataprocessing)]						[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing<>null)]							[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+			[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
+		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[/if]																		[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+[/for]																			[comment CLOSE traverse all the DataProcessings/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing<>null)]								[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
 [callContractsRecursiveTemplate(d)/]
-	[/if]																	[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
-[/for]																		[comment CLOSE traverse all the DataProcessings/]
+	[/if]																		[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+[/for]																			[comment CLOSE traverse all the DataProcessings/]
 set_logger("contracts")
 generateDataProcessing()
 [/file]
@@ -163,14 +168,19 @@ generateDataProcessing()
 [template public callContractsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
-	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-		[for (dc_out : DataDictionary | d.incoming.source.outputPort)]			[comment OPEN read the previous DataProcessing output datasets/]
-			[if (dc.path = dc_out.path)]										[comment OPEN checks that both datasets are the same/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep = '[dc_out.columnDelimiter/]')
+	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
+	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep='[d.incoming.source.outputPort->first().columnDelimiter/]')
 
-			[/if]																[comment CLOSE checks that both datasets are the same/]
-		[/for]																	[comment CLOSE read the previous DataProcessing output datasets/]
-	[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[else]
+		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
+				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+
+				[/if]															[comment CLOSE checks that both datasets are the same/]
+			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
+		[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[/if]
 [else]																			[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -237,14 +247,19 @@ generateDataProcessing()
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
-	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-		[for (dc_out : DataDictionary | d.incoming.source.outputPort)]			[comment OPEN read the previous DataProcessing output datasets/]
-			[if (dc.path = dc_out.path)]										[comment OPEN checks that both datasets are the same/]
-	[dc.dataDictionaryDefinition.name/]=[dc_out.dataDictionaryDefinition.name/]
+	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
+	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.incoming.source.outputPort->first().path/]', sep='[d.incoming.source.outputPort->first().columnDelimiter/]')
 
-			[/if]																[comment CLOSE checks that both datasets are the same/]
-		[/for]																	[comment CLOSE read the previous DataProcessing output datasets/]
-	[/for]																		[comment CLOSE read all the input datasets and store them/]
+	[else]
+		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
+				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+
+				[/if]															[comment CLOSE checks that both datasets are the same/]
+			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
+		[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
@@ -449,7 +464,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 			[/let]																						[comment CLOSE assigns the variable to be a CastType/]
 		[/if]																							[comment CLOSE checks that the parameter is a CastType/]
 	[/if]																								[comment CLOSE checks that the DataProcessing is categoricalToContinuous(StringToNumber)/]
-	[if (dataProcessing.dataProcessingDefinition.name='rowFilter')]										[comment OPEN checks that the DataProcessing is rowFilter/]
+	[if (dataProcessing.dataProcessingDefinition.name='rowFilter' or dataProcessing.dataProcessingDefinition.name='rowFilterRange')]		[comment OPEN checks that the DataProcessing is rowFilter/]
 		[if (p.oclIsKindOf(FilterValue))]																[comment OPEN checks that the parameter is a FilterValue/]
 			[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 				[let fValue : FilterValue = p.oclAsType(FilterValue)]									[comment OPEN assigns the variable to be a FilterValue/]
@@ -461,7 +476,8 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 						[for (dd_out : DataDictionary | dataProcessing.outputPort)]						[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 									columns=columns_[fValue.filterValueDef.name/],
-                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/])
+                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/],
+									filter_type='Meter el filterType')
 						[/for]																			[comment CLOSE traverse all the output DataDictionaries/]
 					[/if]																				[comment CLOSE checks that the list of primitives is not empty/]
 
@@ -472,7 +488,8 @@ dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) sepa
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
-																										cols_special_type_values=dicc_[fValue.filterValueDef.name/])
+																										cols_special_type_values=dicc_[fValue.filterValueDef.name/],
+																										filter_type='Meter el filterType')
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
 							[/if]																		[comment CLOSE checks that list of SpecialValues is not empty/]
 						[/let]																											[comment CLOSE assigns to a set only the SpecialValues/]
@@ -481,14 +498,13 @@ dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) sepa
 							[if (not filteredSet->isEmpty())]											[comment OPEN checks that the list of Range is not empty/]
 filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.min/][/for][']'/]
 filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.max/][/for][']'/]
-[comment]closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.closure/][/for][']'/][/comment]
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 																									columns=columns_[fValue.filterValueDef.name/],
 																									left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
 																									right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
-																									closure_type_list=closure_type_list_[fValue.filterValueDef.name/])
+																									filter_type='Meter el filterType')
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
 							[/if]																		[comment CLOSE checks that the list of Range is not empty/]
 						[/let]																											[comment CLOSE assigns to a set only the Range/]
@@ -500,7 +516,7 @@ filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range :
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
 		[/if]																							[comment CLOSE checks that the parameter is a FilterValue/]
-	[/if]																								[comment CLOSE checks that the DataProcessing is rowFilter/]
+	[/if]																																	[comment CLOSE checks that the DataProcessing is rowFilter/]
 	[if (dataProcessing.dataProcessingDefinition.name='columnFilter')]									[comment OPEN checks that the DataProcessing is columnFilter/]
 		[if (p.oclIsKindOf(Field))]																		[comment OPEN checks that the parameter is a Field/]
 			[let field : Field = p.oclAsType(Field)]													[comment OPEN assigns the variable to be a field/]
