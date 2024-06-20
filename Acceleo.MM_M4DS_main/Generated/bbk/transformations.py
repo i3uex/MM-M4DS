@@ -93,24 +93,22 @@ def generateDataProcessing():
 	rowFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv', sep=',')
 
 	rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
-	columns_rowFilterRange_param_filter=['init_span']
+	columns_rowFilter_param_filter=['init_span']
 	
-	filter_range_left_values_list_rowFilterRange_param_filter=[0.0]
-	filter_range_right_values_list_rowFilterRange_param_filter=[0.0]
+	filter_fix_value_list_rowFilter_param_filter=[0]
 	
-	rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_range(data_dictionary=rowFilter_input_DataDictionary_transformed,
-																											columns=columns_rowFilterRange_param_filter,
-																											left_margin_list=filter_range_left_values_list_rowFilterRange_param_filter,
-																											right_margin_list=filter_range_right_values_list_rowFilterRange_param_filter,
+	rowFilter_input_DataDictionary_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=rowFilter_input_DataDictionary_transformed,
+																											columns=columns_rowFilter_param_filter,
+																		                                    filter_fix_value_list=filter_fix_value_list_rowFilter_param_filter,
 																											filter_type=FilterType(0))
-	rowFilterRange_output_DataDictionary=rowFilter_input_DataDictionary_transformed
-	rowFilterRange_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
+	rowFilter_output_DataDictionary=rowFilter_input_DataDictionary_transformed
+	rowFilter_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
 	
 #-----------------New DataProcessing-----------------
 	columnFilter_input_DataDictionary=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',')
 
 	columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
-	field_list_columnFilter_param_field=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
+	field_list_columnFilter_param_field=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNCTS']
 	
 	columnFilter_input_DataDictionary_transformed=data_transformations.transform_filter_columns(data_dictionary=columnFilter_input_DataDictionary_transformed,
 																	columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
@@ -188,7 +186,7 @@ def generateDataProcessing():
 	imputeByNumericOp_input_dataDictionary_transformed=data_transformations.transform_special_value_num_op(data_dictionary=imputeByNumericOp_input_dataDictionary_transformed,
 																  special_type_input=SpecialType(2), num_op_output=Operation(3),
 																  missing_values=missing_values_list,		
-																  axis_param=0, field_in = 'Instate', field_out = 'Instate')
+																  axis_param=0, field_in = 'Instate', field_out = 'invalid')
 	
 	imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
 	imputeByNumericOp_output_dataDictionary.to_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv')
@@ -218,7 +216,7 @@ def generateDataProcessing():
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
-																  fix_value_output='Low',
+																  fix_value_output='low',
 							                                      data_type_output = DataType(0),
 																  field_in = 'TOTAL_CONTACTS',
 																  field_out = 'TOTAL_CONTACTS_binned')
@@ -226,7 +224,7 @@ def generateDataProcessing():
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
-																  fix_value_output='Low',
+																  fix_value_output='low',
 							                                      data_type_output = DataType(0),
 																  field_in = 'SELF_INIT_CNTCTS',
 																  field_out = 'SELF_INIT_CNTCTS_binned')
@@ -234,7 +232,7 @@ def generateDataProcessing():
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
-																  fix_value_output='Low',
+																  fix_value_output='low',
 							                                      data_type_output = DataType(0),
 																  field_in = 'SOLICITED_CNTCTS',
 																  field_out = 'SOLICITED_CNTCTS_binned')
@@ -387,7 +385,7 @@ def generateDataProcessing():
 	binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1160.0, right_margin=1340.0,
-																  closure_type=Closure(1),
+																  closure_type=Closure(2),
 																  fix_value_output='76-93 Percentile',
 							                                      data_type_output = DataType(0),
 																  field_in = 'satscore',
@@ -397,7 +395,7 @@ def generateDataProcessing():
 	binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1340.0, right_margin=2000.0,
-																  closure_type=Closure(1),
+																  closure_type=Closure(2),
 																  fix_value_output='94+ percentile',
 							                                      data_type_output = DataType(0),
 																  field_in = 'satscore',
@@ -417,7 +415,7 @@ def generateDataProcessing():
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
 	binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
-																  left_margin=9.0, right_margin=42830.0,
+																  left_margin=-1000.0, right_margin=1040.0,
 																  closure_type=Closure(1),
 																  fix_value_output='Low',
 							                                      data_type_output = DataType(0),
@@ -427,7 +425,7 @@ def generateDataProcessing():
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
 	binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
-																  left_margin=42830.0, right_margin=55590.0,
+																  left_margin=1040.0, right_margin=1160.0,
 																  closure_type=Closure(1),
 																  fix_value_output='Moderate',
 							                                      data_type_output = DataType(0),
@@ -437,7 +435,7 @@ def generateDataProcessing():
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
 	binner_output_dataDictionary.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
-																  left_margin=55590.0, right_margin=100000.0,
+																  left_margin=1160.0, right_margin=1340.0,
 																  closure_type=Closure(2),
 																  fix_value_output='High',
 							                                      data_type_output = DataType(0),
