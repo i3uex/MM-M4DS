@@ -64,8 +64,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="RangeDef" eSuperTypes="#//MatchingValueDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//Range"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MissingValuesDef" eSuperTypes="#//MatchingValueDef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//MissingValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialValuesDef" eSuperTypes="#//MatchingValueDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//SpecialValues"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiscretizeBinDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DiscretizeBin"/>
