@@ -350,7 +350,7 @@ def generateDataProcessing():
 	rowFilterRange_output_DataDictionary=rowFilter_input_DataDictionary_transformed
 	rowFilterRange_output_DataDictionary.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')
 	
-	if contract_pre_post.check_fix_value_range(value='-216', data_dictionary=rowFilterRange_output_DataDictionary, belong_op=Belong(1), field='init_span',
+	if contract_pre_post.check_fix_value_range(value=-216, data_dictionary=rowFilterRange_output_DataDictionary, belong_op=Belong(1), field='init_span',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange VALIDATED')
 	else:
