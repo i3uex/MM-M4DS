@@ -224,80 +224,80 @@ else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 								[/if]																					[comment CLOSE checks if the quantity is null/]
 							[/let]																						[comment CLOSE assigns the parameter to be a FixValue/]
-						[elseif (v.oclIsTypeOf(Interval))]
-							[let inter : Interval = v.oclAsType(Interval)]
+						[elseif (v.oclIsTypeOf(Interval))]																[comment OPEN checks if the parameter is an interval/]
+							[let inter : Interval = v.oclAsType(Interval)]												[comment OPEN assigns the variable to be an interval/]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd_in.dataDictionaryDefinition.name/],
                                closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-							[/let]
-						[elseif (v.oclIsTypeOf(SpecialValue))]
-							[let sv : SpecialValue = v.oclAsType(SpecialValue)]
-								[if (v.quantity <> null)]
-									[if (sv.specialType=SpecialType::MISSING)]
+							[/let]																						[comment CLOSE assigns the variable to be an interval/]
+						[elseif (v.oclIsTypeOf(SpecialValue))]															[comment OPEN checks if the parameter is a SpecialValue/]
+							[let sv : SpecialValue = v.oclAsType(SpecialValue)]											[comment OPEN assigns the variable to be a SpecialValue/]
+								[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
+									[if (sv.specialType=SpecialType::MISSING)]											[comment OPEN checks if the SpecialValue is MISSING/]
 missing_values_[vr.valueRangeDef.name/]=None
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment OPEN assigns the variable to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[elseif (sv.specialType=SpecialType::INVALID)]
+											[/let]																		[comment CLOSE assigns the variable to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
+									[elseif (sv.specialType=SpecialType::INVALID)]										[comment OPEN checks if the SpecialValue is INVALID/]
 invalid_values_[vr.valueRangeDef.name/]=None
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment CLOSE assigns the variable to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[elseif (sv.specialType=SpecialType::OUTLIER)]
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+											[/let]																		[comment CLOSE assigns the variable to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
+									[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialValue is OUTLIER/]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment CLOSE assigns the variable to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[/if]
-								[elseif (v.quantity = null)]
-									[if (sv.specialType=SpecialType::MISSING)]
+											[/let]																		[comment CLOSE assigns the variable to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
+									[/if]																				[comment CLOSE checks if the SpecialValue is MISSING, INVALID o OUTLIER/]
+								[elseif (v.quantity = null)]															[comment OPEN checks if the quantity is null/]
+									[if (sv.specialType=SpecialType::MISSING)]											[comment OPEN checks if the SpecialType is MISSING/]
 missing_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
@@ -305,7 +305,7 @@ if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=Belon
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-									[elseif (sv.specialType=SpecialType::INVALID)]
+									[elseif (sv.specialType=SpecialType::INVALID)]										[comment OPEN checks if the SpecialType is INVALID/]
 invalid_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
@@ -313,123 +313,123 @@ if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=Belo
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-									[elseif (sv.specialType=SpecialType::OUTLIER)]
+									[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialType is OUTLIER/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.dataDictionaryDefinition.name/], field=None, 
 								quant_abs=None, quant_rel=None, quant_op=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 									[/if]
-								[/if]
-							[/let]
-						[/if]
-					[/for]
-				[/for]
-			[elseif (aContract.type=ContractType::POSTCONDITION)]														[comment Separation between PRECONDITIONS and POSTCONDITIONS/]
-				[for (dd_out : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).outputPort)]
-					[for (v : Value | vr.value)]
-						[if (v.oclIsTypeOf(FixValue))]
-							[let fv : FixValue = v.oclAsType(FixValue)]
-								[if (v.quantity <> null)]
-									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+								[/if]																					[comment CLOSE checks if the quantity is null/]
+							[/let]																						[comment CLOSE assigns the variable to be a SpecialValue/]
+						[/if]																							[comment CLOSE checks if the parameter is a SpecialValue/]
+					[/for]																								[comment CLOSE traverse all the parameters/]
+				[/for]																									[comment CLOSE traverse all the input DataDictionaries/]
+			[elseif (aContract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if it is a Postcondition/]
+				[for (dd_out : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).outputPort)]	[comment OPEN traverse all the output DataDictionaries/]
+					[for (v : Value | vr.value)]																		[comment OPEN traverse all the value parameters/]
+						[if (v.oclIsTypeOf(FixValue))]																	[comment OPEN checks if the parameter is a FixValue/]
+							[let fv : FixValue = v.oclAsType(FixValue)]													[comment OPEN assigns the parameter to be a FixValue/]
+								[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
+									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
+										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-										[/let]
-									[elseif (v.quantity.oclIsTypeOf(Percent))]
-										[let per : Percent = v.quantity.oclAsType(Percent)]
+										[/let]																			[comment CLOSE assigns the parameter to be an AbsoluteValue/]
+									[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the parameter is a Percent/]
+										[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-										[/let]
-									[/if]
-								[else]
+										[/let]																			[comment CLOSE assigns the parameter to be a Percent/]
+									[/if]																				[comment CLOSE checks if the parameter is a Percent/]
+								[else]																					[comment OPEN checks if the quantity is null/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.dataDictionaryDefinition.name/], belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=None, quant_rel=None, quant_op=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-								[/if]
-							[/let]
-						[elseif (v.oclIsTypeOf(Interval))]
-							[let inter : Interval = v.oclAsType(Interval)]
+								[/if]																					[comment CLOSE checks if the quantity is null/]
+							[/let]																						[comment CLOSE assigns the parameter to be a FixValue/]
+						[elseif (v.oclIsTypeOf(Interval))]																[comment OPEN checks if the parameter is an Interval/]
+							[let inter : Interval = v.oclAsType(Interval)]												[comment OPEN assigns the parameter to be an Interval/]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd_out.dataDictionaryDefinition.name/],
                                closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-							[/let]
-						[elseif (v.oclIsTypeOf(SpecialValue))]
-							[let sv : SpecialValue = v.oclAsType(SpecialValue)]
-								[if (v.quantity <> null)]
-									[if (sv.specialType=SpecialType::MISSING)]
+							[/let]																						[comment CLOSE assigns the parameter to be an Interval/]
+						[elseif (v.oclIsTypeOf(SpecialValue))]															[comment OPEN checks if the parameter is a SpecialValue/]
+							[let sv : SpecialValue = v.oclAsType(SpecialValue)]											[comment OPEN assigns the parameter to be a SpecialValue/]
+								[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
+									[if (sv.specialType=SpecialType::MISSING)]											[comment OPEN checks if the SpecialValue is MISSING/]
 missing_values_[vr.valueRangeDef.name/]=None
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment CLOSE assigns the parameter to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[elseif (sv.specialType=SpecialType::INVALID)]
+											[/let]																		[comment CLOSE assigns the parameter to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
+									[elseif (sv.specialType=SpecialType::INVALID)]										[comment OPEN checks if the SpecialValue is INVALID/]
 invalid_values_[vr.valueRangeDef.name/]=None
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment CLOSE assigns the parameter to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[elseif (sv.specialType=SpecialType::OUTLIER)]
-										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]
-											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]
+											[/let]																		[comment CLOSE assigns the parameter to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is a Percent/]
+									[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialValue is OUTLIER/]
+										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
+											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[elseif (v.quantity.oclIsTypeOf(Percent))]
-											[let per : Percent = v.quantity.oclAsType(Percent)]
+											[/let]																		[comment CLOSE assigns the parameter to be an AbsoluteValue/]
+										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
+											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-											[/let]
-										[/if]
-									[/if]
-								[elseif (v.quantity = null)]
-									[if (sv.specialType=SpecialType::MISSING)]
+											[/let]																		[comment CLOSE assigns the parameter to be a Percent/]
+										[/if]																			[comment CLOSE checks if the quantity is an AbsolteValue or a Percent/]
+									[/if]																				[comment CLOSE checks if the SpecialValue is MISSING, INVALID or OUTLIER/]
+								[elseif (v.quantity = null)]															[comment OPEN checks if the quantity is null/]
+									[if (sv.specialType=SpecialType::MISSING)]											[comment OPEN checks if the SpecialValue is MISSING/]
 missing_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
@@ -437,7 +437,7 @@ if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=Belon
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-									[elseif (sv.specialType=SpecialType::INVALID)]
+									[elseif (sv.specialType=SpecialType::INVALID)]										[comment OPEN checks if the SpecialValue is INVALID/]
 invalid_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
@@ -445,20 +445,20 @@ if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=Belo
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-									[elseif (sv.specialType=SpecialType::OUTLIER)]
+									[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialValue is OUTLIER/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.dataDictionaryDefinition.name/], field=None, 
 								quant_abs=None, quant_rel=None, quant_op=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-									[/if]
-								[/if]
-							[/let]
-						[/if]
-					[/for]
-				[/for]
-			[/if]
-		[/let]
+									[/if]																				[comment CLOSE checks if the SpecialValue is MISSING, INVALID or OUTLIER/]
+								[/if]																					[comment CLOSE checks if the quantity is null or not/]
+							[/let]																						[comment CLOSE assigns the parameter to be a SpecialValue/]
+						[/if]																							[comment CLOSE checks if the parameter is a FixValue, Interval or SpecialValue/]
+					[/for]																								[comment CLOSE traverse all the value parameters/]
+				[/for]																									[comment CLOSE traverse all the output DataDictionaries/]
+			[/if]																										[comment CLOSE checks if it is a Precondition or a Postcondition/]
+		[/let]																											[comment CLOSE assigns the contract to be a ValueRange/]
 	[elseif (aContract.oclIsTypeOf(Condition))]																			[comment OPEN Contracts of type Condition (Invariants)/]
 [generateCallConditionContract(aContract)/]
 	[/if]																												[comment CLOSE Contracts of type FieldRange, ValueRange or Condition (Invariants)/]
