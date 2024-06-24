@@ -63,22 +63,17 @@
         eType="#//Primitive"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchingvalue" upperBound="-1"
         eType="#//MatchingValue"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterType" eType="#//FilterType"
-        defaultValueLiteral="EXCLUDE"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MatchingValue" abstract="true" eSuperTypes="#//Parameter"/>
   <eClassifiers xsi:type="ecore:EClass" name="Range" eSuperTypes="#//MatchingValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rangeDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//RangeDef"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
-        unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
-        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SpecialValues" eSuperTypes="#//MatchingValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="specialValuesDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//SpecialValuesDef"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialType" eType="#//SpecialValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MissingValues" eSuperTypes="#//MatchingValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missingValuesDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//MissingValuesDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiscretizeBin" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="discretizeBinDef" lowerBound="1"
@@ -154,7 +149,7 @@
     <eLiterals name="closedClosed" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImputeType" abstract="true" eSuperTypes="#//Parameter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imputeValue" eType="#//SpecialValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imputeValue" eType="#//ImputeValue"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CastType" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="castTypeDef" lowerBound="1"
@@ -191,7 +186,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SpecialValue">
+  <eClassifiers xsi:type="ecore:EEnum" name="ImputeValue">
     <eLiterals name="Missing"/>
     <eLiterals name="Invalid" value="1"/>
     <eLiterals name="Outlier" value="2"/>
@@ -206,9 +201,5 @@
   <eClassifiers xsi:type="ecore:EEnum" name="Operator">
     <eLiterals name="BELONG"/>
     <eLiterals name="NOTBELONG" value="1"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="FilterType">
-    <eLiterals name="EXCLUDE"/>
-    <eLiterals name="INCLUDE" value="1"/>
   </eClassifiers>
 </ecore:EPackage>
