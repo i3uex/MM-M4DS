@@ -1495,7 +1495,8 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0">
+              value="0"
+              dataType="Integer">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1507,7 +1508,8 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0">
+              value="0"
+              dataType="Integer">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
