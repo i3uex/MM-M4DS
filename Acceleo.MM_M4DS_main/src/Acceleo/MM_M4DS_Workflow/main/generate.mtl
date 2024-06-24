@@ -293,7 +293,8 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 						                                      data_type_input_list = data_type_input_list,
 						                                      data_type_output_list = data_type_output_list, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')	
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 		[else]																							[comment OPEN checks that there are no DataField/]
 input_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.inValue/]'[/let][/if][/for][']'/]
@@ -304,7 +305,8 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 						                                      data_type_input_list = None,
 						                                      data_type_output_list = None, field_in = None, filed_out = None)
 
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')				
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')			
 		[/if]																							[comment CLOSE checks that there are DataFields or not/]
 	[/for]																								[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 [/for]																									[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -360,6 +362,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 [comment]The code below generates the same transformation generated above but for the whole dataframe instead of a field[/comment]
 					[else]																				[comment OPEN checks that there are no DataFields/]
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]			[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
@@ -393,6 +396,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				        	[/if]																		[comment CLOSE checks that the ImputeType is a NumOp/]
 						[/if]																			[comment CLOSE checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 					[/if]																				[comment CLOSE checks if there are DataFields or not/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 			[/for]																						[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -427,6 +431,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/if]																			[comment CLOSE checks if there are DataFields/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 					[/for]																				[comment CLOSE traverse all the intervals in the binner/]
 				[/for]																					[comment CLOSE traverse all the DataFields in the input DataDictionary/]
 			[/let]																						[comment OPEN assigns the parameter to be an DiscretizeBin/]
@@ -442,6 +447,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse al the output DataDictionaries/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
 		[/let]																							[comment CLOSE assigns the parameter to be a DerivedField/]
@@ -459,6 +465,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/for]																			[comment CLOSE traverse the DataFields/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 					[/for]																				[comment CLOSE traverse the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse the input DataDictionaries/]
 			[/let]																						[comment CLOSE assigns the variable to be a CastType/]
@@ -511,6 +518,7 @@ filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range :
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse all the output DataDictionaries/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
 		[/if]																							[comment CLOSE checks that the parameter is a FilterValue/]
@@ -527,6 +535,7 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 [dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
+[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
 					[/for]																				[comment CLOSE traverse all the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries/]
 			[/let]																						[comment CLOSE assigns the variable to be a field/]
