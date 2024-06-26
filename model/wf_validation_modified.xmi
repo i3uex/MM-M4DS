@@ -1116,7 +1116,8 @@
     </parameter>
     <parameter
         xsi:type="Workflow:Range"
-        name="rowFilterRange(init_span)_param_range">
+        name="rowFilterRange(init_span)_param_range"
+        maxInfinity="true">
       <rangeDef
           href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
     </parameter>
