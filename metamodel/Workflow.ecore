@@ -70,6 +70,11 @@
         eType="ecore:EClass Library.ecore#//RangeDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"
+        defaultValueLiteral="closedClosed"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minInfinity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxInfinity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MissingValues" eSuperTypes="#//MatchingValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="missingValuesDef" lowerBound="1"
