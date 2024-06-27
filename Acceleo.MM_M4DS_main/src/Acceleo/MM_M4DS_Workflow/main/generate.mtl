@@ -23,6 +23,7 @@
 [template public generateDataProcessing(aWorkflow : Workflow)]
 [file ('dataProcessing.py', false, 'UTF-8')]
 import pandas as pd
+import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
@@ -118,6 +119,7 @@ generateDataProcessing()
 import os
 
 import pandas as pd
+import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
@@ -217,6 +219,7 @@ generateDataProcessing()
 [template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
 [file ('transformations.py', false, 'UTF-8')]
 import pandas as pd
+import numpy as np
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
@@ -501,15 +504,17 @@ dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) sepa
 						[/let]																											[comment CLOSE assigns to a set only the SpecialValues/]
 						[let filteredSet : OrderedSet(Range) = fValue.matchingvalue->select(e | e.oclIsKindOf(Range))]					[comment OPEN assigns to a set only the Range/]
 							[if (not filteredSet->isEmpty())]											[comment OPEN checks that the list of Range is not empty/]
-filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.min/][/for][']'/]
-filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][range.max/][/for][']'/]
+filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][if (range.minInfinity=true)]-np.inf[else][range.min/][/if][/for][']'/]
+filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][if (range.maxInfinity=true)]np.inf[else][range.max/][/if][/for][']'/]
+closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')]Closure([if (range.clousure=ClosureType::opeOpen)]0[elseif(range.clousure=ClosureType::openClosed)]1[elseif(range.clousure=ClosureType::closedOpen)]2[elseif(range.clousure=ClosureType::closedClosed)]3[/if])[/for][']'/]
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
 [dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
 																										left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
 																										right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
-																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
+																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]),
+																										closure_type_list=closure_type_list_[fValue.filterValueDef.name/])
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
 							[/if]																		[comment CLOSE checks that the list of Range is not empty/]
 						[/let]																											[comment CLOSE assigns to a set only the Range/]

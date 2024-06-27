@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
-  <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_main::main::generate" startHeaderPosition="83" endHeaderPosition="326">
+  <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_main::main::generate" startHeaderPosition="83" endHeaderPosition="334">
     <documentation xsi:type="mtl:ModuleDocumentation">
-      <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
+      <body startPosition="32" endPosition="80" value="&#xD;&#xA;The documentation of the module generate.&#xD;&#xA;&#xD;&#xA;"/>
     </documentation>
     <input>
       <takesTypesFrom href="http://www.example.org/Library#/"/>
     </input>
     <input>
-      <takesTypesFrom href="https://www.example.org/workflow#/"/>
+      <takesTypesFrom href="https://www.example.org/contract#/"/>
     </input>
     <input>
       <takesTypesFrom href="https://www.example.org/contractDef#/"/>
     </input>
     <input>
-      <takesTypesFrom href="https://www.example.org/contract#/"/>
+      <takesTypesFrom href="https://www.example.org/workflow#/"/>
     </input>
     <ownedModuleElement xsi:type="mtl:Template" name="generateElement" visibility="Public" main="true">
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+      <body xsi:type="mtl:FileBlock" openMode="OverWrite">
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+        <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </charset>
+      </body>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="250" endPosition="326" value="&#xA;The documentation of the template generateElement.&#xA;@param aLibrary&#xA;&#xA;"/>
-        <parametersDocumentation name="aLibrary">
+        <body startPosition="251" endPosition="334" value="&#xD;&#xA;The documentation of the template generateElement.&#xD;&#xA;@param anAbsoluteValue&#xD;&#xA;&#xD;&#xA;"/>
+        <parametersDocumentation name="anAbsoluteValue">
           <body value=""/>
         </parametersDocumentation>
       </documentation>
-      <parameter name="aLibrary">
-        <eType xsi:type="ecore:EClass" href="http://www.example.org/Library#//Library"/>
+      <parameter name="anAbsoluteValue">
+        <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
       </parameter>
     </ownedModuleElement>
   </mtl:Module>
@@ -55,8 +60,8 @@
         </eAnnotations>
         <eAnnotations source="MTL" references="/0/generateElement"/>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <eParameters name="aLibrary">
-          <eType xsi:type="ecore:EClass" href="http://www.example.org/Library#//Library"/>
+        <eParameters name="anAbsoluteValue">
+          <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
         </eParameters>
       </eOperations>
     </eClassifiers>
@@ -80,9 +85,9 @@
         <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Library_Library_Class">
+    <eClassifiers xsi:type="ecore:EClass" name="Contract_AbsoluteValue_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.example.org/Library#//Library"/>
+        <references href="https://www.example.org/contract#//AbsoluteValue"/>
       </eAnnotations>
     </eClassifiers>
   </ecore:EPackage>
@@ -90,13 +95,28 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.example.org/Library#//Library"/>
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="http://www.example.org/Library#//Library"/>
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/contract#//AbsoluteValue"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -108,28 +128,38 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateElement">
-      <details key="start" value="330"/>
-      <details key="end" value="412"/>
+      <details key="start" value="337"/>
+      <details key="end" value="487"/>
       <details key="line" value="12"/>
     </eAnnotations>
     <eAnnotations source="positions.2" references="/0/generateElement/%">
-      <details key="start" value="400"/>
-      <details key="end" value="401"/>
+      <details key="start" value="421"/>
+      <details key="end" value="475"/>
       <details key="line" value="14"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/generateElement/%.1">
-      <details key="start" value="247"/>
-      <details key="end" value="328"/>
+    <eAnnotations source="positions.3" references="/0/generateElement/%/%">
+      <details key="start" value="467"/>
+      <details key="end" value="468"/>
+      <details key="line" value="15"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateElement/%/%.1">
+      <details key="start" value="457"/>
+      <details key="end" value="464"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/generateElement/%.1/aLibrary">
+    <eAnnotations source="positions.5" references="/0/generateElement/%.1">
+      <details key="start" value="248"/>
+      <details key="end" value="336"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateElement/%.1/anAbsoluteValue">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/generateElement/aLibrary">
-      <details key="start" value="363"/>
-      <details key="end" value="380"/>
+    <eAnnotations source="positions.7" references="/0/generateElement/anAbsoluteValue">
+      <details key="start" value="370"/>
+      <details key="end" value="401"/>
       <details key="line" value="12"/>
     </eAnnotations>
   </ecore:EAnnotation>
