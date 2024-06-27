@@ -1,2 +1,1 @@
-# MM-M4DS
-Meta Modelos del proyecto M4DSP
+# Metamodels of paper for MODELS-24

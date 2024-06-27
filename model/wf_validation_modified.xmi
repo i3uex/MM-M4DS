@@ -531,7 +531,7 @@
           <quantity
               xsi:type="Contract:Percent"
               operator="lessEqual"
-              percent="30.0">
+              percent="70.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -695,7 +695,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              percent="70.0">
+              operator="lessEqual"
+              percent="30.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -1116,7 +1117,7 @@
     <parameter
         xsi:type="Workflow:Range"
         name="rowFilterRange(init_span)_param_range"
-        min="0.0">
+        minInfinity="true">
       <rangeDef
           href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
     </parameter>
@@ -1126,7 +1127,8 @@
           href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:ValueRange"
-          name="rowFilter(init_span)_PRE_valueRange">
+          name="rowFilter(init_span)_PRE_valueRange"
+          belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
             dataField="//@dataprocessing.4/@inputPort.0/@datafield.0"
@@ -1136,7 +1138,8 @@
         </in>
         <value
             xsi:type="Contract:Interval"
-            leftMargin="-1000.0">
+            rightMargin="1000.0"
+            closureType="closedOpen">
           <intervalDef
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
@@ -1162,7 +1165,8 @@
         </in>
         <value
             xsi:type="Contract:FixValue"
-            value="-216">
+            value="-216"
+            dataType="Integer">
           <valueFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
@@ -1492,7 +1496,8 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0">
+              value="0"
+              dataType="Integer">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1504,7 +1509,8 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0">
+              value="0"
+              dataType="Integer">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1613,15 +1619,13 @@
         </in>
         <value
             xsi:type="Contract:FixValue"
-            value="Y"
-            dataType="Integer">
+            value="Y">
           <valueFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
         <value
             xsi:type="Contract:FixValue"
-            value="N"
-            dataType="Integer">
+            value="N">
           <valueFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
@@ -2507,7 +2511,7 @@
           belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
-            dataField="//@dataprocessing.10/@inputPort.0/@datafield.2"
+            dataField="//@dataprocessing.10/@outputPort.0/@datafield.2"
             name="binner(SOLICITED_CNTCTS)_POST_input_dataField">
           <dataFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.0/@contractDefinition/@in"/>
@@ -2894,7 +2898,7 @@
       </datafield>
       <datafield
           xsi:type="Workflow:Categorical"
-          name="binner(SELF_INIT_CNTCTS)_output_dataField"
+          name="binner(SOLICITED_CNTCTS)_output_dataField"
           displayName="SOLICITED_CNTCTS_binned"
           in="//@dataprocessing.10/@inputPort.0/@datafield.2">
         <categoricalDef
