@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import functions.contract_invariants as contract_invariants
+import functions.60.0 as 60.0
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
@@ -84,7 +84,7 @@ def generateDataProcessing():
 		print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 	
 	missing_values_imputeByDerivedValue_INV_condition=[]
-	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
+	if 60.0.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
 								data_dictionary_out=imputeByDerivedValue_output_dataDictionary,
 								belong_op_in=Belong(0),
 								belong_op_out=Belong(0),
@@ -97,7 +97,7 @@ def generateDataProcessing():
 	
 	
 	missing_values_imputeByDerivedValue_INV_condition=[]
-	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
+	if 60.0.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
 								data_dictionary_out=imputeByDerivedValue_output_dataDictionary,
 								belong_op_in=Belong(0),
 								belong_op_out=Belong(0),
@@ -110,7 +110,7 @@ def generateDataProcessing():
 	
 	
 	missing_values_imputeByDerivedValue_INV_condition=[]
-	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
+	if 60.0.check_inv_special_value_derived_value(data_dictionary_in=imputeByDerivedValue_input_dataDictionary,
 								data_dictionary_out=imputeByDerivedValue_output_dataDictionary,
 								belong_op_in=Belong(0),
 								belong_op_out=Belong(0),
@@ -179,7 +179,7 @@ def generateDataProcessing():
 		print('POSTCONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_POST_valueRange NOT VALIDATED')
 	
 	missing_values_imputeByFixValue_INV_condition=[]
-	if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=imputeByFixValue_input_dataDictionary,
+	if 60.0.check_inv_special_value_fix_value(data_dictionary_in=imputeByFixValue_input_dataDictionary,
 								data_dictionary_out=imputeByFixValue_output_dataDictionary,
 								special_type_input=SpecialType(0),
 								fix_value_output='Unknown',
@@ -194,7 +194,7 @@ def generateDataProcessing():
 	
 	
 	missing_values_imputeByFixValue_INV_condition=[]
-	if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=imputeByFixValue_input_dataDictionary,
+	if 60.0.check_inv_special_value_fix_value(data_dictionary_in=imputeByFixValue_input_dataDictionary,
 								data_dictionary_out=imputeByFixValue_output_dataDictionary,
 								special_type_input=SpecialType(0),
 								fix_value_output='Unknown',
@@ -263,7 +263,7 @@ def generateDataProcessing():
 		print('POSTCONDITION imputeMissingByMean(distance)_POST_valueRange NOT VALIDATED')
 	
 	missing_values_imputeByNumericOp_INV_condition=[]
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -276,7 +276,7 @@ def generateDataProcessing():
 	
 	
 	missing_values_imputeByNumericOp_INV_condition=[]
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -320,7 +320,7 @@ def generateDataProcessing():
 		print('POSTCONDITION imputeMissingByLinearInterpolation(satscore)_POST_valueRange NOT VALIDATED')
 	
 	missing_values_imputeByNumericOp_INV_condition=[]
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -441,7 +441,7 @@ def generateDataProcessing():
 	data_type_input_list_def_INV_condition=[DataType(0), DataType(0)]
 	data_type_output_list_def_INV_condition=[DataType(2), DataType(2)]
 	
-	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
+	if 60.0.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
 											data_dictionary_out=mapping_output_dataDictionary,
 											input_values_list=input_values_list_def_INV_condition, 
 											output_values_list=output_values_list_def_INV_condition,
@@ -501,7 +501,7 @@ def generateDataProcessing():
 	data_type_input_list_def_INV_condition=[DataType(0), DataType(0)]
 	data_type_output_list_def_INV_condition=[DataType(2), DataType(2)]
 	
-	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
+	if 60.0.check_inv_fix_value_fix_value(data_dictionary_in=mapping_input_dataDictionary,
 											data_dictionary_out=mapping_output_dataDictionary,
 											input_values_list=input_values_list_def_INV_condition, 
 											output_values_list=output_values_list_def_INV_condition,
@@ -531,7 +531,7 @@ def generateDataProcessing():
 	categoricalToContinuous_output_dataDictionary.to_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv')
 	categoricalToContinuous_output_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',')
 	
-	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=categoricalToContinuous_input_dataDictionary,
+	if 60.0.check_inv_missing_value_missing_value(data_dictionary_in=categoricalToContinuous_input_dataDictionary,
 											data_dictionary_out=categoricalToContinuous_output_dataDictionary,
 											belong_op_out=Belong(1), field_in='TERRITORY', field_out='TERRITORY'):
 		print('INVARIANT INV_condition_TERRITORY VALIDATED')
@@ -539,7 +539,7 @@ def generateDataProcessing():
 		print('INVARIANT INV_condition_TERRITORY NOT VALIDATED')
 	
 	
-	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=categoricalToContinuous_input_dataDictionary,
+	if 60.0.check_inv_missing_value_missing_value(data_dictionary_in=categoricalToContinuous_input_dataDictionary,
 											data_dictionary_out=categoricalToContinuous_output_dataDictionary,
 											belong_op_out=Belong(1), field_in='Instate', field_out='Instate'):
 		print('INVARIANT INV_condition_Instate VALIDATED')
@@ -612,7 +612,7 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION imputeOutlierByClosest(Instate)_POST_valueRange´ NOT VALIDATED')
 	
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -624,7 +624,7 @@ def generateDataProcessing():
 		print('INVARIANT imputeOutlierByClosest(avg_income)_INV_condition NOT VALIDATED')
 	
 	
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -636,7 +636,7 @@ def generateDataProcessing():
 		print('INVARIANT imputeOutlierByClosest(distance)_INV_condition NOT VALIDATED')
 	
 	
-	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
+	if 60.0.check_inv_special_value_num_op(data_dictionary_in=imputeByNumericOp_input_dataDictionary,
 											data_dictionary_out=imputeByNumericOp_output_dataDictionary,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
@@ -791,7 +791,7 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION binner(SOLICITED_CNTCTS)_POST_valueRange NOT VALIDATED')
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=-1000.0, right_margin=1.0,
 											closure_type=Closure(0),
@@ -802,7 +802,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1.0, right_margin=4.0,
 											closure_type=Closure(2),
@@ -813,7 +813,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=4.0, right_margin=1000.0,
 											closure_type=Closure(2),
@@ -826,7 +826,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
 	
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=-1000.0, right_margin=1.0,
 											closure_type=Closure(0),
@@ -837,7 +837,7 @@ def generateDataProcessing():
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 	else:
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1.0, right_margin=4.0,
 											closure_type=Closure(2),
@@ -848,7 +848,7 @@ def generateDataProcessing():
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 	else:
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=4.0, right_margin=1000.0,
 											closure_type=Closure(2),
@@ -861,7 +861,7 @@ def generateDataProcessing():
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 	
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=-1000.0, right_margin=1.0,
 											closure_type=Closure(0),
@@ -872,7 +872,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1.0, right_margin=4.0,
 											closure_type=Closure(2),
@@ -883,7 +883,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=4.0, right_margin=1000.0,
 											closure_type=Closure(2),
@@ -975,7 +975,7 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION binner(TERRITORY)_POST_valueRange NOT VALIDATED')
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=-1000.0, right_margin=1.0,
 											closure_type=Closure(0),
@@ -986,7 +986,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1.0, right_margin=3.0,
 											closure_type=Closure(2),
@@ -997,7 +997,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=3.0, right_margin=5.0,
 											closure_type=Closure(2),
@@ -1008,7 +1008,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=5.0, right_margin=7.0,
 											closure_type=Closure(2),
@@ -1019,7 +1019,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=7.0, right_margin=1000.0,
 											closure_type=Closure(2),
@@ -1100,7 +1100,7 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION binner(satscore)_POST_valueRange NOT VALIDATED')
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=-1000.0, right_margin=1040.0,
 											closure_type=Closure(1),
@@ -1111,7 +1111,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1040.0, right_margin=1160.0,
 											closure_type=Closure(0),
@@ -1122,7 +1122,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1160.0, right_margin=1340.0,
 											closure_type=Closure(1),
@@ -1133,7 +1133,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=1340.0, right_margin=2000.0,
 											closure_type=Closure(1),
@@ -1203,7 +1203,7 @@ def generateDataProcessing():
 	else:
 		print('POSTCONDITION binner(avg_income)_POST_valueRange NOT VALIDATED')
 	
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=9.0, right_margin=42830.0,
 											closure_type=Closure(0),
@@ -1214,7 +1214,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=42830.0, right_margin=55559.0,
 											closure_type=Closure(2),
@@ -1225,7 +1225,7 @@ def generateDataProcessing():
 		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
-	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
+	if 60.0.check_inv_interval_fix_value(data_dictionary_in=binner_input_dataDictionary,
 											data_dictionary_out=binner_output_dataDictionary,
 											left_margin=55590.0, right_margin=100000.0,
 											closure_type=Closure(2),
