@@ -82,7 +82,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="specialValuesDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MissingValuesDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialType" eType="#//SpecialValue"
-        defaultValueLiteral="MISSING"/>
+        defaultValueLiteral="Missing"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiscretizeBin" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="discretizeBinDef" lowerBound="1"

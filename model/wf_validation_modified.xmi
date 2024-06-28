@@ -40,8 +40,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
-              percent="70.0">
+              operator="less"
+              percent="60.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -70,8 +70,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
-              percent="70.0">
+              operator="less"
+              percent="60.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -100,8 +100,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
-              percent="70.0">
+              operator="less"
+              percent="60.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -426,7 +426,7 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
+              operator="less"
               percent="70.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
@@ -530,8 +530,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
-              percent="70.0">
+              operator="less"
+              percent="60.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -695,8 +695,8 @@
             xsi:type="Contract:SpecialValue">
           <quantity
               xsi:type="Contract:Percent"
-              operator="lessEqual"
-              percent="30.0">
+              operator="less"
+              percent="60.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
