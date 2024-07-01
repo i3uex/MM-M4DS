@@ -3251,8 +3251,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
           leftMargin="1040.0"
-          rightMargin="1160.0"
-          clousure="openClosed"/>
+          rightMargin="1160.0"/>
     </parameter>
     <parameter
         xsi:type="Workflow:DiscretizeBin"
@@ -3389,7 +3388,7 @@
               xsi:type="Contract:Interval"
               leftMargin="1160.0"
               rightMargin="1340.0"
-              closureType="openClosed">
+              closureType="closedOpen">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
