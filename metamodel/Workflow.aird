@@ -7,7 +7,7 @@
     <semanticResources>Contract.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_w8j1EHowEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1719480925652">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1720549140044">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Workflow.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1374,7 +1374,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_1HbdkHoxEe67Z-Y0pklHtA" name="[2..*] dataprocessing" sourceNode="_0dI_4HowEe67Z-Y0pklHtA" targetNode="__qKR8HowEe67Z-Y0pklHtA">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_1HbdkHoxEe67Z-Y0pklHtA" name="[1..*] dataprocessing" sourceNode="_0dI_4HowEe67Z-Y0pklHtA" targetNode="__qKR8HowEe67Z-Y0pklHtA">
       <target xmi:type="ecore:EReference" href="Workflow.ecore#//Workflow/dataprocessing"/>
       <semanticElements xmi:type="ecore:EReference" href="Workflow.ecore#//Workflow/dataprocessing"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_2ipeY3oxEe67Z-Y0pklHtA" description="_2ipeYHoxEe67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
@@ -1385,14 +1385,12 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_3wWAlnoxEe67Z-Y0pklHtA" name="[1..*] link" sourceNode="_0dI_4HowEe67Z-Y0pklHtA" targetNode="_Fhq34HoxEe67Z-Y0pklHtA">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_3wWAlnoxEe67Z-Y0pklHtA" name="[0..*] link" sourceNode="_0dI_4HowEe67Z-Y0pklHtA" targetNode="_Fhq34HoxEe67Z-Y0pklHtA">
       <target xmi:type="ecore:EReference" href="Workflow.ecore#//Workflow/link"/>
       <semanticElements xmi:type="ecore:EReference" href="Workflow.ecore#//Workflow/link"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_60LlAHoxEe67Z-Y0pklHtA" description="_2ipeYHoxEe67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_60LlAnoxEe67Z-Y0pklHtA" showIcon="false">
-          <labelFormat>bold</labelFormat>
-        </centerLabelStyle>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_60LlAXoxEe67Z-Y0pklHtA" labelSize="6" showIcon="false" labelColor="39,76,114"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_tpb3Nj4fEe-lTfvCJghJbQ" description="_sY67t3o5Ee67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_tpb3OD4fEe-lTfvCJghJbQ" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_tpb3Nz4fEe-lTfvCJghJbQ" labelSize="6" showIcon="false" labelColor="39,76,114"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
@@ -2648,14 +2646,14 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_Y6CkEDRoEe-xLJxvlG5xkw" name="SpecialValues" tooltipText="&#xA;WARNING : The default value literal 'MISSING' must be a valid literal of the attribute's type" outgoingEdges="_Y6OKgjRoEe-xLJxvlG5xkw" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_Y6CkEDRoEe-xLJxvlG5xkw" name="SpecialValues" tooltipText="" outgoingEdges="_Y6OKgjRoEe-xLJxvlG5xkw" width="12" height="10">
       <target xmi:type="ecore:EClass" href="Workflow.ecore#//SpecialValues"/>
       <semanticElements xmi:type="ecore:EClass" href="Workflow.ecore#//SpecialValues"/>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_Y6DLIDRoEe-xLJxvlG5xkw" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Y6GOeTRoEe-xLJxvlG5xkw" name="specialType : SpecialValue = MISSING" tooltipText="&#xA;WARNING : The default value literal 'MISSING' must be a valid literal of the attribute's type">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Y6GOeTRoEe-xLJxvlG5xkw" name="specialType : SpecialValue = Missing" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Workflow.ecore#//SpecialValues/specialType"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Workflow.ecore#//SpecialValues/specialType"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_Y6GOejRoEe-xLJxvlG5xkw" labelAlignment="LEFT">
