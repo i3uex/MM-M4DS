@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('https://www.example.org/workflow', 'https://www.example.org/contract')]
+[module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'http://www.example.org/Library')]
 
 [import Acceleo::MM_M4DS_contract::Jobs::main::generate/]
 
@@ -33,29 +33,43 @@ from helpers.logger import set_logger
 [comment generate the imports and the class/]
 def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-[if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
+	[if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
-	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if dpd.oclIsKindOf(Library::Transformation)]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-	[/for]																		[comment CLOSE read all the input datasets and store them/]
-	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+						[/for]																		[comment CLOSE read all the input datasets and store them/]
+						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract)/]
-		[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
-	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+							[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
+						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d)/]
-	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
+						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract)/]
-		[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
-	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
-	[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-		[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
+							[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
+						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract)/]
-		[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
-	[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
-[/if]																			[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+							[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
+						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+					[/let]
+				[else]
+
+AQUI SE PODRÍAN HACER LAS LLAMADAS A LA GENERACION DE CODIGO DE LOS JOBS
+JUNTO CON LA ASIGNACION DE PATHS Y SEPARADORES
+
+
+				[/if]
+			[/let]
+		[/if]
+	[/if]																			[comment CLOSE checks if the DataProcessing is isolated (no links)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 [if (d.incoming = null and d.outgoing<>null)]									[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]

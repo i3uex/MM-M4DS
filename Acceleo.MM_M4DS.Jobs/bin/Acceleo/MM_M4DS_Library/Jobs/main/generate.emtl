@@ -7,7 +7,7 @@
     <input>
       <takesTypesFrom href="http://www.example.org/Library#/"/>
     </input>
-    <imports href="platform:/resource/Acceleo.MM_M4DS.Jobs/bin/Acceleo/MM_M4DS_Workflow/Jobs/main/generate.emtl#/0"/>
+    <imports href="../../../MM_M4DS_Workflow/Jobs/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateLibrary" visibility="Public" main="true">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <body xsi:type="mtl:ForBlock">
@@ -15,7 +15,7 @@
           <body xsi:type="mtl:LetBlock">
             <body xsi:type="mtl:TemplateInvocation">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-              <definition href="platform:/resource/Acceleo.MM_M4DS.Jobs/bin/Acceleo/MM_M4DS_Workflow/Jobs/main/generate.emtl#/0/generateWorkflow"/>
+              <definition href="../../../MM_M4DS_Workflow/Jobs/main/generate.emtl#/0/generateWorkflow"/>
               <argument xsi:type="ocl.ecore:PropertyCallExp">
                 <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
                 <source xsi:type="ocl.ecore:VariableExp" name="job" referredVariable="/0/generateLibrary/%.1/%/%/job">
@@ -233,7 +233,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="platform:/resource/Acceleo.MM_M4DS.Jobs/bin/Acceleo/MM_M4DS_Workflow/Jobs/main/generate.emtl#/0/generateWorkflow"/>
+          <references href="../../../MM_M4DS_Workflow/Jobs/main/generate.emtl#/0/generateWorkflow"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aWorkflow">
