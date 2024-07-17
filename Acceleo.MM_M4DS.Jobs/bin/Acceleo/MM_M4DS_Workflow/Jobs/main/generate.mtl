@@ -34,11 +34,11 @@ from helpers.logger import set_logger
 def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
 		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
 			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
-				[if dpd.oclIsKindOf(Library::Transformation)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
@@ -60,21 +60,65 @@ def generateWorkflow():
 							[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
 						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
 					[/let]
-				[else]
-
-AQUI SE PODRÍAN HACER LAS LLAMADAS A LA GENERACION DE CODIGO DE LOS JOBS
-JUNTO CON LA ASIGNACION DE PATHS Y SEPARADORES
-
-
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
 				[/if]
 			[/let]
 		[/if]
 	[/if]																			[comment CLOSE checks if the DataProcessing is isolated (no links)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-[if (d.incoming = null and d.outgoing<>null)]									[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+	[if (d.incoming = null and d.outgoing<>null)]									[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [callRecursiveTemplate(d)/]
-[/if]																			[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+					[/let]
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
+	[/if]																			[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 set_logger("dataProcessing")
 generateWorkflow()
@@ -119,11 +163,11 @@ generateWorkflow()
 	[generateCallContract(c.contract)/]
 	[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
 [/for]
-	[if (d.outgoing<>null)]														[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]		[comment OPEN assigns the next DataProcessing to a variable/]
+[if (d.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]	[comment OPEN assigns the next DataProcessing to a variable/]
 [callRecursiveTemplate(nextDp)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
-[/let]																			[comment OPEN assigns the next DataProcessing to a variable/]
-	[/if]																		[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[/let]																		[comment OPEN assigns the next DataProcessing to a variable/]
+[/if]																			[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
 [comment]################################################################################################################################################################[/comment]
@@ -144,35 +188,93 @@ def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
-		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+						[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-		[/for]																	[comment CLOSE read all the input datasets and store them/]
-		[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
+						[/for]																	[comment CLOSE read all the input datasets and store them/]
+						[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
 	if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
 		[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-		[/for]																	[comment CLOSE read all the output datasets and store them/]
-		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::PRECONDITION)	]				[comment OPEN checks if the if the contract is a Precondition/]
+						[/for]																	[comment CLOSE read all the output datasets and store them/]
+						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::PRECONDITION)	]				[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract)/]
-			[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
-		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+							[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
+						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract)/]
-			[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
-		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-		[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
+							[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
+						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract)/]
-			[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
-		[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+							[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
+						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+					[/let]
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
 	[/if]																		[comment CLOSE checks if the DataProcessing is isolated (no links)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing<>null)]								[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [callContractsRecursiveTemplate(d)/]
+					[/let]
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
 	[/if]																		[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 set_logger("contracts")
@@ -243,16 +345,74 @@ def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
 #-----------------New DataProcessing-----------------
-	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-	[/for]																		[comment CLOSE read all the input datasets and store them/]
+						[/for]																		[comment CLOSE read all the input datasets and store them/]
 	[generateCallTransformation(d)/]
+					[/let]
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
 	[/if]																		[comment CLOSE checks if the DataProcessing is isolated (no links)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing<>null)]								[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+				[if (dpd.oclIsKindOf(Library::Transformation))]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [callTransformationsRecursiveTemplate(d)/]
+					[/let]
+				[elseif (dpd.oclIsKindOf(Library::Job))]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]
+							[if (arg.oclIsKindOf(DataDictionary))]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+								[/let]
+							[/if]
+						[/for]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
 	[/if]																		[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
 [/for]																			[comment CLOSE traverse all the DataProcessings/]
 set_logger("transformations")

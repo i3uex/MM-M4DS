@@ -6,60 +6,63 @@ from helpers.logger import set_logger
 
 def generateWorkflow():
 #-----------------New DataProcessing-----------------
-	job_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByMean(avg_income, distance)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByMean(avg_income, distance)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByLinearInterpolation(satscore)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-
-	job_imputeMissingByLinearInterpolation(satscore)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-	job_rowFilterRange(init_span)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
-
-	job_rowFilterRange(init_span)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
-
-	job_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep = ',')
-
-	job_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
-
-	job_mapping(TERRITORY)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep = ',')
-
-	job_mapping(TERRITORY)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-
-	job_mapping(Instate)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-
-	job_mapping(Instate)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
-
-	job_stringToNumber(TERRITORY, Instate)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep = ',')
-
-	job_stringToNumber(TERRITORY, Instate)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
-
-	job_imputeOutlierByClosest(avg_income, distance, Instate)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep = ',')
-
-	job_imputeOutlierByClosest(avg_income, distance, Instate)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
-	job_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
-	job_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
-
-	job_binner(TERRITORY)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
-	job_binner(TERRITORY)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
-
-	job_binner(satscore)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
-	job_binner(satscore)_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep = ',')
-
-	job_binner(avg_income)_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep = ',')
-
-	
+#--------------------------------------Input data dictionaries--------------------------------------
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='./python_dataDictionaries/missing_input_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep=','
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='./python_dataDictionaries/missing_input_dataDictionary.csv'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_sep=','
+	imputeMissingByMean_avg_income_distance__input_dataDictionary='./python_dataDictionaries/missing_input_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_sep=','
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='./python_dataDictionaries/missing_input_dataDictionary.csv'
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_sep=','
+	rowFilterRange_init_span__input_dataDictionary='./python_dataDictionaries/missing_output_dataDictionary.csv'
+	rowFilterRange_init_span__input_dataDictionary_sep=','
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='./python_dataDictionaries/rowFilter_output_dataDictionary.csv'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_sep=','
+	mapping_TERRITORY__input_dataDictionary='./python_dataDictionaries/columnFilter_output_dataDictionary.csv'
+	mapping_TERRITORY__input_dataDictionary_sep=','
+	mapping_Instate__input_dataDictionary='./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv'
+	mapping_Instate__input_dataDictionary_sep=','
+	stringToNumber_TERRITORY_Instate__input_dataDictionary='./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv'
+	stringToNumber_TERRITORY_Instate__input_dataDictionary_sep=','
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='./python_dataDictionaries/stringToNumber_output_dataDictionary.csv'
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_sep=','
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='./python_dataDictionaries/numericOutliers_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_sep=','
+	binner_avg_income__input_dataDictionary='./python_dataDictionaries/numericOutliers_output_dataDictionary.csv'
+	binner_avg_income__input_dataDictionary_sep=','
+	binner_satscore__input_dataDictionary='./python_dataDictionaries/numericOutliers_output_dataDictionary.csv'
+	binner_satscore__input_dataDictionary_sep=','
+	binner_avg_income__input_dataDictionary='./python_dataDictionaries/numericOutliers_output_dataDictionary.csv'
+	binner_avg_income__input_dataDictionary_sep=','
+#--------------------------------------Output data dictionaries--------------------------------------
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='./python_dataDictionaries/missing_output_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_sep=','
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='./python_dataDictionaries/missing_output_dataDictionary.csv'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_sep=','
+	imputeMissingByMean_avg_income_distance__output_dataDictionary='./python_dataDictionaries/missing_output_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__output_dataDictionary_sep=','
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='./python_dataDictionaries/missing_output_dataDictionary.csv'
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_sep=','
+	rowFilterRange_init_span__output_dataDictionary='./python_dataDictionaries/rowFilter_output_dataDictionary.csv'
+	rowFilterRange_init_span__output_dataDictionary_sep=','
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='./python_dataDictionaries/columnFilter_output_dataDictionary.csv'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_sep=','
+	mapping_TERRITORY__output_dataDictionary='./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv'
+	mapping_TERRITORY__output_dataDictionary_sep=','
+	invalid='./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv'
+	invalid_sep=','
+	invalid='./python_dataDictionaries/stringToNumber_output_dataDictionary.csv'
+	invalid_sep=','
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='./python_dataDictionaries/numericOutliers_output_dataDictionary.csv'
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_sep=','
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='./python_dataDictionaries/numericBinner_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_sep=','
+	binner_TERRITORY__output_dataDictionary='./python_dataDictionaries/numericBinner_output_dataDictionary.csv'
+	binner_TERRITORY__output_dataDictionary_sep=','
+	binner_satscore__output_dataDictionary='./python_dataDictionaries/numericBinner_output_dataDictionary.csv'
+	binner_satscore__output_dataDictionary_sep=','
+	binner_avg_income__output_dataDictionary='./python_dataDictionaries/numericBinner_output_dataDictionary.csv'
+	binner_avg_income__output_dataDictionary_sep=','
 set_logger("transformations")
 generateWorkflow()
