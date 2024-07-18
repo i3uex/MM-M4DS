@@ -21,7 +21,7 @@
 
 
 [template public generateDataProcessing(aWorkflow : Workflow)]
-[file ('dataProcessing_Job_'+aWorkflow.name.replaceAll(' ', '_')+'.py', false, 'UTF-8')]
+[file ('dataProcessing_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
 import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
@@ -170,10 +170,9 @@ generateWorkflow()
 [/if]																			[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
-[comment]################################################################################################################################################################[/comment]
 
 [template public generateContractsDataProcessing(aWorkflow : Workflow)]
-[file ('contracts_Job_'+aWorkflow.name.replaceAll(' ', '_')+'.py', false, 'UTF-8')]
+[file ('contracts_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
 import os
 
 import pandas as pd
@@ -333,7 +332,7 @@ generateWorkflow()
 
 
 [template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
-[file ('transformations_Job_'+aWorkflow.name.replaceAll(' ', '_')+'.py', false, 'UTF-8')]
+[file ('transformations_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
 import pandas as pd
 import numpy as np
 import functions.data_transformations as data_transformations
@@ -350,10 +349,10 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																		[comment CLOSE read all the input datasets and store them/]
-	[generateCallTransformation(d)/]
+[generateCallTransformation(d)/]
 					[/let]
 				[elseif (dpd.oclIsKindOf(Library::Job))]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
@@ -377,12 +376,12 @@ def generateWorkflow():
 						[/for]
 						[for (dp : DataProcessing | libJ.workflow.dataprocessing)]
 							[if (dp.incoming = null and dp.outgoing=null)]
-	[generateCallTransformation(dp)/]
+[generateCallTransformation(dp, d)/]
 							[/if]
 						[/for]
 						[for (dp : DataProcessing | libJ.workflow.dataprocessing)]
 							[if (dp.incoming = null and dp.outgoing<>null)]
-	[callTransformationsRecursiveTemplate(dp)/]
+[callTransformationsModifiedRecursiveTemplate(dp, d)/]
 							[/if]
 						[/for]
 					[/let]
@@ -421,12 +420,12 @@ def generateWorkflow():
 						[/for]
 						[for (dp : DataProcessing | libJ.workflow.dataprocessing)]
 							[if (dp.incoming = null and dp.outgoing=null)]
-	[generateCallTransformation(dp)/]
+[generateCallTransformation(dp, d)/]
 							[/if]
 						[/for]
 						[for (dp : DataProcessing | libJ.workflow.dataprocessing)]
 							[if (dp.incoming = null and dp.outgoing<>null)]
-	[callTransformationsRecursiveTemplate(dp)/]
+[callTransformationsModifiedRecursiveTemplate(dp, d)/]
 							[/if]
 						[/for]
 					[/let]
@@ -441,17 +440,47 @@ generateWorkflow()
 [/template]
 
 
+[template public callTransformationsModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
+#-----------------New DataProcessing-----------------
+[if (dw.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
+	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]
+	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)
+
+	[else]
+		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
+				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+
+				[/if]															[comment CLOSE checks that both datasets are the same/]
+			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
+		[/for]																	[comment CLOSE read all the input datasets and store them/]
+	[/if]
+[else]																			[comment OPEN checks if there is not an incoming link/]
+	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[/for]																		[comment CLOSE read all the input datasets and store them/]
+[/if]																			[comment CLOSE checks if there is an incoming link or not/]
+	[generateCallTransformation(dw, d_or)/]
+[if (dw.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextDp : DataProcessing = dw.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
+[callTransformationsModifiedRecursiveTemplate(nextDp, d_or)/]
+	[/let]																		[comment OPEN assigns the next DataProcessing to a variable/]
+[/if]																			[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+[/template]
+
+
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
 #-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -459,10 +488,10 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
-	[generateCallTransformation(d)/]
+	[generateCallTransformation(d, d)/]
 [if (d.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
 	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)] [comment OPEN assigns the next DataProcessing to a variable/]
 [callTransformationsRecursiveTemplate(nextDp)/]
@@ -471,7 +500,7 @@ generateWorkflow()
 [/template]
 
 
-[template public generateCallTransformation(dataProcessing : DataProcessing)]
+[template public generateCallTransformation(dataProcessing : DataProcessing, dw_modified : DataProcessing)]
 [comment]The code below generates the mapping transformations[/comment]
 [if (dataProcessing.parameter->notEmpty())]																[comment OPEN checks that there are parameters in the DataProcessing/]
 [if (dataProcessing.dataProcessingDefinition.name='mapping')]											[comment OPEN checks that the DataProcessing is a Mapping (FixValue-FixValue)/]
@@ -485,25 +514,46 @@ data_type_input_list=['['/][for (aParameter : Parameter | dataProcessing.paramet
 data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 
 
-[dd_out.dataDictionaryDefinition.name/]=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/], input_values_list=input_values_list,
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/], input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = data_type_input_list,
 						                                      data_type_output_list = data_type_output_list, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')	
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+				[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+					[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+						[if (dpd.oclIsKindOf(Library::Transformation))]
+							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+							[/let]
+						[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+						[/if]
+					[/let]
+				[/if]
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 		[else]																							[comment OPEN checks that there are no DataField/]
 input_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.inValue/]'[/let][/if][/for][']'/]
 output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.outvalue/]'[/let][/if][/for][']'/]
 
-[dd_out.dataDictionaryDefinition.name/]=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/], input_values_list=input_values_list,
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/], input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = None,
 						                                      data_type_output_list = None, field_in = None, filed_out = None)
-
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')			
+			[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+				[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+					[if (dpd.oclIsKindOf(Library::Transformation))]
+							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+							[/let]
+					[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+					[/if]
+				[/let]
+			[/if]			
 		[/if]																							[comment CLOSE checks that there are DataFields or not/]
 	[/for]																								[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 [/for]																									[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -511,7 +561,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [comment]The code below generates the transformations different from mapping for every field[/comment]
 [if (dataProcessing.dataProcessingDefinition.name<>'mapping')]											[comment OPEN checks that the DataProcessing is not a Mapping/]
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]												[comment OPEN traverse all the input DataDictionaries/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=[dd_in.dataDictionaryDefinition.name/].copy()
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=[dd_in.name.replaceAll('[(),\\s]+', '_')/].copy()
 [/for]																									[comment CLOSE traverse all the input DataDictionaries/]
 [for (p : Parameter | dataProcessing.parameter)]														[comment OPEN traverse all the parameters in the DataProcessing/]
     [if (p.oclIsKindOf(ImputeType))]																	[comment OPEN checks that the parameter is an ImputeType/]
@@ -525,7 +575,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]		[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 				            	[if (imType.oclIsKindOf(FixValue))]										[comment OPEN checks that the ImputeType is a FixValue/]
             	    				[let fv : FixValue = imType.oclAsType(FixValue)]					[comment OPEN assigns the ImputeType as a FixValue/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (fv.imputeValue=SpecialValue::Missing)]0[elseif (fv.imputeValue=SpecialValue::Invalid)]1[elseif (fv.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[fv.value/]'[else][fv.value/][/if],
 															  missing_values=missing_values_list,		
 						                                      data_type_output = [if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if],
@@ -537,7 +587,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[if (dataProcessing.dataProcessingDefinition.name='imputeByDerivedValue')]	[comment OPEN checks that the DataProcessing is an imputeByDerivedValue(SpecialValue_DerivedValue)/]
 	        					[if (imType.oclIsKindOf(DerivedValue))]									[comment OPEN checks that the ImputeType is a DerivedValue/]
                 					[let dv : DerivedValue = imType.oclAsType(DerivedValue)]			[comment OPEN assigns the ImputeType as a DerivedValue/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
@@ -548,7 +598,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]		[comment OPEN checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
             					[if (imType.oclIsKindOf(NumOp))]										[comment OPEN checks that the ImputeType is a NumOp/]
                 					[let nop : NumOp = imType.oclAsType(NumOp)]							[comment OPEN assigns the ImputeType as a NumOp/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
@@ -557,15 +607,26 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				            	[/if]																	[comment CLOSE checks that the ImputeType is a NumOp/]
 							[/if]																		[comment CLOSE checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
 						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+								[if (dpd.oclIsKindOf(Library::Transformation))]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+									[/let]
+								[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+								[/if]
+							[/let]
+						[/if]
 [comment]The code below generates the same transformation generated above but for the whole dataframe instead of a field[/comment]
 					[else]																				[comment OPEN checks that there are no DataFields/]
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]			[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 							[if (imType.oclIsKindOf(FixValue))]											[comment OPEN checks that the ImputeType is a FixValue/]
 			            	[let fv : FixValue = imType.oclAsType(FixValue)]							[comment OPEN assigns the ImputeType as a FixValue/]
-[dd_out.dataDictionaryDefinition.name/]=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/],
 															  special_type_input=SpecialType([if (imType.imputeValue=SpecialValue::Missing)]0[elseif (imType.imputeValue=SpecialValue::Invalid)]1[elseif (imType.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output='[fv.value/]', missing_values=None
 						                                      data_type_output = None, axis_param=0, field_in = None, field_out = None)		
 
@@ -575,7 +636,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByDerivedValue')]		[comment OPEN checks that the DataProcessing is an imputeByDerivedValue(SpecialValue_DerivedValue)/]	
 	        				[if (imType.oclIsKindOf(DerivedValue))]										[comment OPEN checks that the ImputeType is a DerivedValue/]
 	            				[let dv : DerivedValue = imType.oclAsType(DerivedValue)]				[comment OPEN assigns the ImputeType as a DerivedValue/]
-[dd_out.dataDictionaryDefinition.name/]=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/],
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/],
 															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
@@ -585,15 +646,26 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]			[comment OPEN checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
         					[if (imType.oclIsKindOf(NumOp))]											[comment OPEN checks that the ImputeType is a NumOp/]
                 				[let nop : NumOp = imType.oclAsType(NumOp)]								[comment OPEN assigns the ImputeType as a NumOp/]
-[dd_out.dataDictionaryDefinition.name/]=data_transformations.transform_special_value_num_op(data_dictionary=[dd_out.dataDictionaryDefinition.name/],
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_num_op(data_dictionary=[dd_out.name.replaceAll('[(),\\s]+', '_')/],
 															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
 				            	[/let]																	[comment CLOSE assigns the ImputeType as a NumOp/]
 				        	[/if]																		[comment CLOSE checks that the ImputeType is a NumOp/]
 						[/if]																			[comment CLOSE checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+								[if (dpd.oclIsKindOf(Library::Transformation))]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+									[/let]
+								[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+								[/if]
+							[/let]
+						[/if]
 					[/if]																				[comment CLOSE checks if there are DataFields or not/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
 			[/for]																						[comment CLOSE traverse all the output DataDictionaries (in theory there is only 1)/]
@@ -607,7 +679,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if dd_in.datafield->notEmpty()]												[comment OPEN checks that there is at least DataField/]
 							[for (df : DataField | dd_in.datafield)]									[comment OPEN traverse all the DataFields in the input DataDictionary/]
 								[for (interval : Interval | binner.interval)]							[comment OPEN traverse all the intervals in the binner/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 															  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 															  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
 															  fix_value_output=[if (df.out.dataType=DataType::String or df.out.dataType=DataType::DateTime or df.out.dataType=DataType::Time)]'[binner.binValue/]'[else][binner.binValue/][/if],
@@ -619,16 +691,27 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[/for]																		[comment CLOSE traverse all the DataFields in the input DataDictionary/]
 						[else]																			[comment OPEN checks that there are not DataFields/]
 							[for (interval : Interval | binner.interval)]								[comment OPEN traverse all the intervals in the binner/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 														  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 														  closure_type=Closure([if (interval.clousure=ClosureType::opeOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
 														  fix_value_output='[binner.binValue/]', data_type_output = None, field_in = None, field_out = None)
 
 							[/for]																		[comment CLOSE traverse all the intervals in the binner/]
 						[/if]																			[comment CLOSE checks if there are DataFields/]
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+								[if (dpd.oclIsKindOf(Library::Transformation))]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+									[/let]
+								[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+								[/if]
+							[/let]
+						[/if]
 					[/for]																				[comment CLOSE traverse all the intervals in the binner/]
 				[/for]																					[comment CLOSE traverse all the DataFields in the input DataDictionary/]
 			[/let]																						[comment OPEN assigns the parameter to be an DiscretizeBin/]
@@ -637,14 +720,25 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 	[if (p.oclIsKindOf(DerivedField))]																	[comment OPEN checks that the parameter is a DerivedField/]
 		[let derf : DerivedField = p.oclAsType(DerivedField)]											[comment OPEN assigns the parameter to be a DerivedField/]
 			[for (dd_in : DataDictionary | dataProcessing.inputPort)]									[comment OPEN traverse al the input DataDictionaries/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
 															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_dataField.displayName/]')
 
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse al the output DataDictionaries/]
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+							[if (dpd.oclIsKindOf(Library::Transformation))]
+								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+								[/let]
+							[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+							[/if]
+						[/let]
+					[/if]
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
 		[/let]																							[comment CLOSE assigns the parameter to be a DerivedField/]
@@ -655,14 +749,25 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				[for (dd_in : DataDictionary | dataProcessing.inputPort)]								[comment OPEN traverse the input DataDictionaries/]
 					[for (dd_out : DataDictionary | dataProcessing.outputPort)]							[comment OPEN traverse the output DataDictionaries/]
 						[for (df : DataField | dd_in.datafield)]										[comment OPEN traverse the DataFields/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
 																field='[df.displayName/]')
 
 						[/for]																			[comment CLOSE traverse the DataFields/]
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+								[if (dpd.oclIsKindOf(Library::Transformation))]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+									[/let]
+								[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+								[/if]
+							[/let]
+						[/if]
 					[/for]																				[comment CLOSE traverse the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse the input DataDictionaries/]
 			[/let]																						[comment CLOSE assigns the variable to be a CastType/]
@@ -678,7 +783,7 @@ columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafie
 filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][prim.value/][/for][']'/]
 
 						[for (dd_out : DataDictionary | dataProcessing.outputPort)]						[comment OPEN traverse all the output DataDictionaries/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
 																	                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/],
 																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
@@ -690,7 +795,7 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]':{[for (spVal : SpecialValues | filteredSet) separator (', ')][if (spVal.specialType=SpecialValue::Missing)]'missing': ['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialValue::Invalid)]'invalid': ['['/][for (iv : ValueField | df.invalidValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/] [elseif(spVal.specialType=SpecialValue::Outlier)]'outlier': True[/if][/for]}[/for]}
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 																										cols_special_type_values=dicc_[fValue.filterValueDef.name/],
 																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
 								[/for]																	[comment CLOSE traverse all the output DataDictionaries/]
@@ -703,7 +808,7 @@ filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range :
 closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')]Closure([if (range.clousure=ClosureType::opeOpen)]0[elseif(range.clousure=ClosureType::openClosed)]1[elseif(range.clousure=ClosureType::closedOpen)]2[elseif(range.clousure=ClosureType::closedClosed)]3[/if])[/for][']'/]
 
 								[for (dd_out : DataDictionary | dataProcessing.outputPort)]				[comment OPEN traverse all the output DataDictionaries/]
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
 																										left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
 																										right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
@@ -715,9 +820,20 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 					[/if]																				[comment CLOSE checks that the list of MatchingValues is not empty/]
 				[/let]	
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse all the output DataDictionaries/]
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+							[if (dpd.oclIsKindOf(Library::Transformation))]
+								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+								[/let]
+							[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+							[/if]
+						[/let]
+					[/if]
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
 		[/if]																							[comment CLOSE checks that the parameter is a FilterValue/]
@@ -729,12 +845,23 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 					[for (dd_out : DataDictionary | dataProcessing.outputPort)]							[comment OPEN traverse all the output DataDictionaries/]
 field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
 
-[dd_in.dataDictionaryDefinition.name/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.dataDictionaryDefinition.name/]_transformed,
+[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
 																columns=field_list_[field.fieldDef.name/], belong_op=Belong.[field.operator/])
 
-[dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')
-[dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+								[if (dpd.oclIsKindOf(Library::Transformation))]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+									[/let]
+								[elseif (dpd.oclIsKindOf(Library::Job))]
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+								[/if]
+							[/let]
+						[/if]
 					[/for]																				[comment CLOSE traverse all the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries/]
 			[/let]																						[comment CLOSE assigns the variable to be a field/]
