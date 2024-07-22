@@ -1175,7 +1175,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_output4_dataDictionary.csv"
+        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
         name="rowFilterRange(init_span)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1284,7 +1284,7 @@
     </contract>
     <inputPort
         path="./knime_dataDictionaries/rowFilter_output_dataDictionary.csv"
-        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField">
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
           name="columnFilter(TRAVEL_INIT_CNTCTS)_input_dataField"
@@ -1349,7 +1349,7 @@
     </inputPort>
     <outputPort
         path="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
-        name="data_model_column_cont_filter_out">
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.3/@outputPort.0"/>
     </outputPort>
@@ -1519,7 +1519,7 @@
     </contract>
     <inputPort
         path="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
-        name="Mapping(TERRITORY)_input_dataDictionary">
+        name="mapping(TERRITORY)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
           name="Mapping(TERRITORY)_input_dataField"
@@ -1533,7 +1533,7 @@
     </inputPort>
     <outputPort
         path="./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
-        name="Mapping(TERRITORY)_output_dataDictionary">
+        name="mapping(TERRITORY)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
           name="Mapping(TERRITORY)_output_dataField"
@@ -3663,7 +3663,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="low">
+              value="Low">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
