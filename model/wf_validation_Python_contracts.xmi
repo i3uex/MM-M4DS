@@ -1175,7 +1175,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./python_dataDictionaries/missing_output4_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="rowFilterRange(init_span)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1284,7 +1284,7 @@
     </contract>
     <inputPort
         path="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
-        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField">
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
           name="columnFilter(TRAVEL_INIT_CNTCTS)_input_dataField"
@@ -1349,7 +1349,7 @@
     </inputPort>
     <outputPort
         path="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
-        name="data_model_column_cont_filter_out">
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.3/@outputPort.0"/>
     </outputPort>

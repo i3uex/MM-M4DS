@@ -332,7 +332,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -362,7 +362,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./python_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv"
         name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -427,7 +427,7 @@
           <quantity
               xsi:type="Contract:Percent"
               operator="less"
-              percent="60.0">
+              percent="70.0">
             <percentDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0/@contractDefinition/@valuedefinition.0/@quantitydef"/>
           </quantity>
@@ -617,7 +617,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -639,7 +639,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./python_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -879,7 +879,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -910,7 +910,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./python_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1060,7 +1060,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1079,7 +1079,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./python_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1175,7 +1175,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        path="./python_dataDictionaries/missing_output4_dataDictionary.csv"
         name="rowFilterRange(init_span)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1193,7 +1193,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.2/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        path="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
         name="rowFilterRange(init_span)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -1283,8 +1283,8 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/rowFilter_output_dataDictionary.csv"
-        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary">
+        path="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField">
       <datafield
           xsi:type="Workflow:Continuous"
           name="columnFilter(TRAVEL_INIT_CNTCTS)_input_dataField"
@@ -1348,8 +1348,8 @@
           href="library_validation.xmi#//@dataprocessingdefinition.3/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
-        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary">
+        path="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        name="data_model_column_cont_filter_out">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.3/@outputPort.0"/>
     </outputPort>
@@ -1518,8 +1518,8 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
-        name="mapping(TERRITORY)_input_dataDictionary">
+        path="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        name="Mapping(TERRITORY)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
           name="Mapping(TERRITORY)_input_dataField"
@@ -1532,8 +1532,8 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
-        name="mapping(TERRITORY)_output_dataDictionary">
+        path="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        name="Mapping(TERRITORY)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
           name="Mapping(TERRITORY)_output_dataField"
@@ -1710,7 +1710,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        path="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
         name="mapping(Instate)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -1724,7 +1724,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        path="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
         name="mapping(Instate)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -1855,7 +1855,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        path="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
         name="stringToNumber(TERRITORY, Instate)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -1877,7 +1877,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        path="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
         name="stringToNumber(TERRITORY, Instate)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2225,7 +2225,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        path="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
         name="imputeOutlierByClosest(avg_income, distance, Instate)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2267,7 +2267,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="imputeOutlierByClosest(avg_income, distance, Instate)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2837,7 +2837,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2878,7 +2878,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -3185,7 +3185,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="binner(TERRITORY)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -3202,7 +3202,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="binner(TERRITORY)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -3251,7 +3251,8 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
           leftMargin="1040.0"
-          rightMargin="1160.0"/>
+          rightMargin="1160.0"
+          clousure="openClosed"/>
     </parameter>
     <parameter
         xsi:type="Workflow:DiscretizeBin"
@@ -3262,7 +3263,7 @@
       <interval
           leftMargin="1160.0"
           rightMargin="1340.0"
-          clousure="closedOpen"/>
+          clousure="openClosed"/>
     </parameter>
     <parameter
         xsi:type="Workflow:DiscretizeBin"
@@ -3388,7 +3389,7 @@
               xsi:type="Contract:Interval"
               leftMargin="1160.0"
               rightMargin="1340.0"
-              closureType="closedOpen">
+              closureType="openClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
@@ -3458,7 +3459,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="binner(satscore)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -3476,7 +3477,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="binner(satscore)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
@@ -3663,7 +3664,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="low">
+              value="Low">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -3695,7 +3696,7 @@
       </contract>
     </contract>
     <inputPort
-        path="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="binner(avg_income)_input_dataDictionary">
       <datafield
           xsi:type="Workflow:Continuous"
@@ -3713,7 +3714,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        path="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="binner(avg_income)_output_dataDictionary">
       <datafield
           xsi:type="Workflow:Categorical"
