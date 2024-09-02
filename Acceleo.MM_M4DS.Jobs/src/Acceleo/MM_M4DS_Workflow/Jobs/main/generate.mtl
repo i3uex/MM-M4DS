@@ -32,148 +32,146 @@ from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
 def generateWorkflow():
-[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
-		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
-			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
-				[if (dpd.oclIsKindOf(Library::Transformation))]
-					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-#-----------------New DataProcessing-----------------
-						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]													[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing=null)]														[comment OPEN checks if the DataProcessing is isolated (no links)/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]				[comment OPEN checks if the dataPrcessingDefinition is of type DataProcessingDefinition/]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]	[comment OPEN assigns the variable to be of type DataProcessingDefinition/]
+				[if (dpd.oclIsKindOf(Library::Transformation))]											[comment OPEN checks if the dataPrcessingDefinition is of type Transformation/]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]		[comment OPEN assigns the variable to be of type Transformation/]
+	#-----------------New DataProcessing-----------------
+						[for (dc : DataDictionary | d.inputPort)]										[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
 
-						[/for]																		[comment CLOSE read all the input datasets and store them/]
-						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+						[/for]																			[comment CLOSE read all the input datasets and store them/]
+						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::PRECONDITION)]							[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																	[comment CLOSE checks if the if the contract is a Precondition/]
-						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
+							[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+						[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d, d)/]
-						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::POSTCONDITION)]						[comment OPEN checks if the if the contract is a Postcondition/]
+						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::POSTCONDITION)]							[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																	[comment CLOSE checks if the if the contract is a Postcondition/]
-						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
-						[for (c : Contract | d.contract)]											[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
+							[/if]																		[comment CLOSE checks if the if the contract is a Postcondition/]
+						[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::INVARIANT)]								[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																	[comment CLOSE checks if the if the contract is a Invariant/]
-						[/for]																		[comment CLOSE traverse all the contracts in the DataProcessing/]
-					[/let]
-				[elseif (dpd.oclIsKindOf(Library::Job))]
-					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
-						[for (arg : Argument | d._in)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+							[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
+						[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
+					[/let]																				[comment CLOSE assigns the variable to be of type Transformation/]
+				[elseif (dpd.oclIsKindOf(Library::Job))]												[comment OPEN checks if the dataPrcessingDefinition is of type Job/]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]								[comment OPEN assigns the variable to be of type Job/]
+	#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-								[/let]
-							[/if]
-						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
-						[for (arg : Argument | d.out)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
+							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																			[comment CLOSE traverse all the input arguments/]
+	#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-								[/let]
-							[/if]
-						[/for]
+								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
+							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																			[comment CLOSE traverse all the output arguments/]
 
-
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing=null)]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]					[comment OPEN traverse the dataProcessings in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing=null)]						[comment OPEN checks if the dataProcessing is isolated/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dataP, d)/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-							[/if]
-						[/for]
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing<>null)]
+							[/if]																		[comment CLOSE checks if the dataProcessing is isolated/]
+						[/for]																			[comment CLOSE traverse the dataProcessings in the workflow/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]					[comment OPEN traverse the dataProcessings in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing<>null)]						[comment OPEN checks that the dataProcessing is not isolated and is the first/]
 [callModifiedRecursiveTemplate(dataP, d)/]
-							[/if]
-						[/for]
-					[/let]
-				[/if]
-			[/let]
-		[/if]
-	[/if]																			[comment CLOSE checks if the DataProcessing is isolated (no links)/]
-[/for]																			[comment CLOSE traverse all the DataProcessings/]
-[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing<>null)]									[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
-		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
-			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
-				[if (dpd.oclIsKindOf(Library::Transformation))]
-					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+							[/if]																		[comment CLOSE checks that the dataProcessing is not isolated and is the first/]
+						[/for]																			[comment CLOSE traverse the dataProcessings in the workflow/]
+					[/let]																				[comment CLOSE assigns the variable to be of type Job/]
+				[/if]																					[comment CLOSE checks if the dataPrcessingDefinition is of type Transformation or Job/]
+			[/let]																														[comment CLOSE assigns the variable to be of type DataProcessingDefinition/]
+		[/if]																							[comment CLOSE checks if the dataPrcessingDefinition is of type DataProcessingDefinition/]
+	[/if]																								[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+[/for]																									[comment CLOSE traverse all the DataProcessings/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]													[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing<>null)]														[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]				[comment OPEN checks if the dataPrcessingDefinition is of type DataProcessingDefinition/]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]	[comment OPEN assigns the variable to be of type DataProcessingDefinition/]
+				[if (dpd.oclIsKindOf(Library::Transformation))]											[comment OPEN checks if the dataPrcessingDefinition is of type Transformation/]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]		[comment OPEN assigns the variable to be of type Transformation/]
 [callRecursiveTemplate(d)/]
-					[/let]
-				[elseif (dpd.oclIsKindOf(Library::Job))]
-					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
-						[for (arg : Argument | d._in)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+					[/let]																				[comment CLOSE assigns the variable to be of type Transformation/]
+				[elseif (dpd.oclIsKindOf(Library::Job))]												[comment OPEN checks if the dataPrcessingDefinition is of type Job/]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]								[comment OPEN assigns the variable to be of type Job/]
+	#--------------------------------------Input data dictionaries--------------------------------------
+						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-								[/let]
-							[/if]
-						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
-						[for (arg : Argument | d.out)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
+							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																			[comment CLOSE traverse all the input arguments/]
+	#--------------------------------------Output data dictionaries--------------------------------------
+						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-								[/let]
-							[/if]
-						[/for]
+								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
+							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																			[comment CLOSE traverse all the output arguments/]
 
-
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing=null)]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]					[comment OPEN traverse the dataProcessings in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing=null)]						[comment OPEN checks if the dataProcessing is isolated/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dataP, d)/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]									[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
 									[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
 								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-							[/if]
-						[/for]
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing<>null)]
+							[/if]																		[comment CLOSE checks if the dataProcessing is isolated/]
+						[/for]																			[comment CLOSE traverse the dataProcessings in the workflow/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]					[comment OPEN traverse the dataProcessings in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing<>null)]						[comment OPEN checks that the dataProcessing is not isolated and is the first/]
 [callModifiedRecursiveTemplate(dataP, d)/]
-							[/if]
-						[/for]
-					[/let]
-				[/if]
-			[/let]
-		[/if]
-	[/if]																			[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
-[/for]																			[comment CLOSE traverse all the DataProcessings/]
+							[/if]																		[comment CLOSE checks that the dataProcessing is not isolated and is the first/]
+						[/for]																			[comment CLOSE traverse the dataProcessings in the workflow/]
+					[/let]																				[comment CLOSE assigns the variable to be of type Job/]
+				[/if]																					[comment CLOSE checks if the dataPrcessingDefinition is of type Transformation or Job/]
+			[/let]																													[comment CLOSE assigns the variable to be of type DataProcessingDefinition/]
+		[/if]																							[comment CLOSE checks if the dataPrcessingDefinition is of type DataProcessingDefinition/]
+	[/if]																								[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+[/for]																									[comment CLOSE traverse all the DataProcessings/]
 set_logger("dataProcessing")
 generateWorkflow()
 [/file]
@@ -181,16 +179,16 @@ generateWorkflow()
 
 
 [template public callModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (dw.incoming <> null)]
 	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]
-	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -199,6 +197,7 @@ generateWorkflow()
 [else]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | dw.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -226,16 +225,16 @@ generateWorkflow()
 
 
 [template public callRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -244,6 +243,7 @@ generateWorkflow()
 [else]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -285,7 +285,7 @@ from helpers.logger import set_logger
 def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
 			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 				[if (dpd.oclIsKindOf(Library::Transformation))]
@@ -317,7 +317,7 @@ def generateWorkflow():
 					[/let]
 				[elseif (dpd.oclIsKindOf(Library::Job))]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
+	#--------------------------------------Input data dictionaries--------------------------------------
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -326,7 +326,7 @@ def generateWorkflow():
 								[/let]
 							[/if]
 						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
+	#--------------------------------------Output data dictionaries--------------------------------------
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -377,7 +377,7 @@ def generateWorkflow():
 					[/let]
 				[elseif (dpd.oclIsKindOf(Library::Job))]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
+	#--------------------------------------Input data dictionaries--------------------------------------
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -386,7 +386,7 @@ def generateWorkflow():
 								[/let]
 							[/if]
 						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
+	#--------------------------------------Output data dictionaries--------------------------------------
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -434,7 +434,7 @@ generateWorkflow()
 
 
 [template public callContractsModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (dw.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]
 	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)
@@ -483,7 +483,7 @@ generateWorkflow()
 
 
 [template public callContractsRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
@@ -543,7 +543,7 @@ from helpers.logger import set_logger
 def generateWorkflow():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
 			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 				[if (dpd.oclIsKindOf(Library::Transformation))]
@@ -556,7 +556,7 @@ def generateWorkflow():
 					[/let]
 				[elseif (dpd.oclIsKindOf(Library::Job))]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
+	#--------------------------------------Input data dictionaries--------------------------------------
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -565,7 +565,7 @@ def generateWorkflow():
 								[/let]
 							[/if]
 						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
+	#--------------------------------------Output data dictionaries--------------------------------------
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -600,7 +600,7 @@ def generateWorkflow():
 					[/let]
 				[elseif (dpd.oclIsKindOf(Library::Job))]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
-#--------------------------------------Input data dictionaries--------------------------------------
+	#--------------------------------------Input data dictionaries--------------------------------------
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -609,7 +609,7 @@ def generateWorkflow():
 								[/let]
 							[/if]
 						[/for]
-#--------------------------------------Output data dictionaries--------------------------------------
+	#--------------------------------------Output data dictionaries--------------------------------------
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
@@ -641,16 +641,16 @@ generateWorkflow()
 
 
 [template public callTransformationsModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (dw.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]
-	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -659,6 +659,7 @@ generateWorkflow()
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(dw, d_or)/]
@@ -671,16 +672,16 @@ generateWorkflow()
 
 
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -689,6 +690,7 @@ generateWorkflow()
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(d, d)/]
@@ -724,11 +726,11 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 						[if (dpd.oclIsKindOf(Library::Transformation))]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 							[/let]
 						[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 						[/if]
 					[/let]
 				[/if]
@@ -746,11 +748,11 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 					[if (dpd.oclIsKindOf(Library::Transformation))]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 							[/let]
 					[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 					[/if]
 				[/let]
 			[/if]			
@@ -813,11 +815,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 								[/if]
 							[/let]
 						[/if]
@@ -858,11 +860,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 								[/if]
 							[/let]
 						[/if]
@@ -904,11 +906,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 								[/if]
 							[/let]
 						[/if]
@@ -931,11 +933,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[if (dpd.oclIsKindOf(Library::Transformation))]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 								[/let]
 							[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 							[/if]
 						[/let]
 					[/if]
@@ -960,11 +962,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 								[/if]
 							[/let]
 						[/if]
@@ -1026,11 +1028,11 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 							[if (dpd.oclIsKindOf(Library::Transformation))]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 								[/let]
 							[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 							[/if]
 						[/let]
 					[/if]
@@ -1054,11 +1056,11 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]')
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/], sep=[dd_out.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 								[/if]
 							[/let]
 						[/if]
