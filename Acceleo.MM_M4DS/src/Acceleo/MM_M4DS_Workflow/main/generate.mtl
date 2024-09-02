@@ -34,7 +34,7 @@ from helpers.logger import set_logger
 def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 [if (d.incoming = null and d.outgoing=null)]									[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep='[dc.columnDelimiter/]')
 
@@ -69,7 +69,7 @@ generateDataProcessing()
 
 
 [template public callRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
 	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
@@ -85,7 +85,7 @@ generateDataProcessing()
 [else]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep='[dc.columnDelimiter/]')
-	[dc.dataDictionaryDefinition.name/].to_csv('[dc.path/]', index=True)
+	[dc.dataDictionaryDefinition.name/].to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -128,7 +128,7 @@ from helpers.logger import set_logger
 def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep='[dc.columnDelimiter/]')
 
@@ -167,7 +167,7 @@ generateDataProcessing()
 
 
 [template public callContractsRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
 	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
@@ -227,7 +227,7 @@ from helpers.logger import set_logger
 def generateDataProcessing():
 [for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
 	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep='[dc.columnDelimiter/]')
 
@@ -247,16 +247,16 @@ generateDataProcessing()
 
 
 [template public callTransformationsRecursiveTemplate(d : DataProcessing)]
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().dataDictionaryDefinition.name/]=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -265,6 +265,7 @@ generateDataProcessing()
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep='[dc.columnDelimiter/]')
+	[dc.dataDictionaryDefinition.name/].to_csv('[dc.path/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(d)/]
@@ -296,7 +297,7 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 						                                      data_type_output_list = data_type_output_list, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
 	
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)																				[comment CLOSE checks if the dataprocessing is not the first of the workflow/]
 			[/for]																						[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 		[else]																							[comment OPEN checks that there are no DataField/]
@@ -308,7 +309,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 						                                      data_type_input_list = None,
 						                                      data_type_output_list = None, field_in = None, filed_out = None)
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)																					[comment CLOSE checks if the dataprocessing is not the first of the workflow/]
 		[/if]																							[comment CLOSE checks that there are DataFields or not/]
 	[/for]																								[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
@@ -365,7 +366,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/for]																			[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 [comment]The code below generates the same transformation generated above but for the whole dataframe instead of a field[/comment]
 					[else]																				[comment OPEN checks that there are no DataFields/]
@@ -400,7 +401,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				        	[/if]																		[comment CLOSE checks that the ImputeType is a NumOp/]
 						[/if]																			[comment CLOSE checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 					[/if]																				[comment CLOSE checks if there are DataFields or not/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries (in theory there is only 1)/]
@@ -436,7 +437,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/if]																			[comment CLOSE checks if there are DataFields/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 					[/for]																				[comment CLOSE traverse all the intervals in the binner/]
 				[/for]																					[comment CLOSE traverse all the DataFields in the input DataDictionary/]
@@ -453,7 +454,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse al the output DataDictionaries/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
@@ -472,7 +473,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/for]																			[comment CLOSE traverse the DataFields/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 	
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 					[/for]																				[comment CLOSE traverse the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse the input DataDictionaries/]
@@ -528,7 +529,7 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 				[for (dd_out : DataDictionary | dataProcessing.outputPort)]								[comment OPEN traverse all the output DataDictionaries/]
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 				[/for]																					[comment CLOSE traverse all the output DataDictionaries/]
 			[/for]																						[comment CLOSE traverse all the input DataDictionaries/]
@@ -546,7 +547,7 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 [dd_out.dataDictionaryDefinition.name/]=[dd_in.dataDictionaryDefinition.name/]_transformed
 
-[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]', index=True)							
+[dd_out.dataDictionaryDefinition.name/].to_csv('[dd_out.path/]')							
 [dd_out.dataDictionaryDefinition.name/]=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 					[/for]																				[comment CLOSE traverse all the output DataDictionaries/]
 				[/for]																					[comment CLOSE traverse all the input DataDictionaries/]
