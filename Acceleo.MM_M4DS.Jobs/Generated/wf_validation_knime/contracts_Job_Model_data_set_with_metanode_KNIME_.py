@@ -8,7 +8,7 @@ from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataT
 from helpers.logger import set_logger
 
 def generateWorkflow():
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
 	if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
 		imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')
@@ -100,7 +100,7 @@ def generateWorkflow():
 		print('INVARIANT INV_condition_impute_ETHNICITY_columns NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -168,7 +168,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -232,7 +232,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByMean(distance)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/missing_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -267,7 +267,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByLinearInterpolation(satscore)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	rowFilterRange_init_span__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -285,7 +285,7 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -309,7 +309,7 @@ def generateWorkflow():
 		print('POSTCONDITION columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_POST_fieldRange NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	mapping_TERRITORY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -358,7 +358,7 @@ def generateWorkflow():
 		print('INVARIANT Mapping(TERRITORY)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	mapping_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -407,7 +407,7 @@ def generateWorkflow():
 		print('INVARIANT mapping(Instate)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -429,7 +429,7 @@ def generateWorkflow():
 		print('INVARIANT INV_condition_Instate NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -507,7 +507,7 @@ def generateWorkflow():
 		print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -654,7 +654,7 @@ def generateWorkflow():
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	binner_TERRITORY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -729,7 +729,7 @@ def generateWorkflow():
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
@@ -793,7 +793,7 @@ def generateWorkflow():
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
 	
 	
-#-----------------New DataProcessing-----------------
+	#-----------------New DataProcessing-----------------
 	binner_avg_income__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	if os.path.exists('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv'):		#If the output DataDictionary exists, we store it
