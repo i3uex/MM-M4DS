@@ -7,7 +7,7 @@
     <semanticResources>Contract.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_ruCXMHovEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_40AH4HovEe67Z-Y0pklHtA" name="Library class diagram" repPath="#_4z8dgHovEe67Z-Y0pklHtA" changeId="1716545733487">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_40AH4HovEe67Z-Y0pklHtA" name="Library class diagram" repPath="#_4z8dgHovEe67Z-Y0pklHtA" changeId="1716819866695">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Library.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1475,19 +1475,19 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_y5KsMIeYEe6EpPuNa2I42g" name="MissingValuesDef" tooltipText="" outgoingEdges="_y5NI0IeYEe6EpPuNa2I42g" width="12" height="10">
-      <target xmi:type="ecore:EClass" href="Library.ecore#//MissingValuesDef"/>
-      <semanticElements xmi:type="ecore:EClass" href="Library.ecore#//MissingValuesDef"/>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_y5KsMIeYEe6EpPuNa2I42g" name="SpecialValuesDef" tooltipText="" outgoingEdges="_y5NI0IeYEe6EpPuNa2I42g" width="12" height="10">
+      <target xmi:type="ecore:EClass" href="Library.ecore#//SpecialValuesDef"/>
+      <semanticElements xmi:type="ecore:EClass" href="Library.ecore#//SpecialValuesDef"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_y5KsMYeYEe6EpPuNa2I42g" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0ner_xw0Ee-D5Iahp-fDFA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_y5MhZIeYEe6EpPuNa2I42g" name=" boundTo : MissingValues" tooltipText="">
-        <target xmi:type="ecore:EReference" href="Library.ecore#//MissingValuesDef/boundTo"/>
-        <semanticElements xmi:type="ecore:EReference" href="Library.ecore#//MissingValuesDef/boundTo"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_y5MhZIeYEe6EpPuNa2I42g" name=" boundTo : SpecialValues" tooltipText="">
+        <target xmi:type="ecore:EReference" href="Library.ecore#//SpecialValuesDef/boundTo"/>
+        <semanticElements xmi:type="ecore:EReference" href="Library.ecore#//SpecialValuesDef/boundTo"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_y5MhZYeYEe6EpPuNa2I42g" labelAlignment="LEFT" color="114,159,207">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']/@style"/>
         </ownedStyle>
@@ -1495,14 +1495,14 @@
       </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_y5NI0IeYEe6EpPuNa2I42g" sourceNode="_y5KsMIeYEe6EpPuNa2I42g" targetNode="_wjMTUIeYEe6EpPuNa2I42g">
-      <target xmi:type="ecore:EClass" href="Library.ecore#//MissingValuesDef"/>
-      <semanticElements xmi:type="ecore:EClass" href="Library.ecore#//MissingValuesDef"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_y5NvgIeYEe6EpPuNa2I42g" targetArrow="InputClosedArrow" routingStyle="tree">
+      <target xmi:type="ecore:EClass" href="Library.ecore#//SpecialValuesDef"/>
+      <semanticElements xmi:type="ecore:EClass" href="Library.ecore#//SpecialValuesDef"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_0nq5Wxw0Ee-D5Iahp-fDFA" targetArrow="InputClosedArrow" routingStyle="tree">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
-        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_y5NvgYeYEe6EpPuNa2I42g" showIcon="false">
+        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_0nq5XBw0Ee-D5Iahp-fDFA" showIcon="false">
           <labelFormat>italic</labelFormat>
         </beginLabelStyle>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_y5NvgoeYEe6EpPuNa2I42g" showIcon="false"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_0nq5XRw0Ee-D5Iahp-fDFA" showIcon="false"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
     </ownedDiagramElements>
