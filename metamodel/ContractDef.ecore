@@ -4,10 +4,10 @@
     nsPrefix="ContractDefinition">
   <eClassifiers xsi:type="ecore:EClass" name="ContractDefinition" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContractType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" upperBound="-1"
-        eType="#//ObjectDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//ObjectDefinition"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="out" upperBound="-1" eType="#//ObjectDefinition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="#//ObjectDefinition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ContractType">

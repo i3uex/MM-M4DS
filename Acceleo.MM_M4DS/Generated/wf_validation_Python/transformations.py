@@ -5,9 +5,8 @@ from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataT
 from helpers.logger import set_logger
 
 def generateDataProcessing():
-	#-----------------New DataProcessing-----------------
-	imputeByDerivedValue_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
-	imputeByDerivedValue_input_dataDictionary.to_csv('./python_dataDictionaries/missing_input_dataDictionary.csv')
+#-----------------New DataProcessing-----------------
+	imputeByDerivedValue_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
 	imputeByDerivedValue_input_dataDictionary_transformed=imputeByDerivedValue_input_dataDictionary.copy()
 	missing_values_list=[]
 	
@@ -31,12 +30,11 @@ def generateDataProcessing():
 																  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 	
 	imputeByDerivedValue_output_dataDictionary=imputeByDerivedValue_input_dataDictionary_transformed
-		
-	imputeByDerivedValue_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')							
-	imputeByDerivedValue_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeByDerivedValue_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')
+	imputeByDerivedValue_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	imputeByFixValue_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	imputeByFixValue_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	imputeByFixValue_input_dataDictionary_transformed=imputeByFixValue_input_dataDictionary.copy()
 	missing_values_list=[]
@@ -56,12 +54,11 @@ def generateDataProcessing():
 																  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
 	
 	imputeByFixValue_output_dataDictionary=imputeByFixValue_input_dataDictionary_transformed
-		
-	imputeByFixValue_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')							
-	imputeByFixValue_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeByFixValue_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')
+	imputeByFixValue_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 	missing_values_list=[]
@@ -79,12 +76,11 @@ def generateDataProcessing():
 																  axis_param=0, field_in = 'distance', field_out = 'distance')
 	
 	imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
-		
-	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')							
-	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')
+	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',')
 
 	imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 	missing_values_list=[]
@@ -95,12 +91,11 @@ def generateDataProcessing():
 																  axis_param=0, field_in = 'satscore', field_out = 'satscore')
 	
 	imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
-		
-	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')							
-	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')
+	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	rowFilter_input_DataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	rowFilter_input_DataDictionary=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',')
 
 	rowFilter_input_DataDictionary_transformed=rowFilter_input_DataDictionary.copy()
 	columns_rowFilterRange_param_filter=['init_span']
@@ -116,12 +111,11 @@ def generateDataProcessing():
 																											filter_type=FilterType(0),
 																											closure_type_list=closure_type_list_rowFilterRange_param_filter)
 	rowFilterRange_output_DataDictionary=rowFilter_input_DataDictionary_transformed
+	rowFilterRange_output_DataDictionary.to_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv')
+	rowFilterRange_output_DataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',')
 	
-	rowFilterRange_output_DataDictionary.to_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv')							
-	rowFilterRange_output_DataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
-	
-	#-----------------New DataProcessing-----------------
-	columnFilter_input_DataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	columnFilter_input_DataDictionary=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',')
 
 	columnFilter_input_DataDictionary_transformed=columnFilter_input_DataDictionary.copy()
 	field_list_columnFilter_param_field=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
@@ -130,12 +124,11 @@ def generateDataProcessing():
 																	columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
 	
 	columnFilter_output_DataDictionary=columnFilter_input_DataDictionary_transformed
+	columnFilter_output_DataDictionary.to_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv')
+	columnFilter_output_DataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',')
 	
-	columnFilter_output_DataDictionary.to_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv')							
-	columnFilter_output_DataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
-	
-	#-----------------New DataProcessing-----------------
-	mapping_input_dataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	mapping_input_dataDictionary=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',')
 
 	input_values_list=['A', 'N']
 	output_values_list=['0', '0']
@@ -147,13 +140,12 @@ def generateDataProcessing():
 																  output_values_list=output_values_list,
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
-		
-		
-	mapping_output_dataDictionary.to_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')							
-	mapping_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)																				
 	
-	#-----------------New DataProcessing-----------------
-	mapping_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)
+	mapping_output_dataDictionary.to_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')	
+	mapping_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',')
+	
+#-----------------New DataProcessing-----------------
+	mapping_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',')
 
 	input_values_list=['Y', 'N']
 	output_values_list=['1', '0']
@@ -165,13 +157,12 @@ def generateDataProcessing():
 																  output_values_list=output_values_list,
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'Instate', field_out = 'Instate')
-		
-		
-	mapping_output_dataDictionary.to_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')							
-	mapping_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)																				
 	
-	#-----------------New DataProcessing-----------------
-	categoricalToContinuous_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)
+	mapping_output_dataDictionary.to_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')	
+	mapping_output_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',')
+	
+#-----------------New DataProcessing-----------------
+	categoricalToContinuous_input_dataDictionary=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',')
 
 	categoricalToContinuous_input_dataDictionary_transformed=categoricalToContinuous_input_dataDictionary.copy()
 	categoricalToContinuous_input_dataDictionary_transformed=data_transformations.transform_cast_type(data_dictionary=categoricalToContinuous_input_dataDictionary_transformed,
@@ -183,12 +174,11 @@ def generateDataProcessing():
 																	field='Instate')
 	
 	categoricalToContinuous_output_dataDictionary=categoricalToContinuous_input_dataDictionary_transformed
-		
-	categoricalToContinuous_output_dataDictionary.to_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv')							
-	categoricalToContinuous_output_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
+	categoricalToContinuous_output_dataDictionary.to_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv')
+	categoricalToContinuous_output_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	imputeByNumericOp_input_dataDictionary=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',')
 
 	imputeByNumericOp_input_dataDictionary_transformed=imputeByNumericOp_input_dataDictionary.copy()
 	missing_values_list=[]
@@ -213,12 +203,11 @@ def generateDataProcessing():
 																  axis_param=0, field_in = 'Instate', field_out = 'Instate')
 	
 	imputeByNumericOp_output_dataDictionary=imputeByNumericOp_input_dataDictionary_transformed
-		
-	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv')							
-	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeByNumericOp_output_dataDictionary.to_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv')
+	imputeByNumericOp_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -226,25 +215,22 @@ def generateDataProcessing():
 																  field_in = 'TOTAL_CONTACTS', field_out = 'TOTAL_CONTACTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
 																  field_in = 'SELF_INIT_CNTCTS', field_out = 'SELF_INIT_CNTCTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
 																  field_in = 'SOLICITED_CNTCTS', field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
@@ -270,9 +256,8 @@ def generateDataProcessing():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=4.0,
 																  closure_type=Closure(2),
@@ -298,9 +283,8 @@ def generateDataProcessing():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=4.0, right_margin=1000.0,
 																  closure_type=Closure(2),
@@ -326,12 +310,11 @@ def generateDataProcessing():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -339,9 +322,8 @@ def generateDataProcessing():
 																  field_in = 'TERRITORY', field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
@@ -351,9 +333,8 @@ def generateDataProcessing():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=3.0,
 																  closure_type=Closure(2),
@@ -363,9 +344,8 @@ def generateDataProcessing():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=3.0, right_margin=5.0,
 																  closure_type=Closure(2),
@@ -375,9 +355,8 @@ def generateDataProcessing():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=5.0, right_margin=7.0,
 																  closure_type=Closure(2),
@@ -387,9 +366,8 @@ def generateDataProcessing():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=7.0, right_margin=1000.0,
 																  closure_type=Closure(3),
@@ -399,12 +377,11 @@ def generateDataProcessing():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -412,9 +389,8 @@ def generateDataProcessing():
 																  field_in = 'satscore', field_out = 'satscore_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1040.0,
 																  closure_type=Closure(1),
@@ -424,9 +400,8 @@ def generateDataProcessing():
 																  field_out = 'satscore_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1040.0, right_margin=1160.0,
 																  closure_type=Closure(0),
@@ -436,9 +411,8 @@ def generateDataProcessing():
 																  field_out = 'satscore_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1160.0, right_margin=1340.0,
 																  closure_type=Closure(2),
@@ -448,9 +422,8 @@ def generateDataProcessing():
 																  field_out = 'satscore_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=1340.0, right_margin=2000.0,
 																  closure_type=Closure(1),
@@ -460,12 +433,11 @@ def generateDataProcessing():
 																  field_out = 'satscore_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	
-	#-----------------New DataProcessing-----------------
-	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+#-----------------New DataProcessing-----------------
+	binner_input_dataDictionary=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',')
 
 	binner_input_dataDictionary_transformed=binner_input_dataDictionary.copy()
 	binner_input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_input_dataDictionary_transformed,
@@ -473,9 +445,8 @@ def generateDataProcessing():
 																  field_in = 'avg_income', field_out = 'avg_income_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=9.0, right_margin=42830.0,
 																  closure_type=Closure(1),
@@ -485,9 +456,8 @@ def generateDataProcessing():
 																  field_out = 'avg_income_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=42830.0, right_margin=55590.0,
 																  closure_type=Closure(1),
@@ -497,9 +467,8 @@ def generateDataProcessing():
 																  field_out = 'avg_income_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	binner_input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_input_dataDictionary_transformed,
 																  left_margin=55590.0, right_margin=100000.0,
 																  closure_type=Closure(2),
@@ -509,9 +478,8 @@ def generateDataProcessing():
 																  field_out = 'avg_income_binned')
 	
 	binner_output_dataDictionary=binner_input_dataDictionary_transformed
-		
-	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')							
-	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_output_dataDictionary.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')
+	binner_output_dataDictionary=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',')
 	
 
 

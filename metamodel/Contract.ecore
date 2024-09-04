@@ -3,10 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Contract" nsURI="https://www.example.org/contract" nsPrefix="Contract">
   <eClassifiers xsi:type="ecore:EClass" name="Contract" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContractType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" upperBound="-1"
-        eType="#//Object" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//Object"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="out" upperBound="-1" eType="#//Object"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="#//Object"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ContractType">

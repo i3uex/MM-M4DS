@@ -7,7 +7,7 @@
     <semanticResources>Library.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_IZ2HQHyUEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_I81fkHyUEe67Z-Y0pklHtA" name="Contract class diagram" repPath="#_I8zqYHyUEe67Z-Y0pklHtA" changeId="1723124592497">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_I81fkHyUEe67Z-Y0pklHtA" name="Contract class diagram" repPath="#_I8zqYHyUEe67Z-Y0pklHtA" changeId="1715776915568">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Contract.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1561,7 +1561,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_olu_9nyUEe67Z-Y0pklHtA" name="[1..*] in" sourceNode="_J8mTcHyUEe67Z-Y0pklHtA" targetNode="_J8oIo3yUEe67Z-Y0pklHtA">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_olu_9nyUEe67Z-Y0pklHtA" name="[1..1] in" sourceNode="_J8mTcHyUEe67Z-Y0pklHtA" targetNode="_J8oIo3yUEe67Z-Y0pklHtA">
       <target xmi:type="ecore:EReference" href="Contract.ecore#//Contract/in"/>
       <semanticElements xmi:type="ecore:EReference" href="Contract.ecore#//Contract/in"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_YgeIF4lKEe6EpPuNa2I42g" description="_cWUcxXyUEe67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
@@ -2052,7 +2052,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_bEF7WIlKEe6EpPuNa2I42g" name="[0..*] out" sourceNode="_J8mTcHyUEe67Z-Y0pklHtA" targetNode="_J8oIo3yUEe67Z-Y0pklHtA">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_bEF7WIlKEe6EpPuNa2I42g" name="[0..1] out" sourceNode="_J8mTcHyUEe67Z-Y0pklHtA" targetNode="_J8oIo3yUEe67Z-Y0pklHtA">
       <target xmi:type="ecore:EReference" href="Contract.ecore#//Contract/out"/>
       <semanticElements xmi:type="ecore:EReference" href="Contract.ecore#//Contract/out"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_bEF7WYlKEe6EpPuNa2I42g" description="_aju8SofJEe6EpPuNa2I42g" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
