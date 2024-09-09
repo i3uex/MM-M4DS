@@ -8,8 +8,8 @@ from helpers.logger import set_logger
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_csv('./python_dataDictionaries/missing_input_dataDictionary.csv')
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', 
 									missing_values=missing_values_imputeByDerivedValue_PRE_valueRange,
@@ -57,8 +57,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 	
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')	
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')	
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	missing_values_imputeByDerivedValue_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df, field='sex', 
@@ -84,14 +84,47 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION POST_value_range_impute_ETHNICITY_columns NOT VALIDATED')
 	
+	missing_values_imputeByDerivedValue_INV_condition=[]
+	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df,
+								data_dictionary_out=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df,
+								belong_op_in=Belong(0),
+								belong_op_out=Belong(0),
+								special_type_input=SpecialType(0),
+								derived_type_output=DerivedType(0),
+								missing_values=missing_values_imputeByDerivedValue_INV_condition, axis_param=0, field_in='sex', field_out='sex'):
+		print('INVARIANT INV_condition_impute_sex_columns VALIDATED')
+	else:
+		print('INVARIANT INV_condition_impute_sex_columns NOT VALIDATED')
 	
 	
+	missing_values_imputeByDerivedValue_INV_condition=[]
+	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df,
+								data_dictionary_out=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df,
+								belong_op_in=Belong(0),
+								belong_op_out=Belong(0),
+								special_type_input=SpecialType(0),
+								derived_type_output=DerivedType(0),
+								missing_values=missing_values_imputeByDerivedValue_INV_condition, axis_param=0, field_in='IRSCHOOL', field_out='IRSCHOOL'):
+		print('INVARIANT INV_condition_impute_IRSCHOOL_columns VALIDATED')
+	else:
+		print('INVARIANT INV_condition_impute_IRSCHOOL_columns NOT VALIDATED')
 	
 	
+	missing_values_imputeByDerivedValue_INV_condition=[]
+	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df,
+								data_dictionary_out=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df,
+								belong_op_in=Belong(0),
+								belong_op_out=Belong(0),
+								special_type_input=SpecialType(0),
+								derived_type_output=DerivedType(0),
+								missing_values=missing_values_imputeByDerivedValue_INV_condition, axis_param=0, field_in='ETHNICITY', field_out='ETHNICITY'):
+		print('INVARIANT INV_condition_impute_ETHNICITY_columns VALIDATED')
+	else:
+		print('INVARIANT INV_condition_impute_ETHNICITY_columns NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
 
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2', 
@@ -127,8 +160,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'ACADEMIC_INTEREST_1', field_out = 'ACADEMIC_INTEREST_1')
 	
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_transformed
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')	
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')	
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	missing_values_imputeByFixValue_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df, field='ACADEMIC_INTEREST_2', 
@@ -146,12 +179,38 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION imputeMissingByFixValue(ACADEMIC_INTEREST_1)_POST_valueRange NOT VALIDATED')
 	
+	missing_values_imputeByFixValue_INV_condition=[]
+	if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df,
+								data_dictionary_out=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df,
+								special_type_input=SpecialType(0),
+								fix_value_output='Unknown',
+								belong_op_in=Belong(0),
+								belong_op_out=Belong(0),
+								data_type_output=DataType(0),
+								missing_values=missing_values_imputeByFixValue_INV_condition, 
+								axis_param=0, field_in='ACADEMIC_INTEREST_2', field_out='ACADEMIC_INTEREST_2'):
+		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_condition NOT VALIDATED')
 	
 	
+	missing_values_imputeByFixValue_INV_condition=[]
+	if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df,
+								data_dictionary_out=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df,
+								special_type_input=SpecialType(0),
+								fix_value_output='Unknown',
+								belong_op_in=Belong(0),
+								belong_op_out=Belong(0),
+								data_type_output=DataType(0),
+								missing_values=missing_values_imputeByFixValue_INV_condition, 
+								axis_param=0, field_in='ACADEMIC_INTEREST_1', field_out='ACADEMIC_INTEREST_1'):
+		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income', 
@@ -185,8 +244,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'distance', field_out = 'distance')
 	
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_df=imputeMissingByMean_avg_income_distance__input_dataDictionary_transformed
-	imputeMissingByMean_avg_income_distance__output_dataDictionary_df.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')	
-	imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByMean_avg_income_distance__output_dataDictionary_df.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')	
+	imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	missing_values_imputeByNumericOp_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByMean_avg_income_distance__output_dataDictionary_df, field='avg_income', 
@@ -204,12 +263,34 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION imputeMissingByMean(distance)_POST_valueRange NOT VALIDATED')
 	
+	missing_values_imputeByNumericOp_INV_condition=[]
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeMissingByMean_avg_income_distance__input_dataDictionary_df,
+											data_dictionary_out=imputeMissingByMean_avg_income_distance__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(0),
+											num_op_output=Operation(1),
+											missing_values=missing_values_imputeByNumericOp_INV_condition, axis_param=0, field_in='avg_income', field_out='avg_income'):
+		print('INVARIANT imputeMissingByMean(avg_income)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeMissingByMean(avg_income)_INV_condition NOT VALIDATED')
 	
 	
+	missing_values_imputeByNumericOp_INV_condition=[]
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeMissingByMean_avg_income_distance__input_dataDictionary_df,
+											data_dictionary_out=imputeMissingByMean_avg_income_distance__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(0),
+											num_op_output=Operation(1),
+											missing_values=missing_values_imputeByNumericOp_INV_condition, axis_param=0, field_in='distance', field_out='distance'):
+		print('INVARIANT imputeMissingByMean(distance)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeMissingByMean(distance)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_input_dataDictionary.csv', sep=',', index_col=0)
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df, field='satscore', 
@@ -228,8 +309,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'satscore', field_out = 'satscore')
 	
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_transformed
-	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv')	
-	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/missing_output_dataDictionary.csv')	
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	missing_values_imputeByNumericOp_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df, field='satscore', 
@@ -239,10 +320,21 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION imputeMissingByLinearInterpolation(satscore)_POST_valueRange NOT VALIDATED')
 	
+	missing_values_imputeByNumericOp_INV_condition=[]
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df,
+											data_dictionary_out=imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(0),
+											num_op_output=Operation(0),
+											missing_values=missing_values_imputeByNumericOp_INV_condition, axis_param=0, field_in='satscore', field_out='satscore'):
+		print('INVARIANT imputeMissingByLinearInterpolation(satscore)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeMissingByLinearInterpolation(satscore)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	rowFilterRange_init_span__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
+	rowFilterRange_init_span__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/missing_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=rowFilterRange_init_span__input_dataDictionary_df,
 	                                	closure_type=Closure(2), belong_op=Belong(1), field='init_span'):
@@ -264,8 +356,8 @@ def generateWorkflow():
 																											filter_type=FilterType(0),
 																											closure_type_list=closure_type_list_rowFilterRange_param_filter)
 	rowFilterRange_init_span__output_dataDictionary_df=rowFilterRange_init_span__input_dataDictionary_transformed
-	rowFilterRange_init_span__output_dataDictionary_df.to_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv')	
-	rowFilterRange_init_span__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
+	rowFilterRange_init_span__output_dataDictionary_df.to_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv')	
+	rowFilterRange_init_span__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_fix_value_range(value=-216, data_dictionary=rowFilterRange_init_span__output_dataDictionary_df, belong_op=Belong(1), field='init_span',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -274,7 +366,7 @@ def generateWorkflow():
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 	
 	#-----------------New DataProcessing-----------------
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/rowFilter_output_dataDictionary.csv', sep=',', index_col=0)
 
 	field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_PRE_field_range,
@@ -292,8 +384,8 @@ def generateWorkflow():
 																	columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
 	
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_transformed
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df.to_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv')	
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df.to_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv')	
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_POST_field_range,
@@ -305,14 +397,14 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	mapping_TERRITORY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
+	Mapping_TERRITORY__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/columnFilter_output_dataDictionary.csv', sep=',', index_col=0)
 
-	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=Mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
 	else:
 		print('PRECONDITION mapping(TERRITORY)_PRE_valueRange NOT VALIDATED')
-	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=Mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('PRECONDITION mapping(TERRITORY)_PRE_valueRange VALIDATED')
 	else:
@@ -324,20 +416,20 @@ def generateWorkflow():
 	data_type_output_list=[DataType(0), DataType(0)]
 	
 	
-	mapping_TERRITORY__output_dataDictionary_df=data_transformations.transform_fix_value_fix_value(data_dictionary=mapping_TERRITORY__input_dataDictionary_df, input_values_list=input_values_list,
+	Mapping_TERRITORY__output_dataDictionary_df=data_transformations.transform_fix_value_fix_value(data_dictionary=Mapping_TERRITORY__input_dataDictionary_df, input_values_list=input_values_list,
 																  output_values_list=output_values_list,
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
 	
-	mapping_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')	
-	mapping_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)
+	Mapping_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv')	
+	Mapping_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)
 	
-	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=Mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
 	else:
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange NOT VALIDATED')
-	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
+	if contract_pre_post.check_fix_value_range(value='N', data_dictionary=Mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
 	else:
@@ -350,8 +442,8 @@ def generateWorkflow():
 	data_type_input_list_def_INV_condition=[DataType(0), DataType(0)]
 	data_type_output_list_def_INV_condition=[DataType(2), DataType(2)]
 	
-	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_TERRITORY__input_dataDictionary_df,
-											data_dictionary_out=mapping_TERRITORY__output_dataDictionary_df,
+	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=Mapping_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=Mapping_TERRITORY__output_dataDictionary_df,
 											input_values_list=input_values_list_def_INV_condition, 
 											output_values_list=output_values_list_def_INV_condition,
 											belong_op_in=Belong(0),
@@ -365,7 +457,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	mapping_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)
+	mapping_Instate__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__input_dataDictionary_df, belong_op=Belong(0), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -389,8 +481,8 @@ def generateWorkflow():
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'Instate', field_out = 'Instate')
 	
-	mapping_Instate__output_dataDictionary_df.to_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')	
-	mapping_Instate__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)
+	mapping_Instate__output_dataDictionary_df.to_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv')	
+	mapping_Instate__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__output_dataDictionary_df, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -425,7 +517,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)
+	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv', sep=',', index_col=0)
 
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=stringToNumber_TERRITORY_Instate__input_dataDictionary_df.copy()
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=data_transformations.transform_cast_type(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed,
@@ -437,8 +529,8 @@ def generateWorkflow():
 																	field='Instate')
 	
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed
-	stringToNumber_TERRITORY_Instate__output_dataDictionary_df.to_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv')	
-	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
+	stringToNumber_TERRITORY_Instate__output_dataDictionary_df.to_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv')	
+	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
@@ -457,7 +549,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/stringToNumber_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_outliers(belong_op=Belong(0), data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='avg_income', 
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -500,8 +592,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'Instate', field_out = 'Instate')
 	
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_transformed
-	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv')	
-	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv')	
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_outliers(belong_op=Belong(1), data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df, field='avg_income', 
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -521,14 +613,44 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION imputeOutlierByClosest(Instate)_POST_valueRange´ NOT VALIDATED')
 	
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df,
+											data_dictionary_out=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(2),
+											num_op_output=Operation(3),
+											missing_values=None, axis_param=0, field_in='avg_income', field_out='avg_income'):
+		print('INVARIANT imputeOutlierByClosest(avg_income)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeOutlierByClosest(avg_income)_INV_condition NOT VALIDATED')
 	
 	
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df,
+											data_dictionary_out=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(2),
+											num_op_output=Operation(3),
+											missing_values=None, axis_param=0, field_in='distance', field_out='distance'):
+		print('INVARIANT imputeOutlierByClosest(distance)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeOutlierByClosest(distance)_INV_condition NOT VALIDATED')
 	
 	
+	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df,
+											data_dictionary_out=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df,
+											belong_op_in=Belong(0),
+											belong_op_out=Belong(0),
+											special_type_input=SpecialType(2),
+											num_op_output=Operation(3),
+											missing_values=None, axis_param=0, field_in='Instate', field_out='Instate'):
+		print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS'):
@@ -554,22 +676,22 @@ def generateWorkflow():
 																  field_in = 'TOTAL_CONTACTS', field_out = 'TOTAL_CONTACTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
 																  field_in = 'SELF_INIT_CNTCTS', field_out = 'SELF_INIT_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
 																  field_in = 'SOLICITED_CNTCTS', field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
@@ -595,8 +717,8 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=4.0,
 																  closure_type=Closure(2),
@@ -622,8 +744,8 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  left_margin=4.0, right_margin=1000.0,
 																  closure_type=Closure(2),
@@ -649,8 +771,8 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned'):
@@ -670,14 +792,113 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION binner(SOLICITED_CNTCTS)_POST_valueRange NOT VALIDATED')
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=-1000.0, right_margin=1.0,
+											closure_type=Closure(0),
+											fix_value_output='Low',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TOTAL_CONTACTS', field_out='TOTAL_CONTACTS_binned'):
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=1.0, right_margin=4.0,
+											closure_type=Closure(2),
+											fix_value_output='Moderate',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TOTAL_CONTACTS', field_out='TOTAL_CONTACTS_binned'):
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=4.0, right_margin=1000.0,
+											closure_type=Closure(2),
+											fix_value_output='High',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TOTAL_CONTACTS', field_out='TOTAL_CONTACTS_binned'):
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
 	
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=-1000.0, right_margin=1.0,
+											closure_type=Closure(0),
+											fix_value_output='Low',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SELF_INIT_CNTCTS', field_out='SELF_INIT_CNTCTS_binned'):
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+	else:
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=1.0, right_margin=4.0,
+											closure_type=Closure(2),
+											fix_value_output='Moderate',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SELF_INIT_CNTCTS', field_out='SELF_INIT_CNTCTS_binned'):
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+	else:
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=4.0, right_margin=1000.0,
+											closure_type=Closure(2),
+											fix_value_output='High',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SELF_INIT_CNTCTS', field_out='SELF_INIT_CNTCTS_binned'):
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
+	else:
+		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 	
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=-1000.0, right_margin=1.0,
+											closure_type=Closure(0),
+											fix_value_output='Low',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SOLICITED_CNTCTS', field_out='SOLICITED_CNTCTS_binned'):
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=1.0, right_margin=4.0,
+											closure_type=Closure(2),
+											fix_value_output='Moderate',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SOLICITED_CNTCTS', field_out='SOLICITED_CNTCTS_binned'):
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
+											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
+											left_margin=4.0, right_margin=1000.0,
+											closure_type=Closure(2),
+											fix_value_output='High',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='SOLICITED_CNTCTS', field_out='SOLICITED_CNTCTS_binned'):
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_TERRITORY__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY'):
@@ -691,8 +912,8 @@ def generateWorkflow():
 																  field_in = 'TERRITORY', field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1.0,
 																  closure_type=Closure(0),
@@ -702,8 +923,8 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=3.0,
 																  closure_type=Closure(2),
@@ -713,8 +934,8 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=3.0, right_margin=5.0,
 																  closure_type=Closure(2),
@@ -724,8 +945,8 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=5.0, right_margin=7.0,
 																  closure_type=Closure(2),
@@ -735,8 +956,8 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=7.0, right_margin=1000.0,
 																  closure_type=Closure(3),
@@ -746,8 +967,8 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_TERRITORY__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_TERRITORY__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='TERRITORY_binned'):
@@ -755,10 +976,65 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION binner(TERRITORY)_POST_valueRange NOT VALIDATED')
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
+											left_margin=-1000.0, right_margin=1.0,
+											closure_type=Closure(0),
+											fix_value_output='Unknown',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TERRITORY', field_out='TERRITORY_binned'):
+		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
+											left_margin=1.0, right_margin=3.0,
+											closure_type=Closure(2),
+											fix_value_output='Zone 1',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TERRITORY', field_out='TERRITORY_binned'):
+		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
+											left_margin=3.0, right_margin=5.0,
+											closure_type=Closure(2),
+											fix_value_output='Zone 2',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TERRITORY', field_out='TERRITORY_binned'):
+		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
+											left_margin=5.0, right_margin=7.0,
+											closure_type=Closure(2),
+											fix_value_output='Zone 3',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TERRITORY', field_out='TERRITORY_binned'):
+		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
+											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
+											left_margin=7.0, right_margin=1000.0,
+											closure_type=Closure(2),
+											fix_value_output='Zone 4',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='TERRITORY', field_out='TERRITORY_binned'):
+		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_satscore__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
@@ -772,8 +1048,8 @@ def generateWorkflow():
 																  field_in = 'satscore', field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=-1000.0, right_margin=1040.0,
 																  closure_type=Closure(1),
@@ -783,8 +1059,8 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1040.0, right_margin=1160.0,
 																  closure_type=Closure(0),
@@ -794,8 +1070,8 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1160.0, right_margin=1340.0,
 																  closure_type=Closure(2),
@@ -805,8 +1081,8 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1340.0, right_margin=2000.0,
 																  closure_type=Closure(1),
@@ -816,8 +1092,8 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_satscore__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_satscore__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_satscore__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='satscore_binned'):
@@ -825,10 +1101,54 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION binner(satscore)_POST_valueRange NOT VALIDATED')
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
+											data_dictionary_out=binner_satscore__output_dataDictionary_df,
+											left_margin=-1000.0, right_margin=1040.0,
+											closure_type=Closure(1),
+											fix_value_output='54 Percentile and Under',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='satscore', field_out='satscore_binned'):
+		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
+											data_dictionary_out=binner_satscore__output_dataDictionary_df,
+											left_margin=1040.0, right_margin=1160.0,
+											closure_type=Closure(0),
+											fix_value_output='55-75 Percentile',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='satscore', field_out='satscore_binned'):
+		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
+											data_dictionary_out=binner_satscore__output_dataDictionary_df,
+											left_margin=1160.0, right_margin=1340.0,
+											closure_type=Closure(2),
+											fix_value_output='76-93 Percentile',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='satscore', field_out='satscore_binned'):
+		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
+											data_dictionary_out=binner_satscore__output_dataDictionary_df,
+											left_margin=1340.0, right_margin=2000.0,
+											closure_type=Closure(1),
+											fix_value_output='94+ percentile',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='satscore', field_out='satscore_binned'):
+		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_avg_income__input_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_avg_income__input_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericOutliers_output_dataDictionary.csv', sep=',', index_col=0)
 
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='avg_income'):
@@ -842,19 +1162,19 @@ def generateWorkflow():
 																  field_in = 'avg_income', field_out = 'avg_income_binned')
 	
 	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_avg_income__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_avg_income__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_avg_income__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=9.0, right_margin=42830.0,
 																  closure_type=Closure(1),
-																  fix_value_output='Low',
+																  fix_value_output='low',
 							                                      data_type_output = DataType(0),
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
 	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_avg_income__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_avg_income__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_avg_income__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=42830.0, right_margin=55590.0,
 																  closure_type=Closure(1),
@@ -864,8 +1184,8 @@ def generateWorkflow():
 																  field_out = 'avg_income_binned')
 	
 	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_avg_income__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_avg_income__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_avg_income__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=55590.0, right_margin=100000.0,
 																  closure_type=Closure(2),
@@ -875,8 +1195,8 @@ def generateWorkflow():
 																  field_out = 'avg_income_binned')
 	
 	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv')	
-	binner_avg_income__output_dataDictionary_df=pd.read_csv('./knime_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
+	binner_avg_income__output_dataDictionary_df.to_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv')	
+	binner_avg_income__output_dataDictionary_df=pd.read_csv('./python_dataDictionaries/numericBinner_output_dataDictionary.csv', sep=',', index_col=0)
 	
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='avg_income_binned'):
@@ -884,6 +1204,39 @@ def generateWorkflow():
 	else:
 		print('POSTCONDITION binner(avg_income)_POST_valueRange NOT VALIDATED')
 	
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_avg_income__input_dataDictionary_df,
+											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
+											left_margin=9.0, right_margin=42830.0,
+											closure_type=Closure(0),
+											fix_value_output='low',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='avg_income', field_out='avg_income_binned'):
+		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_avg_income__input_dataDictionary_df,
+											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
+											left_margin=42830.0, right_margin=55559.0,
+											closure_type=Closure(2),
+											fix_value_output='Moderate',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='avg_income', field_out='avg_income_binned'):
+		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
+	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_avg_income__input_dataDictionary_df,
+											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
+											left_margin=55590.0, right_margin=100000.0,
+											closure_type=Closure(2),
+											fix_value_output='High',
+											belong_op_in=Belong(0), belong_op_out=Belong(0),
+											data_type_output=DataType(0),
+											field_in='avg_income', field_out='avg_income_binned'):
+		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
+	else:
+		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
 	
 	
 
