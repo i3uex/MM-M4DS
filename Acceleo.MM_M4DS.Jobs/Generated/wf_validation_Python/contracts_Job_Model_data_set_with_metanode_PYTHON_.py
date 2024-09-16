@@ -71,7 +71,7 @@ def generateWorkflow():
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary, sep = imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep)
-	if os.path.exists(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary, sep = imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_sep)
 
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
@@ -167,7 +167,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_csv(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary, sep=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_sep)
 
-	if os.path.exists(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_csv(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary, sep = imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_sep)
 
 	missing_values_imputeByFixValue_PRE_valueRange=[]
@@ -237,7 +237,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv(imputeMissingByMean_avg_income_distance__input_dataDictionary, sep=imputeMissingByMean_avg_income_distance__input_dataDictionary_sep)
 
-	if os.path.exists(imputeMissingByMean_avg_income_distance__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(imputeMissingByMean_avg_income_distance__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_csv(imputeMissingByMean_avg_income_distance__output_dataDictionary, sep = imputeMissingByMean_avg_income_distance__output_dataDictionary_sep)
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
@@ -303,7 +303,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_csv(imputeMissingByLinearInterpolation_satscore__input_dataDictionary, sep=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_sep)
 
-	if os.path.exists(imputeMissingByLinearInterpolation_satscore__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(imputeMissingByLinearInterpolation_satscore__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_csv(imputeMissingByLinearInterpolation_satscore__output_dataDictionary, sep = imputeMissingByLinearInterpolation_satscore__output_dataDictionary_sep)
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
@@ -339,7 +339,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	rowFilterRange_init_span__input_dataDictionary_df=pd.read_csv(rowFilterRange_init_span__input_dataDictionary, sep=rowFilterRange_init_span__input_dataDictionary_sep)
 
-	if os.path.exists(rowFilterRange_init_span__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(rowFilterRange_init_span__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		rowFilterRange_init_span__output_dataDictionary_df=pd.read_csv(rowFilterRange_init_span__output_dataDictionary, sep = rowFilterRange_init_span__output_dataDictionary_sep)
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=rowFilterRange_init_span__input_dataDictionary_df,
@@ -357,7 +357,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df=pd.read_csv(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary, sep=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_sep)
 
-	if os.path.exists(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=pd.read_csv(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary, sep = columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_sep)
 
 	field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
@@ -381,7 +381,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	mapping_TERRITORY__input_dataDictionary_df=pd.read_csv(mapping_TERRITORY__input_dataDictionary, sep=mapping_TERRITORY__input_dataDictionary_sep)
 
-	if os.path.exists(mapping_TERRITORY__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(mapping_TERRITORY__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		mapping_TERRITORY__output_dataDictionary_df=pd.read_csv(mapping_TERRITORY__output_dataDictionary, sep = mapping_TERRITORY__output_dataDictionary_sep)
 
 	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
@@ -432,7 +432,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	mapping_Instate__input_dataDictionary_df=pd.read_csv(mapping_Instate__input_dataDictionary, sep=mapping_Instate__input_dataDictionary_sep)
 
-	if os.path.exists(mapping_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(mapping_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		mapping_Instate__output_dataDictionary_df=pd.read_csv(mapping_Instate__output_dataDictionary, sep = mapping_Instate__output_dataDictionary_sep)
 
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__input_dataDictionary_df, belong_op=Belong(0), field='Instate',
@@ -483,7 +483,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_csv(stringToNumber_TERRITORY_Instate__input_dataDictionary, sep=stringToNumber_TERRITORY_Instate__input_dataDictionary_sep)
 
-	if os.path.exists(stringToNumber_TERRITORY_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(stringToNumber_TERRITORY_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_csv(stringToNumber_TERRITORY_Instate__output_dataDictionary, sep = stringToNumber_TERRITORY_Instate__output_dataDictionary_sep)
 
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
@@ -505,7 +505,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_csv(imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary, sep=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_sep)
 
-	if os.path.exists(imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_csv(imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary, sep = imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_sep)
 
 	if contract_pre_post.check_outliers(belong_op=Belong(0), data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='avg_income', 
@@ -586,7 +586,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_csv(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary, sep=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_sep)
 
-	if os.path.exists(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary, sep = binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_sep)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
@@ -742,7 +742,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	binner_TERRITORY__input_dataDictionary_df=pd.read_csv(binner_TERRITORY__input_dataDictionary, sep=binner_TERRITORY__input_dataDictionary_sep)
 
-	if os.path.exists(binner_TERRITORY__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(binner_TERRITORY__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		binner_TERRITORY__output_dataDictionary_df=pd.read_csv(binner_TERRITORY__output_dataDictionary, sep = binner_TERRITORY__output_dataDictionary_sep)
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__input_dataDictionary_df,
@@ -822,7 +822,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_df=pd.read_csv(binner_satscore__input_dataDictionary, sep=binner_satscore__input_dataDictionary_sep)
 
-	if os.path.exists(binner_satscore__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(binner_satscore__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		binner_satscore__output_dataDictionary_df=pd.read_csv(binner_satscore__output_dataDictionary, sep = binner_satscore__output_dataDictionary_sep)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__input_dataDictionary_df,
@@ -890,7 +890,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	binner_avg_income__input_dataDictionary_df=pd.read_csv(binner_avg_income__input_dataDictionary, sep=binner_avg_income__input_dataDictionary_sep)
 
-	if os.path.exists(binner_avg_income__output_dataDictionary):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists(binner_avg_income__output_dataDictionary):		#If the output DataDictionary exists, we store it
 		binner_avg_income__output_dataDictionary_df=pd.read_csv(binner_avg_income__output_dataDictionary, sep = binner_avg_income__output_dataDictionary_sep)
 
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__input_dataDictionary_df,

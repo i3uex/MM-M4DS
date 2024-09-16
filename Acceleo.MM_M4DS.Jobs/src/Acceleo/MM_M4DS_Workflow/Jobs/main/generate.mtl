@@ -40,7 +40,7 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]		[comment OPEN assigns the variable to be of type Transformation/]
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | d.inputPort)]										[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																			[comment CLOSE read all the input datasets and store them/]
 						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -66,7 +66,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -75,7 +75,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -126,7 +126,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -135,7 +135,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -187,7 +187,7 @@ generateWorkflow()
 	[else]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
@@ -197,7 +197,7 @@ generateWorkflow()
 [else]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | dw.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -228,13 +228,13 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -242,8 +242,8 @@ generateWorkflow()
 	[/if]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -291,12 +291,12 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																	[comment CLOSE read all the input datasets and store them/]
 						[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
-	if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
-		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	if os.fileName.exists('[dc.fileName/]'):		#If the output DataDictionary exists, we store it
+		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																	[comment CLOSE read all the output datasets and store them/]
 						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -321,7 +321,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -330,7 +330,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -381,7 +381,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -390,7 +390,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -442,7 +442,7 @@ generateWorkflow()
 	[else]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
@@ -455,7 +455,7 @@ generateWorkflow()
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | dw.outputPort)]										[comment OPEN read all the output datasets and store them/]
-	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):		#If the output DataDictionary exists, we store it
+	if os.fileName.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):		#If the output DataDictionary exists, we store it
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
 
 [/for]																			[comment CLOSE read all the output datasets and store them/]
@@ -486,13 +486,13 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]')
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]')
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]')
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -500,12 +500,12 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | d.outputPort)]										[comment OPEN read all the output datasets and store them/]
-	if os.path.exists('[dc.path/]'):		#If the output DataDictionary exists, we store it
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	if os.fileName.exists('[dc.fileName/]'):		#If the output DataDictionary exists, we store it
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 [/for]																			[comment CLOSE read all the output datasets and store them/]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -549,7 +549,7 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																		[comment CLOSE read all the input datasets and store them/]
 [generateCallTransformation(d, d)/]
@@ -560,7 +560,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -569,7 +569,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -604,7 +604,7 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.path/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -613,7 +613,7 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.path/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -649,7 +649,7 @@ generateWorkflow()
 	[else]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
@@ -659,7 +659,7 @@ generateWorkflow()
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(dw, d_or)/]
@@ -675,13 +675,13 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().path/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
-				[if (dc.path = dc_out.path)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.path/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -689,8 +689,8 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.path/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.path/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(d, d)/]
@@ -725,8 +725,8 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 					[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 						[if (dpd.oclIsKindOf(Library::Transformation))]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 							[/let]
 						[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -747,8 +747,8 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 				[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 					[if (dpd.oclIsKindOf(Library::Transformation))]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 							[/let]
 					[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -814,8 +814,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -859,8 +859,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -905,8 +905,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -932,8 +932,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 							[if (dpd.oclIsKindOf(Library::Transformation))]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 								[/let]
 							[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -961,8 +961,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -1027,8 +1027,8 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 							[if (dpd.oclIsKindOf(Library::Transformation))]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 								[/let]
 							[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
@@ -1055,8 +1055,8 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 								[if (dpd.oclIsKindOf(Library::Transformation))]
 									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.path/]')	
-[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.path/]', sep='[dd_out.columnDelimiter/]', index_col=0)
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[dd_out.fileName/]')	
+[dd_out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[dd_out.fileName/]', sep='[dd_out.columnDelimiter/]', index_col=0)
 									[/let]
 								[elseif (dpd.oclIsKindOf(Library::Job))]
 [dd_out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dd_out.name.replaceAll('[(),\\s]+', '_')/])	
