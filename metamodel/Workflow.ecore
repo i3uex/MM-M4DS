@@ -3,10 +3,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Workflow" nsURI="https://www.example.org/workflow" nsPrefix="Workflow">
   <eClassifiers xsi:type="ecore:EClass" name="Workflow">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataprocessing" lowerBound="2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataprocessing" lowerBound="1"
         upperBound="-1" eType="#//DataProcessing" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="link" lowerBound="1" upperBound="-1"
-        eType="#//Link" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="#//Link"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="ecore:EClass Environment.ecore#//Environment"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataProcessing">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="#//Link"
@@ -82,7 +84,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="specialValuesDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MissingValuesDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialType" eType="#//SpecialValue"
-        defaultValueLiteral="MISSING"/>
+        defaultValueLiteral="Missing"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiscretizeBin" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="discretizeBinDef" lowerBound="1"
@@ -96,7 +98,7 @@
         eType="#//DataField" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataDictionaryDefinition"
         lowerBound="1" eType="ecore:EClass Library.ecore#//DataDictionaryDefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=","/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
