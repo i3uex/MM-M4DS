@@ -1,8 +1,8 @@
 #CAMBIAR LAS RUTAS DE LOS COPY DE LOS ARCHIVOS GENERADOS
 
-CONTRACTS_SCRIPT="generated_code.contracts_Job_Model_data_set_with_metanode_PYTHON_"
-TRANSFORMATIONS_SCRIPT="generated_code.transformations_Job_Model_data_set_with_metanode_PYTHON_"
-WORKFLOW_SCRIPT="generated_code.dataProcessing_Job_Model_data_set_with_metanode_PYTHON_"
+CONTRACTS_SCRIPT="workflows.contracts_Job_Model_data_set_with_metanode_PYTHON_"
+TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_Model_data_set_with_metanode_PYTHON_"
+WORKFLOW_SCRIPT="workflows.dataProcessing_Job_Model_data_set_with_metanode_PYTHON_"
 
 while true; do
     echo -e "\nWhat would you like to do?"

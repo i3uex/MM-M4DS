@@ -17,9 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV PYTHONPATH=./wf_model_dataset_python
 
 
-COPY ./dataProcessing_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/generated_code/
-COPY ./contracts_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/generated_code/
-COPY ./transformations_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/generated_code/
+COPY ./dataProcessing_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
+COPY ./contracts_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
+COPY ./transformations_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
 
 COPY workflow_scripts.sh ./wf_model_dataset_python/workflow_scripts.sh
 
