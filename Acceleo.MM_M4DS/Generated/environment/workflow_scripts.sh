@@ -30,7 +30,6 @@ while true; do
             echo "An error occurred while executing the complete Pipeline."
         fi
     elif [ "$option" -eq 4 ]; then
-        echo -e "Exiting the application...\n"
         break
     else
         echo -e "Invalid option. Please select a valid option.\n"

@@ -14203,84 +14203,6 @@
             </ifExpr>
           </elseIf>
         </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#xA;"/>
-        <body xsi:type="mtl:FileBlock" openMode="OverWrite">
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="EnvironmentName = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Environment/name"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;EnvironmentPath = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Environment/path"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;ContainerPython = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Python"/>
-              <source xsi:type="ocl.ecore:PropertyCallExp">
-                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
-                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-                </source>
-                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
-              </source>
-              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Container/developmentTool"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Python/version"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;ContainerName = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
-              <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-              </source>
-              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/name"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;ContainerImageName = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
-              <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-              </source>
-              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageName"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;ContainerImageTag = "/>
-          <body xsi:type="ocl.ecore:PropertyCallExp">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <source xsi:type="ocl.ecore:PropertyCallExp">
-              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
-              <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generatePortable/%/por">
-                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
-              </source>
-              <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
-            </source>
-            <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageTag"/>
-          </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
-          <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Atributes.txt">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          </fileUrl>
-          <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
-            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          </charset>
-        </body>
         <letVariable name="por">
           <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
           <initExpression xsi:type="ocl.ecore:OperationCallExp">
@@ -14322,7 +14244,7 @@
             </source>
             <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Python/version"/>
           </body>
-          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;&#xA;WORKDIR "/>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="-slim&#xA;&#xA;&#xA;WORKDIR "/>
           <body xsi:type="ocl.ecore:PropertyCallExp">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
@@ -14466,6 +14388,239 @@
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           </charset>
         </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+        <body xsi:type="mtl:FileBlock" openMode="OverWrite">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="#!/bin/bash&#xA;set -e&#xA;&#xA;sudo apt-get update --yes&#xA;sudo apt-get install ca-certificates curl&#xA;sudo install -m 0755 -d /etc/apt/keyrings&#xA;sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc&#xA;sudo chmod a+r /etc/apt/keyrings/docker.asc&#xA;&#xA;echo \&#xA;  &quot;deb "/>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \&#xA;  $(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;) stable&quot; | \&#xA;  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null&#xA;sudo apt-get update --yes&#xA;&#xA;sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes&#xA;&#xA;docker build -t "/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageName"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=":"/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageTag"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" -f Dockerfile .&#xA;&#xA;clear&#xA;&#xA;docker run -it --rm --name "/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/name"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" --mount type=bind,source="/>
+          <body xsi:type="mtl:LetBlock">
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="ls" referredVariable="/0/generateDocker/%/%.2/%.9/ls">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//LocalStorage"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//LocalStorage/path"/>
+            </body>
+            <letVariable name="ls">
+              <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//LocalStorage"/>
+              <initExpression xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//LocalStorage"/>
+                <source xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Storage"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp" eType="/16/OrderedSet(Storage)">
+                    <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                      <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Environment/storage"/>
+                  </source>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/first"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/20/LocalStorage">
+                  <referredType xsi:type="ecore:EClass" href="https://www.example.org/environment#//LocalStorage"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+              </initExpression>
+            </letVariable>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=",target="/>
+          <body xsi:type="mtl:IfBlock">
+            <body xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Environment/path"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/replaceFirst"/>
+            </body>
+            <ifExpr xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/startsWith">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Environment/path"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+            </ifExpr>
+            <else>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Environment/path"/>
+              </body>
+            </else>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="/data "/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageName"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=":"/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageTag"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;docker rmi "/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageName"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=":"/>
+          <body xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_String_Class/replaceAll">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Container"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="por" referredVariable="/0/generateDocker/%/por">
+                  <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/environment#//Portable/container"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="https://www.example.org/environment#//Container/imageTag"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[(),\s]+">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;clear&#xA;&#xA;echo -e &quot;Exiting the application...\n&quot;&#xA;"/>
+          <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="deploy_docker_app.sh">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </fileUrl>
+          <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </charset>
+        </body>
         <letVariable name="por">
           <eType xsi:type="ecore:EClass" href="https://www.example.org/environment#//Portable"/>
           <initExpression xsi:type="ocl.ecore:OperationCallExp">
@@ -14569,22 +14724,8 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="]">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="; then&#xA;        echo -e &quot;Exiting the application...\n&quot;&#xA;        break&#xA;    else&#xA;        echo -e &quot;Invalid option. Please select a valid option.\n&quot;&#xA;    fi&#xA;done&#xA;"/>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="; then&#xA;        break&#xA;    else&#xA;        echo -e &quot;Invalid option. Please select a valid option.\n&quot;&#xA;    fi&#xA;done&#xA;"/>
         <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="workflow_scripts.sh">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        </fileUrl>
-        <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        </charset>
-      </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
-      <body xsi:type="mtl:FileBlock" openMode="OverWrite">
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="#!/bin/bash&#xA;set -e&#xA;&#xA;sudo apt-get update --yes&#xA;sudo apt-get install ca-certificates curl&#xA;sudo install -m 0755 -d /etc/apt/keyrings&#xA;sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc&#xA;sudo chmod a+r /etc/apt/keyrings/docker.asc&#xA;&#xA;echo \&#xA;  &quot;deb "/>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[">
-          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \&#xA;  $(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;) stable&quot; | \&#xA;  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null&#xA;sudo apt-get update --yes&#xA;&#xA;sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes&#xA;&#xA;docker build -t docker_app -f Dockerfile .&#xA;&#xA;clear&#xA;&#xA;docker run -it docker_app&#xA;&#xA;&#xA;"/>
-        <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="deploy_docker_app.sh">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </fileUrl>
         <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
@@ -14770,6 +14911,13 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </eParameters>
         <eParameters name="replacement">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="startsWith">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <eParameters name="substring">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </eParameters>
       </eOperations>
@@ -19321,30 +19469,6 @@
     <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
-    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
-  </ocl.ecore:Variable>
-  <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
@@ -19403,6 +19527,42 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="i">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//Workflow"/>
@@ -43807,12 +43967,12 @@
     </eAnnotations>
     <eAnnotations source="positions.4853" references="/0/generatePortable">
       <details key="start" value="94021"/>
-      <details key="end" value="94675"/>
+      <details key="end" value="94370"/>
       <details key="line" value="1133"/>
     </eAnnotations>
     <eAnnotations source="positions.4854" references="/0/generatePortable/%">
       <details key="start" value="94078"/>
-      <details key="end" value="94663"/>
+      <details key="end" value="94358"/>
       <details key="line" value="1134"/>
     </eAnnotations>
     <eAnnotations source="positions.4855" references="/0/generatePortable/%/%">
@@ -43935,1045 +44095,1270 @@
       <details key="end" value="94320"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4879" references="/0/generatePortable/%/%.1">
-      <details key="start" value="94352"/>
-      <details key="end" value="94354"/>
-      <details key="line" value="1142"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4880" references="/0/generatePortable/%/%.2">
-      <details key="start" value="94355"/>
-      <details key="end" value="94656"/>
-      <details key="line" value="1143"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4881" references="/0/generatePortable/%/%.2/%">
-      <details key="start" value="94396"/>
-      <details key="end" value="94414"/>
-      <details key="line" value="1144"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4882" references="/0/generatePortable/%/%.2/%.1">
-      <details key="start" value="94415"/>
-      <details key="end" value="94423"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4883" references="/0/generatePortable/%/%.2/%.1/por">
-      <details key="start" value="94415"/>
-      <details key="end" value="94418"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4884" references="/0/generatePortable/%/%.2/%.2">
-      <details key="start" value="94425"/>
-      <details key="end" value="94444"/>
-      <details key="line" value="1145"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4885" references="/0/generatePortable/%/%.2/%.3">
-      <details key="start" value="94445"/>
-      <details key="end" value="94453"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4886" references="/0/generatePortable/%/%.2/%.3/por">
-      <details key="start" value="94445"/>
-      <details key="end" value="94448"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4887" references="/0/generatePortable/%/%.2/%.4">
-      <details key="start" value="94455"/>
-      <details key="end" value="94475"/>
-      <details key="line" value="1146"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4888" references="/0/generatePortable/%/%.2/%.5">
-      <details key="start" value="94476"/>
-      <details key="end" value="94513"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4889" references="/0/generatePortable/%/%.2/%.5/%">
-      <details key="start" value="94476"/>
-      <details key="end" value="94505"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4890" references="/0/generatePortable/%/%.2/%.5/%/%">
-      <details key="start" value="94476"/>
-      <details key="end" value="94489"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4891" references="/0/generatePortable/%/%.2/%.5/%/%/por">
-      <details key="start" value="94476"/>
-      <details key="end" value="94479"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4892" references="/0/generatePortable/%/%.2/%.6">
-      <details key="start" value="94515"/>
-      <details key="end" value="94532"/>
-      <details key="line" value="1148"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4893" references="/0/generatePortable/%/%.2/%.7">
-      <details key="start" value="94533"/>
-      <details key="end" value="94551"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4894" references="/0/generatePortable/%/%.2/%.7/%">
-      <details key="start" value="94533"/>
-      <details key="end" value="94546"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4895" references="/0/generatePortable/%/%.2/%.7/%/por">
-      <details key="start" value="94533"/>
-      <details key="end" value="94536"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4896" references="/0/generatePortable/%/%.2/%.8">
-      <details key="start" value="94553"/>
-      <details key="end" value="94575"/>
-      <details key="line" value="1149"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4897" references="/0/generatePortable/%/%.2/%.9">
-      <details key="start" value="94576"/>
-      <details key="end" value="94599"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4898" references="/0/generatePortable/%/%.2/%.9/%">
-      <details key="start" value="94576"/>
-      <details key="end" value="94589"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4899" references="/0/generatePortable/%/%.2/%.9/%/por">
-      <details key="start" value="94576"/>
-      <details key="end" value="94579"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4900" references="/0/generatePortable/%/%.2/%.10">
-      <details key="start" value="94601"/>
-      <details key="end" value="94622"/>
-      <details key="line" value="1150"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4901" references="/0/generatePortable/%/%.2/%.11">
-      <details key="start" value="94623"/>
-      <details key="end" value="94645"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4902" references="/0/generatePortable/%/%.2/%.11/%">
-      <details key="start" value="94623"/>
-      <details key="end" value="94636"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4903" references="/0/generatePortable/%/%.2/%.11/%/por">
-      <details key="start" value="94623"/>
-      <details key="end" value="94626"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4904" references="/0/generatePortable/%/%.2/%.12">
-      <details key="start" value="94647"/>
-      <details key="end" value="94648"/>
-      <details key="line" value="1151"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4905" references="/0/generatePortable/%/%.2/%.13">
-      <details key="start" value="94362"/>
-      <details key="end" value="94377"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4906" references="/0/generatePortable/%/%.2/%.14">
-      <details key="start" value="94386"/>
-      <details key="end" value="94393"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4907" references="/0/generatePortable/%/por">
+    <eAnnotations source="positions.4879" references="/0/generatePortable/%/por">
       <details key="start" value="94083"/>
       <details key="end" value="94141"/>
       <details key="line" value="1134"/>
     </eAnnotations>
-    <eAnnotations source="positions.4908" references="/0/generatePortable/%/por/%">
+    <eAnnotations source="positions.4880" references="/0/generatePortable/%/por/%">
       <details key="start" value="94101"/>
       <details key="end" value="94142"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4909" references="/0/generatePortable/%/por/%/%">
+    <eAnnotations source="positions.4881" references="/0/generatePortable/%/por/%/%">
       <details key="start" value="94101"/>
       <details key="end" value="94122"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4910" references="/0/generatePortable/%/por/%/%/aWorkflow">
+    <eAnnotations source="positions.4882" references="/0/generatePortable/%/por/%/%/aWorkflow">
       <details key="start" value="94101"/>
       <details key="end" value="94110"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4911" references="/0/generatePortable/%/por/%/%.1">
+    <eAnnotations source="positions.4883" references="/0/generatePortable/%/por/%/%.1">
       <details key="start" value="94133"/>
       <details key="end" value="94141"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4912" references="/0/generatePortable/aWorkflow">
+    <eAnnotations source="positions.4884" references="/0/generatePortable/aWorkflow">
       <details key="start" value="94055"/>
       <details key="end" value="94075"/>
       <details key="line" value="1133"/>
     </eAnnotations>
-    <eAnnotations source="positions.4913" references="/0/generateDocker">
-      <details key="start" value="94678"/>
-      <details key="end" value="98259"/>
-      <details key="line" value="1156"/>
+    <eAnnotations source="positions.4885" references="/0/generateDocker">
+      <details key="start" value="94373"/>
+      <details key="end" value="98555"/>
+      <details key="line" value="1146"/>
     </eAnnotations>
-    <eAnnotations source="positions.4914" references="/0/generateDocker/%">
-      <details key="start" value="94733"/>
-      <details key="end" value="95763"/>
-      <details key="line" value="1157"/>
+    <eAnnotations source="positions.4886" references="/0/generateDocker/%">
+      <details key="start" value="94428"/>
+      <details key="end" value="96885"/>
+      <details key="line" value="1147"/>
     </eAnnotations>
-    <eAnnotations source="positions.4915" references="/0/generateDocker/%/%">
-      <details key="start" value="94799"/>
-      <details key="end" value="95756"/>
-      <details key="line" value="1158"/>
+    <eAnnotations source="positions.4887" references="/0/generateDocker/%/%">
+      <details key="start" value="94494"/>
+      <details key="end" value="95456"/>
+      <details key="line" value="1148"/>
     </eAnnotations>
-    <eAnnotations source="positions.4916" references="/0/generateDocker/%/%/%">
-      <details key="start" value="94837"/>
-      <details key="end" value="94849"/>
-      <details key="line" value="1159"/>
+    <eAnnotations source="positions.4888" references="/0/generateDocker/%/%/%">
+      <details key="start" value="94532"/>
+      <details key="end" value="94544"/>
+      <details key="line" value="1149"/>
     </eAnnotations>
-    <eAnnotations source="positions.4917" references="/0/generateDocker/%/%/%.1">
-      <details key="start" value="94850"/>
-      <details key="end" value="94887"/>
+    <eAnnotations source="positions.4889" references="/0/generateDocker/%/%/%.1">
+      <details key="start" value="94545"/>
+      <details key="end" value="94582"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4918" references="/0/generateDocker/%/%/%.1/%">
-      <details key="start" value="94850"/>
-      <details key="end" value="94879"/>
+    <eAnnotations source="positions.4890" references="/0/generateDocker/%/%/%.1/%">
+      <details key="start" value="94545"/>
+      <details key="end" value="94574"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4919" references="/0/generateDocker/%/%/%.1/%/%">
-      <details key="start" value="94850"/>
-      <details key="end" value="94863"/>
+    <eAnnotations source="positions.4891" references="/0/generateDocker/%/%/%.1/%/%">
+      <details key="start" value="94545"/>
+      <details key="end" value="94558"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4920" references="/0/generateDocker/%/%/%.1/%/%/por">
-      <details key="start" value="94850"/>
-      <details key="end" value="94853"/>
+    <eAnnotations source="positions.4892" references="/0/generateDocker/%/%/%.1/%/%/por">
+      <details key="start" value="94545"/>
+      <details key="end" value="94548"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4921" references="/0/generateDocker/%/%/%.2">
-      <details key="start" value="94889"/>
-      <details key="end" value="94900"/>
-      <details key="line" value="1160"/>
+    <eAnnotations source="positions.4893" references="/0/generateDocker/%/%/%.2">
+      <details key="start" value="94584"/>
+      <details key="end" value="94600"/>
+      <details key="line" value="1149"/>
     </eAnnotations>
-    <eAnnotations source="positions.4922" references="/0/generateDocker/%/%/%.3">
-      <details key="start" value="94901"/>
-      <details key="end" value="94909"/>
+    <eAnnotations source="positions.4894" references="/0/generateDocker/%/%/%.3">
+      <details key="start" value="94601"/>
+      <details key="end" value="94609"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4923" references="/0/generateDocker/%/%/%.3/por">
-      <details key="start" value="94901"/>
-      <details key="end" value="94904"/>
+    <eAnnotations source="positions.4895" references="/0/generateDocker/%/%/%.3/por">
+      <details key="start" value="94601"/>
+      <details key="end" value="94604"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4924" references="/0/generateDocker/%/%/%.4">
-      <details key="start" value="94911"/>
-      <details key="end" value="95192"/>
-      <details key="line" value="1163"/>
+    <eAnnotations source="positions.4896" references="/0/generateDocker/%/%/%.4">
+      <details key="start" value="94611"/>
+      <details key="end" value="94892"/>
+      <details key="line" value="1153"/>
     </eAnnotations>
-    <eAnnotations source="positions.4925" references="/0/generateDocker/%/%/%.5">
-      <details key="start" value="95193"/>
-      <details key="end" value="95201"/>
+    <eAnnotations source="positions.4897" references="/0/generateDocker/%/%/%.5">
+      <details key="start" value="94893"/>
+      <details key="end" value="94901"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4926" references="/0/generateDocker/%/%/%.5/por">
-      <details key="start" value="95193"/>
-      <details key="end" value="95196"/>
+    <eAnnotations source="positions.4898" references="/0/generateDocker/%/%/%.5/por">
+      <details key="start" value="94893"/>
+      <details key="end" value="94896"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4927" references="/0/generateDocker/%/%/%.6">
-      <details key="start" value="95203"/>
-      <details key="end" value="95206"/>
+    <eAnnotations source="positions.4899" references="/0/generateDocker/%/%/%.6">
+      <details key="start" value="94903"/>
+      <details key="end" value="94906"/>
+      <details key="line" value="1166"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4900" references="/0/generateDocker/%/%/%.7">
+      <details key="start" value="94908"/>
+      <details key="end" value="95279"/>
+      <details key="line" value="1168"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4901" references="/0/generateDocker/%/%/%.7/%">
+      <details key="start" value="94963"/>
+      <details key="end" value="94989"/>
+      <details key="line" value="1169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4902" references="/0/generateDocker/%/%/%.7/%.1">
+      <details key="start" value="94990"/>
+      <details key="end" value="95033"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4903" references="/0/generateDocker/%/%/%.7/%.1/%">
+      <details key="start" value="94990"/>
+      <details key="end" value="95004"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4904" references="/0/generateDocker/%/%/%.7/%.1/%/aWorkflow">
+      <details key="start" value="94990"/>
+      <details key="end" value="94999"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4905" references="/0/generateDocker/%/%/%.7/%.1/%.1">
+      <details key="start" value="95016"/>
+      <details key="end" value="95027"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4906" references="/0/generateDocker/%/%/%.7/%.1/%.2">
+      <details key="start" value="95029"/>
+      <details key="end" value="95032"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4907" references="/0/generateDocker/%/%/%.7/%.2">
+      <details key="start" value="95035"/>
+      <details key="end" value="95039"/>
+      <details key="line" value="1169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4908" references="/0/generateDocker/%/%/%.7/%.3">
+      <details key="start" value="95040"/>
+      <details key="end" value="95048"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4909" references="/0/generateDocker/%/%/%.7/%.3/por">
+      <details key="start" value="95040"/>
+      <details key="end" value="95043"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4910" references="/0/generateDocker/%/%/%.7/%.4">
+      <details key="start" value="95050"/>
+      <details key="end" value="95088"/>
+      <details key="line" value="1169"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4911" references="/0/generateDocker/%/%/%.7/%.5">
+      <details key="start" value="95089"/>
+      <details key="end" value="95132"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4912" references="/0/generateDocker/%/%/%.7/%.5/%">
+      <details key="start" value="95089"/>
+      <details key="end" value="95103"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4913" references="/0/generateDocker/%/%/%.7/%.5/%/aWorkflow">
+      <details key="start" value="95089"/>
+      <details key="end" value="95098"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4914" references="/0/generateDocker/%/%/%.7/%.5/%.1">
+      <details key="start" value="95115"/>
+      <details key="end" value="95126"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4915" references="/0/generateDocker/%/%/%.7/%.5/%.2">
+      <details key="start" value="95128"/>
+      <details key="end" value="95131"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4916" references="/0/generateDocker/%/%/%.7/%.6">
+      <details key="start" value="95134"/>
+      <details key="end" value="95138"/>
+      <details key="line" value="1170"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4917" references="/0/generateDocker/%/%/%.7/%.7">
+      <details key="start" value="95139"/>
+      <details key="end" value="95147"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4918" references="/0/generateDocker/%/%/%.7/%.7/por">
+      <details key="start" value="95139"/>
+      <details key="end" value="95142"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4919" references="/0/generateDocker/%/%/%.7/%.8">
+      <details key="start" value="95149"/>
+      <details key="end" value="95193"/>
+      <details key="line" value="1170"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4920" references="/0/generateDocker/%/%/%.7/%.9">
+      <details key="start" value="95194"/>
+      <details key="end" value="95237"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4921" references="/0/generateDocker/%/%/%.7/%.9/%">
+      <details key="start" value="95194"/>
+      <details key="end" value="95208"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4922" references="/0/generateDocker/%/%/%.7/%.9/%/aWorkflow">
+      <details key="start" value="95194"/>
+      <details key="end" value="95203"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4923" references="/0/generateDocker/%/%/%.7/%.9/%.1">
+      <details key="start" value="95220"/>
+      <details key="end" value="95231"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4924" references="/0/generateDocker/%/%/%.7/%.9/%.2">
+      <details key="start" value="95233"/>
+      <details key="end" value="95236"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4925" references="/0/generateDocker/%/%/%.7/%.10">
+      <details key="start" value="95239"/>
+      <details key="end" value="95243"/>
+      <details key="line" value="1171"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4926" references="/0/generateDocker/%/%/%.7/%.11">
+      <details key="start" value="95244"/>
+      <details key="end" value="95252"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4927" references="/0/generateDocker/%/%/%.7/%.11/por">
+      <details key="start" value="95244"/>
+      <details key="end" value="95247"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4928" references="/0/generateDocker/%/%/%.7/%.12">
+      <details key="start" value="95254"/>
+      <details key="end" value="95271"/>
+      <details key="line" value="1171"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4929" references="/0/generateDocker/%/%/%.7/dp">
+      <details key="start" value="94914"/>
+      <details key="end" value="94933"/>
+      <details key="line" value="1168"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4930" references="/0/generateDocker/%/%/%.7/%.13">
+      <details key="start" value="94936"/>
+      <details key="end" value="94960"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4931" references="/0/generateDocker/%/%/%.7/%.13/aWorkflow">
+      <details key="start" value="94936"/>
+      <details key="end" value="94945"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4932" references="/0/generateDocker/%/%/%.8">
+      <details key="start" value="95280"/>
+      <details key="end" value="95306"/>
+      <details key="line" value="1173"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4933" references="/0/generateDocker/%/%/%.9">
+      <details key="start" value="95307"/>
+      <details key="end" value="95315"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4934" references="/0/generateDocker/%/%/%.9/por">
+      <details key="start" value="95307"/>
+      <details key="end" value="95310"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4935" references="/0/generateDocker/%/%/%.10">
+      <details key="start" value="95317"/>
+      <details key="end" value="95352"/>
+      <details key="line" value="1174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4936" references="/0/generateDocker/%/%/%.11">
+      <details key="start" value="95353"/>
+      <details key="end" value="95361"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4937" references="/0/generateDocker/%/%/%.11/por">
+      <details key="start" value="95353"/>
+      <details key="end" value="95356"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4938" references="/0/generateDocker/%/%/%.12">
+      <details key="start" value="95363"/>
+      <details key="end" value="95389"/>
       <details key="line" value="1176"/>
     </eAnnotations>
-    <eAnnotations source="positions.4928" references="/0/generateDocker/%/%/%.7">
-      <details key="start" value="95208"/>
-      <details key="end" value="95579"/>
+    <eAnnotations source="positions.4939" references="/0/generateDocker/%/%/%.13">
+      <details key="start" value="95390"/>
+      <details key="end" value="95393"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4940" references="/0/generateDocker/%/%/%.14">
+      <details key="start" value="95395"/>
+      <details key="end" value="95409"/>
       <details key="line" value="1178"/>
     </eAnnotations>
-    <eAnnotations source="positions.4929" references="/0/generateDocker/%/%/%.7/%">
-      <details key="start" value="95263"/>
-      <details key="end" value="95289"/>
-      <details key="line" value="1179"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4930" references="/0/generateDocker/%/%/%.7/%.1">
-      <details key="start" value="95290"/>
-      <details key="end" value="95333"/>
+    <eAnnotations source="positions.4941" references="/0/generateDocker/%/%/%.15">
+      <details key="start" value="95410"/>
+      <details key="end" value="95418"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4931" references="/0/generateDocker/%/%/%.7/%.1/%">
-      <details key="start" value="95290"/>
-      <details key="end" value="95304"/>
+    <eAnnotations source="positions.4942" references="/0/generateDocker/%/%/%.15/por">
+      <details key="start" value="95410"/>
+      <details key="end" value="95413"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4932" references="/0/generateDocker/%/%/%.7/%.1/%/aWorkflow">
-      <details key="start" value="95290"/>
-      <details key="end" value="95299"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4933" references="/0/generateDocker/%/%/%.7/%.1/%.1">
-      <details key="start" value="95316"/>
-      <details key="end" value="95327"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4934" references="/0/generateDocker/%/%/%.7/%.1/%.2">
-      <details key="start" value="95329"/>
-      <details key="end" value="95332"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4935" references="/0/generateDocker/%/%/%.7/%.2">
-      <details key="start" value="95335"/>
-      <details key="end" value="95339"/>
-      <details key="line" value="1179"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4936" references="/0/generateDocker/%/%/%.7/%.3">
-      <details key="start" value="95340"/>
-      <details key="end" value="95348"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4937" references="/0/generateDocker/%/%/%.7/%.3/por">
-      <details key="start" value="95340"/>
-      <details key="end" value="95343"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4938" references="/0/generateDocker/%/%/%.7/%.4">
-      <details key="start" value="95350"/>
-      <details key="end" value="95388"/>
-      <details key="line" value="1179"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4939" references="/0/generateDocker/%/%/%.7/%.5">
-      <details key="start" value="95389"/>
-      <details key="end" value="95432"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4940" references="/0/generateDocker/%/%/%.7/%.5/%">
-      <details key="start" value="95389"/>
-      <details key="end" value="95403"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4941" references="/0/generateDocker/%/%/%.7/%.5/%/aWorkflow">
-      <details key="start" value="95389"/>
-      <details key="end" value="95398"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4942" references="/0/generateDocker/%/%/%.7/%.5/%.1">
-      <details key="start" value="95415"/>
-      <details key="end" value="95426"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4943" references="/0/generateDocker/%/%/%.7/%.5/%.2">
-      <details key="start" value="95428"/>
-      <details key="end" value="95431"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4944" references="/0/generateDocker/%/%/%.7/%.6">
-      <details key="start" value="95434"/>
-      <details key="end" value="95438"/>
-      <details key="line" value="1180"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4945" references="/0/generateDocker/%/%/%.7/%.7">
-      <details key="start" value="95439"/>
-      <details key="end" value="95447"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4946" references="/0/generateDocker/%/%/%.7/%.7/por">
-      <details key="start" value="95439"/>
-      <details key="end" value="95442"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4947" references="/0/generateDocker/%/%/%.7/%.8">
-      <details key="start" value="95449"/>
-      <details key="end" value="95493"/>
-      <details key="line" value="1180"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4948" references="/0/generateDocker/%/%/%.7/%.9">
-      <details key="start" value="95494"/>
-      <details key="end" value="95537"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4949" references="/0/generateDocker/%/%/%.7/%.9/%">
-      <details key="start" value="95494"/>
-      <details key="end" value="95508"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4950" references="/0/generateDocker/%/%/%.7/%.9/%/aWorkflow">
-      <details key="start" value="95494"/>
-      <details key="end" value="95503"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4951" references="/0/generateDocker/%/%/%.7/%.9/%.1">
-      <details key="start" value="95520"/>
-      <details key="end" value="95531"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4952" references="/0/generateDocker/%/%/%.7/%.9/%.2">
-      <details key="start" value="95533"/>
-      <details key="end" value="95536"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4953" references="/0/generateDocker/%/%/%.7/%.10">
-      <details key="start" value="95539"/>
-      <details key="end" value="95543"/>
-      <details key="line" value="1181"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4954" references="/0/generateDocker/%/%/%.7/%.11">
-      <details key="start" value="95544"/>
-      <details key="end" value="95552"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4955" references="/0/generateDocker/%/%/%.7/%.11/por">
-      <details key="start" value="95544"/>
-      <details key="end" value="95547"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4956" references="/0/generateDocker/%/%/%.7/%.12">
-      <details key="start" value="95554"/>
-      <details key="end" value="95571"/>
-      <details key="line" value="1181"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4957" references="/0/generateDocker/%/%/%.7/dp">
-      <details key="start" value="95214"/>
-      <details key="end" value="95233"/>
+    <eAnnotations source="positions.4943" references="/0/generateDocker/%/%/%.16">
+      <details key="start" value="95420"/>
+      <details key="end" value="95441"/>
       <details key="line" value="1178"/>
     </eAnnotations>
-    <eAnnotations source="positions.4958" references="/0/generateDocker/%/%/%.7/%.13">
-      <details key="start" value="95236"/>
-      <details key="end" value="95260"/>
+    <eAnnotations source="positions.4944" references="/0/generateDocker/%/%/%.17">
+      <details key="start" value="95442"/>
+      <details key="end" value="95445"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4959" references="/0/generateDocker/%/%/%.7/%.13/aWorkflow">
-      <details key="start" value="95236"/>
-      <details key="end" value="95245"/>
+    <eAnnotations source="positions.4945" references="/0/generateDocker/%/%/%.18">
+      <details key="start" value="95447"/>
+      <details key="end" value="95448"/>
+      <details key="line" value="1179"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4946" references="/0/generateDocker/%/%/%.19">
+      <details key="start" value="94501"/>
+      <details key="end" value="94513"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4960" references="/0/generateDocker/%/%/%.8">
-      <details key="start" value="95580"/>
-      <details key="end" value="95606"/>
+    <eAnnotations source="positions.4947" references="/0/generateDocker/%/%/%.20">
+      <details key="start" value="94522"/>
+      <details key="end" value="94529"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4948" references="/0/generateDocker/%/%.1">
+      <details key="start" value="95457"/>
+      <details key="end" value="95459"/>
+      <details key="line" value="1180"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4949" references="/0/generateDocker/%/%.2">
+      <details key="start" value="95460"/>
+      <details key="end" value="96878"/>
+      <details key="line" value="1182"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4950" references="/0/generateDocker/%/%.2/%">
+      <details key="start" value="95508"/>
+      <details key="end" value="95790"/>
       <details key="line" value="1183"/>
     </eAnnotations>
-    <eAnnotations source="positions.4961" references="/0/generateDocker/%/%/%.9">
-      <details key="start" value="95607"/>
-      <details key="end" value="95615"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4962" references="/0/generateDocker/%/%/%.9/por">
-      <details key="start" value="95607"/>
-      <details key="end" value="95610"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4963" references="/0/generateDocker/%/%/%.10">
-      <details key="start" value="95617"/>
-      <details key="end" value="95652"/>
-      <details key="line" value="1184"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4964" references="/0/generateDocker/%/%/%.11">
-      <details key="start" value="95653"/>
-      <details key="end" value="95661"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4965" references="/0/generateDocker/%/%/%.11/por">
-      <details key="start" value="95653"/>
-      <details key="end" value="95656"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4966" references="/0/generateDocker/%/%/%.12">
-      <details key="start" value="95663"/>
-      <details key="end" value="95689"/>
-      <details key="line" value="1186"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4967" references="/0/generateDocker/%/%/%.13">
-      <details key="start" value="95690"/>
-      <details key="end" value="95693"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4968" references="/0/generateDocker/%/%/%.14">
-      <details key="start" value="95695"/>
-      <details key="end" value="95709"/>
-      <details key="line" value="1188"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4969" references="/0/generateDocker/%/%/%.15">
-      <details key="start" value="95710"/>
-      <details key="end" value="95718"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4970" references="/0/generateDocker/%/%/%.15/por">
-      <details key="start" value="95710"/>
-      <details key="end" value="95713"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4971" references="/0/generateDocker/%/%/%.16">
-      <details key="start" value="95720"/>
-      <details key="end" value="95741"/>
-      <details key="line" value="1188"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4972" references="/0/generateDocker/%/%/%.17">
-      <details key="start" value="95742"/>
-      <details key="end" value="95745"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4973" references="/0/generateDocker/%/%/%.18">
-      <details key="start" value="95747"/>
-      <details key="end" value="95748"/>
-      <details key="line" value="1189"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4974" references="/0/generateDocker/%/%/%.19">
-      <details key="start" value="94806"/>
-      <details key="end" value="94818"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4975" references="/0/generateDocker/%/%/%.20">
-      <details key="start" value="94827"/>
-      <details key="end" value="94834"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4976" references="/0/generateDocker/%/por">
-      <details key="start" value="94738"/>
-      <details key="end" value="94796"/>
-      <details key="line" value="1157"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4977" references="/0/generateDocker/%/por/%">
-      <details key="start" value="94756"/>
-      <details key="end" value="94797"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4978" references="/0/generateDocker/%/por/%/%">
-      <details key="start" value="94756"/>
-      <details key="end" value="94777"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4979" references="/0/generateDocker/%/por/%/%/aWorkflow">
-      <details key="start" value="94756"/>
-      <details key="end" value="94765"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4980" references="/0/generateDocker/%/por/%/%.1">
-      <details key="start" value="94788"/>
-      <details key="end" value="94796"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4981" references="/0/generateDocker/%.1">
-      <details key="start" value="95764"/>
-      <details key="end" value="95766"/>
-      <details key="line" value="1191"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4982" references="/0/generateDocker/%.2">
-      <details key="start" value="95766"/>
-      <details key="end" value="97467"/>
-      <details key="line" value="1193"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4983" references="/0/generateDocker/%.2/%">
-      <details key="start" value="95813"/>
-      <details key="end" value="95918"/>
-      <details key="line" value="1194"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4984" references="/0/generateDocker/%.2/%.1">
-      <details key="start" value="95919"/>
-      <details key="end" value="95962"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4985" references="/0/generateDocker/%.2/%.1/%">
-      <details key="start" value="95919"/>
-      <details key="end" value="95933"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4986" references="/0/generateDocker/%.2/%.1/%/aWorkflow">
-      <details key="start" value="95919"/>
-      <details key="end" value="95928"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4987" references="/0/generateDocker/%.2/%.1/%.1">
-      <details key="start" value="95945"/>
-      <details key="end" value="95956"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4988" references="/0/generateDocker/%.2/%.1/%.2">
-      <details key="start" value="95958"/>
-      <details key="end" value="95961"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4989" references="/0/generateDocker/%.2/%.2">
-      <details key="start" value="95964"/>
-      <details key="end" value="96025"/>
-      <details key="line" value="1196"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4990" references="/0/generateDocker/%.2/%.3">
-      <details key="start" value="96026"/>
-      <details key="end" value="96069"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4991" references="/0/generateDocker/%.2/%.3/%">
-      <details key="start" value="96026"/>
-      <details key="end" value="96040"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4992" references="/0/generateDocker/%.2/%.3/%/aWorkflow">
-      <details key="start" value="96026"/>
-      <details key="end" value="96035"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4993" references="/0/generateDocker/%.2/%.3/%.1">
-      <details key="start" value="96052"/>
-      <details key="end" value="96063"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4994" references="/0/generateDocker/%.2/%.3/%.2">
-      <details key="start" value="96065"/>
-      <details key="end" value="96068"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4995" references="/0/generateDocker/%.2/%.4">
-      <details key="start" value="96071"/>
-      <details key="end" value="96124"/>
-      <details key="line" value="1197"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4996" references="/0/generateDocker/%.2/%.5">
-      <details key="start" value="96125"/>
-      <details key="end" value="96168"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4997" references="/0/generateDocker/%.2/%.5/%">
-      <details key="start" value="96125"/>
-      <details key="end" value="96139"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4998" references="/0/generateDocker/%.2/%.5/%/aWorkflow">
-      <details key="start" value="96125"/>
-      <details key="end" value="96134"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.4999" references="/0/generateDocker/%.2/%.5/%.1">
-      <details key="start" value="96151"/>
-      <details key="end" value="96162"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5000" references="/0/generateDocker/%.2/%.5/%.2">
-      <details key="start" value="96164"/>
-      <details key="end" value="96167"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5001" references="/0/generateDocker/%.2/%.6">
-      <details key="start" value="96170"/>
-      <details key="end" value="96518"/>
-      <details key="line" value="1198"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5002" references="/0/generateDocker/%.2/%.7">
-      <details key="start" value="96519"/>
-      <details key="end" value="96522"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5003" references="/0/generateDocker/%.2/%.8">
-      <details key="start" value="96524"/>
-      <details key="end" value="96541"/>
-      <details key="line" value="1210"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5004" references="/0/generateDocker/%.2/%.9">
-      <details key="start" value="96542"/>
-      <details key="end" value="96545"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5005" references="/0/generateDocker/%.2/%.10">
-      <details key="start" value="96547"/>
-      <details key="end" value="96777"/>
-      <details key="line" value="1210"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5006" references="/0/generateDocker/%.2/%.11">
-      <details key="start" value="96778"/>
-      <details key="end" value="96781"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5007" references="/0/generateDocker/%.2/%.12">
-      <details key="start" value="96783"/>
-      <details key="end" value="96800"/>
-      <details key="line" value="1215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5008" references="/0/generateDocker/%.2/%.13">
-      <details key="start" value="96801"/>
-      <details key="end" value="96804"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5009" references="/0/generateDocker/%.2/%.14">
-      <details key="start" value="96806"/>
-      <details key="end" value="97042"/>
-      <details key="line" value="1215"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5010" references="/0/generateDocker/%.2/%.15">
-      <details key="start" value="97043"/>
-      <details key="end" value="97046"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5011" references="/0/generateDocker/%.2/%.16">
-      <details key="start" value="97048"/>
-      <details key="end" value="97065"/>
-      <details key="line" value="1220"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5012" references="/0/generateDocker/%.2/%.17">
-      <details key="start" value="97066"/>
-      <details key="end" value="97069"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5013" references="/0/generateDocker/%.2/%.18">
-      <details key="start" value="97071"/>
-      <details key="end" value="97276"/>
-      <details key="line" value="1220"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5014" references="/0/generateDocker/%.2/%.19">
-      <details key="start" value="97277"/>
-      <details key="end" value="97280"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5015" references="/0/generateDocker/%.2/%.20">
-      <details key="start" value="97282"/>
-      <details key="end" value="97299"/>
-      <details key="line" value="1225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5016" references="/0/generateDocker/%.2/%.21">
-      <details key="start" value="97300"/>
-      <details key="end" value="97303"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5017" references="/0/generateDocker/%.2/%.22">
-      <details key="start" value="97305"/>
-      <details key="end" value="97460"/>
-      <details key="line" value="1225"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5018" references="/0/generateDocker/%.2/%.23">
-      <details key="start" value="95773"/>
+    <eAnnotations source="positions.4951" references="/0/generateDocker/%/%.2/%.1">
+      <details key="start" value="95791"/>
       <details key="end" value="95794"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5019" references="/0/generateDocker/%.2/%.24">
-      <details key="start" value="95803"/>
-      <details key="end" value="95810"/>
+    <eAnnotations source="positions.4952" references="/0/generateDocker/%/%.2/%.2">
+      <details key="start" value="95796"/>
+      <details key="end" value="96165"/>
+      <details key="line" value="1193"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4953" references="/0/generateDocker/%/%.2/%.3">
+      <details key="start" value="96166"/>
+      <details key="end" value="96218"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5020" references="/0/generateDocker/%.3">
-      <details key="start" value="97468"/>
-      <details key="end" value="97470"/>
-      <details key="line" value="1233"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5021" references="/0/generateDocker/%.4">
-      <details key="start" value="97470"/>
-      <details key="end" value="98245"/>
-      <details key="line" value="1235"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5022" references="/0/generateDocker/%.4/%">
-      <details key="start" value="97518"/>
-      <details key="end" value="97800"/>
-      <details key="line" value="1236"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5023" references="/0/generateDocker/%.4/%.1">
-      <details key="start" value="97801"/>
-      <details key="end" value="97804"/>
+    <eAnnotations source="positions.4954" references="/0/generateDocker/%/%.2/%.3/%">
+      <details key="start" value="96166"/>
+      <details key="end" value="96189"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5024" references="/0/generateDocker/%.4/%.2">
-      <details key="start" value="97806"/>
-      <details key="end" value="98238"/>
-      <details key="line" value="1246"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5025" references="/0/generateDocker/%.4/%.3">
-      <details key="start" value="97477"/>
-      <details key="end" value="97499"/>
+    <eAnnotations source="positions.4955" references="/0/generateDocker/%/%.2/%.3/%/%">
+      <details key="start" value="96166"/>
+      <details key="end" value="96179"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5026" references="/0/generateDocker/%.4/%.4">
-      <details key="start" value="97508"/>
-      <details key="end" value="97515"/>
+    <eAnnotations source="positions.4956" references="/0/generateDocker/%/%.2/%.3/%/%/por">
+      <details key="start" value="96166"/>
+      <details key="end" value="96169"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5027" references="/0/generateDocker/%.5">
-      <details key="start" value="98246"/>
-      <details key="end" value="98247"/>
+    <eAnnotations source="positions.4957" references="/0/generateDocker/%/%.2/%.3/%.1">
+      <details key="start" value="96201"/>
+      <details key="end" value="96212"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4958" references="/0/generateDocker/%/%.2/%.3/%.2">
+      <details key="start" value="96214"/>
+      <details key="end" value="96217"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4959" references="/0/generateDocker/%/%.2/%.4">
+      <details key="start" value="96220"/>
+      <details key="end" value="96221"/>
+      <details key="line" value="1200"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4960" references="/0/generateDocker/%/%.2/%.5">
+      <details key="start" value="96222"/>
+      <details key="end" value="96273"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4961" references="/0/generateDocker/%/%.2/%.5/%">
+      <details key="start" value="96222"/>
+      <details key="end" value="96244"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4962" references="/0/generateDocker/%/%.2/%.5/%/%">
+      <details key="start" value="96222"/>
+      <details key="end" value="96235"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4963" references="/0/generateDocker/%/%.2/%.5/%/%/por">
+      <details key="start" value="96222"/>
+      <details key="end" value="96225"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4964" references="/0/generateDocker/%/%.2/%.5/%.1">
+      <details key="start" value="96256"/>
+      <details key="end" value="96267"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4965" references="/0/generateDocker/%/%.2/%.5/%.2">
+      <details key="start" value="96269"/>
+      <details key="end" value="96272"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4966" references="/0/generateDocker/%/%.2/%.6">
+      <details key="start" value="96275"/>
+      <details key="end" value="96327"/>
+      <details key="line" value="1200"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4967" references="/0/generateDocker/%/%.2/%.7">
+      <details key="start" value="96328"/>
+      <details key="end" value="96375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4968" references="/0/generateDocker/%/%.2/%.7/%">
+      <details key="start" value="96328"/>
+      <details key="end" value="96346"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4969" references="/0/generateDocker/%/%.2/%.7/%/%">
+      <details key="start" value="96328"/>
+      <details key="end" value="96341"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4970" references="/0/generateDocker/%/%.2/%.7/%/%/por">
+      <details key="start" value="96328"/>
+      <details key="end" value="96331"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4971" references="/0/generateDocker/%/%.2/%.7/%.1">
+      <details key="start" value="96358"/>
+      <details key="end" value="96369"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4972" references="/0/generateDocker/%/%.2/%.7/%.2">
+      <details key="start" value="96371"/>
+      <details key="end" value="96374"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4973" references="/0/generateDocker/%/%.2/%.8">
+      <details key="start" value="96377"/>
+      <details key="end" value="96403"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4974" references="/0/generateDocker/%/%.2/%.9">
+      <details key="start" value="96403"/>
+      <details key="end" value="96489"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4975" references="/0/generateDocker/%/%.2/%.9/%">
+      <details key="start" value="96474"/>
+      <details key="end" value="96481"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4976" references="/0/generateDocker/%/%.2/%.9/%/ls">
+      <details key="start" value="96474"/>
+      <details key="end" value="96476"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4977" references="/0/generateDocker/%/%.2/%.9/ls">
+      <details key="start" value="96408"/>
+      <details key="end" value="96472"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4978" references="/0/generateDocker/%/%.2/%.9/ls/%">
+      <details key="start" value="96429"/>
+      <details key="end" value="96473"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4979" references="/0/generateDocker/%/%.2/%.9/ls/%/%">
+      <details key="start" value="96429"/>
+      <details key="end" value="96449"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4980" references="/0/generateDocker/%/%.2/%.9/ls/%/%/%">
+      <details key="start" value="96429"/>
+      <details key="end" value="96440"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4981" references="/0/generateDocker/%/%.2/%.9/ls/%/%/%/por">
+      <details key="start" value="96429"/>
+      <details key="end" value="96432"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4982" references="/0/generateDocker/%/%.2/%.9/ls/%/%.1">
+      <details key="start" value="96460"/>
+      <details key="end" value="96472"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4983" references="/0/generateDocker/%/%.2/%.10">
+      <details key="start" value="96489"/>
+      <details key="end" value="96497"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4984" references="/0/generateDocker/%/%.2/%.11">
+      <details key="start" value="96497"/>
+      <details key="end" value="96583"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4985" references="/0/generateDocker/%/%.2/%.11/%">
+      <details key="start" value="96529"/>
+      <details key="end" value="96559"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4986" references="/0/generateDocker/%/%.2/%.11/%/%">
+      <details key="start" value="96529"/>
+      <details key="end" value="96537"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4987" references="/0/generateDocker/%/%.2/%.11/%/%/por">
+      <details key="start" value="96529"/>
+      <details key="end" value="96532"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4988" references="/0/generateDocker/%/%.2/%.11/%/%.1">
+      <details key="start" value="96551"/>
+      <details key="end" value="96554"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4989" references="/0/generateDocker/%/%.2/%.11/%/%.2">
+      <details key="start" value="96556"/>
+      <details key="end" value="96558"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4990" references="/0/generateDocker/%/%.2/%.11/%.1">
+      <details key="start" value="96501"/>
+      <details key="end" value="96527"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4991" references="/0/generateDocker/%/%.2/%.11/%.1/%">
+      <details key="start" value="96502"/>
+      <details key="end" value="96510"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4992" references="/0/generateDocker/%/%.2/%.11/%.1/%/por">
+      <details key="start" value="96502"/>
+      <details key="end" value="96505"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4993" references="/0/generateDocker/%/%.2/%.11/%.1/%.1">
+      <details key="start" value="96522"/>
+      <details key="end" value="96525"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4994" references="/0/generateDocker/%/%.2/%.11/%.2">
+      <details key="start" value="96561"/>
+      <details key="end" value="96578"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4995" references="/0/generateDocker/%/%.2/%.11/%.2/%">
+      <details key="start" value="96568"/>
+      <details key="end" value="96576"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4996" references="/0/generateDocker/%/%.2/%.11/%.2/%/por">
+      <details key="start" value="96568"/>
+      <details key="end" value="96571"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4997" references="/0/generateDocker/%/%.2/%.12">
+      <details key="start" value="96583"/>
+      <details key="end" value="96589"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4998" references="/0/generateDocker/%/%.2/%.13">
+      <details key="start" value="96590"/>
+      <details key="end" value="96642"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4999" references="/0/generateDocker/%/%.2/%.13/%">
+      <details key="start" value="96590"/>
+      <details key="end" value="96613"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5000" references="/0/generateDocker/%/%.2/%.13/%/%">
+      <details key="start" value="96590"/>
+      <details key="end" value="96603"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5001" references="/0/generateDocker/%/%.2/%.13/%/%/por">
+      <details key="start" value="96590"/>
+      <details key="end" value="96593"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5002" references="/0/generateDocker/%/%.2/%.13/%.1">
+      <details key="start" value="96625"/>
+      <details key="end" value="96636"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5003" references="/0/generateDocker/%/%.2/%.13/%.2">
+      <details key="start" value="96638"/>
+      <details key="end" value="96641"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5004" references="/0/generateDocker/%/%.2/%.14">
+      <details key="start" value="96644"/>
+      <details key="end" value="96645"/>
+      <details key="line" value="1204"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5005" references="/0/generateDocker/%/%.2/%.15">
+      <details key="start" value="96646"/>
+      <details key="end" value="96697"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5006" references="/0/generateDocker/%/%.2/%.15/%">
+      <details key="start" value="96646"/>
+      <details key="end" value="96668"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5007" references="/0/generateDocker/%/%.2/%.15/%/%">
+      <details key="start" value="96646"/>
+      <details key="end" value="96659"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5008" references="/0/generateDocker/%/%.2/%.15/%/%/por">
+      <details key="start" value="96646"/>
+      <details key="end" value="96649"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5009" references="/0/generateDocker/%/%.2/%.15/%.1">
+      <details key="start" value="96680"/>
+      <details key="end" value="96691"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5010" references="/0/generateDocker/%/%.2/%.15/%.2">
+      <details key="start" value="96693"/>
+      <details key="end" value="96696"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5011" references="/0/generateDocker/%/%.2/%.16">
+      <details key="start" value="96699"/>
+      <details key="end" value="96712"/>
+      <details key="line" value="1205"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5012" references="/0/generateDocker/%/%.2/%.17">
+      <details key="start" value="96713"/>
+      <details key="end" value="96765"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5013" references="/0/generateDocker/%/%.2/%.17/%">
+      <details key="start" value="96713"/>
+      <details key="end" value="96736"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5014" references="/0/generateDocker/%/%.2/%.17/%/%">
+      <details key="start" value="96713"/>
+      <details key="end" value="96726"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5015" references="/0/generateDocker/%/%.2/%.17/%/%/por">
+      <details key="start" value="96713"/>
+      <details key="end" value="96716"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5016" references="/0/generateDocker/%/%.2/%.17/%.1">
+      <details key="start" value="96748"/>
+      <details key="end" value="96759"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5017" references="/0/generateDocker/%/%.2/%.17/%.2">
+      <details key="start" value="96761"/>
+      <details key="end" value="96764"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5018" references="/0/generateDocker/%/%.2/%.18">
+      <details key="start" value="96767"/>
+      <details key="end" value="96768"/>
+      <details key="line" value="1206"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5019" references="/0/generateDocker/%/%.2/%.19">
+      <details key="start" value="96769"/>
+      <details key="end" value="96820"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5020" references="/0/generateDocker/%/%.2/%.19/%">
+      <details key="start" value="96769"/>
+      <details key="end" value="96791"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5021" references="/0/generateDocker/%/%.2/%.19/%/%">
+      <details key="start" value="96769"/>
+      <details key="end" value="96782"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5022" references="/0/generateDocker/%/%.2/%.19/%/%/por">
+      <details key="start" value="96769"/>
+      <details key="end" value="96772"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5023" references="/0/generateDocker/%/%.2/%.19/%.1">
+      <details key="start" value="96803"/>
+      <details key="end" value="96814"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5024" references="/0/generateDocker/%/%.2/%.19/%.2">
+      <details key="start" value="96816"/>
+      <details key="end" value="96819"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5025" references="/0/generateDocker/%/%.2/%.20">
+      <details key="start" value="96822"/>
+      <details key="end" value="96870"/>
+      <details key="line" value="1207"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5026" references="/0/generateDocker/%/%.2/%.21">
+      <details key="start" value="95467"/>
+      <details key="end" value="95489"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5027" references="/0/generateDocker/%/%.2/%.22">
+      <details key="start" value="95498"/>
+      <details key="end" value="95505"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5028" references="/0/generateDocker/%/por">
+      <details key="start" value="94433"/>
+      <details key="end" value="94491"/>
+      <details key="line" value="1147"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5029" references="/0/generateDocker/%/por/%">
+      <details key="start" value="94451"/>
+      <details key="end" value="94492"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5030" references="/0/generateDocker/%/por/%/%">
+      <details key="start" value="94451"/>
+      <details key="end" value="94472"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5031" references="/0/generateDocker/%/por/%/%/aWorkflow">
+      <details key="start" value="94451"/>
+      <details key="end" value="94460"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5032" references="/0/generateDocker/%/por/%/%.1">
+      <details key="start" value="94483"/>
+      <details key="end" value="94491"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5033" references="/0/generateDocker/%.1">
+      <details key="start" value="96886"/>
+      <details key="end" value="96888"/>
+      <details key="line" value="1213"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5034" references="/0/generateDocker/%.2">
+      <details key="start" value="96888"/>
+      <details key="end" value="98542"/>
+      <details key="line" value="1215"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5035" references="/0/generateDocker/%.2/%">
+      <details key="start" value="96935"/>
+      <details key="end" value="97040"/>
+      <details key="line" value="1216"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5036" references="/0/generateDocker/%.2/%.1">
+      <details key="start" value="97041"/>
+      <details key="end" value="97084"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5037" references="/0/generateDocker/%.2/%.1/%">
+      <details key="start" value="97041"/>
+      <details key="end" value="97055"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5038" references="/0/generateDocker/%.2/%.1/%/aWorkflow">
+      <details key="start" value="97041"/>
+      <details key="end" value="97050"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5039" references="/0/generateDocker/%.2/%.1/%.1">
+      <details key="start" value="97067"/>
+      <details key="end" value="97078"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5040" references="/0/generateDocker/%.2/%.1/%.2">
+      <details key="start" value="97080"/>
+      <details key="end" value="97083"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5041" references="/0/generateDocker/%.2/%.2">
+      <details key="start" value="97086"/>
+      <details key="end" value="97147"/>
+      <details key="line" value="1218"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5042" references="/0/generateDocker/%.2/%.3">
+      <details key="start" value="97148"/>
+      <details key="end" value="97191"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5043" references="/0/generateDocker/%.2/%.3/%">
+      <details key="start" value="97148"/>
+      <details key="end" value="97162"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5044" references="/0/generateDocker/%.2/%.3/%/aWorkflow">
+      <details key="start" value="97148"/>
+      <details key="end" value="97157"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5045" references="/0/generateDocker/%.2/%.3/%.1">
+      <details key="start" value="97174"/>
+      <details key="end" value="97185"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5046" references="/0/generateDocker/%.2/%.3/%.2">
+      <details key="start" value="97187"/>
+      <details key="end" value="97190"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5047" references="/0/generateDocker/%.2/%.4">
+      <details key="start" value="97193"/>
+      <details key="end" value="97246"/>
+      <details key="line" value="1219"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5048" references="/0/generateDocker/%.2/%.5">
+      <details key="start" value="97247"/>
+      <details key="end" value="97290"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5049" references="/0/generateDocker/%.2/%.5/%">
+      <details key="start" value="97247"/>
+      <details key="end" value="97261"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5050" references="/0/generateDocker/%.2/%.5/%/aWorkflow">
+      <details key="start" value="97247"/>
+      <details key="end" value="97256"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5051" references="/0/generateDocker/%.2/%.5/%.1">
+      <details key="start" value="97273"/>
+      <details key="end" value="97284"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5052" references="/0/generateDocker/%.2/%.5/%.2">
+      <details key="start" value="97286"/>
+      <details key="end" value="97289"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5053" references="/0/generateDocker/%.2/%.6">
+      <details key="start" value="97292"/>
+      <details key="end" value="97640"/>
+      <details key="line" value="1220"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5054" references="/0/generateDocker/%.2/%.7">
+      <details key="start" value="97641"/>
+      <details key="end" value="97644"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5055" references="/0/generateDocker/%.2/%.8">
+      <details key="start" value="97646"/>
+      <details key="end" value="97663"/>
+      <details key="line" value="1232"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5056" references="/0/generateDocker/%.2/%.9">
+      <details key="start" value="97664"/>
+      <details key="end" value="97667"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5057" references="/0/generateDocker/%.2/%.10">
+      <details key="start" value="97669"/>
+      <details key="end" value="97899"/>
+      <details key="line" value="1232"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5058" references="/0/generateDocker/%.2/%.11">
+      <details key="start" value="97900"/>
+      <details key="end" value="97903"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5059" references="/0/generateDocker/%.2/%.12">
+      <details key="start" value="97905"/>
+      <details key="end" value="97922"/>
+      <details key="line" value="1237"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5060" references="/0/generateDocker/%.2/%.13">
+      <details key="start" value="97923"/>
+      <details key="end" value="97926"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5061" references="/0/generateDocker/%.2/%.14">
+      <details key="start" value="97928"/>
+      <details key="end" value="98164"/>
+      <details key="line" value="1237"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5062" references="/0/generateDocker/%.2/%.15">
+      <details key="start" value="98165"/>
+      <details key="end" value="98168"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5063" references="/0/generateDocker/%.2/%.16">
+      <details key="start" value="98170"/>
+      <details key="end" value="98187"/>
+      <details key="line" value="1242"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5064" references="/0/generateDocker/%.2/%.17">
+      <details key="start" value="98188"/>
+      <details key="end" value="98191"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5065" references="/0/generateDocker/%.2/%.18">
+      <details key="start" value="98193"/>
+      <details key="end" value="98398"/>
+      <details key="line" value="1242"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5066" references="/0/generateDocker/%.2/%.19">
+      <details key="start" value="98399"/>
+      <details key="end" value="98402"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5067" references="/0/generateDocker/%.2/%.20">
+      <details key="start" value="98404"/>
+      <details key="end" value="98421"/>
+      <details key="line" value="1247"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5068" references="/0/generateDocker/%.2/%.21">
+      <details key="start" value="98422"/>
+      <details key="end" value="98425"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5069" references="/0/generateDocker/%.2/%.22">
+      <details key="start" value="98427"/>
+      <details key="end" value="98535"/>
+      <details key="line" value="1247"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5070" references="/0/generateDocker/%.2/%.23">
+      <details key="start" value="96895"/>
+      <details key="end" value="96916"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5071" references="/0/generateDocker/%.2/%.24">
+      <details key="start" value="96925"/>
+      <details key="end" value="96932"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5072" references="/0/generateDocker/%.3">
+      <details key="start" value="98543"/>
+      <details key="end" value="98544"/>
+      <details key="line" value="1254"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5073" references="/0/generateDocker/aWorkflow">
+      <details key="start" value="94405"/>
+      <details key="end" value="94425"/>
+      <details key="line" value="1146"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5074" references="/0/generateAmazonECS">
+      <details key="start" value="98558"/>
+      <details key="end" value="98887"/>
+      <details key="line" value="1258"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5075" references="/0/generateAmazonECS/%">
+      <details key="start" value="98616"/>
+      <details key="end" value="98875"/>
+      <details key="line" value="1259"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5076" references="/0/generateAmazonECS/%/%">
+      <details key="start" value="98682"/>
+      <details key="end" value="98868"/>
+      <details key="line" value="1260"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5077" references="/0/generateAmazonECS/%/%/%">
+      <details key="start" value="98725"/>
+      <details key="end" value="98859"/>
       <details key="line" value="1261"/>
     </eAnnotations>
-    <eAnnotations source="positions.5028" references="/0/generateDocker/aWorkflow">
-      <details key="start" value="94710"/>
-      <details key="end" value="94730"/>
-      <details key="line" value="1156"/>
+    <eAnnotations source="positions.5078" references="/0/generateAmazonECS/%/%/%/%">
+      <details key="start" value="98784"/>
+      <details key="end" value="98795"/>
+      <details key="line" value="1262"/>
     </eAnnotations>
-    <eAnnotations source="positions.5029" references="/0/generateAmazonECS">
-      <details key="start" value="98262"/>
-      <details key="end" value="98591"/>
-      <details key="line" value="1266"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5030" references="/0/generateAmazonECS/%">
-      <details key="start" value="98320"/>
-      <details key="end" value="98579"/>
-      <details key="line" value="1267"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5031" references="/0/generateAmazonECS/%/%">
-      <details key="start" value="98386"/>
-      <details key="end" value="98572"/>
-      <details key="line" value="1268"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5032" references="/0/generateAmazonECS/%/%/%">
-      <details key="start" value="98429"/>
-      <details key="end" value="98563"/>
-      <details key="line" value="1269"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5033" references="/0/generateAmazonECS/%/%/%/%">
-      <details key="start" value="98488"/>
-      <details key="end" value="98499"/>
-      <details key="line" value="1270"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5034" references="/0/generateAmazonECS/%/%/%/%.1">
-      <details key="start" value="98500"/>
-      <details key="end" value="98512"/>
+    <eAnnotations source="positions.5079" references="/0/generateAmazonECS/%/%/%/%.1">
+      <details key="start" value="98796"/>
+      <details key="end" value="98808"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5035" references="/0/generateAmazonECS/%/%/%/%.1/ecs">
-      <details key="start" value="98500"/>
-      <details key="end" value="98503"/>
+    <eAnnotations source="positions.5080" references="/0/generateAmazonECS/%/%/%/%.1/ecs">
+      <details key="start" value="98796"/>
+      <details key="end" value="98799"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5036" references="/0/generateAmazonECS/%/%/%/%.2">
-      <details key="start" value="98514"/>
-      <details key="end" value="98524"/>
-      <details key="line" value="1271"/>
+    <eAnnotations source="positions.5081" references="/0/generateAmazonECS/%/%/%/%.2">
+      <details key="start" value="98810"/>
+      <details key="end" value="98820"/>
+      <details key="line" value="1263"/>
     </eAnnotations>
-    <eAnnotations source="positions.5037" references="/0/generateAmazonECS/%/%/%/%.3">
-      <details key="start" value="98525"/>
-      <details key="end" value="98535"/>
+    <eAnnotations source="positions.5082" references="/0/generateAmazonECS/%/%/%/%.3">
+      <details key="start" value="98821"/>
+      <details key="end" value="98831"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5038" references="/0/generateAmazonECS/%/%/%/%.3/ecs">
-      <details key="start" value="98525"/>
-      <details key="end" value="98528"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5039" references="/0/generateAmazonECS/%/%/%/%.4">
-      <details key="start" value="98537"/>
-      <details key="end" value="98544"/>
-      <details key="line" value="1272"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5040" references="/0/generateAmazonECS/%/%/%/%.5">
-      <details key="start" value="98545"/>
-      <details key="end" value="98552"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5041" references="/0/generateAmazonECS/%/%/%/%.5/ecs">
-      <details key="start" value="98545"/>
-      <details key="end" value="98548"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5042" references="/0/generateAmazonECS/%/%/%/%.6">
-      <details key="start" value="98554"/>
-      <details key="end" value="98555"/>
-      <details key="line" value="1273"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5043" references="/0/generateAmazonECS/%/%/%/ecs">
-      <details key="start" value="98434"/>
-      <details key="end" value="98486"/>
-      <details key="line" value="1269"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5044" references="/0/generateAmazonECS/%/%/%/ecs/%">
-      <details key="start" value="98453"/>
-      <details key="end" value="98487"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5045" references="/0/generateAmazonECS/%/%/%/ecs/%/%">
-      <details key="start" value="98453"/>
-      <details key="end" value="98466"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5046" references="/0/generateAmazonECS/%/%/%/ecs/%/%/por">
-      <details key="start" value="98453"/>
-      <details key="end" value="98456"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5047" references="/0/generateAmazonECS/%/%/%/ecs/%/%.1">
-      <details key="start" value="98477"/>
-      <details key="end" value="98486"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5048" references="/0/generateAmazonECS/%/%/%.1">
-      <details key="start" value="98393"/>
-      <details key="end" value="98408"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5049" references="/0/generateAmazonECS/%/%/%.2">
-      <details key="start" value="98417"/>
-      <details key="end" value="98424"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5050" references="/0/generateAmazonECS/%/por">
-      <details key="start" value="98325"/>
-      <details key="end" value="98383"/>
-      <details key="line" value="1267"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5051" references="/0/generateAmazonECS/%/por/%">
-      <details key="start" value="98343"/>
-      <details key="end" value="98384"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5052" references="/0/generateAmazonECS/%/por/%/%">
-      <details key="start" value="98343"/>
-      <details key="end" value="98364"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5053" references="/0/generateAmazonECS/%/por/%/%/aWorkflow">
-      <details key="start" value="98343"/>
-      <details key="end" value="98352"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5054" references="/0/generateAmazonECS/%/por/%/%.1">
-      <details key="start" value="98375"/>
-      <details key="end" value="98383"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5055" references="/0/generateAmazonECS/aWorkflow">
-      <details key="start" value="98297"/>
-      <details key="end" value="98317"/>
-      <details key="line" value="1266"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5056" references="/0/generateAzureCI">
-      <details key="start" value="98594"/>
-      <details key="end" value="98962"/>
-      <details key="line" value="1279"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5057" references="/0/generateAzureCI/%">
-      <details key="start" value="98650"/>
-      <details key="end" value="98949"/>
-      <details key="line" value="1280"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5058" references="/0/generateAzureCI/%/%">
-      <details key="start" value="98716"/>
-      <details key="end" value="98942"/>
-      <details key="line" value="1281"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5059" references="/0/generateAzureCI/%/%/%">
-      <details key="start" value="98757"/>
-      <details key="end" value="98933"/>
-      <details key="line" value="1282"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5060" references="/0/generateAzureCI/%/%/%/%">
-      <details key="start" value="98811"/>
-      <details key="end" value="98821"/>
-      <details key="line" value="1283"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5061" references="/0/generateAzureCI/%/%/%/%.1">
-      <details key="start" value="98822"/>
-      <details key="end" value="98832"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5062" references="/0/generateAzureCI/%/%/%/%.1/ci">
-      <details key="start" value="98822"/>
+    <eAnnotations source="positions.5083" references="/0/generateAmazonECS/%/%/%/%.3/ecs">
+      <details key="start" value="98821"/>
       <details key="end" value="98824"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5063" references="/0/generateAzureCI/%/%/%/%.2">
-      <details key="start" value="98834"/>
-      <details key="end" value="98850"/>
-      <details key="line" value="1284"/>
+    <eAnnotations source="positions.5084" references="/0/generateAmazonECS/%/%/%/%.4">
+      <details key="start" value="98833"/>
+      <details key="end" value="98840"/>
+      <details key="line" value="1264"/>
     </eAnnotations>
-    <eAnnotations source="positions.5064" references="/0/generateAzureCI/%/%/%/%.3">
-      <details key="start" value="98851"/>
-      <details key="end" value="98866"/>
+    <eAnnotations source="positions.5085" references="/0/generateAmazonECS/%/%/%/%.5">
+      <details key="start" value="98841"/>
+      <details key="end" value="98848"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5065" references="/0/generateAzureCI/%/%/%/%.3/ci">
-      <details key="start" value="98851"/>
-      <details key="end" value="98853"/>
+    <eAnnotations source="positions.5086" references="/0/generateAmazonECS/%/%/%/%.5/ecs">
+      <details key="start" value="98841"/>
+      <details key="end" value="98844"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5066" references="/0/generateAzureCI/%/%/%/%.4">
-      <details key="start" value="98868"/>
-      <details key="end" value="98882"/>
-      <details key="line" value="1285"/>
+    <eAnnotations source="positions.5087" references="/0/generateAmazonECS/%/%/%/%.6">
+      <details key="start" value="98850"/>
+      <details key="end" value="98851"/>
+      <details key="line" value="1265"/>
     </eAnnotations>
-    <eAnnotations source="positions.5067" references="/0/generateAzureCI/%/%/%/%.5">
-      <details key="start" value="98883"/>
-      <details key="end" value="98896"/>
+    <eAnnotations source="positions.5088" references="/0/generateAmazonECS/%/%/%/ecs">
+      <details key="start" value="98730"/>
+      <details key="end" value="98782"/>
+      <details key="line" value="1261"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5089" references="/0/generateAmazonECS/%/%/%/ecs/%">
+      <details key="start" value="98749"/>
+      <details key="end" value="98783"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5068" references="/0/generateAzureCI/%/%/%/%.5/ci">
-      <details key="start" value="98883"/>
-      <details key="end" value="98885"/>
+    <eAnnotations source="positions.5090" references="/0/generateAmazonECS/%/%/%/ecs/%/%">
+      <details key="start" value="98749"/>
+      <details key="end" value="98762"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5069" references="/0/generateAzureCI/%/%/%/%.6">
-      <details key="start" value="98898"/>
-      <details key="end" value="98910"/>
-      <details key="line" value="1286"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5070" references="/0/generateAzureCI/%/%/%/%.7">
-      <details key="start" value="98911"/>
-      <details key="end" value="98922"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5071" references="/0/generateAzureCI/%/%/%/%.7/ci">
-      <details key="start" value="98911"/>
-      <details key="end" value="98913"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5072" references="/0/generateAzureCI/%/%/%/%.8">
-      <details key="start" value="98924"/>
-      <details key="end" value="98925"/>
-      <details key="line" value="1287"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5073" references="/0/generateAzureCI/%/%/%/ci">
-      <details key="start" value="98762"/>
-      <details key="end" value="98809"/>
-      <details key="line" value="1282"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5074" references="/0/generateAzureCI/%/%/%/ci/%">
-      <details key="start" value="98778"/>
-      <details key="end" value="98810"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5075" references="/0/generateAzureCI/%/%/%/ci/%/%">
-      <details key="start" value="98778"/>
-      <details key="end" value="98791"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5076" references="/0/generateAzureCI/%/%/%/ci/%/%/por">
-      <details key="start" value="98778"/>
-      <details key="end" value="98781"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5077" references="/0/generateAzureCI/%/%/%/ci/%/%.1">
-      <details key="start" value="98802"/>
-      <details key="end" value="98809"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5078" references="/0/generateAzureCI/%/%/%.1">
-      <details key="start" value="98723"/>
-      <details key="end" value="98736"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5079" references="/0/generateAzureCI/%/%/%.2">
-      <details key="start" value="98745"/>
+    <eAnnotations source="positions.5091" references="/0/generateAmazonECS/%/%/%/ecs/%/%/por">
+      <details key="start" value="98749"/>
       <details key="end" value="98752"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5080" references="/0/generateAzureCI/%/por">
-      <details key="start" value="98655"/>
-      <details key="end" value="98713"/>
-      <details key="line" value="1280"/>
-    </eAnnotations>
-    <eAnnotations source="positions.5081" references="/0/generateAzureCI/%/por/%">
-      <details key="start" value="98673"/>
-      <details key="end" value="98714"/>
+    <eAnnotations source="positions.5092" references="/0/generateAmazonECS/%/%/%/ecs/%/%.1">
+      <details key="start" value="98773"/>
+      <details key="end" value="98782"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5082" references="/0/generateAzureCI/%/por/%/%">
-      <details key="start" value="98673"/>
-      <details key="end" value="98694"/>
+    <eAnnotations source="positions.5093" references="/0/generateAmazonECS/%/%/%.1">
+      <details key="start" value="98689"/>
+      <details key="end" value="98704"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5083" references="/0/generateAzureCI/%/por/%/%/aWorkflow">
-      <details key="start" value="98673"/>
-      <details key="end" value="98682"/>
+    <eAnnotations source="positions.5094" references="/0/generateAmazonECS/%/%/%.2">
+      <details key="start" value="98713"/>
+      <details key="end" value="98720"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5084" references="/0/generateAzureCI/%/por/%/%.1">
-      <details key="start" value="98705"/>
-      <details key="end" value="98713"/>
+    <eAnnotations source="positions.5095" references="/0/generateAmazonECS/%/por">
+      <details key="start" value="98621"/>
+      <details key="end" value="98679"/>
+      <details key="line" value="1259"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5096" references="/0/generateAmazonECS/%/por/%">
+      <details key="start" value="98639"/>
+      <details key="end" value="98680"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5085" references="/0/generateAzureCI/%.1">
-      <details key="start" value="98950"/>
-      <details key="end" value="98951"/>
-      <details key="line" value="1290"/>
+    <eAnnotations source="positions.5097" references="/0/generateAmazonECS/%/por/%/%">
+      <details key="start" value="98639"/>
+      <details key="end" value="98660"/>
+      <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5086" references="/0/generateAzureCI/aWorkflow">
-      <details key="start" value="98627"/>
-      <details key="end" value="98647"/>
+    <eAnnotations source="positions.5098" references="/0/generateAmazonECS/%/por/%/%/aWorkflow">
+      <details key="start" value="98639"/>
+      <details key="end" value="98648"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5099" references="/0/generateAmazonECS/%/por/%/%.1">
+      <details key="start" value="98671"/>
+      <details key="end" value="98679"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5100" references="/0/generateAmazonECS/aWorkflow">
+      <details key="start" value="98593"/>
+      <details key="end" value="98613"/>
+      <details key="line" value="1258"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5101" references="/0/generateAzureCI">
+      <details key="start" value="98890"/>
+      <details key="end" value="99258"/>
+      <details key="line" value="1271"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5102" references="/0/generateAzureCI/%">
+      <details key="start" value="98946"/>
+      <details key="end" value="99245"/>
+      <details key="line" value="1272"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5103" references="/0/generateAzureCI/%/%">
+      <details key="start" value="99012"/>
+      <details key="end" value="99238"/>
+      <details key="line" value="1273"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5104" references="/0/generateAzureCI/%/%/%">
+      <details key="start" value="99053"/>
+      <details key="end" value="99229"/>
+      <details key="line" value="1274"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5105" references="/0/generateAzureCI/%/%/%/%">
+      <details key="start" value="99107"/>
+      <details key="end" value="99117"/>
+      <details key="line" value="1275"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5106" references="/0/generateAzureCI/%/%/%/%.1">
+      <details key="start" value="99118"/>
+      <details key="end" value="99128"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5107" references="/0/generateAzureCI/%/%/%/%.1/ci">
+      <details key="start" value="99118"/>
+      <details key="end" value="99120"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5108" references="/0/generateAzureCI/%/%/%/%.2">
+      <details key="start" value="99130"/>
+      <details key="end" value="99146"/>
+      <details key="line" value="1276"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5109" references="/0/generateAzureCI/%/%/%/%.3">
+      <details key="start" value="99147"/>
+      <details key="end" value="99162"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5110" references="/0/generateAzureCI/%/%/%/%.3/ci">
+      <details key="start" value="99147"/>
+      <details key="end" value="99149"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5111" references="/0/generateAzureCI/%/%/%/%.4">
+      <details key="start" value="99164"/>
+      <details key="end" value="99178"/>
+      <details key="line" value="1277"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5112" references="/0/generateAzureCI/%/%/%/%.5">
+      <details key="start" value="99179"/>
+      <details key="end" value="99192"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5113" references="/0/generateAzureCI/%/%/%/%.5/ci">
+      <details key="start" value="99179"/>
+      <details key="end" value="99181"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5114" references="/0/generateAzureCI/%/%/%/%.6">
+      <details key="start" value="99194"/>
+      <details key="end" value="99206"/>
+      <details key="line" value="1278"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5115" references="/0/generateAzureCI/%/%/%/%.7">
+      <details key="start" value="99207"/>
+      <details key="end" value="99218"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5116" references="/0/generateAzureCI/%/%/%/%.7/ci">
+      <details key="start" value="99207"/>
+      <details key="end" value="99209"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5117" references="/0/generateAzureCI/%/%/%/%.8">
+      <details key="start" value="99220"/>
+      <details key="end" value="99221"/>
       <details key="line" value="1279"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5118" references="/0/generateAzureCI/%/%/%/ci">
+      <details key="start" value="99058"/>
+      <details key="end" value="99105"/>
+      <details key="line" value="1274"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5119" references="/0/generateAzureCI/%/%/%/ci/%">
+      <details key="start" value="99074"/>
+      <details key="end" value="99106"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5120" references="/0/generateAzureCI/%/%/%/ci/%/%">
+      <details key="start" value="99074"/>
+      <details key="end" value="99087"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5121" references="/0/generateAzureCI/%/%/%/ci/%/%/por">
+      <details key="start" value="99074"/>
+      <details key="end" value="99077"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5122" references="/0/generateAzureCI/%/%/%/ci/%/%.1">
+      <details key="start" value="99098"/>
+      <details key="end" value="99105"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5123" references="/0/generateAzureCI/%/%/%.1">
+      <details key="start" value="99019"/>
+      <details key="end" value="99032"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5124" references="/0/generateAzureCI/%/%/%.2">
+      <details key="start" value="99041"/>
+      <details key="end" value="99048"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5125" references="/0/generateAzureCI/%/por">
+      <details key="start" value="98951"/>
+      <details key="end" value="99009"/>
+      <details key="line" value="1272"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5126" references="/0/generateAzureCI/%/por/%">
+      <details key="start" value="98969"/>
+      <details key="end" value="99010"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5127" references="/0/generateAzureCI/%/por/%/%">
+      <details key="start" value="98969"/>
+      <details key="end" value="98990"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5128" references="/0/generateAzureCI/%/por/%/%/aWorkflow">
+      <details key="start" value="98969"/>
+      <details key="end" value="98978"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5129" references="/0/generateAzureCI/%/por/%/%.1">
+      <details key="start" value="99001"/>
+      <details key="end" value="99009"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5130" references="/0/generateAzureCI/%.1">
+      <details key="start" value="99246"/>
+      <details key="end" value="99247"/>
+      <details key="line" value="1282"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5131" references="/0/generateAzureCI/aWorkflow">
+      <details key="start" value="98923"/>
+      <details key="end" value="98943"/>
+      <details key="line" value="1271"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>

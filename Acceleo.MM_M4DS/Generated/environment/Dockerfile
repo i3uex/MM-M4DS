@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 
 WORKDIR ./wf_model_dataset_python

@@ -15,10 +15,14 @@ sudo apt-get update --yes
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build -t docker_app -f Dockerfile .
+docker build -t ubuntu-base:dist-amd64 -f Dockerfile .
 
 clear
 
-docker run -it docker_app
+docker run -it --rm --name wf_model_dataset_python_dockerContainer --mount type=bind,source=/home/carlos/Escritorio/datasets,target=/wf_model_dataset_python/data ubuntu-base:dist-amd64
 
+docker rmi ubuntu-base:dist-amd64
 
+clear
+
+echo -e "Exiting the application...\n"

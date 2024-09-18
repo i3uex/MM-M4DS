@@ -1139,16 +1139,6 @@ EnvironmentPythonInterpreter = [lo.pythonInterpreter.path/]
 	[elseif (por.container.oclIsTypeOf(AzureCI))]
 [generateAzureCI()/]
 	[/if]
-	
-	[file ('Atributes.txt', false, 'UTF-8')]
-EnvironmentName = [por.name/]
-EnvironmentPath = [por.path/]
-
-ContainerPython = [por.container.developmentTool.version/]
-ContainerName = [por.container.name/]
-ContainerImageName = [por.container.imageName/]
-ContainerImageTag = [por.container.imageTag/]
-	[/file]
 [/let]
 [/template]
 
@@ -1156,7 +1146,7 @@ ContainerImageTag = [por.container.imageTag/]
 [template public generateDocker(aWorkflow : Workflow)]
 [let por : Portable = aWorkflow.environment.oclAsType(Portable)]
 	[file ('Dockerfile', false, 'UTF-8')]
-FROM python:[por.container.developmentTool.version/]
+FROM python:[por.container.developmentTool.version/]-slim
 
 
 WORKDIR [por.path/]
@@ -1186,6 +1176,38 @@ COPY workflow_scripts.sh [por.path/]/workflow_scripts.sh
 RUN chmod +x [por.path/]/workflow_scripts.sh
 
 CMD ['['/]"/bin/bash", "[por.path/]/workflow_scripts.sh"[']'/]
+	[/file]
+
+
+	[file ('deploy_docker_app.sh', false, 'UTF-8')]
+#!/bin/bash
+set -e
+
+sudo apt-get update --yes
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb ['['/]arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update --yes
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
+
+docker build -t [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/] -f Dockerfile .
+
+clear
+
+docker run -it --rm --name [por.container.name.replaceAll('[(),\\s]+', '_')/] --mount type=bind,source=[let ls : LocalStorage = por.storage->first().oclAsType(LocalStorage)][ls.path/][/let],target=[if (por.path.startsWith('.'))][por.path.replaceFirst('.', '')/][else][por.path/][/if]/data [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/]
+
+docker rmi [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/]
+
+clear
+
+echo -e "Exiting the application...\n"
 	[/file]
 [/let]
 
@@ -1223,42 +1245,12 @@ while true; do
             echo "An error occurred while executing the complete Pipeline."
         fi
     elif ['['/] "$option" -eq 4 [']'/]; then
-        echo -e "Exiting the application...\n"
         break
     else
         echo -e "Invalid option. Please select a valid option.\n"
     fi
 done
 [/file]
-
-
-[file ('deploy_docker_app.sh', false, 'UTF-8')]
-#!/bin/bash
-set -e
-
-sudo apt-get update --yes
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-echo \
-  "deb ['['/]arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update --yes
-
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
-
-docker build -t docker_app -f Dockerfile .
-
-clear
-
-docker run -it docker_app
-
-
-[/file]
-
 
 [/template]
 
