@@ -199,7 +199,7 @@ generateWorkflow()
 [else]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dc.eContainer(Workflow).environment.path.startsWith('.'))][dc.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dc.name.replaceAll('[(),\\s]+', '_')/])
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | dw.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -236,7 +236,7 @@ generateWorkflow()
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dc_out.eContainer(Workflow).environment.path.startsWith('.'))][dc_out.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc_out.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -244,8 +244,8 @@ generateWorkflow()
 	[/if]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dc.eContainer(Workflow).environment.path.startsWith('.'))][dc.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dc.eContainer(Workflow).environment.path.startsWith('.'))][dc.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -661,7 +661,7 @@ generateWorkflow()
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dw.eContainer(Workflow).environment.path.startsWith('.'))][dw.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dw.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dc.name.replaceAll('[(),\\s]+', '_')/])
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(dw, d_or)/]
@@ -683,7 +683,7 @@ generateWorkflow()
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dc_out.eContainer(Workflow).environment.path.startsWith('.'))][dc_out.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc_out.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -691,8 +691,8 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dc.eContainer(Workflow).environment.path.startsWith('.'))][dc.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dc.eContainer(Workflow).environment.path.startsWith('.'))][dc.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dc.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(d, d)/]

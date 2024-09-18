@@ -66,7 +66,7 @@ def generateWorkflow():
 	binner_avg_income__output_dataDictionary_sep=','
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary, sep = imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep)
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_csv('/data/./knime_dataDictionaries/missing_input_dataDictionary.csv')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.copy()
 	missing_values_list=[]
 	
