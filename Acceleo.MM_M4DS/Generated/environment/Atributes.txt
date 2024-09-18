@@ -1,0 +1,7 @@
+EnvironmentName = wf_model_dataset_python_dockerEnvironment
+EnvironmentPath = ./wf_model_dataset_python
+
+ContainerPython = 3.11
+ContainerName = wf_model_dataset_python_dockerContainer
+ContainerImageName = ubuntu-base
+ContainerImageTag = dist-amd64

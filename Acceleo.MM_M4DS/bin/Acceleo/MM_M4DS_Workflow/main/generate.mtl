@@ -1078,81 +1078,231 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 [template public generateEnvironment(aWorkflow : Workflow)]
 [if (aWorkflow.environment.oclIsKindOf(Portable))]
-	[let por : Portable = aWorkflow.environment.oclAsType(Portable)]
-		[file ('Dockerfile', false, 'UTF-8')]
-# Use the official Python 3.11 slim image as the base as it's the python version used for the MD4DSP project
+[generatePortable()/]
+[elseif (aWorkflow.environment.oclIsKindOf(Local))]
+[generateLocal()/]
+[/if]
+
+[file ('LocalStorage.txt', false, 'UTF-8')]
+	[for (st : Storage | aWorkflow.environment.storage)]
+		[if (st.oclIsKindOf(LocalStorage))]
+			[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+Dataset path = [ls.path/]
+			[/let]
+		[/if]
+	[/for]
+[/file]
+
+[file ('RemoteStorage.txt', false, 'UTF-8')]
+	[for (st : Storage | aWorkflow.environment.storage)]
+		[if (st.oclIsKindOf(RemoteStorage))]
+			[let rs : RemoteStorage = st.oclAsType(RemoteStorage)]
+				[if (rs.oclIsKindOf(AmazonS3))]
+					[let s3 : AmazonS3 = rs.oclAsType(AmazonS3)]
+AmazonS3Bucket = [s3.bucket/]
+AmazonS3Key = [s3.key/]
+AmazonS3Region = [s3.region/]
+AmazonS3SecretId = [s3.secretId/]
+					[/let]
+				[elseif (rs.oclIsKindOf(AzureBlob))]
+					[let ab : AzureBlob = rs.oclAsType(AzureBlob)]
+AzureBlobContainer = [ab.container/]
+AzureBlobBlobName = [ab.blobName/]
+AzureBlobKeyVaultName = [ab.keyVaultName/]
+AzureBlobSecretName = [ab.secretName/]
+					[/let]
+				[/if]
+			[/let]
+		[/if]
+	[/for]
+[/file]
+[/template]
+
+
+[template public generateLocal(aWorkflow : Workflow)]
+[let lo : Local = aWorkflow.environment.oclAsType(Local)]
+	[file ('Local.txt', false, 'UTF-8')]
+EnvironmentName = [lo.name/]
+EnvironmentPath = [lo.path/]
+EnvironmentPythonInterpreter = [lo.pythonInterpreter.path/]
+	[/file]
+[/let]
+[/template]
+
+
+[template public generatePortable(aWorkflow : Workflow)]
+[let por : Portable = aWorkflow.environment.oclAsType(Portable)]
+	[if (por.container.oclIsTypeOf(Docker))]
+[generateDocker()/]
+	[elseif (por.container.oclIsTypeOf(AmazonECS))]
+[generateAmazonECS()/]
+	[elseif (por.container.oclIsTypeOf(AzureCI))]
+[generateAzureCI()/]
+	[/if]
+	
+	[file ('Atributes.txt', false, 'UTF-8')]
+EnvironmentName = [por.name/]
+EnvironmentPath = [por.path/]
+
+ContainerPython = [por.container.developmentTool.version/]
+ContainerName = [por.container.name/]
+ContainerImageName = [por.container.imageName/]
+ContainerImageTag = [por.container.imageTag/]
+	[/file]
+[/let]
+[/template]
+
+
+[template public generateDocker(aWorkflow : Workflow)]
+[let por : Portable = aWorkflow.environment.oclAsType(Portable)]
+	[file ('Dockerfile', false, 'UTF-8')]
 FROM python:[por.container.developmentTool.version/]
 
-# Set the working directory inside the container to /app.
-# All subsequent commands, such as copying files or running commands, will use this directory as the default path.
-# organizing the container’s filesystem structure and making it easier to manage and locate files.
-WORKDIR /app
 
-# installs Git and cleans up unnecessary files
-# - apt-get update: updates the package list to ensure the latest versions of packages are installed.
-# - apt-get install -y --no-install-recommends git: installs Git without extra recommended packages to keep the image
-# small.
-# - rm -rf /var/lib/apt/lists/*: removes the cached package lists to reduce the image size further.
+WORKDIR [por.path/]
+
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
-# Clone the project repository from GitHub
-# - depth 1: clones only the latest commit, reducing the amount of data pulled and speeding up the build process
-# - branch develop: clones the develop branch of the repository
+
 RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-m2python.git .
 
-# Install the project requirements without using or storing package cache, which reduces the final image size.
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Add the current directory to PYTHONPATH
-# Setting the PYTHONPATH allows Python to locate the modules within the /app directory, ensuring that the application \
-# can be run without module import errors.
-ENV PYTHONPATH=/app
 
-# Copy the desired files into the generated_code directory
-COPY generated_code/contracts_Job_Model_data_set_with_metanode_KNIME_.py generated_code/
-COPY generated_code/contracts_Job_Model_data_set_with_metanode_PYTHON_.py generated_code/
-
-# Copy the shell script into the container
-COPY script_calls.sh /app/script_calls.sh
-
-# Make the shell script executable
-RUN chmod +x /app/script_calls.sh
-
-# Use the JSON format for CMD to execute the shell script
-CMD ['['/]"/bin/bash", "/app/script_calls.sh"[']'/]
+ENV PYTHONPATH=[por.path/]
 
 
-		[/file]
-	[/let]
-[/if]
+		[for (dp : DataProcessing | aWorkflow.dataprocessing)]
+COPY ./dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [por.path/]/generated_code/
+COPY ./contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [por.path/]/generated_code/
+COPY ./transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [por.path/]/generated_code/
+		[/for]
 
-[file ('script_calls.sh', false, 'UTF-8')]
+COPY workflow_scripts.sh [por.path/]/workflow_scripts.sh
+
+RUN chmod +x [por.path/]/workflow_scripts.sh
+
+CMD ['['/]"/bin/bash", "[por.path/]/workflow_scripts.sh"[']'/]
+	[/file]
+[/let]
+
+
+[file ('workflow_scripts.sh', false, 'UTF-8')]
+#CAMBIAR LAS RUTAS DE LOS COPY DE LOS ARCHIVOS GENERADOS
+
+CONTRACTS_SCRIPT="generated_code.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+TRANSFORMATIONS_SCRIPT="generated_code.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+WORKFLOW_SCRIPT="generated_code.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+
+while true; do
+    echo -e "\nWhat would you like to do?"
+    echo "    1. Execute the Workflow validation contracts"
+    echo "    2. Execute the Workflow data transformations"
+    echo "    3. Execute the complete Pipeline (transformations and contracts)"
+    echo -e "    4. Exit\n"
+
+    read -r -p "Select an option: " option
+    clear
+
+	if ['['/] "$option" -eq 1 [']'/]; then
+        echo -e "Executing the Workflow validation contracts...\n"
+        if ! python3 -m $CONTRACTS_SCRIPT; then
+            echo "An error occurred while executing the Workflow validation contracts."
+        fi
+    elif ['['/] "$option" -eq 2 [']'/]; then
+        echo -e "Executing the Workflow data transformations...\n"
+        if ! python3 -m $TRANSFORMATIONS_SCRIPT; then
+            echo "An error occurred while executing the Workflow data transformations."
+        fi
+    elif ['['/] "$option" -eq 3 [']'/]; then
+        echo -e "Executing the complete Pipeline...\n"
+        if ! python3 -m $WORKFLOW_SCRIPT; then
+            echo "An error occurred while executing the complete Pipeline."
+        fi
+    elif ['['/] "$option" -eq 4 [']'/]; then
+        echo -e "Exiting the application...\n"
+        break
+    else
+        echo -e "Invalid option. Please select a valid option.\n"
+    fi
+done
+[/file]
+
+
+[file ('deploy_docker_app.sh', false, 'UTF-8')]
 #!/bin/bash
 set -e
 
-#Se podria hacer un pequeño menu para seleccionar lo que se quiere ejecutar
-#hacer un for para recorrer los ficheros generados y hacer la llamada
-python3 -m #meter nombre de fichero
+sudo apt-get update --yes
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb ['['/]arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update --yes
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
+
+docker build -t docker_app -f Dockerfile .
+
+clear
+
+docker run -it docker_app
 
 
 [/file]
 
 
+[/template]
 
 
+[template public generateAmazonECS(aWorkflow : Workflow)]
+[let por : Portable = aWorkflow.environment.oclAsType(Portable)]
+	[file ('AmazonECSfile', false, 'UTF-8')]
+		[let ecs : AmazonECS = por.container.oclAsType(AmazonECS)]
+SecretId = [ecs.secretId/]
+Region = [ecs.region/]
+Key = [ecs.key/]
+		[/let]
+	[/file]
+[/let]
+[/template]
 
 
-
-
-
-
-
-
-
+[template public generateAzureCI(aWorkflow : Workflow)]
+[let por : Portable = aWorkflow.environment.oclAsType(Portable)]
+	[file ('AzureCIfile', false, 'UTF-8')]
+		[let ci : AzureCI = por.container.oclAsType(AzureCI)]
+AcrName = [ci.acrName/]
+KeyVaultName = [ci.keyVaultName/]
+SecretName = [ci.secretName/]
+BlobName = [ci.blobName/]
+		[/let]
+	[/file]
+[/let]
 
 [/template]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
