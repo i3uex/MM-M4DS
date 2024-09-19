@@ -297,7 +297,7 @@ def generateWorkflow():
 
 						[/for]																	[comment CLOSE read all the input datasets and store them/]
 						[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
-	if os.fileName.exists('[dc.fileName/]'):		#If the output DataDictionary exists, we store it
+	if os.path.exists('[dc.fileName/]'):		#If the output DataDictionary exists, we store it
 		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]', sep = '[dc.columnDelimiter/]')
 
 						[/for]																	[comment CLOSE read all the output datasets and store them/]
@@ -457,7 +457,7 @@ generateWorkflow()
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | dw.outputPort)]										[comment OPEN read all the output datasets and store them/]
-	if os.fileName.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):		#If the output DataDictionary exists, we store it
+	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):		#If the output DataDictionary exists, we store it
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
 
 [/for]																			[comment CLOSE read all the output datasets and store them/]
@@ -506,7 +506,7 @@ generateWorkflow()
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | d.outputPort)]										[comment OPEN read all the output datasets and store them/]
-	if os.fileName.exists('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]'):		#If the output DataDictionary exists, we store it
+	if os.path.exists('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]'):		#If the output DataDictionary exists, we store it
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 
 [/for]																			[comment CLOSE read all the output datasets and store them/]
