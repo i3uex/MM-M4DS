@@ -11,13 +11,13 @@ def generateWorkflow():
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_model_dataset_python/data/missing_input_dataDictionary.csv'
 
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep=','
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_model_dataset_python/data/missing_input_dataDictionary.csv'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_model_dataset_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_sep=','
-	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_model_dataset_python/data/missing_input_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_model_dataset_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_sep=','
-	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_model_dataset_python/data/missing_input_dataDictionary.csv'
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_model_dataset_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_sep=','
 	rowFilterRange_init_span__input_dataDictionary='/wf_model_dataset_python/data/missing_output_dataDictionary.csv'
@@ -41,13 +41,13 @@ def generateWorkflow():
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_model_dataset_python/data/numericOutliers_output_dataDictionary.csv'
 
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_sep=','
-	binner_TERRITORY__input_dataDictionary='/wf_model_dataset_python/data/numericOutliers_output_dataDictionary.csv'
+	binner_TERRITORY__input_dataDictionary='/wf_model_dataset_python/data/numericBinner_output_dataDictionary.csv'
 
 	binner_TERRITORY__input_dataDictionary_sep=','
-	binner_satscore__input_dataDictionary='/wf_model_dataset_python/data/numericOutliers_output_dataDictionary.csv'
+	binner_satscore__input_dataDictionary='/wf_model_dataset_python/data/numericBinner_output_dataDictionary.csv'
 
 	binner_satscore__input_dataDictionary_sep=','
-	binner_avg_income__input_dataDictionary='/wf_model_dataset_python/data/numericOutliers_output_dataDictionary.csv'
+	binner_avg_income__input_dataDictionary='/wf_model_dataset_python/data/numericBinner_output_dataDictionary.csv'
 
 	binner_avg_income__input_dataDictionary_sep=','
 	#--------------------------------------Output data dictionaries--------------------------------------
