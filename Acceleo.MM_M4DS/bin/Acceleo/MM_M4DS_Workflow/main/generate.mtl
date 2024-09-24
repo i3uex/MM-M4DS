@@ -41,8 +41,16 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]		[comment OPEN assigns the variable to be of type Transformation/]
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | d.inputPort)]										[comment OPEN read all the input datasets and store them/]
+							[for (st : Storage | aWorkflow.environment.storage)]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-							
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+									[/let]
+								[/if]
+							[/for]							
+
 						[/for]																			[comment CLOSE read all the input datasets and store them/]
 						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
 							[if (c.contract.type=ContractType::PRECONDITION)]							[comment OPEN checks if the if the contract is a Precondition/]
@@ -67,7 +75,15 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
@@ -77,7 +93,15 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -128,7 +152,15 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -137,7 +169,15 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -230,22 +270,47 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+				[/let]
+			[/if]
+		[/for]							
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
-
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+							[/let]
+						[/if]
+					[/for]
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																	[comment CLOSE read all the input datasets and store them/]
 	[/if]
 [else]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/][dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/][dc.fileName/]')
+				[/let]
+			[/if]
+		[/for]
+
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -293,12 +358,28 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
+							[for (st : Storage | aWorkflow.environment.storage)]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+									[/let]
+								[/if]
+							[/for]
 
 						[/for]																	[comment CLOSE read all the input datasets and store them/]
 						[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
-	if os.path.exists('[dc.fileName/]'):		#If the output DataDictionary exists, we store it
-		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]', sep = '[dc.columnDelimiter/]')
+	if os.path.exists('[dc.fileName/]'):
+							[for (st : Storage | aWorkflow.environment.storage)]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
+	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]', sep = '[dc.columnDelimiter/]')
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+									[/let]
+								[/if]
+							[/for]
 
 						[/for]																	[comment CLOSE read all the output datasets and store them/]
 						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -323,8 +404,17 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+											[/let]
+										[/if]
+									[/for]	
 								[/let]
 							[/if]
 						[/for]
@@ -332,8 +422,17 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+											[/let]
+										[/if]
+									[/for]
 								[/let]
 							[/if]
 						[/for]
@@ -383,8 +482,17 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+											[/let]
+										[/if]
+									[/for]
 								[/let]
 							[/if]
 						[/for]
@@ -392,8 +500,17 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+											[/let]
+										[/if]
+									[/for]
 								[/let]
 							[/if]
 						[/for]
@@ -488,13 +605,29 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]')
+	[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+				[/let]
+			[/if]
+		[/for]
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]')
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+							[/let]
+						[/if]
+					[/for]
 
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
@@ -502,12 +635,32 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/][dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/][dc.fileName/]')
+				[/let]
+			[/if]
+		[/for]
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | d.outputPort)]										[comment OPEN read all the output datasets and store them/]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	if os.path.exists('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]'):		#If the output DataDictionary exists, we store it
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+if os.path.exists('[ls.path/][dc.fileName/]'):		#If the output DataDictionary exists, we store it
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/][dc.fileName/]')
+				[/let]
+			[/if]
+		[/for]
 
 [/for]																			[comment CLOSE read all the output datasets and store them/]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -551,7 +704,15 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+							[for (st : Storage | aWorkflow.environment.storage)]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+									[/let]
+								[/if]
+							[/for]
 
 						[/for]																		[comment CLOSE read all the input datasets and store them/]
 [generateCallTransformation(d, d)/]
@@ -562,7 +723,15 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -571,7 +740,15 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -606,7 +783,15 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -615,7 +800,15 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
+									[for (st : Storage | aWorkflow.environment.storage)]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+											[/let]
+										[/if]
+									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]
 							[/if]
@@ -677,22 +870,46 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+				[/let]
+			[/if]
+		[/for]							
 
 	[else]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
-
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+							[/let]
+						[/if]
+					[/for]
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																	[comment CLOSE read all the input datasets and store them/]
 	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
+				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/][dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/][dc.fileName/]')
+				[/let]
+			[/if]
+		[/for]
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is an incoming link or not/]
 	[generateCallTransformation(d, d)/]
@@ -1122,10 +1339,102 @@ AzureBlobSecretName = [ab.secretName/]
 
 [template public generateLocal(aWorkflow : Workflow)]
 [let lo : Local = aWorkflow.environment.oclAsType(Local)]
-	[file ('Local.txt', false, 'UTF-8')]
-EnvironmentName = [lo.name/]
-EnvironmentPath = [lo.path/]
-EnvironmentPythonInterpreter = [lo.pythonInterpreter.path/]
+	[file ('deploy_local_app.sh', false, 'UTF-8')]
+#!/bin/bash
+set -e
+
+sudo apt update --yes
+sudo apt install python3-pip python3-venv git --yes
+
+REPO_URL="https://github.com/franjmelchor/MD4DSP-m2python.git"
+PROJECT_DIR="[aWorkflow.environment.path/]"
+PYTHON_INTERPRETER="[lo.pythonInterpreter.path/]"
+
+
+CONTRACTS_SCRIPT="contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+TRANSFORMATIONS_SCRIPT="transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+WORKFLOW_SCRIPT="dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+
+VENV_DIR="$PROJECT_DIR/venv"
+
+if ['['/] ! -d "$PROJECT_DIR" [']'/]; then
+    echo "Cloning the project repository..."
+    git clone --depth 1 --branch develop $REPO_URL $PROJECT_DIR
+else
+    echo "Project directory already exists. Skipping clone."
+fi
+
+
+#if ['['/] ! -d "$PROJECT_DIR/data" [']'/]; then
+#  mkdir -p "$PROJECT_DIR/data"
+#fi
+
+#		[for (st : Storage | lo.storage)]
+#			[if (st.oclIsKindOf(LocalStorage))]
+#				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+#cp -a [ls.path/]/. $PROJECT_DIR/data
+#				[/let]
+#			[/if]
+#		[/for]
+
+
+cp $CONTRACTS_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
+cp $TRANSFORMATIONS_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
+cp $WORKFLOW_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
+
+
+if ['['/] ! -d "$VENV_DIR" [']'/]; then
+    echo "Creating a Python virtual environment..."
+    virtualenv -p "$PYTHON_INTERPRETER" $VENV_DIR
+fi
+
+source "$VENV_DIR/bin/activate"
+
+cd "$PROJECT_DIR"
+
+
+if ['['/] -f "requirements.txt" [']'/]; then
+    echo "Installing project requirements..."
+    python3 -m pip install --no-cache-dir -r requirements.txt
+else
+    echo "requirements.txt not found. Skipping installation of requirements."
+fi
+
+clear
+
+while true; do
+    echo -e "\nWhat would you like to do?"
+    echo "    1. Execute the Workflow validation contracts"
+    echo "    2. Execute the Workflow data transformations"
+    echo "    3. Execute the complete Pipeline (transformations and contracts)"
+    echo -e "    4. Exit\n"
+
+    read -r -p "Select an option: " option
+    clear
+
+    if ['['/] "$option" -eq 1 [']'/]; then
+        echo -e "Executing the Workflow validation contracts...\n"
+        if ! python3 -m generated_code.$CONTRACTS_SCRIPT; then
+            echo "An error occurred while executing the Workflow validation contracts."
+        fi
+    elif ['['/] "$option" -eq 2 [']'/]; then
+        echo -e "Executing the Workflow data transformations...\n"
+        if ! python3 -m generated_code.$TRANSFORMATIONS_SCRIPT; then
+            echo "An error occurred while executing the Workflow data transformations."
+        fi
+    elif ['['/] "$option" -eq 3 [']'/]; then
+        echo -e "Executing the complete Pipeline...\n"
+        if ! python3 -m generated_code.$WORKFLOW_SCRIPT; then
+            echo "An error occurred while executing the complete Pipeline."
+        fi
+    elif ['['/] "$option" -eq 4 [']'/]; then
+        echo -e "Exiting the application...\n"
+        break
+    else
+        echo -e "Invalid option. Please select a valid option.\n"
+    fi
+done
+
 	[/file]
 [/let]
 [/template]
