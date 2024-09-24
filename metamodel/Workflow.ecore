@@ -102,6 +102,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=","/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="#//DataDictionary"
+        eOpposite="#//DataDictionary/out"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="#//DataDictionary"
+        eOpposite="#//DataDictionary/in"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataField" abstract="true" eSuperTypes="#//Argument">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
