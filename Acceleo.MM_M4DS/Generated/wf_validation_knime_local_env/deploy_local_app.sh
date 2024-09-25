@@ -6,7 +6,7 @@ sudo apt install python3-pip python3-venv git --yes
 
 REPO_URL="https://github.com/franjmelchor/MD4DSP-m2python.git"
 PROJECT_DIR="./wf_validation_knime"
-PYTHON_INTERPRETER="/usr/bin/python3.11"
+PYTHON_INTERPRETER="3.11"
 
 
 CONTRACTS_SCRIPT="contracts_Job_Model_data_set_with_metanode_KNIME_"
@@ -22,13 +22,6 @@ else
     echo "Project directory already exists. Skipping clone."
 fi
 
-
-#if [ ! -d "$PROJECT_DIR/data" ]; then
-#  mkdir -p "$PROJECT_DIR/data"
-#fi
-
-#		#			#				#cp -a /home/carlos/Escritorio/datasets/. $PROJECT_DIR/data
-#				#			#		
 
 cp $CONTRACTS_SCRIPT.py ./wf_validation_knime/generated_code/
 cp $TRANSFORMATIONS_SCRIPT.py ./wf_validation_knime/generated_code/

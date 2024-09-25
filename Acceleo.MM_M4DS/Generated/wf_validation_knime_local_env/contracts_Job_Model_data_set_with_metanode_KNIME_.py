@@ -175,7 +175,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv', sep = ',')
 
 	if os.path.exists('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_output_dataDictionary.csv'):
 		imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',')

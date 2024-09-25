@@ -216,7 +216,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv', sep = ',')
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income', 

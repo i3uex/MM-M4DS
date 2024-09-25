@@ -1426,19 +1426,6 @@ else
 fi
 
 
-#if ['['/] ! -d "$PROJECT_DIR/data" [']'/]; then
-#  mkdir -p "$PROJECT_DIR/data"
-#fi
-
-#		[for (st : Storage | lo.storage)]
-#			[if (st.oclIsKindOf(LocalStorage))]
-#				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-#cp -a [ls.path/]/. $PROJECT_DIR/data
-#				[/let]
-#			[/if]
-#		[/for]
-
-
 cp $CONTRACTS_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
 cp $TRANSFORMATIONS_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
 cp $WORKFLOW_SCRIPT.py [aWorkflow.environment.path/]/generated_code/

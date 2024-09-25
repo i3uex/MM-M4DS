@@ -59,7 +59,7 @@ def generateWorkflow():
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_output_dataDictionary.csv', sep = ',', index_col=0)
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/./knime_dataDictionaries/missing_input_dataDictionary.csv', sep = ',')
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_csv('/home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv', sep = ',')
 
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_transformed=imputeMissingByMean_avg_income_distance__input_dataDictionary_df.copy()
 	missing_values_list=[]

@@ -23,13 +23,6 @@ else
 fi
 
 
-#if [ ! -d "$PROJECT_DIR/data" ]; then
-#  mkdir -p "$PROJECT_DIR/data"
-#fi
-
-#		#			#				#cp -a /home/carlos/Escritorio/datasets/. $PROJECT_DIR/data
-#				#			#		
-
 cp $CONTRACTS_SCRIPT.py ./wf_model_dataset_python/generated_code/
 cp $TRANSFORMATIONS_SCRIPT.py ./wf_model_dataset_python/generated_code/
 cp $WORKFLOW_SCRIPT.py ./wf_model_dataset_python/generated_code/
