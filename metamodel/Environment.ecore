@@ -8,8 +8,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Local" eSuperTypes="#//Environment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pythonInterpreter" lowerBound="1"
-        eType="#//PythonInterpreter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpreter" lowerBound="1"
+        eType="#//Interpreter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Portable" eSuperTypes="#//Environment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
@@ -18,7 +18,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="developmentTool" lowerBound="1"
-        eType="#//Python" containment="true"/>
+        eType="#//DevelopmentTool" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -34,24 +34,67 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="region" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PythonInterpreter">
+  <eClassifiers xsi:type="ecore:EClass" name="Interpreter" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tool" eType="#//TOOL"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Python">
+  <eClassifiers xsi:type="ecore:EClass" name="DevelopmentTool">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tool" eType="#//TOOL"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TOOL">
+    <eLiterals name="PYTHON"/>
+    <eLiterals name="R" value="1"/>
+    <eLiterals name="KNIME" value="2" literal="KNIME"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Storage" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalStorage" eSuperTypes="#//Storage">
+  <eClassifiers xsi:type="ecore:EEnum" name="DBTYPE">
+    <eLiterals name="MYSQL"/>
+    <eLiterals name="POSTGRESQL" value="1"/>
+    <eLiterals name="SQLSERVER" value="2"/>
+    <eLiterals name="ORACLE" value="3"/>
+    <eLiterals name="MONGODB" value="4"/>
+    <eLiterals name="DYNAMODB" value="5"/>
+    <eLiterals name="OTHER" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//Storage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DBTYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="auth" eType="#//Authentication"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Authentication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Credentials" eSuperTypes="#//Authentication">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SSL" eSuperTypes="#//Authentication">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path_sslcert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path_sslkey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path_sslrootcert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OAuth2" eSuperTypes="#//Authentication">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clientId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clientSecret" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tokenUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessToken" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Storage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalFile" eSuperTypes="#//File">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RemoteStorage" abstract="true" eSuperTypes="#//Storage"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AmazonS3" eSuperTypes="#//RemoteStorage">
+  <eClassifiers xsi:type="ecore:EClass" name="RemoteFile" abstract="true" eSuperTypes="#//File"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AmazonS3" eSuperTypes="#//RemoteFile">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="region" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AzureBlob" eSuperTypes="#//RemoteStorage">
+  <eClassifiers xsi:type="ecore:EClass" name="AzureBlob" eSuperTypes="#//RemoteFile">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="blobName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyVaultName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
