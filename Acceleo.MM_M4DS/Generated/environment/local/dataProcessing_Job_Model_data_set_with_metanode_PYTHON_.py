@@ -8,76 +8,76 @@ from helpers.logger import set_logger
 
 def generateWorkflow():
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='data/missing_input_dataDictionary.csv'
 
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep=','
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='data/missing_output_dataDictionary.csv'
 
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_sep=','
-	imputeMissingByMean_avg_income_distance__input_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__input_dataDictionary='data/missing_output_dataDictionary.csv'
 
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_sep=','
-	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='data/missing_output_dataDictionary.csv'
 
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_sep=','
-	rowFilterRange_init_span__input_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	rowFilterRange_init_span__input_dataDictionary='data/missing_output_dataDictionary.csv'
 
 	rowFilterRange_init_span__input_dataDictionary_sep=','
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='data/rowFilter_output_dataDictionary.csv'
 
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_sep=','
-	mapping_TERRITORY__input_dataDictionary='/home/carlos/Escritorio/datasets/columnFilter_output_dataDictionary.csv'
+	mapping_TERRITORY__input_dataDictionary='data/columnFilter_output_dataDictionary.csv'
 
 	mapping_TERRITORY__input_dataDictionary_sep=','
-	mapping_Instate__input_dataDictionary='/home/carlos/Escritorio/datasets/ruleEngine_territory_output_dataDictionary.csv'
+	mapping_Instate__input_dataDictionary='data/ruleEngine_territory_output_dataDictionary.csv'
 
 	mapping_Instate__input_dataDictionary_sep=','
-	stringToNumber_TERRITORY_Instate__input_dataDictionary='/home/carlos/Escritorio/datasets/ruleEngine_instate_output_dataDictionary.csv'
+	stringToNumber_TERRITORY_Instate__input_dataDictionary='data/ruleEngine_instate_output_dataDictionary.csv'
 
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_sep=','
-	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/home/carlos/Escritorio/datasets/stringToNumber_output_dataDictionary.csv'
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='data/stringToNumber_output_dataDictionary.csv'
 
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_sep=','
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/home/carlos/Escritorio/datasets/numericOutliers_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='data/numericOutliers_output_dataDictionary.csv'
 
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_sep=','
-	binner_TERRITORY__input_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_TERRITORY__input_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 
 	binner_TERRITORY__input_dataDictionary_sep=','
-	binner_satscore__input_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_satscore__input_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 
 	binner_satscore__input_dataDictionary_sep=','
-	binner_avg_income__input_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_avg_income__input_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 
 	binner_avg_income__input_dataDictionary_sep=','
 	#--------------------------------------Output data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='data/missing_output_dataDictionary.csv'
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_sep=','
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_sep=','
-	imputeMissingByMean_avg_income_distance__output_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__output_dataDictionary='data/missing_output_dataDictionary.csv'
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_sep=','
-	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/home/carlos/Escritorio/datasets/missing_output_dataDictionary.csv'
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_sep=','
-	rowFilterRange_init_span__output_dataDictionary='/home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv'
+	rowFilterRange_init_span__output_dataDictionary='data/rowFilter_output_dataDictionary.csv'
 	rowFilterRange_init_span__output_dataDictionary_sep=','
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/home/carlos/Escritorio/datasets/columnFilter_output_dataDictionary.csv'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='data/columnFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_sep=','
-	mapping_TERRITORY__output_dataDictionary='/home/carlos/Escritorio/datasets/ruleEngine_territory_output_dataDictionary.csv'
+	mapping_TERRITORY__output_dataDictionary='data/ruleEngine_territory_output_dataDictionary.csv'
 	mapping_TERRITORY__output_dataDictionary_sep=','
-	mapping_Instate__output_dataDictionary='/home/carlos/Escritorio/datasets/ruleEngine_instate_output_dataDictionary.csv'
+	mapping_Instate__output_dataDictionary='data/ruleEngine_instate_output_dataDictionary.csv'
 	mapping_Instate__output_dataDictionary_sep=','
-	stringToNumber_TERRITORY_Instate__output_dataDictionary='/home/carlos/Escritorio/datasets/stringToNumber_output_dataDictionary.csv'
+	stringToNumber_TERRITORY_Instate__output_dataDictionary='data/stringToNumber_output_dataDictionary.csv'
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_sep=','
-	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/home/carlos/Escritorio/datasets/numericOutliers_output_dataDictionary.csv'
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='data/numericOutliers_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_sep=','
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_sep=','
-	binner_TERRITORY__output_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_TERRITORY__output_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__output_dataDictionary_sep=','
-	binner_satscore__output_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_satscore__output_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 	binner_satscore__output_dataDictionary_sep=','
-	binner_avg_income__output_dataDictionary='/home/carlos/Escritorio/datasets/numericBinner_output_dataDictionary.csv'
+	binner_avg_income__output_dataDictionary='data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__output_dataDictionary_sep=','
 
 	#-----------------New DataProcessing-----------------

@@ -46,7 +46,7 @@ def generateWorkflow():
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 									[/let]
 								[/if]
 							[/for]							
@@ -80,7 +80,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -98,7 +98,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -157,7 +157,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -174,7 +174,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -275,7 +275,7 @@ generateWorkflow()
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
 				[/let]
 			[/if]
 		[/for]							
@@ -289,7 +289,7 @@ generateWorkflow()
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
 							[/let]
 						[/if]
 					[/for]
@@ -305,8 +305,8 @@ generateWorkflow()
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
 				[/let]
 			[/if]
 		[/for]
@@ -363,7 +363,7 @@ def generateWorkflow():
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 									[/let]
 								[/if]
 							[/for]
@@ -376,8 +376,8 @@ def generateWorkflow():
 		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	if os.path.exists('[ls.path/]/[dc.fileName/]'):
-		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	if os.path.exists('data/[dc.fileName/]'):
+		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 									[/let]
 								[/if]
 							[/for]
@@ -411,7 +411,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 											[/let]
 										[/if]
@@ -429,7 +429,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 											[/let]
 										[/if]
@@ -489,7 +489,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 											[/let]
 										[/if]
@@ -507,7 +507,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 											[/let]
 										[/if]
@@ -608,10 +608,10 @@ generateWorkflow()
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
 	[for (st : Storage | d.eContainer(Workflow).environment.storage)]
 			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]')
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
 				[/let]
 			[/if]
 		[/for]
@@ -622,10 +622,10 @@ generateWorkflow()
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
 					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
 						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalStorage))]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]')
 						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
 							[/let]
 						[/if]
 					[/for]
@@ -642,8 +642,8 @@ generateWorkflow()
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
 				[/let]
 			[/if]
 		[/for]
@@ -656,8 +656,8 @@ generateWorkflow()
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 		[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 			[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	if os.path.exists('[ls.path/]/[dc.fileName/]'):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	if os.path.exists('data/[dc.fileName/]'):
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 			[/let]
 		[/if]
 	[/for]
@@ -709,7 +709,7 @@ def generateWorkflow():
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 									[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 									[/let]
 								[/if]
 							[/for]
@@ -728,7 +728,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -745,7 +745,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -788,7 +788,7 @@ def generateWorkflow():
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_in.fileName/]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -805,7 +805,7 @@ def generateWorkflow():
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[ls.path/]/[dd_out.fileName/]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 											[/let]
 										[/if]
 									[/for]
@@ -875,7 +875,7 @@ generateWorkflow()
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
+	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
 				[/let]
 			[/if]
 		[/for]							
@@ -889,7 +889,7 @@ generateWorkflow()
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
 						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 							[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
 							[/let]
 						[/if]
 					[/for]
@@ -905,8 +905,8 @@ generateWorkflow()
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
 			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 				[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dc.fileName/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
 				[/let]
 			[/if]
 		[/for]
@@ -949,8 +949,8 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 										[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[/let]
 									[/if]
 								[/for]
@@ -980,8 +980,8 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 										[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[/let]
 									[/if]
 								[/for]
@@ -1054,8 +1054,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 											[/let]
 										[/if]
 									[/for]
@@ -1108,8 +1108,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 											[/let]
 										[/if]
 									[/for]
@@ -1161,8 +1161,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 											[/let]
 										[/if]
 									[/for]
@@ -1195,8 +1195,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 										[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[/let]
 									[/if]
 								[/for]
@@ -1231,8 +1231,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 											[/let]
 										[/if]
 									[/for]
@@ -1298,8 +1298,8 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 										[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[/let]
 									[/if]
 								[/for]
@@ -1333,8 +1333,8 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalStorage))]
 											[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[ls.path/]/[dd_in.out.fileName/]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[ls.path/]/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 											[/let]
 										[/if]
 									[/for]
@@ -1361,16 +1361,6 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 [elseif (aWorkflow.environment.oclIsKindOf(Local))]
 [generateLocal()/]
 [/if]
-
-[file ('LocalStorage.txt', false, 'UTF-8')]
-	[for (st : Storage | aWorkflow.environment.storage)]
-		[if (st.oclIsKindOf(LocalStorage))]
-			[let ls : LocalStorage = st.oclAsType(LocalStorage)]
-Dataset path = [ls.path/]
-			[/let]
-		[/if]
-	[/for]
-[/file]
 
 [file ('RemoteStorage.txt', false, 'UTF-8')]
 	[for (st : Storage | aWorkflow.environment.storage)]
@@ -1406,6 +1396,7 @@ set -e
 
 sudo apt update --yes
 sudo apt install python3-pip python3-venv git --yes
+sudo pip3 install virtualenv
 
 REPO_URL="https://github.com/franjmelchor/MD4DSP-m2python.git"
 PROJECT_DIR="[aWorkflow.environment.path/]"
@@ -1424,6 +1415,18 @@ if ['['/] ! -d "$PROJECT_DIR" [']'/]; then
 else
     echo "Project directory already exists. Skipping clone."
 fi
+
+if ['['/] ! -d "[aWorkflow.environment.path/]/data" [']'/]; then
+    mkdir [aWorkflow.environment.path/]/data/
+fi
+
+[for (st: Storage | lo.storage)]
+	[if (st.oclIsKindOf(LocalStorage))]
+		[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+cp -R [ls.path/]/* [aWorkflow.environment.path/]/data/
+		[/let]
+	[/if]
+[/for]
 
 
 cp $CONTRACTS_SCRIPT.py [aWorkflow.environment.path/]/generated_code/
@@ -1541,6 +1544,11 @@ CMD ['['/]"/bin/bash", "[por.path/]/workflow_scripts.sh"[']'/]
 #!/bin/bash
 set -e
 
+if ['['/] ! -d "data" [']'/]; then
+    mkdir data
+fi
+
+
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -1559,7 +1567,15 @@ docker build -t [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.con
 
 clear
 
-docker run -it --rm --name [por.container.name.replaceAll('[(),\\s]+', '_')/] --mount type=bind,source=[let ls : LocalStorage = por.storage->first().oclAsType(LocalStorage)][ls.path/][/let],target=[if (por.path.startsWith('.'))][por.path.replaceFirst('.', '')/][else][por.path/][/if]/data [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/]
+[for (st: Storage | por.storage)]
+	[if (st.oclIsKindOf(LocalStorage))]
+		[let ls : LocalStorage = st.oclAsType(LocalStorage)]
+cp -R [ls.path/]/* "$(pwd)/data/"
+		[/let]
+	[/if]
+[/for]
+
+docker run -it --rm --name [por.container.name.replaceAll('[(),\\s]+', '_')/] --mount type=bind,source="$(pwd)/data",target=[if (por.path.startsWith('.'))][por.path.replaceFirst('.', '')/][else][por.path/][/if]/data [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/]
 
 docker rmi [por.container.imageName.replaceAll('[(),\\s]+', '_')/]:[por.container.imageTag.replaceAll('[(),\\s]+', '_')/]
 
@@ -1571,8 +1587,6 @@ echo -e "Exiting the application...\n"
 
 
 [file ('workflow_scripts.sh', false, 'UTF-8')]
-#CAMBIAR LAS RUTAS DE LOS COPY DE LOS ARCHIVOS GENERADOS
-
 CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"

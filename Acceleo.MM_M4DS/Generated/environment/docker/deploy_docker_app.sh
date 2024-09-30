@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ ! -d "data" ]; then
+    mkdir data
+fi
+
+
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -19,7 +24,9 @@ docker build -t ubuntu-base:dist-amd64 -f Dockerfile .
 
 clear
 
-docker run -it --rm --name wf_model_dataset_python_dockerContainer --mount type=bind,source=/home/carlos/Escritorio/datasets,target=/wf_model_dataset_python/data ubuntu-base:dist-amd64
+cp -R /home/carlos/Escritorio/datasets/* "$(pwd)/data/"
+
+docker run -it --rm --name wf_model_dataset_python_dockerContainer --mount type=bind,source="$(pwd)/data",target=/wf_model_dataset_python/data ubuntu-base:dist-amd64
 
 docker rmi ubuntu-base:dist-amd64
 

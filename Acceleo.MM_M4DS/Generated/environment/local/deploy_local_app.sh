@@ -3,6 +3,7 @@ set -e
 
 sudo apt update --yes
 sudo apt install python3-pip python3-venv git --yes
+sudo pip3 install virtualenv
 
 REPO_URL="https://github.com/franjmelchor/MD4DSP-m2python.git"
 PROJECT_DIR="./wf_model_dataset_python"
@@ -21,6 +22,12 @@ if [ ! -d "$PROJECT_DIR" ]; then
 else
     echo "Project directory already exists. Skipping clone."
 fi
+
+if [ ! -d "./wf_model_dataset_python/data" ]; then
+    mkdir ./wf_model_dataset_python/data/
+fi
+
+cp -R /home/carlos/Escritorio/datasets/* ./wf_model_dataset_python/data/
 
 
 cp $CONTRACTS_SCRIPT.py ./wf_model_dataset_python/generated_code/

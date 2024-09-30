@@ -1,5 +1,3 @@
-#CAMBIAR LAS RUTAS DE LOS COPY DE LOS ARCHIVOS GENERADOS
-
 CONTRACTS_SCRIPT="workflows.contracts_Job_Model_data_set_with_metanode_PYTHON_"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_Model_data_set_with_metanode_PYTHON_"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_Model_data_set_with_metanode_PYTHON_"
