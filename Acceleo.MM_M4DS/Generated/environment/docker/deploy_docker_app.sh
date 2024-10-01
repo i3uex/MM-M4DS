@@ -20,15 +20,16 @@ sudo apt-get update --yes
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build -t ubuntu-base:dist-amd64 -f Dockerfile .
+docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
 cp -R /home/carlos/Escritorio/datasets/* "$(pwd)/data/"
+cp -R /home/carlos/Escritorio/datasetsTest/* "$(pwd)/data/"
 
-docker run -it --rm --name wf_model_dataset_python_dockerContainer --mount type=bind,source="$(pwd)/data",target=/wf_model_dataset_python/data ubuntu-base:dist-amd64
+docker run -it --rm --name docker_python --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 
-docker rmi ubuntu-base:dist-amd64
+docker rmi ubuntu-22.04:latest
 
 clear
 

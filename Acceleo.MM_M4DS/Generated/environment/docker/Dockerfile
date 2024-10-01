@@ -1,7 +1,6 @@
 FROM python:3.11-slim
 
-
-WORKDIR ./wf_model_dataset_python
+WORKDIR ./wf_validation_python
 
 
 RUN apt-get update && \
@@ -13,16 +12,14 @@ RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV PYTHONPATH=./wf_validation_python
 
-ENV PYTHONPATH=./wf_model_dataset_python
+COPY ./dataProcessing_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validation_python/workflows/
+COPY ./contracts_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validation_python/workflows/
+COPY ./transformations_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validation_python/workflows/
 
+COPY workflow_scripts.sh ./wf_validation_python/workflow_scripts.sh
 
-COPY ./dataProcessing_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
-COPY ./contracts_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
-COPY ./transformations_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_model_dataset_python/workflows/
+RUN chmod +x ./wf_validation_python/workflow_scripts.sh
 
-COPY workflow_scripts.sh ./wf_model_dataset_python/workflow_scripts.sh
-
-RUN chmod +x ./wf_model_dataset_python/workflow_scripts.sh
-
-CMD ["/bin/bash", "./wf_model_dataset_python/workflow_scripts.sh"]
+CMD ["/bin/bash", "./wf_validation_python/workflow_scripts.sh"]
