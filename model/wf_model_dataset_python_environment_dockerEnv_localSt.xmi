@@ -186,16 +186,19 @@
   </dataprocessing>
   <environment
       xsi:type="Environment:Portable"
-      name="wf_model_dataset_python_dockerEnvironment"
-      path="./wf_model_dataset_python">
+      name="wf_validation_python"
+      path="./wf_validation_python">
     <storage
-        xsi:type="Environment:LocalStorage"
+        xsi:type="Environment:LocalFile"
         path="/home/carlos/Escritorio/datasets"/>
+    <storage
+        xsi:type="Environment:LocalFile"
+        path="/home/carlos/Escritorio/datasetsTest"/>
     <container
         xsi:type="Environment:Docker"
-        name="wf_model_dataset_python_dockerContainer"
-        imageName="ubuntu-base"
-        imageTag="dist-amd64">
+        name="docker_python"
+        imageName="ubuntu-22.04"
+        imageTag="latest">
       <developmentTool
           version="3.11"/>
     </container>

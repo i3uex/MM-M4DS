@@ -186,12 +186,15 @@
   </dataprocessing>
   <environment
       xsi:type="Environment:Local"
-      name="localEnvironmentPython"
-      path="./wf_model_dataset_python">
+      name="wf_validation_python"
+      path="./wf_validation_python">
     <storage
-        xsi:type="Environment:LocalStorage"
+        xsi:type="Environment:LocalFile"
         path="/home/carlos/Escritorio/datasets"/>
-    <pythonInterpreter
+    <storage
+        xsi:type="Environment:LocalFile"
+        path="/home/carlos/Escritorio/datasetsTest"/>
+    <interpreter
         path="/usr/bin/python3.11"/>
   </environment>
 </Workflow:Workflow>
