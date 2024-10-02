@@ -7,7 +7,7 @@ sudo pip3 install virtualenv
 
 REPO_URL="https://github.com/franjmelchor/MD4DSP-m2python.git"
 PROJECT_DIR="./wf_validation_python"
-PYTHON_INTERPRETER="/usr/bin/python3.11"
+PYTHON_INTERPRETER="3.11"
 
 CONTRACTS_SCRIPT="contracts_Job_Model_data_set_with_metanode_PYTHON_"
 TRANSFORMATIONS_SCRIPT="transformations_Job_Model_data_set_with_metanode_PYTHON_"
