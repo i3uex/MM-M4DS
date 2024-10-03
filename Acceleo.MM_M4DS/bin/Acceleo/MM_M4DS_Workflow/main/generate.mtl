@@ -41,15 +41,13 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]		[comment OPEN assigns the variable to be of type Transformation/]
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | d.inputPort)]										[comment OPEN read all the input datasets and store them/]
-							[for (st : Storage | aWorkflow.environment.storage)]
-								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+							[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-									[let lf : LocalFile = st.oclAsType(LocalFile)]
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-									[/let]
-								[/if]
-							[/for]							
+								[/if]																				[comment CLOSE checks if it is a local file and a container or a local environment/]
+							[/for]																		[comment CLOSE traverse all the storage directories/]
 
 						[/for]																			[comment CLOSE read all the input datasets and store them/]
 						[for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -75,15 +73,13 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]				[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
-											[/let]
-										[/if]
-									[/for]
+										[/if]																				[comment CLOSE checks if it is a local file and a container or a local environmenr/]
+									[/for]																[comment CLOSE traverse all the storage directories/]
 
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
@@ -93,15 +89,13 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]				[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
-											[/let]
-										[/if]
-									[/for]
+										[/if]																				[comment CLOSE checks if it is a local file and a container or a local environment/]
+									[/for]																[comment CLOSE traverse all the storage directories/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -152,15 +146,13 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]													[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]				[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
-											[/let]
-										[/if]
-									[/for]
+										[/if]																				[comment CLOSE checks if it is a local file and container or a local environment/]
+									[/for]																[comment CLOSE traverse all the storage directories/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -169,15 +161,13 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]													[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]										[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]			[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]				[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
-											[/let]
-										[/if]
-									[/for]
+										[/if]																				[comment CLOSE checks if it is a local file and container or a local environment/]
+									[/for]																[comment CLOSE traverse all the storage directories/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
 								[/let]																	[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																		[comment CLOSE checks if the argument is a DataDictionary/]
@@ -222,11 +212,11 @@ generateWorkflow()
 
 [template public callModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
 	#-----------------New DataProcessing-----------------
-[if (dw.incoming <> null)]
-	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]
+[if (dw.incoming <> null)]														[comment OPEN checks that it is not the first data processing/]
+	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]			[comment OPEN checks if the operation is not split/]
 	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep, index_col=0)
 
-	[else]
+	[else]																		[comment OPEN checks that the operation is split/]
 		[for (dc : DataDictionary | dw.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
@@ -235,13 +225,13 @@ generateWorkflow()
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																	[comment CLOSE read all the input datasets and store them/]
-	[/if]
-[else]
+	[/if]																		[comment CLOSE checks whether the operation is split or not/]
+[else]																			[comment OPEN checks if it is the first data processing/]
 	[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dc.name.replaceAll('[(),\\s]+', '_')/])
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
-[/if]
+[/if]																			[comment CLOSE checks whether it is the first data processing or not/]
 [for (c : Contract | dw.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]							[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d_or)/]
@@ -257,7 +247,7 @@ generateWorkflow()
 	[if (c.contract.type=ContractType::INVARIANT)]								[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d_or)/]
 	[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
-[/for]
+[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
 [if (dw.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
 	[let nextDp : DataProcessing = dw.outgoing.target.oclAsType(DataProcessing)]	[comment OPEN assigns the next DataProcessing to a variable/]
 [callModifiedRecursiveTemplate(nextDp, d_or)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
@@ -268,51 +258,45 @@ generateWorkflow()
 
 [template public callRecursiveTemplate(d : DataProcessing)]
 	#-----------------New DataProcessing-----------------
-[if (d.incoming <> null)]
-	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+[if (d.incoming <> null)]														[comment OPEN checks that it is not the first data processing/]
+	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]				[comment OPEN checks that the operation is not split/]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
-				[/let]
-			[/if]
-		[/for]							
+			[/if]																							[comment CLOSE checks if it is a local file and a container or a local environment/]
+		[/for]																	[comment CLOSE traverse all the storage directories/]
 
-	[else]
+	[else]																		[comment OPEN checks if the operation is split/]
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]	[comment OPEN traverse all the storage directories/]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
-						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-							[let lf : LocalFile = st.oclAsType(LocalFile)]
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
-							[/let]
-						[/if]
-					[/for]
+						[/if]																							[comment CLOSE checks if it is a local file and a container or a local environment/]
+					[/for]																[comment CLOSE traverse all the storage directories/]
 				[/if]															[comment CLOSE checks that both datasets are the same/]
 			[/for]																[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																	[comment CLOSE read all the input datasets and store them/]
-	[/if]
-[else]
+	[/if]																		[comment CLOSE checks whether the operation is split or not/]
+[else]																			[comment CLOSE checks that it is not the first data processing/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
-				[/let]
-			[/if]
-		[/for]
+			[/if]																							[comment CLOSE checks if it is a local file and a container or a local environment/]
+		[/for]																	[comment CLOSE traverse all the storage directories/]
 
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
-[/if]
+[/if]																			[comment CLOSE checks whether it is the first data processing or not/]
 [for (c : Contract | d.contract)]												[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]							[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
@@ -328,7 +312,7 @@ generateWorkflow()
 	[if (c.contract.type=ContractType::INVARIANT)]								[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
 	[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
-[/for]
+[/for]																			[comment CLOSE traverse all the contracts in the DataProcessing/]
 [if (d.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
 	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]	[comment OPEN assigns the next DataProcessing to a variable/]
 [callRecursiveTemplate(nextDp)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
@@ -350,127 +334,118 @@ from helpers.logger import set_logger
 
 [comment generate the imports and the class/]
 def generateWorkflow():
-[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing=null)]								[comment OPEN checks if the DataProcessing is isolated (no links)/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]																				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing=null)]																					[comment OPEN checks if the DataProcessing is isolated (no links)/]
 	#-----------------New DataProcessing-----------------
-		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
-			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
-				[if (dpd.oclIsKindOf(Library::Transformation))]
-					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-						[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
-							[for (st : Storage | aWorkflow.environment.storage)]
-								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]											[comment OPEN checks that it is a DataProcessingDefinition/]
+			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]	[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+				[if (dpd.oclIsKindOf(Library::Transformation))]																		[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]									[comment OPEN assigns the variable to be a Transformation/]
+						[for (dc : DataDictionary | d.inputPort)]																	[comment OPEN read all the input datasets and store them/]
+							[for (st : Storage | aWorkflow.environment.storage)]													[comment OPEN traverse all the storage directories/]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]					[comment OPEN checks if it is a local file and a container/]
 	[dc.dataDictionaryDefinition.name/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-									[let lf : LocalFile = st.oclAsType(LocalFile)]
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]					[comment OPEN checks if it is a local file and a local environment/]
 	[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-									[/let]
-								[/if]
-							[/for]
+								[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
+							[/for]																									[comment CLOSE traverse all the storage directories/]
 
-						[/for]																	[comment CLOSE read all the input datasets and store them/]
-						[for (dc : DataDictionary | d.outputPort)]								[comment OPEN read all the output datasets and store them/]
-							[for (st : Storage | aWorkflow.environment.storage)]
-								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+						[/for]																										[comment CLOSE read all the input datasets and store them/]
+						[for (dc : DataDictionary | d.outputPort)]																	[comment OPEN read all the output datasets and store them/]
+							[for (st : Storage | aWorkflow.environment.storage)]													[comment OPEN traverse all the storage directories/]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]					[comment OPEN checks if it is a local file and a container/]
 	if os.path.exists([if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]'):
 		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-									[let lf : LocalFile = st.oclAsType(LocalFile)]
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]					[comment OPEN checks if it is a local file and a local environment/]
 	if os.path.exists('data/[dc.fileName/]'):
 		[dc.dataDictionaryDefinition.name/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-									[/let]
-								[/if]
-							[/for]
+								[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
+							[/for]																									[comment CLOSE traverse all the storage directories/]
 
-						[/for]																	[comment CLOSE read all the output datasets and store them/]
-						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
+						[/for]																										[comment CLOSE read all the output datasets and store them/]
+						[for (c : Contract | d.contract)]																			[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::PRECONDITION)]														[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
-						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+							[/if]																									[comment CLOSE checks if the if the contract is a Precondition/]
+						[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]																			[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
-						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-						[for (c : Contract | d.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-							[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
+							[/if]																									[comment CLOSE checks if the if the contract is a Postcondition/]
+						[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
+						[for (c : Contract | d.contract)]																			[comment OPEN traverse all the contracts in the DataProcessing/]
+							[if (c.contract.type=ContractType::INVARIANT)]															[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-							[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
-						[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-					[/let]
-				[elseif (dpd.oclIsKindOf(Library::Job))]
-					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]
+							[/if]																									[comment CLOSE checks if the if the contract is a Invariant/]
+						[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
+					[/let]																											[comment CLOSE assigns the variable to be a Transformation/]
+				[elseif (dpd.oclIsKindOf(Library::Job))]																			[comment OPEN checks if the DataProcessingDefinition is a Job/]
+					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]															[comment OPEN assigns the variable to be a Job/]
 	#--------------------------------------Input data dictionaries--------------------------------------
-						[for (arg : Argument | d._in)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+						[for (arg : Argument | d._in)]																				[comment OPEN traverse all the input arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]																	[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]										[comment OPEN assigns the variable to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]											[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-											[/let]
-										[/if]
-									[/for]	
-								[/let]
-							[/if]
-						[/for]
+										[/if]																						[comment CLOSE checks if it is a local file and a container or a local environment/]
+									[/for]																							[comment CLOSE traverse all the storage directories/]
+								[/let]																								[comment CLOSE assigns the variable to be a DataDictionary/]
+							[/if]																									[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																										[comment CLOSE traverse all the input arguments/]
 	#--------------------------------------Output data dictionaries--------------------------------------
-						[for (arg : Argument | d.out)]
-							[if (arg.oclIsKindOf(DataDictionary))]
-								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+						[for (arg : Argument | d.out)]																				[comment OPEN traverse all the output arguments/]
+							[if (arg.oclIsKindOf(DataDictionary))]																	[comment OPEN checks if the argument is a DataDictionary/]
+								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]										[comment OPEN assigns the variable to be a DataDictionary/]
+									[for (st : Storage | aWorkflow.environment.storage)]											[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-											[/let]
-										[/if]
-									[/for]
-								[/let]
-							[/if]
-						[/for]
+										[/if]																						[comment CLOSE checks if it is a local file and a container or a local environment/]
+									[/for]																							[comment CLOSE traverse all the storage directories/]
+								[/let]																								[comment CLOSE assigns the variable to be a DataDictionary/]
+							[/if]																									[comment CLOSE checks if the argument is a DataDictionary/]
+						[/for]																										[comment CLOSE traverse all the input arguments/]
 
-
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing=null)]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]												[comment OPEN traverse all the dataProcessing in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing=null)]													[comment OPEN checks if the dataProcessing is isolated/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::PRECONDITION)]												[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+									[/if]																							[comment CLOSE checks if the if the contract is a Precondition/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::POSTCONDITION)]												[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
+									[/if]																							[comment CLOSE checks if the if the contract is a Postcondition/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::INVARIANT)]													[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-							[/if]
-						[/for]
-						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
-							[if (dataP.incoming = null and dataP.outgoing<>null)]
+									[/if]																							[comment CLOSE checks if the if the contract is a Invariant/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
+							[/if]																									[comment CLOSE checks if the dataProcessing is isolated/]
+						[/for]																										[comment CLOSE traverse all the dataProcessing in the workflow/]
+						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]												[comment OPEN traverse all the dataProcessing in the workflow/]
+							[if (dataP.incoming = null and dataP.outgoing<>null)]													[comment OPEN checks if it is the first dataProcessing/]
 [callContractsModifiedRecursiveTemplate(dataP, d)/]
-							[/if]
-						[/for]
-					[/let]
-				[/if]
-			[/let]
-		[/if]
-	[/if]																		[comment CLOSE checks if the DataProcessing is isolated (no links)/]
-[/for]																			[comment CLOSE traverse all the DataProcessings/]
-[for (d : DataProcessing | aWorkflow.dataprocessing)]							[comment OPEN traverse all the DataProcessings/]
-	[if (d.incoming = null and d.outgoing<>null)]								[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
+							[/if]																									[comment CLOSE checks if it is the first dataProcessing/]
+						[/for]																										[comment CLOSE traverse all the dataProcessing in the workflow/]
+					[/let]																											[comment CLOSE assigns the variable to be a Transformation/]
+				[/if]																												[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+			[/let]																													[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+		[/if]																														[comment CLOSE checks that it is a DataProcessingDefinition/]
+	[/if]																															[comment CLOSE checks if the DataProcessing is isolated (no links)/]
+[/for]																																[comment CLOSE traverse all the DataProcessings/]
+[for (d : DataProcessing | aWorkflow.dataprocessing)]																				[comment OPEN traverse all the DataProcessings/]
+	[if (d.incoming = null and d.outgoing<>null)]																					[comment OPEN checks if the DataProcessing is the first (no input link, an output link)/]
 		[if (d.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
 			[let dpd : Library::DataProcessingDefinition = d.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
 				[if (dpd.oclIsKindOf(Library::Transformation))]
@@ -483,15 +458,13 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]											[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -501,15 +474,13 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]											[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]			[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -519,21 +490,21 @@ def generateWorkflow():
 
 						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
 							[if (dataP.incoming = null and dataP.outgoing=null)]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::PRECONDITION)]												[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Precondition/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+									[/if]																							[comment CLOSE checks if the if the contract is a Precondition/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::POSTCONDITION)]												[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Postcondition/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
-								[for (c : Contract | dataP.contract)]										[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
+									[/if]																							[comment CLOSE checks if the if the contract is a Postcondition/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
+								[for (c : Contract | dataP.contract)]																[comment OPEN traverse all the contracts in the DataProcessing/]
+									[if (c.contract.type=ContractType::INVARIANT)]													[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																[comment CLOSE checks if the if the contract is a Invariant/]
-								[/for]																	[comment CLOSE traverse all the contracts in the DataProcessing/]
+									[/if]																							[comment CLOSE checks if the if the contract is a Invariant/]
+								[/for]																								[comment CLOSE traverse all the contracts in the DataProcessing/]
 							[/if]
 						[/for]
 						[for (dataP : DataProcessing | libJ.workflow.dataprocessing)]
@@ -545,8 +516,8 @@ def generateWorkflow():
 				[/if]
 			[/let]
 		[/if]
-	[/if]																		[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
-[/for]																			[comment CLOSE traverse all the DataProcessings/]
+	[/if]																															[comment CLOSE checks if the DataProcessing is the first (no input link, an output link)/]
+[/for]																																[comment CLOSE traverse all the DataProcessings/]
 set_logger("contracts")
 generateWorkflow()
 [/file]
@@ -606,13 +577,11 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is a previous DataProcessing/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-	[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+	[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]')
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
-				[/let]
 			[/if]
 		[/for]
 
@@ -620,13 +589,11 @@ generateWorkflow()
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]')
-						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-							[let lf : LocalFile = st.oclAsType(LocalFile)]
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
-							[/let]
 						[/if]
 					[/for]
 
@@ -636,29 +603,25 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
-				[/let]
 			[/if]
 		[/for]
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
 [/if]																			[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | d.outputPort)]										[comment OPEN read all the output datasets and store them/]
-	[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+	[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+		[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	if os.path.exists('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]'):		#If the output DataDictionary exists, we store it
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-		[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-			[let lf : LocalFile = st.oclAsType(LocalFile)]
+		[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	if os.path.exists('data/[dc.fileName/]'):
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-			[/let]
 		[/if]
 	[/for]
 
@@ -704,13 +667,11 @@ def generateWorkflow():
 				[if (dpd.oclIsKindOf(Library::Transformation))]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
 						[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-							[for (st : Storage | aWorkflow.environment.storage)]
-								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+							[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+								[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-									[let lf : LocalFile = st.oclAsType(LocalFile)]
+								[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-									[/let]
 								[/if]
 							[/for]
 
@@ -723,13 +684,11 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
-											[/let]
 										[/if]
 									[/for]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
@@ -740,13 +699,11 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
-											[/let]
 										[/if]
 									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
@@ -783,13 +740,11 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_in.fileName/]'
-											[/let]
 										[/if]
 									[/for]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
@@ -800,13 +755,11 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]
 							[if (arg.oclIsKindOf(DataDictionary))]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]
-									[for (st : Storage | aWorkflow.environment.storage)]
-										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+									[for (st : Storage | aWorkflow.environment.storage)]						[comment OPEN traverse all the storage directories/]
+										[if (aWorkflow.environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
-										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
+										[elseif (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='data/[dd_out.fileName/]'
-											[/let]
 										[/if]
 									[/for]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
@@ -870,13 +823,11 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (d.incoming <> null)]														[comment OPEN checks if there is an incoming link/]
 	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]
-		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[d.inputPort->first().fileName/]', sep='[d.inputPort->first().columnDelimiter/]', index_col=0)
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[d.inputPort->first().fileName/]', sep = '[d.inputPort->first().columnDelimiter/]')
-				[/let]
 			[/if]
 		[/for]							
 
@@ -884,13 +835,11 @@ generateWorkflow()
 		[for (dc : DataDictionary | d.inputPort)]								[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]		[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName = dc_out.fileName)]									[comment OPEN checks that both datasets are the same/]
-					[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+					[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+						[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc_out.fileName/]', sep='[dc_out.columnDelimiter/]', index_col=0)
-						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-							[let lf : LocalFile = st.oclAsType(LocalFile)]
+						[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc_out.fileName/]', sep = '[dc_out.columnDelimiter/]')
-							[/let]
 						[/if]
 					[/for]
 				[/if]															[comment CLOSE checks that both datasets are the same/]
@@ -899,15 +848,13 @@ generateWorkflow()
 	[/if]
 [else]																			[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | d.inputPort)]									[comment OPEN read all the input datasets and store them/]
-		[for (st : Storage | d.eContainer(Workflow).environment.storage)]
-			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]
+		[for (st : Storage | d.eContainer(Workflow).environment.storage)]		[comment OPEN traverse all the storage directories/]
+			[if (d.eContainer(Workflow).environment.oclIsKindOf(Portable) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[dc.fileName/]')
-			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-				[let lf : LocalFile = st.oclAsType(LocalFile)]
+			[elseif (d.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]	[comment OPEN checks if it is a local file and a local environment/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dc.fileName/]')
-				[/let]
 			[/if]
 		[/for]
 	[/for]																		[comment CLOSE read all the input datasets and store them/]
@@ -948,10 +895,8 @@ data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parame
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-										[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-										[/let]
 									[/if]
 								[/for]
 							[/let]
@@ -979,10 +924,8 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-										[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-										[/let]
 									[/if]
 								[/for]
 							[/let]
@@ -1053,10 +996,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -1107,10 +1048,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -1160,10 +1099,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -1194,10 +1131,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-										[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-										[/let]
 									[/if]
 								[/for]
 							[/let]
@@ -1230,10 +1165,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -1297,10 +1230,8 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 									[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-										[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-										[/let]
 									[/if]
 								[/for]
 							[/let]
@@ -1332,10 +1263,8 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
 										[elseif (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]
-											[let lf : LocalFile = st.oclAsType(LocalFile)]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv('data/[dd_in.out.fileName/]')
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('data/[dd_in.out.fileName/]', sep = '[dd_in.out.columnDelimiter/]', index_col=0)
-											[/let]
 										[/if]
 									[/for]
 								[/let]
@@ -1362,7 +1291,7 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 [generateLocal()/]
 [/if]
 
-[comment]#[file ('RemoteStorage.txt', false, 'UTF-8')][/comment]
+[comment][file ('RemoteStorage.txt', false, 'UTF-8')][/comment]
 [comment]	[for (st : Storage | aWorkflow.environment.storage)][/comment]
 [comment]		[if (st.oclIsKindOf(RemoteFile))][/comment]
 [comment]			[let rf : RemoteFile = st.oclAsType(RemoteFile)][/comment]
