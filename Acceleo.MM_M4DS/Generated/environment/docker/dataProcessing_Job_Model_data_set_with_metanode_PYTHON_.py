@@ -10,56 +10,70 @@ def generateWorkflow():
 	#--------------------------------------Input data dictionaries--------------------------------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/missing_input_dataDictionary.csv'
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/missing_input_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/missing_input_dataDictionary.csv'
 
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_sep=','
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_sep=','
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_sep=','
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_sep=','
 	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
+	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 
 	rowFilterRange_init_span__input_dataDictionary_sep=','
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
 
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_sep=','
 	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
 	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
+	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
 
 	mapping_TERRITORY__input_dataDictionary_sep=','
+	mapping_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
 	mapping_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
 	mapping_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
 
 	mapping_Instate__input_dataDictionary_sep=','
 	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
 	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
+	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
 
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_sep=','
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
 
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_sep=','
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
 
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_sep=','
+	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 
 	binner_TERRITORY__input_dataDictionary_sep=','
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
+	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 
 	binner_satscore__input_dataDictionary_sep=','
+	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 
@@ -67,43 +81,57 @@ def generateWorkflow():
 	#--------------------------------------Output data dictionaries--------------------------------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_sep=','
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_sep=','
 	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
+	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_sep=','
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_sep=','
 	rowFilterRange_init_span__output_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
 	rowFilterRange_init_span__output_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
+	rowFilterRange_init_span__output_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
 	rowFilterRange_init_span__output_dataDictionary_sep=','
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_sep=','
 	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
 	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
+	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
 	mapping_TERRITORY__output_dataDictionary_sep=','
+	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
 	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
 	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
 	mapping_Instate__output_dataDictionary_sep=','
 	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
 	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
+	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_sep=','
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_sep=','
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_sep=','
+	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_TERRITORY__output_dataDictionary_sep=','
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
+	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_satscore__output_dataDictionary_sep=','
+	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
 	binner_avg_income__output_dataDictionary_sep=','
@@ -160,7 +188,7 @@ def generateWorkflow():
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary)	
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_csv(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary, sep=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_sep, index_col=0)
-	
+		
 	missing_values_imputeByDerivedValue_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df, field='sex', 
 									missing_values=missing_values_imputeByDerivedValue_POST_valueRange,
@@ -266,7 +294,7 @@ def generateWorkflow():
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_transformed
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df.to_csv(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary)	
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_csv(imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary, sep=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_sep, index_col=0)
-	
+		
 	missing_values_imputeByFixValue_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df, field='ACADEMIC_INTEREST_2', 
 									missing_values=missing_values_imputeByFixValue_POST_valueRange,
@@ -352,7 +380,7 @@ def generateWorkflow():
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_df=imputeMissingByMean_avg_income_distance__input_dataDictionary_transformed
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_df.to_csv(imputeMissingByMean_avg_income_distance__output_dataDictionary)	
 	imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_csv(imputeMissingByMean_avg_income_distance__output_dataDictionary, sep=imputeMissingByMean_avg_income_distance__output_dataDictionary_sep, index_col=0)
-	
+		
 	missing_values_imputeByNumericOp_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByMean_avg_income_distance__output_dataDictionary_df, field='avg_income', 
 									missing_values=missing_values_imputeByNumericOp_POST_valueRange,
@@ -419,7 +447,7 @@ def generateWorkflow():
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_transformed
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df.to_csv(imputeMissingByLinearInterpolation_satscore__output_dataDictionary)	
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_csv(imputeMissingByLinearInterpolation_satscore__output_dataDictionary, sep=imputeMissingByLinearInterpolation_satscore__output_dataDictionary_sep, index_col=0)
-	
+		
 	missing_values_imputeByNumericOp_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df, field='satscore', 
 									missing_values=missing_values_imputeByNumericOp_POST_valueRange,
@@ -467,7 +495,7 @@ def generateWorkflow():
 	rowFilterRange_init_span__output_dataDictionary_df=rowFilterRange_init_span__input_dataDictionary_transformed
 	rowFilterRange_init_span__output_dataDictionary_df.to_csv(rowFilterRange_init_span__output_dataDictionary)	
 	rowFilterRange_init_span__output_dataDictionary_df=pd.read_csv(rowFilterRange_init_span__output_dataDictionary, sep=rowFilterRange_init_span__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_fix_value_range(value=-216, data_dictionary=rowFilterRange_init_span__output_dataDictionary_df, belong_op=Belong(1), field='init_span',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange VALIDATED')
@@ -495,7 +523,7 @@ def generateWorkflow():
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_transformed
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df.to_csv(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary)	
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df=pd.read_csv(columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary, sep=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_sep, index_col=0)
-	
+		
 	field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_POST_field_range,
 								data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df,
@@ -532,7 +560,7 @@ def generateWorkflow():
 	
 	mapping_TERRITORY__output_dataDictionary_df.to_csv(mapping_TERRITORY__output_dataDictionary)	
 	mapping_TERRITORY__output_dataDictionary_df=pd.read_csv(mapping_TERRITORY__output_dataDictionary, sep=mapping_TERRITORY__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(TERRITORY)_POST_valueRange VALIDATED')
@@ -594,7 +622,7 @@ def generateWorkflow():
 	
 	mapping_Instate__output_dataDictionary_df.to_csv(mapping_Instate__output_dataDictionary)	
 	mapping_Instate__output_dataDictionary_df=pd.read_csv(mapping_Instate__output_dataDictionary, sep=mapping_Instate__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__output_dataDictionary_df, belong_op=Belong(1), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION mapping(Instate)_POST_valueRange VALIDATED')
@@ -644,7 +672,7 @@ def generateWorkflow():
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_df.to_csv(stringToNumber_TERRITORY_Instate__output_dataDictionary)	
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_csv(stringToNumber_TERRITORY_Instate__output_dataDictionary, sep=stringToNumber_TERRITORY_Instate__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
 											belong_op_out=Belong(1), field_in='TERRITORY', field_out='TERRITORY'):
@@ -707,7 +735,7 @@ def generateWorkflow():
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_transformed
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df.to_csv(imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary)	
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_csv(imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary, sep=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_outliers(belong_op=Belong(1), data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df, field='avg_income', 
 									quant_abs=None, quant_rel=None, quant_op=None):
 		print('POSTCONDITION imputeOutlierByClosest(avg_income)_POST_valueRange VALIDATED')
@@ -889,7 +917,7 @@ def generateWorkflow():
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_csv(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_csv(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary, sep=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='TOTAL_CONTACTS_binned'):
 		print('POSTCONDITION binner(TOTAL_CONTACTS)_POST_valueRange VALIDATED')
@@ -1094,7 +1122,7 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
 	binner_TERRITORY__output_dataDictionary_df.to_csv(binner_TERRITORY__output_dataDictionary)	
 	binner_TERRITORY__output_dataDictionary_df=pd.read_csv(binner_TERRITORY__output_dataDictionary, sep=binner_TERRITORY__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='TERRITORY_binned'):
 		print('POSTCONDITION binner(TERRITORY)_POST_valueRange VALIDATED')
@@ -1224,7 +1252,7 @@ def generateWorkflow():
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
 	binner_satscore__output_dataDictionary_df.to_csv(binner_satscore__output_dataDictionary)	
 	binner_satscore__output_dataDictionary_df=pd.read_csv(binner_satscore__output_dataDictionary, sep=binner_satscore__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='satscore_binned'):
 		print('POSTCONDITION binner(satscore)_POST_valueRange VALIDATED')
@@ -1331,7 +1359,7 @@ def generateWorkflow():
 	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
 	binner_avg_income__output_dataDictionary_df.to_csv(binner_avg_income__output_dataDictionary)	
 	binner_avg_income__output_dataDictionary_df=pd.read_csv(binner_avg_income__output_dataDictionary, sep=binner_avg_income__output_dataDictionary_sep, index_col=0)
-	
+		
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='avg_income_binned'):
 		print('POSTCONDITION binner(avg_income)_POST_valueRange VALIDATED')
