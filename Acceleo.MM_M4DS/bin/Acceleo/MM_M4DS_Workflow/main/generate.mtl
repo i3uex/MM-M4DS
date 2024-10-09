@@ -41,11 +41,19 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]											[comment OPEN assigns the variable to be of type Transformation/]
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | d.inputPort)]																			[comment OPEN read all the input datasets and store them/]
-							[for (st : Storage | aWorkflow.environment.storage)]															[comment OPEN traverse all the storage directories/]
-								[if (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]								[comment OPEN checks if it is a local file and a container/]
+							[if (aWorkflow.environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
+								[if (aWorkflow.environment.storage->first().oclIsKindOf(LocalFile))]	
+									[let lf : LocalFile = aWorkflow.environment.storage->first().oclAsType(LocalFile)]
+										[if (lf.type=FileType::CSV)]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]', sep = '[dc.columnDelimiter/]')
-								[/if]																										[comment CLOSE checks if it is a local file and a container or a local environment/]
-							[/for]																											[comment CLOSE traverse all the storage directories/]
+										[elseif (lf.type=FileType::EXCEL or lf.type=FileType::FEATHER or lf.type=FileType::JSON or lf.type=FileType::PARQUET)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_[lf.type.toString().toLowerCase()/]('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]')
+										[elseif (lf.type=FileType::HDF5)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_hdf('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dc.fileName/]'[if (lf.hdf5_key<>'')], key=[lf.hdf5_key/][/if])
+										[/if]
+									[/let]
+								[/if]
+							[/if]																											[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																												[comment CLOSE read all the input datasets and store them/]
 						[for (c : Contract | d.contract)]																					[comment OPEN traverse all the contracts in the DataProcessing/]
@@ -71,13 +79,11 @@ def generateWorkflow():
 						[for (arg : Argument | d._in)]																						[comment OPEN traverse all the input arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]																			[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]												[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]													[comment OPEN traverse all the storage directories/]
-										[if (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]						[comment OPEN checks if it is a local file and a container/]
+									[if (aWorkflow.environment.oclIsKindOf(Local) and aWorkflow.environment.storage->first().oclIsKindOf(LocalFile))]						[comment OPEN checks if it is a local file and a container/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_in.fileName/]'
-										[/if]																								[comment CLOSE checks if it is a local file and a container or a local environmenr/]
-									[/for]																									[comment CLOSE traverse all the storage directories/]
-
+									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environmenr/]
 	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_in.columnDelimiter/]'
+
 								[/let]																										[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																											[comment CLOSE checks if the argument is a DataDictionary/]
 						[/for]																												[comment CLOSE traverse all the input arguments/]
@@ -85,12 +91,11 @@ def generateWorkflow():
 						[for (arg : Argument | d.out)]																						[comment OPEN traverse all the output arguments/]
 							[if (arg.oclIsKindOf(DataDictionary))]																			[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]												[comment OPEN assigns the variables to be a DataDictionary/]
-									[for (st : Storage | aWorkflow.environment.storage)]													[comment OPEN traverse all the storage directories/]
-										[if (aWorkflow.environment.oclIsKindOf(Local) and st.oclIsKindOf(LocalFile))]						[comment OPEN checks if it is a local file and a container/]
+									[if (aWorkflow.environment.oclIsKindOf(Local) and aWorkflow.environment.storage->first().oclIsKindOf(LocalFile))]						[comment OPEN checks if it is a local file and a container/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[dd_out.fileName/]'
-										[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
-									[/for]																									[comment CLOSE traverse all the storage directories/]
+									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]_sep='[dd_out.columnDelimiter/]'
+
 								[/let]																										[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																											[comment CLOSE checks if the argument is a DataDictionary/]
 						[/for]																												[comment CLOSE traverse all the output arguments/]
@@ -218,8 +223,21 @@ generateWorkflow()
 	[/if]																			[comment CLOSE checks whether the operation is split or not/]
 [else]																				[comment OPEN checks if it is the first data processing/]
 	[for (dc : DataDictionary | dw.inputPort)]										[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep = [dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+		[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
+			[if (d_or.eContainer(Workflow).environment.storage->first().oclIsKindOf(LocalFile))]	
+				[let lf : LocalFile = d_or.eContainer(Workflow).environment.storage->first().oclAsType(LocalFile)]
+					[if (lf.type=FileType::CSV)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dc.name.replaceAll('[(),\\s]+', '_')/], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep)
+					[elseif (lf.type=FileType::EXCEL or lf.type=FileType::FEATHER or lf.type=FileType::JSON or lf.type=FileType::PARQUET)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_[lf.type.toString().toLowerCase()/]([dc.name.replaceAll('[(),\\s]+', '_')/])
+					[elseif (lf.type=FileType::HDF5)]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_hdf([dc.name.replaceAll('[(),\\s]+', '_')/][if (lf.hdf5_key<>'')], key=[lf.hdf5_key/][/if])
+					[/if]
+				[/let]
+			[/if]
+		[/if]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_csv([dc.name.replaceAll('[(),\\s]+', '_')/])
+
 	[/for]																			[comment CLOSE read all the input datasets and store them/]
 [/if]																				[comment CLOSE checks whether it is the first data processing or not/]
 [for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
