@@ -3,6 +3,9 @@ import numpy as np
 import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
+import json
+import h5py
+import pyarrow
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------

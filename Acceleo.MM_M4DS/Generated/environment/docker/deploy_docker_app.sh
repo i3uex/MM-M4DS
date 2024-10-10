@@ -24,9 +24,9 @@ docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp -R /home/carlos/Escritorio/datasets/* "$(pwd)/data/"
-cp -R /home/carlos/Escritorio/datasetsTest/* "$(pwd)/data/"
 cp -R /home/carlos/Escritorio/datasetsNo/* "$(pwd)/data/"
+cp -R /home/carlos/Escritorio/datasetsTest/* "$(pwd)/data/"
+cp -R /home/carlos/Escritorio/datasets/* "$(pwd)/data/"
 
 docker run -it --rm --name wf_validation_python --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 
