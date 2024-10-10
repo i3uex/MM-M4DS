@@ -554,8 +554,67 @@ generateWorkflow()
 	#-----------------New DataProcessing-----------------
 [if (dw.incoming <> null)]															[comment OPEN checks if there is a previous DataProcessing/]
 	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]				[comment OPEN checks that the operation is not split/]
-	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)
+[comment]	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_csv([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/], sep=[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_sep)[/comment]
+		[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
+			[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
+				[if (d_or.eContainer(Workflow).environment.storage->first().oclIsKindOf(LocalFile))]	
+					[let lf : LocalFile = d_or.eContainer(Workflow).environment.storage->first().oclAsType(LocalFile)]
+	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
+						[if (lf.type=FileType::CSV or lf.type=FileType::EXCEL or lf.type=FileType::PARQUET or lf.type=FileType::FEATHER)]
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_[lf.type.toString().toLowerCase()/]([dc.name.replaceAll('[(),\\s]+', '_')/][if (lf.type=FileType::CSV)], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep[/if])
+						[elseif lf.type=FileType::JSON]
+		with open([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+	    	data = json.load(f)
+		try:
+	    	[dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.DataFrame(data)
+		except ValueError:
+		    [dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.json_normalize(data)
+						[elseif (lf.type=FileType::HDF5)]
+							[if (lf.hdf5_key<>'')]
+		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+			data = f['['/][lf.hdf5_key/][']'/]['['/]:[']'/]
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.DataFrame(data)
+							[elseif (lf.hdf5_key='')]
+		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+		    first_key = list(f.keys())['['/]0[']'/]
+    	data = f['['/]first_key[']'/]['['/]:[']'/]
+							[/if]
+						[/if]
+					[/let]
+				[/if]
+			[/if]
+		[/for]
 
+		[for (dc : DataDictionary | dw.outputPort)]											[comment OPEN read all the output datasets and store them/]
+			[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
+				[if (d_or.eContainer(Workflow).environment.storage->first().oclIsKindOf(LocalFile))]	
+					[let lf : LocalFile = d_or.eContainer(Workflow).environment.storage->first().oclAsType(LocalFile)]
+	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
+						[if (lf.type=FileType::CSV or lf.type=FileType::EXCEL or lf.type=FileType::PARQUET or lf.type=FileType::FEATHER)]
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_[lf.type.toString().toLowerCase()/]([dc.name.replaceAll('[(),\\s]+', '_')/][if (lf.type=FileType::CSV)], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep[/if])
+						[elseif lf.type=FileType::JSON]
+		with open([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+	    	data = json.load(f)
+		try:
+	    	[dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.DataFrame(data)
+		except ValueError:
+		    [dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.json_normalize(data)
+						[elseif (lf.type=FileType::HDF5)]
+							[if (lf.hdf5_key<>'')]
+		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+			data = f['['/][lf.hdf5_key/][']'/]['['/]:[']'/]
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.DataFrame(data)
+							[elseif (lf.hdf5_key='')]
+		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
+		    first_key = list(f.keys())['['/]0[']'/]
+    	data = f['['/]first_key[']'/]['['/]:[']'/]
+							[/if]
+						[/if]
+					[/let]
+				[/if]
+			[/if]
+			
+		[/for]
 	[else]																			[comment OPEN checks if the operation is split/]
 		[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]			[comment OPEN read the previous DataProcessing output datasets/]
@@ -596,37 +655,37 @@ generateWorkflow()
 		[/if]
 
 	[/for]																			[comment CLOSE read all the input datasets and store them/]
-[/if]																				[comment CLOSE checks if there is a previous DataProcessingor not/]
-[for (dc : DataDictionary | dw.outputPort)]											[comment OPEN read all the output datasets and store them/]
-	[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
-		[if (d_or.eContainer(Workflow).environment.storage->first().oclIsKindOf(LocalFile))]	
-			[let lf : LocalFile = d_or.eContainer(Workflow).environment.storage->first().oclAsType(LocalFile)]
+	[for (dc : DataDictionary | dw.outputPort)]											[comment OPEN read all the output datasets and store them/]
+		[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]																	[comment OPEN checks if it is a local file and a container/]
+			[if (d_or.eContainer(Workflow).environment.storage->first().oclIsKindOf(LocalFile))]	
+				[let lf : LocalFile = d_or.eContainer(Workflow).environment.storage->first().oclAsType(LocalFile)]
 	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
-				[if (lf.type=FileType::CSV or lf.type=FileType::EXCEL or lf.type=FileType::PARQUET or lf.type=FileType::FEATHER)]
+					[if (lf.type=FileType::CSV or lf.type=FileType::EXCEL or lf.type=FileType::PARQUET or lf.type=FileType::FEATHER)]
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_[lf.type.toString().toLowerCase()/]([dc.name.replaceAll('[(),\\s]+', '_')/][if (lf.type=FileType::CSV)], sep=[dc.name.replaceAll('[(),\\s]+', '_')/]_sep[/if])
-				[elseif lf.type=FileType::JSON]
+					[elseif lf.type=FileType::JSON]
 		with open([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
 	    	data = json.load(f)
 		try:
 	    	[dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.DataFrame(data)
 		except ValueError:
 		    [dc.name.replaceAll('[(),\\s]+', '_')/]_df = pd.json_normalize(data)
-				[elseif (lf.type=FileType::HDF5)]
-					[if (lf.hdf5_key<>'')]
+					[elseif (lf.type=FileType::HDF5)]
+						[if (lf.hdf5_key<>'')]
 		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
 			data = f['['/][lf.hdf5_key/][']'/]['['/]:[']'/]
 		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.DataFrame(data)
-					[elseif (lf.hdf5_key='')]
+						[elseif (lf.hdf5_key='')]
 		with h5py.File([dc.name.replaceAll('[(),\\s]+', '_')/], 'r') as f:
 		    first_key = list(f.keys())['['/]0[']'/]
     	data = f['['/]first_key[']'/]['['/]:[']'/]
+						[/if]
 					[/if]
-				[/if]
-			[/let]
+				[/let]
+			[/if]
 		[/if]
-	[/if]
-	
-[/for]																				[comment CLOSE read all the output datasets and store them/]
+			
+	[/for]
+[/if]																				[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
 	[if (c.contract.type=ContractType::PRECONDITION)]								[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d_or)/]
