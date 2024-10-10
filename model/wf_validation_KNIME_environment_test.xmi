@@ -4,9 +4,10 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:Contract="https://www.example.org/contract"
+    xmlns:Environment="https://www.example.org/environment"
     xmlns:Library="http://www.example.org/Library"
     xmlns:Workflow="https://www.example.org/workflow"
-    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
+    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="Model data set with metanode (KNIME)">
   <dataprocessing
       outgoing="//@link.0"
@@ -332,7 +333,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="missing_input_dataDictionary.csv"
         name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary"
         out="//@dataprocessing.0/@outputPort.0">
       <datafield
@@ -363,7 +364,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv"
+        fileName="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv"
         name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary"
         in="//@dataprocessing.0/@inputPort.0">
       <datafield
@@ -619,7 +620,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="missing_input_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary"
         out="//@dataprocessing.1/@outputPort.0">
       <datafield
@@ -642,7 +643,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
+        fileName="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary"
         in="//@dataprocessing.1/@inputPort.0">
       <datafield
@@ -3794,4 +3795,23 @@
   <link source="//@dataprocessing.12"
       target="//@dataprocessing.13"
       name="binner(satscore)-binner(avg_income)"/>
+  <environment
+      xsi:type="Environment:Local"
+      name="wf_validation_python"
+      path="./wf_validation_python"
+      containerName="docker_python"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
+    <storage
+        xsi:type="Environment:LocalFile"
+        csv_sep=","
+        path="/home/carlos/Escritorio/datasets"/>
+    <storage
+        xsi:type="Environment:LocalFile"
+        csv_sep=","
+        path="/home/carlos/Escritorio/datasetsTest"/>
+    <developmentTool
+        version="4.27"
+        tool="KNIME"/>
+  </environment>
 </Workflow:Workflow>

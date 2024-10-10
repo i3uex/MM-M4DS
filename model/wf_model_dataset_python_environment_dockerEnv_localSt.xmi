@@ -185,22 +185,30 @@
     </outputPort>
   </dataprocessing>
   <environment
-      xsi:type="Environment:Portable"
+      xsi:type="Environment:Local"
       name="wf_validation_python"
-      path="./wf_validation_python">
+      path="./wf_validation_python"
+      containerName="docker_python"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
     <storage
         xsi:type="Environment:LocalFile"
-        path="/home/carlos/Escritorio/datasets"/>
+        csv_sep=","
+        hdf5_key=""
+        type="EXCEL"
+        path="/home/carlos/Escritorio/datasetsNo"/>
     <storage
         xsi:type="Environment:LocalFile"
+        csv_sep=","
+        type="JSON"
         path="/home/carlos/Escritorio/datasetsTest"/>
-    <container
-        xsi:type="Environment:Docker"
-        name="docker_python"
-        imageName="ubuntu-22.04"
-        imageTag="latest">
-      <developmentTool
-          version="3.11"/>
-    </container>
+    <storage
+        xsi:type="Environment:LocalFile"
+        csv_sep=","
+        hdf5_key="paco"
+        type="HDF5"
+        path="/home/carlos/Escritorio/datasets"/>
+    <developmentTool
+        version="3.11"/>
   </environment>
 </Workflow:Workflow>
