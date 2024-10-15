@@ -18,6 +18,9 @@ COPY ./dataProcessing_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validatio
 COPY ./contracts_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validation_python/workflows/
 COPY ./transformations_Job_Model_data_set_with_metanode_PYTHON_.py ./wf_validation_python/workflows/
 
+COPY ./fileFormatting.py ./wf_validation_python/workflows/
+
+
 COPY workflow_scripts.sh ./wf_validation_python/workflow_scripts.sh
 
 RUN chmod +x ./wf_validation_python/workflow_scripts.sh

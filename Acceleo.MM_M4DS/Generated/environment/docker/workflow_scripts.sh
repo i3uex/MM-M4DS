@@ -2,6 +2,9 @@ CONTRACTS_SCRIPT="workflows.contracts_Job_Model_data_set_with_metanode_PYTHON_"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_Model_data_set_with_metanode_PYTHON_"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_Model_data_set_with_metanode_PYTHON_"
 
+python3 -m workflows.fileFormatting
+
+
 while true; do
     echo -e "\nWhat would you like to do?"
     echo "    1. Execute the Workflow validation contracts"
