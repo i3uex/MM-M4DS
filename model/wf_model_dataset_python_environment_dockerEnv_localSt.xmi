@@ -188,26 +188,19 @@
       xsi:type="Environment:Local"
       name="wf_validation_python"
       path="./wf_validation_python"
-      containerName="docker_python"
+      containerName="docker_workflow"
       imageName="ubuntu-22.04"
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFile"
-        csv_sep=","
-        hdf5_key=""
-        type="EXCEL"
-        path="/home/carlos/Escritorio/datasetsNo"/>
+        sourceName="missing_input_dataDictionary.csv"
+        folderPath="/home/carlos/Escritorio/datasets"
+        csv_sep=","/>
     <storage
         xsi:type="Environment:LocalFile"
-        csv_sep=","
-        type="JSON"
-        path="/home/carlos/Escritorio/datasetsTest"/>
-    <storage
-        xsi:type="Environment:LocalFile"
-        csv_sep=","
-        hdf5_key="paco"
-        type="HDF5"
-        path="/home/carlos/Escritorio/datasets"/>
+        sourceName="missing_output_dataDictionary.csv"
+        folderPath="/home/carlos/Escritorio/datasetsTest"
+        csv_sep=","/>
     <developmentTool
         version="3.11"/>
   </environment>

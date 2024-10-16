@@ -3795,23 +3795,4 @@
   <link source="//@dataprocessing.12"
       target="//@dataprocessing.13"
       name="binner(satscore)-binner(avg_income)"/>
-  <environment
-      xsi:type="Environment:Local"
-      name="wf_validation_python"
-      path="./wf_validation_python"
-      containerName="docker_python"
-      imageName="ubuntu-22.04"
-      imageTag="latest">
-    <storage
-        xsi:type="Environment:LocalFile"
-        csv_sep=","
-        path="/home/carlos/Escritorio/datasets"/>
-    <storage
-        xsi:type="Environment:LocalFile"
-        csv_sep=","
-        path="/home/carlos/Escritorio/datasetsTest"/>
-    <developmentTool
-        version="4.27"
-        tool="KNIME"/>
-  </environment>
 </Workflow:Workflow>
