@@ -1,5 +1,4 @@
 FROM python:3.11-slim
-#FROM KNIME:4.27
 
 WORKDIR ./wf_validation_python
 
@@ -12,12 +11,17 @@ RUN apt-get update && \
 RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-m2python.git .
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install h5py
+RUN pip install pyarrow
 
 ENV PYTHONPATH=./wf_validation_python
 
 COPY ./dataProcessing_Job_Model_data_set_with_metanode_KNIME_.py ./wf_validation_python/workflows/
 COPY ./contracts_Job_Model_data_set_with_metanode_KNIME_.py ./wf_validation_python/workflows/
 COPY ./transformations_Job_Model_data_set_with_metanode_KNIME_.py ./wf_validation_python/workflows/
+
+COPY ./fileFormatting.py ./wf_validation_python/workflows/
+
 
 COPY workflow_scripts.sh ./wf_validation_python/workflow_scripts.sh
 

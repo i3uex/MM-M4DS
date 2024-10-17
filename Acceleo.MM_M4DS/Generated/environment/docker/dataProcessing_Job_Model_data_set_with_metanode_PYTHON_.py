@@ -9,63 +9,35 @@ import pyarrow
 
 def generateWorkflow():
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/missing_input_dataDictionary.csv'
-
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
-
-	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
-
-	mapping_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
-
-	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
-
-	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
-
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
-
-	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
-	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
-	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/missing_input_dataDictionary.parquet'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.parquet'
+	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.parquet'
+	mapping_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet'
+	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.parquet'
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.parquet'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.parquet'
+	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	#--------------------------------------Output data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.csv'
-
-	rowFilterRange_init_span__output_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.csv'
-
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.csv'
-
-	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.csv'
-
-	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.csv'
-
-	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.csv'
-
-	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.csv'
-
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
-	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
-	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
-	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.csv'
-
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
+	rowFilterRange_init_span__output_dataDictionary='/wf_validation_python/data/rowFilter_output_dataDictionary.parquet'
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/columnFilter_output_dataDictionary.parquet'
+	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet'
+	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.parquet'
+	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.parquet'
+	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.parquet'
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -506,10 +478,10 @@ def generateWorkflow():
 	
 	
 	input_values_list_def_INV_condition=['A', 'N']
-	output_values_list_def_INV_condition=[0, 0]
+	output_values_list_def_INV_condition=['0', '0']
 	
 	data_type_input_list_def_INV_condition=[DataType(0), DataType(0)]
-	data_type_output_list_def_INV_condition=[DataType(2), DataType(2)]
+	data_type_output_list_def_INV_condition=[DataType(0), DataType(0)]
 	
 	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_TERRITORY__input_dataDictionary_df,
 											data_dictionary_out=mapping_TERRITORY__output_dataDictionary_df,
@@ -568,10 +540,10 @@ def generateWorkflow():
 	
 	
 	input_values_list_def_INV_condition=['Y', 'N']
-	output_values_list_def_INV_condition=[1, 0]
+	output_values_list_def_INV_condition=['1', '0']
 	
 	data_type_input_list_def_INV_condition=[DataType(0), DataType(0)]
-	data_type_output_list_def_INV_condition=[DataType(2), DataType(2)]
+	data_type_output_list_def_INV_condition=[DataType(0), DataType(0)]
 	
 	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_Instate__input_dataDictionary_df,
 											data_dictionary_out=mapping_Instate__output_dataDictionary_df,
@@ -594,11 +566,11 @@ def generateWorkflow():
 
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=stringToNumber_TERRITORY_Instate__input_dataDictionary_df.copy()
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=data_transformations.transform_cast_type(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed,
-																	data_type_output= DataType(6),
+																	data_type_output= DataType(2),
 																	field='TERRITORY')
 	
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=data_transformations.transform_cast_type(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed,
-																	data_type_output= DataType(6),
+																	data_type_output= DataType(2),
 																	field='Instate')
 	
 	stringToNumber_TERRITORY_Instate__output_dataDictionary_df=stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed
@@ -1164,7 +1136,7 @@ def generateWorkflow():
 	binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1160.0, right_margin=1340.0,
-																  closure_type=Closure(2),
+																  closure_type=Closure(3),
 																  fix_value_output='76-93 Percentile',
 							                                      data_type_output = DataType(0),
 																  field_in = 'satscore',
@@ -1302,7 +1274,7 @@ def generateWorkflow():
 											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
 											left_margin=9.0, right_margin=42830.0,
 											closure_type=Closure(0),
-											fix_value_output='low',
+											fix_value_output='Low',
 											belong_op_in=Belong(0), belong_op_out=Belong(0),
 											data_type_output=DataType(0),
 											field_in='avg_income', field_out='avg_income_binned'):
