@@ -1180,6 +1180,28 @@ RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
+RUN pip install sqlalchemy
+[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
+	[if (not filteredSet->isEmpty())]
+		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
+			[for (type : DBTYPE | types)]
+				[if (type=DBTYPE::MYSQL)]
+RUN pip install mysql.connector
+				[elseif (type=DBTYPE::POSTGRESQL)]
+RUN pip install psycopg2
+				[elseif (type=DBTYPE::SQLSERVER)]
+RUN pip install pyodbc
+				[elseif (type=DBTYPE::ORACLE)]
+RUN pip install cx_Oracle
+				[elseif (type=DBTYPE::MONGODB)]
+RUN pip install pymongo
+				[elseif (type=DBTYPE::DYNAMODB)]
+RUN pip install boto3
+				[/if]
+			[/for]
+		[/let]
+	[/if]
+[/let]
 
 ENV PYTHONPATH=[aWorkflow.environment.path/]
 
@@ -1317,6 +1339,7 @@ import pandas as pd
 import json
 import h5py
 import pyarrow
+from sqlalchemy import create_engine
 
 [for (st : Storage | aWorkflow.environment.storage)]
 	[if (st.oclIsKindOf(LocalFile))]

@@ -13,6 +13,8 @@ RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
+RUN pip install sqlalchemy
+RUN pip install mysql.connector
 
 ENV PYTHONPATH=./wf_validation_python
 
