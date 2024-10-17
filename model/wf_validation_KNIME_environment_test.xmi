@@ -620,7 +620,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary"
         out="//@dataprocessing.1/@outputPort.0">
       <datafield
@@ -884,7 +884,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_input_dataDictionary"
         out="//@dataprocessing.2/@outputPort.0">
       <datafield
@@ -916,7 +916,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv"
+        fileName="imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_output_dataDictionary"
         in="//@dataprocessing.2/@inputPort.0">
       <datafield
@@ -1067,7 +1067,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="imputeMissingByMean(avg_income, distance)_output_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_input_dataDictionary"
         out="//@dataprocessing.3/@outputPort.0">
       <datafield
@@ -1087,7 +1087,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv"
+        fileName="imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_output_dataDictionary"
         in="//@dataprocessing.3/@inputPort.0">
       <datafield
@@ -1184,7 +1184,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.csv"
         name="rowFilterRange(init_span)_input_dataDictionary"
         out="//@dataprocessing.4/@outputPort.0">
       <datafield
@@ -1203,7 +1203,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.2/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        fileName="rowFilter_output_dataDictionary.csv"
         name="rowFilterRange(init_span)_output_dataDictionary"
         in="//@dataprocessing.4/@inputPort.0">
       <datafield
@@ -1294,7 +1294,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        fileName="rowFilter_output_dataDictionary.csv"
         name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataField"
         out="//@dataprocessing.5/@outputPort.0">
       <datafield
@@ -1360,7 +1360,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.3/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        fileName="columnFilter_output_dataDictionary.csv"
         name="data_model_column_cont_filter_out"
         in="//@dataprocessing.5/@inputPort.0">
       <dataDictionaryDefinition
@@ -1509,8 +1509,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0"
-              dataType="Integer">
+              value="0">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1522,8 +1521,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0"
-              dataType="Integer">
+              value="0">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1531,7 +1529,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        fileName="columnFilter_output_dataDictionary.csv"
         name="Mapping(TERRITORY)_input_dataDictionary"
         out="//@dataprocessing.6/@outputPort.0">
       <datafield
@@ -1546,7 +1544,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        fileName="ruleEngine_territory_output_dataDictionary.csv"
         name="Mapping(TERRITORY)_output_dataDictionary"
         in="//@dataprocessing.6/@inputPort.0">
       <datafield
@@ -1703,8 +1701,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="1"
-              dataType="Integer">
+              value="1">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1716,8 +1713,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="0"
-              dataType="Integer">
+              value="0">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -1725,7 +1721,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        fileName="ruleEngine_territory_output_dataDictionary.csv"
         name="mapping(Instate)_input_dataDictionary"
         out="//@dataprocessing.7/@outputPort.0">
       <datafield
@@ -1740,7 +1736,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        fileName="ruleEngine_instate_output_dataDictionary.csv"
         name="mapping(Instate)_output_dataDictionary"
         in="//@dataprocessing.7/@inputPort.0">
       <datafield
@@ -1872,7 +1868,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        fileName="ruleEngine_instate_output_dataDictionary.csv"
         name="stringToNumber(TERRITORY, Instate)_input_dataDictionary"
         out="//@dataprocessing.8/@outputPort.0">
       <datafield
@@ -1895,7 +1891,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        fileName="stringToNumber_output_dataDictionary.csv"
         name="stringToNumber(TERRITORY, Instate)_output_dataDictionary"
         in="//@dataprocessing.8/@inputPort.0">
       <datafield
@@ -2244,7 +2240,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        fileName="stringToNumber_output_dataDictionary.csv"
         name="imputeOutlierByClosest(avg_income, distance, Instate)_input_dataDictionary"
         out="//@dataprocessing.9/@outputPort.0">
       <datafield
@@ -2287,7 +2283,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="numericOutliers_output_dataDictionary.csv"
         name="imputeOutlierByClosest(avg_income, distance, Instate)_output_dataDictionary"
         in="//@dataprocessing.9/@inputPort.0">
       <datafield
@@ -2858,7 +2854,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="numericOutliers_output_dataDictionary.csv"
         name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_input_dataDictionary"
         out="//@dataprocessing.10/@outputPort.0">
       <datafield
@@ -2900,7 +2896,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_output_dataDictionary"
         in="//@dataprocessing.10/@inputPort.0">
       <datafield
@@ -3208,7 +3204,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(TERRITORY)_input_dataDictionary"
         out="//@dataprocessing.11/@outputPort.0">
       <datafield
@@ -3226,7 +3222,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(TERRITORY)_output_dataDictionary"
         in="//@dataprocessing.11/@inputPort.0">
       <datafield
@@ -3483,7 +3479,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(satscore)_input_dataDictionary"
         out="//@dataprocessing.12/@outputPort.0">
       <datafield
@@ -3502,7 +3498,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(satscore)_output_dataDictionary"
         in="//@dataprocessing.12/@inputPort.0">
       <datafield
@@ -3690,7 +3686,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:FixValue"
-              value="low">
+              value="Low">
             <valueFieldDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
@@ -3722,7 +3718,7 @@
       </contract>
     </contract>
     <inputPort
-        fileName="./knime_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(avg_income)_input_dataDictionary"
         out="//@dataprocessing.13/@outputPort.0">
       <datafield
@@ -3741,7 +3737,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="./knime_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(avg_income)_output_dataDictionary"
         in="//@dataprocessing.13/@inputPort.0">
       <datafield
@@ -3795,4 +3791,24 @@
   <link source="//@dataprocessing.12"
       target="//@dataprocessing.13"
       name="binner(satscore)-binner(avg_income)"/>
+  <environment
+      xsi:type="Environment:Local"
+      name="wf_validation_python"
+      path="./wf_validation_python"
+      containerName="docker_python"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
+    <storage
+        xsi:type="Environment:LocalFile"
+        sourceName="missing_input_dataDictionary.csv"
+        folderPath="/home/carlos/Escritorio/datasets"
+        csv_sep=","/>
+    <storage
+        xsi:type="Environment:LocalFile"
+        sourceName="missing_output_dataDictionary.csv"
+        folderPath="/home/carlos/Escritorio/datasetsTest"
+        csv_sep=","/>
+    <developmentTool
+        version="3.11"/>
+  </environment>
 </Workflow:Workflow>

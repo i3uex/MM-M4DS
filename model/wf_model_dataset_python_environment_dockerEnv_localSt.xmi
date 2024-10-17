@@ -188,7 +188,7 @@
       xsi:type="Environment:Local"
       name="wf_validation_python"
       path="./wf_validation_python"
-      containerName="docker_workflow"
+      containerName="docker_python"
       imageName="ubuntu-22.04"
       imageTag="latest">
     <storage
