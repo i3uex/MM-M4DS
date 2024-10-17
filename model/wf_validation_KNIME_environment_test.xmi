@@ -3808,6 +3808,14 @@
         sourceName="missing_output_dataDictionary.csv"
         folderPath="/home/carlos/Escritorio/datasetsTest"
         csv_sep=","/>
+    <storage
+        xsi:type="Environment:Database"
+        sourceName="test_storage"
+        host="localhost"
+        port="3306">
+      <table
+          tableName="missing_input_dataDictionary"/>
+    </storage>
     <developmentTool
         version="3.11"/>
   </environment>
