@@ -12,5 +12,3 @@ engine = create_engine('mysql+mysqlconnector://root:password@localhost/test_stor
 test_storage_missing_output_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
 test_storage_missing_output_dataDictionary.to_parquet('/wf_validation_python/data/missing_output_dataDictionary.parquet')
 
-
-

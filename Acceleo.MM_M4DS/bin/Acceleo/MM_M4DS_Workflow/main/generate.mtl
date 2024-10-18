@@ -1354,8 +1354,10 @@ import pyodbc
 import cx_Oracle
 				[elseif (type=DBTYPE::MONGODB)]
 import pymongo
+from pandas import json_normalize
 				[elseif (type=DBTYPE::DYNAMODB)]
 import boto3
+from pandas import json_normalize
 				[/if]
 			[/for]
 		[/let]
@@ -1390,14 +1392,14 @@ import boto3
 	[elseif (st.oclIsKindOf(Database))]
 		[let db : Database = st.oclAsType(Database)]
 			[if (db.type=DBTYPE::MYSQL)]
-				[if (not db.auth->isEmpty() and db.auth.oclIsKindOf(Credentials))]
+				[if (db.auth.oclIsKindOf(Credentials))]
 					[let cr : Credentials = db.auth.oclAsType(Credentials)]
 engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.host/]/[db.sourceName/]')
 					[/let]
-				[elseif (not db.auth->isEmpty() and db.auth.oclIsKindOf(OAuth2))]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
 					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
 					[/let]
-				[elseif (not db.auth->isEmpty() and db.auth.oclIsKindOf(SSL))]
+				[elseif (db.auth.oclIsKindOf(SSL))]
 					[let ssl : SSL = db.auth.oclAsType(SSL)]
 					[/let]
 				[/if]
@@ -1406,8 +1408,97 @@ engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.h
 [db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
 
 				[/for]
+			[elseif (db.type=DBTYPE::POSTGRESQL)]
+				[if (db.auth.oclIsKindOf(Credentials))]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+engine = create_engine('postgresql+psycopg2://[cr.username/]:[cr.passwd/]@[db.host/]/[db.sourceName/]')
+					[/let]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+				[/if]
+				[for (tab : Table | db.table)]
+[db.sourceName/]_[tab.tableName/] = pd.read_sql('SELECT * FROM [tab.tableName/];', engine)
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
 
+				[/for]
+			[elseif (db.type=DBTYPE::SQLSERVER)]
+				[if (db.auth.oclIsKindOf(Credentials))]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+engine = create_engine('mssql+pyodbc://[cr.username/]:[cr.passwd/]@[db.host/]/[db.sourceName/]?driver=ODBC+Driver+17+for+SQL+Server')
+					[/let]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+				[/if]
+				[for (tab : Table | db.table)]
+[db.sourceName/]_[tab.tableName/] = pd.read_sql('SELECT * FROM [tab.tableName/];', engine)
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
 
+				[/for]
+			[elseif (db.type=DBTYPE::ORACLE)]
+				[if (db.auth.oclIsKindOf(Credentials))]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+engine = create_engine('oracle+cx_oracle://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/?service_name=[db.sourceName/]')
+					[/let]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+				[/if]
+				[for (tab : Table | db.table)]
+[db.sourceName/]_[tab.tableName/] = pd.read_sql('SELECT * FROM [tab.tableName/];', engine)
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
+
+				[/for]
+			[elseif (db.type=DBTYPE::MONGODB)]
+				[if (db.auth.oclIsKindOf(Credentials))]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+client = pymongo.MongoClient("mongodb://[db.host/]:[db.port/]/")
+					[/let]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+[db.sourceName/]_db = client['['/]"[db.sourceName/]"[']'/]
+				[/if]
+				[for (tab : Table | db.table)]
+[tab.tableName/]_collection = [db.sourceName/]_db['['/]"[tab.tableName/]"[']'/]
+[tab.tableName/]_data = [tab.tableName/]_collection.find()
+[db.sourceName/]_[tab.tableName/] = pd.DataFrame(json_normalize([tab.tableName/]_data))
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
+
+				[/for]
+			[elseif (db.type=DBTYPE::DYNAMODB)]
+				[if (db.auth.oclIsKindOf(Credentials))]
+[db.sourceName/]_dynamodb = boto3.resource('[db.sourceName/]', region_name='your-region')
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+				[/if]
+				[for (tab : Table | db.table)]
+[db.sourceName/]_[tab.tableName/]_table = dynamodb.Table('[tab.tableName/]')
+[db.sourceName/]_[tab.tableName/]_response = [db.sourceName/]_[tab.tableName/]_table.scan()
+[db.sourceName/]_[tab.tableName/]_data = response['['/]'Items'[']'/]
+[db.sourceName/]_[tab.tableName/] = pd.DataFrame(json_normalize([db.sourceName/]_[tab.tableName/]_data))
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
+
+				[/for]
 			[/if]
 		[/let]
 	[/if]
