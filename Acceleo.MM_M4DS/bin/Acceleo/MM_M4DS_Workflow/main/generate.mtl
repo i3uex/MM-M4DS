@@ -1180,13 +1180,13 @@ RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
-RUN pip install sqlalchemy
 [let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
 	[if (not filteredSet->isEmpty())]
+RUN pip install sqlalchemy
 		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
 			[for (type : DBTYPE | types)]
 				[if (type=DBTYPE::MYSQL)]
-RUN pip install mysql.connector
+RUN pip install mysql-connector-python --upgrade
 				[elseif (type=DBTYPE::POSTGRESQL)]
 RUN pip install psycopg2
 				[elseif (type=DBTYPE::SQLSERVER)]
@@ -1255,7 +1255,7 @@ cp [lf.folderPath/]/[lf.sourceName/] "$(pwd)/data/"
 	[/if]
 [/for]
 
-docker run -it --rm --name [doc.name.replaceAll('[(),\\s]+', '_')/] --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
+docker run -it --rm --name [doc.name.replaceAll('[(),\\s]+', '_')/] --network host --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
 
 docker rmi [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
 
@@ -1339,7 +1339,28 @@ import pandas as pd
 import json
 import h5py
 import pyarrow
+[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
+	[if (not filteredSet->isEmpty())]
 from sqlalchemy import create_engine
+		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
+			[for (type : DBTYPE | types)]
+				[if (type=DBTYPE::MYSQL)]
+import mysql.connector
+				[elseif (type=DBTYPE::POSTGRESQL)]
+import psycopg2
+				[elseif (type=DBTYPE::SQLSERVER)]
+import pyodbc
+				[elseif (type=DBTYPE::ORACLE)]
+import cx_Oracle
+				[elseif (type=DBTYPE::MONGODB)]
+import pymongo
+				[elseif (type=DBTYPE::DYNAMODB)]
+import boto3
+				[/if]
+			[/for]
+		[/let]
+	[/if]
+[/let]
 
 [for (st : Storage | aWorkflow.environment.storage)]
 	[if (st.oclIsKindOf(LocalFile))]
@@ -1347,20 +1368,47 @@ from sqlalchemy import create_engine
 			[if (lf.type=FileType::CSV)]
 [lf.sourceName.replaceAll('.csv', '')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName/]', sep = '[lf.csv_sep/]')
 [lf.sourceName.replaceAll('.csv', '')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/]')
+
 			[elseif (lf.type=FileType::EXCEL)]
 [lf.sourceName.replaceAll('.xlsx', '')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName/]')
 [lf.sourceName.replaceAll('.xlsx', '')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/]')
+
 			[elseif (lf.type=FileType::FEATHER)]
 [lf.sourceName.replaceAll('.feather', '')/]=pd.read_feather('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName/]')
 [lf.sourceName.replaceAll('.feather', '')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/]')
+
 			[elseif (lf.type=FileType::HDF5)]
 [lf.sourceName.replaceAll('.hdf5', '')/]=pd.read_hdf('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName/]'[if (lf.hdf5_key<>'')], key='[lf.hdf5_key/]'[/if])
 [lf.sourceName.replaceAll('.hdf5', '')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/]')
+
 			[elseif (lf.type=FileType::JSON)]
 [lf.sourceName.replaceAll('.json', '')/]=pd.json_normalize('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName/]')
 [lf.sourceName.replaceAll('.json', '')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[lf.sourceName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/]')
-			[/if]
 
+			[/if]
+		[/let]
+	[elseif (st.oclIsKindOf(Database))]
+		[let db : Database = st.oclAsType(Database)]
+			[if (db.type=DBTYPE::MYSQL)]
+				[if (not db.auth->isEmpty() and db.auth.oclIsKindOf(Credentials))]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.host/]/[db.sourceName/]')
+					[/let]
+				[elseif (not db.auth->isEmpty() and db.auth.oclIsKindOf(OAuth2))]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+					[/let]
+				[elseif (not db.auth->isEmpty() and db.auth.oclIsKindOf(SSL))]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]
+					[/let]
+				[/if]
+				[for (tab : Table | db.table)]
+[db.sourceName/]_[tab.tableName/] = pd.read_sql('SELECT * FROM [tab.tableName/];', engine)
+[db.sourceName/]_[tab.tableName/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[tab.tableName/].parquet')
+
+				[/for]
+
+
+			[/if]
 		[/let]
 	[/if]
 [/for]

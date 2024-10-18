@@ -24,10 +24,9 @@ docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"
 cp /home/carlos/Escritorio/datasetsTest/missing_output_dataDictionary.csv "$(pwd)/data/"
 
-docker run -it --rm --name wf_validation_python --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
+docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 
 docker rmi ubuntu-22.04:latest
 

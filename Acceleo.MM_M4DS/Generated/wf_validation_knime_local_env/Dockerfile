@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
 RUN pip install sqlalchemy
-RUN pip install mysql.connector
+RUN pip install mysql-connector-python --upgrade
 
 ENV PYTHONPATH=./wf_validation_python
 
