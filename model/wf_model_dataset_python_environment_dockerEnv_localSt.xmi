@@ -70,7 +70,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.8"/>
     </inputPort>
     <inputPort
-        fileName="rowFilter_output_dataDictionary.csv"
+        fileName="rowFilter_output_dataDictionary"
         name="wf_rowFilterRange(init_span)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.9"/>
@@ -193,8 +193,8 @@
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFile"
-        sourceName="missing_output_dataDictionary.csv"
-        folderPath="/home/carlos/Escritorio/datasetsTest"
+        sourceName="missing_input_dataDictionary"
+        folderPath="/home/carlos/Escritorio/datasets"
         csv_sep=","/>
     <storage
         xsi:type="Environment:Database"
@@ -202,7 +202,7 @@
         host="localhost"
         port="3306">
       <table
-          tableName="missing_input_dataDictionary"/>
+          tableName="missing_output_dataDictionary"/>
       <auth
           xsi:type="Environment:Credentials"
           username="root"
