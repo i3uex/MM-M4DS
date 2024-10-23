@@ -15,6 +15,7 @@ RUN pip install h5py
 RUN pip install pyarrow
 RUN pip install sqlalchemy
 RUN pip install mysql-connector-python --upgrade
+RUN pip install psycopg2-binary
 
 ENV PYTHONPATH=./wf_validation_python
 
