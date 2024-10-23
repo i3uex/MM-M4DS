@@ -192,21 +192,47 @@
       imageName="ubuntu-22.04"
       imageTag="latest">
     <storage
-        xsi:type="Environment:LocalFile"
-        sourceName="missing_input_dataDictionary"
-        folderPath="/home/carlos/Escritorio/datasets"
-        csv_sep=","/>
+        xsi:type="Environment:LocalFolder"
+        storageName="dataset1"
+        folderPath="/home/carlos/Escritorio/datasets">
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.9"/>
+    </storage>
+    <storage
+        xsi:type="Environment:LocalFolder"
+        storageName="dataset2"
+        folderPath="/home/carlos/Escritorio/datasetsTest">
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.11"/>
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.13"/>
+    </storage>
     <storage
         xsi:type="Environment:Database"
-        sourceName="test_storage"
+        storageName="db1"
         host="localhost"
-        port="3306">
-      <table
-          tableName="missing_output_dataDictionary"/>
+        port="3306"
+        dbName="test_storage">
       <auth
           xsi:type="Environment:Credentials"
           username="root"
           passwd="password"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.1"/>
+    </storage>
+    <storage
+        xsi:type="Environment:Database"
+        storageName="db2"
+        host="localhost"
+        port="5432"
+        type="POSTGRESQL"
+        dbName="test_storage_postgre">
+      <auth
+          xsi:type="Environment:Credentials"
+          username="root"
+          passwd="pass"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
     </storage>
     <developmentTool
         version="3.11"/>

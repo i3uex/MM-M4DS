@@ -3791,31 +3791,4 @@
   <link source="//@dataprocessing.12"
       target="//@dataprocessing.13"
       name="binner(satscore)-binner(avg_income)"/>
-  <environment
-      xsi:type="Environment:Local"
-      name="wf_validation_python"
-      path="./wf_validation_python"
-      containerName="docker_python"
-      imageName="ubuntu-22.04"
-      imageTag="latest">
-    <storage
-        xsi:type="Environment:LocalFile"
-        sourceName="missing_input_dataDictionary.csv"
-        folderPath="/home/carlos/Escritorio/datasets"
-        csv_sep=","/>
-    <storage
-        xsi:type="Environment:Database"
-        sourceName="test_storage"
-        host="localhost"
-        port="3306">
-      <table
-          tableName="missing_output_dataDictionary"/>
-      <auth
-          xsi:type="Environment:Credentials"
-          username="root"
-          passwd="password"/>
-    </storage>
-    <developmentTool
-        version="3.11"/>
-  </environment>
 </Workflow:Workflow>
