@@ -37,8 +37,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Storage" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="storageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        upperBound="-1" eType="#//Source" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DBTYPE">
     <eLiterals name="MYSQL"/>
@@ -52,11 +50,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DBTYPE"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="auth" eType="#//Authentication"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" lowerBound="1" upperBound="-1"
+        eType="#//Table" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Authentication" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Credentials" eSuperTypes="#//Authentication">
@@ -75,24 +73,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessToken" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Folder" abstract="true" eSuperTypes="#//Storage"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalFolder" eSuperTypes="#//Folder">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hdf5_key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//FileType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="csv_sep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=";"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RemoteFolder" abstract="true" eSuperTypes="#//Folder"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AmazonS3" eSuperTypes="#//RemoteFolder.1">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="region" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AzureBlob" eSuperTypes="#//RemoteFolder.1">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyVaultName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cloud" abstract="true" eSuperTypes="#//DockerContainer"/>
   <eClassifiers xsi:type="ecore:EEnum" name="FileType">
     <eLiterals name="CSV"/>
@@ -102,17 +82,32 @@
     <eLiterals name="FEATHER" value="4"/>
     <eLiterals name="HDF5" value="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Source">
+  <eClassifiers xsi:type="ecore:EClass" name="Source" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataDictionary" lowerBound="1"
         eType="ecore:EClass Workflow.ecore#//DataDictionary"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hdf5_key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Source">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//FileType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="csv_sep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=","/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hdf5_key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//Source"/>
   <eClassifiers xsi:type="ecore:EClass" name="Folder" abstract="true" eSuperTypes="#//Storage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="folderPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="file" lowerBound="1" upperBound="-1"
+        eType="#//File" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RemoteFolder" abstract="true" eSuperTypes="#//Folder.1"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalFolder" eSuperTypes="#//Folder.1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalFolder" eSuperTypes="#//Folder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoteFolder" abstract="true" eSuperTypes="#//Folder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AmazonS3" eSuperTypes="#//RemoteFolder">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bucket" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="region" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AzureBlob" eSuperTypes="#//RemoteFolder">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyVaultName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="secretName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>
