@@ -6,16 +6,13 @@ if [ ! -d "data" ]; then
 fi
 
 if [ ! -d "data/dataset1" ]; then
-    mkdir dataset1
+    mkdir data/dataset1
 fi
 if [ ! -d "data/dataset2" ]; then
-    mkdir dataset2
+    mkdir data/dataset2
 fi
 if [ ! -d "data/db1" ]; then
-    mkdir db1
-fi
-if [ ! -d "data/db2" ]; then
-    mkdir db2
+    mkdir data/db1
 fi
 
 
