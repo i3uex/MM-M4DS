@@ -218,21 +218,23 @@
           username="root"
           passwd="password"/>
       <table
-          dataDictionary="//@dataprocessing.0/@inputPort.1"/>
-    </storage>
-    <storage
-        xsi:type="Environment:Database"
-        storageName="db2"
-        host="localhost"
-        port="5432"
-        type="POSTGRESQL"
-        dbName="test_storage_postgre">
-      <auth
-          xsi:type="Environment:Credentials"
-          username="root"
-          passwd="pass"/>
-      <table
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.1"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.2"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.3"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.4"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.5"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.6"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.7"/>
+      <table
+          dataDictionary="//@dataprocessing.0/@inputPort.8"/>
     </storage>
     <developmentTool
         version="3.11"/>
