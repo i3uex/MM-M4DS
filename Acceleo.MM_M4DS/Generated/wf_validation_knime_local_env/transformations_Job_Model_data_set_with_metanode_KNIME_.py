@@ -7,8 +7,8 @@ import pyarrow
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/db_mysql/missing_input_dataDictionary.parquet')
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.copy()
 	missing_values_list=[]
 	
@@ -32,11 +32,11 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 	
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary.parquet')
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
 
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_transformed=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df.copy()
 	missing_values_list=[]
@@ -113,11 +113,11 @@ def generateWorkflow():
 																											filter_type=FilterType(0),
 																											closure_type_list=closure_type_list_rowFilterRange_param_filter)
 	rowFilterRange_init_span__output_dataDictionary_df=rowFilterRange_init_span__input_dataDictionary_transformed
-	rowFilterRange_init_span__output_dataDictionary_df.to_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
-	rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
+	rowFilterRange_init_span__output_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
+	rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
 	
 	#-----------------New DataProcessing-----------------
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
 
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_transformed=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df.copy()
 	field_list_columnFilter_param_field=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
@@ -126,11 +126,11 @@ def generateWorkflow():
 																	columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
 	
 	data_model_column_cont_filter_out_df=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_transformed
-	data_model_column_cont_filter_out_df.to_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
-	data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
+	data_model_column_cont_filter_out_df.to_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
+	data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
 	
 	#-----------------New DataProcessing-----------------
-	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
+	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
 
 	input_values_list=['A', 'N']
 	output_values_list=['0', '0']
@@ -143,11 +143,11 @@ def generateWorkflow():
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
 	
-	Mapping_TERRITORY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
-	Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
+	Mapping_TERRITORY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
+	Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
 	
 	#-----------------New DataProcessing-----------------
-	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
+	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
 
 	input_values_list=['Y', 'N']
 	output_values_list=['1', '0']

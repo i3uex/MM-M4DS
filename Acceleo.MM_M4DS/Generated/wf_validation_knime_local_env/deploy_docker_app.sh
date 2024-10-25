@@ -5,6 +5,16 @@ if [ ! -d "data" ]; then
     mkdir data
 fi
 
+if [ ! -d "data/db_mysql" ]; then
+    mkdir data/db_mysql
+fi
+if [ ! -d "data/dataset1" ]; then
+    mkdir data/dataset1
+fi
+if [ ! -d "data/dataset2" ]; then
+    mkdir data/dataset2
+fi
+
 
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
@@ -24,7 +34,12 @@ docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"
+cp /home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv "$(pwd)/data/"dataset1
+cp /home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv "$(pwd)/data/"dataset1
+cp /home/carlos/Escritorio/datasetsTest/columnFilter_output_dataDictionary.csv "$(pwd)/data/"dataset2
+cp /home/carlos/Escritorio/datasetsTest/columnFilter_output_dataDictionary.csv "$(pwd)/data/"dataset2
+cp /home/carlos/Escritorio/datasetsTest/ruleEngine_territory_output_dataDictionary.csv "$(pwd)/data/"dataset2
+cp /home/carlos/Escritorio/datasetsTest/ruleEngine_territory_output_dataDictionary.csv "$(pwd)/data/"dataset2
 
 docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 
