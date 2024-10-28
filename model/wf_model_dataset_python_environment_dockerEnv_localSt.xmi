@@ -193,23 +193,29 @@
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="dataset1"
+        storageName="dataset9"
         folderPath="/home/carlos/Escritorio/datasets">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.9"/>
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.10"/>
     </storage>
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="dataset2"
+        storageName="dataset11"
         folderPath="/home/carlos/Escritorio/datasetsTest">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.11"/>
       <file
+          dataDictionary="//@dataprocessing.0/@inputPort.12"/>
+      <file
           dataDictionary="//@dataprocessing.0/@inputPort.13"/>
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.14"/>
     </storage>
     <storage
         xsi:type="Environment:Database"
-        storageName="db1"
+        storageName="database"
         host="localhost"
         port="3306"
         dbName="test_storage">
