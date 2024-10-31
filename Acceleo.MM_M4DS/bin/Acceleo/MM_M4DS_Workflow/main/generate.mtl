@@ -1168,7 +1168,7 @@ FROM python:3.11-slim
 		[/if]
 
 WORKDIR [aWorkflow.environment.path/]
-
+ENV PYTHONPATH=[aWorkflow.environment.path/]
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git && \
@@ -1190,9 +1190,15 @@ RUN pip install mysql-connector-python --upgrade
 				[elseif (type=DBTYPE::POSTGRESQL)]
 RUN pip install psycopg2-binary
 				[elseif (type=DBTYPE::SQLSERVER)]
-RUN pip install pyodbc
+RUN pip3 install pyodbc
+RUN apt-get update && \
+    apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
+    rm -rf /var/lib/apt/lists/*
 				[elseif (type=DBTYPE::ORACLE)]
-RUN pip install cx_Oracle
+RUN pip install oracledb
 				[elseif (type=DBTYPE::MONGODB)]
 RUN pip install pymongo
 				[elseif (type=DBTYPE::DYNAMODB)]
@@ -1203,14 +1209,11 @@ RUN pip install boto3
 	[/if]
 [/let]
 
-ENV PYTHONPATH=[aWorkflow.environment.path/]
+COPY dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
+COPY contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
+COPY transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
 
-COPY ./dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
-COPY ./contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
-COPY ./transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
-
-COPY ./fileFormatting.py [aWorkflow.environment.path/]/workflows/
-
+COPY fileFormatting.py [aWorkflow.environment.path/]/workflows/
 
 COPY workflow_scripts.sh [aWorkflow.environment.path/]/workflow_scripts.sh
 
@@ -1233,7 +1236,6 @@ if ['['/] ! -d "data/[st.storageName/]" [']'/]; then
     mkdir data/[st.storageName/]
 fi
 [/for]
-
 
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
@@ -1367,7 +1369,7 @@ import psycopg2
 				[elseif (type=DBTYPE::SQLSERVER)]
 import pyodbc
 				[elseif (type=DBTYPE::ORACLE)]
-import cx_Oracle
+import oracledb
 				[elseif (type=DBTYPE::MONGODB)]
 import pymongo
 from pandas import json_normalize
@@ -1463,7 +1465,7 @@ engine = create_engine('mssql+pyodbc://[cr.username/]:[cr.passwd/]@[db.host/]/[d
 			[elseif (db.type=DBTYPE::ORACLE)]
 				[if (db.auth.oclIsKindOf(Credentials))]
 					[let cr : Credentials = db.auth.oclAsType(Credentials)]
-engine = create_engine('oracle+cx_oracle://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/?service_name=[db.dbName/]')
+engine = create_engine('oracle+oracledb://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/?service_name=[db.dbName/]')
 					[/let]
 				[elseif (db.auth.oclIsKindOf(OAuth2))]
 					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
@@ -1473,7 +1475,7 @@ engine = create_engine('oracle+cx_oracle://[cr.username/]:[cr.passwd/]@[db.host/
 					[/let]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.fileName.trim()/][/if];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM employees', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (st.storageName.size()>0)][st.storageName/]/[/if][if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]

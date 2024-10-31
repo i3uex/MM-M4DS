@@ -3,42 +3,35 @@ import json
 import h5py
 import pyarrow
 from sqlalchemy import create_engine
-import mysql.connector
+import oracledb
+import pyodbc
 
-wf_rowFilterRange_init_span__output_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.csv', sep = ',')
-wf_rowFilterRange_init_span__output_dataDictionary.to_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
+engine = create_engine('mssql+pyodbc://SA:Contraseña_1234@localhost/test_storage_sqlserver?driver=ODBC+Driver+17+for+SQL+Server')
+test_storage_sqlserver_wf_stringToNumber_TERRITORY_Instate__output_dataDictionary = pd.read_sql('SELECT * FROM stringToNumber_output_dataDictionary;', engine)
+test_storage_sqlserver_wf_stringToNumber_TERRITORY_Instate__output_dataDictionary.to_parquet('/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet')
 
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.csv', sep = ',')
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
+test_storage_sqlserver_wf_imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary = pd.read_sql('SELECT * FROM stringToNumber_output_dataDictionary;', engine)
+test_storage_sqlserver_wf_imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet')
 
-wf_Mapping_TERRITORY__output_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-wf_Mapping_TERRITORY__output_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
+wf_rowFilterRange_init_span__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.csv', sep = ',')
+wf_rowFilterRange_init_span__output_dataDictionary.to_parquet('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.parquet')
 
-engine = create_engine('mysql+mysqlconnector://root:password@localhost/test_storage')
-test_storage_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.read_sql('SELECT * FROM missing_input_dataDictionary;', engine)
-test_storage_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_input_dataDictionary.parquet')
+wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.csv', sep = ',')
+wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary.to_parquet('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.parquet')
 
-test_storage_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
+wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.csv', sep = ',')
+wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet')
 
-test_storage_wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
+wf_Mapping_TERRITORY__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.csv', sep = ',')
+wf_Mapping_TERRITORY__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet')
 
-test_storage_wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
+wf_Mapping_TERRITORY__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
+wf_Mapping_TERRITORY__output_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
 
-test_storage_wf_imputeMissingByMean_avg_income_distance__input_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByMean_avg_income_distance__input_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
+wf_mapping_Instate__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
+wf_mapping_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
 
-test_storage_wf_mputeMissingByMean_avg_income_distance__output_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_mputeMissingByMean_avg_income_distance__output_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
-
-test_storage_wf_imputeMissingByLinearInterpolation_satscore__input_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByLinearInterpolation_satscore__input_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
-
-test_storage_wf_imputeMissingByLinearInterpolation_satscore__output_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_imputeMissingByLinearInterpolation_satscore__output_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
-
-test_storage_wf_rowFilterRange_init_span__input_dataDictionary = pd.read_sql('SELECT * FROM missing_output_dataDictionary;', engine)
-test_storage_wf_rowFilterRange_init_span__input_dataDictionary.to_parquet('/wf_validation_python/data/db1/missing_output_dataDictionary.parquet')
+engine = create_engine('oracle+oracledb://test_user:TestPassword1@localhost:1521/?service_name=XEPDB1')
+XEPDB1_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.read_sql('SELECT * FROM employees', engine)
+XEPDB1_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/oracle/missing_input_dataDictionary.parquet')
 

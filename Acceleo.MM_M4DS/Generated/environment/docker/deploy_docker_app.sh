@@ -5,16 +5,18 @@ if [ ! -d "data" ]; then
     mkdir data
 fi
 
-if [ ! -d "data/dataset1" ]; then
-    mkdir data/dataset1
+if [ ! -d "data/sqlserver" ]; then
+    mkdir data/sqlserver
 fi
-if [ ! -d "data/dataset2" ]; then
-    mkdir data/dataset2
+if [ ! -d "data/datasets" ]; then
+    mkdir data/datasets
 fi
-if [ ! -d "data/db1" ]; then
-    mkdir data/db1
+if [ ! -d "data/datasetsTest" ]; then
+    mkdir data/datasetsTest
 fi
-
+if [ ! -d "data/oracle" ]; then
+    mkdir data/oracle
+fi
 
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
@@ -34,9 +36,12 @@ docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv "$(pwd)/data/"dataset1
-cp /home/carlos/Escritorio/datasetsTest/columnFilter_output_dataDictionary.csv "$(pwd)/data/"dataset2
-cp /home/carlos/Escritorio/datasetsTest/ruleEngine_territory_output_dataDictionary.csv "$(pwd)/data/"dataset2
+cp /home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv "$(pwd)/data/"datasets
+cp /home/carlos/Escritorio/datasets/rowFilter_output_dataDictionary.csv "$(pwd)/data/"datasets
+cp /home/carlos/Escritorio/datasetsTest/columnFilter_output_dataDictionary.csv "$(pwd)/data/"datasetsTest
+cp /home/carlos/Escritorio/datasetsTest/columnFilter_output_dataDictionary.csv "$(pwd)/data/"datasetsTest
+cp /home/carlos/Escritorio/datasetsTest/ruleEngine_territory_output_dataDictionary.csv "$(pwd)/data/"datasetsTest
+cp /home/carlos/Escritorio/datasetsTest/ruleEngine_territory_output_dataDictionary.csv "$(pwd)/data/"datasetsTest
 
 docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 
