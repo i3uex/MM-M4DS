@@ -11,7 +11,7 @@ import pyarrow
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/oracle/missing_input_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/mongo/missing_input_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'

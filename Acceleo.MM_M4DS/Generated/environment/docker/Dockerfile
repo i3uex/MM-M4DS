@@ -13,8 +13,8 @@ RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
+RUN pip install pymongo
 RUN pip install sqlalchemy
-RUN pip install oracledb
 RUN pip3 install pyodbc
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \

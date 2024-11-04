@@ -3,7 +3,8 @@ import json
 import h5py
 import pyarrow
 from sqlalchemy import create_engine
-import oracledb
+import pymongo
+from pandas import json_normalize
 import pyodbc
 
 engine = create_engine('mssql+pyodbc://SA:Contraseña_1234@localhost/test_storage_sqlserver?driver=ODBC+Driver+17+for+SQL+Server')
@@ -31,7 +32,14 @@ wf_Mapping_TERRITORY__output_dataDictionary.to_parquet('/wf_validation_python/da
 wf_mapping_Instate__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 wf_mapping_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
 
-engine = create_engine('oracle+oracledb://test_user:TestPassword1@localhost:1521/?service_name=XEPDB1')
-XEPDB1_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.read_sql('SELECT * FROM employees', engine)
-XEPDB1_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/oracle/missing_input_dataDictionary.parquet')
+client = pymongo.MongoClient("mongodb://root:example@localhost:27017/")
+test_db = client["test"]
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_collection = test_db["missing_input_dataDictionary"]
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data = wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_collection.find()
+test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.DataFrame(json_normalize(wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data))
+
+if '_id' in test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.columns:
+    test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary['_id'] = test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary['_id'].astype(str)
+
+test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/mongo/missing_input_dataDictionary.parquet')
 

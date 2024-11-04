@@ -1182,14 +1182,16 @@ RUN pip install h5py
 RUN pip install pyarrow
 [let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
 	[if (not filteredSet->isEmpty())]
-RUN pip install sqlalchemy
 		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
 			[for (type : DBTYPE | types)]
 				[if (type=DBTYPE::MYSQL)]
+RUN pip install sqlalchemy
 RUN pip install mysql-connector-python --upgrade
 				[elseif (type=DBTYPE::POSTGRESQL)]
+RUN pip install sqlalchemy
 RUN pip install psycopg2-binary
 				[elseif (type=DBTYPE::SQLSERVER)]
+RUN pip install sqlalchemy
 RUN pip3 install pyodbc
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \
@@ -1198,6 +1200,7 @@ RUN apt-get update && \
     apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
     rm -rf /var/lib/apt/lists/*
 				[elseif (type=DBTYPE::ORACLE)]
+RUN pip install sqlalchemy
 RUN pip install oracledb
 				[elseif (type=DBTYPE::MONGODB)]
 RUN pip install pymongo
@@ -1480,22 +1483,30 @@ engine = create_engine('oracle+oracledb://[cr.username/]:[cr.passwd/]@[db.host/]
 
 				[/for]
 			[elseif (db.type=DBTYPE::MONGODB)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[if (not db.auth->isEmpty())]
+					[if (db.auth.oclIsKindOf(Credentials))]
+						[let cr : Credentials = db.auth.oclAsType(Credentials)]
+client = pymongo.MongoClient("mongodb://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/")
+						[/let]
+					[elseif (db.auth.oclIsKindOf(OAuth2))]
+						[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+						[/let]
+					[elseif (db.auth.oclIsKindOf(SSL))]
+						[let ssl : SSL = db.auth.oclAsType(SSL)]
+						[/let]
+					[/if]
+				[elseif (db.auth->isEmpty())]
 client = pymongo.MongoClient("mongodb://[db.host/]:[db.port/]/")
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
-[db.dbName/]_db = client['['/]"[db.dbName/]"[']'/]
 				[/if]
+[db.dbName/]_db = client['['/]"[db.dbName/]"[']'/]
 				[for (tab : Table | db.table)]
 [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.fileName.trim()/][/if]"[']'/]
 [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection.find()
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
+
+if '_id' in [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].columns:
+    [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]['['/]'_id'[']'/] = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]['['/]'_id'[']'/].astype(str)
+
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (st.storageName.size()>0)][st.storageName/]/[/if][if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]

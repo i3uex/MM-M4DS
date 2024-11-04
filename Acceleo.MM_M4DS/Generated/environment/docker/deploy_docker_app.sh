@@ -14,8 +14,8 @@ fi
 if [ ! -d "data/datasetsTest" ]; then
     mkdir data/datasetsTest
 fi
-if [ ! -d "data/oracle" ]; then
-    mkdir data/oracle
+if [ ! -d "data/mongo" ]; then
+    mkdir data/mongo
 fi
 
 sudo apt-get update --yes
