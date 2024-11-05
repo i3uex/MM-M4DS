@@ -3,16 +3,8 @@ import json
 import h5py
 import pyarrow
 from sqlalchemy import create_engine
-import pymongo
+import boto3
 from pandas import json_normalize
-import pyodbc
-
-engine = create_engine('mssql+pyodbc://SA:Contraseña_1234@localhost/test_storage_sqlserver?driver=ODBC+Driver+17+for+SQL+Server')
-test_storage_sqlserver_wf_stringToNumber_TERRITORY_Instate__output_dataDictionary = pd.read_sql('SELECT * FROM stringToNumber_output_dataDictionary;', engine)
-test_storage_sqlserver_wf_stringToNumber_TERRITORY_Instate__output_dataDictionary.to_parquet('/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet')
-
-test_storage_sqlserver_wf_imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary = pd.read_sql('SELECT * FROM stringToNumber_output_dataDictionary;', engine)
-test_storage_sqlserver_wf_imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet')
 
 wf_rowFilterRange_init_span__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.csv', sep = ',')
 wf_rowFilterRange_init_span__output_dataDictionary.to_parquet('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.parquet')
@@ -32,14 +24,17 @@ wf_Mapping_TERRITORY__output_dataDictionary.to_parquet('/wf_validation_python/da
 wf_mapping_Instate__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
 wf_mapping_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
 
-client = pymongo.MongoClient("mongodb://root:example@localhost:27017/")
-test_db = client["test"]
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_collection = test_db["missing_input_dataDictionary"]
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data = wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_collection.find()
-test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.DataFrame(json_normalize(wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data))
+dynamodb = boto3.resource(
+    'dynamodb',
+    region_name="us-west-2",
+    aws_access_key_id='67l6r6',
+    aws_secret_access_key='r7onss',
+    endpoint_url="http://localhost:8000"
+)
 
-if '_id' in test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.columns:
-    test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary['_id'] = test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary['_id'].astype(str)
-
-test_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/mongo/missing_input_dataDictionary.parquet')
+test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_table = dynamodb.Table('missing_input_dataDictionary')
+test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_response = test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_table.scan()
+test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data = test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_response['Items']
+test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.DataFrame(json_normalize(test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data))
+test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/dynamo/missing_input_dataDictionary.parquet')
 

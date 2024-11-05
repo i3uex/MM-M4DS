@@ -1182,16 +1182,14 @@ RUN pip install h5py
 RUN pip install pyarrow
 [let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
 	[if (not filteredSet->isEmpty())]
+RUN pip install sqlalchemy
 		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
 			[for (type : DBTYPE | types)]
 				[if (type=DBTYPE::MYSQL)]
-RUN pip install sqlalchemy
 RUN pip install mysql-connector-python --upgrade
 				[elseif (type=DBTYPE::POSTGRESQL)]
-RUN pip install sqlalchemy
 RUN pip install psycopg2-binary
 				[elseif (type=DBTYPE::SQLSERVER)]
-RUN pip install sqlalchemy
 RUN pip3 install pyodbc
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \
@@ -1200,7 +1198,6 @@ RUN apt-get update && \
     apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
     rm -rf /var/lib/apt/lists/*
 				[elseif (type=DBTYPE::ORACLE)]
-RUN pip install sqlalchemy
 RUN pip install oracledb
 				[elseif (type=DBTYPE::MONGODB)]
 RUN pip install pymongo
@@ -1511,21 +1508,30 @@ if '_id' in [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]
 
 				[/for]
 			[elseif (db.type=DBTYPE::DYNAMODB)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-[db.dbName/]_dynamodb = boto3.resource('[db.dbName/]', region_name='your-region')
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
+dynamodb = boto3.resource(
+    'dynamodb',
+    region_name="us-west-2",
+    aws_access_key_id='67l6r6',
+    aws_secret_access_key='r7onss',
+    endpoint_url="http://localhost:8000"
+)
+
+				[if (not db.auth->isEmpty())]
+					[if (db.auth.oclIsKindOf(Credentials))]
+						[let cr : Credentials = db.auth.oclAsType(Credentials)]
+						[/let]
+					[elseif (db.auth.oclIsKindOf(OAuth2))]
+						[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
+						[/let]
+					[elseif (db.auth.oclIsKindOf(SSL))]
+						[let ssl : SSL = db.auth.oclAsType(SSL)]
+						[/let]
+					[/if]
 				[/if]
 				[for (tab : Table | db.table)]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table = dynamodb.Table('[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.fileName.trim()/][/if]')
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table.scan()
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = response['['/]'Items'[']'/]
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response['['/]'Items'[']'/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (st.storageName.size()>0)][st.storageName/]/[/if][if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 

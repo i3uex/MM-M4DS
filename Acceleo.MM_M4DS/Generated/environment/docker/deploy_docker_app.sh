@@ -5,17 +5,14 @@ if [ ! -d "data" ]; then
     mkdir data
 fi
 
-if [ ! -d "data/sqlserver" ]; then
-    mkdir data/sqlserver
-fi
 if [ ! -d "data/datasets" ]; then
     mkdir data/datasets
 fi
 if [ ! -d "data/datasetsTest" ]; then
     mkdir data/datasetsTest
 fi
-if [ ! -d "data/mongo" ]; then
-    mkdir data/mongo
+if [ ! -d "data/dynamo" ]; then
+    mkdir data/dynamo
 fi
 
 sudo apt-get update --yes

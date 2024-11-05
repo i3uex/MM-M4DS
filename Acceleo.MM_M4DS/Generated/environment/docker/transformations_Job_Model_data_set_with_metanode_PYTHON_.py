@@ -8,7 +8,7 @@ import pyarrow
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/mongo/missing_input_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/dynamo/missing_input_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -17,7 +17,7 @@ def generateWorkflow():
 	mapping_TERRITORY__input_dataDictionary='/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet'
 	mapping_Instate__input_dataDictionary='/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet'
 	stringToNumber_TERRITORY_Instate__input_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.parquet'
-	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet'
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.parquet'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.parquet'
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
@@ -31,7 +31,7 @@ def generateWorkflow():
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary='/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet'
 	mapping_TERRITORY__output_dataDictionary='/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet'
 	mapping_Instate__output_dataDictionary='/wf_validation_python/data/ruleEngine_instate_output_dataDictionary.parquet'
-	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/sqlserver/stringToNumber_output_dataDictionary.parquet'
+	stringToNumber_TERRITORY_Instate__output_dataDictionary='/wf_validation_python/data/stringToNumber_output_dataDictionary.parquet'
 	imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary='/wf_validation_python/data/numericOutliers_output_dataDictionary.parquet'
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
