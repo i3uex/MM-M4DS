@@ -4,24 +4,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="Workflow">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataprocessing" lowerBound="1"
-        upperBound="-1" eType="#//DataProcessing" containment="true"/>
+        upperBound="-1" eType="#//ProcessingStep" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="#//Link"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="ecore:EClass Environment.ecore#//Environment"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataProcessing">
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessingStep" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="#//Link"
         eOpposite="#//Link/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" eType="#//Link"
         eOpposite="#//Link/target"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataProcessingDefinition"
-        lowerBound="1" eType="ecore:EClass Library.ecore#//DataProcessingDefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
-        eType="#//Parameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contract" upperBound="-1"
-        eType="#//Contract" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputPort" lowerBound="1"
         upperBound="-1" eType="#//DataDictionary" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputPort" lowerBound="1"
@@ -30,12 +23,15 @@
         eType="#//Argument"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="out" lowerBound="1" upperBound="-1"
         eType="#//Argument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataProcessingDefinition"
+        lowerBound="1" eType="ecore:EClass Library.ecore#//DataProcessingDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Link">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//DataProcessing" eOpposite="#//DataProcessing/outgoing"/>
+        eType="#//ProcessingStep" eOpposite="#//ProcessingStep/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//DataProcessing" eOpposite="#//DataProcessing/incoming"/>
+        eType="#//ProcessingStep" eOpposite="#//ProcessingStep/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true">
@@ -99,8 +95,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataDictionaryDefinition"
         lowerBound="1" eType="ecore:EClass Library.ecore#//DataDictionaryDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnDelimiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=","/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="#//DataDictionary"
         eOpposite="#//DataDictionary/out"/>
@@ -220,5 +214,29 @@
   <eClassifiers xsi:type="ecore:EEnum" name="FilterType">
     <eLiterals name="EXCLUDE"/>
     <eLiterals name="INCLUDE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PMMLModel" eSuperTypes="#//ProcessingStep">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onlyPredictions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelType" eType="#//MLModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//Test" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MLModel">
+    <eLiterals name="CLASSIFICATION"/>
+    <eLiterals name="REGRESSION" value="1"/>
+    <eLiterals name="CLUSTERING" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataProcessing" eSuperTypes="#//ProcessingStep">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contract" upperBound="-1"
+        eType="#//Contract" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Test">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trainSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="0.70"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="testSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="0.30"/>
   </eClassifiers>
 </ecore:EPackage>
