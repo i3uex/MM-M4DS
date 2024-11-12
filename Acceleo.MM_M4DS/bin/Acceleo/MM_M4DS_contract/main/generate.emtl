@@ -3891,7 +3891,7 @@
                         <referredType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataProcessing"/>
                       </argument>
                     </source>
-                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//DataProcessing/inputPort"/>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//ProcessingStep/inputPort"/>
                   </iterSet>
                 </body>
                 <ifExpr xsi:type="ocl.ecore:OperationCallExp">
@@ -4054,7 +4054,7 @@
                           <referredType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataProcessing"/>
                         </argument>
                       </source>
-                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//DataProcessing/outputPort"/>
+                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//ProcessingStep/outputPort"/>
                     </iterSet>
                   </body>
                   <ifExpr xsi:type="ocl.ecore:OperationCallExp">
@@ -6964,7 +6964,7 @@
                         <referredType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataProcessing"/>
                       </argument>
                     </source>
-                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//DataProcessing/inputPort"/>
+                    <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//ProcessingStep/inputPort"/>
                   </iterSet>
                 </body>
                 <ifExpr xsi:type="ocl.ecore:OperationCallExp">
@@ -9845,7 +9845,7 @@
                           <referredType xsi:type="ecore:EClass" href="https://www.example.org/workflow#//DataProcessing"/>
                         </argument>
                       </source>
-                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//DataProcessing/outputPort"/>
+                      <referredProperty xsi:type="ecore:EReference" href="https://www.example.org/workflow#//ProcessingStep/outputPort"/>
                     </iterSet>
                   </body>
                   <ifExpr xsi:type="ocl.ecore:OperationCallExp">

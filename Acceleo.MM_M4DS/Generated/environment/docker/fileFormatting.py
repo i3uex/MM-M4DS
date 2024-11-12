@@ -2,39 +2,13 @@ import pandas as pd
 import json
 import h5py
 import pyarrow
-from sqlalchemy import create_engine
-import boto3
-from pandas import json_normalize
 
-wf_rowFilterRange_init_span__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.csv', sep = ',')
-wf_rowFilterRange_init_span__output_dataDictionary.to_parquet('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.parquet')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset1/missing_input_dataDictionary.csv', sep = ',')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
 
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.csv', sep = ',')
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary.to_parquet('/wf_validation_python/data/datasets/rowFilter_output_dataDictionary.parquet')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/missing_output_dataDictionary.csv', sep = ',')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet')
 
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.csv', sep = ',')
-wf_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet')
-
-wf_Mapping_TERRITORY__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.csv', sep = ',')
-wf_Mapping_TERRITORY__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/columnFilter_output_dataDictionary.parquet')
-
-wf_Mapping_TERRITORY__output_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-wf_Mapping_TERRITORY__output_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
-
-wf_mapping_Instate__input_dataDictionary=pd.read_csv('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.csv', sep = ',')
-wf_mapping_Instate__input_dataDictionary.to_parquet('/wf_validation_python/data/datasetsTest/ruleEngine_territory_output_dataDictionary.parquet')
-
-dynamodb = boto3.resource(
-    'dynamodb',
-    region_name="us-west-2",
-    aws_access_key_id='67l6r6',
-    aws_secret_access_key='r7onss',
-    endpoint_url="http://localhost:8000"
-)
-
-test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_table = dynamodb.Table('missing_input_dataDictionary')
-test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_response = test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_table.scan()
-test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data = test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_response['Items']
-test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary = pd.DataFrame(json_normalize(test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_data))
-test_dynamo_wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/dynamo/missing_input_dataDictionary.parquet')
+wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/missing_output_dataDictionary.csv', sep = ',')
+wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet')
 

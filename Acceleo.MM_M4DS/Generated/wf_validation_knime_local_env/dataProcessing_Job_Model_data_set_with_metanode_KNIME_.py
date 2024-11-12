@@ -8,9 +8,10 @@ from helpers.logger import set_logger
 import pyarrow
 
 def generateWorkflow():
+
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/db_mysql/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
 
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', 
@@ -59,8 +60,8 @@ def generateWorkflow():
 																  axis_param=0, field_in = 'ETHNICITY', field_out = 'ETHNICITY')
 	
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/missing_output_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/missing_output_dataDictionary.parquet')
 	
 	missing_values_imputeByDerivedValue_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df, field='sex', 
@@ -129,7 +130,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/db_mysql/missing_output_dataDictionary.parquet')
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/missing_output_dataDictionary.parquet')
 
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2', 
@@ -366,8 +367,8 @@ def generateWorkflow():
 																											filter_type=FilterType(0),
 																											closure_type_list=closure_type_list_rowFilterRange_param_filter)
 	rowFilterRange_init_span__output_dataDictionary_df=rowFilterRange_init_span__input_dataDictionary_transformed
-	rowFilterRange_init_span__output_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
-	rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
+	rowFilterRange_init_span__output_dataDictionary_df.to_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
+	rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
 	
 	if contract_pre_post.check_fix_value_range(value=-216, data_dictionary=rowFilterRange_init_span__output_dataDictionary_df, belong_op=Belong(1), field='init_span',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -376,7 +377,7 @@ def generateWorkflow():
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 	
 	#-----------------New DataProcessing-----------------
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_python/data/dataset1/rowFilter_output_dataDictionary.parquet')
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_python/data/rowFilter_output_dataDictionary.parquet')
 
 	field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_PRE_field_range,
@@ -394,8 +395,8 @@ def generateWorkflow():
 																	columns=field_list_columnFilter_param_field, belong_op=Belong.BELONG)
 	
 	data_model_column_cont_filter_out_df=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_transformed
-	data_model_column_cont_filter_out_df.to_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
-	data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
+	data_model_column_cont_filter_out_df.to_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
+	data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
 	
 	field_list_columnFilter_POST_field_range=['stuemail', 'interest', 'telecq', 'TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_POST_field_range,
@@ -407,7 +408,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/columnFilter_output_dataDictionary.parquet')
+	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/columnFilter_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=Mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -431,8 +432,8 @@ def generateWorkflow():
 							                                      data_type_input_list = data_type_input_list,
 							                                      data_type_output_list = data_type_output_list, field_in = 'TERRITORY', field_out = 'TERRITORY')
 	
-	Mapping_TERRITORY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
-	Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
+	Mapping_TERRITORY__output_dataDictionary_df.to_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
+	Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
 	
 	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=Mapping_TERRITORY__output_dataDictionary_df, belong_op=Belong(1), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -469,7 +470,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset2/ruleEngine_territory_output_dataDictionary.parquet')
+	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/ruleEngine_territory_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__input_dataDictionary_df, belong_op=Belong(0), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
