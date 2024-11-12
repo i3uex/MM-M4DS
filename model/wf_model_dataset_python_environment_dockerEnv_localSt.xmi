@@ -9,12 +9,10 @@
     xsi:schemaLocation="https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="Model data set with metanode (PYTHON)">
   <dataprocessing
-      name="Model data set workflow"
+      xsi:type="Workflow:DataProcessing"
       in="//@dataprocessing.0/@inputPort.0 //@dataprocessing.0/@inputPort.2 //@dataprocessing.0/@inputPort.4 //@dataprocessing.0/@inputPort.6 //@dataprocessing.0/@inputPort.8 //@dataprocessing.0/@inputPort.10 //@dataprocessing.0/@inputPort.12 //@dataprocessing.0/@inputPort.14 //@dataprocessing.0/@inputPort.16 //@dataprocessing.0/@inputPort.18 //@dataprocessing.0/@inputPort.20 //@dataprocessing.0/@inputPort.22 //@dataprocessing.0/@inputPort.24 //@dataprocessing.0/@inputPort.26"
-      out="//@dataprocessing.0/@inputPort.1 //@dataprocessing.0/@inputPort.3 //@dataprocessing.0/@inputPort.5 //@dataprocessing.0/@inputPort.7 //@dataprocessing.0/@inputPort.9 //@dataprocessing.0/@inputPort.11 //@dataprocessing.0/@inputPort.13 //@dataprocessing.0/@inputPort.15 //@dataprocessing.0/@inputPort.17 //@dataprocessing.0/@inputPort.19 //@dataprocessing.0/@inputPort.21 //@dataprocessing.0/@inputPort.23 //@dataprocessing.0/@inputPort.25 //@dataprocessing.0/@outputPort.0">
-    <dataProcessingDefinition
-        xsi:type="Library:Job"
-        href="library_validation.xmi#//@dataprocessingdefinition.9"/>
+      out="//@dataprocessing.0/@inputPort.1 //@dataprocessing.0/@inputPort.3 //@dataprocessing.0/@inputPort.5 //@dataprocessing.0/@inputPort.7 //@dataprocessing.0/@inputPort.9 //@dataprocessing.0/@inputPort.11 //@dataprocessing.0/@inputPort.13 //@dataprocessing.0/@inputPort.15 //@dataprocessing.0/@inputPort.17 //@dataprocessing.0/@inputPort.19 //@dataprocessing.0/@inputPort.21 //@dataprocessing.0/@inputPort.23 //@dataprocessing.0/@inputPort.25 //@dataprocessing.0/@outputPort.0"
+      name="Model data set workflow">
     <inputPort
         fileName="missing_input_dataDictionary.csv"
         name="wf_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary">
@@ -183,6 +181,9 @@
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@outputPort.0"/>
     </outputPort>
+    <dataProcessingDefinition
+        xsi:type="Library:Job"
+        href="library_validation.xmi#//@dataprocessingdefinition.9"/>
   </dataprocessing>
   <environment
       xsi:type="Environment:Local"
@@ -193,54 +194,19 @@
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="dataset9"
+        storageName="dataset1"
         folderPath="/home/carlos/Escritorio/datasets">
       <file
-          dataDictionary="//@dataprocessing.0/@inputPort.9"/>
-      <file
-          dataDictionary="//@dataprocessing.0/@inputPort.10"/>
+          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
     </storage>
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="dataset11"
+        storageName="dataset2"
         folderPath="/home/carlos/Escritorio/datasetsTest">
       <file
-          dataDictionary="//@dataprocessing.0/@inputPort.11"/>
-      <file
-          dataDictionary="//@dataprocessing.0/@inputPort.12"/>
-      <file
-          dataDictionary="//@dataprocessing.0/@inputPort.13"/>
-      <file
-          dataDictionary="//@dataprocessing.0/@inputPort.14"/>
-    </storage>
-    <storage
-        xsi:type="Environment:Database"
-        storageName="database"
-        host="localhost"
-        port="3306"
-        dbName="test_storage">
-      <auth
-          xsi:type="Environment:Credentials"
-          username="root"
-          passwd="password"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
-      <table
           dataDictionary="//@dataprocessing.0/@inputPort.1"/>
-      <table
+      <file
           dataDictionary="//@dataprocessing.0/@inputPort.2"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.3"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.4"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.5"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.6"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.7"/>
-      <table
-          dataDictionary="//@dataprocessing.0/@inputPort.8"/>
     </storage>
     <developmentTool
         version="3.11"/>
