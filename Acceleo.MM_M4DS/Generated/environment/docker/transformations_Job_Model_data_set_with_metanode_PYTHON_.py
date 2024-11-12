@@ -477,9 +477,9 @@ def generateWorkflow():
 																  data_type_output = DataType(0),
 																  field_in = 'avg_income', field_out = 'avg_income_binned')
 	
-	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)	
-	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
+	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	invalid_df.to_parquet(invalid)	
+	invalid_df=pd.read_parquet(invalid)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=9.0, right_margin=42830.0,
 																  closure_type=Closure(1),
@@ -488,9 +488,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)	
-	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
+	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	invalid_df.to_parquet(invalid)	
+	invalid_df=pd.read_parquet(invalid)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=42830.0, right_margin=55590.0,
 																  closure_type=Closure(1),
@@ -499,9 +499,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)	
-	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
+	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	invalid_df.to_parquet(invalid)	
+	invalid_df=pd.read_parquet(invalid)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=55590.0, right_margin=100000.0,
 																  closure_type=Closure(2),
@@ -510,9 +510,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
-	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)	
-	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
+	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	invalid_df.to_parquet(invalid)	
+	invalid_df=pd.read_parquet(invalid)
 	
 
 
