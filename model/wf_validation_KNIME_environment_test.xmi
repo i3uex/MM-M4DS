@@ -11,7 +11,7 @@
     name="Model data set with metanode (KNIME)">
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.0"
+      outgoing="//@link.1"
       in="//@dataprocessing.0/@inputPort.0/@datafield.0 //@dataprocessing.0/@inputPort.0/@datafield.1 //@dataprocessing.0/@inputPort.0/@datafield.2"
       out="//@dataprocessing.0/@outputPort.0/@datafield.0 //@dataprocessing.0/@outputPort.0/@datafield.1 //@dataprocessing.0/@outputPort.0/@datafield.2"
       name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)">
@@ -398,8 +398,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.1"
-      incoming="//@link.0"
+      outgoing="//@link.2"
+      incoming="//@link.1"
       in="//@dataprocessing.1/@inputPort.0/@datafield.0 //@dataprocessing.1/@inputPort.0/@datafield.1"
       out="//@dataprocessing.1/@outputPort.0/@datafield.0 //@dataprocessing.1/@outputPort.0/@datafield.1"
       name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)">
@@ -670,8 +670,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.2"
-      incoming="//@link.1"
+      outgoing="//@link.3"
+      incoming="//@link.2"
       in="//@dataprocessing.2/@inputPort.0"
       out="//@dataprocessing.2/@outputPort.0"
       name="imputeMissingByMean(avg_income, distance)">
@@ -953,8 +953,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.3"
-      incoming="//@link.2"
+      outgoing="//@link.4"
+      incoming="//@link.3"
       in="//@dataprocessing.3/@inputPort.0/@datafield.0"
       out="//@dataprocessing.3/@outputPort.0/@datafield.0"
       name="imputeMissingByLinearInterpolation(satscore)">
@@ -1113,8 +1113,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.4"
-      incoming="//@link.3"
+      outgoing="//@link.5"
+      incoming="//@link.4"
       in="//@dataprocessing.4/@inputPort.0/@datafield.0"
       out="//@dataprocessing.4/@outputPort.0/@datafield.0"
       name="rowFilterRange(init_span)">
@@ -1228,8 +1228,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.5"
-      incoming="//@link.4"
+      outgoing="//@link.6"
+      incoming="//@link.5"
       in="//@dataprocessing.5/@inputPort.0"
       out="//@dataprocessing.5/@outputPort.0"
       name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)">
@@ -1375,8 +1375,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.6"
-      incoming="//@link.5"
+      outgoing="//@link.7"
+      incoming="//@link.6"
       in="//@dataprocessing.6/@inputPort.0/@datafield.0"
       out="//@dataprocessing.6/@outputPort.0/@datafield.0"
       name="mapping(TERRITORY)">
@@ -1568,8 +1568,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.7"
-      incoming="//@link.6"
+      outgoing="//@link.8"
+      incoming="//@link.7"
       in="//@dataprocessing.7/@inputPort.0/@datafield.0"
       out="//@dataprocessing.7/@outputPort.0/@datafield.0"
       name="mapping(Instate)">
@@ -1761,8 +1761,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.8"
-      incoming="//@link.7"
+      outgoing="//@link.9"
+      incoming="//@link.8"
       in="//@dataprocessing.8/@inputPort.0"
       out="//@dataprocessing.8/@outputPort.0"
       name="stringToNumber(TERRITORY, Instate)">
@@ -1933,8 +1933,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.9"
-      incoming="//@link.8"
+      outgoing="//@link.10"
+      incoming="//@link.9"
       in="//@dataprocessing.9/@inputPort.0/@datafield.0 //@dataprocessing.9/@inputPort.0/@datafield.1 //@dataprocessing.9/@inputPort.0/@datafield.2"
       out="//@dataprocessing.9/@outputPort.0/@datafield.0 //@dataprocessing.9/@outputPort.0/@datafield.1 //@dataprocessing.9/@outputPort.0/@datafield.2"
       name="imputeOutlierByClosest(avg_income, distance, Instate)">
@@ -2338,8 +2338,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.10"
-      incoming="//@link.9"
+      outgoing="//@link.11"
+      incoming="//@link.10"
       in="//@dataprocessing.10/@inputPort.0/@datafield.0 //@dataprocessing.10/@inputPort.0/@datafield.1 //@dataprocessing.10/@inputPort.0/@datafield.2"
       out="//@dataprocessing.10/@outputPort.0/@datafield.0 //@dataprocessing.10/@outputPort.0/@datafield.1 //@dataprocessing.10/@outputPort.0/@datafield.2"
       name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)">
@@ -2940,8 +2940,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.11"
-      incoming="//@link.10"
+      outgoing="//@link.12"
+      incoming="//@link.11"
       in="//@dataprocessing.11/@inputPort.0/@datafield.0"
       out="//@dataprocessing.11/@outputPort.0/@datafield.0"
       name="binner(TERRITORY)">
@@ -3251,8 +3251,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      outgoing="//@link.12"
-      incoming="//@link.11"
+      outgoing="//@link.13"
+      incoming="//@link.12"
       in="//@dataprocessing.12/@inputPort.0/@datafield.0"
       out="//@dataprocessing.12/@outputPort.0/@datafield.0"
       name="binner(satscore)">
@@ -3528,7 +3528,8 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
-      incoming="//@link.12"
+      outgoing="//@link.0"
+      incoming="//@link.13"
       in="//@dataprocessing.13/@inputPort.0/@datafield.0"
       out="//@dataprocessing.13/@outputPort.0/@datafield.0"
       name="binner(avg_income)">
@@ -3766,6 +3767,35 @@
       </contract>
     </contract>
   </dataprocessing>
+  <dataprocessing
+      xsi:type="Workflow:PMMLModel"
+      incoming="//@link.0"
+      in="//@dataprocessing.14/@inputPort.0"
+      out="//@dataprocessing.14/@outputPort.0"
+      name="pmml"
+      filePath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml">
+    <inputPort
+        fileName="yt"
+        name="wrety"
+        out="//@dataprocessing.14/@outputPort.0">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
+    </inputPort>
+    <outputPort
+        fileName="tfyjikftyj"
+        name="cvbjgv"
+        in="//@dataprocessing.14/@inputPort.0">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
+    </outputPort>
+    <dataProcessingDefinition
+        xsi:type="Library:Transformation"
+        href="library_validation.xmi#//@dataprocessingdefinition.10"/>
+    <test path="resultados"/>
+  </dataprocessing>
+  <link source="//@dataprocessing.13"
+      target="//@dataprocessing.14"
+      name="binner-pmml"/>
   <link source="//@dataprocessing.0"
       target="//@dataprocessing.1"
       name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)-imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)"/>
@@ -3814,7 +3844,7 @@
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="datasets"
+        storageName="dataset1"
         folderPath="/home/carlos/Escritorio/datasets">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>
