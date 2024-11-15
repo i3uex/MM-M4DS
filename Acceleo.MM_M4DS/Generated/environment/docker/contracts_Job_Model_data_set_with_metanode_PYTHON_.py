@@ -7,12 +7,13 @@ import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet'
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.parquet'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -25,8 +26,9 @@ def generateWorkflow():
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	wrety='/wf_validation_python/data/yt.parquet'
 	#--------------------------------------Output data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -40,6 +42,7 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	dghbdrj='/wf_validation_python/data/tfyjikftyj.parquet'
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -814,10 +817,20 @@ def generateWorkflow():
 	
 	
 	
+
+
+
+
+
+
+
+
+
+
+
+
 	#-----------------New DataProcessing-----------------
-	if os.path.exists(binner_satscore__input_dataDictionary):
-		binner_satscore__input_dataDictionary_df=pd.read_parquet(binner_satscore__input_dataDictionary)
-						
+	binner_satscore__input_dataDictionary_df=pd.read_parquet(binner_satscore__input_dataDictionary)
 
 	if os.path.exists(binner_satscore__output_dataDictionary):
 		binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
@@ -942,18 +955,6 @@ def generateWorkflow():
 	
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 set_logger("contracts")

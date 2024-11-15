@@ -6,12 +6,13 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 def generateWorkflow():
 
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
 
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', 
@@ -1278,6 +1279,13 @@ def generateWorkflow():
 	
 	
 	
+	#-----------------New DataProcessing-----------------
+	wrety_df=pd.read_parquet('/wf_validation_python/data/yt.parquet')
+
+	pmml_model = PMMLModel(input_dataset_filepath=wrety_df, output_dataset_filepath="data/resultados", model_learner_pmml_filepath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3)
+	pmml_model.train_and_validate_model()
+	
+
 
 
 

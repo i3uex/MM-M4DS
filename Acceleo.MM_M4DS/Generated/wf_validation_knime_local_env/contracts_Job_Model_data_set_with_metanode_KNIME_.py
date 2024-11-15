@@ -7,11 +7,12 @@ import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/datasets/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
 	if os.path.exists('/wf_validation_python/data/missing_output_dataDictionary.parquet'):
 		imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/missing_output_dataDictionary.parquet')
 
@@ -884,6 +885,16 @@ def generateWorkflow():
 	
 	
 	
+	#-----------------New DataProcessing-----------------
+	wrety_df=pd.read_parquet('/wf_validation_python/data/yt.parquet')
+
+	if os.path.exists('/wf_validation_python/data/tfyjikftyj.parquet'):
+		cvbjgv_df=pd.read_parquet('/wf_validation_python/data/tfyjikftyj.parquet')
+
+	pmml_model = PMMLModel(input_dataset_filepath=wrety_df, output_dataset_filepath="data/resultados", model_learner_pmml_filepath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3)
+	pmml_model.train_and_validate_model()
+	
+
 
 
 

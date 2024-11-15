@@ -87,6 +87,11 @@
         <references href="https://www.example.org/workflow#//DataProcessing"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Workflow_ProcessingStep_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="https://www.example.org/workflow#//ProcessingStep"/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Workflow_PMMLModel_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="https://www.example.org/workflow#//PMMLModel"/>

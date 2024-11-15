@@ -3,12 +3,6 @@ import json
 import h5py
 import pyarrow
 
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset1/missing_input_dataDictionary.csv', sep = ',')
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet')
-
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/missing_output_dataDictionary.csv', sep = ',')
-wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet')
-
-wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary=pd.read_csv('/wf_validation_python/data/dataset2/missing_output_dataDictionary.csv', sep = ',')
-wf_imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary.to_parquet('/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary=pd.read_csv('/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.csv', sep = ',')
+wf_imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary.to_parquet('/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.parquet')
 

@@ -6,11 +6,12 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/dataset1/missing_input_dataDictionary.parquet'
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.parquet'
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	rowFilterRange_init_span__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -23,8 +24,9 @@ def generateWorkflow():
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	wrety='/wf_validation_python/data/yt.parquet'
 	#--------------------------------------Output data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/dataset2/missing_output_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -38,6 +40,7 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
+	dghbdrj='/wf_validation_python/data/tfyjikftyj.parquet'
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -765,7 +768,7 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=4.0,
@@ -792,7 +795,7 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed,
 																  left_margin=4.0, right_margin=1000.0,
@@ -819,7 +822,7 @@ def generateWorkflow():
 																  field_out = 'SOLICITED_CNTCTS_binned')
 	
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)	
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df.to_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_parquet(binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary)
 		
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
@@ -980,7 +983,7 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)	
+	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=1.0, right_margin=3.0,
@@ -991,7 +994,7 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)	
+	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=3.0, right_margin=5.0,
@@ -1002,7 +1005,7 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)	
+	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=5.0, right_margin=7.0,
@@ -1013,7 +1016,7 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)	
+	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_TERRITORY__input_dataDictionary_transformed,
 																  left_margin=7.0, right_margin=1000.0,
@@ -1024,7 +1027,7 @@ def generateWorkflow():
 																  field_out = 'TERRITORY_binned')
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
-	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)	
+	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 		
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__output_dataDictionary_df,
@@ -1095,8 +1098,21 @@ def generateWorkflow():
 	
 	
 	
+
+
+
+
+
+
+
+
+
+
+
+
 	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_df=pd.read_parquet(binner_satscore__input_dataDictionary)
+	binner_satscore__input_dataDictionary_df.to_parquet(binner_satscore__input_dataDictionary)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
@@ -1121,7 +1137,7 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)	
+	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1040.0, right_margin=1160.0,
@@ -1132,7 +1148,7 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)	
+	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1160.0, right_margin=1340.0,
@@ -1143,7 +1159,7 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)	
+	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  left_margin=1340.0, right_margin=2000.0,
@@ -1154,7 +1170,7 @@ def generateWorkflow():
 																  field_out = 'satscore_binned')
 	
 	binner_satscore__output_dataDictionary_df=binner_satscore__input_dataDictionary_transformed
-	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)	
+	binner_satscore__output_dataDictionary_df.to_parquet(binner_satscore__output_dataDictionary)
 	binner_satscore__output_dataDictionary_df=pd.read_parquet(binner_satscore__output_dataDictionary)
 		
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__output_dataDictionary_df,
@@ -1227,9 +1243,9 @@ def generateWorkflow():
 																  data_type_output = DataType(0),
 																  field_in = 'avg_income', field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
-	invalid_df.to_parquet(invalid)	
-	invalid_df=pd.read_parquet(invalid)
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)	
+	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=9.0, right_margin=42830.0,
 																  closure_type=Closure(1),
@@ -1238,9 +1254,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
-	invalid_df.to_parquet(invalid)	
-	invalid_df=pd.read_parquet(invalid)
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)
+	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=42830.0, right_margin=55590.0,
 																  closure_type=Closure(1),
@@ -1249,9 +1265,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
-	invalid_df.to_parquet(invalid)	
-	invalid_df=pd.read_parquet(invalid)
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)
+	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=55590.0, right_margin=100000.0,
 																  closure_type=Closure(2),
@@ -1260,9 +1276,9 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
-	invalid_df.to_parquet(invalid)	
-	invalid_df=pd.read_parquet(invalid)
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)
+	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
 		
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='avg_income_binned'):
@@ -1308,18 +1324,6 @@ def generateWorkflow():
 	
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

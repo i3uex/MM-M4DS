@@ -16,7 +16,6 @@
 [comment @main/]
 [generateEnvironment(aWorkflow)/]
 [fileFormatting(aWorkflow)/]
-[pmmlProcessing(aWorkflow)/]
 [generateDataProcessing(aWorkflow)/]
 [generateContractsDataProcessing(aWorkflow)/]
 [generateTransformationsDataProcessing(aWorkflow)/]
@@ -33,6 +32,7 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 [comment generate the imports and the class/]
 def generateWorkflow():
@@ -162,16 +162,7 @@ def generateWorkflow():
 			[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]						[comment OPEN assigns the variable to be of type DataProcessingDefinition/]
 				[if (dpd.oclIsKindOf(Library::Transformation))]																								[comment OPEN checks if the dataPrcessingDefinition is of type Transformation/]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]															[comment OPEN assigns the variable to be of type Transformation/]
-						[if (ps.oclIsKindOf(DataProcessing))]
-							[let d : DataProcessing = ps.oclAsType(DataProcessing)]
-[callRecursiveTemplate(d)/]
-							[/let]
-						[/if]
-						[if (ps.oclIsKindOf(PMMLModel))]
-							[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-							[/let]
-						[/if]
+[callRecursiveTemplate(ps)/]
 					[/let]																																	[comment CLOSE assigns the variable to be of type Transformation/]
 				[elseif (dpd.oclIsKindOf(Library::Job))]																									[comment OPEN checks if the dataPrcessingDefinition is of type Job/]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]																					[comment OPEN assigns the variable to be of type Job/]
@@ -308,53 +299,61 @@ generateWorkflow()
 [/template]
 
 
-[template public callRecursiveTemplate(d : DataProcessing)]
+[template public callRecursiveTemplate(ps : ProcessingStep)]
 	#-----------------New DataProcessing-----------------
-[if (d.incoming <> null)]																								[comment OPEN checks that it is not the first data processing/]
-	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]														[comment OPEN checks that the operation is not split/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (d.inputPort->first().fileName.trim().indexOf('.')>0)][d.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][d.inputPort->first().fileName.trim()/].parquet[/if]')
+[if (ps.incoming <> null)]																								[comment OPEN checks that it is not the first data processing/]
+	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]														[comment OPEN checks that the operation is not split/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
+	[ps.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (ps.inputPort->first().fileName.trim().indexOf('.')>0)][ps.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.inputPort->first().fileName.trim()/].parquet[/if]')
 		[/if]																											[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[else]																												[comment OPEN checks if the operation is split/]
-		[for (dc : DataDictionary | d.inputPort)]																		[comment OPEN read all the input datasets and store them/]
-			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]												[comment OPEN read the previous DataProcessing output datasets/]
+		[for (dc : DataDictionary | ps.inputPort)]																		[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]												[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]																[comment OPEN checks that both datasets are the same/]
-					[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]										[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName.trim()/].parquet[/if]')
+					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]										[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName.trim()/].parquet[/if]')
 					[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 				[/if]																									[comment CLOSE checks that both datasets are the same/]
 			[/for]																										[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																											[comment CLOSE read all the input datasets and store them/]
 	[/if]																												[comment CLOSE checks whether the operation is split or not/]
 [else]																													[comment CLOSE checks that it is not the first data processing/]
-	[for (dc : DataDictionary | d.inputPort)]																			[comment OPEN read all the input datasets and store them/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[for (dc : DataDictionary | ps.inputPort)]																			[comment OPEN read all the input datasets and store them/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																											[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[/for]																												[comment CLOSE read all the input datasets and store them/]
 [/if]																													[comment CLOSE checks whether it is the first data processing or not/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
+[if (ps.oclIsKindOf(DataProcessing))]
+	[let d : DataProcessing = ps.oclAsType(DataProcessing)]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d, d)/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
-[if (d.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]											[comment OPEN assigns the next DataProcessing to a variable/]
-[callRecursiveTemplate(nextDp)/]							[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[/let]
+[elseif (ps.oclIsKindOf(PMMLModel))]
+	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
+	[generatePMML(pmml)/]
+	[/let]
+[/if]
+[if (ps.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextPs : ProcessingStep = ps.outgoing.target]											[comment OPEN assigns the next DataProcessing to a variable/]
+[callRecursiveTemplate(nextPs)/]							[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
 	[/let]																												[comment OPEN assigns the next DataProcessing to a variable/]
 [/if]																													[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
@@ -371,6 +370,7 @@ import functions.contract_pre_post as contract_pre_post
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 [comment generate the imports and the class/]
 def generateWorkflow():
@@ -505,16 +505,7 @@ def generateWorkflow():
 			[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]						[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 				[if (dpd.oclIsKindOf(Library::Transformation))]																								[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]															[comment OPEN assigns the variable to be a Transformation/]
-						[if (ps.oclIsKindOf(DataProcessing))]
-							[let d : DataProcessing = ps.oclAsType(DataProcessing)]
-[callContractsRecursiveTemplate(d)/]
-							[/let]
-						[/if]
-						[if (ps.oclIsKindOf(PMMLModel))]
-							[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-							[/let]
-						[/if]
+[callContractsRecursiveTemplate(ps)/]
 					[/let]																																	[comment CLOSE assigns the variable to be a Transformation/]
 				[elseif (dpd.oclIsKindOf(Library::Job))]																									[comment OPEN assigns the variable to be a Job/]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]																					[comment OPEN assigns the variable to be a Job/]
@@ -669,20 +660,20 @@ generateWorkflow()
 [/template]
 
 
-[template public callContractsRecursiveTemplate(d : DataProcessing)]
+[template public callContractsRecursiveTemplate(ps : ProcessingStep)]
 	#-----------------New DataProcessing-----------------
-[if (d.incoming <> null)]																								[comment OPEN checks if there is a previous DataProcessing/]
-	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]														[comment OPEN checks that the operation is not split/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (d.inputPort->first().fileName.trim().indexOf('.')>0)][d.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][d.inputPort->first().fileName.trim()/].parquet[/if]')
+[if (ps.incoming <> null)]																								[comment OPEN checks if there is a previous DataProcessing/]
+	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]														[comment OPEN checks that the operation is not split/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
+	[ps.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (ps.inputPort->first().fileName.trim().indexOf('.')>0)][ps.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.inputPort->first().fileName.trim()/].parquet[/if]')
 		[/if]																											[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[else]																												[comment OPEN checks if the operation is split/]
-		[for (dc : DataDictionary | d.inputPort)]																		[comment OPEN read all the input datasets and store them/]
-			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]												[comment OPEN read the previous DataProcessing output datasets/]
+		[for (dc : DataDictionary | ps.inputPort)]																		[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]												[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]																	[comment OPEN checks that both datasets are the same/]
-					[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]										[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
+					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]										[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc_out)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
 					[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 				[/if]																									[comment CLOSE checks that both datasets are the same/]
@@ -690,38 +681,46 @@ generateWorkflow()
 		[/for]																											[comment CLOSE read all the input datasets and store them/]
 	[/if]																												[comment CLOSE checks that the operation is split or not/]
 [else]																													[comment OPEN checks that there is not a previous DataProcessing/]
-	[for (dc : DataDictionary | d.inputPort)]																			[comment OPEN read all the input datasets and store them/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[for (dc : DataDictionary | ps.inputPort)]																			[comment OPEN read all the input datasets and store them/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																											[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																												[comment CLOSE read all the input datasets and store them/]
 [/if]																													[comment CLOSE checks if there is a previous DataProcessingor not/]
-[for (dc : DataDictionary | d.outputPort)]																				[comment OPEN read all the output datasets and store them/]
-	[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	if os.path.exists('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+[for (dc : DataDictionary | ps.outputPort)]																				[comment OPEN read all the output datasets and store them/]
+	[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
+	if os.path.exists('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
+		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 	[/if]																												[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 [/for]																													[comment CLOSE read all the output datasets and store them/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
+[if (ps.oclIsKindOf(DataProcessing))]
+	[let d : DataProcessing = ps.oclAsType(DataProcessing)]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
-[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
+			[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
-	[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
-[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
-[if (d.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]											[comment OPEN assigns the next DataProcessing to a variable/]
-[callContractsRecursiveTemplate(nextDp)/]											[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
+			[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
+		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
+	[/let]
+[elseif (ps.oclIsKindOf(PMMLModel))]
+	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
+	[generatePMML(pmml)/]
+	[/let]
+[/if]
+[if (ps.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextps : ProcessingStep = ps.outgoing.target]											[comment OPEN assigns the next DataProcessing to a variable/]
+[callContractsRecursiveTemplate(nextps)/]											[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
 	[/let]																												[comment OPEN assigns the next DataProcessing to a variable/]
 [/if]																													[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
@@ -735,6 +734,7 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 [comment generate the imports and the class/]
 def generateWorkflow():
@@ -833,16 +833,7 @@ def generateWorkflow():
 			[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a dataProcessingDefinition/]
 				[if (dpd.oclIsKindOf(Library::Transformation))]																			[comment OPEN checks if the dataProcessingDefinition is a Transformation/]
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]										[comment OPEN assigns the variable to be a Tranformation/]
-						[if (ps.oclIsKindOf(DataProcessing))]
-							[let d : DataProcessing = ps.oclAsType(DataProcessing)]
-[callTransformationsRecursiveTemplate(d)/]
-							[/let]
-						[/if]
-						[if (ps.oclIsKindOf(PMMLModel))]
-							[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-							[/let]
-						[/if]
+[callTransformationsRecursiveTemplate(ps)/]
 					[/let]																												[comment CLOSE assigns the variable to be a Tranformation/]
 				[elseif (dpd.oclIsKindOf(Library::Job))]																				[comment OPEN checks if the dataProcessingDefinition is a Job/]
 					[let libJ : Library::Job = dpd.oclAsType(Library::Job)]																[comment OPEN assigns the variable to be a Job/]
@@ -946,46 +937,53 @@ generateWorkflow()
 [/template]
 
 
-[template public callTransformationsRecursiveTemplate(d : DataProcessing)]
+[template public callTransformationsRecursiveTemplate(ps : ProcessingStep)]
 	#-----------------New DataProcessing-----------------
-[if (d.incoming <> null)]																																		[comment OPEN checks if there is an incoming link/]
-	[if (d.incoming.source.dataProcessingDefinition.name<>'split')]																								[comment OPEN checks if the operation is split/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
-	[d.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=d.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (d.inputPort->first().fileName.trim().indexOf('.')>0)][d.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][d.inputPort->first().fileName/].parquet[/if]')
+[if (ps.incoming <> null)]																																		[comment OPEN checks if there is an incoming link/]
+	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]																								[comment OPEN checks if the operation is split/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
+	[ps.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=ps.inputPort->first())][st.storageName/]/[/if][/for][/let][/if][/for][if (ps.inputPort->first().fileName.trim().indexOf('.')>0)][ps.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.inputPort->first().fileName/].parquet[/if]')
 		[/if]																																					[comment CLOSE checks if it is a local file and a local container/]
 
 	[else]																																						[comment OPEN checks that the operation is not split/]
-		[for (dc : DataDictionary | d.inputPort)]																												[comment OPEN read all the input datasets and store them/]
-			[for (dc_out : DataDictionary | d.incoming.source.outputPort)]																						[comment OPEN read the previous DataProcessing output datasets/]
+		[for (dc : DataDictionary | ps.inputPort)]																												[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]																						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]																											[comment OPEN checks that both datasets are the same/]
-					[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]																				[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary.fileName=dc_out.fileName)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary.fileName=dc_out.fileName)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
+					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																				[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary.fileName=dc_out.fileName)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary.fileName=dc_out.fileName)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
 					[/if]																																		[comment CLOSE checks if it is a local file and a container or a local environment/]
 				[/if]																																			[comment CLOSE checks that both datasets are the same/]
 			[/for]																																				[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																																					[comment CLOSE read all the input datasets and store them/]
 	[/if]																																						[comment CLOSE checks if the operation is split or not/]
 [else]																																							[comment OPEN checks if there is not an incoming link/]
-	[for (dc : DataDictionary | d.inputPort)]																													[comment OPEN read all the input datasets and store them/]
-		[if (d.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (d.eContainer(Workflow).environment.path.startsWith('.'))][d.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][d.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | d.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[for (dc : DataDictionary | ps.inputPort)]																													[comment OPEN read all the input datasets and store them/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[for (st : Storage | ps.eContainer(Workflow).environment.storage)][if (st.oclIsKindOf(Database) and st.storageName.size()>0)][let db : Database = st.oclAsType(Database)][for(tab : Table | db.table)][if(tab.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][elseif(st.oclIsKindOf(Folder) and st.storageName.size()>0)][let fo : Folder = st.oclAsType(Folder)][for(fi : File | fo.file)][if(fi.dataDictionary=dc)][st.storageName/]/[/if][/for][/let][/if][/for][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																																					[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																																						[comment CLOSE read all the input datasets and store them/]
 [/if]																																							[comment CLOSE checks if there is an incoming link or not/]
+[if (ps.oclIsKindOf(DataProcessing))]
+	[let d : DataProcessing = ps.oclAsType(DataProcessing)]
 	[generateCallTransformation(d, d)/]
-[if (d.outgoing<>null)]																																			[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-	[let nextDp : DataProcessing = d.outgoing.target.oclAsType(DataProcessing)]																					[comment OPEN assigns the next DataProcessing to a variable/]
-[callTransformationsRecursiveTemplate(nextDp)/]
+	[/let]
+[elseif (ps.oclIsKindOf(PMMLModel))]
+	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
+	[generatePMML(pmml)/]
+	[/let]
+[/if]
+[if (ps.outgoing<>null)]																																			[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextps : ProcessingStep = ps.outgoing.target]																					[comment OPEN assigns the next DataProcessing to a variable/]
+[callTransformationsRecursiveTemplate(nextps)/]
 	[/let]																																						[comment OPEN assigns the next DataProcessing to a variable/]
 [/if]																																							[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
 
 [template public generatePMML(pmml : PMMLModel)]
-[comment]FALTA POR AÑADIR LA CLASE QUE TIENE LAS FUNCIONES DEL PMML. (HAY QUE CREARLO EN UN TEMPLATE INDEPENDIENTE, COMO EL fileFormatting)[/comment]
 [comment]CAMBIAR EL FIRST POR LOS FOR COMO EN LOS RECURSIVE TEMPLATES[/comment]
-pmml_model = PMMLModel(input_dataset_filepath="[pmml.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]", output_dataset_filepath="data", model_learner_pmml_filepath="[pmml.filePath/], export_only_predictions=False, export_test_metrics=True[if (pmml.test<>null)], train_split=[pmml.test.trainSize/], test_split=[pmml.test.testSize/][/if])
+pmml_model = PMMLModel(input_dataset_filepath=[pmml.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df, output_dataset_filepath=[if (pmml.test<>null)]"data/[pmml.test.path/]"[else]"data"[/if], model_learner_pmml_filepath="[pmml.filePath/]", export_only_predictions=[if (pmml.onlyPredictions=false)]False[elseif (pmml.onlyPredictions=true)]True[/if], export_test_metrics=True[if (pmml.test<>null)], train_split=[pmml.test.trainSize/], test_split=[pmml.test.testSize/][/if])
 [if (pmml.test<>null)]
 pmml_model.train_and_validate_model()
 [/if]
@@ -1204,7 +1202,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 									[/if]
 								[/let]
 							[elseif (dpd.oclIsKindOf(Library::Job))]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
 							[/if]
 						[/let]
@@ -1364,10 +1362,12 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 
 [template public generateEnvironment(aWorkflow : Workflow)]
-[if (aWorkflow.environment.oclIsKindOf(Local))]
+[if (aWorkflow.environment<>null)]
+	[if (aWorkflow.environment.oclIsKindOf(Local))]
 [generateLocalDocker()/]
-[elseif (aWorkflow.environment.oclIsKindOf(AzureCI) or aWorkflow.environment.oclIsKindOf(AmazonECS))]
+	[elseif (aWorkflow.environment.oclIsKindOf(AzureCI) or aWorkflow.environment.oclIsKindOf(AmazonECS))]
 [generateRemoteDocker()/]
+	[/if]
 [/if]
 [/template]
 
@@ -1765,395 +1765,6 @@ dynamodb = boto3.resource(
 [/file]
 [/template]
 
-
-[template public pmmlProcessing(aWorkflow : Workflow)]
-[file ('pmmlProcessing.py', false, 'UTF-8')]
-import os
-from enum import Enum
-from pathlib import Path
-import pandas as pd
-import pypmml
-import sklearn.metrics as sklearn_metrics
-from sklearn.cluster import KMeans
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neural_network import MLPClassifier
-from sklearn.tree import DecisionTreeClassifier
-import xml.etree.ElementTree as ElementTreeXML
-
-
-class ModelName(Enum):
-    NAIVE_BAYES = "naive bayes"
-    DECISION_TREE = "decision tree"
-    LINEAR_REGRESSION = "linear regression"
-    K_MEANS = "k-means"
-    MLP = "multi-layer perceptron (Neural Network)"
-
-
-class PMMLModel:
-    """
-    PMML model class to make predictions, save the predictions and metrics to a CSV file and train and
-    validate the model
-
-    Attributes:
-    ----------
-    inputDatasetFilePath: str
-        Input dataset filepath
-    outputDatasetFilePath: str
-        Output dataset filepath
-    pmml_model_filepath: str
-        PMML model filepath
-    inputDataset: pd.DataFrame
-        Input dataset
-    predictions: pd.DataFrame
-        Predictions made by the model
-    validation_predictions: pd.DataFrame
-        Predictions to validate the model
-    pmmlModelLearner: pypmml.Model
-        PMML model learner
-    exportOnlyPredictions: bool
-        Export just the predictions or the whole dataset with predictions
-    export_test_metrics: bool
-        Export the test metrics or not
-    algorithmName: str
-        Algorithm type name
-    modelName: ModelName
-        Algorithm model name
-    inputNames: list
-        Input column names used by the model
-    outputNames: list
-        Output column names generated by the model
-    predictedClassColumn: str
-        Predicted class column name
-    classColumn: str
-        Class column name to predict
-    metric_scores: pd.DataFrame
-        Metric scores
-    train_split: float
-        Train split percentage for the dataset
-    test_split: float
-        Test split percentage for the dataset
-    """
-    inputDatasetFilePath: str = None  # Input dataset filepath
-    outputDatasetFilePath: str = None  # Output dataset filepath
-    pmml_model_filepath: str = None  # PMML model filepath
-
-    inputDataset: pd.DataFrame = None  # Input dataset
-    predictions: pd.DataFrame = None  # Predictions made by the model
-    validation_predictions: pd.DataFrame = None  # Validation predictions
-
-    pmmlModelLearner: pypmml.Model = None  # PMML model learner
-    exportOnlyPredictions: bool = None  # Export just the predictions or the whole dataset with predictions
-    export_test_metrics: bool = None  # Export the test metrics or not
-
-    algorithmName: str = None  # Algorithm type name
-    modelName: ModelName = None  # Algorithm model name
-
-    inputNames: list = None  # Input column names used by the model
-    outputNames: list = None  # Output column names generated by the model
-
-    predictedClassColumn: str = None  # Predicted class column name
-    classColumn: str = None  # Predicted class column name
-
-    metric_scores: pd.DataFrame = None  # Metric scores
-
-    train_split: float = None  # Train split percentage for the dataset
-    test_split: float = None  # Test split percentage for the dataset
-
-    def __init__(self, input_dataset_filepath: str, output_dataset_filepath: str, model_learner_pmml_filepath: str,
-                 export_only_predictions: bool, export_test_metrics: bool, train_split: float = None,
-                 test_split: float = None):
-        """
-        Initialize the PMML model object, parse the PMML model and make and export the predictions
-
-        :param input_dataset_filepath: filepath to the input dataset to use to validate the model and make predictions
-        :param output_dataset_filepath: filepath to the output dataset to save the predictions and metrics
-        :param model_learner_pmml_filepath: filepath to the PMML model file
-        :param export_only_predictions: export just the predictions or the whole dataset with predictions
-        :param export_test_metrics: boolean to export the test metrics or not
-        :param train_split: train split percentage for the dataset
-        :param test_split: test split percentage for the dataset
-        """
-        self.inputDatasetFilePath = input_dataset_filepath
-        self.outputDatasetFilePath = output_dataset_filepath
-        self.pmml_model_filepath = model_learner_pmml_filepath
-
-        self.inputDataset = pd.read_csv(self.inputDatasetFilePath)  # Load the input dataset as a dataframe
-        self.pmmlModelLearner = pypmml.Model.load(model_learner_pmml_filepath)  # Load the PMML model
-        self.exportOnlyPredictions = export_only_predictions  # Export just the predictions or the whole
-        # dataset with predictions
-        self.export_test_metrics = export_test_metrics  # Export the test metrics or not
-        # Save the train and test split if they are not None
-        if train_split is not None and test_split is not None:
-            self.train_split = train_split
-            self.test_split = test_split
-
-        # MAIN FUNCTION CALLS: PARSE PMML MODEL, MAKE AND EXPORT PREDICTIONS AND SAVE TEST METRICS
-        self.parser_pmml_model()  # Parse the PMML model
-        self.make_and_export_predictions()  # Make and export the predictions
-        self.save_test_metrics()  # Save the test metrics
-        print(f"{self.modelName.value} model has been loaded\n")
-
-    def get_model_name(self):
-        """
-        Get a uniform model name from the PMML model name
-        """
-        if self.pmmlModelLearner.modelName is not None:
-            pmml_model_name = self.pmmlModelLearner.modelName
-        else:
-            pmml_model_name = self.pmmlModelLearner.modelElement
-        model_name_lower = pmml_model_name.lower()
-        best_match = None
-        highest_score = 0
-
-        # Calculate the score based on substring matches with variable lengths
-        for name in ModelName:
-            name_value = name.value.lower()
-            score = 0
-
-            # Iterate through all possible substrings of name_value
-            for i in range(len(name_value)):
-                for j in range(i + 1, len(name_value) + 1):
-                    substring = name_value['['/]i:j[']'/]
-                    if substring in model_name_lower:
-                        score += 1
-
-            # Save the best match
-            if score > highest_score:
-                highest_score = score
-                best_match = name
-
-        self.modelName = best_match
-
-    def parser_pmml_model(self):
-        """
-        Parse the PMML model
-        """
-        self.algorithmName = self.pmmlModelLearner.functionName  # Get the function name
-        self.get_model_name()
-        self.inputNames = self.pmmlModelLearner.inputNames
-        self.outputNames = self.pmmlModelLearner.outputNames
-
-        # Get the predicted class column name
-        if self.algorithmName != 'clustering':
-            self.predictedClassColumn = self.outputNames['['/]0[']'/]  # Get the predicted class column name
-            self.classColumn = self.predictedClassColumn.replace('predicted_', '')  # Get class column name
-
-    def make_and_export_predictions(self):
-        """
-        Make and export the predictions
-        """
-        print("Making predictions on the dataset...")
-        self.predictions = self.pmmlModelLearner.predict(self.inputDataset)  # Make predictions on the dataset
-
-        # Create the output directory if it does not exist
-        if not os.path.exists(self.outputDatasetFilePath):
-            os.makedirs(self.outputDatasetFilePath)
-
-        if not self.exportOnlyPredictions:
-            predictions_df = self.inputDataset.copy()
-            predictions_df = pd.concat(['['/]predictions_df, self.predictions[']'/], axis=1)
-            predictions_df.to_csv(f'{self.outputDatasetFilePath}/{Path(self.inputDatasetFilePath).stem}'
-                                  f'_with_predictions_using_{self.modelName.name}.csv', index=False)
-            print("Predictions and dataset saved to a CSV file")
-        else:
-            self.predictions.to_csv(f'{self.outputDatasetFilePath}/{Path(self.inputDatasetFilePath).stem}'
-                                    f'_only_predictions_using_{self.modelName.name}.csv', index=False)
-            print("Only predictions saved to a CSV file")
-
-    def save_test_metrics(self):
-        """
-        Save the test metrics to the PMMLModel class instance and export them to a CSV file if the attribute
-        'export_test_metrics' is True
-        """
-        print("Testing model and saving metric results...")
-        if self.algorithmName == 'classification':
-
-            y_true = self.inputDataset['['/]self.classColumn[']'/]
-            y_pred = self.predictions['['/]self.predictedClassColumn[']'/]
-            y_true = pd.Categorical(y_true).codes
-            y_pred = pd.Categorical(y_pred).codes
-
-            accuracy = sklearn_metrics.accuracy_score(y_true, y_pred)
-            precision = sklearn_metrics.precision_score(y_true, y_pred)
-            recall = sklearn_metrics.recall_score(y_true, y_pred)
-            f1 = sklearn_metrics.f1_score(y_true, y_pred)
-            # Save the metrics to the PMMLModel object
-            self.metric_scores = pd.DataFrame({
-                'Metric': ['['/]'Accuracy', 'Precision', 'Recall', 'F1 Score'[']'/],
-                'Score': ['['/]accuracy, precision, recall, f1[']'/]
-            })
-
-        elif self.algorithmName == 'regression':
-
-            y_true = self.inputDataset['['/]self.classColumn[']'/]
-            y_pred = self.predictions['['/]self.predictedClassColumn[']'/]
-            mse = sklearn_metrics.mean_squared_error(y_true, y_pred)
-            r2 = sklearn_metrics.r2_score(y_true, y_pred)
-            mae = sklearn_metrics.mean_absolute_error(y_true, y_pred)
-            median_ae = sklearn_metrics.median_absolute_error(y_true, y_pred)
-
-            self.metric_scores = pd.DataFrame({
-                'Metric': ['['/]'Mean Squared Error', 'R2 Score', 'Mean Absolute Error', 'Median Absolute Error'[']'/],
-                'Score': ['['/]mse, r2, mae, median_ae[']'/]
-            })
-
-        elif self.algorithmName == 'clustering':
-            cluster_names = self.predictions['['/]'cluster_name'[']'/]
-
-            # Count the number of instances in each cluster
-            cluster_counts = cluster_names.value_counts()
-
-            self.metric_scores = pd.DataFrame({
-                'Metric': ['['/]'Cluster Counts'[']'/],
-                'Score': ['['/]cluster_counts[']'/]
-            })
-
-        else:
-            raise ValueError(f"{self.modelName.value} model not recognized")
-
-        if self.export_test_metrics:
-            if not os.path.exists(self.outputDatasetFilePath):
-                os.makedirs(self.outputDatasetFilePath)
-
-            self.metric_scores.to_csv(f'{self.outputDatasetFilePath}/{Path(self.inputDatasetFilePath).stem}'
-                                      f'_metric_scores_using_{self.modelName.name}.csv', index=False)
-            print("Metric scores saved to a CSV file")
-
-    def train_and_validate_model(self):
-        """
-        Train and validate the model if the attribute 'validate_model' is True
-        """
-        print(f"Training and validating the {self.modelName.value} model...")
-
-        model_validated = False
-
-        # Split the dataset into train and test using train_test_split from sklearn
-        x = self.inputDataset['['/]self.inputNames[']'/]
-        y = self.inputDataset['['/]self.classColumn[']'/] if self.classColumn is not None else None
-        y_test = None
-        y_train = None
-        if self.classColumn is not None:
-            x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=self.train_split,
-                                                                test_size=self.test_split, shuffle=True)
-        else:
-            x_train, x_test = train_test_split(x, train_size=self.train_split, test_size=self.test_split, shuffle=True)
-
-        # Prepare the training data to convert categorical columns to numerical columns
-        x_train = x_train.apply(lambda col: pd.Categorical(col).codes)
-        x_test = x_test.apply(lambda col: pd.Categorical(col).codes)
-
-        validation_model = None
-        # Train the model using the training dataset
-        if self.modelName == ModelName.K_MEANS:
-            # Carga el archivo PMML
-            tree = ElementTreeXML.parse(self.pmml_model_filepath)
-            root = tree.getroot()
-
-            # Encuentra el ClusteringModel y accede a 'numberOfClusters'
-            clustering_model = root.find('.//{http://www.dmg.org/PMML-4_2}'+ self.pmmlModelLearner.modelElement)
-            if clustering_model is not None:
-                number_of_clusters = int(clustering_model.get('numberOfClusters'))
-                validation_model = KMeans(n_clusters=number_of_clusters)
-                validation_model.fit(x_train)
-            else:
-                print("No se encontró el modelo de clustering.")
-
-        elif self.modelName == ModelName.LINEAR_REGRESSION:
-            validation_model = LinearRegression()
-            validation_model.fit(x_train, y_train)
-        elif self.modelName == ModelName.DECISION_TREE:
-            validation_model = DecisionTreeClassifier()
-            validation_model.fit(x_train, y_train)
-        elif self.modelName == ModelName.NAIVE_BAYES:
-            validation_model = GaussianNB()
-            validation_model.fit(x_train, y_train)
-        elif self.modelName == ModelName.MLP:
-            validation_model = MLPClassifier()
-            validation_model.fit(x_train, y_train)
-        else:
-            raise ValueError(f"{self.modelName.value} model not recognized")
-
-        print(f"{self.modelName.value} model has been TRAINED")
-
-        # Make validation predictions
-        self.validation_predictions = validation_model.predict(x_test)
-
-        # Validate the model
-        if self.algorithmName == 'classification':
-
-            y_true = y_test
-            y_pred = self.validation_predictions
-            y_true = pd.Categorical(y_true).codes
-            y_pred = pd.Categorical(y_pred).codes
-
-            accuracy = sklearn_metrics.accuracy_score(y_true, y_pred)
-            precision = sklearn_metrics.precision_score(y_true, y_pred)
-            recall = sklearn_metrics.recall_score(y_true, y_pred)
-            f1 = sklearn_metrics.f1_score(y_true, y_pred)
-
-            original_accuracy = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Accuracy', 'Score'[']'/].values['['/]0[']'/]
-            original_precision = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Precision', 'Score'[']'/].values['['/]0[']'/]
-            original_recall = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Recall', 'Score'[']'/].values['['/]0[']'/]
-            original_f1 = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'F1 Score', 'Score'[']'/].values['['/]0[']'/]
-
-            print(f"Pretrained Model Accuracy: {original_accuracy} - Validation Model Accuracy: {accuracy}")
-            print(f"Pretrained Model Precision: {original_precision} - Validation Model Precision: {precision}")
-            print(f"Pretrained Model Recall: {original_recall} - Validation Model Recall: {recall}")
-            print(f"Pretrained Model F1 Score: {original_f1} - Validation Model F1 Score: {f1}")
-
-        elif self.algorithmName == 'regression':
-
-            y_true = y_test
-            y_pred = self.validation_predictions
-            mse = sklearn_metrics.mean_squared_error(y_true, y_pred)
-            r2 = sklearn_metrics.r2_score(y_true, y_pred)
-            mae = sklearn_metrics.mean_absolute_error(y_true, y_pred)
-            median_ae = sklearn_metrics.median_absolute_error(y_true, y_pred)
-
-            original_mse = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Mean Squared Error', 'Score'[']'/].values['['/]0[']'/]
-            original_r2 = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'R2 Score', 'Score'[']'/].values['['/]0[']'/]
-            original_mae = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Mean Absolute Error', 'Score'[']'/].values['['/]0[']'/]
-            original_median_ae = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Median Absolute Error', 'Score'[']'/].values['['/]0[']'/]
-
-            print(f"Pretrained Model Mean Squared Error: {original_mse} - Validation Model Mean Squared Error: {mse}")
-            print(f"Pretrained Model R2 Score: {original_r2} - Validation Model R2 Score: {r2}")
-            print(f"Pretrained Model Mean Absolute Error: {original_mae} - Validation Model Mean Absolute Error: {mae}")
-            print(f"Pretrained Model Median Absolute Error: {original_median_ae} - Validation Model Median Absolute Error: {median_ae}")
-
-        elif self.algorithmName == 'clustering':
-
-            # Count the number of instances in each cluster and compare with the original cluster counts
-            cluster_counts = pd.Series(validation_model.labels_).value_counts()
-            original_cluster_counts = self.metric_scores.loc['['/]self.metric_scores['['/]'Metric'[']'/] == 'Cluster Counts', 'Score'[']'/].values['['/]0[']'/]
-            print(f"Pretrained Model Cluster Counts: {original_cluster_counts} - Validation Model Cluster Counts: {cluster_counts}")
-
-            # Check if the cluster counts are the same considering an epsilon error
-            if (original_cluster_counts - cluster_counts).abs().max() < 1e-5:
-                print("Cluster counts are the same")
-                model_validated = True
-            else:
-                print("Cluster counts are NOT the same")
-        else:
-            raise ValueError(f"{self.modelName.value} model not recognized")
-
-        if model_validated:
-            print(f"{self.modelName.value} model has been VALIDATED\n")
-        else:
-            print(f"{self.modelName.value} model has NOT BEEN VALIDATED\n")
-
-    def __str__(self):
-        """
-        String representation of the PMML model
-        :return: string representation of the PMML model
-        """
-        return f"Algorithm type name: {self.algorithmName}\n" \
-               f"Model name: {self.modelName.value}\n" \
-               f"Input names: {self.inputNames}\n" \
-               f"Output names: {self.outputNames}\n"
-[/file]
-[/template]
 
 
 

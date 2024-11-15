@@ -5,11 +5,8 @@ if [ ! -d "data" ]; then
     mkdir data
 fi
 
-if [ ! -d "data/dataset1" ]; then
-    mkdir data/dataset1
-fi
-if [ ! -d "data/dataset2" ]; then
-    mkdir data/dataset2
+if [ ! -d "data/pmmldb1" ]; then
+    mkdir data/pmmldb1
 fi
 
 sudo apt-get update --yes
@@ -30,9 +27,7 @@ docker build -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"dataset1
-cp /home/carlos/Escritorio/datasetsTest/missing_output_dataDictionary.csv "$(pwd)/data/"dataset2
-cp /home/carlos/Escritorio/datasetsTest/missing_output_dataDictionary.csv "$(pwd)/data/"dataset2
+cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"pmmldb1
 
 docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 

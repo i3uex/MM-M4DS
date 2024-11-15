@@ -4,6 +4,7 @@ import functions.data_transformations as data_transformations
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
 from helpers.logger import set_logger
 import pyarrow
+from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
@@ -325,8 +326,19 @@ def generateWorkflow():
 	
 	binner_TERRITORY__output_dataDictionary_df=binner_TERRITORY__input_dataDictionary_transformed
 	
-	#-----------------New DataProcessing-----------------
 
+
+
+
+
+
+
+
+
+
+
+
+	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_transformed=binner_satscore__input_dataDictionary_df.copy()
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
@@ -377,7 +389,7 @@ def generateWorkflow():
 																  data_type_output = DataType(0),
 																  field_in = 'avg_income', field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=9.0, right_margin=42830.0,
 																  closure_type=Closure(1),
@@ -386,7 +398,7 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=42830.0, right_margin=55590.0,
 																  closure_type=Closure(1),
@@ -395,7 +407,7 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
 	binner_avg_income__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_avg_income__input_dataDictionary_transformed,
 																  left_margin=55590.0, right_margin=100000.0,
 																  closure_type=Closure(2),
@@ -404,20 +416,8 @@ def generateWorkflow():
 																  field_in = 'avg_income',
 																  field_out = 'avg_income_binned')
 	
-	invalid_df=binner_avg_income__input_dataDictionary_transformed
+	binner_avg_income__output_dataDictionary_df=binner_avg_income__input_dataDictionary_transformed
 	
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 set_logger("transformations")
