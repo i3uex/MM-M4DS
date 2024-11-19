@@ -10,6 +10,8 @@
     name="Model data set with metanode (PYTHON)">
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
+      in="//@dataprocessing.0/@inputPort.0 //@dataprocessing.0/@inputPort.2 //@dataprocessing.0/@inputPort.4 //@dataprocessing.0/@inputPort.6 //@dataprocessing.0/@inputPort.8 //@dataprocessing.0/@inputPort.10 //@dataprocessing.0/@inputPort.12 //@dataprocessing.0/@inputPort.14 //@dataprocessing.0/@inputPort.16 //@dataprocessing.0/@inputPort.18 //@dataprocessing.0/@inputPort.20 //@dataprocessing.0/@inputPort.22 //@dataprocessing.0/@inputPort.24 //@dataprocessing.0/@inputPort.26 //@dataprocessing.0/@inputPort.27"
+      out="//@dataprocessing.0/@inputPort.1 //@dataprocessing.0/@inputPort.3 //@dataprocessing.0/@inputPort.5 //@dataprocessing.0/@inputPort.7 //@dataprocessing.0/@inputPort.9 //@dataprocessing.0/@inputPort.11 //@dataprocessing.0/@inputPort.13 //@dataprocessing.0/@inputPort.15 //@dataprocessing.0/@inputPort.17 //@dataprocessing.0/@inputPort.19 //@dataprocessing.0/@inputPort.21 //@dataprocessing.0/@inputPort.23 //@dataprocessing.0/@inputPort.25 //@dataprocessing.0/@outputPort.0 //@dataprocessing.0/@outputPort.1"
       name="Model data set workflow">
     <inputPort
         fileName="missing_input_dataDictionary.csv"
@@ -174,8 +176,8 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.26"/>
     </inputPort>
     <inputPort
-        fileName="wrety.html"
-        name="wrety">
+        fileName="numericBinner_output_dataDictionary.csv"
+        name="wf_pmml_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
     </inputPort>
@@ -186,71 +188,11 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@outputPort.0"/>
     </outputPort>
     <outputPort
-        fileName="asfdhgh.html"
-        name="sdfgh">
+        fileName="pmml_output_dataDictionary.csv"
+        name="wf_pmml_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
     </outputPort>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.0"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.2"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.4"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.6"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.8"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.10"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.12"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.14"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.16"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.18"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.20"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.22"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.24"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.26"/>
-    <in xsi:type="Workflow:DataDictionary"
-        href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.14/@inputPort.0"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.1"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.3"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.5"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.7"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.9"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.11"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.13"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.15"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.17"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.19"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.21"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.23"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@inputPort.25"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="#//@dataprocessing.0/@outputPort.0"/>
-    <out xsi:type="Workflow:DataDictionary"
-        href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.14/@outputPort.0"/>
     <dataProcessingDefinition
         xsi:type="Library:Job"
         href="library_validation.xmi#//@dataprocessingdefinition.9"/>
@@ -264,7 +206,7 @@
       imageTag="latest">
     <storage
         xsi:type="Environment:LocalFolder"
-        storageName="pmmldb1"
+        storageName="d1"
         folderPath="/home/carlos/Escritorio/datasets">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>

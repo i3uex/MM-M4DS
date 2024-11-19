@@ -342,11 +342,11 @@
     </outputPort>
     <workflow href="wf_validation_KNIME_contracts.xmi#/"/>
   </dataprocessingdefinition>
-  <dataprocessingdefinition xsi:type="Library:Transformation" name="asdasda" in="//@dataprocessingdefinition.4/@outputPort.0" out="//@dataprocessingdefinition.5/@outputPort.0">
-    <inputPort name="dfaswgdh">
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="pmml" in="//@dataprocessingdefinition.4/@outputPort.0" out="//@dataprocessingdefinition.5/@outputPort.0">
+    <inputPort name="pmml_input_dataDictionary">
       <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.14/@inputPort.0"/>
     </inputPort>
-    <outputPort name="sdgh">
+    <outputPort name="pmml_output_dataDictionary">
       <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.14/@outputPort.0"/>
     </outputPort>
   </dataprocessingdefinition>

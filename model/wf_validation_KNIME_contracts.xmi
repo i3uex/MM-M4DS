@@ -1447,7 +1447,7 @@
       </contract>
     </contract>
   </dataprocessing>
-  <dataprocessing xsi:type="Workflow:DataProcessing" outgoing="//@link.12" in="//@dataprocessing.12/@inputPort.0/@datafield.0" out="//@dataprocessing.12/@outputPort.0/@datafield.0" name="binner(satscore)">
+  <dataprocessing xsi:type="Workflow:DataProcessing" outgoing="//@link.12" incoming="//@link.11" in="//@dataprocessing.12/@inputPort.0/@datafield.0" out="//@dataprocessing.12/@outputPort.0/@datafield.0" name="binner(satscore)">
     <inputPort fileName="numericOutliers_output_dataDictionary.csv" name="binner(satscore)_input_dataDictionary" out="//@dataprocessing.12/@outputPort.0">
       <datafield xsi:type="Workflow:Continuous" name="binner(satscore)_input_dataField" dataType="Integer" displayName="satscore" out="//@dataprocessing.12/@outputPort.0/@datafield.0">
         <continuousDef href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0"/>
@@ -1566,7 +1566,7 @@
       </contract>
     </contract>
   </dataprocessing>
-  <dataprocessing xsi:type="Workflow:DataProcessing" incoming="//@link.12" in="//@dataprocessing.13/@inputPort.0/@datafield.0" out="//@dataprocessing.13/@outputPort.0/@datafield.0" name="binner(avg_income)">
+  <dataprocessing xsi:type="Workflow:DataProcessing" outgoing="//@link.13" incoming="//@link.12" in="//@dataprocessing.13/@inputPort.0/@datafield.0" out="//@dataprocessing.13/@outputPort.0/@datafield.0" name="binner(avg_income)">
     <inputPort fileName="numericOutliers_output_dataDictionary.csv" name="binner(avg_income)_input_dataDictionary" out="//@dataprocessing.13/@outputPort.0">
       <datafield xsi:type="Workflow:Continuous" name="binner(avg_income)_input_dataField" dataType="Integer" displayName="avg_income" out="//@dataprocessing.13/@outputPort.0/@datafield.0">
         <continuousDef href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0"/>
@@ -1669,11 +1669,11 @@
       </contract>
     </contract>
   </dataprocessing>
-  <dataprocessing xsi:type="Workflow:PMMLModel" incoming="//@link.13" in="//@dataprocessing.14/@inputPort.0" out="//@dataprocessing.14/@outputPort.0" name="pmmlc" filePath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml">
-    <inputPort fileName="yt" name="wrety" out="//@dataprocessing.14/@outputPort.0">
+  <dataprocessing xsi:type="Workflow:PMMLModel" incoming="//@link.13" in="//@dataprocessing.14/@inputPort.0" out="//@dataprocessing.14/@outputPort.0" name="pmmlTransformations" filePath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml">
+    <inputPort fileName="numericBinner_output_dataDictionary.csv" name="pmml_input_dataDictionary" out="//@dataprocessing.14/@outputPort.0">
       <dataDictionaryDefinition href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
     </inputPort>
-    <outputPort fileName="tfyjikftyj" name="dghbdrj" in="//@dataprocessing.14/@inputPort.0">
+    <outputPort fileName="pmml_output_dataDictionary.csv" name="pmml_output_dataDictionary" in="//@dataprocessing.14/@inputPort.0">
       <dataDictionaryDefinition href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
     </outputPort>
     <dataProcessingDefinition xsi:type="Library:Transformation" href="library_validation.xmi#//@dataprocessingdefinition.10"/>
@@ -1690,7 +1690,7 @@
   <link source="//@dataprocessing.8" target="//@dataprocessing.9" name="stringToNumber(TERRITORY, Instate)-imputeOutlierByClosest(avg_income, distance, Instate)"/>
   <link source="//@dataprocessing.9" target="//@dataprocessing.10" name="imputeOutlierByClosest(avg_income, distance, Instate)-binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)"/>
   <link source="//@dataprocessing.10" target="//@dataprocessing.11" name="binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)-binner(TERRITORY)"/>
-  <link source="//@dataprocessing.11" name="binner(TERRITORY)-binner(satscore)"/>
+  <link source="//@dataprocessing.11" target="//@dataprocessing.12" name="binner(TERRITORY)-binner(satscore)"/>
   <link source="//@dataprocessing.12" target="//@dataprocessing.13" name="binner(satscore)-binner(avg_income)"/>
-  <link target="//@dataprocessing.14" name="binner-pmml"/>
+  <link source="//@dataprocessing.13" target="//@dataprocessing.14" name="binner-pmml"/>
 </Workflow:Workflow>

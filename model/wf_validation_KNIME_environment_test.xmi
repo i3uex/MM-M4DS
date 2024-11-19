@@ -3775,15 +3775,15 @@
       name="pmml"
       filePath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml">
     <inputPort
-        fileName="yt"
-        name="wrety"
+        fileName="numericBinner_output_dataDictionary.csv"
+        name="pmml_input_dataDictionary"
         out="//@dataprocessing.14/@outputPort.0">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
     </inputPort>
     <outputPort
-        fileName="tfyjikftyj"
-        name="cvbjgv"
+        fileName="pmml_output_dataDictionary.csv"
+        name="pmml_output_dataDictionary"
         in="//@dataprocessing.14/@inputPort.0">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
