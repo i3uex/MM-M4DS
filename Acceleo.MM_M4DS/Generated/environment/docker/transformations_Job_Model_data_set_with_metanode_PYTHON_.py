@@ -9,7 +9,7 @@ from functions.PMML import PMMLModel
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/d1/missing_input_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -23,7 +23,7 @@ def generateWorkflow():
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
-	wrety='/wf_validation_python/data/yt.parquet'
+	pmml_input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	#--------------------------------------Output data dictionaries--------------------------------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -39,9 +39,7 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
-	dghbdrj='/wf_validation_python/data/tfyjikftyj.parquet'
-	pmml_model = PMMLModel(input_dataset_filepath=wrety_df, output_dataset_filepath="data/resultados", model_learner_pmml_filepath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3)
-	pmml_model.train_and_validate_model()
+	pmml_output_dataDictionary='/wf_validation_python/data/pmml_output_dataDictionary.parquet'
 	
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -419,21 +417,9 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary_df.to_parquet(binner_TERRITORY__output_dataDictionary)
 	binner_TERRITORY__output_dataDictionary_df=pd.read_parquet(binner_TERRITORY__output_dataDictionary)
 	
-
-
-
-
-
-
-
-
-
-
-
-
 	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_df=pd.read_parquet(binner_satscore__input_dataDictionary)
-	binner_satscore__input_dataDictionary_df.to_parquet(binner_satscore__input_dataDictionary)
+
 	binner_satscore__input_dataDictionary_transformed=binner_satscore__input_dataDictionary_df.copy()
 	binner_satscore__input_dataDictionary_transformed=data_transformations.transform_derived_field(data_dictionary=binner_satscore__input_dataDictionary_transformed,
 																  data_type_output = DataType(0),
@@ -534,8 +520,18 @@ def generateWorkflow():
 	
 
 
-	pmml_model = PMMLModel(input_dataset_filepath=wrety_df, output_dataset_filepath="data/resultados", model_learner_pmml_filepath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3)
-	pmml_model.train_and_validate_model()
+
+
+
+
+
+
+
+
+
+
+
+
 	
 set_logger("transformations")
 generateWorkflow()

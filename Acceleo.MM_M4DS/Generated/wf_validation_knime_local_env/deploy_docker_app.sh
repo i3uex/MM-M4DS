@@ -23,11 +23,15 @@ sudo apt-get update --yes
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build -t ubuntu-22.04:latest -f Dockerfile .
+docker build --no-cache -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
 cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"dataset1
+
+
+cp /home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml "$(pwd)/data"
+
 
 docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 

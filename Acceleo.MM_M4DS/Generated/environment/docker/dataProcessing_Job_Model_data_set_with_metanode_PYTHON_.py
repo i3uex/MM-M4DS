@@ -10,7 +10,7 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#--------------------------------------Input data dictionaries--------------------------------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/pmmldb1/missing_input_dataDictionary.parquet'
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary='/wf_validation_python/data/d1/missing_input_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByMean_avg_income_distance__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -24,7 +24,7 @@ def generateWorkflow():
 	binner_TERRITORY__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
-	wrety='/wf_validation_python/data/yt.parquet'
+	pmml_input_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	#--------------------------------------Output data dictionaries--------------------------------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary='/wf_validation_python/data/missing_output_dataDictionary.parquet'
@@ -40,7 +40,7 @@ def generateWorkflow():
 	binner_TERRITORY__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
-	dghbdrj='/wf_validation_python/data/tfyjikftyj.parquet'
+	pmml_output_dataDictionary='/wf_validation_python/data/pmml_output_dataDictionary.parquet'
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -1098,21 +1098,8 @@ def generateWorkflow():
 	
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
 	#-----------------New DataProcessing-----------------
 	binner_satscore__input_dataDictionary_df=pd.read_parquet(binner_satscore__input_dataDictionary)
-	binner_satscore__input_dataDictionary_df.to_parquet(binner_satscore__input_dataDictionary)
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
@@ -1324,6 +1311,25 @@ def generateWorkflow():
 	
 	
 	
+	#-----------------New DataProcessing-----------------
+	pmml_input_dataDictionary_df=pd.read_parquet(pmml_input_dataDictionary)
+
+	pmml_model = PMMLModel(input_dataset=pmml_input_dataDictionary_df, output_dataset_filepath="data/pmml_output_dataDictionary", model_learner_pmml_filepath="data/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3, export_test_metrics_path='resultados')
+	pmml_model.train_and_validate_model()
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

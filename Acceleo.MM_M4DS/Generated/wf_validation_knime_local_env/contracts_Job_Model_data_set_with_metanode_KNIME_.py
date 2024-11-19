@@ -886,12 +886,12 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	wrety_df=pd.read_parquet('/wf_validation_python/data/yt.parquet')
+	pmml_input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/numericBinner_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/tfyjikftyj.parquet'):
-		cvbjgv_df=pd.read_parquet('/wf_validation_python/data/tfyjikftyj.parquet')
+	if os.path.exists('/wf_validation_python/data/pmml_output_dataDictionary.parquet'):
+		pmml_output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/pmml_output_dataDictionary.parquet')
 
-	pmml_model = PMMLModel(input_dataset_filepath=wrety_df, output_dataset_filepath="data/resultados", model_learner_pmml_filepath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3)
+	pmml_model = PMMLModel(input_dataset=pmml_input_dataDictionary_df, output_dataset_filepath="data/pmml_output_dataDictionary", model_learner_pmml_filepath="data/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3, export_test_metrics_path='resultados')
 	pmml_model.train_and_validate_model()
 	
 

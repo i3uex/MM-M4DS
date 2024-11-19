@@ -71,7 +71,7 @@ def generateWorkflow():
 						[/if]
 						[if (ps.oclIsKindOf(PMMLModel))]
 							[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
+	[generatePMML(pmml, ps)/]
 							[/let]
 						[/if]
 					[/let]																																	[comment CLOSE assigns the variable to be of type Transformation/]
@@ -124,29 +124,11 @@ def generateWorkflow():
 										[/if]
 									[/let]
 								[/if]
-								[if (ps.oclIsKindOf(DataProcessing))]
-									[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-									[/let]
-								[/if]
 							[/if]																															[comment CLOSE checks if the dataProcessing is isolated/]
 						[/for]																																[comment CLOSE traverse the dataProcessings in the workflow/]
 						[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]																		[comment OPEN traverse the dataProcessings in the workflow/]
 							[if (pstep.incoming = null and pstep.outgoing<>null)]																			[comment OPEN checks if the dataProcessing is isolated/]
-								[if (pstep.oclIsKindOf(DataProcessing))]
-									[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]
-										[if (ps.oclIsKindOf(DataProcessing))]
-											[let d : DataProcessing = ps.oclAsType(DataProcessing)]
-[callModifiedRecursiveTemplate(dataP, d)/]
-											[/let]
-										[/if]
-									[/let]
-								[/if]
-								[if (pstep.oclIsKindOf(PMMLModel))]
-									[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-									[/let]
-								[/if]
+[callModifiedRecursiveTemplate(pstep, ps)/]
 							[/if]																															[comment CLOSE checks that the dataProcessing is not isolated and is the first/]
 						[/for]																																[comment CLOSE traverse the dataProcessings in the workflow/]
 					[/let]																																	[comment CLOSE assigns the variable to be of type Job/]
@@ -212,32 +194,20 @@ def generateWorkflow():
 											[/let]
 										[/if]
 									[/if]																													[comment CLOSE checks if the dataProcessing is isolated/]
-									[if (pstep.oclIsKindOf(PMMLModel))]
-										[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-										[/let]
-									[/if]
 								[/for]																														[comment CLOSE traverse the dataProcessings in the workflow/]
 								[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]																[comment OPEN traverse the dataProcessings in the workflow/]
 									[if (pstep.incoming = null and pstep.outgoing<>null)]																	[comment OPEN checks if the dataProcessing is isolated/]
-										[if (pstep.oclIsKindOf(DataProcessing))]
-											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN checks that the dataProcessing is not isolated and is the first/]
-[callModifiedRecursiveTemplate(dataP, d)/]
-											[/let]
-										[/if]		
-										[if (pstep.oclIsKindOf(PMMLModel))]
-											[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-											[/let]
-										[/if]
+[callModifiedRecursiveTemplate(pstep, ps)/]
 									[/if]																													[comment CLOSE checks that the dataProcessing is not isolated and is the first/]
 								[/for]																														[comment CLOSE traverse the dataProcessings in the workflow/]
 							[/let]
 						[/if]
 						[if (ps.oclIsKindOf(PMMLModel))]
-							[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
-							[/let]
+							[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]																[comment OPEN traverse the dataProcessings in the workflow/]
+								[if (pstep.incoming = null and pstep.outgoing<>null)]																	[comment OPEN checks if the dataProcessing is isolated/]
+[callModifiedRecursiveTemplate(pstep, ps)/]
+								[/if]																													[comment CLOSE checks that the dataProcessing is not isolated and is the first/]
+							[/for]
 						[/if]
 					[/let]																																	[comment CLOSE assigns the variable to be of type Job/]
 				[/if]																																		[comment CLOSE checks if the dataPrcessingDefinition is of type Transformation or Job/]
@@ -250,16 +220,17 @@ generateWorkflow()
 [/file]
 [/template]
 
+[comment]pstep, dw, dataP son el modelo grande. El que tiene todos los dataProcessing con las transformaciones y los contratos[/comment]
 
-[template public callModifiedRecursiveTemplate(dw : DataProcessing, d_or : DataProcessing)]
+[template public callModifiedRecursiveTemplate(pstep : ProcessingStep, ps : ProcessingStep)] [comment dw : DataProcessing=pstep, d_or : DataProcessing=ps/]
 	#-----------------New DataProcessing-----------------
-[if (dw.incoming <> null)]															[comment OPEN checks that it is not the first data processing/]
-	[if (dw.incoming.source.dataProcessingDefinition.name<>'split')]				[comment OPEN checks if the operation is not split/]
-	[dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dw.inputPort->first().name.replaceAll('[(),\\s]+', '_')/])
+[if (pstep.incoming <> null)]															[comment OPEN checks that it is not the first data processing/]
+	[if (pstep.incoming.source.dataProcessingDefinition.name<>'split')]				[comment OPEN checks if the operation is not split/]
+	[pstep.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([pstep.inputPort->first().name.replaceAll('[(),\\s]+', '_')/])
 
 	[else]																			[comment OPEN checks that the operation is split/]
-		[for (dc : DataDictionary | dw.inputPort)]									[comment OPEN read all the input datasets and store them/]
-			[for (dc_out : DataDictionary | dw.incoming.source.outputPort)]			[comment OPEN read the previous DataProcessing output datasets/]
+		[for (dc : DataDictionary | pstep.inputPort)]									[comment OPEN read all the input datasets and store them/]
+			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]			[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]								[comment OPEN checks that both datasets are the same/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
 				[/if]																[comment CLOSE checks that both datasets are the same/]
@@ -267,35 +238,47 @@ generateWorkflow()
 		[/for]																		[comment CLOSE read all the input datasets and store them/]
 	[/if]																			[comment CLOSE checks whether the operation is split or not/]
 [else]																				[comment OPEN checks if it is the first data processing/]
-	[for (dc : DataDictionary | dw.inputPort)]										[comment OPEN read all the input datasets and store them/]
-		[if (d_or.eContainer(Workflow).environment.oclIsKindOf(Local))]				[comment OPEN checks if it is a local file and a container/]
+	[for (dc : DataDictionary | pstep.inputPort)]										[comment OPEN read all the input datasets and store them/]
+		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]				[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
 		[/if]
 	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
 
 	[/for]																			[comment CLOSE read all the input datasets and store them/]
 [/if]																				[comment CLOSE checks whether it is the first data processing or not/]
-[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::PRECONDITION)]								[comment OPEN checks if the if the contract is a Precondition/]
+[if (pstep.oclIsKindOf(DataProcessing))]
+	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]
+		[if (ps.oclIsKindOf(DataProcessing))]
+			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]
+				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
+					[if (c.contract.type=ContractType::PRECONDITION)]								[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d_or)/]
-	[/if]																			[comment CLOSE checks if the if the contract is a Precondition/]
-[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
+					[/if]																			[comment CLOSE checks if the if the contract is a Precondition/]
+				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dw, d_or)/]	
-[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::POSTCONDITION)]								[comment OPEN checks if the if the contract is a Postcondition/]
+				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
+					[if (c.contract.type=ContractType::POSTCONDITION)]								[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d_or)/]
-	[/if]																			[comment CLOSE checks if the if the contract is a Postcondition/]
-[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
-[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-	[if (c.contract.type=ContractType::INVARIANT)]									[comment OPEN checks if the if the contract is a Invariant/]
+					[/if]																			[comment CLOSE checks if the if the contract is a Postcondition/]
+				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
+				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
+					[if (c.contract.type=ContractType::INVARIANT)]									[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d_or)/]
-	[/if]																			[comment CLOSE checks if the if the contract is a Invariant/]
-[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
-[if (dw.outgoing<>null)]															[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
-	[let nextDp : DataProcessing = dw.outgoing.target.oclAsType(DataProcessing)]	[comment OPEN assigns the next DataProcessing to a variable/]
-[callModifiedRecursiveTemplate(nextDp, d_or)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
-	[/let]																			[comment OPEN assigns the next DataProcessing to a variable/]
-[/if]																				[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
+					[/if]																			[comment CLOSE checks if the if the contract is a Invariant/]
+				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
+			[/let]
+		[/if]
+	[/let]
+[elseif (pstep.oclIsKindOf(PMMLModel))]
+	[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
+	[generatePMML(pmml, ps)/]
+	[/let]
+[/if]
+[if (pstep.outgoing<>null)]																				[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
+	[let nextPstep : ProcessingStep = pstep.outgoing.target]												[comment OPEN assigns the next DataProcessing to a variable/]
+[callModifiedRecursiveTemplate(nextPstep, ps)/]			[comment Recursive call to this template to generate all the DataProcessings linked to the first/]
+	[/let]																								[comment OPEN assigns the next DataProcessing to a variable/]
+[/if]																									[comment CLOSE checks if the DataProcessing has an outgoing link (it's not the last)/]
 [/template]
 
 
@@ -348,7 +331,7 @@ generateWorkflow()
 	[/let]
 [elseif (ps.oclIsKindOf(PMMLModel))]
 	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
+	[generatePMML(pmml, ps)/]
 	[/let]
 [/if]
 [if (ps.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
@@ -715,7 +698,7 @@ generateWorkflow()
 	[/let]
 [elseif (ps.oclIsKindOf(PMMLModel))]
 	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
+	[generatePMML(pmml, ps)/]
 	[/let]
 [/if]
 [if (ps.outgoing<>null)]																									[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
@@ -970,7 +953,7 @@ generateWorkflow()
 	[/let]
 [elseif (ps.oclIsKindOf(PMMLModel))]
 	[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
-	[generatePMML(pmml)/]
+	[generatePMML(pmml, ps)/]
 	[/let]
 [/if]
 [if (ps.outgoing<>null)]																																			[comment OPEN checks if the DataProcessing has an outgoing link (it's not the last)/]
@@ -981,12 +964,23 @@ generateWorkflow()
 [/template]
 
 
-[template public generatePMML(pmml : PMMLModel)]
-[comment]CAMBIAR EL FIRST POR LOS FOR COMO EN LOS RECURSIVE TEMPLATES[/comment]
-pmml_model = PMMLModel(input_dataset_filepath=[pmml.inputPort->first().name.replaceAll('[(),\\s]+', '_')/]_df, output_dataset_filepath=[if (pmml.test<>null)]"data/[pmml.test.path/]"[else]"data"[/if], model_learner_pmml_filepath="[pmml.filePath/]", export_only_predictions=[if (pmml.onlyPredictions=false)]False[elseif (pmml.onlyPredictions=true)]True[/if], export_test_metrics=True[if (pmml.test<>null)], train_split=[pmml.test.trainSize/], test_split=[pmml.test.testSize/][/if])
-[if (pmml.test<>null)]
+[template public generatePMML(pmmlStep : PMMLModel, ps_or : ProcessingStep)] [comment pmmlStep es el workflow con todo el contenido y ps_or es el workflow que solo tiene los dataDictionary/]
+[for (dd_instep : DataDictionary | pmmlStep.inputPort)]
+	[for (dd_inor : DataDictionary | ps_or.inputPort)]
+		[if (dd_instep.dataDictionaryDefinition = dd_inor.dataDictionaryDefinition)]
+			[for (dd_outstep : DataDictionary | pmmlStep.outputPort)]
+				[for (dd_outor : DataDictionary | ps_or.outputPort)]
+					[if (dd_outstep.dataDictionaryDefinition = dd_outor.dataDictionaryDefinition)]
+pmml_model = PMMLModel(input_dataset=[dd_instep.name.replaceAll('[(),\\s]+', '_')/]_df, output_dataset_filepath="data/[dd_outor.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/]", model_learner_pmml_filepath="data/[pmmlStep.filePath.trim().replaceAll('(.*?\\/)', '')/]", export_only_predictions=[if (pmmlStep.onlyPredictions=false)]False[elseif (pmmlStep.onlyPredictions=true)]True[/if], export_test_metrics=[if (pmmlStep.test<>null)]True, train_split=[pmmlStep.test.trainSize/], test_split=[pmmlStep.test.testSize/], export_test_metrics_path='[pmmlStep.test.path/]'[else]False[/if])
+						[if (pmmlStep.test<>null)]
 pmml_model.train_and_validate_model()
-[/if]
+						[/if]
+					[/if]
+				[/for]
+			[/for]
+		[/if]
+	[/for]
+[/for]
 [/template]
 
 
@@ -1398,11 +1392,14 @@ WORKDIR [aWorkflow.environment.path/]
 ENV PYTHONPATH=[aWorkflow.environment.path/]
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
+    apt-get install -y --no-install-recommends wget git && \
     rm -rf /var/lib/apt/lists/*
 
-
 RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-m2python.git .
+
+RUN wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz && \
+    tar -xvf openjdk-11_linux-x64_bin.tar.gz -C /usr/local && \
+    ln -s /usr/local/jdk-11/bin/java /usr/bin/java
 
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
@@ -1478,7 +1475,7 @@ sudo apt-get update --yes
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build -t [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/] -f Dockerfile .
+docker build --no-cache -t [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/] -f Dockerfile .
 
 clear
 
@@ -1499,6 +1496,34 @@ cp [lf.folderPath/]/[fi.dataDictionary.fileName.trim()/].xlsx "$(pwd)/data/"[lf.
 		[/let]
 	[/if]
 [/for]
+
+
+[for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]
+	[if (ps.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
+		[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
+			[if (dpd.oclIsKindOf(Library::Transformation))]
+				[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
+					[if (ps.oclIsKindOf(PMMLModel))]
+						[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
+cp [pmml.filePath/] "$(pwd)/data"
+						[/let]
+					[/if]
+				[/let]
+			[elseif (dpd.oclIsKindOf(Library::Job))]
+				[let libJ : Library::Job = dpd.oclAsType(Library::Job)]	
+					[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]
+						[if (pstep.oclIsKindOf(PMMLModel))]
+							[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
+cp [pmml.filePath/] "$(pwd)/data"
+							[/let]
+						[/if]
+					[/for]
+				[/let]
+			[/if]
+		[/let]
+	[/if]
+[/for]
+
 
 docker run -it --rm --name [doc.name.replaceAll('[(),\\s]+', '_')/] --network host --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
 

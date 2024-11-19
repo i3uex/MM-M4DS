@@ -5,8 +5,8 @@ if [ ! -d "data" ]; then
     mkdir data
 fi
 
-if [ ! -d "data/pmmldb1" ]; then
-    mkdir data/pmmldb1
+if [ ! -d "data/d1" ]; then
+    mkdir data/d1
 fi
 
 sudo apt-get update --yes
@@ -23,11 +23,15 @@ sudo apt-get update --yes
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build -t ubuntu-22.04:latest -f Dockerfile .
+docker build --no-cache -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"pmmldb1
+cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"d1
+
+
+cp /home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml "$(pwd)/data"
+
 
 docker run -it --rm --name wf_validation_python --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_python/data ubuntu-22.04:latest
 

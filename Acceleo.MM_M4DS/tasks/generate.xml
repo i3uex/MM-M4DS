@@ -54,7 +54,7 @@
 
     <!-- The default task with the jars used by this project -->
     <target name="generate">
-        <java classname="Acceleo.MM_M4DS_Library.main.Generate" classpathref="Acceleo.MM_M4DS.classpath">
+        <java classname="Acceleo.MM_M4DS_Workflow.main.Generate" classpathref="Acceleo.MM_M4DS.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>
@@ -65,7 +65,7 @@
         Keep in mind that having two versions of the same jar can create problems
     -->
     <target name="generate.alljars">
-        <java classname="Acceleo.MM_M4DS_Library.main.Generate" classpathref="Acceleo.MM_M4DS.classpath">
+        <java classname="Acceleo.MM_M4DS_Workflow.main.Generate" classpathref="Acceleo.MM_M4DS.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>
