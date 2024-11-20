@@ -28,7 +28,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.1"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.2"/>
@@ -40,7 +40,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.3"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByMean(avg_income, distance)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.4"/>
@@ -52,7 +52,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.5"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByLinearInterpolation(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.6"/>
@@ -148,7 +148,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.21"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(TERRITORY)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.22"/>
@@ -160,7 +160,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.23"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.24"/>
@@ -172,7 +172,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.25"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(avg_income)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.26"/>
@@ -186,12 +186,15 @@
   </dataprocessing>
   <environment
       xsi:type="Environment:Local"
-      name="localEnvironmentPython"
-      path="./wf_model_dataset_python">
+      name="wf_validation_python"
+      path="./wf_validation_python">
     <storage
-        xsi:type="Environment:LocalStorage"
-        path="C:\Users\franj\eclipse-workspace\prueba_M4DS\model\python_dataDictionaries"/>
-    <pythonInterpreter
-        path="C:\Users\franj\Desktop\Desktop\PAI_UEX_Repositorios\MD4DSPP\venv\Scripts\python.exe"/>
+        xsi:type="Environment:LocalFile"
+        path="/home/carlos/Escritorio/datasets"/>
+    <storage
+        xsi:type="Environment:LocalFile"
+        path="/home/carlos/Escritorio/datasetsTest"/>
+    <interpreter
+        path="3.11"/>
   </environment>
 </Workflow:Workflow>

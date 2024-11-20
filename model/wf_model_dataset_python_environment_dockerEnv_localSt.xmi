@@ -9,12 +9,10 @@
     xsi:schemaLocation="https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="Model data set with metanode (PYTHON)">
   <dataprocessing
-      name="Model data set workflow"
-      in="//@dataprocessing.0/@inputPort.0 //@dataprocessing.0/@inputPort.2 //@dataprocessing.0/@inputPort.4 //@dataprocessing.0/@inputPort.6 //@dataprocessing.0/@inputPort.8 //@dataprocessing.0/@inputPort.10 //@dataprocessing.0/@inputPort.12 //@dataprocessing.0/@inputPort.14 //@dataprocessing.0/@inputPort.16 //@dataprocessing.0/@inputPort.18 //@dataprocessing.0/@inputPort.20 //@dataprocessing.0/@inputPort.22 //@dataprocessing.0/@inputPort.24 //@dataprocessing.0/@inputPort.26"
-      out="//@dataprocessing.0/@inputPort.1 //@dataprocessing.0/@inputPort.3 //@dataprocessing.0/@inputPort.5 //@dataprocessing.0/@inputPort.7 //@dataprocessing.0/@inputPort.9 //@dataprocessing.0/@inputPort.11 //@dataprocessing.0/@inputPort.13 //@dataprocessing.0/@inputPort.15 //@dataprocessing.0/@inputPort.17 //@dataprocessing.0/@inputPort.19 //@dataprocessing.0/@inputPort.21 //@dataprocessing.0/@inputPort.23 //@dataprocessing.0/@inputPort.25 //@dataprocessing.0/@outputPort.0">
-    <dataProcessingDefinition
-        xsi:type="Library:Job"
-        href="library_validation.xmi#//@dataprocessingdefinition.9"/>
+      xsi:type="Workflow:DataProcessing"
+      in="//@dataprocessing.0/@inputPort.0 //@dataprocessing.0/@inputPort.2 //@dataprocessing.0/@inputPort.4 //@dataprocessing.0/@inputPort.6 //@dataprocessing.0/@inputPort.8 //@dataprocessing.0/@inputPort.10 //@dataprocessing.0/@inputPort.12 //@dataprocessing.0/@inputPort.14 //@dataprocessing.0/@inputPort.16 //@dataprocessing.0/@inputPort.18 //@dataprocessing.0/@inputPort.20 //@dataprocessing.0/@inputPort.22 //@dataprocessing.0/@inputPort.24 //@dataprocessing.0/@inputPort.26 //@dataprocessing.0/@inputPort.27"
+      out="//@dataprocessing.0/@inputPort.1 //@dataprocessing.0/@inputPort.3 //@dataprocessing.0/@inputPort.5 //@dataprocessing.0/@inputPort.7 //@dataprocessing.0/@inputPort.9 //@dataprocessing.0/@inputPort.11 //@dataprocessing.0/@inputPort.13 //@dataprocessing.0/@inputPort.15 //@dataprocessing.0/@inputPort.17 //@dataprocessing.0/@inputPort.19 //@dataprocessing.0/@inputPort.21 //@dataprocessing.0/@inputPort.23 //@dataprocessing.0/@inputPort.25 //@dataprocessing.0/@outputPort.0 //@dataprocessing.0/@outputPort.1"
+      name="Model data set workflow">
     <inputPort
         fileName="missing_input_dataDictionary.csv"
         name="wf_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary">
@@ -28,7 +26,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.1"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.2"/>
@@ -40,7 +38,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.3"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByMean(avg_income, distance)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.4"/>
@@ -52,7 +50,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.5"/>
     </inputPort>
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="wf_imputeMissingByLinearInterpolation(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.6"/>
@@ -70,7 +68,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.8"/>
     </inputPort>
     <inputPort
-        fileName="rowFilter_output_dataDictionary.csv"
+        fileName="rowFilter_output_dataDictionary"
         name="wf_rowFilterRange(init_span)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.9"/>
@@ -148,7 +146,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.21"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(TERRITORY)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.22"/>
@@ -160,7 +158,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.23"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.24"/>
@@ -172,10 +170,16 @@
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.25"/>
     </inputPort>
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="wf_binner(avg_income)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.26"/>
+    </inputPort>
+    <inputPort
+        fileName="numericBinner_output_dataDictionary.csv"
+        name="wf_pmml_input_dataDictionary">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
     </inputPort>
     <outputPort
         fileName="numericBinner_output_dataDictionary.csv"
@@ -183,21 +187,31 @@
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@outputPort.0"/>
     </outputPort>
+    <outputPort
+        fileName="pmml_output_dataDictionary.csv"
+        name="wf_pmml_output_dataDictionary">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
+    </outputPort>
+    <dataProcessingDefinition
+        xsi:type="Library:Job"
+        href="library_validation.xmi#//@dataprocessingdefinition.9"/>
   </dataprocessing>
   <environment
-      xsi:type="Environment:Portable"
-      name="wf_model_dataset_python_dockerEnvironment"
-      path="./wf_model_dataset_python">
+      xsi:type="Environment:Local"
+      name="wf_validation_python"
+      path="./wf_validation_python"
+      containerName="docker_python"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
     <storage
-        xsi:type="Environment:LocalStorage"
-        path="C:\Users\franj\eclipse-workspace\prueba_M4DS\model\python_dataDictionaries"/>
-    <container
-        xsi:type="Environment:Docker"
-        name="wf_model_dataset_python_dockerContainer"
-        imageName="ubuntu-base"
-        imageTag="dist-amd64">
-      <developmentTool
-          version="3.11"/>
-    </container>
+        xsi:type="Environment:LocalFolder"
+        storageName="d1"
+        folderPath="/home/carlos/Escritorio/datasets">
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
+    </storage>
+    <developmentTool
+        version="3.11"/>
   </environment>
 </Workflow:Workflow>
