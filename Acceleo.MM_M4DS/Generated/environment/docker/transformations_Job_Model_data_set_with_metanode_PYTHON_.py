@@ -40,7 +40,6 @@ def generateWorkflow():
 	binner_satscore__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	binner_avg_income__output_dataDictionary='/wf_validation_python/data/numericBinner_output_dataDictionary.parquet'
 	pmml_output_dataDictionary='/wf_validation_python/data/pmml_output_dataDictionary.parquet'
-	
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet(imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary)
@@ -518,20 +517,27 @@ def generateWorkflow():
 	binner_avg_income__output_dataDictionary_df.to_parquet(binner_avg_income__output_dataDictionary)
 	binner_avg_income__output_dataDictionary_df=pd.read_parquet(binner_avg_income__output_dataDictionary)
 	
+	#-----------------New DataProcessing-----------------
+	pmml_input_dataDictionary_df=pd.read_parquet(pmml_input_dataDictionary)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	pmml_model = PMMLModel(input_dataset=pmml_input_dataDictionary_df, output_dataset_filepath="data/pmml_output_dataDictionary", model_learner_pmml_filepath="data/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3, export_test_metrics_path='resultados')
+	pmml_model.train_and_validate_model()
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 set_logger("transformations")
 generateWorkflow()
