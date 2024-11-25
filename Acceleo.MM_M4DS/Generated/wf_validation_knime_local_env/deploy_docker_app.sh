@@ -2,13 +2,99 @@
 set -e
 
 if [ ! -d "data" ]; then
-    mkdir data
+    mkdir -p data
 fi
 
-if [ ! -d "data/dataset1" ]; then
-    mkdir data/dataset1
+if [ ! -d "data/d1/test" ]; then
+    mkdir -p data/d1/test
 fi
-
+if [ ! -d "data/d2" ]; then
+    mkdir -p data/d2
+fi
+if [ ! -d "data/d2" ]; then
+    mkdir -p data/d2
+fi
+if [ ! -d "data/d3" ]; then
+    mkdir -p data/d3
+fi
+if [ ! -d "data/d3" ]; then
+    mkdir -p data/d3
+fi
+if [ ! -d "data/d4" ]; then
+    mkdir -p data/d4
+fi
+if [ ! -d "data/d4" ]; then
+    mkdir -p data/d4
+fi
+if [ ! -d "data/d5" ]; then
+    mkdir -p data/d5
+fi
+if [ ! -d "data/d5" ]; then
+    mkdir -p data/d5
+fi
+if [ ! -d "data/d6" ]; then
+    mkdir -p data/d6
+fi
+if [ ! -d "data/d6" ]; then
+    mkdir -p data/d6
+fi
+if [ ! -d "data/d7" ]; then
+    mkdir -p data/d7
+fi
+if [ ! -d "data/d7" ]; then
+    mkdir -p data/d7
+fi
+if [ ! -d "data/d8" ]; then
+    mkdir -p data/d8
+fi
+if [ ! -d "data/d8" ]; then
+    mkdir -p data/d8
+fi
+if [ ! -d "data/d9" ]; then
+    mkdir -p data/d9
+fi
+if [ ! -d "data/d9" ]; then
+    mkdir -p data/d9
+fi
+if [ ! -d "data/d10" ]; then
+    mkdir -p data/d10
+fi
+if [ ! -d "data/d10" ]; then
+    mkdir -p data/d10
+fi
+if [ ! -d "data/d11" ]; then
+    mkdir -p data/d11
+fi
+if [ ! -d "data/d11" ]; then
+    mkdir -p data/d11
+fi
+if [ ! -d "data/d12" ]; then
+    mkdir -p data/d12
+fi
+if [ ! -d "data/d12" ]; then
+    mkdir -p data/d12
+fi
+if [ ! -d "data/d13" ]; then
+    mkdir -p data/d13
+fi
+if [ ! -d "data/d13" ]; then
+    mkdir -p data/d13
+fi
+if [ ! -d "data/d14" ]; then
+    mkdir -p data/d14
+fi
+if [ ! -d "data/d14" ]; then
+    mkdir -p data/d14
+fi
+if [ ! -d "data/d15" ]; then
+    mkdir -p data/d15
+fi
+if [ ! -d "data/d15" ]; then
+    mkdir -p data/d15
+fi
+if [ ! -d "data/d16" ]; then
+    mkdir -p data/d16
+fi
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -27,7 +113,7 @@ docker build --no-cache -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"dataset1
+cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"d1/test
 
 
 cp /home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml "$(pwd)/data"
