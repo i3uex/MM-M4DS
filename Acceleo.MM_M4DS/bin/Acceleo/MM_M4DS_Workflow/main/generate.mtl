@@ -1434,14 +1434,18 @@ fi
 
 [for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]
 	[for (dd_in : DataDictionary | ps.inputPort)]
+		[if (dd_in.filePath.trim().contains('/'))]
 if ['['/] ! -d "data/[dd_in.filePath.trim().replaceAll('/[^/]*$', '')/]" [']'/]; then
     mkdir -p data/[dd_in.filePath.trim().replaceAll('/[^/]*$', '')/]
 fi
+		[/if]
 	[/for]
 	[for (dd_out : DataDictionary | ps.outputPort)]
+		[if (dd_out.filePath.trim().contains('/'))]
 if ['['/] ! -d "data/[dd_out.filePath.trim().replaceAll('/[^/]*$', '')/]" [']'/]; then
     mkdir -p data/[dd_out.filePath.trim().replaceAll('/[^/]*$', '')/]
 fi
+		[/if]
 	[/for]
 [/for]
 sudo apt-get update --yes
@@ -1467,13 +1471,13 @@ clear
 		[let lf : LocalFolder = st.oclAsType(LocalFolder)]
 			[for (fi : File | lf.file)]
 				[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)]
-cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/] "$(pwd)/data/"[fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/]
+cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/] "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
 				[elseif (fi.type=FileType::CSV or fi.type=FileType::FEATHER or fi.type=FileType::JSON or fi.type=FileType::PARQUET)]
-cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].[fi.type.toString().toLowerCase()/] "$(pwd)/data/"[fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/]
+cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].[fi.type.toString().toLowerCase()/] "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
 				[elseif (fi.type=FileType::HDF5)]
-cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].hdf "$(pwd)/data/"[fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/]
+cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].hdf "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
 				[elseif (fi.type=FileType::EXCEL)]
-cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].xlsx "$(pwd)/data/"[fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/]
+cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].xlsx "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
 				[/if]
 			[/for]
 		[/let]

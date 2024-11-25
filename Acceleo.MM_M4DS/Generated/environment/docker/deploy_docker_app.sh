@@ -2,11 +2,7 @@
 set -e
 
 if [ ! -d "data" ]; then
-    mkdir data
-fi
-
-if [ ! -d "data/d1" ]; then
-    mkdir data/d1
+    mkdir -p data
 fi
 
 sudo apt-get update --yes
@@ -27,7 +23,7 @@ docker build --no-cache -t ubuntu-22.04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"d1
+cp /home/carlos/Escritorio/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"
 
 
 cp /home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml "$(pwd)/data"
