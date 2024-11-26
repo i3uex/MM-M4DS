@@ -1661,7 +1661,7 @@ engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.h
 					[/let]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
 				[/for]
@@ -1678,7 +1678,7 @@ engine = create_engine('postgresql+psycopg2://[cr.username/]:[cr.passwd/]@[db.ho
 					[/let]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
 				[/for]
@@ -1695,7 +1695,7 @@ engine = create_engine('mssql+pyodbc://[cr.username/]:[cr.passwd/]@[db.host/]/[d
 					[/let]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
 				[/for]
@@ -1712,7 +1712,7 @@ engine = create_engine('oracle+oracledb://[cr.username/]:[cr.passwd/]@[db.host/]
 					[/let]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if]', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
 				[/for]
@@ -1734,7 +1734,7 @@ client = pymongo.MongoClient("mongodb://[db.host/]:[db.port/]/")
 				[/if]
 [db.dbName/]_db = client['['/]"[db.dbName/]"[']'/]
 				[for (tab : Table | db.table)]
-[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if]"[']'/]
+[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]"[']'/]
 [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection.find()
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
 
@@ -1759,7 +1759,7 @@ dynamodb = boto3.resource(
 					[/if]
 				[/if]
 				[for (tab : Table | db.table)]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table = dynamodb.Table('[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '')/][else][tab.dataDictionary.filePath.trim()/][/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table = dynamodb.Table('[tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]')
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table.scan()
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response['['/]'Items'[']'/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
