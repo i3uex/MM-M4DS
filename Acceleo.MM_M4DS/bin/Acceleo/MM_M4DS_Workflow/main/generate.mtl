@@ -1533,7 +1533,7 @@ echo -e "Exiting the application...\n"
 [/let]
 
 
-[file ('workflow_scripts.sh', false, 'UTF-8')]
+[file ('workflow_scripts.sh', false, 'UTF-8')]																		[comment generates the menu/]
 CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"

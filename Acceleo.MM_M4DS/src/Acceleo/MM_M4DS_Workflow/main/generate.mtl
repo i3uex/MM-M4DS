@@ -1363,8 +1363,8 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 
 [template public generateLocalDocker(aWorkflow : Workflow)]
-[let doc : Local = aWorkflow.environment.oclAsType(Local)]
-	[file ('Dockerfile', false, 'UTF-8')]
+[let doc : Local = aWorkflow.environment.oclAsType(Local)]															[comment OPEN assigns the Environment to be Local/]
+	[file ('Dockerfile', false, 'UTF-8')]																			[comment OPEN generates the Dockerfile/]
 		[if (doc.developmentTool.tool=TOOL::PYTHON)]
 FROM python:[doc.developmentTool.version/]-slim
 		[elseif (doc.developmentTool.tool=TOOL::KNIME)]
@@ -1391,16 +1391,16 @@ RUN wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
-[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
-	[if (not filteredSet->isEmpty())]
+[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]		[comment OPEN creates a set only with databases/]
+	[if (not filteredSet->isEmpty())]																				[comment OPEN checks if the set is not empty/]
 RUN pip install sqlalchemy
-		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
-			[for (type : DBTYPE | types)]
-				[if (type=DBTYPE::MYSQL)]
+		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]							[comment OPEN creates a set only with the type of the databases/]
+			[for (type : DBTYPE | types)]																			[comment OPEN traverse all the types for the databases/]
+				[if (type=DBTYPE::MYSQL)]																			[comment OPEN checks if the database is Mysql/]
 RUN pip install mysql-connector-python --upgrade
-				[elseif (type=DBTYPE::POSTGRESQL)]
+				[elseif (type=DBTYPE::POSTGRESQL)]																	[comment OPEN checks if the database is PostgreSQL/]
 RUN pip install psycopg2-binary
-				[elseif (type=DBTYPE::SQLSERVER)]
+				[elseif (type=DBTYPE::SQLSERVER)]																	[comment OPEN checks if the database is SQLServer/]
 RUN pip3 install pyodbc
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \
@@ -1408,17 +1408,17 @@ RUN apt-get update && \
     curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
     apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
     rm -rf /var/lib/apt/lists/*
-				[elseif (type=DBTYPE::ORACLE)]
+				[elseif (type=DBTYPE::ORACLE)]																		[comment OPEN checks if the database is Oracle/]
 RUN pip install oracledb
-				[elseif (type=DBTYPE::MONGODB)]
+				[elseif (type=DBTYPE::MONGODB)]																		[comment OPEN checks if the database is MongoDB/]
 RUN pip install pymongo
-				[elseif (type=DBTYPE::DYNAMODB)]
+				[elseif (type=DBTYPE::DYNAMODB)]																	[comment OPEN checks if the database is DynamoDB/]
 RUN pip install boto3
-				[/if]
-			[/for]
-		[/let]
-	[/if]
-[/let]
+				[/if]																								[comment CLOSE checks the type of the database/]
+			[/for]																									[comment CLOSE traverse all the types for the databases/]
+		[/let]																										[comment CLOSE creates a set only with the type of the databases/]
+	[/if]																											[comment CLOSE checks if the set is not empty/]
+[/let]																												[comment CLOSE creates a set only with databases/]
 
 COPY dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
 COPY contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
@@ -1431,10 +1431,10 @@ COPY workflow_scripts.sh [aWorkflow.environment.path/]/workflow_scripts.sh
 RUN chmod +x [aWorkflow.environment.path/]/workflow_scripts.sh
 
 CMD ['['/]"/bin/bash", "[aWorkflow.environment.path/]/workflow_scripts.sh"[']'/]
-	[/file]
+	[/file]																											[comment CLOSE generates the Dockerfile/]
 
 
-	[file ('deploy_docker_app.sh', false, 'UTF-8')]
+	[file ('deploy_docker_app.sh', false, 'UTF-8')]																	[comment OPEN generates the deploy_docker_app/]
 #!/bin/bash
 set -e
 
@@ -1529,11 +1529,11 @@ docker rmi [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAl
 clear
 
 echo -e "Exiting the application...\n"
-	[/file]
-[/let]
+	[/file]																											[comment CLOSE generates the deploy_docker_app/]
+[/let]																												[comment CLOSE assigns the Environment to be Local/]
 
 
-[file ('workflow_scripts.sh', false, 'UTF-8')]
+[file ('workflow_scripts.sh', false, 'UTF-8')]																		[comment OPEN generates the workflow_scripts/]
 CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
@@ -1572,7 +1572,7 @@ while true; do
         echo -e "Invalid option. Please select a valid option.\n"
     fi
 done
-[/file]
+[/file]																												[comment CLOSE generates the workflow_scripts/]
 [/template]
 
 
