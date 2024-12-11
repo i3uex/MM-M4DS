@@ -11,10 +11,10 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d1/test/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_python/data/d1/test/missing_input_dataDictionary.parquet')
-	if os.path.exists('/wf_validation_python/data/d2/missing_output_dataDictionary.parquet'):
-		imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d2/missing_output_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d1/test/missing_input_dataDictionary.parquet')
+	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_knime/data/d1/test/missing_input_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d2/missing_output_dataDictionary.parquet'):
+		imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d2/missing_output_dataDictionary.parquet')
 
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', 
@@ -107,10 +107,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d2/missing_output_dataDictionary.parquet')
+	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d2/missing_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet'):
-		imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet'):
+		imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet')
 
 	missing_values_imputeByFixValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2', 
@@ -177,10 +177,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet')
+	imputeMissingByMean_avg_income_distance__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d3/imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet'):
-		imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet'):
+		imputeMissingByMean_avg_income_distance__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet')
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income', 
@@ -243,10 +243,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet')
+	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d4/imputeMissingByMean(avg_income, distance)_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet'):
-		imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet'):
+		imputeMissingByLinearInterpolation_satscore__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet')
 
 	missing_values_imputeByNumericOp_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df, field='satscore', 
@@ -279,10 +279,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	rowFilterRange_init_span__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet')
+	rowFilterRange_init_span__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d5/imputeMissingByLinearInterpolation(satscore)_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d6/rowFilter_output_dataDictionary.parquet'):
-		rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d6/rowFilter_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d6/rowFilter_output_dataDictionary.parquet'):
+		rowFilterRange_init_span__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d6/rowFilter_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=rowFilterRange_init_span__input_dataDictionary_df,
 	                                	closure_type=Closure(2), belong_op=Belong(1), field='init_span'):
@@ -297,10 +297,10 @@ def generateWorkflow():
 		print('POSTCONDITION rowFilter(init_span)_POST_valueRange NOT VALIDATED')
 	
 	#-----------------New DataProcessing-----------------
-	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_python/data/d6/rowFilter_output_dataDictionary.parquet')
+	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataField_df=pd.read_parquet('/wf_validation_knime/data/d6/rowFilter_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d7/columnFilter_output_dataDictionary.parquet'):
-		data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_python/data/d7/columnFilter_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d7/columnFilter_output_dataDictionary.parquet'):
+		data_model_column_cont_filter_out_df=pd.read_parquet('/wf_validation_knime/data/d7/columnFilter_output_dataDictionary.parquet')
 
 	field_list_columnFilter_PRE_field_range=['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'stuemail', 'interest']
 	if contract_pre_post.check_field_range(fields=field_list_columnFilter_PRE_field_range,
@@ -321,10 +321,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d7/columnFilter_output_dataDictionary.parquet')
+	Mapping_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d7/columnFilter_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d8/ruleEngine_territory_output_dataDictionary.parquet'):
-		Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d8/ruleEngine_territory_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d8/ruleEngine_territory_output_dataDictionary.parquet'):
+		Mapping_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d8/ruleEngine_territory_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_fix_value_range(value='A', data_dictionary=Mapping_TERRITORY__input_dataDictionary_df, belong_op=Belong(0), field='TERRITORY',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -372,10 +372,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d8/ruleEngine_territory_output_dataDictionary.parquet')
+	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d8/ruleEngine_territory_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d9/ruleEngine_instate_output_dataDictionary.parquet'):
-		mapping_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d9/ruleEngine_instate_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d9/ruleEngine_instate_output_dataDictionary.parquet'):
+		mapping_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d9/ruleEngine_instate_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_fix_value_range(value='Y', data_dictionary=mapping_Instate__input_dataDictionary_df, belong_op=Belong(0), field='Instate',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -423,10 +423,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d9/ruleEngine_instate_output_dataDictionary.parquet')
+	stringToNumber_TERRITORY_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d9/ruleEngine_instate_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d10/stringToNumber_output_dataDictionary.parquet'):
-		stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d10/stringToNumber_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d10/stringToNumber_output_dataDictionary.parquet'):
+		stringToNumber_TERRITORY_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d10/stringToNumber_output_dataDictionary.parquet')
 
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
@@ -445,10 +445,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d10/stringToNumber_output_dataDictionary.parquet')
+	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d10/stringToNumber_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d11/numericOutliers_output_dataDictionary.parquet'):
-		imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d11/numericOutliers_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d11/numericOutliers_output_dataDictionary.parquet'):
+		imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d11/numericOutliers_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_outliers(belong_op=Belong(0), data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='avg_income', 
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -526,10 +526,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d11/numericOutliers_output_dataDictionary.parquet')
+	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d11/numericOutliers_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d12/numericBinner_output_dataDictionary.parquet'):
-		binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d12/numericBinner_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d12/numericBinner_output_dataDictionary.parquet'):
+		binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d12/numericBinner_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=1000.0, data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(0), field='TOTAL_CONTACTS'):
@@ -682,10 +682,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d12/numericBinner_output_dataDictionary.parquet')
+	binner_TERRITORY__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d12/numericBinner_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d13/numericBinner_output_dataDictionary.parquet'):
-		binner_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d13/numericBinner_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d13/numericBinner_output_dataDictionary.parquet'):
+		binner_TERRITORY__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d13/numericBinner_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_TERRITORY__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='TERRITORY'):
@@ -762,10 +762,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_satscore__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d13/numericBinner_output_dataDictionary.parquet')
+	binner_satscore__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d13/numericBinner_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d14/numericBinner_output_dataDictionary.parquet'):
-		binner_satscore__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d14/numericBinner_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d14/numericBinner_output_dataDictionary.parquet'):
+		binner_satscore__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d14/numericBinner_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=-1000.0, right_margin=2000.0, data_dictionary=binner_satscore__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='satscore'):
@@ -830,10 +830,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	binner_avg_income__input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d14/numericBinner_output_dataDictionary.parquet')
+	binner_avg_income__input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d14/numericBinner_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d15/numericBinner_output_dataDictionary.parquet'):
-		binner_avg_income__output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d15/numericBinner_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d15/numericBinner_output_dataDictionary.parquet'):
+		binner_avg_income__output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d15/numericBinner_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=9.0, right_margin=100000.0, data_dictionary=binner_avg_income__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='avg_income'):
@@ -886,10 +886,10 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
-	pmml_input_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d15/numericBinner_output_dataDictionary.parquet')
+	pmml_input_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d15/numericBinner_output_dataDictionary.parquet')
 
-	if os.path.exists('/wf_validation_python/data/d16/pmml_output_dataDictionary.parquet'):
-		pmml_output_dataDictionary_df=pd.read_parquet('/wf_validation_python/data/d16/pmml_output_dataDictionary.parquet')
+	if os.path.exists('/wf_validation_knime/data/d16/pmml_output_dataDictionary.parquet'):
+		pmml_output_dataDictionary_df=pd.read_parquet('/wf_validation_knime/data/d16/pmml_output_dataDictionary.parquet')
 
 	pmml_model = PMMLModel(input_dataset=pmml_input_dataDictionary_df, output_dataset_filepath="data/d16/pmml_output_dataDictionary", model_learner_pmml_filepath="data/students_decisionTree_PMML.pmml", export_only_predictions=False, export_test_metrics=True, train_split=0.7, test_split=0.3, export_test_metrics_path='resultados')
 	pmml_model.train_and_validate_model()
