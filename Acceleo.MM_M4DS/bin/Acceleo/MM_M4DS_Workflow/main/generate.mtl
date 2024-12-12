@@ -1363,8 +1363,8 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 
 
 [template public generateLocalDocker(aWorkflow : Workflow)]
-[let doc : Local = aWorkflow.environment.oclAsType(Local)]
-	[file ('Dockerfile', false, 'UTF-8')]
+[let doc : Local = aWorkflow.environment.oclAsType(Local)]																					[comment OPEN assigns the Environment to be Local/]
+	[file ('Dockerfile', false, 'UTF-8')]																									[comment OPEN generates the Dockerfile/]
 		[if (doc.developmentTool.tool=TOOL::PYTHON)]
 FROM python:[doc.developmentTool.version/]-slim
 		[elseif (doc.developmentTool.tool=TOOL::KNIME)]
@@ -1391,16 +1391,16 @@ RUN wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
-[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
-	[if (not filteredSet->isEmpty())]
+[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]								[comment OPEN creates a set only with databases/]
+	[if (not filteredSet->isEmpty())]																										[comment OPEN checks if the set is not empty/]
 RUN pip install sqlalchemy
-		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
-			[for (type : DBTYPE | types)]
-				[if (type=DBTYPE::MYSQL)]
+		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]													[comment OPEN creates a set only with the type of the databases/]
+			[for (type : DBTYPE | types)]																									[comment OPEN traverse all the types for the databases/]
+				[if (type=DBTYPE::MYSQL)]																									[comment OPEN checks if the database is Mysql/]
 RUN pip install mysql-connector-python --upgrade
-				[elseif (type=DBTYPE::POSTGRESQL)]
+				[elseif (type=DBTYPE::POSTGRESQL)]																							[comment OPEN checks if the database is PostgreSQL/]
 RUN pip install psycopg2-binary
-				[elseif (type=DBTYPE::SQLSERVER)]
+				[elseif (type=DBTYPE::SQLSERVER)]																							[comment OPEN checks if the database is SQLServer/]
 RUN pip3 install pyodbc
 RUN apt-get update && \
     apt-get install -y curl gnupg apt-transport-https unixodbc-dev && \
@@ -1408,17 +1408,17 @@ RUN apt-get update && \
     curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
     apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
     rm -rf /var/lib/apt/lists/*
-				[elseif (type=DBTYPE::ORACLE)]
+				[elseif (type=DBTYPE::ORACLE)]																								[comment OPEN checks if the database is Oracle/]
 RUN pip install oracledb
-				[elseif (type=DBTYPE::MONGODB)]
+				[elseif (type=DBTYPE::MONGODB)]																								[comment OPEN checks if the database is MongoDB/]
 RUN pip install pymongo
-				[elseif (type=DBTYPE::DYNAMODB)]
+				[elseif (type=DBTYPE::DYNAMODB)]																							[comment OPEN checks if the database is DynamoDB/]
 RUN pip install boto3
-				[/if]
-			[/for]
-		[/let]
-	[/if]
-[/let]
+				[/if]																														[comment CLOSE checks the type of the database/]
+			[/for]																															[comment CLOSE traverse all the types for the databases/]
+		[/let]																																[comment CLOSE creates a set only with the type of the databases/]
+	[/if]																																	[comment CLOSE checks if the set is not empty/]
+[/let]																																		[comment CLOSE creates a set only with databases/]
 
 COPY dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
 COPY contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
@@ -1431,10 +1431,10 @@ COPY workflow_scripts.sh [aWorkflow.environment.path/]/workflow_scripts.sh
 RUN chmod +x [aWorkflow.environment.path/]/workflow_scripts.sh
 
 CMD ['['/]"/bin/bash", "[aWorkflow.environment.path/]/workflow_scripts.sh"[']'/]
-	[/file]
+	[/file]																																	[comment CLOSE generates the Dockerfile/]
 
 
-	[file ('deploy_docker_app.sh', false, 'UTF-8')]
+	[file ('deploy_docker_app.sh', false, 'UTF-8')]																							[comment OPEN generates the deploy_docker_app/]
 #!/bin/bash
 set -e
 
@@ -1442,22 +1442,22 @@ if ['['/] ! -d "data" [']'/]; then
     mkdir -p data
 fi
 
-[for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]
-	[for (dd_in : DataDictionary | ps.inputPort)]
-		[if (dd_in.filePath.trim().contains('/'))]
+[for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]																		[comment OPEN traverse all the ProcessingSteps in the workflow/]
+	[for (dd_in : DataDictionary | ps.inputPort)]																							[comment OPEN traverse all the input DataDictionaries in the ProcessingStep/]
+		[if (dd_in.filePath.trim().contains('/'))]																							[comment OPEN checks if the filepath is absolute/]
 if ['['/] ! -d "data/[dd_in.filePath.trim().replaceAll('/[^/]*$', '')/]" [']'/]; then
     mkdir -p data/[dd_in.filePath.trim().replaceAll('/[^/]*$', '')/]
 fi
-		[/if]
-	[/for]
-	[for (dd_out : DataDictionary | ps.outputPort)]
-		[if (dd_out.filePath.trim().contains('/'))]
+		[/if]																																[comment CLOSE checks if the filepath is absolute/]
+	[/for]																																	[comment CLOSE traverse all the input DataDictionaries in the ProcessingStep/]
+	[for (dd_out : DataDictionary | ps.outputPort)]																							[comment OPEN traverse all the output DataDictionaries in the ProcessingStep/]
+		[if (dd_out.filePath.trim().contains('/'))]																							[comment OPEN checks if the filepath is absolute/]
 if ['['/] ! -d "data/[dd_out.filePath.trim().replaceAll('/[^/]*$', '')/]" [']'/]; then
     mkdir -p data/[dd_out.filePath.trim().replaceAll('/[^/]*$', '')/]
 fi
-		[/if]
-	[/for]
-[/for]
+		[/if]																																[comment CLOSE checks if the filepath is absolute/]
+	[/for]																																	[comment CLOSE traverse all the output DataDictionaries in the ProcessingStep/]
+[/for]																																		[comment CLOSE traverse all the ProcessingSteps in the workflow/]
 sudo apt-get update --yes
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -1476,50 +1476,50 @@ docker build --no-cache -t [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.im
 
 clear
 
-[for (st: Storage | doc.storage)]
-	[if (st.oclIsKindOf(LocalFolder))]
-		[let lf : LocalFolder = st.oclAsType(LocalFolder)]
-			[for (fi : File | lf.file)]
-				[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)]
+[for (st: Storage | doc.storage)]																											[comment OPEN traverse all the storages in the environment/]
+	[if (st.oclIsKindOf(LocalFolder))]																										[comment OPEN checks if the storage is a LocalFolder/]
+		[let lf : LocalFolder = st.oclAsType(LocalFolder)]																					[comment OPEN assigns the variable to be a LocalFolder/]
+			[for (fi : File | lf.file)]																										[comment OPEN traverse all the files in the folder/]
+				[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)]																		[comment OPEN checks if the file contains a ./]
 cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/] "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
-				[elseif (fi.type=FileType::CSV or fi.type=FileType::FEATHER or fi.type=FileType::JSON or fi.type=FileType::PARQUET)]
+				[elseif (fi.type=FileType::CSV or fi.type=FileType::FEATHER or fi.type=FileType::JSON or fi.type=FileType::PARQUET)]		[comment OPEN checks the extension of the file/]
 cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].[fi.type.toString().toLowerCase()/] "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
-				[elseif (fi.type=FileType::HDF5)]
+				[elseif (fi.type=FileType::HDF5)]																							[comment OPEN checks the extension of the file/]
 cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].hdf "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
-				[elseif (fi.type=FileType::EXCEL)]
+				[elseif (fi.type=FileType::EXCEL)]																							[comment OPEN checks the extension of the file/]
 cp [lf.folderPath/]/[fi.dataDictionary.filePath.trim().replaceAll('.*/', '')/].xlsx "$(pwd)/data/"[if (fi.dataDictionary.filePath.trim().contains('/'))][fi.dataDictionary.filePath.trim().replaceAll('/[^/]*$', '')/][/if]
-				[/if]
-			[/for]
-		[/let]
-	[/if]
-[/for]
+				[/if]																														[comment CLOSE checks the extension of the file/]
+			[/for]																															[comment CLOSE traverse all the files in the folder/]
+		[/let]																																[comment CLOSE assigns the variable to be a LocalFolder/]
+	[/if]																																	[comment CLOSE checks if the storage is a LocalFolder/]
+[/for]																																		[comment CLOSE traverse all the storages in the environment/]
 
 
-[for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]
-	[if (ps.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]
-		[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]
-			[if (dpd.oclIsKindOf(Library::Transformation))]
-				[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]
-					[if (ps.oclIsKindOf(PMMLModel))]
-						[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]
+[for (ps : ProcessingStep | doc.eContainer(Workflow).dataprocessing)]																		[comment OPEN traverse all the ProcessingStep in the workflow/]
+	[if (ps.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the ProcessingStep contains a DataProcessingDefinition/]
+		[let dpd : Library::DataProcessingDefinition = ps.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+			[if (dpd.oclIsKindOf(Library::Transformation))]																					[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+				[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]												[comment OPEN assigns the variable to be a Transformation/]
+					[if (ps.oclIsKindOf(PMMLModel))]																						[comment OPEN checks if the ProcessingStep is a PMMLModel/]
+						[let pmml : PMMLModel = ps.oclAsType(PMMLModel)]																	[comment OPEN assigns the variable to be a PMMLModel/]
 cp [pmml.filePath/] "$(pwd)/data"
-						[/let]
-					[/if]
-				[/let]
-			[elseif (dpd.oclIsKindOf(Library::Job))]
-				[let libJ : Library::Job = dpd.oclAsType(Library::Job)]	
-					[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]
-						[if (pstep.oclIsKindOf(PMMLModel))]
-							[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]
+						[/let]																												[comment CLOSE assigns the variable to be a PMMLModel/]
+					[/if]																													[comment CLOSE checks if the ProcessingStep is a PMMLModel/]
+				[/let]																														[comment CLOSE assigns the variable to be a Transformation/]
+			[elseif (dpd.oclIsKindOf(Library::Job))]																						[comment OPEN checks if the DataProcessingDefinition is a Job/]
+				[let libJ : Library::Job = dpd.oclAsType(Library::Job)]																		[comment OPEN assigns the variable to be a Job/]
+					[for (pstep : ProcessingStep | libJ.workflow.dataprocessing)]															[comment OPEN traverse all the ProcessingSteps in the original workflow/]
+						[if (pstep.oclIsKindOf(PMMLModel))]																					[comment OPEN checks if the ProcessingStep is a PMMLModel/]
+							[let pmml : PMMLModel = pstep.oclAsType(PMMLModel)]																[comment OPEN assigns the variable to be a PMMLModel/]
 cp [pmml.filePath/] "$(pwd)/data"
-							[/let]
-						[/if]
-					[/for]
-				[/let]
-			[/if]
-		[/let]
-	[/if]
-[/for]
+							[/let]																											[comment CLOSE assigns the variable to be a PMMLModel/]
+						[/if]																												[comment CLOSE checks if the ProcessingStep is a PMMLModel/]
+					[/for]																													[comment CLOSE traverse all the ProcessingSteps in the original workflow/]
+				[/let]																														[comment CLOSE assigns the variable to be a Job/]
+			[/if]																															[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+		[/let]																																[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+	[/if]																																	[comment CLOSE checks if the ProcessingStep contains a DataProcessingDefinition/]
+[/for]																																		[comment CLOSE traverse all the ProcessingStep in the workflow/]
 
 
 docker run -it --rm --name [doc.containerName.replaceAll('[(),\\s]+', '_')/] --network host --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
@@ -1529,11 +1529,11 @@ docker rmi [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAl
 clear
 
 echo -e "Exiting the application...\n"
-	[/file]
-[/let]
+	[/file]																											[comment CLOSE generates the deploy_docker_app/]
+[/let]																												[comment CLOSE assigns the Environment to be Local/]
 
 
-[file ('workflow_scripts.sh', false, 'UTF-8')]																		[comment generates the menu/]
+[file ('workflow_scripts.sh', false, 'UTF-8')]																		[comment OPEN generates the workflow_scripts/]
 CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
 WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
@@ -1572,7 +1572,7 @@ while true; do
         echo -e "Invalid option. Please select a valid option.\n"
     fi
 done
-[/file]
+[/file]																												[comment CLOSE generates the workflow_scripts/]
 [/template]
 
 
@@ -1603,146 +1603,146 @@ BlobName = [ci.blobName/]
 
 
 [template public fileFormatting(aWorkflow : Workflow)]
-[file ('fileFormatting.py', false, 'UTF-8')]
+[file ('fileFormatting.py', false, 'UTF-8')]																				[comment OPEN creates the fileFormatting file/]
 import pandas as pd
 import json
 import h5py
 import pyarrow
-[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]
-	[if (not filteredSet->isEmpty())]
+[let filteredSet : OrderedSet(Database) = aWorkflow.environment.storage->select(e | e.oclIsKindOf(Database))]				[comment OPEN creates a set only with the databases/]
+	[if (not filteredSet->isEmpty())]																						[comment OPEN checks if the set is not empty/]
 from sqlalchemy import create_engine
-		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]
-			[for (type : DBTYPE | types)]
-				[if (type=DBTYPE::MYSQL)]
+		[let types : Set(Environment::DBTYPE) = filteredSet->collect(e | e.type)->asSet()]									[comment OPEN creates a set only with the different types of databases/]
+			[for (type : DBTYPE | types)]																					[comment OPEN traverse the types of the databases in the set/]
+				[if (type=DBTYPE::MYSQL)]																					[comment OPEN checks if the database is MySQL/]
 import mysql.connector
-				[elseif (type=DBTYPE::POSTGRESQL)]
+				[elseif (type=DBTYPE::POSTGRESQL)]																			[comment OPEN checks if the database is PostgreSQL/]
 import psycopg2
-				[elseif (type=DBTYPE::SQLSERVER)]
+				[elseif (type=DBTYPE::SQLSERVER)]																			[comment OPEN checks if the database is SQLServer/]
 import pyodbc
-				[elseif (type=DBTYPE::ORACLE)]
+				[elseif (type=DBTYPE::ORACLE)]																				[comment OPEN checks if the database is Oracle/]
 import oracledb
-				[elseif (type=DBTYPE::MONGODB)]
+				[elseif (type=DBTYPE::MONGODB)]																				[comment OPEN checks if the database is Mongodb/]
 import pymongo
 from pandas import json_normalize
-				[elseif (type=DBTYPE::DYNAMODB)]
+				[elseif (type=DBTYPE::DYNAMODB)]																			[comment OPEN checks if the database is Dynamodb/]
 import boto3
 from pandas import json_normalize
-				[/if]
-			[/for]
-		[/let]
-	[/if]
-[/let]
-[for (st : Storage | aWorkflow.environment.storage)]
-	[if (st.oclIsKindOf(LocalFolder))]
-		[let f : Folder = st.oclAsType(Folder)]
-			[for (fi : File | f.file)]
+				[/if]																										[comment CLOSE checks the type of the database/]
+			[/for]																											[comment CLOSE traverse the types of the databases in the set/]
+		[/let]																												[comment CLOSE creates a set only with the different types of databases/]
+	[/if]																													[comment CLOSE checks if the set is not empty/]
+[/let]																														[comment CLOSE creates a set only with the databases/]
+[for (st : Storage | aWorkflow.environment.storage)]																		[comment OPEN traverse the storages in the environment/]
+	[if (st.oclIsKindOf(LocalFolder))]																						[comment OPEN checks if the storage is a LocalFolder/]
+		[let f : Folder = st.oclAsType(Folder)]																				[comment OPEN assigns the variable to be a Folder/]
+			[for (fi : File | f.file)]																						[comment OPEN traverse the files in the folder/]
 				
-				[if (fi.type=FileType::CSV)]
+				[if (fi.type=FileType::CSV)]																				[comment OPEN checks if the file is csv/]
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim()/][else][fi.dataDictionary.filePath.trim()/].csv[/if]', sep = '[fi.csv_sep/]')
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.filePath.trim()/].parquet[/if]')
-				[elseif (fi.type=FileType::EXCEL)]
+				[elseif (fi.type=FileType::EXCEL)]																			[comment OPEN checks if the file is excel/]
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim()/][else][fi.dataDictionary.filePath.trim()/].xlsx[/if]')
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.filePath.trim()/].parquet[/if]')
-				[elseif (fi.type=FileType::FEATHER)]
+				[elseif (fi.type=FileType::FEATHER)]																		[comment OPEN checks if the file is feather/]
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_feather('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim()/][else][fi.dataDictionary.filePath.trim()/].feather[/if]')
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.filePath.trim()/].parquet[/if]')
-				[elseif (fi.type=FileType::HDF5)]
+				[elseif (fi.type=FileType::HDF5)]																			[comment OPEN checks if the file is hdf5/]
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_hdf('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim()/][else][fi.dataDictionary.filePath.trim()/].hdf5[/if]'[if (fi.hdf5_key<>'')], key='[fi.hdf5_key/]'[/if])
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.filePath.trim()/].parquet[/if]')
-				[elseif (fi.type=FileType::JSON)]
+				[elseif (fi.type=FileType::JSON)]																			[comment OPEN checks if the file is json/]
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.json_normalize('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim()/][else][fi.dataDictionary.filePath.trim()/].json[/if]')
 [fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.filePath.trim().indexOf('.')>0)][fi.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.filePath.trim()/].parquet[/if]')
-				[/if]
-			[/for]
-		[/let]
-	[elseif (st.oclIsKindOf(Database))]
-		[let db : Database = st.oclAsType(Database)]
-			[if (db.type=DBTYPE::MYSQL)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[/if]																										[comment CLOSE checks the type of the file/]
+			[/for]																											[comment CLOSE traverse the files in the folder/]
+		[/let]																												[comment CLOSE assigns the variable to be a Folder/]
+	[elseif (st.oclIsKindOf(Database))]																						[comment OPEN checks if the storage is a Database/]
+		[let db : Database = st.oclAsType(Database)]																		[comment OPEN assigns the variable to be a Database/]
+			[if (db.type=DBTYPE::MYSQL)]																					[comment OPEN checks if the Database is MySQL/]
+				[if (db.auth.oclIsKindOf(Credentials))]																		[comment OPEN checks if the autentication uses credentials/]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]													[comment OPEN assigns the variable to be Credentials/]
 engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.host/]/[db.dbName/]')
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
-				[/if]
-				[for (tab : Table | db.table)]
+					[/let]																									[comment CLOSE assigns the variable to be Credentials/]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]																		[comment OPEN checks if the autentication uses OAuth2/]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]															[comment OPEN assigns the variable to be OAuth2/]
+					[/let]																									[comment CLOSE assigns the variable to be OAuth2/]
+				[elseif (db.auth.oclIsKindOf(SSL))]																			[comment OPEN checks if the autentication uses SSL/]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]																[comment OPEN assigns the variable to be SSL/]
+					[/let]																									[comment CLOSE assigns the variable to be SSL/]
+				[/if]																										[comment CLOSE checks the autentication type/]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[elseif (db.type=DBTYPE::POSTGRESQL)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[elseif (db.type=DBTYPE::POSTGRESQL)]																			[comment OPEN checks if the Database is PostgreSQL/]
+				[if (db.auth.oclIsKindOf(Credentials))]																		[comment OPEN checks if the autentication uses credentials/]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]													[comment OPEN assigns the variable to be Credentials/]													
 engine = create_engine('postgresql+psycopg2://[cr.username/]:[cr.passwd/]@[db.host/]/[db.dbName/]')
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
-				[/if]
-				[for (tab : Table | db.table)]
+					[/let]																									[comment CLOSE assigns the variable to be Credentials/]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]																		[comment OPEN checks if the autentication uses OAuth2/]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]															[comment OPEN assigns the variable to be OAuth2/]
+					[/let]																									[comment CLOSE assigns the variable to be OAuth2/]
+				[elseif (db.auth.oclIsKindOf(SSL))]																			[comment OPEN checks if the autentication uses SSL/]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]																[comment OPEN assigns the variable to be SSL/]
+					[/let]																									[comment CLOSE assigns the variable to be SSL/]
+				[/if]																										[comment CLOSE checks the autentication type/]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[elseif (db.type=DBTYPE::SQLSERVER)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[elseif (db.type=DBTYPE::SQLSERVER)]																			[comment OPEN checks if the Database is SQLServer/]
+				[if (db.auth.oclIsKindOf(Credentials))]																		[comment OPEN checks if the autentication uses credentials/]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]													[comment OPEN assigns the variable to be Credentials/]
 engine = create_engine('mssql+pyodbc://[cr.username/]:[cr.passwd/]@[db.host/]/[db.dbName/]?driver=ODBC+Driver+17+for+SQL+Server')
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
-				[/if]
-				[for (tab : Table | db.table)]
+					[/let]																									[comment CLOSE assigns the variable to be Credentials/]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]																		[comment OPEN checks if the autentication uses OAuth2/]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]															[comment OPEN assigns the variable to be OAuth2/]
+					[/let]																									[comment CLOSE assigns the variable to be OAuth2/]
+				[elseif (db.auth.oclIsKindOf(SSL))]																			[comment OPEN checks if the autentication uses SSL/]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]																[comment OPEN assigns the variable to be SSL/]
+					[/let]																									[comment CLOSE assigns the variable to be SSL/]
+				[/if]																										[comment CLOSE checks the autentication type/]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[elseif (db.type=DBTYPE::ORACLE)]
-				[if (db.auth.oclIsKindOf(Credentials))]
-					[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[elseif (db.type=DBTYPE::ORACLE)]																				[comment OPEN checks if the Database is Oracle/]
+				[if (db.auth.oclIsKindOf(Credentials))]																		[comment OPEN checks if the autentication uses credentials/]
+					[let cr : Credentials = db.auth.oclAsType(Credentials)]													[comment OPEN assigns the variable to be Credentials/]
 engine = create_engine('oracle+oracledb://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/?service_name=[db.dbName/]')
-					[/let]
-				[elseif (db.auth.oclIsKindOf(OAuth2))]
-					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-					[/let]
-				[elseif (db.auth.oclIsKindOf(SSL))]
-					[let ssl : SSL = db.auth.oclAsType(SSL)]
-					[/let]
-				[/if]
-				[for (tab : Table | db.table)]
+					[/let]																									[comment CLOSE assigns the variable to be Credentials/]
+				[elseif (db.auth.oclIsKindOf(OAuth2))]																		[comment OPEN checks if the autentication uses OAuth2/]
+					[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]															[comment OPEN assigns the variable to be OAuth2/]
+					[/let]																									[comment CLOSE assigns the variable to be OAuth2/]
+				[elseif (db.auth.oclIsKindOf(SSL))]																			[comment OPEN checks if the autentication uses SSL/]
+					[let ssl : SSL = db.auth.oclAsType(SSL)]																[comment OPEN assigns the variable to be SSL/]
+					[/let]																									[comment CLOSE assigns the variable to be SSL/]
+				[/if]																										[comment CLOSE checks the autentication type/]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]', engine)
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[elseif (db.type=DBTYPE::MONGODB)]
-				[if (not db.auth->isEmpty())]
-					[if (db.auth.oclIsKindOf(Credentials))]
-						[let cr : Credentials = db.auth.oclAsType(Credentials)]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[elseif (db.type=DBTYPE::MONGODB)]																				[comment OPEN checks if the Database is Mongodb/]
+				[if (not db.auth->isEmpty())]																				[comment OPEN checks if the autentication is not empty/]
+					[if (db.auth.oclIsKindOf(Credentials))]																	[comment OPEN checks if the autentication uses credentials/]
+						[let cr : Credentials = db.auth.oclAsType(Credentials)]												[comment OPEN assigns the variable to be Credentials/]
 client = pymongo.MongoClient("mongodb://[cr.username/]:[cr.passwd/]@[db.host/]:[db.port/]/")
-						[/let]
-					[elseif (db.auth.oclIsKindOf(OAuth2))]
-						[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]
-						[/let]
-					[elseif (db.auth.oclIsKindOf(SSL))]
-						[let ssl : SSL = db.auth.oclAsType(SSL)]
-						[/let]
-					[/if]
-				[elseif (db.auth->isEmpty())]
+						[/let]																								[comment CLOSE assigns the variable to be Credentials/]
+					[elseif (db.auth.oclIsKindOf(OAuth2))]																	[comment OPEN checks if the autentication uses OAuth2/]
+						[let oa : OAuth2 = db.auth.oclAsType(OAuth2)]														[comment OPEN assigns the variable to be OAuth2/]
+						[/let]																								[comment CLOSE assigns the variable to be OAuth2/]
+					[elseif (db.auth.oclIsKindOf(SSL))]																		[comment OPEN checks if the autentication uses SSL/]
+						[let ssl : SSL = db.auth.oclAsType(SSL)]															[comment OPEN assigns the variable to be SSL/]
+						[/let]																								[comment CLOSE assigns the variable to be SSL/]
+					[/if]																									[comment CLOSE checks the autentication type/]
+				[elseif (db.auth->isEmpty())]																				[comment OPEN checks if the autentication is empty/]
 client = pymongo.MongoClient("mongodb://[db.host/]:[db.port/]/")
-				[/if]
+				[/if]																										[comment CLOSE checks if the autentication is empty or not/]
 [db.dbName/]_db = client['['/]"[db.dbName/]"[']'/]
-				[for (tab : Table | db.table)]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]"[']'/]
 [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection.find()
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
@@ -1752,11 +1752,11 @@ if '_id' in [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]
 
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[elseif (db.type=DBTYPE::DYNAMODB)]
-				[if (not db.auth->isEmpty())]
-					[if (db.auth.oclIsKindOf(AWS))]
-						[let aws : AWS = db.auth.oclAsType(AWS)]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[elseif (db.type=DBTYPE::DYNAMODB)]																				[comment OPEN checks if the Database is Dynamodb/]
+				[if (not db.auth->isEmpty())]																				[comment OPEN checks if the autentication is not empty/]
+					[if (db.auth.oclIsKindOf(AWS))]																			[comment OPEN checks if the autentication uses AWS credentials/]
+						[let aws : AWS = db.auth.oclAsType(AWS)]															[comment OPEN assigns the variable to be AWS/]
 dynamodb = boto3.resource(
     'dynamodb',
     region_name="[aws.region/]",
@@ -1764,22 +1764,22 @@ dynamodb = boto3.resource(
     aws_secret_access_key='[aws.secretId/]',
     endpoint_url="[aws.endpointURL/]"
 )
-						[/let]
-					[/if]
-				[/if]
-				[for (tab : Table | db.table)]
+						[/let]																								[comment CLOSE assigns the variable to be AWS/]
+					[/if]																									[comment CLOSE checks if the autentication uses AWS credentials/]
+				[/if]																										[comment CLOSE checks if the autentication is empty/]
+				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table = dynamodb.Table('[tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]')
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table.scan()
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response['['/]'Items'[']'/]
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
 [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.filePath.trim().indexOf('.')>0)][tab.dataDictionary.filePath.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.filePath.trim()/].parquet[/if]')
 
-				[/for]
-			[/if]
-		[/let]
-	[/if]
-[/for]
-[/file]
+				[/for]																										[comment CLOSE traverse the tables in the database/]
+			[/if]																											[comment CLOSE checks the type Database of the Database/]
+		[/let]																												[comment CLOSE assigns the variable to be a Database/]
+	[/if]																													[comment CLOSE checks if the storage is a LocalFolder or a Database/]
+[/for]																														[comment CLOSE traverse the storages in the environment/]
+[/file]																														[comment CLOSE creates the fileFormatting file/]
 [/template]
 
 
