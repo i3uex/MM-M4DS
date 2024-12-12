@@ -1287,7 +1287,7 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 							[/if]																																[comment CLOSE checks that the list of Range is not empty/]
 						[/let]																																	[comment CLOSE assigns to a set only the Range/]
 					[/if]																																		[comment CLOSE checks that the list of MatchingValues is not empty/]
-				[/let]	
+				[/let]																																			[comment CLOSE assigns the variable to be a FilterValue/]
 [dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
 				[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 					[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
@@ -1365,15 +1365,15 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 [template public generateLocalDocker(aWorkflow : Workflow)]
 [let doc : Local = aWorkflow.environment.oclAsType(Local)]																					[comment OPEN assigns the Environment to be Local/]
 	[file ('Dockerfile', false, 'UTF-8')]																									[comment OPEN generates the Dockerfile/]
-		[if (doc.developmentTool.tool=TOOL::PYTHON)]
+		[if (doc.developmentTool.tool=TOOL::PYTHON)]																						[comment OPEN checks if the development tool is Python/]
 FROM python:[doc.developmentTool.version/]-slim
-		[elseif (doc.developmentTool.tool=TOOL::KNIME)]
+		[elseif (doc.developmentTool.tool=TOOL::KNIME)]																						[comment OPEN checks if the development tool is KNIME/]
 FROM python:3.11-slim
 #FROM KNIME:[doc.developmentTool.version/]
-		[elseif (doc.developmentTool.tool=TOOL::R)]
+		[elseif (doc.developmentTool.tool=TOOL::R)]																							[comment OPEN checks if the development tool is R/]
 FROM python:3.11-slim
 #FROM R:[doc.developmentTool.version/]
-		[/if]
+		[/if]																																[comment CLOSE checks the type of the development/]
 
 WORKDIR [aWorkflow.environment.path/]
 ENV PYTHONPATH=[aWorkflow.environment.path/]
