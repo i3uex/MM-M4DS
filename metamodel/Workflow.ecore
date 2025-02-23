@@ -44,11 +44,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="outvalue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapDefinition" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MapDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mapOperation" eType="#//MapOperation"
+        defaultValueLiteral="VALUE_MAPPING"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//PrimitiveDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EEnum Library.ecore#//DataType"
+        defaultValueLiteral="String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedField" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivedFieldDef" lowerBound="1"
@@ -60,9 +64,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="filterValueDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//FilterValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitive" upperBound="-1"
-        eType="#//Primitive"/>
+        eType="#//Primitive" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchingvalue" upperBound="-1"
-        eType="#//MatchingValue"/>
+        eType="#//MatchingValue" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterType" eType="#//FilterType"
         defaultValueLiteral="EXCLUDE"/>
   </eClassifiers>
@@ -176,9 +180,10 @@
         eType="ecore:EClass Library.ecore#//NumOpDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FixValue" eSuperTypes="#//ImputeType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fixValueDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//FixValueDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Operation">
     <eLiterals name="Interpolation"/>
@@ -200,9 +205,9 @@
     <eLiterals name="Invalid" value="1"/>
     <eLiterals name="Outlier" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Parameter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//FieldDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldRange" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldRangeDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//FieldRangeDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataField" lowerBound="1"
         upperBound="-1" eType="#//DataField"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//Operator"/>
@@ -214,5 +219,37 @@
   <eClassifiers xsi:type="ecore:EEnum" name="FilterType">
     <eLiterals name="EXCLUDE"/>
     <eLiterals name="INCLUDE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
+    <eLiterals name="SUM"/>
+    <eLiterals name="SUBSTRACT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOp" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MathOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//MathOpDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
+        eType="#//DataField"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MapOperation">
+    <eLiterals name="VALUE_MAPPING"/>
+    <eLiterals name="SUBSTRING" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

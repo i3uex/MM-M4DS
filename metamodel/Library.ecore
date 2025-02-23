@@ -30,7 +30,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
     <eLiterals name="String"/>
@@ -56,9 +55,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="FilterValueDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FilterValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchingvaluedef" upperBound="-1"
-        eType="#//MatchingValueDef"/>
+        eType="#//MatchingValueDef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitivedef" upperBound="-1"
-        eType="#//PrimitiveDef"/>
+        eType="#//PrimitiveDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MatchingValueDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="RangeDef" eSuperTypes="#//MatchingValueDef">
@@ -102,8 +101,28 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FixValueDef" eSuperTypes="#//ImputeTypeDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FixValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//PrimitiveDef"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldDef" eSuperTypes="#//ParameterDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldRangeDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FieldRange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOpDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//MathOp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
+        eType="#//OperandDef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
+        eType="#//OperandDef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFixValueDef" eSuperTypes="#//OperandDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpFixValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//PrimitiveDef"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpField"/>
   </eClassifiers>
 </ecore:EPackage>

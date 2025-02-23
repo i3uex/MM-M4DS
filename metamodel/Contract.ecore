@@ -84,6 +84,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueFieldDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//FixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SubStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="False"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
@@ -121,6 +123,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Field">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataField" lowerBound="1"
         eType="ecore:EClass Workflow.ecore#//DataField"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
     <eLiterals name="String"/>
@@ -162,5 +165,33 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialType" eType="#//SpecialType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specialValueDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//SpecialValueDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
+    <eLiterals name="SUM"/>
+    <eLiterals name="SUBSTRACT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOperation" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mathOp" eType="#//MathOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SecondOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//MathOpDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//FixValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//OpFixValueDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="#//Field"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

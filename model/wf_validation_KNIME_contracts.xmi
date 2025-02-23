@@ -185,8 +185,11 @@
   </dataprocessing>
   <dataprocessing outgoing="//@link.1" incoming="//@link.0" name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)" in="//@dataprocessing.1/@inputPort.0/@datafield.0 //@dataprocessing.1/@inputPort.0/@datafield.1" out="//@dataprocessing.1/@outputPort.0/@datafield.0 //@dataprocessing.1/@outputPort.0/@datafield.1">
     <dataProcessingDefinition xsi:type="Library:Transformation" href="library_validation.xmi#//@dataprocessingdefinition.1"/>
-    <parameter xsi:type="Workflow:FixValue" name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue" value="Unknown">
+    <parameter xsi:type="Workflow:FixValue" name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue">
       <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0"/>
+      <value name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_primitive" value="Unknown">
+        <primitiveDef href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0/@value"/>
+      </value>
     </parameter>
     <contract name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRECONDITION">
       <contractDefinition href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.0"/>
@@ -509,11 +512,11 @@
   </dataprocessing>
   <dataprocessing outgoing="//@link.4" incoming="//@link.3" name="rowFilterRange(init_span)" in="//@dataprocessing.4/@inputPort.0/@datafield.0" out="//@dataprocessing.4/@outputPort.0/@datafield.0">
     <dataProcessingDefinition xsi:type="Library:Transformation" href="library_validation.xmi#//@dataprocessingdefinition.8"/>
-    <parameter xsi:type="Workflow:FilterValue" name="rowFilterRange(init_span)_param_rowFilter" matchingvalue="//@dataprocessing.4/@parameter.1">
+    <parameter xsi:type="Workflow:FilterValue" name="rowFilterRange(init_span)_param_rowFilter">
       <filterValueDef href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.0"/>
-    </parameter>
-    <parameter xsi:type="Workflow:Range" name="rowFilterRange(init_span)_param_range" minInfinity="true">
-      <rangeDef href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
+      <matchingvalue xsi:type="Workflow:Range" name="rowFilterRange(init_span)_param_range" minInfinity="true">
+        <rangeDef href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
+      </matchingvalue>
     </parameter>
     <contract name="rowFilterRange(init_span)_PRECONDITION">
       <contractDefinition href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0"/>
@@ -556,8 +559,8 @@
   </dataprocessing>
   <dataprocessing outgoing="//@link.5" incoming="//@link.4" name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)" in="//@dataprocessing.5/@inputPort.0" out="//@dataprocessing.5/@outputPort.0">
     <dataProcessingDefinition xsi:type="Library:Transformation" href="library_validation.xmi#//@dataprocessingdefinition.3"/>
-    <parameter xsi:type="Workflow:Field" name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_param_field" dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1">
-      <fieldDef href="library_validation.xmi#//@dataprocessingdefinition.3/@parameterdefinition.0"/>
+    <parameter xsi:type="Workflow:FieldRange" name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_param_field" dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1">
+      <fieldRangeDef href="library_validation.xmi#//@dataprocessingdefinition.3/@parameterdefinition.0"/>
     </parameter>
     <contract name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_PRECONDITION">
       <contractDefinition href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.0"/>
