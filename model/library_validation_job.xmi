@@ -341,4 +341,88 @@
       <datafielddefinition xsi:type="Library:ContinuousDef" name="mathOperationFieldField_output_DataField"/>
     </outputPort>
   </dataprocessingdefinition>
+  <dataprocessingdefinition xsi:type="Library:Job" name="Model data set with metanode" in="//@dataprocessingdefinition.11/@inputPort.0 //@dataprocessingdefinition.11/@inputPort.2 //@dataprocessingdefinition.11/@inputPort.4 //@dataprocessingdefinition.11/@inputPort.6 //@dataprocessingdefinition.11/@inputPort.8 //@dataprocessingdefinition.11/@inputPort.10 //@dataprocessingdefinition.11/@inputPort.12 //@dataprocessingdefinition.11/@inputPort.14 //@dataprocessingdefinition.11/@inputPort.16 //@dataprocessingdefinition.11/@inputPort.18 //@dataprocessingdefinition.11/@inputPort.20 //@dataprocessingdefinition.11/@inputPort.22 //@dataprocessingdefinition.11/@inputPort.24 //@dataprocessingdefinition.11/@inputPort.26" out="//@dataprocessingdefinition.11/@inputPort.1 //@dataprocessingdefinition.11/@outputPort.0 //@dataprocessingdefinition.11/@inputPort.3 //@dataprocessingdefinition.11/@inputPort.5 //@dataprocessingdefinition.11/@inputPort.7 //@dataprocessingdefinition.11/@inputPort.9 //@dataprocessingdefinition.11/@inputPort.11 //@dataprocessingdefinition.11/@inputPort.13 //@dataprocessingdefinition.11/@inputPort.15 //@dataprocessingdefinition.11/@inputPort.17 //@dataprocessingdefinition.11/@inputPort.19 //@dataprocessingdefinition.11/@inputPort.21 //@dataprocessingdefinition.11/@inputPort.23 //@dataprocessingdefinition.11/@inputPort.25">
+    <parameterdefinition xsi:type="Library:MapDef"/>
+    <inputPort name="job_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.0/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.0/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.1/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.1/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByMean(avg_income, distance)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.2/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByMean(avg_income, distance)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.2/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByLinearInterpolation(satscore)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.3/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeMissingByLinearInterpolation(satscore)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.3/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_rowFilterRange(init_span)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.4/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_rowFilterRange(init_span)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.4/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.5/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.5/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_mapping(TERRITORY)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.6/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_mapping(TERRITORY)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.6/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_mapping(Instate)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.7/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_mapping(Instate)_output_dataDictionary"/>
+    <inputPort name="job_stringToNumber(TERRITORY, Instate)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.8/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_stringToNumber(TERRITORY, Instate)_output_dataDictionary"/>
+    <inputPort name="job_imputeOutlierByClosest(avg_income, distance, Instate)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.9/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_imputeOutlierByClosest(avg_income, distance, Instate)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.9/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.10/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.10/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(TERRITORY)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.13/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(TERRITORY)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.11/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(satscore)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.12/@inputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(satscore)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.12/@outputPort.0"/>
+    </inputPort>
+    <inputPort name="job_binner(avg_income)_input_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.13/@inputPort.0"/>
+    </inputPort>
+    <outputPort name="job_binner(avg_income)_output_dataDictionary">
+      <boundTo href="wf_validation_KNIME_contracts.xmi#//@dataprocessing.13/@outputPort.0"/>
+    </outputPort>
+    <workflow href="wf_validation_KNIME_contracts.xmi#/"/>
+  </dataprocessingdefinition>
 </Library:Library>
