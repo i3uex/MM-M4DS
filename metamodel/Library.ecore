@@ -124,7 +124,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpField"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
-        eType="#//DataFieldDefinition"/>
   </eClassifiers>
 </ecore:EPackage>

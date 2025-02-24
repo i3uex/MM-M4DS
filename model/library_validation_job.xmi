@@ -260,7 +260,7 @@
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="mathOperationFieldFixValue" in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition xsi:type="Library:MathOpDef" name="mathOperationFieldFixValue_param_mathop">
-      <firstOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldFixValue_first_operand" datafield="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"/>
+      <firstOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldFixValue_first_operand"/>
       <secondOperand xsi:type="Library:OpFixValueDef" name="mathOperationFieldFixValue_second_operand">
         <value name="mathOperationFieldFixValue_param_primitive_second_operand"/>
       </secondOperand>
@@ -283,7 +283,7 @@
         <out xsi:type="ContractDefinition:DataFieldDef" name="mathOperationFieldFixValue_INV_output_dataField"/>
         <thendefinition ifdefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="mathOperationFieldFixValue_INV_THEN">
           <valueResult xsi:type="ContractDefinition:MathOpDef" name="mathOperationFieldFixValue_INV_valueResult">
-            <firstOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldFixValue_INV_firstOperand" datafield="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@in.0"/>
+            <firstOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldFixValue_INV_firstOperand"/>
             <secondOperand xsi:type="ContractDefinition:OpFixValueDef" name="mathOperationFieldFixValue_INV_secondOperand">
               <value name="mathOperationFieldFixValue_INV_fixValue_secondOperand"/>
             </secondOperand>
@@ -303,8 +303,8 @@
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="mathOperationFieldField" in="//@dataprocessingdefinition.10/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.10/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition xsi:type="Library:MathOpDef" name="mathOperationFieldField_param_mathop">
-      <firstOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldField_first_operand" datafield="//@dataprocessingdefinition.10/@inputPort.0/@datafielddefinition.0"/>
-      <secondOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldField_second_operand" datafield="//@dataprocessingdefinition.10/@inputPort.0/@datafielddefinition.1"/>
+      <firstOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldField_first_operand"/>
+      <secondOperand xsi:type="Library:OpFieldDef" name="mathOperationFieldField_second_operand"/>
     </parameterdefinition>
     <contractdefinition name="mathOperationFieldField_PRECONDITION">
       <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="mathOperationFieldField_PRE_valueRange" belongOp="NOTBELONG">
@@ -324,8 +324,8 @@
         <out xsi:type="ContractDefinition:DataFieldDef" name="mathOperationFieldField_INV_input2_dataField"/>
         <thendefinition ifdefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="mathOperationFieldField_INV_THEN">
           <valueResult xsi:type="ContractDefinition:MathOpDef" name="mathOperationFieldField_INV_valueResult">
-            <firstOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldField_INV_firstOperand" datafield="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@in.0"/>
-            <secondOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldField_INV_secondOperand" datafield="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@out.0"/>
+            <firstOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldField_INV_firstOperand"/>
+            <secondOperand xsi:type="ContractDefinition:OpFieldDef" name="mathOperationFieldField_INV_secondOperand"/>
           </valueResult>
         </thendefinition>
         <ifdefinition thendefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="mathOperationFieldField_INV_IF">

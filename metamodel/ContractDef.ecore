@@ -102,8 +102,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//OpField"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
-        eType="#//DataFieldDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValueDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpFixValue"/>
