@@ -8,7 +8,7 @@
     <semanticResources>Environment.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_w8j1EHowEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1740411663382">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_xQonoHowEe67Z-Y0pklHtA" name="Workflow class diagram" repPath="#_xQnZgHowEe67Z-Y0pklHtA" changeId="1740561479735">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Workflow.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -2427,7 +2427,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_C7HbAYebEe6EpPuNa2I42g" name="clousure : ClosureType = opeOpen" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_C7HbAYebEe6EpPuNa2I42g" name="clousure : ClosureType = openOpen" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Workflow.ecore#//Interval/clousure"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Workflow.ecore#//Interval/clousure"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_C7HbAoebEe6EpPuNa2I42g" labelAlignment="LEFT">
@@ -2535,9 +2535,9 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_YdW0bIebEe6EpPuNa2I42g" name="opeOpen" tooltipText="">
-        <target xmi:type="ecore:EEnumLiteral" href="Workflow.ecore#//ClosureType/opeOpen"/>
-        <semanticElements xmi:type="ecore:EEnumLiteral" href="Workflow.ecore#//ClosureType/opeOpen"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_YdW0bIebEe6EpPuNa2I42g" name="openOpen" tooltipText="">
+        <target xmi:type="ecore:EEnumLiteral" href="Workflow.ecore#//ClosureType/openOpen"/>
+        <semanticElements xmi:type="ecore:EEnumLiteral" href="Workflow.ecore#//ClosureType/openOpen"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_YdW0bYebEe6EpPuNa2I42g" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']/@style"/>
         </ownedStyle>

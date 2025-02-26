@@ -154,7 +154,7 @@
     <eLiterals name="Float" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ClosureType">
-    <eLiterals name="opeOpen"/>
+    <eLiterals name="openOpen"/>
     <eLiterals name="openClosed" value="1"/>
     <eLiterals name="closedOpen" value="2"/>
     <eLiterals name="closedClosed" value="3"/>
