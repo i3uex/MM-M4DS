@@ -114,9 +114,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
         eType="#//OperandDef" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValueDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpFixValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//PrimitiveDef"

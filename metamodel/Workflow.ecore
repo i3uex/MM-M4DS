@@ -253,18 +253,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MathOpDef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter"/>
   <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
         eType="#//DataField"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
         containment="true"/>
   </eClassifiers>
