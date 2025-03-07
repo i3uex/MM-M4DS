@@ -794,10 +794,66 @@
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition
+      xsi:type="Library:Transformation"
+      name="rowFilterMissing"
+      in="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"
+      out="//@dataprocessingdefinition.11/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition
+        xsi:type="Library:FilterValueDef"
+        name="rowFilterMissing_param_filter">
+      <matchingvaluedef
+          xsi:type="Library:MissingValuesDef"
+          name="rowFilterMissing_param_missing_values"/>
+    </parameterdefinition>
+    <contractdefinition
+        name="rowFilterMissing_PRECONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          name="rowFilterMissing_PRE_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterMissing_PRE_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:SpecialValueDef"
+            name="rowFilterMissing_PRE_specialValue">
+          <quantitydef
+              xsi:type="ContractDefinition:PercentDef"
+              name="rowFilterMissing_PRE_percent"/>
+        </valuedefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="rowFilterMissing_POSTCONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          type="POSTCONDITION"
+          name="rowFilterMissing_POST_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterMissing_POST_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:SpecialValueDef"
+            name="rowFilterMissing_POST_specialValue"/>
+      </contractDefinition>
+    </contractdefinition>
+    <inputPort
+        name="rowFilterMissing_input_DataDictionary">
+      <datafielddefinition
+          xsi:type="Library:ContinuousDef"
+          name="rowFilterMissing_input_dataField"/>
+    </inputPort>
+    <outputPort
+        name="rowFilterMissing_output_DataDictionary">
+      <datafielddefinition
+          xsi:type="Library:ContinuousDef"
+          name="rowFilterMissing_output_dataField"/>
+    </outputPort>
+  </dataprocessingdefinition>
+  <dataprocessingdefinition
       xsi:type="Library:Job"
       name="Model data set with metanode"
-      in="//@dataprocessingdefinition.11/@inputPort.0 //@dataprocessingdefinition.11/@inputPort.2 //@dataprocessingdefinition.11/@inputPort.4 //@dataprocessingdefinition.11/@inputPort.6 //@dataprocessingdefinition.11/@inputPort.8 //@dataprocessingdefinition.11/@inputPort.10 //@dataprocessingdefinition.11/@inputPort.12 //@dataprocessingdefinition.11/@inputPort.14 //@dataprocessingdefinition.11/@inputPort.16 //@dataprocessingdefinition.11/@inputPort.18 //@dataprocessingdefinition.11/@inputPort.20 //@dataprocessingdefinition.11/@inputPort.22 //@dataprocessingdefinition.11/@inputPort.24 //@dataprocessingdefinition.11/@inputPort.26"
-      out="//@dataprocessingdefinition.11/@inputPort.1 //@dataprocessingdefinition.11/@outputPort.0 //@dataprocessingdefinition.11/@inputPort.3 //@dataprocessingdefinition.11/@inputPort.5 //@dataprocessingdefinition.11/@inputPort.7 //@dataprocessingdefinition.11/@inputPort.9 //@dataprocessingdefinition.11/@inputPort.11 //@dataprocessingdefinition.11/@inputPort.13 //@dataprocessingdefinition.11/@inputPort.15 //@dataprocessingdefinition.11/@inputPort.17 //@dataprocessingdefinition.11/@inputPort.19 //@dataprocessingdefinition.11/@inputPort.21 //@dataprocessingdefinition.11/@inputPort.23 //@dataprocessingdefinition.11/@inputPort.25">
+      in="//@dataprocessingdefinition.12/@inputPort.0 //@dataprocessingdefinition.12/@inputPort.2 //@dataprocessingdefinition.12/@inputPort.4 //@dataprocessingdefinition.12/@inputPort.6 //@dataprocessingdefinition.12/@inputPort.8 //@dataprocessingdefinition.12/@inputPort.10 //@dataprocessingdefinition.12/@inputPort.12 //@dataprocessingdefinition.12/@inputPort.14 //@dataprocessingdefinition.12/@inputPort.16 //@dataprocessingdefinition.12/@inputPort.18 //@dataprocessingdefinition.12/@inputPort.20 //@dataprocessingdefinition.12/@inputPort.22 //@dataprocessingdefinition.12/@inputPort.24 //@dataprocessingdefinition.12/@inputPort.26"
+      out="//@dataprocessingdefinition.12/@inputPort.1 //@dataprocessingdefinition.12/@outputPort.0 //@dataprocessingdefinition.12/@inputPort.3 //@dataprocessingdefinition.12/@inputPort.5 //@dataprocessingdefinition.12/@inputPort.7 //@dataprocessingdefinition.12/@inputPort.9 //@dataprocessingdefinition.12/@inputPort.11 //@dataprocessingdefinition.12/@inputPort.13 //@dataprocessingdefinition.12/@inputPort.15 //@dataprocessingdefinition.12/@inputPort.17 //@dataprocessingdefinition.12/@inputPort.19 //@dataprocessingdefinition.12/@inputPort.21 //@dataprocessingdefinition.12/@inputPort.23 //@dataprocessingdefinition.12/@inputPort.25">
     <parameterdefinition
         xsi:type="Library:MapDef"/>
     <inputPort
