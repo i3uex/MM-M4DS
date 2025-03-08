@@ -93,6 +93,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContinuousDef" eSuperTypes="#//DataFieldDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Continuous"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateDef" eSuperTypes="#//DataFieldDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Date"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValueDef" eSuperTypes="#//ImputeTypeDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DerivedValue"/>
   </eClassifiers>

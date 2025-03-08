@@ -130,10 +130,26 @@
         eType="ecore:EClass Library.ecore#//ContinuousDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
         upperBound="-1" eType="#//Interval" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thousandsSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="&quot;&quot;"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="."/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
+        eType="#//IntervalDate" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dateDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//DateDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervalDate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Contract">
@@ -152,6 +168,7 @@
     <eLiterals name="Boolean" value="4"/>
     <eLiterals name="Double" value="5"/>
     <eLiterals name="Float" value="6"/>
+    <eLiterals name="Date" value="7" literal="Date"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ClosureType">
     <eLiterals name="openOpen"/>

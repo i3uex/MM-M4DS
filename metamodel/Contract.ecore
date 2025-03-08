@@ -131,6 +131,7 @@
     <eLiterals name="Boolean" value="4"/>
     <eLiterals name="Double" value="5"/>
     <eLiterals name="Float" value="6"/>
+    <eLiterals name="Date" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DerivedType"
