@@ -777,6 +777,17 @@ else:
 										[/if]																															[comment CLOSE checks that the type of the result is NumOp/]
 									[/let]																																[comment CLOSE assigns the variable to be of type SpecialValue/]
 								[/if]																																	[comment CLOSE checks that the type of the value is FixValue or SpecialValue (if at the beginning)/]
+								[if(v.oclIsTypeOf(MathOperation))]
+if contract_invariants.check_inv_math_operation(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
+										firstOperand=[fvop.value.value/], isFieldFirst=False, secondOperand='[fvop2.value.value/]', isFieldSecond=False
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df_in.displayName/]', field_out='[df_in.out.displayName/]')
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+
+								[/if]
 							[/for]																																		[comment CLOSE traverse all the values associated to the contract/]
 						[/let]																																			[comment CLOSE assigns the variable to be of type Then/]
 					[/let]																																				[comment CLOSE assigns the variable to be of type DataField/]
@@ -986,6 +997,17 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 						[/if]																																	[comment CLOSE checks that the type of the result is NumOp/]
 					[/let]																																		[comment CLOSE assigns the variable to be of type SpecialValue/]
 				[/if]																																			[comment CLOSE checks that the type of the value is FixValue or SpecialValue (if at the beginning)/]
+				[if(v.oclIsTypeOf(MathOperation))]
+if contract_invariants.check_inv_math_operation(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
+										firstOperand=[fvop.value.value/], isFieldFirst=False, secondOperand='[fvop2.value.value/]', isFieldSecond=False
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df_in.displayName/]', field_out='[df_in.out.displayName/]')
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+
+				[/if]
 			[/for]																																				[comment CLOSE traverse all the values associated to the contract/]
 		[/let]																																					[comment CLOSE assigns the variable to be of type Then/]
 	[/let]																																						[comment CLOSE assigns the variable to be of type DataField/]
