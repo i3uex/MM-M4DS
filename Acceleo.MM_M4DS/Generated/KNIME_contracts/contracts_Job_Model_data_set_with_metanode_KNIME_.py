@@ -78,6 +78,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	missing_values_imputeByDerivedValue_INV_condition=[]
 	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df,
 								data_dictionary_out=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df,
@@ -92,6 +93,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	missing_values_imputeByDerivedValue_INV_condition=[]
 	if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df,
 								data_dictionary_out=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__output_dataDictionary_df,
@@ -103,6 +105,7 @@ def generateWorkflow():
 		print('INVARIANT INV_condition_impute_ETHNICITY_columns VALIDATED')
 	else:
 		print('INVARIANT INV_condition_impute_ETHNICITY_columns NOT VALIDATED')
+	
 	
 	
 	
@@ -160,6 +163,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	missing_values_imputeByFixValue_INV_condition=[]
 	if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df,
 								data_dictionary_out=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__output_dataDictionary_df,
@@ -173,6 +177,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -228,6 +233,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	missing_values_imputeByNumericOp_INV_condition=[]
 	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeMissingByMean_avg_income_distance__input_dataDictionary_df,
 											data_dictionary_out=imputeMissingByMean_avg_income_distance__output_dataDictionary_df,
@@ -239,6 +245,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByMean(distance)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT imputeMissingByMean(distance)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -275,6 +282,7 @@ def generateWorkflow():
 		print('INVARIANT imputeMissingByLinearInterpolation(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT imputeMissingByLinearInterpolation(satscore)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -371,6 +379,8 @@ def generateWorkflow():
 	
 	
 	
+	
+	
 	#-----------------New DataProcessing-----------------
 	mapping_Instate__input_dataDictionary_df=pd.read_parquet('/wf_validation_contracts/data/ruleEngine_territory_output_dataDictionary.parquet')
 
@@ -418,6 +428,8 @@ def generateWorkflow():
 		print('INVARIANT mapping(Instate)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT mapping(Instate)_INV_condition NOT VALIDATED')
+	
+	
 	
 	
 	
@@ -499,6 +511,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df,
 											data_dictionary_out=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df,
 											belong_op_in=Belong(0),
@@ -512,6 +525,7 @@ def generateWorkflow():
 	
 	
 	
+	
 	if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df,
 											data_dictionary_out=imputeOutlierByClosest_avg_income_distance_Instate__output_dataDictionary_df,
 											belong_op_in=Belong(0),
@@ -522,6 +536,7 @@ def generateWorkflow():
 		print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT imputeOutlierByClosest(Instate)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -579,6 +594,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=1.0, right_margin=4.0,
@@ -591,6 +607,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=4.0, right_margin=1000.0,
@@ -602,6 +619,7 @@ def generateWorkflow():
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TOTAL_CONTACTS)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -617,6 +635,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=1.0, right_margin=4.0,
@@ -629,6 +648,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=4.0, right_margin=1000.0,
@@ -640,6 +660,7 @@ def generateWorkflow():
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS VALIDATED')
 	else:
 		print('INVARIANT INV_binner_condition_SELF_INIT_CNTCTS NOT VALIDATED')
+	
 	
 	
 	
@@ -655,6 +676,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=1.0, right_margin=4.0,
@@ -667,6 +689,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df,
 											data_dictionary_out=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__output_dataDictionary_df,
 											left_margin=4.0, right_margin=1000.0,
@@ -678,6 +701,7 @@ def generateWorkflow():
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(SOLICITED_CNTCTS)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -711,6 +735,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
 											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
 											left_margin=1.0, right_margin=3.0,
@@ -722,6 +747,7 @@ def generateWorkflow():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	
 	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
 											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
@@ -735,6 +761,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
 											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
 											left_margin=5.0, right_margin=7.0,
@@ -747,6 +774,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_TERRITORY__input_dataDictionary_df,
 											data_dictionary_out=binner_TERRITORY__output_dataDictionary_df,
 											left_margin=7.0, right_margin=1000.0,
@@ -758,6 +786,7 @@ def generateWorkflow():
 		print('INVARIANT binner(TERRITORY)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(TERRITORY)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -791,6 +820,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
 											data_dictionary_out=binner_satscore__output_dataDictionary_df,
 											left_margin=1040.0, right_margin=1160.0,
@@ -802,6 +832,7 @@ def generateWorkflow():
 		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
+	
 	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
 											data_dictionary_out=binner_satscore__output_dataDictionary_df,
@@ -815,6 +846,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_satscore__input_dataDictionary_df,
 											data_dictionary_out=binner_satscore__output_dataDictionary_df,
 											left_margin=1340.0, right_margin=2000.0,
@@ -826,6 +858,7 @@ def generateWorkflow():
 		print('INVARIANT binner(satscore)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(satscore)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
@@ -859,6 +892,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_avg_income__input_dataDictionary_df,
 											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
 											left_margin=42830.0, right_margin=55559.0,
@@ -871,6 +905,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_avg_income__input_dataDictionary_df,
 											data_dictionary_out=binner_avg_income__output_dataDictionary_df,
 											left_margin=55590.0, right_margin=100000.0,
@@ -882,6 +917,7 @@ def generateWorkflow():
 		print('INVARIANT binner(avg_income)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT binner(avg_income)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
