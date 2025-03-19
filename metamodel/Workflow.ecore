@@ -260,6 +260,8 @@
   <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
     <eLiterals name="SUM"/>
     <eLiterals name="SUBSTRACT" value="1"/>
+    <eLiterals name="MULTIPLY" value="2" literal="MULTIPLY"/>
+    <eLiterals name="DIVIDE" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOp" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MathOperator"/>
