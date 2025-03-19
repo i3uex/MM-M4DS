@@ -175,6 +175,8 @@
   <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
     <eLiterals name="SUM"/>
     <eLiterals name="SUBSTRACT" value="1"/>
+    <eLiterals name="MULTIPLY" value="2"/>
+    <eLiterals name="DIVIDE" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
