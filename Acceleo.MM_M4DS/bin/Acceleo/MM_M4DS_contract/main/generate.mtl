@@ -506,10 +506,13 @@ output_values_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | con
 data_type_input_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fv.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/for][/for][']'/]
 data_type_output_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/if][/for][/for][']'/]
 
+is_substring_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fval.subStr=true)]True[elseif (fval.subStr=false)]False[/if][/let][/if][/for][/for][']'/]
+
 if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
 										input_values_list=input_values_list_[cond.conditionDef.name/], 
 										output_values_list=output_values_list_[cond.conditionDef.name/],
+										is_substring_list=is_substring_list_[cond.conditionDef.name/],
 										belong_op_in=Belong([if (firstIf.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[cond.conditionDef.name/],
@@ -544,10 +547,13 @@ output_values_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | con
 data_type_input_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fv.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/for][/for][']'/]
 data_type_output_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][if (if_cond_list._then.valueResult.oclIsTypeOf(FixValue))][let fval : FixValue = if_cond_list._then.valueResult.oclAsType(FixValue)][if (fval.dataType=DataType::String)]DataType(0)[elseif (fval.dataType=DataType::Time)]DataType(1)[elseif (fval.dataType=DataType::Integer)]DataType(2)[elseif (fval.dataType=DataType::DateTime)]DataType(3)[elseif (fval.dataType=DataType::Boolean)]DataType(4)[elseif (fval.dataType=DataType::Double)]DataType(5)[elseif (fval.dataType=DataType::Float)]DataType(6)[else]None)[/if][/let][/if][/if][/for][/for][']'/]
 
+is_substring_list_[cond.conditionDef.name/]=['['/][for (if_cond_list : If | cond._if) separator(', ')][for (value : Value | if_cond_list.valueCondition) separator(', ')][if (value.oclIsTypeOf(FixValue))][let fval : FixValue = value.oclAsType(FixValue)][if (fval.subStr=true)]True[elseif (fval.subStr=false)]False[/if][/let][/if][/for][/for][']'/]
+
 if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=[dd_in.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_df,
 										data_dictionary_out=[dd_in.dataDictionary.datafield->first().out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
 										input_values_list=input_values_list_[cond.conditionDef.name/], 
 										output_values_list=output_values_list_[cond.conditionDef.name/],
+										is_substring_list=is_substring_list_[cond.conditionDef.name/],
 										belong_op_in=Belong([if (firstIf.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[cond.conditionDef.name/],
@@ -607,6 +613,32 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 		[/if]																																							[comment CLOSE checks that belongOp_in is NOTBELONG/]
 		[if (if_cond.belongOp=BelongOp::BELONG)]																														[comment OPEN checks that belongOp_in is BELONG/]
 			[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																										[comment OPEN checks that the input is a DataField/]
+				[for (odf : Object | cond.out->select(odf | odf.oclIsTypeOf(DataField)))]
+					[let df : DataField = odf.oclAsType(DataField)]																										[comment OPEN assigns the variable to be of type DataField/]
+						[let th : Then = if_cond._then.oclAsType(Then)]																									[comment OPEN assigns the variable to be of type Then/]
+							[for (v : Value | if_cond.valueCondition)]
+								[if (v.oclIsTypeOf(Interval))]
+[comment]The code below generates the call to invariants of type MathOperation[/comment]
+									[if (th.valueResult.oclIsTypeOf(MathOperation))]
+										[let mathOp : MathOperation = th.valueResult.oclAsType(MathOperation)]
+											[if (aContract.out->exists(df | df.oclIsTypeOf(DataField)))]															[comment OPEN checks that the variable is of type DataField/]
+if contract_invariants.check_inv_math_operation(data_dictionary_in=[df.dataField._in.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+										[if (mathOp.mathOp=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.mathOp=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.mathOp=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.mathOp=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if],
+										[if mathOp.firstOperand.oclIsKindOf(OpField)][let fop : OpField = mathOp.firstOperand.oclAsType(OpField)]firstOperand='[fop.field.dataField.displayName/]', isFieldFirst=True[/let][elseif mathOp.firstOperand.oclIsKindOf(OpFixValue)][let fvop : OpFixValue = mathOp.firstOperand.oclAsType(OpFixValue)]firstOperand=[fvop.value.value/], isFieldFirst=False[/let][/if], [if mathOp.secondOperand.oclIsKindOf(OpField)][let fop : OpField = mathOp.secondOperand.oclAsType(OpField)]secondOperand='[fop.field.dataField.displayName/]', isFieldSecond=True[/let][elseif mathOp.secondOperand.oclIsKindOf(OpFixValue)][let fvop : OpFixValue = mathOp.secondOperand.oclAsType(OpFixValue)]secondOperand=[fvop.value.value/], isFieldFSecond=False[/let][/if]
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.displayName/]'):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+
+											[/if]
+										[/let]
+									[/if]
+								[/if]
+							[/for]
+						[/let]
+					[/let]		
+				[/for]
 				[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 					[let df : DataField = odf.oclAsType(DataField)]																										[comment OPEN assigns the variable to be of type DataField/]
 						[let th : Then = if_cond._then.oclAsType(Then)]																									[comment OPEN assigns the variable to be of type Then/]
@@ -787,7 +819,7 @@ else:
 			[/if]
 		[/if]																																							[comment CLOSE checks that belongOp_in is BELONG/]
 	[/for]																																								[comment CLOSE traverse all the If class in the contract/]
-[/let]																																									[comment CLOSE  assigns the contract to be of type Condition (Invariants)/]
+[/let]								 																																	[comment CLOSE  assigns the contract to be of type Condition (Invariants)/]
 [/template]
 
 
@@ -800,6 +832,32 @@ else:
 
 
 [template public generateCallConditionContractDataDictionary(cond : Contract, if_cond : If)]
+[for (odd : Object | cond.out->select(odd | odd.oclIsTypeOf(DataDictionary)))]
+	[let dd_out : DataDictionary = odd.oclAsType(DataDictionary)]
+		[let th : Then = if_cond._then.oclAsType(Then)]																									[comment OPEN assigns the variable to be of type Then/]
+			[for (v : Value | if_cond.valueCondition)]
+				[if (v.oclIsTypeOf(Interval))]
+[comment]The code below generates the call to invariants of type MathOperation[/comment]
+					[if (th.valueResult.oclIsTypeOf(MathOperation))]
+						[let mathOp : MathOperation = th.valueResult.oclAsType(MathOperation)]
+							[if (cond.out->exists(df | df.oclIsTypeOf(DataField)))]															[comment OPEN checks that the variable is of type DataField/]
+if contract_invariants.check_inv_math_operation(data_dictionary_in=[dd_out.dataDictionary._in.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+						data_dictionary_out=[dd_out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+						[if (mathOp.mathOp=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.mathOp=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.mathOp=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.mathOp=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if],
+						[if mathOp.firstOperand.oclIsKindOf(OpField)][let fop : OpField = mathOp.firstOperand.oclAsType(OpField)]firstOperand='[fop.field.dataField.displayName/]', isFieldFirst=True[/let][elseif mathOp.firstOperand.oclIsKindOf(OpFixValue)][let fvop : OpFixValue = mathOp.firstOperand.oclAsType(OpFixValue)]firstOperand=[fvop.value.value/], isFieldFirst=False[/let][/if], [if mathOp.secondOperand.oclIsKindOf(OpField)][let fop : OpField = mathOp.secondOperand.oclAsType(OpField)]secondOperand='[fop.field.dataField.displayName/]', isFieldSecond=True[/let][elseif mathOp.secondOperand.oclIsKindOf(OpFixValue)][let fvop : OpFixValue = mathOp.secondOperand.oclAsType(OpFixValue)]secondOperand=[fvop.value.value/], isFieldFSecond=False[/let][/if]
+						belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
+print('[cond.type/] [cond.name/] VALIDATED')
+else:
+	print('[cond.type/] [cond.name/] NOT VALIDATED')
+
+							[/if]
+						[/let]
+					[/if]
+				[/if]
+			[/for]
+		[/let]
+	[/let]		
+[/for]
 [for (odd : Object | cond._in->select(odd | odd.oclIsTypeOf(DataDictionary)))]
 	[let dd_in : DataDictionary = odd.oclAsType(DataDictionary)]																								[comment OPEN assigns the variable to be of type DataField/]
 		[let th : Then = if_cond._then.oclAsType(Then)]																											[comment OPEN assigns the variable to be of type Then/]

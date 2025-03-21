@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
 from functions.PMML import PMMLModel

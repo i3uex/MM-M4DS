@@ -23,13 +23,13 @@
 
 
 [template public generateDataProcessing(aWorkflow : Workflow)]
-[file ('dataProcessing_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
+[file ('dataProcessing_Job_'+aWorkflow.name.replaceAll('[(),/\\s]+', '_')+'.py', false, 'UTF-8')]
 import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
 from functions.PMML import PMMLModel
@@ -45,7 +45,7 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | ps.inputPort)]																							[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks that the environment is local/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 							[/if]																															[comment CLOSE checks that the environment is local/]
 
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
@@ -82,7 +82,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environmenr/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -92,7 +92,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -153,7 +153,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -163,7 +163,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -226,14 +226,14 @@ generateWorkflow()
 [if (pstep.incoming <> null)]																		[comment OPEN checks that it is not the first data processing/]
 	[if (pstep.incoming.source.dataProcessingDefinition.name<>'split')]								[comment OPEN checks if the operation is not split/]
 		[for (dd_in : DataDictionary | pstep.inputPort)]											[comment OPEN traverse all the input datasets in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.name.replaceAll('[(),\\s]+', '_')/])
+	[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.name.replaceAll('[(),/\\s]+', '_')/])
 		[/for]																						[comment CLOSE traverse all the input datasets in the ProcessingStep/]
 
 	[else]																							[comment OPEN checks that the operation is split/]
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]											[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 				[/if]																				[comment CLOSE checks that both datasets are the same/]
 			[/for]																					[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																						[comment CLOSE read all the input datasets and store them/]
@@ -241,9 +241,9 @@ generateWorkflow()
 [else]																								[comment OPEN checks if it is the first data processing/]
 	[for (dc : DataDictionary | pstep.inputPort)]													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 		[/if]																						[comment CLOSE checks if it is a local file/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 
 	[/for]																							[comment CLOSE read all the input datasets and store them/]
 [/if]																								[comment CLOSE checks whether it is the first data processing or not/]
@@ -289,7 +289,7 @@ generateWorkflow()
 	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]															[comment OPEN checks that the operation is not split/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
 			[for (dd_in : DataDictionary | ps.inputPort)]																		[comment OPEN traverse all the input datasets in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
+	[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
 			[/for]																												[comment CLOSE traverse all the input datasets in the ProcessingStep/]
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 
@@ -298,7 +298,7 @@ generateWorkflow()
 			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]														[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName.trim())]																[comment OPEN checks that both datasets are the same/]
 					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]												[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName.trim()/].parquet[/if]')
 					[/if]																										[comment CLOSE checks if it is a local file and a container or a local environment/]
 				[/if]																											[comment CLOSE checks that both datasets are the same/]
 			[/for]																												[comment CLOSE read the previous DataProcessing output datasets/]
@@ -307,8 +307,8 @@ generateWorkflow()
 [else]																															[comment CLOSE checks that it is not the first data processing/]
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
@@ -346,14 +346,14 @@ generateWorkflow()
 
 
 [template public generateContractsDataProcessing(aWorkflow : Workflow)]
-[file ('contracts_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
+[file ('contracts_Job_'+aWorkflow.name.replaceAll('[(),/\\s]+', '_')+'.py', false, 'UTF-8')]
 import os
 
 import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
 from functions.PMML import PMMLModel
@@ -375,7 +375,7 @@ def generateWorkflow():
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
 						[for (dc : DataDictionary | ps.outputPort)]																							[comment OPEN read all the output datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks if it is a local file and a container/]
-	if os.path.exists([if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
+	if os.path.exists('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
 		[dc.dataDictionaryDefinition.name/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 							[/if]																															[comment CLOSE checks if it is a local file and a container or a local environment/]
 
@@ -412,7 +412,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -422,7 +422,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -486,7 +486,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -496,7 +496,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -564,16 +564,16 @@ generateWorkflow()
 	[if (pstep.incoming.source.dataProcessingDefinition.name<>'split')]								[comment OPEN checks that the operation is not split/]
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]							[comment OPEN checks if it is a local file/]
-	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	if os.path.exists([dc.name.replaceAll('[(),/\\s]+', '_')/]):
+		[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 						
 			[/if]																					[comment CLOSE checks if it is a local file/]
 		[/for]																						[comment CLOSE read all the input datasets and store them/]
 
 		[for (dc : DataDictionary | pstep.outputPort)]												[comment OPEN read all the output datasets and store them/]
 			[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]							[comment OPEN checks if it is a local file and a container/]
-	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	if os.path.exists([dc.name.replaceAll('[(),/\\s]+', '_')/]):
+		[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 			[/if]																					[comment CLOSE checks if it is a local file and a container/]
 			
 		[/for]																						[comment CLOSE read all the output datasets and store them/]
@@ -581,7 +581,7 @@ generateWorkflow()
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]											[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 
 				[/if]																				[comment CLOSE checks that both datasets are the same/]
 			[/for]																					[comment CLOSE read the previous DataProcessing output datasets/]
@@ -590,14 +590,14 @@ generateWorkflow()
 [else]																								[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | pstep.inputPort)]													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 		[/if]
 
 	[/for]																							[comment CLOSE read all the input datasets and store them/]
 	[for (dc : DataDictionary | pstep.outputPort)]													[comment OPEN read all the output datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file/]
-	if os.path.exists([dc.name.replaceAll('[(),\\s]+', '_')/]):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	if os.path.exists([dc.name.replaceAll('[(),/\\s]+', '_')/]):
+		[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 		[/if]																						[comment CLOSE checks if it is a local file/]
 			
 	[/for]																							[comment CLOSE read all the output datasets and store them/]
@@ -643,7 +643,7 @@ generateWorkflow()
 	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]															[comment OPEN checks that the operation is not split/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and/]
 			[for (dd_in : DataDictionary | ps.inputPort)]																		[comment OPEN traverse all the input DataDictionaries in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
+	[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
 			[/for]																												[comment CLOSE traverse all the input DataDictionaries in the ProcessingStep/]
 		[/if]																													[comment CLOSE checks if it is a local file/]
 
@@ -652,7 +652,7 @@ generateWorkflow()
 			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]														[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]																		[comment OPEN checks that both datasets are the same/]
 					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]												[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
 					[/if]																										[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 				[/if]																											[comment CLOSE checks that both datasets are the same/]
@@ -662,15 +662,15 @@ generateWorkflow()
 [else]																															[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
 [/if]																															[comment CLOSE checks if there is a previous DataProcessingor not/]
 [for (dc : DataDictionary | ps.outputPort)]																						[comment OPEN read all the output datasets and store them/]
 	[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																[comment OPEN checks if it is a local file and a container/]
 	if os.path.exists('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
-		[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+		[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 	[/if]																														[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 [/for]																															[comment CLOSE read all the output datasets and store them/]
@@ -706,11 +706,11 @@ generateWorkflow()
 
 
 [template public generateTransformationsDataProcessing(aWorkflow : Workflow)]
-[file ('transformations_Job_'+aWorkflow.name.replaceAll('[(),\\s]+', '_')+'.py', false, 'UTF-8')]
+[file ('transformations_Job_'+aWorkflow.name.replaceAll('[(),/\\s]+', '_')+'.py', false, 'UTF-8')]
 import pandas as pd
 import numpy as np
 import functions.data_transformations as data_transformations
-from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType
+from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
 from functions.PMML import PMMLModel
@@ -726,13 +726,13 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]										[comment OPEN assigns the variable to be a Tranformation/]
 						[for (dc : DataDictionary | ps.inputPort)]																		[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 							[/if]																										[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																											[comment CLOSE read all the input datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]														[comment OPEN assigns the variable to be a DataProcessing/]
-[generateCallTransformation(d, d)/]
+	[generateCallTransformation(d, d)/]
 							[/let]																										[comment CLOSE assigns the variable to be a DataProcessing/]
 						[/if]																											[comment CLOSE checks if the actual ProcessingStep is a DataProcessing/]
 						[if (ps.oclIsKindOf(PMMLModel))]																				[comment OPEN checks if the actual ProcessingStep is a PMMLModel/]
@@ -748,7 +748,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -758,7 +758,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -803,7 +803,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -813,7 +813,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_out : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
+	[dd_out.dataDictionaryDefinition.boundTo.name.replaceAll('[(),/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_out.fileName.trim().indexOf('.')>0)][dd_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_out.fileName.trim()/].parquet[/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -865,14 +865,14 @@ generateWorkflow()
 [if (pstep.incoming <> null)]																	[comment OPEN checks if there is an incoming link/]
 	[if (pstep.incoming.source.dataProcessingDefinition.name<>'split')]							[comment OPEN checks if the operation is split/]
 		[for (dd_in : DataDictionary | pstep.inputPort)]										[comment OPEN traverse all the input datasets in the original ProcessingStep/]
-	[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.name.replaceAll('[(),\\s]+', '_')/])
+	[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.name.replaceAll('[(),/\\s]+', '_')/])
 		[/for]																					[comment CLOSE traverse all the input datasets in the original ProcessingStep/]
 
 	[else]																						[comment OPEN checks that the operation is not split/]
 		[for (dc : DataDictionary | pstep.inputPort)]											[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]					[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]										[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 
 				[/if]																			[comment CLOSE checks that both datasets are the same/]
 			[/for]																				[comment CLOSE read the previous DataProcessing output datasets/]
@@ -880,8 +880,8 @@ generateWorkflow()
 	[/if]																						[comment CLOSE checks if the operation is split or not/]
 [else]																							[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),/\\s]+', '_')/])
 	[/for]																						[comment CLOSE read all the input datasets and store them/]
 [/if]																							[comment CLOSE checks if there is an incoming link or not/]
 [if (pstep.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
@@ -911,7 +911,7 @@ generateWorkflow()
 	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]																							[comment OPEN checks if the operation is split/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file/]
 			[for (dd_in : DataDictionary | ps.inputPort)]																										[comment OPEN traverse all the input DataDictionaries in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName/].parquet[/if]')
+	[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName/].parquet[/if]')
 			[/for]																																				[comment CLOSE traverse all the input DataDictionaries in the ProcessingStep/]
 		[/if]																																					[comment CLOSE checks if it is a local file/]
 
@@ -920,7 +920,7 @@ generateWorkflow()
 			[for (dc_out : DataDictionary | ps.incoming.source.outputPort)]																						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]																										[comment OPEN checks that both datasets are the same/]
 					[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																				[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc_out.fileName.trim().indexOf('.')>0)][dc_out.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc_out.fileName/].parquet[/if]')
 					[/if]																																		[comment CLOSE checks if it is a local file and a container or a local environment/]
 				[/if]																																			[comment CLOSE checks that both datasets are the same/]
 			[/for]																																				[comment CLOSE read the previous DataProcessing output datasets/]
@@ -929,8 +929,8 @@ generateWorkflow()
 [else]																																							[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | ps.inputPort)]																													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																																					[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																																						[comment CLOSE read all the input datasets and store them/]
 [/if]																																							[comment CLOSE checks if there is an incoming link or not/]
@@ -958,7 +958,7 @@ generateWorkflow()
 			[for (dd_outstep : DataDictionary | pmmlStep.outputPort)]									[comment OPEN traverse all the output DataDictionaries in the original PMMLModel/]
 				[for (dd_outor : DataDictionary | ps_or.outputPort)]									[comment OPEN traverse all the output DataDictionaries in the actual ProcessingStep/]
 					[if (dd_outstep.dataDictionaryDefinition = dd_outor.dataDictionaryDefinition)]		[comment OPEN checks if the output DataDictionaries in the original PMMLModel and the actual ProcessingStep are the same/]
-pmml_model = PMMLModel(input_dataset=[dd_instep.name.replaceAll('[(),\\s]+', '_')/]_df, output_dataset_fileName="data/[dd_outor.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/]", model_learner_pmml_fileName="data/[pmmlStep.filePath.trim().replaceAll('(.*?\\/)', '')/]", export_only_predictions=[if (pmmlStep.onlyPredictions=false)]False[elseif (pmmlStep.onlyPredictions=true)]True[/if], export_test_metrics=[if (pmmlStep.test<>null)]True, train_split=[pmmlStep.test.trainSize/], test_split=[pmmlStep.test.testSize/], export_test_metrics_path='[pmmlStep.test.path/]'[else]False[/if])
+pmml_model = PMMLModel(input_dataset=[dd_instep.name.replaceAll('[(),/\\s]+', '_')/]_df, output_dataset_fileName="data/[dd_outor.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '')/]", model_learner_pmml_fileName="data/[pmmlStep.filePath.trim().replaceAll('(.*?\\/)', '')/]", export_only_predictions=[if (pmmlStep.onlyPredictions=false)]False[elseif (pmmlStep.onlyPredictions=true)]True[/if], export_test_metrics=[if (pmmlStep.test<>null)]True, train_split=[pmmlStep.test.trainSize/], test_split=[pmmlStep.test.testSize/], export_test_metrics_path='[pmmlStep.test.path/]'[else]False[/if])
 						[if (pmmlStep.test<>null)]														[comment OPEN checks if the test class exists/]
 pmml_model.train_and_validate_model()
 						[/if]																			[comment CLOSE checks if the test class exists/]
@@ -984,7 +984,7 @@ data_type_input_list=['['/][for (aParameter : Parameter | dataProcessing.paramet
 data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (map.mapOperation=MapOperation::VALUE_MAPPING)]MapOperation(0)[elseif (map.mapOperation=MapOperation::SUBSTRING)]MapOperation(1)[/if][/let][/if][/for][']'/]
 
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df, input_values_list=input_values_list,
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df, input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = data_type_input_list,
 						                                      data_type_output_list = data_type_output_list,
@@ -996,13 +996,13 @@ map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 						[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
 								[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 								[/if]																															[comment CLOSE checks if the Environment is local/]
 							[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
 						[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 						[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 					[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 				[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1011,7 +1011,7 @@ map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 input_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.inValue/]'[/let][/if][/for][']'/]
 output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)]'[map.outvalue/]'[/let][/if][/for][']'/]
 
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df, input_values_list=input_values_list,
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df, input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = None,
 						                                      data_type_output_list = None, field_in = None, filed_out = None)
@@ -1020,13 +1020,13 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 					[if (dpd.oclIsKindOf(Library::Transformation))]																								[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
 								[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 								[/if]																															[comment CLOSE checks if the Environment is local/]
 							[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
 					[elseif (dpd.oclIsKindOf(Library::Job))]																									[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 					[/if]																																		[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 				[/let]																																			[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 			[/if]																																				[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]			
@@ -1036,7 +1036,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [comment]The code below generates the transformations different from mapping for every field[/comment]
 [if (dataProcessing.dataProcessingDefinition.name<>'mapping')]																									[comment OPEN checks that the DataProcessing is not a Mapping/]
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]																										[comment OPEN traverse all the input DataDictionaries/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df.copy()
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df.copy()
 [/for]																																							[comment CLOSE traverse all the input DataDictionaries/]
 [for (p : Parameter | dataProcessing.parameter)]																												[comment OPEN traverse all the parameters in the DataProcessing/]
     [if (p.oclIsKindOf(ImputeType))]																															[comment OPEN checks that the parameter is an ImputeType/]
@@ -1049,7 +1049,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]																	[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 			            	[if (imType.oclIsKindOf(FixValue))]																									[comment OPEN checks that the ImputeType is a FixValue/]
         	    				[let fv : FixValue = imType.oclAsType(FixValue)]																				[comment OPEN assigns the ImputeType as a FixValue/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (fv.imputeValue=SpecialValue::Missing)]0[elseif (fv.imputeValue=SpecialValue::Invalid)]1[elseif (fv.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output=[if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[fv.value.value/]'[else][fv.value.value/][/if],
 															  missing_values=missing_values_list,		
 						                                      data_type_output = [if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if],
@@ -1061,7 +1061,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByDerivedValue')]																[comment OPEN checks that the DataProcessing is an imputeByDerivedValue(SpecialValue_DerivedValue)/]
         					[if (imType.oclIsKindOf(DerivedValue))]																								[comment OPEN checks that the ImputeType is a DerivedValue/]
             					[let dv : DerivedValue = imType.oclAsType(DerivedValue)]																		[comment OPEN assigns the ImputeType as a DerivedValue/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
@@ -1072,7 +1072,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]																	[comment OPEN checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
         					[if (imType.oclIsKindOf(NumOp))]																									[comment OPEN checks that the ImputeType is a NumOp/]
             					[let nop : NumOp = imType.oclAsType(NumOp)]																						[comment OPEN assigns the ImputeType as a NumOp/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=missing_values_list,		
 															  axis_param=0, field_in = '[df.displayName/]', field_out = '[df.out.displayName/]')
@@ -1081,19 +1081,19 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 			            	[/if]																																[comment CLOSE checks that the ImputeType is a NumOp/]
 						[/if]																																	[comment CLOSE checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
 					[/for]																																		[comment CLOSE traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 							[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
 									[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 									[/if]																														[comment CLOSE checks if the Environment is Local/]
 								[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
 							[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 							[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 						[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 					[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1102,7 +1102,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]																		[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 						[if (imType.oclIsKindOf(FixValue))]																										[comment OPEN checks that the ImputeType is a FixValue/]
 		            	[let fv : FixValue = imType.oclAsType(FixValue)]																						[comment OPEN assigns the ImputeType as a FixValue/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df,
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=data_transformations.transform_special_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df,
 															  special_type_input=SpecialType([if (imType.imputeValue=SpecialValue::Missing)]0[elseif (imType.imputeValue=SpecialValue::Invalid)]1[elseif (imType.imputeValue=SpecialValue::Outlier)]2[/if]), fix_value_output='[fv.value.value/]', missing_values=None
 						                                      data_type_output = None, axis_param=0, field_in = None, field_out = None)		
 
@@ -1112,7 +1112,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[if (dataProcessing.dataProcessingDefinition.name='imputeByDerivedValue')]																	[comment OPEN checks that the DataProcessing is an imputeByDerivedValue(SpecialValue_DerivedValue)/]	
         				[if (imType.oclIsKindOf(DerivedValue))]																									[comment OPEN checks that the ImputeType is a DerivedValue/]
             				[let dv : DerivedValue = imType.oclAsType(DerivedValue)]																			[comment OPEN assigns the ImputeType as a DerivedValue/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_df,
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=data_transformations.transform_special_value_derived_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_df,
 															  special_type_input=SpecialType([if (dv.imputeValue=SpecialValue::Missing)]0[elseif (dv.imputeValue=SpecialValue::Invalid)]1[elseif (dv.imputeValue=SpecialValue::Outlier)]2[/if]), derived_type_output=DerivedType([if (dv.type=DerivedType::MostFrequent)]0[elseif (dv.type=DerivedType::Previous)]1[elseif (dv.type=DerivedType::Next)]2[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
@@ -1122,7 +1122,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[if (dataProcessing.dataProcessingDefinition.name='imputeByNumericOp')]																		[comment OPEN checks that the DataProcessing is an imputeByNumericOp(SpecialValue_NumOp)/]
     					[if (imType.oclIsKindOf(NumOp))]																										[comment OPEN checks that the ImputeType is a NumOp/]
             				[let nop : NumOp = imType.oclAsType(NumOp)]																							[comment OPEN assigns the ImputeType as a NumOp/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df,
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=data_transformations.transform_special_value_num_op(data_dictionary=[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df,
 															  special_type_input=SpecialType([if (nop.imputeValue=SpecialValue::Missing)]0[elseif (nop.imputeValue=SpecialValue::Invalid)]1[elseif (nop.imputeValue=SpecialValue::Outlier)]2[/if]), num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
 															  missing_values=None, axis_param=0, field_in = None, field_out = None)		
 
@@ -1134,13 +1134,13 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 							[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
 									[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 									[/if]																														[comment CLOSE checks if the Environment is Local/]
 								[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
 							[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 							[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 						[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 					[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1155,7 +1155,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[if dd_in.datafield->notEmpty()]																											[comment OPEN checks that there is at least DataField/]
 						[for (df : DataField | dd_in.datafield)]																								[comment OPEN traverse all the DataFields in the input DataDictionary/]
 							[for (interval : Interval | binner.interval)]																						[comment OPEN traverse all the intervals in the binner/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 															  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 															  closure_type=Closure([if (interval.clousure=ClosureType::openOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
 															  fix_value_output=[if (df.out.dataType=DataType::String or df.out.dataType=DataType::DateTime or df.out.dataType=DataType::Time)]'[binner.binValue/]'[else][binner.binValue/][/if],
@@ -1167,26 +1167,26 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[/for]																																	[comment CLOSE traverse all the DataFields in the input DataDictionary/]
 					[else]																																		[comment OPEN checks that there are not DataFields/]
 						[for (interval : Interval | binner.interval)]																							[comment OPEN traverse all the intervals in the binner/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 														  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
 														  closure_type=Closure([if (interval.clousure=ClosureType::openOpen)]0[elseif(interval.clousure=ClosureType::openClosed)]1[elseif(interval.clousure=ClosureType::closedOpen)]2[elseif(interval.clousure=ClosureType::closedClosed)]3[/if]),
 														  fix_value_output='[binner.binValue/]', data_type_output = None, field_in = None, field_out = None)
 
 						[/for]																																	[comment CLOSE traverse all the intervals in the binner/]
 					[/if]																																		[comment CLOSE checks if there are DataFields/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 							[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
 									[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 									[/if]																														[comment CLOSE checks if the Environment is Local/]
 								[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
 							[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 							[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 						[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 					[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1197,23 +1197,23 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 	[if (p.oclIsKindOf(DerivedField))]																															[comment OPEN checks that the parameter is a DerivedField/]
 		[let derf : DerivedField = p.oclAsType(DerivedField)]																									[comment OPEN assigns the parameter to be a DerivedField/]
 			[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
 															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_dataField.displayName/]')
 
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 				[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 					[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 						[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
 								[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 								[/if]																															[comment CLOSE checks if the Environment is Local/]
 							[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
 						[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 						[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 					[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 				[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1225,24 +1225,24 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 			[let cast : CastType = p.oclAsType(CastType)]																										[comment OPEN assigns the variable to be a CastType/]
 				[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse the input DataDictionaries/]
 					[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse the DataFields/]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
 																field='[df.displayName/]')
 
 					[/for]																																		[comment CLOSE traverse the DataFields/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 							[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
 									[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 									[/if]																														[comment CLOSE checks if the Environment is Local/]
 								[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
 							[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 							[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 						[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 					[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1259,7 +1259,7 @@ columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafie
 					[if (not fValue.primitive->isEmpty())]																										[comment OPEN checks that the list of primitives is not empty/]
 filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][prim.value/][/for][']'/]
 
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
 																	                                    filter_fix_value_list=filter_fix_value_list_[fValue.filterValueDef.name/],
 																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
@@ -1269,7 +1269,7 @@ filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive
 							[if (not filteredSet->isEmpty())]																									[comment OPEN checks that list of SpecialValues is not empty/]
 dicc_[fValue.filterValueDef.name/]={[for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]':{[for (spVal : SpecialValues | filteredSet) separator (', ')][if (spVal.specialType=SpecialValue::Missing)]'missing': ['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialValue::Invalid)]'invalid': ['['/][for (iv : ValueField | df.invalidValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::Time or df.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/] [elseif(spVal.specialType=SpecialValue::Outlier)]'outlier': True[/if][/for]}[/for]}
 
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_special_values(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 																										cols_special_type_values=dicc_[fValue.filterValueDef.name/],
 																										filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]))
 							[/if]																																[comment CLOSE checks that list of SpecialValues is not empty/]
@@ -1280,7 +1280,7 @@ filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (range : 
 filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')][if (range.maxInfinity=true)]np.inf[else][range.max/][/if][/for][']'/]
 closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filteredSet) separator(', ')]Closure([if (range.clousure=ClosureType::openOpen)]0[elseif(range.clousure=ClosureType::openClosed)]1[elseif(range.clousure=ClosureType::closedOpen)]2[elseif(range.clousure=ClosureType::closedClosed)]3[/if])[/for][']'/]
 
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_range(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
 																										left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
 																										right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
@@ -1290,19 +1290,19 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 						[/let]																																	[comment CLOSE assigns to a set only the Range/]
 					[/if]																																		[comment CLOSE checks that the list of MatchingValues is not empty/]
 				[/let]																																			[comment CLOSE assigns the variable to be a FilterValue/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 				[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 					[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 						[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 							[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
 								[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 								[/if]																															[comment CLOSE checks if the Environment is Local/]
 							[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
 						[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 						[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 					[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 				[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1315,22 +1315,22 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 				[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse all the input DataDictionaries/]
 field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
 
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
 																columns=field_list_[field.fieldDef.name/], belong_op=Belong.[field.operator/])
 
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
 					[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
 						[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
 							[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
 								[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
 									[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
 									[/if]																														[comment CLOSE checks if the Environment is Local/]
 								[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
 							[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),\\s]+', '_')/])
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
 							[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
 						[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
 					[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
@@ -1342,53 +1342,121 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 		[if (p.oclIsKindOf(MathOp))]
 			[let mathOp : MathOp = p.oclAsType(MathOp)]
 				[if (mathOp.firstOperand.oclIsKindOf(OpField))]
-					[let fop : OpField = mathOp.oclAsType(OpField)]
+					[let fop : OpField = mathOp.firstOperand.oclAsType(OpField)]
 						[if (mathOp.secondOperand.oclIsKindOf(OpField))]
-							[let fop2 : OpField = mathOp.oclAsType(OpField)]
+							[let fop2 : OpField = mathOp.secondOperand.oclAsType(OpField)]
 								[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 									[for (df : DataField | dd_in.out.datafield)]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
-															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
-															field_out='[df.displayName/]', firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
+															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
+															firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,
 															secondOperand='[fop2.datafield.displayName/]', isFieldSecond=True)
 									[/for]
+
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
+									[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+										[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+											[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+												[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
+													[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+													[/if]																														[comment CLOSE checks if the Environment is Local/]
+												[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
+											[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
+											[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+										[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+									[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
 								[/for]
 							[/let]
 						[elseif (mathOp.secondOperand.oclIsKindOf(OpFixValue))]
-							[let fvop2 : OpFixValue = mathOp.oclAsType(OpFixValue)]
+							[let fvop2 : OpFixValue = mathOp.secondOperand.oclAsType(OpFixValue)]
 								[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 									[for (df : DataField | dd_in.out.datafield)]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
-															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
-															field_out='[df.displayName/]', firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
+															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
+															firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,
 															secondOperand=[fvop2.value.value/], isFieldSecond=False)
 									[/for]
+
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
+									[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+										[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+											[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+												[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
+													[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+													[/if]																														[comment CLOSE checks if the Environment is Local/]
+												[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
+											[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
+											[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+										[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+									[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
 								[/for]
 							[/let]
 						[/if]
 					[/let]
 				[elseif (mathOp.firstOperand.oclIsKindOf(OpFixValue))]
-					[let fvop : OpFixValue = mathOp.oclAsType(OpFixValue)]
+					[let fvop : OpFixValue = mathOp.firstOperand.oclAsType(OpFixValue)]
 						[if (mathOp.secondOperand.oclIsKindOf(OpField))]
-							[let fop2 : OpField = mathOp.oclAsType(OpField)]
+							[let fop2 : OpField = mathOp.secondOperand.oclAsType(OpField)]
 								[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 									[for (df : DataField | dd_in.out.datafield)]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
-															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
-															field_out='[df.displayName/]', firstOperand=[fvop.value.value/], isFieldFirst=False,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
+															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
+															firstOperand=[fvop.value.value/], isFieldFirst=False,
 															secondOperand='[fop2.datafield.displayName/]', isFieldSecond=True)
 									[/for]
+
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
+									[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+										[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+											[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+												[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
+													[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+													[/if]																														[comment CLOSE checks if the Environment is Local/]
+												[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
+											[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
+											[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+										[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+									[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
 								[/for]
 							[/let]
 						[elseif (mathOp.secondOperand.oclIsKindOf(OpFixValue))]
-							[let fvop2 : OpFixValue = mathOp.oclAsType(OpFixValue)]
+							[let fvop2 : OpFixValue = mathOp.secondOperand.oclAsType(OpFixValue)]
 								[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 									[for (df : DataField | dd_in.out.datafield)]
-[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),\\s]+', '_')/]_transformed,
-															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[/if],
-															field_out='[df.displayName/]', firstOperand=[fvop.value.value/], isFieldFirst=False,
+[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed,
+															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
+															firstOperand=[fvop.value.value/], isFieldFirst=False,
 															secondOperand='[fvop2.value.value/]', isFieldSecond=False)
 									[/for]
+
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),/\\s]+', '_')/]_transformed
+									[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]													[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+										[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]		[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+											[if (dpd.oclIsKindOf(Library::Transformation))]																						[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+												[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]													[comment OPEN assigns the variable to be a Transformation/]
+													[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]													[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+													[/if]																														[comment CLOSE checks if the Environment is Local/]
+												[/let]																															[comment CLOSE assigns the variable to be a Transformation/]
+											[elseif (dpd.oclIsKindOf(Library::Job))]																							[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),/\\s]+', '_')/])
+											[/if]																																[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+										[/let]																																	[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+									[/if]																																		[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
 								[/for]
 							[/let]
 						[/if]
@@ -1443,7 +1511,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends wget git && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 --branch develop https://github.com/franjmelchor/MD4DSP-m2python.git .
+RUN git clone --depth 1 --branch develop https://github.com/i3uex/MD4DSP-m2python.git .
 
 RUN wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz && \
     tar -xvf openjdk-11_linux-x64_bin.tar.gz -C /usr/local && \
@@ -1481,9 +1549,9 @@ RUN pip install boto3
 	[/if]																																	[comment CLOSE checks if the set is not empty/]
 [/let]																																		[comment CLOSE creates a set only with databases/]
 
-COPY dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
-COPY contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
-COPY transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
+COPY dataProcessing_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
+COPY contracts_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
+COPY transformations_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/].py [aWorkflow.environment.path/]/workflows/
 
 COPY fileFormatting.py [aWorkflow.environment.path/]/workflows/
 
@@ -1519,21 +1587,21 @@ fi
 		[/if]																																[comment CLOSE checks if the fileName is absolute/]
 	[/for]																																	[comment CLOSE traverse all the output DataDictionaries in the ProcessingStep/]
 [/for]																																		[comment CLOSE traverse all the ProcessingSteps in the workflow/]
-sudo apt-get update --yes
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+#sudo apt-get update --yes
+#sudo apt-get install ca-certificates curl
+#sudo install -m 0755 -d /etc/apt/keyrings
+#sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+#sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-echo \
-  "deb ['['/]arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update --yes
+#echo \
+#  "deb ['['/]arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+#  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+#  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#sudo apt-get update --yes
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
+#sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build --no-cache -t [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/] -f Dockerfile .
+docker build --no-cache -t [doc.imageName.replaceAll('[(),/\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),/\\s]+', '_')/] -f Dockerfile .
 
 clear
 
@@ -1583,9 +1651,9 @@ cp [pmml.filePath/] "$(pwd)/data"
 [/for]																																		[comment CLOSE traverse all the ProcessingStep in the workflow/]
 
 
-docker run -it --rm --name [doc.containerName.replaceAll('[(),\\s]+', '_')/] --network host --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
+docker run -it --rm --name [doc.containerName.replaceAll('[(),/\\s]+', '_')/] --network host --mount type=bind,source="$(pwd)/data",target=[if (doc.path.startsWith('.'))][doc.path.replaceFirst('.', '')/][else][doc.path/][/if]/data [doc.imageName.replaceAll('[(),/\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),/\\s]+', '_')/]
 
-docker rmi [doc.imageName.replaceAll('[(),\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),\\s]+', '_')/]
+docker rmi [doc.imageName.replaceAll('[(),/\\s]+', '_')/]:[doc.imageTag.replaceAll('[(),/\\s]+', '_')/]
 
 clear
 
@@ -1595,9 +1663,9 @@ echo -e "Exiting the application...\n"
 
 
 [file ('workflow_scripts.sh', false, 'UTF-8')]																		[comment OPEN generates the workflow_scripts/]
-CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
-TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
-WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),\\s]+', '_')/]"
+CONTRACTS_SCRIPT="workflows.contracts_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/]"
+TRANSFORMATIONS_SCRIPT="workflows.transformations_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/]"
+WORKFLOW_SCRIPT="workflows.dataProcessing_Job_[aWorkflow.name.replaceAll('[(),/\\s]+', '_')/]"
 
 python3 -m workflows.fileFormatting
 
@@ -1699,20 +1767,20 @@ from pandas import json_normalize
 			[for (fi : File | f.file)]																						[comment OPEN traverse the files in the folder/]
 				
 				[if (fi.type=FileType::CSV)]																				[comment OPEN checks if the file is csv/]
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]')
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::EXCEL)]																			[comment OPEN checks if the file is excel/]
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].xlsx[/if]')
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].xlsx[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::FEATHER)]																		[comment OPEN checks if the file is feather/]
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_feather('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].feather[/if]')
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]=pd.read_feather('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].feather[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::HDF5)]																			[comment OPEN checks if the file is hdf5/]
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.read_hdf('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].hdf5[/if]'[if (fi.hdf5_key<>'')], key='[fi.hdf5_key/]'[/if])
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]=pd.read_hdf('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].hdf5[/if]'[if (fi.hdf5_key<>'')], key='[fi.hdf5_key/]'[/if])
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::JSON)]																			[comment OPEN checks if the file is json/]
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]=pd.json_normalize('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].json[/if]')
-[fi.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]=pd.json_normalize('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].json[/if]')
+[fi.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[/if]																										[comment CLOSE checks the type of the file/]
 			[/for]																											[comment CLOSE traverse the files in the folder/]
 		[/let]																												[comment CLOSE assigns the variable to be a Folder/]
@@ -1731,8 +1799,8 @@ engine = create_engine('mysql+mysqlconnector://[cr.username/]:[cr.passwd/]@[db.h
 					[/let]																									[comment CLOSE assigns the variable to be SSL/]
 				[/if]																										[comment CLOSE checks the autentication type/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[elseif (db.type=DBTYPE::POSTGRESQL)]																			[comment OPEN checks if the Database is PostgreSQL/]
@@ -1748,8 +1816,8 @@ engine = create_engine('postgresql+psycopg2://[cr.username/]:[cr.passwd/]@[db.ho
 					[/let]																									[comment CLOSE assigns the variable to be SSL/]
 				[/if]																										[comment CLOSE checks the autentication type/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[elseif (db.type=DBTYPE::SQLSERVER)]																			[comment OPEN checks if the Database is SQLServer/]
@@ -1765,8 +1833,8 @@ engine = create_engine('mssql+pyodbc://[cr.username/]:[cr.passwd/]@[db.host/]/[d
 					[/let]																									[comment CLOSE assigns the variable to be SSL/]
 				[/if]																										[comment CLOSE checks the autentication type/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/];', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[elseif (db.type=DBTYPE::ORACLE)]																				[comment OPEN checks if the Database is Oracle/]
@@ -1782,8 +1850,8 @@ engine = create_engine('oracle+oracledb://[cr.username/]:[cr.passwd/]@[db.host/]
 					[/let]																									[comment CLOSE assigns the variable to be SSL/]
 				[/if]																										[comment CLOSE checks the autentication type/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]', engine)
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.read_sql('SELECT * FROM [tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]', engine)
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[elseif (db.type=DBTYPE::MONGODB)]																				[comment OPEN checks if the Database is Mongodb/]
@@ -1804,14 +1872,14 @@ client = pymongo.MongoClient("mongodb://[db.host/]:[db.port/]/")
 				[/if]																										[comment CLOSE checks if the autentication is empty or not/]
 [db.dbName/]_db = client['['/]"[db.dbName/]"[']'/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]"[']'/]
-[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_collection.find()
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
+[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_collection = [db.dbName/]_db['['/]"[tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]"[']'/]
+[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_data = [tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_collection.find()
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.DataFrame(json_normalize([tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_data))
 
-if '_id' in [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].columns:
-    [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]['['/]'_id'[']'/] = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]['['/]'_id'[']'/].astype(str)
+if '_id' in [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].columns:
+    [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]['['/]'_id'[']'/] = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]['['/]'_id'[']'/].astype(str)
 
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[elseif (db.type=DBTYPE::DYNAMODB)]																				[comment OPEN checks if the Database is Dynamodb/]
@@ -1829,11 +1897,11 @@ dynamodb = boto3.resource(
 					[/if]																									[comment CLOSE checks if the autentication uses AWS credentials/]
 				[/if]																										[comment CLOSE checks if the autentication is empty/]
 				[for (tab : Table | db.table)]																				[comment OPEN traverse the tables in the database/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table = dynamodb.Table('[tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]')
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_table.scan()
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_response['['/]'Items'[']'/]
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/] = pd.DataFrame(json_normalize([db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_data))
-[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_table = dynamodb.Table('[tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)|.*/', '')/]')
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_response = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_table.scan()
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_data = [db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_response['['/]'Items'[']'/]
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/] = pd.DataFrame(json_normalize([db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/]_data))
+[db.dbName/]_[tab.dataDictionary.name.replaceAll('[(),/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (tab.dataDictionary.fileName.trim().indexOf('.')>0)][tab.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][tab.dataDictionary.fileName.trim()/].parquet[/if]')
 
 				[/for]																										[comment CLOSE traverse the tables in the database/]
 			[/if]																											[comment CLOSE checks the type Database of the Database/]
