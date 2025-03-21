@@ -454,10 +454,15 @@
         href="library_validation.xmi#//@dataprocessingdefinition.1"/>
     <parameter
         xsi:type="Workflow:FixValue"
-        name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue"
-        value="Unknown">
+        name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue">
       <fixValueDef
           href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0"/>
+      <value
+          name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_primitive"
+          value="Unknown">
+        <primitiveDef
+            href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0/@value"/>
+      </value>
     </parameter>
     <contract
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRECONDITION">
@@ -1160,17 +1165,16 @@
         href="library_validation.xmi#//@dataprocessingdefinition.8"/>
     <parameter
         xsi:type="Workflow:FilterValue"
-        name="rowFilterRange(init_span)_param_rowFilter"
-        matchingvalue="//@dataprocessing.4/@parameter.1">
+        name="rowFilterRange(init_span)_param_rowFilter">
       <filterValueDef
           href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.0"/>
-    </parameter>
-    <parameter
-        xsi:type="Workflow:Range"
-        name="rowFilterRange(init_span)_param_range"
-        minInfinity="true">
-      <rangeDef
-          href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
+      <matchingvalue
+          xsi:type="Workflow:Range"
+          name="rowFilterRange(init_span)_param_range"
+          minInfinity="true">
+        <rangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
+      </matchingvalue>
     </parameter>
     <contract
         name="rowFilterRange(init_span)_PRECONDITION">
@@ -1310,7 +1314,7 @@
         xsi:type="Library:Transformation"
         href="library_validation.xmi#//@dataprocessingdefinition.3"/>
     <parameter
-        xsi:type="Workflow:Field"
+        xsi:type="Workflow:FieldRange"
         name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_param_field"
         dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1">
       <fieldDef

@@ -84,6 +84,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueFieldDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//FixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
@@ -130,6 +131,7 @@
     <eLiterals name="Boolean" value="4"/>
     <eLiterals name="Double" value="5"/>
     <eLiterals name="Float" value="6"/>
+    <eLiterals name="Date" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DerivedType"
@@ -162,5 +164,33 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialType" eType="#//SpecialType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specialValueDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//SpecialValueDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOperation" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mathOp" eType="#//MathOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
+    <eLiterals name="SUM"/>
+    <eLiterals name="SUBSTRACT" value="1"/>
+    <eLiterals name="MULTIPLY" value="2"/>
+    <eLiterals name="DIVIDE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//FixValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="#//Field"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

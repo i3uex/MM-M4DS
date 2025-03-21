@@ -42,11 +42,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="outvalue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapDefinition" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MapDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mapOperation" eType="#//MapOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//PrimitiveDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EEnum Library.ecore#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedField" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivedFieldDef" lowerBound="1"
@@ -58,9 +60,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="filterValueDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//FilterValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitive" upperBound="-1"
-        eType="#//Primitive"/>
+        eType="#//Primitive" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchingvalue" upperBound="-1"
-        eType="#//MatchingValue"/>
+        eType="#//MatchingValue" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterType" eType="#//FilterType"
         defaultValueLiteral="EXCLUDE"/>
   </eClassifiers>
@@ -128,10 +130,26 @@
         eType="ecore:EClass Library.ecore#//ContinuousDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
         upperBound="-1" eType="#//Interval" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thousandsSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="&quot;&quot;"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="."/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
+        eType="#//IntervalDate" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dateDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//DateDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervalDate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Contract">
@@ -150,9 +168,10 @@
     <eLiterals name="Boolean" value="4"/>
     <eLiterals name="Double" value="5"/>
     <eLiterals name="Float" value="6"/>
+    <eLiterals name="Date" value="7" literal="Date"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ClosureType">
-    <eLiterals name="opeOpen"/>
+    <eLiterals name="openOpen"/>
     <eLiterals name="openClosed" value="1"/>
     <eLiterals name="closedOpen" value="2"/>
     <eLiterals name="closedClosed" value="3"/>
@@ -176,9 +195,10 @@
         eType="ecore:EClass Library.ecore#//NumOpDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FixValue" eSuperTypes="#//ImputeType">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fixValueDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//FixValueDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Operation">
     <eLiterals name="Interpolation"/>
@@ -200,9 +220,9 @@
     <eLiterals name="Invalid" value="1"/>
     <eLiterals name="Outlier" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Parameter">
+  <eClassifiers xsi:type="ecore:EClass" name="FieldRange" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//FieldDef"/>
+        eType="ecore:EClass Library.ecore#//FieldRangeDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataField" lowerBound="1"
         upperBound="-1" eType="#//DataField"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//Operator"/>
@@ -232,5 +252,37 @@
         defaultValueLiteral="0.70"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="testSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
         defaultValueLiteral="0.30"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MapOperation">
+    <eLiterals name="VALUE_MAPPING"/>
+    <eLiterals name="SUBSTRING" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
+    <eLiterals name="SUM"/>
+    <eLiterals name="SUBSTRACT" value="1"/>
+    <eLiterals name="MULTIPLY" value="2" literal="MULTIPLY"/>
+    <eLiterals name="DIVIDE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOp" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MathOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//MathOpDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
+        eType="#//DataField"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
