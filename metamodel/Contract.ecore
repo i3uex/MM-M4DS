@@ -193,4 +193,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="#//Field"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastType" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="castTypeDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//CastTypeDef"/>
+  </eClassifiers>
 </ecore:EPackage>

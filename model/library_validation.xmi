@@ -183,15 +183,27 @@
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="categoricalToContinuous" in="//@dataprocessingdefinition.6/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.6/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition xsi:type="Library:CastTypeDef" name="categoricalToContinuous_param_castType"/>
-    <contractdefinition name="categoricalToContinuous_INVARIANT">
-      <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="categoricalToContinuous_INV_condition">
-        <in xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_INV_input_datafield"/>
-        <out xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_INV_output_datafield"/>
-        <thendefinition ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0" name="categoricalToContinuous_INV_THEN">
-          <valueResult xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_INV_valueResult"/>
+    <contractdefinition name="categoricalToContinuous_specialValue_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="categoricalToContinuous_specialValue_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_specialValue_INV_input_datafield"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_specialValue_INV_output_datafield"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0" name="categoricalToContinuous_specialValue_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_specialValue_INV_valueResult"/>
         </thendefinition>
-        <ifdefinition thendefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0" name="categoricalToContinuous_INV_IF">
-          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_INV_valueCondition"/>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0" name="categoricalToContinuous_specialValue_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:SpecialValueDef" name="categoricalToContinuous_specialValue_INV_valueCondition"/>
+        </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="categoricalToContinuous_castType_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="categoricalToContinuous_castType_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_castType_INV_input_datafield"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="categoricalToContinuous_castType_INV_output_datafield"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0" name="categoricalToContinuous_castType_INV_THEN">
+          <valueResult xsi:type="ContractDefinition:CastTypeDef" name="categoricalToContinuous_castType_INV_valueResult"/>
+        </thendefinition>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0" name="categoricalToContinuous_castType_INV_IF">
+          <valueCondition xsi:type="ContractDefinition:CastTypeDef" name="categoricalToContinuous_castType_INV_valueCondition"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
