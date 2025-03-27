@@ -561,17 +561,39 @@ def generateWorkflow():
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
 											belong_op_out=Belong(1), field_in='TERRITORY', field_out='TERRITORY'):
-		print('INVARIANT INV_condition_TERRITORY VALIDATED')
+		print('INVARIANT INV_specialValue_condition_TERRITORY VALIDATED')
 	else:
-		print('INVARIANT INV_condition_TERRITORY NOT VALIDATED')
+		print('INVARIANT INV_specialValue_condition_TERRITORY NOT VALIDATED')
 	
 	
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
 											belong_op_out=Belong(1), field_in='Instate', field_out='Instate'):
-		print('INVARIANT INV_condition_Instate VALIDATED')
+		print('INVARIANT INV_specialValue_condition_Instate VALIDATED')
 	else:
-		print('INVARIANT INV_condition_Instate NOT VALIDATED')
+		print('INVARIANT INV_specialValue_condition_Instate NOT VALIDATED')
+	
+	
+	if contract_invariants.check_inv_cast_type(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
+								data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
+								cast_type_in=DataType(0),
+								cast_type_out=DataType(2),
+								belong_op_out=Belong(1),
+								field_in='TERRITORY', field_out='TERRITORY'):
+		print('INVARIANT INV_castType_condition_TERRITORY VALIDATED')
+	else:
+		print('INVARIANT INV_castType_condition_TERRITORY NOT VALIDATED')
+	
+	
+	if contract_invariants.check_inv_cast_type(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
+								data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
+								cast_type_in=DataType(0),
+								cast_type_out=DataType(2),
+								belong_op_out=Belong(1),
+								field_in='Instate', field_out='Instate'):
+		print('INVARIANT INV_castType_condition_Instate VALIDATED')
+	else:
+		print('INVARIANT INV_castType_condition_Instate NOT VALIDATED')
 	
 	
 	#-----------------New DataProcessing-----------------

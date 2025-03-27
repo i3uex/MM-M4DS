@@ -582,12 +582,37 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 				[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																									[comment OPEN checks that the input is a DataField/]
 					[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 						[let df : DataField = odf.oclAsType(DataField)]																									[comment OPEN assigns the variable to be of type DataField/]
+							[for (v : Value | if_cond.valueCondition)]
+								[if (v.oclIsKindOf(CastType))]
+									[if (v.oclIsTypeOf(CastType))]
+										[let ctif : CastType = v.oclAsType(CastType)]																							[comment OPEN assigns the variable to be of type SpecialValue/]
+[comment]The code below generates the call to invariants of type CastType-CastType[/comment]
+											[if (th.valueResult.oclIsTypeOf(CastType))]																						
+												[let ctthen : CastType = th.valueResult.oclAsType(CastType)]
+													[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]																[comment OPEN checks that the output is a DataField/]
+if contract_invariants.check_inv_cast_type(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+							data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+							cast_type_in=[if (ctif.type=DataType::String)]DataType(0)[elseif (ctif.type=DataType::Time)]DataType(1)[elseif (ctif.type=DataType::Integer)]DataType(2)[elseif (ctif.type=DataType::DateTime)]DataType(3)[elseif (ctif.type=DataType::Boolean)]DataType(4)[elseif (ctif.type=DataType::Double)]DataType(5)[elseif (ctif.type=DataType::Float)]DataType(6)[else]None)[/if],
+							cast_type_out=[if (ctthen.type=DataType::String)]DataType(0)[elseif (ctthen.type=DataType::Time)]DataType(1)[elseif (ctthen.type=DataType::Integer)]DataType(2)[elseif (ctthen.type=DataType::DateTime)]DataType(3)[elseif (ctthen.type=DataType::Boolean)]DataType(4)[elseif (ctthen.type=DataType::Double)]DataType(5)[elseif (ctthen.type=DataType::Float)]DataType(6)[else]None)[/if],
+							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+													[/if]
+												[/let]
+											[/if]
+										[/let]
+									[/if]
+								[else]
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+								[/if]
+							[/for]
 						[/let]																																			[comment CLOSE assigns the variable to be of type DataField/]
 					[/for]
 				[/if]
@@ -809,6 +834,26 @@ else:
 										[/if]																															[comment CLOSE checks that the type of the result is NumOp/]
 									[/let]																																[comment CLOSE assigns the variable to be of type SpecialValue/]
 								[/if]																																	[comment CLOSE checks that the type of the value is FixValue or SpecialValue (if at the beginning)/]
+								[if (v.oclIsTypeOf(CastType))]
+									[let ctif : CastType = v.oclAsType(CastType)]																							[comment OPEN assigns the variable to be of type SpecialValue/]
+[comment]The code below generates the call to invariants of type CastType-CastType[/comment]
+										[if (th.valueResult.oclIsTypeOf(CastType))]																						
+											[let ctthen : CastType = th.valueResult.oclAsType(CastType)]
+												[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]																[comment OPEN checks that the output is a DataField/]
+if contract_invariants.check_inv_cast_type(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+							data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+							cast_type_in=[if (ctif.type=DataType::String)]DataType(0)[elseif (ctif.type=DataType::Time)]DataType(1)[elseif (ctif.type=DataType::Integer)]DataType(2)[elseif (ctif.type=DataType::DateTime)]DataType(3)[elseif (ctif.type=DataType::Boolean)]DataType(4)[elseif (ctif.type=DataType::Double)]DataType(5)[elseif (ctif.type=DataType::Float)]DataType(6)[else]None)[/if],
+							cast_type_out=[if (ctthen.type=DataType::String)]DataType(0)[elseif (ctthen.type=DataType::Time)]DataType(1)[elseif (ctthen.type=DataType::Integer)]DataType(2)[elseif (ctthen.type=DataType::DateTime)]DataType(3)[elseif (ctthen.type=DataType::Boolean)]DataType(4)[elseif (ctthen.type=DataType::Double)]DataType(5)[elseif (ctthen.type=DataType::Float)]DataType(6)[else]None)[/if],
+							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+												[/if]
+											[/let]
+										[/if]
+									[/let]
+								[/if]
 							[/for]																																		[comment CLOSE traverse all the values associated to the contract/]
 						[/let]																																			[comment CLOSE assigns the variable to be of type Then/]
 					[/let]																																				[comment CLOSE assigns the variable to be of type DataField/]
@@ -1044,6 +1089,26 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 						[/if]																																	[comment CLOSE checks that the type of the result is NumOp/]
 					[/let]																																		[comment CLOSE assigns the variable to be of type SpecialValue/]
 				[/if]																																			[comment CLOSE checks that the type of the value is FixValue or SpecialValue (if at the beginning)/]
+				[if (v.oclIsTypeOf(CastType))]
+					[let ctif : CastType = v.oclAsType(CastType)]																							[comment OPEN assigns the variable to be of type SpecialValue/]
+[comment]The code below generates the call to invariants of type CastType-CastType[/comment]
+						[if (th.valueResult.oclIsTypeOf(CastType))]																						
+							[let ctthen : CastType = th.valueResult.oclAsType(CastType)]
+								[if(cond.out->exists(df | df.oclIsTypeOf(DataField)))]																[comment OPEN checks that the output is a DataField/]
+if contract_invariants.check_inv_cast_type(data_dictionary_in=[dd_in.dataDictionary.name.replaceAll('[(),\\s]+', '_')/]_df,
+										data_dictionary_out=[dd_in.dataDictionary.datafield->first().out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),\\s]+', '_')/]_df,
+							cast_type_in=[if (ctif.type=DataType::String)]DataType(0)[elseif (ctif.type=DataType::Time)]DataType(1)[elseif (ctif.type=DataType::Integer)]DataType(2)[elseif (ctif.type=DataType::DateTime)]DataType(3)[elseif (ctif.type=DataType::Boolean)]DataType(4)[elseif (ctif.type=DataType::Double)]DataType(5)[elseif (ctif.type=DataType::Float)]DataType(6)[else]None)[/if],
+							cast_type_out=[if (ctthen.type=DataType::String)]DataType(0)[elseif (ctthen.type=DataType::Time)]DataType(1)[elseif (ctthen.type=DataType::Integer)]DataType(2)[elseif (ctthen.type=DataType::DateTime)]DataType(3)[elseif (ctthen.type=DataType::Boolean)]DataType(4)[elseif (ctthen.type=DataType::Double)]DataType(5)[elseif (ctthen.type=DataType::Float)]DataType(6)[else]None)[/if],
+							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
+							field_in=None, field_out=None):
+	print('[cond.type/] [cond.name/] VALIDATED')
+else:
+	print('[cond.type/] [cond.name/] NOT VALIDATED')
+								[/if]
+							[/let]
+						[/if]
+					[/let]
+				[/if]
 			[/for]																																				[comment CLOSE traverse all the values associated to the contract/]
 		[/let]																																					[comment CLOSE assigns the variable to be of type Then/]
 	[/let]																																						[comment CLOSE assigns the variable to be of type DataField/]
