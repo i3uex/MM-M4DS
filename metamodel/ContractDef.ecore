@@ -108,4 +108,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//FixValueDef"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastTypeDef" eSuperTypes="#//ValueDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//CastType"/>
+  </eClassifiers>
 </ecore:EPackage>
