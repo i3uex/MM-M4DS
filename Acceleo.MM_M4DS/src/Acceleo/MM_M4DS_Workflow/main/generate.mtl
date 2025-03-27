@@ -1250,7 +1250,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 			[/let]																																				[comment CLOSE assigns the variable to be a CastType/]
 		[/if]																																					[comment CLOSE checks that the parameter is a CastType/]
 	[/if]																																						[comment CLOSE checks that the DataProcessing is categoricalToContinuous(StringToNumber)/]
-	[if (dataProcessing.dataProcessingDefinition.name='rowFilter' or dataProcessing.dataProcessingDefinition.name='rowFilterRange')]							[comment OPEN checks that the DataProcessing is rowFilter/]
+	[if (dataProcessing.dataProcessingDefinition.name='rowFilterPrimitive' or dataProcessing.dataProcessingDefinition.name='rowFilterRange' or dataProcessing.dataProcessingDefinition.name='rowFilterMissing')]							[comment OPEN checks that the DataProcessing is rowFilter/]
 		[if (p.oclIsKindOf(FilterValue))]																														[comment OPEN checks that the parameter is a FilterValue/]
 			[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 				[let fValue : FilterValue = p.oclAsType(FilterValue)]																							[comment OPEN assigns the variable to be a FilterValue/]
