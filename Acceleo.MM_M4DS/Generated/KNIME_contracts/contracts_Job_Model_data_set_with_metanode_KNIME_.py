@@ -454,22 +454,24 @@ def generateWorkflow():
 								data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
 								cast_type_in=DataType(0),
 								cast_type_out=DataType(2),
-								belong_op_out=Belong(1),
+								belong_op_out=Belong(0),
 								field_in='TERRITORY', field_out='TERRITORY'):
 		print('INVARIANT INV_castType_condition_TERRITORY VALIDATED')
 	else:
 		print('INVARIANT INV_castType_condition_TERRITORY NOT VALIDATED')
 	
 	
+	
 	if contract_invariants.check_inv_cast_type(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 								data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
 								cast_type_in=DataType(0),
 								cast_type_out=DataType(2),
-								belong_op_out=Belong(1),
+								belong_op_out=Belong(0),
 								field_in='Instate', field_out='Instate'):
 		print('INVARIANT INV_castType_condition_Instate VALIDATED')
 	else:
 		print('INVARIANT INV_castType_condition_Instate NOT VALIDATED')
+	
 	
 	
 	#-----------------New DataProcessing-----------------
