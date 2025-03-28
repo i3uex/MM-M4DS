@@ -274,16 +274,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
         eType="#//DataField"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opFixValueDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EEnum Library.ecore#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
