@@ -265,14 +265,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOp" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MathOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
-        eType="#//Operand" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
-        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="2"
+        upperBound="-1" eType="#//Operand" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MathOpDef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//OpFieldDef"/>
@@ -284,5 +284,11 @@
         eType="ecore:EClass Library.ecore#//OpFixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
+        upperBound="-1" eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//JoinDef"/>
   </eClassifiers>
 </ecore:EPackage>

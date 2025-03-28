@@ -167,10 +167,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOperation" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mathOp" eType="#//MathOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
-        eType="#//Operand" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
-        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="2"
+        upperBound="-1" eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//MathOpDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MathOperator">
     <eLiterals name="SUM"/>
@@ -180,6 +180,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//FixValue"
@@ -197,5 +198,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="castTypeDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//CastTypeDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
+        upperBound="-1" eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//JoinDef"/>
   </eClassifiers>
 </ecore:EPackage>

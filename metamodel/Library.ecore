@@ -112,10 +112,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOpDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//MathOp"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="firstOperand" lowerBound="1"
-        eType="#//OperandDef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondOperand" lowerBound="1"
-        eType="#//OperandDef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="2"
+        upperBound="-1" eType="#//OperandDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="OpFixValueDef" eSuperTypes="#//OperandDef">
@@ -125,5 +123,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpField"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Join"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
+        upperBound="-1" eType="#//OperandDef" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

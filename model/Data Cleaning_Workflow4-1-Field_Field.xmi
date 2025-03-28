@@ -73,20 +73,21 @@
         xsi:type="Workflow:MathOp"
         name="mathOperationFieldField(Difference in Latitude/Altitude)_param_mathop"
         operator="SUBSTRACT">
-      <firstOperand
+      <operands
           xsi:type="Workflow:OpField"
           name="mathOperationFieldField(Difference in Latitude/Altitude)_param_op_field_1"
+          next_operand="//@dataprocessing.0/@parameter.0/@operands.1"
           datafield="//@dataprocessing.0/@inputPort.0/@datafield.0">
         <opFieldDef
-            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@firstOperand"/>
-      </firstOperand>
-      <secondOperand
+            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@operands.0"/>
+      </operands>
+      <operands
           xsi:type="Workflow:OpField"
           name="mathOperationFieldField(Difference in Latitude/Altitude)_param_op_field_2"
           datafield="//@dataprocessing.0/@inputPort.0/@datafield.1">
         <opFieldDef
-            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@secondOperand"/>
-      </secondOperand>
+            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@operands.1"/>
+      </operands>
       <mathOpDef
           href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0"/>
     </parameter>
@@ -195,7 +196,7 @@
                 xsi:type="Contract:OpField"
                 name="mathOperationFieldField(Difference in Latitude/Altitude)_INV_THEN_OP1_FIELD">
               <opFieldDef
-                  href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@firstOperand"/>
+                  href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@operands.0"/>
               <field
                   dataField="//@dataprocessing.0/@inputPort.0/@datafield.0"/>
             </firstOperand>
@@ -203,7 +204,7 @@
                 xsi:type="Contract:OpField"
                 name="mathOperationFieldField(Difference in Latitude/Altitude)_INV_THEN_OP2_FIELD">
               <opFieldDef
-                  href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@secondOperand"/>
+                  href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@operands.1"/>
               <field
                   dataField="//@dataprocessing.0/@inputPort.0/@datafield.1"/>
             </secondOperand>

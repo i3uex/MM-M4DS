@@ -212,25 +212,26 @@
         xsi:type="Workflow:MathOp"
         name="mathOperationFieldFixValue(Age-of-birth)_param_mathop"
         operator="SUBSTRACT">
-      <firstOperand
-          xsi:type="Workflow:OpFixValue"
-          name="mathOperationFieldFixValue(Age-of-birth)_param_op_fix_value">
-        <opFixValueDef
-            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@secondOperand"/>
-        <value
-            name="mathOperationFieldFixValue(Age-of-birth)_param_primitive"
-            value="1994">
-          <primitiveDef
-              href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@secondOperand/@value"/>
-        </value>
-      </firstOperand>
-      <secondOperand
+      <operands
           xsi:type="Workflow:OpField"
           name="mathOperationFieldFixValue(Age-of-birth)_param_op_field"
           datafield="//@dataprocessing.1/@inputPort.0/@datafield.0">
         <opFieldDef
-            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@firstOperand"/>
-      </secondOperand>
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@operands.0"/>
+      </operands>
+      <operands
+          xsi:type="Workflow:OpFixValue"
+          name="mathOperationFieldFixValue(Age-of-birth)_param_op_fix_value"
+          next_operand="//@dataprocessing.1/@parameter.0/@operands.0">
+        <opFixValueDef
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@operands.1"/>
+        <value
+            name="mathOperationFieldFixValue(Age-of-birth)_param_primitive"
+            value="1994">
+          <primitiveDef
+              href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@operands.1/@value"/>
+        </value>
+      </operands>
       <mathOpDef
           href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0"/>
     </parameter>
@@ -335,13 +336,13 @@
                     href="library_validation.xmi#//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult/@secondOperand/@value"/>
               </value>
               <opFixValueDef
-                  href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@secondOperand"/>
+                  href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@operands.1"/>
             </firstOperand>
             <secondOperand
                 xsi:type="Contract:OpField"
                 name="op-field">
               <opFieldDef
-                  href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@firstOperand"/>
+                  href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@operands.0"/>
               <field
                   dataField="//@dataprocessing.1/@inputPort.0/@datafield.0"/>
             </secondOperand>
