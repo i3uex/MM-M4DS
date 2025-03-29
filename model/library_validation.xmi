@@ -329,7 +329,7 @@
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="join" in="//@dataprocessingdefinition.11/@inputPort.0" out="//@dataprocessingdefinition.11/@outputPort.0">
-    <parameterdefinition xsi:type="Library:JoinDef" name="join_param_filter"/>
+    <parameterdefinition xsi:type="Library:JoinDef" name="join_param_join"/>
     <contractdefinition name="join_specialValue_INVARIANT">
       <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="join_specialValue_INV_condition">
         <in xsi:type="ContractDefinition:DataFieldDef" name="join_specialValue_INV_input_datafield"/>
@@ -350,11 +350,15 @@
           <valueResult xsi:type="ContractDefinition:JoinDef" name="join_check_INV_valueResult"/>
         </thendefinition>
         <ifdefinition thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0" name="join_check_INV_IF">
-          <valueCondition xsi:type="ContractDefinition:JoinDef" name="join_check_INV_valueCondition"/>
+          <valueCondition xsi:type="ContractDefinition:IntervalDef" name="join_check_INV_valueCondition"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
-    <inputPort name="join_input_DataDictionary"/>
-    <outputPort name="join_output_DataDictionary"/>
+    <inputPort name="join_input_DataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="join_input_DataField"/>
+    </inputPort>
+    <outputPort name="join_output_DataDictionary">
+      <datafielddefinition xsi:type="Library:CategoricalDef" name="join_output_DataField"/>
+    </outputPort>
   </dataprocessingdefinition>
 </Library:Library>
