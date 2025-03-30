@@ -194,7 +194,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="numOpDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//NumOpDef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FixValue" eSuperTypes="#//ImputeType">
+  <eClassifiers xsi:type="ecore:EClass" name="FixValue" eSuperTypes="#//ImputeType #//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fixValueDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//FixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Primitive"
@@ -265,8 +265,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOp" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MathOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="2"
-        upperBound="-1" eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="2"
+        upperBound="2" eType="#//Operand" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mathOpDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//MathOpDef"/>
   </eClassifiers>
@@ -276,13 +276,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
         eType="#//DataField"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OpFixValue" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EEnum Library.ecore#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Parameter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
         upperBound="-1" eType="#//Operand" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//JoinDef"/>
