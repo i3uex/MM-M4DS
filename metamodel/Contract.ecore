@@ -193,7 +193,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
         upperBound="-1" eType="#//Operand" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
-        eType="ecore:EClass ContractDef.ecore#//JoinDef"/>
   </eClassifiers>
 </ecore:EPackage>

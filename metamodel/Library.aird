@@ -8,7 +8,7 @@
     <semanticResources>Workflow.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_ruCXMHovEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_40AH4HovEe67Z-Y0pklHtA" name="Library class diagram" repPath="#_4z8dgHovEe67Z-Y0pklHtA" changeId="1743361751267">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_40AH4HovEe67Z-Y0pklHtA" name="Library class diagram" repPath="#_4z8dgHovEe67Z-Y0pklHtA" changeId="1743465835911">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Library.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -2023,8 +2023,10 @@
       <target xmi:type="ecore:EReference" href="Library.ecore#//MathOpDef/operandDef"/>
       <semanticElements xmi:type="ecore:EReference" href="Library.ecore#//MathOpDef/operandDef"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Mm0Wcw2aEfCJbu6Lzx-Uiw" description="_rszfQILOEe6lIt3RT-sfLg" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Mm0WdQ2aEfCJbu6Lzx-Uiw" showIcon="false"/>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_Mm0WdA2aEfCJbu6Lzx-Uiw" showIcon="false" labelColor="39,76,114"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Mm0WdQ2aEfCJbu6Lzx-Uiw" showIcon="false">
+          <labelFormat>bold</labelFormat>
+        </centerLabelStyle>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_Mm0WdA2aEfCJbu6Lzx-Uiw" labelSize="6" showIcon="false" labelColor="39,76,114"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
@@ -2032,8 +2034,10 @@
       <target xmi:type="ecore:EReference" href="Library.ecore#//JoinDef/operandDef"/>
       <semanticElements xmi:type="ecore:EReference" href="Library.ecore#//JoinDef/operandDef"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Mm09cA2aEfCJbu6Lzx-Uiw" description="_rszfQILOEe6lIt3RT-sfLg" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Mm09cg2aEfCJbu6Lzx-Uiw" showIcon="false"/>
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_Mm09cQ2aEfCJbu6Lzx-Uiw" showIcon="false" labelColor="39,76,114"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Mm09cg2aEfCJbu6Lzx-Uiw" showIcon="false">
+          <labelFormat>bold</labelFormat>
+        </centerLabelStyle>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_Mm09cQ2aEfCJbu6Lzx-Uiw" labelSize="6" showIcon="false" labelColor="39,76,114"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
