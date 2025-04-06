@@ -562,7 +562,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Unknown">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -666,7 +666,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Unknown">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -1222,7 +1222,7 @@
             xsi:type="Contract:FixValue"
             value="-216"
             dataType="Integer">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
         <valueRangeDef
@@ -1450,13 +1450,13 @@
         <value
             xsi:type="Contract:FixValue"
             value="A">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
         <value
             xsi:type="Contract:FixValue"
             value="N">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
         <valueRangeDef
@@ -1482,13 +1482,13 @@
         <value
             xsi:type="Contract:FixValue"
             value="A">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
         <value
             xsi:type="Contract:FixValue"
             value="N">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
         <valueRangeDef
@@ -1527,7 +1527,7 @@
           <valueCondition
               xsi:type="Contract:FixValue"
               value="A">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
         </if>
@@ -1539,7 +1539,7 @@
           <valueCondition
               xsi:type="Contract:FixValue"
               value="N">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
         </if>
@@ -1551,7 +1551,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="0">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -1563,7 +1563,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="0">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -1643,13 +1643,13 @@
         <value
             xsi:type="Contract:FixValue"
             value="Y">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
         <value
             xsi:type="Contract:FixValue"
             value="N">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
         <valueRangeDef
@@ -1675,13 +1675,13 @@
         <value
             xsi:type="Contract:FixValue"
             value="Y">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
         <value
             xsi:type="Contract:FixValue"
             value="N">
-          <valueFieldDef
+          <fixValueDef
               href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
         <valueRangeDef
@@ -1720,7 +1720,7 @@
           <valueCondition
               xsi:type="Contract:FixValue"
               value="Y">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
         </if>
@@ -1732,7 +1732,7 @@
           <valueCondition
               xsi:type="Contract:FixValue"
               value="N">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
           </valueCondition>
         </if>
@@ -1744,7 +1744,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="1">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -1756,7 +1756,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="0">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2803,7 +2803,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Low">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2815,7 +2815,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Moderate">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2827,7 +2827,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="High">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2906,7 +2906,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Low">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2918,7 +2918,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Moderate">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -2930,7 +2930,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="High">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3009,7 +3009,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Low">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3021,7 +3021,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Moderate">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3033,7 +3033,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="High">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3296,7 +3296,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Unknown">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3308,7 +3308,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Zone 1">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3320,7 +3320,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Zone 2">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3332,7 +3332,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Zone 3">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3344,7 +3344,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Zone 4">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3585,7 +3585,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="54 Percentile and Under">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3597,7 +3597,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="55-75 Percentile">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3609,7 +3609,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="76-93 Percentile">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3621,7 +3621,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="94+ percentile">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3838,7 +3838,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Low">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3850,7 +3850,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="Moderate">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>
@@ -3862,7 +3862,7 @@
           <valueResult
               xsi:type="Contract:FixValue"
               value="High">
-            <valueFieldDef
+            <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>
         </then>

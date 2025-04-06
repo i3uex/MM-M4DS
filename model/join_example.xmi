@@ -54,20 +54,34 @@
     <parameter
         xsi:type="Workflow:Join"
         name="join(Name with City)_param_join">
-      <operands
-          xsi:type="Workflow:OpField"
+      <operand
+          xsi:type="Workflow:Field"
           name="join(Name with City)_param_op1_field"
-          next_operand="//@dataprocessing.0/@parameter.0/@operands.1"
-          datafield="//@dataprocessing.0/@inputPort.0/@datafield.0"/>
-      <operands
-          xsi:type="Workflow:OpFixValue"
+          next_operand="//@dataprocessing.0/@parameter.0/@operand.1"
+          datafield="//@dataprocessing.0/@inputPort.0/@datafield.0">
+        <fieldDef
+            href="library_validation.xmi#//@dataprocessingdefinition.11/@parameterdefinition.0/@operandDef.1"/>
+      </operand>
+      <operand
+          xsi:type="Workflow:FixValue"
           name="join(Name with City)_param_op2_fix_value"
-          next_operand="//@dataprocessing.0/@parameter.0/@operands.2"
-          value="-"/>
-      <operands
-          xsi:type="Workflow:OpField"
+          next_operand="//@dataprocessing.0/@parameter.0/@operand.2">
+        <fixValueDef
+            href="library_validation.xmi#//@dataprocessingdefinition.11/@parameterdefinition.0/@operandDef.0"/>
+        <value
+            name="join(Name with City)_param_op2_fix_value_primitive"
+            value="-">
+          <primitiveDef
+              href="library_validation.xmi#//@dataprocessingdefinition.11/@parameterdefinition.0/@operandDef.0/@value"/>
+        </value>
+      </operand>
+      <operand
+          xsi:type="Workflow:Field"
           name="join(Name with City)_param_op3_field"
-          datafield="//@dataprocessing.0/@inputPort.0/@datafield.1"/>
+          datafield="//@dataprocessing.0/@inputPort.0/@datafield.1">
+        <fieldDef
+            href="library_validation.xmi#//@dataprocessingdefinition.11/@parameterdefinition.0/@operandDef.1"/>
+      </operand>
       <joinDef
           href="library_validation.xmi#//@dataprocessingdefinition.11/@parameterdefinition.0"/>
     </parameter>
@@ -180,24 +194,29 @@
               href="library_validation.xmi#//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
           <valueResult
               xsi:type="Contract:Join">
-            <operands
+            <operand
                 xsi:type="Contract:OpField"
-                name="join(Name with City)_param_op1_field"
-                next_operand="//@dataprocessing.0/@contract.1/@contract/@then.0/@valueResult/@operands.1">
-              <field
-                  dataField="//@dataprocessing.0/@inputPort.0/@datafield.0"/>
-            </operands>
-            <operands
-                xsi:type="Contract:OpFixValue"
-                name="join(Name with City)_param_op2_fix_value"
-                next_operand="//@dataprocessing.0/@contract.1/@contract/@then.0/@valueResult/@operands.2"
-                value="-"/>
-            <operands
+                next_operand="//@dataprocessing.0/@contract.1/@contract/@then.0/@valueResult/@operand.1"
+                name="join(Name with City)_op1_field"
+                datafield="//@dataprocessing.0/@contract.1/@contract/@in.0">
+              <opFieldDef
+                  href="library_validation.xmi#//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult/@operanddef.1"/>
+            </operand>
+            <operand
+                xsi:type="Contract:FixValue"
+                next_operand="//@dataprocessing.0/@contract.1/@contract/@then.0/@valueResult/@operand.2"
+                name="join(Name with City)_op2_fix_value"
+                value="-">
+              <fixValueDef
+                  href="library_validation.xmi#//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult/@operanddef.0"/>
+            </operand>
+            <operand
                 xsi:type="Contract:OpField"
-                name="join(Name with City)_param_op3_field">
-              <field
-                  dataField="//@dataprocessing.0/@inputPort.0/@datafield.1"/>
-            </operands>
+                name="join(Name with City)_op3_field"
+                datafield="//@dataprocessing.0/@contract.1/@contract/@in.1">
+              <opFieldDef
+                  href="library_validation.xmi#//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult/@operanddef.1"/>
+            </operand>
             <joinDef
                 href="library_validation.xmi#//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult"/>
           </valueResult>

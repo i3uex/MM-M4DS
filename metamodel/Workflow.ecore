@@ -273,11 +273,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
+  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
         eType="#//DataField"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//OpFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//FieldDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"

@@ -81,7 +81,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FixValue" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valueFieldDef" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fixValueDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//FixValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -180,10 +180,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OpField" eSuperTypes="#//Operand">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="#//Field"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
+        eType="#//DataField"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opFieldDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//OpFieldDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CastType" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DataType"/>
@@ -193,5 +196,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
         upperBound="-1" eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
+        eType="ecore:EClass ContractDef.ecore#//JoinDef"/>
   </eClassifiers>
 </ecore:EPackage>

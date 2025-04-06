@@ -271,7 +271,12 @@
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="mathOperation" in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
-    <parameterdefinition xsi:type="Library:MathOpDef" name="mathOperation_param_mathop"/>
+    <parameterdefinition xsi:type="Library:MathOpDef" name="mathOperation_param_mathop">
+      <operandDef xsi:type="Library:FixValueDef" name="mathOperation_op_fix_value">
+        <value name="mathOperation_op_fix_value_primitive"/>
+      </operandDef>
+      <operandDef xsi:type="Library:FieldDef" name="mathOperation_op_field" datafielddefinition="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"/>
+    </parameterdefinition>
     <contractdefinition name="mathOperation_PRECONDITION">
       <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="mathOperation_PRE_valueRange" belongOp="NOTBELONG">
         <in xsi:type="ContractDefinition:DataFieldDef" name="mathOperation_PRE_input_datafield"/>
@@ -289,7 +294,10 @@
         <in xsi:type="ContractDefinition:DataFieldDef" name="mathOperation_INV_input_dataField"/>
         <out xsi:type="ContractDefinition:DataFieldDef" name="mathOperation_INV_output_dataField"/>
         <thendefinition ifdefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="mathOperation_INV_THEN">
-          <valueResult xsi:type="ContractDefinition:MathOpDef" name="mathOperation_INV_valueResult"/>
+          <valueResult xsi:type="ContractDefinition:MathOpDef" name="mathOperation_INV_valueResult">
+            <operanddef xsi:type="ContractDefinition:FixValueDef" name="mathOperation_op_fix_value"/>
+            <operanddef xsi:type="ContractDefinition:OpFieldDef" name="mathOperation_op_field"/>
+          </valueResult>
         </thendefinition>
         <ifdefinition thendefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="mathOperation_INV_IF">
           <valueCondition xsi:type="ContractDefinition:IntervalDef" name="mathOperation_INV_valueCondition"/>
@@ -329,7 +337,12 @@
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="join" in="//@dataprocessingdefinition.11/@inputPort.0" out="//@dataprocessingdefinition.11/@outputPort.0">
-    <parameterdefinition xsi:type="Library:JoinDef" name="join_param_join"/>
+    <parameterdefinition xsi:type="Library:JoinDef" name="join_param_join">
+      <operandDef xsi:type="Library:FixValueDef" name="join_op_fix_value">
+        <value name="join_op_fix_value_primitive"/>
+      </operandDef>
+      <operandDef xsi:type="Library:FieldDef" name="join_op_field" datafielddefinition="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"/>
+    </parameterdefinition>
     <contractdefinition name="join_specialValue_INVARIANT">
       <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="join_specialValue_INV_condition">
         <in xsi:type="ContractDefinition:DataFieldDef" name="join_specialValue_INV_input_datafield"/>
@@ -347,7 +360,10 @@
         <in xsi:type="ContractDefinition:DataFieldDef" name="join_check_INV_input_datafield"/>
         <out xsi:type="ContractDefinition:DataFieldDef" name="join_check_INV_output_datafield"/>
         <thendefinition ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@ifdefinition.0" name="join_check_INV_THEN">
-          <valueResult xsi:type="ContractDefinition:JoinDef" name="join_check_INV_valueResult"/>
+          <valueResult xsi:type="ContractDefinition:JoinDef" name="join_check_INV_valueResult">
+            <operanddef xsi:type="ContractDefinition:FixValueDef" name="join_op_fix_value"/>
+            <operanddef xsi:type="ContractDefinition:OpFieldDef" name="join_op_field"/>
+          </valueResult>
         </thendefinition>
         <ifdefinition thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0" name="join_check_INV_IF">
           <valueCondition xsi:type="ContractDefinition:IntervalDef" name="join_check_INV_valueCondition"/>

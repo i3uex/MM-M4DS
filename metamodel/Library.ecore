@@ -121,7 +121,9 @@
         upperBound="-1" eType="#//OperandDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//OpField"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldDef" eSuperTypes="#//OperandDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//OpField"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datafielddefinition" lowerBound="1"
+        eType="#//DataFieldDefinition"/>
   </eClassifiers>
 </ecore:EPackage>

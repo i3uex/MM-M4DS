@@ -7,7 +7,7 @@
     xmlns:Library="http://www.example.org/Library"
     xsi:schemaLocation="https://www.example.org/contractDef ../metamodel/ContractDef.ecore http://www.example.org/Library ../metamodel/Library.ecore"
     name="library">
-  <dataprocessingdefinition
+   <dataprocessingdefinition
       xsi:type="Library:Transformation"
       name="imputeByDerivedValue"
       in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0"
@@ -631,7 +631,18 @@
       out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition
         xsi:type="Library:MathOpDef"
-        name="mathOperation_param_mathop"/>
+        name="mathOperation_param_mathop">
+      <operandDef
+          xsi:type="Library:FixValueDef"
+          name="mathOperation_op_fix_value">
+        <value
+            name="mathOperation_op_fix_value_primitive"/>
+      </operandDef>
+      <operandDef
+          xsi:type="Library:FieldDef"
+          name="mathOperation_op_field"
+          datafielddefinition="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"/>
+    </parameterdefinition>
     <contractdefinition
         name="mathOperation_PRECONDITION">
       <contractDefinition
@@ -678,7 +689,14 @@
             name="mathOperation_INV_THEN">
           <valueResult
               xsi:type="ContractDefinition:MathOpDef"
-              name="mathOperation_INV_valueResult"/>
+              name="mathOperation_INV_valueResult">
+            <operanddef
+                xsi:type="ContractDefinition:FixValueDef"
+                name="mathOperation_op_fix_value"/>
+            <operanddef
+                xsi:type="ContractDefinition:OpFieldDef"
+                name="mathOperation_op_field"/>
+          </valueResult>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@thendefinition.0"
@@ -765,7 +783,18 @@
       out="//@dataprocessingdefinition.11/@outputPort.0">
     <parameterdefinition
         xsi:type="Library:JoinDef"
-        name="join_param_join"/>
+        name="join_param_join">
+      <operandDef
+          xsi:type="Library:FixValueDef"
+          name="join_op_fix_value">
+        <value
+            name="join_op_fix_value_primitive"/>
+      </operandDef>
+      <operandDef
+          xsi:type="Library:FieldDef"
+          name="join_op_field"
+          datafielddefinition="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"/>
+    </parameterdefinition>
     <contractdefinition
         name="join_specialValue_INVARIANT">
       <contractDefinition
@@ -809,7 +838,14 @@
             name="join_check_INV_THEN">
           <valueResult
               xsi:type="ContractDefinition:JoinDef"
-              name="join_check_INV_valueResult"/>
+              name="join_check_INV_valueResult">
+            <operanddef
+                xsi:type="ContractDefinition:FixValueDef"
+                name="join_op_fix_value"/>
+            <operanddef
+                xsi:type="ContractDefinition:OpFieldDef"
+                name="join_op_field"/>
+          </valueResult>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0"
