@@ -271,7 +271,10 @@
         eType="ecore:EClass Library.ecore#//MathOpDef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true" eSuperTypes="#//Parameter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next_operand" eType="#//Operand"
+        eOpposite="#//Operand/previous_operand"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous_operand" eType="#//Operand"
+        eOpposite="#//Operand/next_operand"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Operand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafield" lowerBound="1"
