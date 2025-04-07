@@ -177,48 +177,75 @@
       out="//@dataprocessingdefinition.2/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition
         xsi:type="Library:FilterValueDef"
-        name="rowFilter_param_filter">
+        name="rowFilterPrimitive_param_filter">
       <primitivedef
-          name="rowFilter_param_primitive"/>
+          name="rowFilterPrimitive_param_primitive"/>
     </parameterdefinition>
     <contractdefinition
-        name="rowFilter_PRECONDITION">
+        name="rowFilterPrimitive_PRECONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          name="rowFilter_PRE_valueRange">
+          name="rowFilterPrimitive_PRE_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
-            name="rowFilter_PRE_input_datafield"/>
+            name="rowFilterPrimitive_PRE_input_datafield"/>
         <valuedefinition
             xsi:type="ContractDefinition:FixValueDef"
-            name="rowFilter_PRE_fixValue"/>
+            name="rowFilterPrimitive_PRE_fixValue"/>
       </contractDefinition>
     </contractdefinition>
     <contractdefinition
-        name="rowFilter_POSTCONDITION">
+        name="rowFilterPrimitive_POSTCONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="rowFilter_POST_valueRange">
+          name="rowFilterPrimitive_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
-            name="rowFilter_POST_input_datafield"/>
+            name="rowFilterPrimitive_POST_input_datafield"/>
         <valuedefinition
             xsi:type="ContractDefinition:FixValueDef"
-            name="rowFilter_POST_fixValue"/>
+            name="rowFilterPrimitive_POST_fixValue"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="rowFilterPrimitive_INVARIANT">
+      <contractDefinition
+          xsi:type="ContractDefinition:ConditionDef"
+          name="rowFilterPrimitive_INV_condition">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterPrimitive_INV_input_dataField"/>
+        <out
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterPrimitive_INV_output_dataField"/>
+        <thendefinition
+            ifdefinition="//@dataprocessingdefinition.2/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
+            name="rowFilterPrimitive_INV_THEN">
+          <valueResult
+              xsi:type="ContractDefinition:FixValueDef"
+              name="rowFilterPrimitive_INV_value_input"/>
+        </thendefinition>
+        <ifdefinition
+            thendefinition="//@dataprocessingdefinition.2/@contractdefinition.2/@contractDefinition/@thendefinition.0"
+            name="rowFilterPrimitive_INV_IF">
+          <valueCondition
+              xsi:type="ContractDefinition:IntervalDef"
+              name="rowFilterPrimitive_INV_valueCondition"/>
+        </ifdefinition>
       </contractDefinition>
     </contractdefinition>
     <inputPort
-        name="rowFilter_input_DataDictionary">
+        name="rowFilterPrimitive_input_DataDictionary">
       <datafielddefinition
           xsi:type="Library:ContinuousDef"
-          name="rowFilter_input_dataField"/>
+          name="rowFilterPrimitive_input_dataField"/>
     </inputPort>
     <outputPort
-        name="rowFilter_output_DataDictionary">
+        name="rowFilterPrimitive_output_DataDictionary">
       <datafielddefinition
           xsi:type="Library:ContinuousDef"
-          name="rowFilter_output_dataField"/>
+          name="rowFilterPrimitive_output_dataField"/>
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition
@@ -248,6 +275,33 @@
         <in
             xsi:type="ContractDefinition:DataDictionaryDef"
             name="columnFilter_POST_in_dataDictionary"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="columnFilter_INVARIANT">
+      <contractDefinition
+          xsi:type="ContractDefinition:ConditionDef"
+          name="columnFilter_INV_condition">
+        <in
+            xsi:type="ContractDefinition:DataDictionaryDef"
+            name="columnFilter_INV_input_dataField"/>
+        <out
+            xsi:type="ContractDefinition:DataDictionaryDef"
+            name="columnFilter_INV_output_dataField"/>
+        <thendefinition
+            ifdefinition="//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
+            name="columnFilter_INV_THEN">
+          <valueResult
+              xsi:type="ContractDefinition:IntervalDef"
+              name="columnFilter_INV_value_input"/>
+        </thendefinition>
+        <ifdefinition
+            thendefinition="//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@thendefinition.0"
+            name="columnFilter_INV_IF">
+          <valueCondition
+              xsi:type="ContractDefinition:IntervalDef"
+              name="columnFilter_INV_valueCondition"/>
+        </ifdefinition>
       </contractDefinition>
     </contractdefinition>
     <inputPort
@@ -611,6 +665,33 @@
             name="rowFilterRange_POST_interval"/>
       </contractDefinition>
     </contractdefinition>
+    <contractdefinition
+        name="rowFilterRange_INVARIANT">
+      <contractDefinition
+          xsi:type="ContractDefinition:ConditionDef"
+          name="rowFilterRange_INV_condition">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterRange_INV_input_dataField"/>
+        <out
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterRange_INV_output_dataField"/>
+        <thendefinition
+            ifdefinition="//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
+            name="rowFilterRange_INV_THEN">
+          <valueResult
+              xsi:type="ContractDefinition:IntervalDef"
+              name="rowFilterRange_INV_value_input"/>
+        </thendefinition>
+        <ifdefinition
+            thendefinition="//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"
+            name="rowFilterRange_INV_IF">
+          <valueCondition
+              xsi:type="ContractDefinition:IntervalDef"
+              name="rowFilterRange_INV_valueCondition"/>
+        </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
     <inputPort
         name="rowFilterRange_input_DataDictionary">
       <datafielddefinition
@@ -761,6 +842,33 @@
         <valuedefinition
             xsi:type="ContractDefinition:SpecialValueDef"
             name="rowFilterMissing_POST_specialValue"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="rowFilterMissing_INVARIANT">
+      <contractDefinition
+          xsi:type="ContractDefinition:ConditionDef"
+          name="rowFilterMissing_INV_condition">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterMissing_INV_input_dataField"/>
+        <out
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="rowFilterMissing_INV_output_dataField"/>
+        <thendefinition
+            ifdefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
+            name="rowFilterMissing_INV_THEN">
+          <valueResult
+              xsi:type="ContractDefinition:SpecialValueDef"
+              name="rowFilterMissing_INV_value_input"/>
+        </thendefinition>
+        <ifdefinition
+            thendefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@thendefinition.0"
+            name="rowFilterMissing_INV_IF">
+          <valueCondition
+              xsi:type="ContractDefinition:IntervalDef"
+              name="rowFilterMissing_INV_valueCondition"/>
+        </ifdefinition>
       </contractDefinition>
     </contractdefinition>
     <inputPort
