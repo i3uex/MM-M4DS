@@ -1257,7 +1257,7 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
 
 							[if (not fValue.primitive->isEmpty())]																										[comment OPEN checks that the list of primitives is not empty/]
-filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][prim.value/][/for][']'/]
+filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][if (prim.dataType=DataType::String or prim.dataType=DataType::Date or prim.dataType=DataType::DateTime)]'[prim.value/]'[else][prim.value/][/if][/for][']'/]
 
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_primitive(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																										columns=columns_[fValue.filterValueDef.name/],
