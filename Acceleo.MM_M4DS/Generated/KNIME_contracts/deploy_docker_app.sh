@@ -19,7 +19,7 @@ fi
 
 #sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build --no-cache -t ubuntu-22.04:latest -f Dockerfile .
+docker build --no-cache -t ubuntu_22_04:latest -f Dockerfile .
 
 clear
 
@@ -28,9 +28,9 @@ cp /home/carlos/datasets/missing_input_dataDictionary.csv "$(pwd)/data/"
 
 
 
-docker run -it --rm --name docker-contracts --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_contracts/data ubuntu-22.04:latest
+docker run -it --rm --name docker_contracts --network host --mount type=bind,source="$(pwd)/data",target=/wf_validation_contracts/data ubuntu_22_04:latest
 
-docker rmi ubuntu-22.04:latest
+docker rmi ubuntu_22_04:latest
 
 clear
 
