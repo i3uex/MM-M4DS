@@ -369,14 +369,14 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]															[comment OPEN assigns the variable to be a Transformation/]
 						[for (dc : DataDictionary | ps.inputPort)]																							[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks if it is a container/]
-	[dc.dataDictionaryDefinition.name/]=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 							[/if]																															[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
 						[for (dc : DataDictionary | ps.outputPort)]																							[comment OPEN read all the output datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks if it is a local file and a container/]
 	if os.path.exists('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]'):
-		[dc.dataDictionaryDefinition.name/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+		[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 							[/if]																															[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																																[comment CLOSE read all the output datasets and store them/]
