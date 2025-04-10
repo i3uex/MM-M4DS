@@ -606,8 +606,8 @@ else:
 									[/if]
 								[else]
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -621,7 +621,7 @@ else:
 						[let dd_in : DataDictionary = odd.oclAsType(DataDictionary)]																					[comment OPEN assigns the variable to be of type DataDictionary/]
 							[if (not dd_in.dataDictionary.datafield->isEmpty())]
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[dd_in.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										data_dictionary_out=[dd_in.dataDictionary.datafield->first().out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										data_dictionary_out=[dd_in.dataDictionary.out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
@@ -849,6 +849,18 @@ if contract_invariants.check_inv_cast_type(data_dictionary_in=[df.dataField.eCon
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+												[/if]
+											[/let]
+										[/if]
+									[/let]
+								[/if]
+								[if (v.oclIsTypeOf(CastType))]
+									[let ctif : CastType = v.oclAsType(CastType)]																							[comment OPEN assigns the variable to be of type SpecialValue/]
+[comment]The code below generates the call to invariants of type Join[/comment]
+										[if (th.valueResult.oclIsTypeOf(CastType))]																						
+											[let ctthen : CastType = th.valueResult.oclAsType(CastType)]
+												[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
+--------------------------------------------------------------------------------
 												[/if]
 											[/let]
 										[/if]
