@@ -31,6 +31,24 @@ def generateWorkflow():
 	
 	
 	
+	dictionary_join_specialValue_INV_THEN={'name': True, '-': False, 'City': True}
+	if contract_invariants.check_inv_cast_type(data_dictionary_in=join_Name_with_City__input_dataDictionary_df,
+								data_dictionary_out=join_Name_with_City__output_dataDictionary_df,
+								dictionary=dictionary_join_specialValue_INV_THEN,
+								field_in='name', field_out='Name with City'):
+		print('INVARIANT INV_join_condition_Name with City VALIDATED')
+	else:
+		print('INVARIANT INV_join_condition_Name with City NOT VALIDATED')
+	
+	dictionary_join_specialValue_INV_THEN={'name': True, '-': False, 'City': True}
+	if contract_invariants.check_inv_cast_type(data_dictionary_in=join_Name_with_City__input_dataDictionary_df,
+								data_dictionary_out=join_Name_with_City__output_dataDictionary_df,
+								dictionary=dictionary_join_specialValue_INV_THEN,
+								field_in='City', field_out='Name with City'):
+		print('INVARIANT INV_join_condition_Name with City VALIDATED')
+	else:
+		print('INVARIANT INV_join_condition_Name with City NOT VALIDATED')
+	
 	
 	
 set_logger("contracts")

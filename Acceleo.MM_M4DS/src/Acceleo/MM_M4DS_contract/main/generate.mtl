@@ -167,14 +167,6 @@ else:
 [/template]
 
 
-
-
-
-
-
-
-
-
 [template public generateCallDataDicContract(aContract : Contract)] 		[comment IT IS THE SAME AS generateCallContract(aContract : Contract) but the data input to the contract is a DataDictionary instead of a DataField/]
 [for (odd : Object | aContract._in->select(odd | odd.oclIsTypeOf(DataDictionary)))]
 	[let dd : DataDictionary = odd.oclAsType(DataDictionary)]																[comment OPEN assigns the input in the contract to be of type DataDictionary/]
@@ -479,12 +471,6 @@ else:
 [generateCallConditionContract(aContract)/]
 [/if]
 [/template]
-
-
-
-
-
-
 
 
 [template public generateCallConditionContract(aContract : Contract)]
@@ -854,17 +840,23 @@ else:
 										[/if]
 									[/let]
 								[/if]
-								[if (v.oclIsTypeOf(CastType))]
-									[let ctif : CastType = v.oclAsType(CastType)]																							[comment OPEN assigns the variable to be of type SpecialValue/]
+								[if (v.oclIsTypeOf(Interval))]
 [comment]The code below generates the call to invariants of type Join[/comment]
-										[if (th.valueResult.oclIsTypeOf(CastType))]																						
-											[let ctthen : CastType = th.valueResult.oclAsType(CastType)]
-												[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
---------------------------------------------------------------------------------
-												[/if]
-											[/let]
-										[/if]
-									[/let]
+
+									[if (th.valueResult.oclIsTypeOf(Join))]																						
+										[let jointhen : Join = th.valueResult.oclAsType(Join)]
+dictionary_[th.thenDefinition.name/]={[for (operand : Operand | jointhen.operand)][if (operand.previous_operand=null)][if (operand.oclIsKindOf(OpField))][let field : OpField=operand.oclAsType(OpField)]'[field.datafield.dataField.displayName/]': True[/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)]'[fv.value/]': False[/let][/if][if (operand.next_operand<>null)][joinOperands(operand.next_operand)/][/if][/if][/for]}
+											[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
+if contract_invariants.check_inv_cast_type(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+							data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+							dictionary=dictionary_[th.thenDefinition.name/],
+							field_in='[df.dataField.displayName/]', field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]'):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+											[/if]
+										[/let]
+									[/if]
 								[/if]
 							[/for]																																		[comment CLOSE traverse all the values associated to the contract/]
 						[/let]																																			[comment CLOSE assigns the variable to be of type Then/]
@@ -880,12 +872,9 @@ else:
 [/template]
 
 
-
-
-
-
-
-
+[template public joinOperands(operand : Operand)]
+[if (operand.oclIsKindOf(OpField))][let field : OpField=operand.oclAsType(OpField)], '[field.datafield.dataField.displayName/]': True[/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)], '[fv.value/]': False[/let][/if][if (operand.next_operand<>null)][joinOperands(operand.next_operand)/][/if]
+[/template]
 
 
 [template public generateCallConditionContractDataDictionary(cond : Contract, if_cond : If)]
