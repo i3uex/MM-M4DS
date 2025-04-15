@@ -27,7 +27,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IfDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="thendefinition" lowerBound="1"
         eType="#//ThenDefinition" eOpposite="#//ThenDefinition/ifdefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valueCondition" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataCondition" lowerBound="1"
         upperBound="-1" eType="#//ValueDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>
@@ -35,7 +35,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ThenDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifdefinition" lowerBound="1"
         eType="#//IfDefinition" eOpposite="#//IfDefinition/thendefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valueResult" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataResult" lowerBound="1"
         eType="#//ValueDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>

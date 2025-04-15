@@ -123,13 +123,13 @@
         <if then="//@dataprocessing.0/@contract.6/@contract/@then.0" name="INV_IF_impute_sex_columns">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.0/@contract.6/@contract/@if.0" name="INV_THEN_impute_sex_columns">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:DerivedValue">
-            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -147,13 +147,13 @@
         <if then="//@dataprocessing.0/@contract.7/@contract/@then.0" name="INV_IF_impute_IRSCHOOL_columns">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.0/@contract.7/@contract/@if.0" name="INV_THEN_impute_IRSCHOOL_columns">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:DerivedValue">
-            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -171,13 +171,13 @@
         <if then="//@dataprocessing.0/@contract.8/@contract/@then.0" name="INV_IF_impute_ETHNICITY_columns">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.0/@contract.8/@contract/@if.0" name="INV_THEN_impute_ETHNICITY_columns">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:DerivedValue">
-            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <derivedValueDef href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -249,13 +249,13 @@
         <if then="//@dataprocessing.1/@contract.2/@contract/@then.0" name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_input_dataField_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.1/@contract.2/@contract/@if.0" name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_input_dataField_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -300,13 +300,13 @@
         <if then="//@dataprocessing.1/@contract.5/@contract/@then.0" name="imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.1/@contract.5/@contract/@if.0" name="imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Unknown">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -403,13 +403,13 @@
         <if then="//@dataprocessing.2/@contract.4/@contract/@then.0" name="imputeMissingByMean(avg_income)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.2/@contract.4/@contract/@if.0" name="imputeMissingByMean(avg_income)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp" operation="Mean">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -427,13 +427,13 @@
         <if then="//@dataprocessing.2/@contract.5/@contract/@then.0" name="imputeMissingByMean(distance)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.2/@contract.5/@contract/@if.0" name="imputeMissingByMean(distance)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp" operation="Mean">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -498,13 +498,13 @@
         <if then="//@dataprocessing.3/@contract.2/@contract/@then.0" name="imputeMissingByLinearInterpolation(satscore)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.3/@contract.2/@contract/@if.0" name="imputeMissingByLinearInterpolation(satscore)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -534,8 +534,8 @@
     </parameter>
     <contract name="rowFilterRange(init_span)_PRECONDITION">
       <contractDefinition href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0"/>
-      <contract xsi:type="Contract:ValueRange" name="rowFilter(init_span)_PRE_valueRange" belongOp="NOTBELONG">
-        <in xsi:type="Contract:DataField" dataField="//@dataprocessing.4/@inputPort.0/@datafield.0" name="rowFilter(init_span)_PRE_input_dataField">
+      <contract xsi:type="Contract:ValueRange" name="rowFilterRange(init_span)_PRE_valueRange" belongOp="NOTBELONG">
+        <in xsi:type="Contract:DataField" dataField="//@dataprocessing.4/@inputPort.0/@datafield.0" name="rowFilterRange(init_span)_PRE_input_dataField">
           <dataFieldDef href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@in.0"/>
         </in>
         <value xsi:type="Contract:Interval" rightMargin="1000.0" closureType="closedOpen">
@@ -544,9 +544,9 @@
         <valueRangeDef href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition"/>
       </contract>
     </contract>
-    <contract name="rowFilter(init_span)_POSTCONDITION">
+    <contract name="rowFilterRange(init_span)_POSTCONDITION">
       <contractDefinition href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1"/>
-      <contract xsi:type="Contract:ValueRange" type="POSTCONDITION" name="rowFilter(init_span)_POST_valueRange" belongOp="NOTBELONG">
+      <contract xsi:type="Contract:ValueRange" type="POSTCONDITION" name="rowFilterRange(init_span)_POST_valueRange" belongOp="NOTBELONG">
         <in xsi:type="Contract:DataField" dataField="//@dataprocessing.4/@outputPort.0/@datafield.0" name="POST_input_datafield_row_filter">
           <dataFieldDef href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.1/@contractDefinition/@in.0"/>
         </in>
@@ -683,25 +683,25 @@
         <if then="//@dataprocessing.6/@contract.2/@contract/@then.0" name="Mapping(TERRITORY)_INV_IF_A">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:FixValue" value="A">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.6/@contract.2/@contract/@then.1" name="Mapping(TERRITORY)_INV_IF_N">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:FixValue" value="N">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.6/@contract.2/@contract/@if.0" name="Mapping(TERRITORY)_INV_THEN_A">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="0">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.6/@contract.2/@contract/@if.1" name="Mapping(TERRITORY)_INV_THEN_N">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="0">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -770,25 +770,25 @@
         <if then="//@dataprocessing.7/@contract.2/@contract/@then.0" name="mapping(Instate)_INV_IF_Y">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:FixValue" value="Y">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.7/@contract.2/@contract/@then.1" name="mapping(Instate)_INV_IF_N">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:FixValue" value="N">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.7/@contract.2/@contract/@if.0" name="mapping(Instate)_INV_THEN_Y">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="1">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.7/@contract.2/@contract/@if.1" name="mapping(Instate)_INV_THEN_N">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="0">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -832,13 +832,13 @@
         <if belongOp="NOTBELONG" then="//@dataprocessing.8/@contract.0/@contract/@then.0" name="INV_specialValue_if_TERRITORY">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.8/@contract.0/@contract/@if.0" name="INV_specialValue_then_TERRITORY" belongOp="NOTBELONG">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -856,13 +856,13 @@
         <if belongOp="NOTBELONG" then="//@dataprocessing.8/@contract.1/@contract/@then.0" name="INV_specialValue_if_Instate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.8/@contract.1/@contract/@if.0" name="INV_specialValue_then_Instate" belongOp="NOTBELONG">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:SpecialValue">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -880,13 +880,13 @@
         <if then="//@dataprocessing.8/@contract.2/@contract/@then.0" name="INV_castType_if_TERRITORY">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:CastType">
-            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.8/@contract.2/@contract/@if.0" name="INV_castType_then_TERRITORY">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:CastType" type="Integer">
-            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -904,13 +904,13 @@
         <if then="//@dataprocessing.8/@contract.3/@contract/@then.0" name="INV_castType_if_Instate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:CastType">
-            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.8/@contract.3/@contract/@if.0" name="INV_castType_then_Instate">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:CastType" type="Integer">
-            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <castTypeDef href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1036,13 +1036,13 @@
         <if then="//@dataprocessing.9/@contract.6/@contract/@then.0" name="imputeOutlierByClosest(avg_income)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue" specialType="OUTLIER">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.9/@contract.6/@contract/@if.0" name="imputeOutlierByClosest(avg_income)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp" operation="Closest">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1060,13 +1060,13 @@
         <if then="//@dataprocessing.9/@contract.7/@contract/@then.0" name="imputeOutlierByClosest(distance)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue" specialType="OUTLIER">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.9/@contract.7/@contract/@if.0" name="imputeOutlierByClosest(distance)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp" operation="Closest">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1084,13 +1084,13 @@
         <if then="//@dataprocessing.9/@contract.8/@contract/@then.0" name="imputeOutlierByClosest(Instate)_INV_IF">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:SpecialValue" specialType="OUTLIER">
-            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <specialValueDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.9/@contract.8/@contract/@if.0" name="imputeOutlierByClosest(Instate)_INV_THEN">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:NumOp" operation="Closest">
-            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <numOpDef href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1231,37 +1231,37 @@
         <if then="//@dataprocessing.10/@contract.6/@contract/@then.0" name="binner(TOTAL_CONTACTS)_INV_IF_low">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="-1000.0" rightMargin="1.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.6/@contract/@then.1" name="binner(TOTAL_CONTACTS)_INV_IF_moderate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1.0" rightMargin="4.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.6/@contract/@then.2" name="binner(TOTAL_CONTACTS)_INV_IF_high">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="4.0" rightMargin="1000.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.10/@contract.6/@contract/@if.0" name="binner(TOTAL_CONTACTS)_INV_THEN_low">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Low">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.6/@contract/@if.1" name="binner(TOTAL_CONTACTS)_INV_THEN_moderate">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Moderate">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.6/@contract/@if.2" name="binner(TOTAL_CONTACTS)_INV_THEN_high">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="High">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1279,37 +1279,37 @@
         <if then="//@dataprocessing.10/@contract.7/@contract/@then.0" name="binner(SELF_INIT_CNTCTS)_INV_IF_low">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="-1000.0" rightMargin="1.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.7/@contract/@then.1" name="binner(SELF_INIT_CNTCTS)_INV_IF_moderate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1.0" rightMargin="4.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.7/@contract/@then.2" name="binner(SELF_INIT_CNTCTS)_INV_IF_high">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="4.0" rightMargin="1000.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.10/@contract.7/@contract/@if.0" name="binner(SELF_INIT_CNTCTS)_INV_THEN_low">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Low">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.7/@contract/@if.1" name="binner(SELF_INIT_CNTCTS)_INV_THEN_moderate">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Moderate">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.7/@contract/@if.2" name="binner(SELF_INIT_CNTCTS)_INV_THEN_high">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="High">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1327,37 +1327,37 @@
         <if then="//@dataprocessing.10/@contract.8/@contract/@then.0" name="binner(SOLICITED_CNTCTS)_INV_IF_low">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="-1000.0" rightMargin="1.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.8/@contract/@then.1" name="binner(SOLICITED_CNTCTS)_INV_IF_moderate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1.0" rightMargin="4.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.10/@contract.8/@contract/@then.2" name="binner(SOLICITED_CNTCTS)_INV_IF_high">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="4.0" rightMargin="1000.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.10/@contract.8/@contract/@if.0" name="binner(SOLICITED_CNTCTS)_INV_THEN_low">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Low">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.8/@contract/@if.1" name="binner(SOLICITED_CNTCTS)_INV_THEN_moderate">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Moderate">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.10/@contract.8/@contract/@if.2" name="binner(SOLICITED_CNTCTS)_INV_THEN_high">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="High">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1438,61 +1438,61 @@
         <if then="//@dataprocessing.11/@contract.2/@contract/@then.0" name="binner(TERRITORY)_INV_IF_Unknown">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="-1000.0" rightMargin="1.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.11/@contract.2/@contract/@then.1" name="binner(TERRITORY)_INV_IF_Zone1">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1.0" rightMargin="3.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.11/@contract.2/@contract/@then.2" name="binner(TERRITORY)_INV_IF_Zone2">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="3.0" rightMargin="5.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.11/@contract.2/@contract/@then.3" name="binner(TERRITORY)_INV_IF_Zone3">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="5.0" rightMargin="7.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.11/@contract.2/@contract/@then.4" name="binner(TERRITORY)_INV_IF_Zone4">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="7.0" rightMargin="1000.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.11/@contract.2/@contract/@if.0" name="binner(TERRITORY)_INV_THEN_Unknown">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Unknown">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.11/@contract.2/@contract/@if.1" name="binner(TERRITORY)_INV_THEN_Zone1">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Zone 1">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.11/@contract.2/@contract/@if.2" name="binner(TERRITORY)_INV_THEN_Zone2">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Zone 2">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.11/@contract.2/@contract/@if.3" name="binner(TERRITORY)_INV_THEN_Zone3">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Zone 3">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.11/@contract.2/@contract/@if.4" name="binner(TERRITORY)_INV_THEN_Zone4">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Zone 4">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1569,49 +1569,49 @@
         <if then="//@dataprocessing.12/@contract.2/@contract/@then.0" name="binner(satscore)_INV_IF_54 Percentile and Under">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="-1000.0" rightMargin="1040.0" closureType="openClosed">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.12/@contract.2/@contract/@then.1" name="binner(satscore)_INV_IF_55-75 Percentile">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1040.0" rightMargin="1160.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.12/@contract.2/@contract/@then.2" name="binner(satscore)_INV_IF_76-93 Percentile">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1160.0" rightMargin="1340.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.12/@contract.2/@contract/@then.3" name="binner(satscore)_INV_IF_94+ percentile">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="1340.0" rightMargin="2000.0" closureType="openClosed">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.12/@contract.2/@contract/@if.0" name="binner(satscore)_INV_THEN_54 Percentile and Under">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="54 Percentile and Under">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.12/@contract.2/@contract/@if.1" name="binner(satscore)_INV_THEN_55-75 Percentile">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="55-75 Percentile">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.12/@contract.2/@contract/@if.2" name="binner(satscore)_INV_THEN_76-93 Percentile">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="76-93 Percentile">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.12/@contract.2/@contract/@if.3" name="binner(satscore)_INV_THEN_94+ percentile">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="94+ percentile">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -1684,37 +1684,37 @@
         <if then="//@dataprocessing.13/@contract.2/@contract/@then.0" name="binner(avg_income)_INV_IF_Low">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="9.0" rightMargin="42830.0">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.13/@contract.2/@contract/@then.1" name="binner(avg_income)_INV_IF_Moderate">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="42830.0" rightMargin="55559.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <if then="//@dataprocessing.13/@contract.2/@contract/@then.2" name="binner(avg_income)_INV_IF_High">
           <ifDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition xsi:type="Contract:Interval" leftMargin="55590.0" rightMargin="100000.0" closureType="closedOpen">
-            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@valueCondition.0"/>
+            <intervalDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then if="//@dataprocessing.13/@contract.2/@contract/@if.0" name="binner(avg_income)_INV_THEN_Low">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Low">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.13/@contract.2/@contract/@if.1" name="binner(avg_income)_INV_THEN_Moderate">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="Moderate">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
         <then if="//@dataprocessing.13/@contract.2/@contract/@if.2" name="binner(avg_income)_INV_THEN_High">
           <thenDefinition href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult xsi:type="Contract:FixValue" value="High">
-            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@valueResult"/>
+            <fixValueDef href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>

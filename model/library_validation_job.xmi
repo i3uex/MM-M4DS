@@ -7,7 +7,7 @@
     xmlns:Library="http://www.example.org/Library"
     xsi:schemaLocation="https://www.example.org/contractDef ../metamodel/ContractDef.ecore http://www.example.org/Library ../metamodel/Library.ecore"
     name="library">
-   <dataprocessingdefinition
+  <dataprocessingdefinition
       xsi:type="Library:Transformation"
       name="imputeByDerivedValue"
       in="//@dataprocessingdefinition.0/@inputPort.0/@datafielddefinition.0"
@@ -61,14 +61,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="imputeByDerivedValue_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:DerivedValueDef"
               name="imputeByDerivedValue_INV_derivedValue"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.0/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="imputeByDerivedValue_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:SpecialValueDef"
               name="imputeByDerivedValue_INV_specialValue"/>
         </ifdefinition>
@@ -144,14 +144,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="imputeByFixValue_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:FixValueDef"
               name="imputeByFixValue_INV_fixValue"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="imputeByFixValue_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:SpecialValueDef"
               name="imputeByFixValue_INV_specialValue"/>
         </ifdefinition>
@@ -222,14 +222,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.2/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="rowFilterPrimitive_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:FixValueDef"
-              name="rowFilterPrimitive_INV_value_input"/>
+              name="rowFilterPrimitive_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.2/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="rowFilterPrimitive_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="rowFilterPrimitive_INV_valueCondition"/>
         </ifdefinition>
@@ -284,21 +284,21 @@
           name="columnFilter_INV_condition">
         <in
             xsi:type="ContractDefinition:DataDictionaryDef"
-            name="columnFilter_INV_input_dataField"/>
+            name="columnFilter_INV_input_dataDictionary"/>
         <out
             xsi:type="ContractDefinition:DataDictionaryDef"
-            name="columnFilter_INV_output_dataField"/>
+            name="columnFilter_INV_output_dataDictionary"/>
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="columnFilter_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:IntervalDef"
               name="columnFilter_INV_value_input"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="columnFilter_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="columnFilter_INV_valueCondition"/>
         </ifdefinition>
@@ -329,26 +329,26 @@
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="def_POST_valueRange">
+          name="mapping_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
-            name="def_POST_input_datafield"/>
+            name="mapping_POST_input_datafield"/>
         <valuedefinition
             xsi:type="ContractDefinition:FixValueDef"
-            name="def_POST_fixValue"/>
+            name="mapping_POST_fixValue"/>
       </contractDefinition>
     </contractdefinition>
     <contractdefinition
         name="mapping_PRECONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          name="def_PRE_valueRange">
+          name="mapping_PRE_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
-            name="def_PRE_input_datafield"/>
+            name="mapping_PRE_input_datafield"/>
         <valuedefinition
             xsi:type="ContractDefinition:FixValueDef"
-            name="def_PRE_fixValue"/>
+            name="mapping_PRE_fixValue"/>
       </contractDefinition>
     </contractdefinition>
     <contractdefinition
@@ -356,26 +356,26 @@
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
           type="INVARIANT"
-          name="def_INV_condition">
+          name="mapping_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
-            name="def_INV_input_datafield"/>
+            name="mapping_INV_input_datafield"/>
         <out
             xsi:type="ContractDefinition:DataFieldDef"
-            name="def_INV_output_datafield"/>
+            name="mapping_INV_output_datafield"/>
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
-            name="def_INV_THEN">
-          <valueResult
+            name="mapping_INV_THEN">
+          <dataResult
               xsi:type="ContractDefinition:FixValueDef"
-              name="def_INV_value_result_fix"/>
+              name="mapping_INV_value_result_fix"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.4/@contractdefinition.2/@contractDefinition/@thendefinition.0"
-            name="def_INV_IF">
-          <valueCondition
+            name="mapping_INV_IF">
+          <dataCondition
               xsi:type="ContractDefinition:FixValueDef"
-              name="def_INV_value_input_fix"/>
+              name="mapping_INV_value_input_fix"/>
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
@@ -446,14 +446,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="imputeByNumericOp_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:NumOpDef"
               name="imputeByNumericOp_INV_value_result"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.5/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="imputeByNumericOp_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:SpecialValueDef"
               name="imputeByNumericOp_INV_value_input"/>
         </ifdefinition>
@@ -494,14 +494,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
             name="categoricalToContinuous_specialValue_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:SpecialValueDef"
               name="categoricalToContinuous_specialValue_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"
             name="categoricalToContinuous_specialValue_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:SpecialValueDef"
               name="categoricalToContinuous_specialValue_INV_valueCondition"/>
         </ifdefinition>
@@ -521,14 +521,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
             name="categoricalToContinuous_castType_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:CastTypeDef"
               name="categoricalToContinuous_castType_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0"
             name="categoricalToContinuous_castType_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:CastTypeDef"
               name="categoricalToContinuous_castType_INV_valueCondition"/>
         </ifdefinition>
@@ -600,14 +600,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="binner_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:FixValueDef"
               name="binner_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="binner_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="binner_INV_valueCondition"/>
         </ifdefinition>
@@ -679,14 +679,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="rowFilterRange_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:IntervalDef"
-              name="rowFilterRange_INV_value_input"/>
+              name="rowFilterRange_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="rowFilterRange_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="rowFilterRange_INV_valueCondition"/>
         </ifdefinition>
@@ -768,7 +768,7 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="mathOperation_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:MathOpDef"
               name="mathOperation_INV_valueResult">
             <operanddef
@@ -777,12 +777,12 @@
             <operanddef
                 xsi:type="ContractDefinition:OpFieldDef"
                 name="mathOperation_op_field"/>
-          </valueResult>
+          </dataResult>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.9/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="mathOperation_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="mathOperation_INV_valueCondition"/>
         </ifdefinition>
@@ -858,14 +858,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@ifdefinition.0"
             name="rowFilterMissing_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:SpecialValueDef"
-              name="rowFilterMissing_INV_value_input"/>
+              name="rowFilterMissing_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.10/@contractdefinition.2/@contractDefinition/@thendefinition.0"
             name="rowFilterMissing_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="rowFilterMissing_INV_valueCondition"/>
         </ifdefinition>
@@ -917,14 +917,14 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
             name="join_specialValue_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:SpecialValueDef"
               name="join_specialValue_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"
             name="join_specialValue_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:SpecialValueDef"
               name="join_specialValue_INV_valueCondition"/>
         </ifdefinition>
@@ -944,7 +944,7 @@
         <thendefinition
             ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
             name="join_check_INV_THEN">
-          <valueResult
+          <dataResult
               xsi:type="ContractDefinition:JoinDef"
               name="join_check_INV_valueResult">
             <operanddef
@@ -953,12 +953,12 @@
             <operanddef
                 xsi:type="ContractDefinition:OpFieldDef"
                 name="join_op_field"/>
-          </valueResult>
+          </dataResult>
         </thendefinition>
         <ifdefinition
             thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0"
             name="join_check_INV_IF">
-          <valueCondition
+          <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
               name="join_check_INV_valueCondition"/>
         </ifdefinition>

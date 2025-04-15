@@ -37,7 +37,7 @@
         eOpposite="#//Then/if"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataCondition" lowerBound="1"
-        upperBound="-1" eType="#//DataDictionaryComponent" containment="true"/>
+        upperBound="-1" eType="#//DataDictionaryElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Then">
     <eStructuralFeatures xsi:type="ecore:EReference" name="thenDefinition" lowerBound="1"
@@ -47,7 +47,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataResult" lowerBound="1"
-        eType="#//DataDictionaryComponent" containment="true"/>
+        eType="#//DataDictionaryElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueRange" eSuperTypes="#//Range">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" upperBound="-1"
@@ -75,7 +75,7 @@
         eType="ecore:EClass ContractDef.ecore#//DataFieldDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RowValue" abstract="true" eSuperTypes="#//DataDictionaryComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="RowValue" abstract="true" eSuperTypes="#//DataDictionaryElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="quantity" eType="#//Quantity"
         containment="true"/>
   </eClassifiers>
@@ -119,7 +119,7 @@
         eType="ecore:EClass ContractDef.ecore#//AbsoluteValueDef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//DataDictionaryComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//DataDictionaryElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataField" lowerBound="1"
         eType="ecore:EClass Workflow.ecore#//DataField"/>
   </eClassifiers>
@@ -202,5 +202,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//JoinDef"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataDictionaryComponent" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataDictionaryElement" abstract="true"/>
 </ecore:EPackage>

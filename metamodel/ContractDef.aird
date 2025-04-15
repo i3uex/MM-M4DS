@@ -8,7 +8,7 @@
     <semanticResources>Environment.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_q6ODsHyXEe67Z-Y0pklHtA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_rVgRgHyXEe67Z-Y0pklHtA" name="ContractDefinition class diagram" repPath="#_rVfDYHyXEe67Z-Y0pklHtA" changeId="1743965714348">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_rVgRgHyXEe67Z-Y0pklHtA" name="ContractDefinition class diagram" repPath="#_rVfDYHyXEe67Z-Y0pklHtA" changeId="1744745295788">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="ContractDef.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1379,9 +1379,9 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_jFp0XRecEe-D5Iahp-fDFA" name="[1..*] valueCondition" sourceNode="_r6nJs3yXEe67Z-Y0pklHtA" targetNode="_r6pl8nyXEe67Z-Y0pklHtA">
-      <target xmi:type="ecore:EReference" href="ContractDef.ecore#//IfDefinition/valueCondition"/>
-      <semanticElements xmi:type="ecore:EReference" href="ContractDef.ecore#//IfDefinition/valueCondition"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_jFp0XRecEe-D5Iahp-fDFA" name="[1..*] dataCondition" sourceNode="_r6nJs3yXEe67Z-Y0pklHtA" targetNode="_r6pl8nyXEe67Z-Y0pklHtA">
+      <target xmi:type="ecore:EReference" href="ContractDef.ecore#//IfDefinition/dataCondition"/>
+      <semanticElements xmi:type="ecore:EReference" href="ContractDef.ecore#//IfDefinition/dataCondition"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_jFp0XhecEe-D5Iahp-fDFA" description="_Fq6CgHyZEe67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_jFp0YBecEe-D5Iahp-fDFA" showIcon="false">
           <labelFormat>bold</labelFormat>
@@ -1390,9 +1390,9 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_jFqbYBecEe-D5Iahp-fDFA" name="[1..1] valueResult" sourceNode="_r6nwwXyXEe67Z-Y0pklHtA" targetNode="_r6pl8nyXEe67Z-Y0pklHtA">
-      <target xmi:type="ecore:EReference" href="ContractDef.ecore#//ThenDefinition/valueResult"/>
-      <semanticElements xmi:type="ecore:EReference" href="ContractDef.ecore#//ThenDefinition/valueResult"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_jFqbYBecEe-D5Iahp-fDFA" name="[1..1] dataResult" sourceNode="_r6nwwXyXEe67Z-Y0pklHtA" targetNode="_r6pl8nyXEe67Z-Y0pklHtA">
+      <target xmi:type="ecore:EReference" href="ContractDef.ecore#//ThenDefinition/dataResult"/>
+      <semanticElements xmi:type="ecore:EReference" href="ContractDef.ecore#//ThenDefinition/dataResult"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_jFqbYRecEe-D5Iahp-fDFA" description="_Fq6CgHyZEe67Z-Y0pklHtA" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_jFqbYxecEe-D5Iahp-fDFA" showIcon="false">
           <labelFormat>bold</labelFormat>
