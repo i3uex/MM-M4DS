@@ -757,6 +757,7 @@ else:
 													[/let]																														[comment CLOSE assigns the variable to be of type NumOp/]
 												[/if]																															[comment CLOSE checks that the variable is of type NumOp/]
 												[if (th.dataResult.oclIsTypeOf(Interval))]Mover fuera del for--------------------------------------------------------------------------------------------------------------------------------------------------------
+SE VA PRESUPONER QUE SI UN THEN ES DE TIPO INTERVAL, LOS DEMÁS TAMBIÉN VAN A SERLO
 													[let int : Interval = th.dataResult.oclAsType(Interval)]
 														[if (aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
 columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Object | cond._in) separator(', ')][if (obj.oclIsKindOf(DataField))][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]'[/let][/if][/for][']'/]
@@ -783,7 +784,7 @@ cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 
 if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.INCLUDE):		NO SE PUEDE INSTANCIAR EL FILTER TYPE, ESTÁ SOLO EN WORKFLOW, NO EN CONTRATOS
+										filter_type=FilterType.INCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -914,6 +915,29 @@ else:
 			[/if]
 		[/if]																																							[comment CLOSE checks that belongOp_in is BELONG/]
 	[/for]																																								[comment CLOSE traverse all the If class in the contract/]
+
+	[if (cond._then->first().dataResult.oclIsTypeOf(Interval) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(Interval))]
+# SE VA PRESUPONER QUE SI EL PRIMER IF-THEN ES DE TIPO INTERVAL, LOS DEMÁS TAMBIÉN VAN A SERLO
+columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Object | cond._in) separator(', ')][if (obj.oclIsKindOf(DataField))][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]'[/let][/if][/for][']'/]
+left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.leftMargin/][/let][/if][/let][/if][/for][']'/]
+right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.rightMargin/][/let][/if][/let][/if][/for][']'/]
+closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.closureType/][/let][/if][/let][/if][/for][']'/]
+		
+		[for (obj : Object | cond._in)]
+			[if (obj.oclIsKindOf(DataField))]
+				[let df : DataField = obj.oclAsType(DataField)]
+if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
+										left_margin_list=left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], right_margin=right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
+										closure_type=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.INCLUDE):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+				[/let]
+			[/if]
+		[/for]
+	[/if]
 [/let]								 																																	[comment CLOSE  assigns the contract to be of type Condition (Invariants)/]
 [/template]
 
