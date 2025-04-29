@@ -8,7 +8,7 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	join_Name_with_City__input_dataDictionary_df=pd.read_parquet('/pop/data/join_input_dataDictionary.parquet')
+	join_Name_with_City__input_dataDictionary_df=pd.read_parquet('here/data/join_input_dataDictionary.parquet')
 
 	join_Name_with_City__input_dataDictionary_transformed=join_Name_with_City__input_dataDictionary_df.copy()
 	dictionary_join_param_join={'name': True, '-': False, 'City': True}
@@ -18,8 +18,8 @@ def generateWorkflow():
 	
 	
 	join_Name_with_City__output_dataDictionary_df=join_Name_with_City__input_dataDictionary_transformed
-	join_Name_with_City__output_dataDictionary_df.to_parquet('/pop/data/join_output_dataDictionary.parquet')
-	join_Name_with_City__output_dataDictionary_df=pd.read_parquet('/pop/data/join_output_dataDictionary.parquet')
+	join_Name_with_City__output_dataDictionary_df.to_parquet('here/data/join_output_dataDictionary.parquet')
+	join_Name_with_City__output_dataDictionary_df=pd.read_parquet('here/data/join_output_dataDictionary.parquet')
 	
 
 set_logger("transformations")

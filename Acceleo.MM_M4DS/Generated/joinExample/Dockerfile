@@ -1,7 +1,7 @@
-FROM python:-slim
+FROM python:3.11-slim
 
-WORKDIR ./pop
-ENV PYTHONPATH=./pop
+WORKDIR here
+ENV PYTHONPATH=here
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget git && \
@@ -17,14 +17,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
 
-COPY dataProcessing_Job_join_example.py ./pop/workflows/
-COPY contracts_Job_join_example.py ./pop/workflows/
-COPY transformations_Job_join_example.py ./pop/workflows/
+COPY dataProcessing_Job_join_example.py here/workflows/
+COPY contracts_Job_join_example.py here/workflows/
+COPY transformations_Job_join_example.py here/workflows/
 
-COPY fileFormatting.py ./pop/workflows/
+COPY fileFormatting.py here/workflows/
 
-COPY workflow_scripts.sh ./pop/workflow_scripts.sh
+COPY workflow_scripts.sh here/workflow_scripts.sh
 
-RUN chmod +x ./pop/workflow_scripts.sh
+RUN chmod +x here/workflow_scripts.sh
 
-CMD ["/bin/bash", "./pop/workflow_scripts.sh"]
+CMD ["/bin/bash", "here/workflow_scripts.sh"]

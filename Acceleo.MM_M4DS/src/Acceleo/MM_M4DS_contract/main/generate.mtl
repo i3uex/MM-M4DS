@@ -702,7 +702,7 @@ else:
 												[/if]																															[comment CLOSE checks that the variable is of type NumOp/]
 											[/let]																																[comment CLOSE assigns the variable to be of type FixValue/]
 										[/if]																																	[comment CLOSE checks that the type of the value is FixValue/]
-----------------------------------------[if (v.oclIsTypeOf(Interval))]----------------------------------------------------------------------------------------------------------[comment OPEN checks that the type of the value is Interval/]
+                                        [if (v.oclIsTypeOf(Interval))]																											[comment OPEN checks that the type of the value is Interval/]
 											[let int : Interval = v.oclAsType(Interval)]																						[comment OPEN assigns the variable to be of type Interval/]
 [comment]The code below generates the call to invariants of type Interval-FixValue[/comment]
 												[if (th.dataResult.oclIsTypeOf(FixValue))]																						[comment OPEN checks that the variable is of type FixValue/]
@@ -756,41 +756,6 @@ else:
 														[/if]																													[comment CLOSE checks that the output is DataDictionary or DataField/]
 													[/let]																														[comment CLOSE assigns the variable to be of type NumOp/]
 												[/if]																															[comment CLOSE checks that the variable is of type NumOp/]
-												[if (th.dataResult.oclIsTypeOf(Interval))]Mover fuera del for--------------------------------------------------------------------------------------------------------------------------------------------------------
-SE VA PRESUPONER QUE SI UN THEN ES DE TIPO INTERVAL, LOS DEMÁS TAMBIÉN VAN A SERLO
-													[let int : Interval = th.dataResult.oclAsType(Interval)]
-														[if (aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
-columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Object | cond._in) separator(', ')][if (obj.oclIsKindOf(DataField))][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]'[/let][/if][/for][']'/]
-left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.leftMargin/][/let][/if][/let][/if][/for][']'/]
-right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.rightMargin/][/let][/if][/let][/if][/for][']'/]
-closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.closureType/][/let][/if][/let][/if][/for][']'/]
-
-if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										left_margin_list=left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], right_margin=right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										closure_type=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.INCLUDE):
-	print('[aContract.type/] [aContract.name/] VALIDATED')
-else:
-	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-														[/if]
-													[/let]
-												[/if]
-												[if (th.dataResult.oclIsTypeOf(SpecialValue))]Mover fuera del for--------------------------------------------------------------------------------------------------------------------------------------------------------
-													[let sv : SpecialValue = th.dataResult.oclAsType(SpecialValue)]
-														[if (aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
-cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 : Then | cond._then) separator(', ')][if (th2.dataResult.oclIsKindOf(SpecialValue))][let spVal : SpecialValue = th2.dataResult.oclAsType(SpecialValue)][for (obj : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField))) separator(', ')][let df : DataField = odf.oclAsType(DataField)]'[df.dataField.displayName/]':{[if (spVal.specialType=SpecialType::MISSING)]'missing': ['['/][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::INVALID)]'invalid': ['['/][for (iv : ValueField | df.dataField.invalidValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::OUTLIER)]'outlier': True[/if][/let][/for]}[/let][/if][/for]}
-
-if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.INCLUDE):
-	print('[aContract.type/] [aContract.name/] VALIDATED')
-else:
-	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
-														[/if]
-													[/let]
-												[/if]
 											[/let]																																[comment CLOSE assigns the variable to be of type Interval/]
 										[/if]																																	[comment CLOSE checks that the type of the value is Interval/]
 										[if (v.oclIsTypeOf(SpecialValue))]																										[comment OPEN checks that the type of the value is SpecialValue/]
@@ -917,7 +882,6 @@ else:
 	[/for]																																								[comment CLOSE traverse all the If class in the contract/]
 
 	[if (cond._then->first().dataResult.oclIsTypeOf(Interval) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(Interval))]
-# SE VA PRESUPONER QUE SI EL PRIMER IF-THEN ES DE TIPO INTERVAL, LOS DEMÁS TAMBIÉN VAN A SERLO
 columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Object | cond._in) separator(', ')][if (obj.oclIsKindOf(DataField))][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]'[/let][/if][/for][']'/]
 left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.leftMargin/][/let][/if][/let][/if][/for][']'/]
 right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.rightMargin/][/let][/if][/let][/if][/for][']'/]
@@ -931,6 +895,23 @@ if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=[df.dataFi
 										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										left_margin_list=left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], right_margin=right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										closure_type=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.INCLUDE):
+	print('[aContract.type/] [aContract.name/] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
+				[/let]
+			[/if]
+		[/for]
+	[/if]
+	[if (cond._then->first().dataResult.oclIsTypeOf(SpecialValue) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(Interval))]
+cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 : Then | cond._then) separator(', ')][if (th2.dataResult.oclIsKindOf(SpecialValue))][let spVal : SpecialValue = th2.dataResult.oclAsType(SpecialValue)][for (obj : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField))) separator(', ')][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]':{[if (spVal.specialType=SpecialType::MISSING)]'missing': ['['/][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::INVALID)]'invalid': ['['/][for (iv : ValueField | df.dataField.invalidValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::OUTLIER)]'outlier': True[/if][/let][/for]}[/let][/if][/for]}
+
+		[for (obj : Object | cond._in)]
+			[if (obj.oclIsKindOf(DataField))]
+				[let df : DataField = obj.oclAsType(DataField)]
+if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
+										filter_type=FilterType.INCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')

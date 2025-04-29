@@ -19,18 +19,18 @@ fi
 
 #sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin --yes
 
-docker build --no-cache -t jmnfgjh:awerw -f Dockerfile .
+docker build --no-cache -t ubuntu_22_04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/join_input_dataDictionary.csv "$(pwd)/data/"
+cp /home//join_input_dataDictionary.csv "$(pwd)/data/"
 
 
 
 
-docker run -it --rm --name asasas --network host --mount type=bind,source="$(pwd)/data",target=/pop/data jmnfgjh:awerw
+docker run -it --rm --name docker_join --network host --mount type=bind,source="$(pwd)/data",target=here/data ubuntu_22_04:latest
 
-docker rmi jmnfgjh:awerw
+docker rmi ubuntu_22_04:latest
 
 clear
 

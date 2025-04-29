@@ -3,5 +3,5 @@ import json
 import h5py
 import pyarrow
 				
-join_Name_with_City__input_dataDictionary=pd.read_csv('/pop/data/join_input_dataDictionary.csv', sep = ',')
-join_Name_with_City__input_dataDictionary.to_parquet('/pop/data/join_input_dataDictionary.parquet')
+join_Name_with_City__input_dataDictionary=pd.read_csv('here/data/join_input_dataDictionary.csv', sep = ',')
+join_Name_with_City__input_dataDictionary.to_parquet('here/data/join_input_dataDictionary.parquet')

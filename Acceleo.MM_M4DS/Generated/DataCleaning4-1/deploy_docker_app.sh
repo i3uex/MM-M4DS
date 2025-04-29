@@ -23,12 +23,12 @@ docker build --no-cache -t ubuntu_22_04:latest -f Dockerfile .
 
 clear
 
-cp /home/carlos/mathOperation_input_dataDictionary.csv "$(pwd)/data/"
+cp /home/mathOperation_input_dataDictionary.csv "$(pwd)/data/"
 
 
 
 
-docker run -it --rm --name docker41 --network host --mount type=bind,source="$(pwd)/data",target=/wf_val/data ubuntu_22_04:latest
+docker run -it --rm --name docker_dataCleaning --network host --mount type=bind,source="$(pwd)/data",target=/home/data ubuntu_22_04:latest
 
 docker rmi ubuntu_22_04:latest
 

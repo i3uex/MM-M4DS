@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
-WORKDIR ./wf_val
-ENV PYTHONPATH=./wf_val
+WORKDIR ./home
+ENV PYTHONPATH=./home
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget git && \
@@ -17,14 +17,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install h5py
 RUN pip install pyarrow
 
-COPY dataProcessing_Job_02_Data_Cleaning_Workflow4_1.py ./wf_val/workflows/
-COPY contracts_Job_02_Data_Cleaning_Workflow4_1.py ./wf_val/workflows/
-COPY transformations_Job_02_Data_Cleaning_Workflow4_1.py ./wf_val/workflows/
+COPY dataProcessing_Job_02_Data_Cleaning_Workflow4_1.py ./home/workflows/
+COPY contracts_Job_02_Data_Cleaning_Workflow4_1.py ./home/workflows/
+COPY transformations_Job_02_Data_Cleaning_Workflow4_1.py ./home/workflows/
 
-COPY fileFormatting.py ./wf_val/workflows/
+COPY fileFormatting.py ./home/workflows/
 
-COPY workflow_scripts.sh ./wf_val/workflow_scripts.sh
+COPY workflow_scripts.sh ./home/workflow_scripts.sh
 
-RUN chmod +x ./wf_val/workflow_scripts.sh
+RUN chmod +x ./home/workflow_scripts.sh
 
-CMD ["/bin/bash", "./wf_val/workflow_scripts.sh"]
+CMD ["/bin/bash", "./home/workflow_scripts.sh"]

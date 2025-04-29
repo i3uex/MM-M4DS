@@ -8,7 +8,7 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df=pd.read_parquet('/wf_val/data/mathOperation_input_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df=pd.read_parquet('/home/data/mathOperation_input_dataDictionary.parquet')
 
 	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_transformed=mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df.copy()
 	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_transformed=data_transformations.transform_math_operation(data_dictionary=mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_transformed,
@@ -16,8 +16,8 @@ def generateWorkflow():
 																firstOperand='Latitude', isFieldFirst=True,secondOperand='Altitude', isFieldSecond=True)
 	
 	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_transformed
-	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df.to_parquet('/wf_val/data/mathOperation_output_dataDictionary.parquet')
-	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=pd.read_parquet('/wf_val/data/mathOperation_output_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df.to_parquet('/home/data/mathOperation_output_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=pd.read_parquet('/home/data/mathOperation_output_dataDictionary.parquet')
 	
 
 set_logger("transformations")

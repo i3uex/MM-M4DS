@@ -11,10 +11,10 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	join_Name_with_City__input_dataDictionary_df=pd.read_parquet('/pop/data/join_input_dataDictionary.parquet')
+	join_Name_with_City__input_dataDictionary_df=pd.read_parquet('here/data/join_input_dataDictionary.parquet')
 
-	if os.path.exists('/pop/data/join_output_dataDictionary.parquet'):
-		join_Name_with_City__output_dataDictionary_df=pd.read_parquet('/pop/data/join_output_dataDictionary.parquet')
+	if os.path.exists('here/data/join_output_dataDictionary.parquet'):
+		join_Name_with_City__output_dataDictionary_df=pd.read_parquet('here/data/join_output_dataDictionary.parquet')
 
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=join_Name_with_City__input_dataDictionary_df,
 											data_dictionary_out=join_Name_with_City__output_dataDictionary_df,
