@@ -711,6 +711,9 @@
       in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"
       out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition
+        xsi:type="Library:DerivedFieldDef"
+        name="mathOperation_param_derived_field"/>
+    <parameterdefinition
         xsi:type="Library:MathOpDef"
         name="mathOperation_param_mathop">
       <operandDef

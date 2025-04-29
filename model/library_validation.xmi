@@ -307,6 +307,7 @@
     </outputPort>
   </dataprocessingdefinition>
   <dataprocessingdefinition xsi:type="Library:Transformation" name="mathOperation" in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:DerivedFieldDef" name="mathOperation_param_derived_field"/>
     <parameterdefinition xsi:type="Library:MathOpDef" name="mathOperation_param_mathop">
       <operandDef xsi:type="Library:FixValueDef" name="mathOperation_op_fix_value">
         <value name="mathOperation_op_fix_value_primitive"/>
