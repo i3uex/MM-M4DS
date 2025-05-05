@@ -875,7 +875,7 @@ else:
 					[/let]																																				[comment CLOSE assigns the variable to be of type DataField/]
 				[/for]
 			[/if]																																						[comment CLOSE checks that the input is a DataField/]
-			[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]
+			[if (cond._in->exists(dd | dd.oclIsTypeOf(DataDictionary)))]
 [generateCallConditionContractDataDictionary(cond, if_cond)/]
 			[/if]
 		[/if]																																							[comment CLOSE checks that belongOp_in is BELONG/]
@@ -956,6 +956,17 @@ else:
 					[/let]
 				[/if]
 			[/for]
+			[if (if_cond.dataCondition->first().oclIsKindOf(Field))]
+columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/] = ['['/][for (dde : DataDictionaryElement | if_cond.dataCondition) separator (', ')][if (dde.oclIsKindOf(Field))][let field : Field = dde.oclAsType(Field)]'[field.dataField.displayName/]'[/let][/if][/for][']'/]
+
+if contract_invariants.check_inv_math_operation(data_dictionary_in=[dd_out.dataDictionary._in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+						data_dictionary_out=[dd_out.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+						columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
+						belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if])):
+	print('[cond.type/] [cond.name/] VALIDATED')
+else:
+	print('[cond.type/] [cond.name/] NOT VALIDATED')
+			[/if]
 		[/let]
 	[/let]		
 [/for]
