@@ -12,7 +12,6 @@ def generateWorkflow():
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_contracts/data/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_contracts/data/missing_input_dataDictionary.parquet')
 
 	missing_values_imputeByDerivedValue_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', 
@@ -382,13 +381,13 @@ def generateWorkflow():
 	columns_list_rowFilterRange_init_span__INV_condition=['init_span']
 	left_margin_list_rowFilterRange_init_span__INV_condition=[-1000.0]
 	right_margin_list_rowFilterRange_init_span__INV_condition=[0.0]
-	closure_type_list_rowFilterRange_init_span__INV_condition=[closedClosed]
+	closure_type_list_rowFilterRange_init_span__INV_condition=[Closure.closedClosed]
 	
 	if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=rowFilterRange_init_span__input_dataDictionary_df,
 											data_dictionary_out=rowFilterRange_init_span__output_dataDictionary_df,
 											columns=columns_list_rowFilterRange_init_span__INV_condition,
-											left_margin_list=left_margin_list_rowFilterRange_init_span__INV_condition, right_margin=right_margin_list_rowFilterRange_init_span__INV_condition,
-											closure_type=closure_type_list_rowFilterRange_init_span__INV_condition, filter_type=FilterType.INCLUDE):
+											left_margin_list=left_margin_list_rowFilterRange_init_span__INV_condition, right_margin_list=right_margin_list_rowFilterRange_init_span__INV_condition,
+											closure_type_list=closure_type_list_rowFilterRange_init_span__INV_condition, filter_type=FilterType.INCLUDE):
 		print('INVARIANT rowFilterRange(init_span)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT rowFilterRange(init_span)_INV_condition NOT VALIDATED')
@@ -430,7 +429,7 @@ def generateWorkflow():
 	if contract_invariants.check_inv_filter_columns(data_dictionary_in=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df,
 							data_dictionary_out=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df,
 							columns=columns_list_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__INV_condition,
-							belong_op_out=Belong(0)):
+							belong_op=Belong(0)):
 		print('INVARIANT columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_condition NOT VALIDATED')
@@ -589,7 +588,8 @@ def generateWorkflow():
 	
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
-											belong_op_out=Belong(1), field_in='TERRITORY', field_out='TERRITORY'):
+											belong_op_in=Belong(1), belong_op_out=Belong(1),
+											field_in='TERRITORY', field_out='TERRITORY'):
 		print('INVARIANT INV_specialValue_condition_TERRITORY VALIDATED')
 	else:
 		print('INVARIANT INV_specialValue_condition_TERRITORY NOT VALIDATED')
@@ -598,7 +598,8 @@ def generateWorkflow():
 	
 	if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=stringToNumber_TERRITORY_Instate__input_dataDictionary_df,
 											data_dictionary_out=stringToNumber_TERRITORY_Instate__output_dataDictionary_df,
-											belong_op_out=Belong(1), field_in='Instate', field_out='TERRITORY'):
+											belong_op_in=Belong(1), belong_op_out=Belong(1),
+											field_in='Instate', field_out='TERRITORY'):
 		print('INVARIANT INV_specialValue_condition_Instate VALIDATED')
 	else:
 		print('INVARIANT INV_specialValue_condition_Instate NOT VALIDATED')

@@ -243,7 +243,6 @@ generateWorkflow()
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file/]
 	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
 		[/if]																						[comment CLOSE checks if it is a local file/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
 
 	[/for]																							[comment CLOSE read all the input datasets and store them/]
 [/if]																								[comment CLOSE checks whether it is the first data processing or not/]
@@ -308,7 +307,6 @@ generateWorkflow()
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
@@ -663,7 +661,6 @@ generateWorkflow()
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
 [/if]																															[comment CLOSE checks if there is a previous DataProcessingor not/]
@@ -881,7 +878,6 @@ generateWorkflow()
 [else]																							[comment OPEN checks if there is not an incoming link/]
 	[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
 	[/for]																						[comment CLOSE read all the input datasets and store them/]
 [/if]																							[comment CLOSE checks if there is an incoming link or not/]
 [if (pstep.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
@@ -930,7 +926,6 @@ generateWorkflow()
 	[for (dc : DataDictionary | ps.inputPort)]																													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]																							[comment OPEN checks if it is a local file and a container/]
 	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
 		[/if]																																					[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																																						[comment CLOSE read all the input datasets and store them/]
 [/if]																																							[comment CLOSE checks if there is an incoming link or not/]

@@ -10,7 +10,6 @@ def generateWorkflow():
 
 	#-----------------New DataProcessing-----------------
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df=pd.read_parquet('/wf_validation_contracts/data/missing_input_dataDictionary.parquet')
-	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.to_parquet('/wf_validation_contracts/data/missing_input_dataDictionary.parquet')
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.copy()
 	missing_values_list=[]
 	
