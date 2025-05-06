@@ -404,7 +404,7 @@
       out="//@dataprocessing.1/@outputPort.0/@datafield.0 //@dataprocessing.1/@outputPort.0/@datafield.1"
       name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)">
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary"
         out="//@dataprocessing.1/@outputPort.0">
       <datafield
@@ -680,7 +680,7 @@
       out="//@dataprocessing.2/@outputPort.0"
       name="imputeMissingByMean(avg_income, distance)">
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_input_dataDictionary"
         out="//@dataprocessing.2/@outputPort.0">
       <datafield
@@ -963,7 +963,7 @@
       out="//@dataprocessing.3/@outputPort.0/@datafield.0"
       name="imputeMissingByLinearInterpolation(satscore)">
     <inputPort
-        fileName="missing_input_dataDictionary.csv"
+        fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_input_dataDictionary"
         out="//@dataprocessing.3/@outputPort.0">
       <datafield
@@ -2376,7 +2376,7 @@
       <contract
           xsi:type="Contract:ValueRange"
           type="POSTCONDITION"
-          name="imputeOutlierByClosest(Instate)_POST_valueRange´"
+          name="imputeOutlierByClosest(Instate)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
@@ -3156,7 +3156,7 @@
       out="//@dataprocessing.11/@outputPort.0/@datafield.0"
       name="binner(TERRITORY)">
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(TERRITORY)_input_dataDictionary"
         out="//@dataprocessing.11/@outputPort.0">
       <datafield
@@ -3467,7 +3467,7 @@
       out="//@dataprocessing.12/@outputPort.0/@datafield.0"
       name="binner(satscore)">
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(satscore)_input_dataDictionary"
         out="//@dataprocessing.12/@outputPort.0">
       <datafield
@@ -3743,7 +3743,7 @@
       out="//@dataprocessing.13/@outputPort.0/@datafield.0"
       name="binner(avg_income)">
     <inputPort
-        fileName="numericOutliers_output_dataDictionary.csv"
+        fileName="numericBinner_output_dataDictionary.csv"
         name="binner(avg_income)_input_dataDictionary"
         out="//@dataprocessing.13/@outputPort.0">
       <datafield
@@ -4025,9 +4025,35 @@
     <storage
         xsi:type="Environment:LocalFolder"
         storageName="dataset1"
-        folderPath="/home/carlos/datasets">
+        folderPath="/home/carlosbc24/PycharmProjects/knime2model_MD4DSP/input_KNIME_workflows/paper_workflows/Model_data_set_with_metanode/knime_dataDictionaries">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.1/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.2/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.3/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.4/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.5/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.6/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.7/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.8/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.9/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.10/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.11/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.12/@inputPort.0"/>
+      <file
+          dataDictionary="//@dataprocessing.13/@inputPort.0"/>
     </storage>
     <developmentTool
         version="3.11"/>
