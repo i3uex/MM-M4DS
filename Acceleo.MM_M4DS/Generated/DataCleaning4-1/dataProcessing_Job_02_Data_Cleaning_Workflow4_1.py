@@ -10,7 +10,7 @@ from functions.PMML import PMMLModel
 
 def generateWorkflow():
 	#-----------------New DataProcessing-----------------
-	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df=pd.read_parquet('/wf_val/data/mathOperation_input_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df=pd.read_parquet('/home/data/mathOperation_input_dataDictionary.parquet')
 
 	missing_values_mathOperation_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_df, field='Latitude', 
@@ -26,8 +26,8 @@ def generateWorkflow():
 																firstOperand='Latitude', isFieldFirst=True,secondOperand='Altitude', isFieldSecond=True)
 	
 	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=mathOperation_Difference_in_Latitude_Altitude__input_dataDictionary_transformed
-	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df.to_parquet('/wf_val/data/mathOperation_output_dataDictionary.parquet')
-	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=pd.read_parquet('/wf_val/data/mathOperation_output_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df.to_parquet('/home/data/mathOperation_output_dataDictionary.parquet')
+	mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df=pd.read_parquet('/home/data/mathOperation_output_dataDictionary.parquet')
 	
 	missing_values_mathOperation_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=mathOperation_Difference_in_Latitude_Altitude__output_dataDictionary_df, field='Difference in Latitude/Altitude', 
@@ -45,6 +45,8 @@ def generateWorkflow():
 		print('INVARIANT mathOperation(Difference in Latitude/Altitude)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT mathOperation(Difference in Latitude/Altitude)_INV_condition NOT VALIDATED')
+	
+	
 	
 	
 	

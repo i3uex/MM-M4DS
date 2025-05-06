@@ -11,6 +11,8 @@ from functions.PMML import PMMLModel
 def generateWorkflow():
 
 	#-----------------New DataProcessing-----------------
+	binner_native_country__input_dataDictionary_df=pd.read_parquet('home/data/binner_input_dataDictionary.parquet')
+	binner_native_country__input_dataDictionary_df.to_parquet('home/data/binner_input_dataDictionary.parquet')
 
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_native_country__input_dataDictionary_df,
 	                                	closure_type=Closure(3), belong_op=Belong(0), field='native-country'):
@@ -24,6 +26,8 @@ def generateWorkflow():
 																  field_in = 'native-country', field_out = 'prediction')
 	
 	binner_native_country__output_dataDictionary_df=binner_native_country__input_dataDictionary_transformed
+	binner_native_country__output_dataDictionary_df.to_parquet('home/data/binner_output_dataDictionary.parquet')
+	binner_native_country__output_dataDictionary_df=pd.read_parquet('home/data/binner_output_dataDictionary.parquet')
 	binner_native_country__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_native_country__input_dataDictionary_transformed,
 																  left_margin=-1000000.0, right_margin=1000000.0,
 																  closure_type=Closure(0),
@@ -33,6 +37,8 @@ def generateWorkflow():
 																  field_out = 'prediction')
 	
 	binner_native_country__output_dataDictionary_df=binner_native_country__input_dataDictionary_transformed
+	binner_native_country__output_dataDictionary_df.to_parquet('home/data/binner_output_dataDictionary.parquet')
+	binner_native_country__output_dataDictionary_df=pd.read_parquet('home/data/binner_output_dataDictionary.parquet')
 	binner_native_country__input_dataDictionary_transformed=data_transformations.transform_interval_fix_value(data_dictionary=binner_native_country__input_dataDictionary_transformed,
 																  left_margin=40.0, right_margin=1000000.0,
 																  closure_type=Closure(2),
@@ -42,6 +48,8 @@ def generateWorkflow():
 																  field_out = 'prediction')
 	
 	binner_native_country__output_dataDictionary_df=binner_native_country__input_dataDictionary_transformed
+	binner_native_country__output_dataDictionary_df.to_parquet('home/data/binner_output_dataDictionary.parquet')
+	binner_native_country__output_dataDictionary_df=pd.read_parquet('home/data/binner_output_dataDictionary.parquet')
 	
 	if contract_pre_post.check_interval_range_float(left_margin=0.0, right_margin=1000.0, data_dictionary=binner_native_country__output_dataDictionary_df,
 	                                	closure_type=Closure(0), belong_op=Belong(1), field='prediction'):
@@ -61,6 +69,7 @@ def generateWorkflow():
 	else:
 		print('INVARIANT binner(native-country)_INV_condition NOT VALIDATED')
 	
+	
 	if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=binner_native_country__input_dataDictionary_df,
 											data_dictionary_out=binner_native_country__output_dataDictionary_df,
 											left_margin=40.0, right_margin=1000000.0,
@@ -75,7 +84,9 @@ def generateWorkflow():
 	
 	
 	
+	
 	#-----------------New DataProcessing-----------------
+	mapping_native_country__input_dataDictionary_df=pd.read_parquet('home/data/binner_output_dataDictionary.parquet')
 
 	if contract_pre_post.check_fix_value_range(value='-', data_dictionary=mapping_native_country__input_dataDictionary_df, belong_op=Belong(0), field='native-country',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -96,6 +107,8 @@ def generateWorkflow():
 																  map_operation_list = map_operation_list,
 																  field_in = 'native-country', field_out = 'native-country')
 	
+	mapping_native_country__output_dataDictionary_df.to_parquet('home/data/mapping_output_dataDictionary.parquet')
+	mapping_native_country__output_dataDictionary_df=pd.read_parquet('home/data/mapping_output_dataDictionary.parquet')
 	
 	if contract_pre_post.check_fix_value_range(value='-', data_dictionary=mapping_native_country__output_dataDictionary_df, belong_op=Belong(1), field='native-country',
 									quant_abs=None, quant_rel=None, quant_op=None):
@@ -104,23 +117,23 @@ def generateWorkflow():
 		print('POSTCONDITION mapping(native-country)_POST_valueRange NOT VALIDATED')
 	
 	
-	input_values_list_def_INV_condition=['-']
-	output_values_list_def_INV_condition=[' ']
+	input_values_list_mapping_INV_condition=['-']
+	output_values_list_mapping_INV_condition=[' ']
 	
-	data_type_input_list_def_INV_condition=[DataType(0)]
-	data_type_output_list_def_INV_condition=[DataType(0)]
+	data_type_input_list_mapping_INV_condition=[DataType(0)]
+	data_type_output_list_mapping_INV_condition=[DataType(0)]
 	
-	is_substring_list_def_INV_condition=[False]
+	is_substring_list_mapping_INV_condition=[False]
 	
 	if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=mapping_native_country__input_dataDictionary_df,
 											data_dictionary_out=mapping_native_country__output_dataDictionary_df,
-											input_values_list=input_values_list_def_INV_condition, 
-											output_values_list=output_values_list_def_INV_condition,
-											is_substring_list=is_substring_list_def_INV_condition,
+											input_values_list=input_values_list_mapping_INV_condition, 
+											output_values_list=output_values_list_mapping_INV_condition,
+											is_substring_list=is_substring_list_mapping_INV_condition,
 											belong_op_in=Belong(0),
 											belong_op_out=Belong(0),
-											data_type_input_list=data_type_input_list_def_INV_condition,
-											data_type_output_list=data_type_output_list_def_INV_condition,
+											data_type_input_list=data_type_input_list_mapping_INV_condition,
+											data_type_output_list=data_type_output_list_mapping_INV_condition,
 											field_in='native-country', field_out='native-country'):
 		print('INVARIANT mapping(native-country)_INV_condition VALIDATED')
 	else:
@@ -129,6 +142,7 @@ def generateWorkflow():
 	
 	
 	#-----------------New DataProcessing-----------------
+	mathOperation_Age_of_birth__input_dataDictionary_df=pd.read_parquet('home/data/mapping_output_dataDictionary.parquet')
 
 	missing_values_mathOperation_PRE_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(0), data_dictionary=mathOperation_Age_of_birth__input_dataDictionary_df, field='age', 
@@ -141,9 +155,11 @@ def generateWorkflow():
 	mathOperation_Age_of_birth__input_dataDictionary_transformed=mathOperation_Age_of_birth__input_dataDictionary_df.copy()
 	mathOperation_Age_of_birth__input_dataDictionary_transformed=data_transformations.transform_math_operation(data_dictionary=mathOperation_Age_of_birth__input_dataDictionary_transformed,
 																math_op=MathOperator(1), field_out='Age-of-birth',
-																)
+																firstOperand='1994', isFieldFirst=False,secondOperand='age', isFieldSecond=True)
 	
 	mathOperation_Age_of_birth__output_dataDictionary_df=mathOperation_Age_of_birth__input_dataDictionary_transformed
+	mathOperation_Age_of_birth__output_dataDictionary_df.to_parquet('home/data/mathOperation_output_dataDictionary.parquet')
+	mathOperation_Age_of_birth__output_dataDictionary_df=pd.read_parquet('home/data/mathOperation_output_dataDictionary.parquet')
 	
 	missing_values_mathOperation_POST_valueRange=[]
 	if contract_pre_post.check_missing_range(belong_op=Belong(1), data_dictionary=mathOperation_Age_of_birth__output_dataDictionary_df, field='Age-of-birth', 
@@ -156,11 +172,12 @@ def generateWorkflow():
 	if contract_invariants.check_inv_math_operation(data_dictionary_in=mathOperation_Age_of_birth__input_dataDictionary_df,
 											data_dictionary_out=mathOperation_Age_of_birth__output_dataDictionary_df,
 											math_op=MathOperator(1),
-											
+											firstOperand='1994', isFieldFirst=False,secondOperand='age', isFieldSecond=True, 
 											belong_op_out=Belong(0), field_in='Age-of-birth', field_out='Age-of-birth'):
 		print('INVARIANT mathOperation(Age-of-birth)_INV_condition VALIDATED')
 	else:
 		print('INVARIANT mathOperation(Age-of-birth)_INV_condition NOT VALIDATED')
+	
 	
 	
 	
