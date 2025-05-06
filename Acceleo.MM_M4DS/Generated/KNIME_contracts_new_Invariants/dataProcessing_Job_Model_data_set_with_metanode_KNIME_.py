@@ -383,7 +383,7 @@ def generateWorkflow():
 	left_margin_list_rowFilterRange_init_span__INV_condition=[-1000.0]
 	right_margin_list_rowFilterRange_init_span__INV_condition=[0.0]
 	closure_type_list_rowFilterRange_init_span__INV_condition=[closedClosed]
-			
+	
 	if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=rowFilterRange_init_span__input_dataDictionary_df,
 											data_dictionary_out=rowFilterRange_init_span__output_dataDictionary_df,
 											columns=columns_list_rowFilterRange_init_span__INV_condition,
@@ -427,7 +427,7 @@ def generateWorkflow():
 	
 	columns_list_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__INV_condition = ['TRAVEL_INIT_CNTCTS', 'REFERRAL_CNTCTS', 'telecq', 'interest', 'stuemail', 'CONTACT_CODE1']
 	
-	if contract_invariants.check_inv_math_operation(data_dictionary_in=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df,
+	if contract_invariants.check_inv_filter_columns(data_dictionary_in=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df,
 							data_dictionary_out=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__output_dataDictionary_df,
 							columns=columns_list_columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__INV_condition,
 							belong_op_out=Belong(0)):

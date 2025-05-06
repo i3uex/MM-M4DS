@@ -857,7 +857,7 @@ else:
 												[let jointhen : Join = th.dataResult.oclAsType(Join)]
 dictionary_[th.thenDefinition.name/]={[for (operand : Operand | jointhen.operand)][if (operand.previous_operand=null)][if (operand.oclIsKindOf(OpField))][let field : OpField=operand.oclAsType(OpField)]'[field.datafield.dataField.displayName/]': True[/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)]'[fv.value/]': False[/let][/if][if (operand.next_operand<>null)][joinOperands(operand.next_operand)/][/if][/if][/for]}
 													[if(aContract.out->exists(df | df.oclIsTypeOf(DataField)))]
-if contract_invariants.check_inv_cast_type(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+if contract_invariants.check_inv_join(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 							data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 							dictionary=dictionary_[th.thenDefinition.name/],
 							field_in='[df.dataField.displayName/]', field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]'):
@@ -886,7 +886,8 @@ columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Objec
 left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.leftMargin/][/let][/if][/let][/if][/for][']'/]
 right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.rightMargin/][/let][/if][/let][/if][/for][']'/]
 closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (then_cond_list : Then | cond._then) separator(', ')][if (then_cond_list.dataResult.oclIsKindOf(RowValue))][let value : RowValue = then_cond_list.dataResult.oclAsType(RowValue)][if (value.oclIsTypeOf(Interval))][let int : Interval = value.oclAsType(Interval)][int.closureType/][/let][/if][/let][/if][/for][']'/]
-		
+[comment]The code below generates the call to invariants of type filterRowRange[/comment]
+
 		[for (obj : Object | cond._in)]
 			[if (obj.oclIsKindOf(DataField))]
 				[let df : DataField = obj.oclAsType(DataField)]
@@ -904,6 +905,7 @@ else:
 	[/if]
 	[if (cond._then->first().dataResult.oclIsTypeOf(SpecialValue) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(Interval))]
 cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 : Then | cond._then) separator(', ')][if (th2.dataResult.oclIsKindOf(SpecialValue))][let spVal : SpecialValue = th2.dataResult.oclAsType(SpecialValue)][for (obj : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField))) separator(', ')][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]':{[if (spVal.specialType=SpecialType::MISSING)]'missing': ['['/][for (mv : ValueField | df.dataField.missingValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::INVALID)]'invalid': ['['/][for (iv : ValueField | df.dataField.invalidValues) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[iv.value/]'[else][iv.value/][/if][/for][']'/][elseif(spVal.specialType=SpecialType::OUTLIER)]'outlier': True[/if][/let][/for]}[/let][/if][/for]}
+[comment]The code below generates the call to invariants of type filterRowSpecialValue[/comment]
 
 		[for (obj : Object | cond._in)]
 			[if (obj.oclIsKindOf(DataField))]
@@ -958,8 +960,9 @@ else:
 			[/for]
 			[if (if_cond.dataCondition->first().oclIsKindOf(Field))]
 columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/] = ['['/][for (dde : DataDictionaryElement | if_cond.dataCondition) separator (', ')][if (dde.oclIsKindOf(Field))][let field : Field = dde.oclAsType(Field)]'[field.dataField.displayName/]'[/let][/if][/for][']'/]
+[comment]The code below generates the call to invariants of type filterColumns[/comment]
 
-if contract_invariants.check_inv_math_operation(data_dictionary_in=[dd_out.dataDictionary._in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+if contract_invariants.check_inv_filter_columns(data_dictionary_in=[dd_out.dataDictionary._in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 						data_dictionary_out=[dd_out.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 						columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 						belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if])):
