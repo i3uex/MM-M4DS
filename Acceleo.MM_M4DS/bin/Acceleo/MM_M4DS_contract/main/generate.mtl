@@ -883,7 +883,7 @@ else:
 		[/if]																																							[comment CLOSE checks that belongOp_in is BELONG/]
 	[/for]																																								[comment CLOSE traverse all the If class in the contract/]
 
-	[if (cond._then->first().dataResult.oclIsTypeOf(Interval) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(FixValue) and aContract.eContainer(DataProcessing).dataProcessingDefinition.name='rowFilterPrimitive')]
+	[if (cond._then->first().dataResult.oclIsTypeOf(FixValue) and cond._then->first()._if.dataCondition->first().oclIsTypeOf(Interval) and aContract.eContainer(DataProcessing).dataProcessingDefinition.name='rowFilterPrimitive')]
 columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (obj : Object | cond._in) separator(', ')][if (obj.oclIsKindOf(DataField))][let df : DataField = obj.oclAsType(DataField)]'[df.dataField.displayName/]'[/let][/if][/for][']'/]
 filter_fix_value_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/]=['['/][for (dde : DataDictionaryElement | cond._then.dataResult)][if (dde.oclIsKindOf(FixValue))][let fv : FixValue = dde.oclAsType(FixValue)][if (fv.dataType=DataType::Boolean or fv.dataType=DataType::Double or fv.dataType=DataType::Float or fv.dataType=DataType::Integer)][fv.value/][elseif (fv.dataType=DataType::Date or fv.dataType=DataType::DateTime or fv.dataType=DataType::String)]'[fv.value/]'[/if][/let][/if][/for][']'/]
 [comment]The code below generates the call to invariants of type filterRowPrimitive[/comment]
