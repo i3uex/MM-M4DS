@@ -895,7 +895,7 @@ if contract_invariants.check_inv_filter_rows_primitive(data_dictionary_in=[df.da
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										filter_fix_value_list=filter_fix_value_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.INCLUDE):
+										filter_type=FilterType.EXCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -917,7 +917,7 @@ if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=[df.dataFi
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										left_margin_list=left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], right_margin_list=right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										closure_type_list=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.INCLUDE):
+										closure_type_list=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.EXCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -935,7 +935,7 @@ cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 
 if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.INCLUDE):
+										filter_type=FilterType.EXCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
