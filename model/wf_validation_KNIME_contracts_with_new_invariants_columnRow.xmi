@@ -1259,6 +1259,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition
               xsi:type="Contract:Interval"
+              leftMargin="-10000.0"
               closureType="closedClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
@@ -1266,11 +1267,13 @@
         </if>
         <then
             if="//@dataprocessing.4/@contract.2/@contract/@if.0"
-            name="rowFilterRange(init_span)_INV_THEN">
+            name="rowFilterRange(init_span)_INV_THEN"
+            belongOp="NOTBELONG">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:Interval"
+              leftMargin="-10000.0"
               closureType="closedClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
@@ -1365,7 +1368,7 @@
     <parameter
         xsi:type="Workflow:FieldRange"
         name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_param_field"
-        dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1">
+        dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1 //@dataprocessing.5/@inputPort.0/@datafield.2 //@dataprocessing.5/@inputPort.0/@datafield.3 //@dataprocessing.5/@inputPort.0/@datafield.4 //@dataprocessing.5/@inputPort.0/@datafield.5">
       <fieldDef
           href="library_validation.xmi#//@dataprocessingdefinition.3/@parameterdefinition.0"/>
     </parameter>
@@ -1394,6 +1397,8 @@
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
         <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
+        <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
       </contract>
     </contract>
     <contract
@@ -1414,15 +1419,17 @@
         <fieldRangeDef
             href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.1/@contractDefinition"/>
         <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.0"/>
+        <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.1"/>
+        <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
+        <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
         <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
         <field
-            dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
-        <field
-            dataField="//@dataprocessing.5/@inputPort.0/@datafield.0"/>
-        <field
-            dataField="//@dataprocessing.5/@inputPort.0/@datafield.1"/>
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
       </contract>
     </contract>
     <contract
@@ -1463,18 +1470,17 @@
               dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
           <dataCondition
               xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
           <dataCondition
               xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
           <dataCondition
               xsi:type="Contract:Field"
               dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
         </if>
         <then
             if="//@dataprocessing.5/@contract.2/@contract/@if.0"
-            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_THEN"
-            belongOp="NOTBELONG">
+            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_THEN">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
