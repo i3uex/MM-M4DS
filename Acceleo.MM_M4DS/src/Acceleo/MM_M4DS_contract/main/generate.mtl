@@ -596,7 +596,7 @@ else:
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										field_in='[df.dataField.displayName/]', field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]'):
+										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
