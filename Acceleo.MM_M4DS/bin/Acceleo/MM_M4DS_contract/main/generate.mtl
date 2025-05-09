@@ -933,7 +933,7 @@ cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 
 			[if (obj.oclIsKindOf(DataField))]
 				[let df : DataField = obj.oclAsType(DataField)]
 if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										data_dictionary_out=[df.dataField.out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										filter_type=FilterType.EXCLUDE):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
