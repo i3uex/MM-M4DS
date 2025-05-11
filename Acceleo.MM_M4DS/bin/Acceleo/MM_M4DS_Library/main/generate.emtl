@@ -2,16 +2,16 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
   <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_Library::main::generate" startHeaderPosition="83" endHeaderPosition="186">
     <documentation xsi:type="mtl:ModuleDocumentation">
-      <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
+      <body startPosition="32" endPosition="80" value="&#xD;&#xA;The documentation of the module generate.&#xD;&#xA;&#xD;&#xA;"/>
     </documentation>
     <input>
       <takesTypesFrom href="http://www.example.org/Library#/"/>
     </input>
-    <imports href="../../MM_M4DS_Workflow/main/generate.emtl#/0"/>
+    <imports href="platform:/resource/Acceleo.MM_M4DS/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateLibrary" visibility="Public" main="true">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="193" endPosition="269" value="&#xA;The documentation of the template generateElement.&#xA;@param aLibrary&#xA;&#xA;"/>
+        <body startPosition="193" endPosition="269" value="&#xD;&#xA;The documentation of the template generateElement.&#xD;&#xA;@param aLibrary&#xD;&#xA;&#xD;&#xA;"/>
         <parametersDocumentation name="aLibrary">
           <body value=""/>
         </parametersDocumentation>

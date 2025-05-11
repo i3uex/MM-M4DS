@@ -15,7 +15,7 @@
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if])):
+							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]), origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] call returned TRUE')
 else:
 	print('[aContract.type/] call returned FALSE')
@@ -31,7 +31,7 @@ else:
 									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks that the quantity is of type Absolute/]
 										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the variable to be of type Absolute/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
-								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -39,7 +39,7 @@ else:
 									[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks that the quantity is of type Percent/]
 										[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the variable to be of type Percent/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
-								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -47,7 +47,7 @@ else:
 									[/if]																				[comment CLOSE checks that the quantity is of type Absolute or Percent/]
 								[else]																					[comment OPEN checks that the quantity not null (there are not operators or quants)/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -56,7 +56,7 @@ else:
 						[elseif (v.oclIsTypeOf(Interval))]																[comment OPEN checks that the variable is of type Interval/]
 							[let inter : Interval = v.oclAsType(Interval)]												[comment OPEN assigns the variable to be of type Interval/]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
-                                	closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]'):
+                                	closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]', origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -70,7 +70,7 @@ missing_values_[vr.valueRangeDef.name/]=['['/][for (mv : ValueField | df.dataFie
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be of type AbsoluteValue/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -79,7 +79,7 @@ else:
 											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be of type Percent/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -91,7 +91,7 @@ invalid_values_[vr.valueRangeDef.name/]=['['/][for (mv : ValueField | df.dataFie
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be of type AbsoluteValue/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -100,7 +100,7 @@ else:
 											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be of type Percent/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -110,7 +110,7 @@ else:
 										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks that the quantity is AbsoluteValue/]
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be of type AbsoluteValue/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -118,7 +118,7 @@ else:
 										[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks that the quantity is Percent/]
 											[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be of type Percent/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -130,7 +130,7 @@ else:
 missing_values_[vr.valueRangeDef.name/]=['['/][for (mv : ValueField | df.dataField.missingValues->asOrderedSet()) separator(', ')][if (df.dataField.dataType=DataType::String or df.dataField.dataType=DataType::Time or df.dataField.dataType=DataType::DateTime)]'[mv.value/]'[else][mv.value/][/if][/for][']'/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -138,13 +138,13 @@ else:
 invalid_values_[vr.valueRangeDef.name/]=['['/][for (mv : ValueField | df.dataField.invalidValues->asOrderedSet()) separator(', ')][mv.value/][/for][']'/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 									[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks that the SpecialType is OUTLIER/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.dataField.displayName/]', 
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
