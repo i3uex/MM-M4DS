@@ -178,7 +178,7 @@ else:
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if])):
+							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -188,7 +188,7 @@ else:
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if])):
+							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -207,7 +207,7 @@ else:
 										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -215,7 +215,7 @@ else:
 										[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the quantity is a Percent/]
 											[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -223,7 +223,7 @@ else:
 										[/if]																				[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
 									[else]																					[comment OPEN checks if the quantity is null/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -232,7 +232,7 @@ else:
 							[elseif (v.oclIsTypeOf(Interval))]																[comment OPEN checks if the parameter is an interval/]
 								[let inter : Interval = v.oclAsType(Interval)]												[comment OPEN assigns the variable to be an interval/]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
+                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -246,7 +246,7 @@ missing_values_[vr.valueRangeDef.name/]=None
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -255,7 +255,7 @@ else:
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -267,7 +267,7 @@ invalid_values_[vr.valueRangeDef.name/]=None
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -276,7 +276,7 @@ else:
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -286,7 +286,7 @@ else:
 											[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the variable to be an AbsoluteValue/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -294,7 +294,7 @@ else:
 											[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the variable to be a Percent/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -306,7 +306,7 @@ else:
 missing_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -314,13 +314,13 @@ else:
 invalid_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 										[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialType is OUTLIER/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -339,7 +339,7 @@ else:
 										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -347,7 +347,7 @@ else:
 										[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the parameter is a Percent/]
 											[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if])):
+								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -355,7 +355,7 @@ else:
 										[/if]																				[comment CLOSE checks if the parameter is a Percent/]
 									[else]																					[comment OPEN checks if the quantity is null/]
 if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -364,7 +364,7 @@ else:
 							[elseif (v.oclIsTypeOf(Interval))]																[comment OPEN checks if the parameter is an Interval/]
 								[let inter : Interval = v.oclAsType(Interval)]												[comment OPEN assigns the parameter to be an Interval/]
 if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/], right_margin=[inter.rightMargin/], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
+                               closure_type=Closure([if (inter.closureType=ClosureType::openOpen)]0[elseif (inter.closureType=ClosureType::openClosed)]1[elseif (inter.closureType=ClosureType::closedOpen)]2[elseif (inter.closureType=ClosureType::closedClosed)]3[/if]), belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -378,7 +378,7 @@ missing_values_[vr.valueRangeDef.name/]=None
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -387,7 +387,7 @@ else:
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -399,7 +399,7 @@ invalid_values_[vr.valueRangeDef.name/]=None
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -408,7 +408,7 @@ else:
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -418,7 +418,7 @@ else:
 											[if(v.quantity.oclIsTypeOf(AbsoluteValue))]										[comment OPEN checks if the quantity is an AbsoluteValue/]
 												[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]				[comment OPEN assigns the parameter to be an AbsoluteValue/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/]):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_abs=[av.value/], origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -426,7 +426,7 @@ else:
 											[elseif (v.quantity.oclIsTypeOf(Percent))]										[comment OPEN checks if the quantity is a Percent/]
 												[let per : Percent = v.quantity.oclAsType(Percent)]							[comment OPEN assigns the parameter to be a Percent/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100):
+								quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), quant_rel=[per.percent/]/100, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -438,7 +438,7 @@ else:
 missing_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_missing_range(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								missing_values=missing_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -446,13 +446,13 @@ else:
 invalid_values_[vr.valueRangeDef.name/]=None
 if contract_pre_post.check_invalid_values(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
 								invalid_values=invalid_values_[vr.valueRangeDef.name/],
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
 										[elseif (sv.specialType=SpecialType::OUTLIER)]										[comment OPEN checks if the SpecialValue is OUTLIER/]
 if contract_pre_post.check_outliers(belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, field=None, 
-								quant_abs=None, quant_rel=None, quant_op=None):
+								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -503,7 +503,7 @@ if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=[df.data
 										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[cond.conditionDef.name/],
 										data_type_output_list=data_type_output_list_[cond.conditionDef.name/],
-										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -544,7 +544,7 @@ if contract_invariants.check_inv_fix_value_fix_value(data_dictionary_in=[dd_in.d
 										belong_op_out=Belong([if (firstIf._then.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_input_list=data_type_input_list_[cond.conditionDef.name/],
 										data_type_output_list=data_type_output_list_[cond.conditionDef.name/],
-										field_in=None, field_out=None):
+										field_in=None, field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -596,7 +596,7 @@ else:
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -614,7 +614,7 @@ else:
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[dd_in.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[dd_in.dataDictionary.out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										field_in=None, field_out=None):
+										field_in=None, field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -645,7 +645,7 @@ if contract_invariants.check_inv_math_operation(data_dictionary_in=[df.dataField
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										[if (mathOp.mathOp=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.mathOp=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.mathOp=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.mathOp=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if],
 										[for (operand : Operand | mathOp.operand)][if (operand.next_operand<>null)][if (operand.oclIsKindOf(OpField))][let fop : OpField = operand.oclAsType(OpField)]firstOperand='[fop.datafield.dataField.displayName/]', isFieldFirst=True, [/let][else][let fop : FixValue = operand.oclAsType(FixValue)]firstOperand='[fop.value/]', isFieldFirst=False,[/let][/if][if (operand.next_operand.oclIsKindOf(OpField))][let sop : OpField = operand.next_operand.oclAsType(OpField)]secondOperand='[sop.datafield.dataField.displayName/]', isFieldSecond=True, [/let][else][let sop : FixValue = operand.next_operand.oclAsType(FixValue)]secondOperand='[sop.value/]', isFieldSecond=False,[/let][/if][/if][/for]
-										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.displayName/]'):
+										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in='[df.dataField.displayName/]', field_out='[df.dataField.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -678,7 +678,7 @@ if contract_invariants.check_inv_fix_value_derived_value(data_dictionary_in=[df.
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -695,7 +695,7 @@ if contract_invariants.check_inv_fix_value_num_op(data_dictionary_in=[df.dataFie
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -717,7 +717,7 @@ if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=[df.dataF
 										fix_value_output=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_output=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -734,7 +734,7 @@ if contract_invariants.check_inv_interval_derived_value(data_dictionary_in=[df.d
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -751,7 +751,7 @@ if contract_invariants.check_inv_interval_num_op(data_dictionary_in=[df.dataFiel
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -779,7 +779,7 @@ if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=[df.
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							data_type_output=[if (fixVal.dataType=DataType::String)]DataType(0)[elseif (fixVal.dataType=DataType::Time)]DataType(1)[elseif (fixVal.dataType=DataType::Integer)]DataType(2)[elseif (fixVal.dataType=DataType::DateTime)]DataType(3)[elseif (fixVal.dataType=DataType::Boolean)]DataType(4)[elseif (fixVal.dataType=DataType::Double)]DataType(5)[elseif (fixVal.dataType=DataType::Float)]DataType(6)[else]None)[/if],
 							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[cond.conditionDef.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[cond.conditionDef.name/][else]None[/if], 
-							axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+							axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -801,7 +801,7 @@ if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 							derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[cond.conditionDef.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[cond.conditionDef.name/][else]None[/if], axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+							missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[cond.conditionDef.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[cond.conditionDef.name/][else]None[/if], axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -823,7 +823,7 @@ if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=[df.dat
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[cond.conditionDef.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[cond.conditionDef.name/][else]None[/if], axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]'):
+										missing_values=[if (sv.specialType=SpecialType::MISSING)]missing_values_[cond.conditionDef.name/][elseif (sv.specialType=SpecialType::INVALID)]invalid_values_[cond.conditionDef.name/][else]None[/if], axis_param=0, field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -895,7 +895,7 @@ if contract_invariants.check_inv_filter_rows_primitive(data_dictionary_in=[df.da
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										filter_fix_value_list=filter_fix_value_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.EXCLUDE):
+										filter_type=FilterType.[if (cond.eContainer(DataProcessing).parameter->first().oclIsKindOf(FilterValue))][let fv : FilterValue = cond.eContainer(DataProcessing).parameter->first().oclAsType(FilterValue)][fv.filterType/][/let][/if]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -917,7 +917,8 @@ if contract_invariants.check_inv_filter_rows_range(data_dictionary_in=[df.dataFi
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
 										left_margin_list=left_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], right_margin_list=right_margin_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										closure_type_list=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/], filter_type=FilterType.EXCLUDE):
+										closure_type_list=closure_type_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
+										filter_type=FilterType.[if (cond.eContainer(DataProcessing).parameter->first().oclIsKindOf(FilterValue))][let fv : FilterValue = cond.eContainer(DataProcessing).parameter->first().oclAsType(FilterValue)][fv.filterType/][/let][/if]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -935,7 +936,7 @@ cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/]={[for (th2 
 if contract_invariants.check_inv_filter_rows_special_values(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										cols_special_type_values=cols_special_type_values_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-										filter_type=FilterType.EXCLUDE):
+										filter_type=FilterType.[if (cond.eContainer(DataProcessing).parameter->first().oclIsKindOf(FilterValue))][let fv : FilterValue = cond.eContainer(DataProcessing).parameter->first().oclAsType(FilterValue)][fv.filterType/][/let][/if]):
 	print('[aContract.type/] [aContract.name/] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.name/] NOT VALIDATED')
@@ -968,7 +969,7 @@ if contract_invariants.check_inv_math_operation(data_dictionary_in=[dd_out.dataD
 						data_dictionary_out=[dd_out.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 						[if (mathOp.mathOp=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.mathOp=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.mathOp=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.mathOp=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if],
 						[for (operand : Operand | mathOp.operand)][if (operand.next_operand<>null)][if (operand.oclIsKindOf(OpField))][let fop : OpField = operand.oclAsType(OpField)]firstOperand='[fop.datafield.dataField.displayName/]', isFieldFirst=True, [/let][else][let fop : FixValue = operand.oclAsType(FixValue)]firstOperand='[fop.value/]', isFieldFirst=False,[/let][/if][if (operand.next_operand.oclIsKindOf(OpField))][let sop : OpField = operand.next_operand.oclAsType(OpField)]secondOperand='[sop.datafield.dataField.displayName/]', isFieldSecond=True, [/let][else][let sop : FixValue = operand.next_operand.oclAsType(FixValue)]secondOperand='[sop.value/]', isFieldSecond=False,[/let][/if][/if][/for]
-						belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None):
+						belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -987,7 +988,7 @@ columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/] = ['['/][for (dde : Dat
 if contract_invariants.check_inv_filter_columns(data_dictionary_in=[dd_out.dataDictionary._in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 						data_dictionary_out=[dd_out.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 						columns=columns_list_[cond.name.replaceAll('[(),-/\\s]+', '_')/],
-						belong_op=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if])):
+						belong_op=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]), origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1014,7 +1015,7 @@ if contract_invariants.check_inv_fix_value_derived_value(data_dictionary_in=[dd_
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field_in=None, field_out=None):
+										axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1035,7 +1036,7 @@ if contract_invariants.check_inv_fix_value_num_op(data_dictionary_in=[dd_in.data
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field_in=None, field_out=None):
+										axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1061,7 +1062,7 @@ if contract_invariants.check_inv_interval_fix_value(data_dictionary_in=[dd_in.da
 										fix_value_output=[if (fvt.dataType=DataType::String or fvt.dataType=DataType::Time or fvt.dataType=DataType::DateTime)]'[fvt.value/]'[else][fvt.value/][/if],
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										data_type_output=[if (fvt.dataType=DataType::String)]DataType(0)[elseif (fvt.dataType=DataType::Time)]DataType(1)[elseif (fvt.dataType=DataType::Integer)]DataType(2)[elseif (fvt.dataType=DataType::DateTime)]DataType(3)[elseif (fvt.dataType=DataType::Boolean)]DataType(4)[elseif (fvt.dataType=DataType::Double)]DataType(5)[elseif (fvt.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-										field_in=None, field_out=None):
+										field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1082,7 +1083,7 @@ if contract_invariants.check_inv_interval_derived_value(data_dictionary_in=[dd_i
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-										axis_param=0, field_in=None, field_out=None):
+										axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1103,7 +1104,7 @@ if contract_invariants.check_inv_interval_num_op(data_dictionary_in=[dd_in.dataD
 										closure_type=Closure([if (int.closureType=ClosureType::openOpen)]0[elseif (int.closureType=ClosureType::openClosed)]1[elseif (int.closureType=ClosureType::closedOpen)]2[elseif (int.closureType=ClosureType::closedClosed)]3[/if]),
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										axis_param=0, field_in=None, field_out=None):
+										axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1129,7 +1130,7 @@ if contract_invariants.check_inv_special_value_fix_value(data_dictionary_in=[dd_
 							belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							data_type_output=[if (fixVal.dataType=DataType::String)]DataType(0)[elseif (fixVal.dataType=DataType::Time)]DataType(1)[elseif (fixVal.dataType=DataType::Integer)]DataType(2)[elseif (fixVal.dataType=DataType::DateTime)]DataType(3)[elseif (fixVal.dataType=DataType::Boolean)]DataType(4)[elseif (fixVal.dataType=DataType::Double)]DataType(5)[elseif (fixVal.dataType=DataType::Float)]DataType(6)[else]None)[/if],
-							missing_values=None, axis_param=0, field_in=None, field_out=None):
+							missing_values=None, axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1150,7 +1151,7 @@ if contract_invariants.check_inv_special_value_derived_value(data_dictionary_in=
 							belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 							special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 							derived_type_output=DerivedType([if (derVal.type=DerivedType::MostFrequent)]0[elseif (derVal.type=DerivedType::Previous)]1[elseif (derVal.type=DerivedType::Next)]2[/if]),
-							missing_values=None, axis_param=0, field_in=None, field_out=None):
+							missing_values=None, axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
@@ -1171,7 +1172,7 @@ if contract_invariants.check_inv_special_value_num_op(data_dictionary_in=[dd_in.
 										belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
 										special_type_input=SpecialType([if (sv.specialType=SpecialType::MISSING)]0[elseif (sv.specialType=SpecialType::INVALID)]1[elseif (sv.specialType=SpecialType::OUTLIER)]2[/if]),
 										num_op_output=Operation([if (nop.operation=Operation::Interpolation)]0[elseif (nop.operation=Operation::Mean)]1[elseif (nop.operation=Operation::Median)]2[elseif (nop.operation=Operation::Closest)]3[/if]),
-										missing_values=None, axis_param=0, field_in=None, field_out=None):
+										missing_values=None, axis_param=0, field_in=None, field_out=None, origin_function="[cond.eContainer(DataProcessing).origin_function/]"):
 	print('[cond.type/] [cond.name/] VALIDATED')
 else:
 	print('[cond.type/] [cond.name/] NOT VALIDATED')
