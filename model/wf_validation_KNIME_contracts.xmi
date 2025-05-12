@@ -563,7 +563,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:FixValue"
-              name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_input_dataField_FIX_VALUE"
+              name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_FIX_VALUE"
               value="Unknown">
             <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
@@ -1236,6 +1236,59 @@
             href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1/@contractDefinition"/>
       </contract>
     </contract>
+    <contract
+        name="rowFilterRange(init_span)_INVARIANT">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2"/>
+      <contract
+          xsi:type="Contract:Condition"
+          type="INVARIANT"
+          name="rowFilterRange(init_span)_INV_condition">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.4/@inputPort.0/@datafield.0"
+            name="rowFilterRange(init_span)_INV_input_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@in.0"/>
+        </in>
+        <out
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.4/@outputPort.0/@datafield.0"
+            name="rowFilterRange(init_span)_INV_output_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@out.0"/>
+        </out>
+        <conditionDef
+            href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition"/>
+        <if
+            then="//@dataprocessing.4/@contract.2/@contract/@then.0"
+            name="rowFilterRange(init_span)_INV_IF">
+          <ifDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
+          <dataCondition
+              xsi:type="Contract:Interval"
+              leftMargin="-10000.0"
+              closureType="closedClosed">
+            <intervalDef
+                href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
+          </dataCondition>
+        </if>
+        <then
+            if="//@dataprocessing.4/@contract.2/@contract/@if.0"
+            name="rowFilterRange(init_span)_INV_THEN"
+            belongOp="NOTBELONG">
+          <thenDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
+          <dataResult
+              xsi:type="Contract:Interval"
+              leftMargin="-10000.0"
+              closureType="closedClosed">
+            <intervalDef
+                href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
+          </dataResult>
+        </then>
+      </contract>
+    </contract>
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
@@ -1381,11 +1434,70 @@
         <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
         <field
-            dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
-        <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
         <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
+        <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
+      </contract>
+    </contract>
+    <contract
+        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INVARIANT">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2"/>
+      <contract
+          xsi:type="Contract:Condition"
+          type="INVARIANT"
+          name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_condition">
+        <in
+            xsi:type="Contract:DataDictionary"
+            dataDictionary="//@dataprocessing.5/@inputPort.0">
+          <dataDictionaryDef
+              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@in.0"/>
+        </in>
+        <out
+            xsi:type="Contract:DataDictionary"
+            dataDictionary="//@dataprocessing.5/@outputPort.0">
+          <dataDictionaryDef
+              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@out.0"/>
+        </out>
+        <conditionDef
+            href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition"/>
+        <if
+            then="//@dataprocessing.5/@contract.2/@contract/@then.0"
+            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_IF">
+          <ifDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.0"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.1"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
+          <dataCondition
+              xsi:type="Contract:Field"
+              dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
+        </if>
+        <then
+            if="//@dataprocessing.5/@contract.2/@contract/@if.0"
+            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_THEN">
+          <thenDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
+          <dataResult
+              xsi:type="Contract:Interval">
+            <intervalDef
+                href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
+          </dataResult>
+        </then>
       </contract>
     </contract>
   </dataprocessing>
@@ -3701,7 +3813,7 @@
     <parameter
         xsi:type="Workflow:DiscretizeBin"
         name="binner(avg_income)_param_bin_Low"
-        binValue="Low">
+        binValue="low">
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
@@ -3856,7 +3968,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:FixValue"
-              value="Low">
+              value="low">
             <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
@@ -3937,7 +4049,7 @@
     <storage
         xsi:type="Environment:LocalFolder"
         storageName="dataset1"
-        folderPath="/home/carlosbc24/PycharmProjects/knime2model_MD4DSP/input_KNIME_workflows/paper_workflows/Model_data_set_with_metanode/knime_dataDictionaries">
+        folderPath="C:\Users\Usuario\PycharmProjects\knime2model_MD4DSP\input_KNIME_workflows\paper_workflows\Model_data_set_with_metanode\knime_dataDictionaries">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>
       <file

@@ -3701,7 +3701,7 @@
     <parameter
         xsi:type="Workflow:DiscretizeBin"
         name="binner(avg_income)_param_bin_Low"
-        binValue="Low">
+        binValue="low">
       <discretizeBinDef
           href="library_validation.xmi#//@dataprocessingdefinition.7/@parameterdefinition.1"/>
       <interval
@@ -3856,7 +3856,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:FixValue"
-              value="Low">
+              value="low">
             <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
