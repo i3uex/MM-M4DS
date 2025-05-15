@@ -61,6 +61,14 @@ if contract_pre_post.check_interval_range_float(left_margin=[inter.leftMargin/],
 else:
 	print('[aContract.type/] [aContract.name/]_[if (inter.closureType=ClosureType::openOpen or inter.closureType=ClosureType::openClosed)]([elseif (inter.closureType=ClosureType::closedOpen or inter.closureType=ClosureType::closedClosed)]['['/][/if][inter.leftMargin/], [inter.rightMargin/][if (inter.closureType=ClosureType::openOpen or inter.closureType=ClosureType::closedOpen)])[elseif (inter.closureType=ClosureType::closedClosed or inter.closureType=ClosureType::openClosed)][']'/][/if] NOT VALIDATED')
 							[/let]																						[comment CLOSE assigns the variable to be of type Interval/]
+						[elseif (v.oclIsTypeOf(CastType))]																[comment OPEN checks that the variable is of type CastType/]
+							[let castType : CastType = v.oclAsType(CastType)]												[comment OPEN assigns the variable to be of type CastType/]
+if contract_pre_post.check_field_type(data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
+                                	  field='[df.dataField.displayName/]', field_type=[if (castType.type=DataType::String)]DataType(0)[elseif (castType.type=DataType::Time)]DataType(1)[elseif (castType.type=DataType::Integer)]DataType(2)[elseif (castType.type=DataType::DateTime)]DataType(3)[elseif (castType.type=DataType::Boolean)]DataType(4)[elseif (castType.type=DataType::Double)]DataType(5)[elseif (castType.type=DataType::Float)]DataType(6)[else]None)[/if], origin_function="[dp.origin_function/]"):
+	print('[aContract.type/] [aContract.name/]_[if (castType.type=DataType::String)]String[elseif (castType.type=DataType::Time)]Time[elseif (castType.type=DataType::Integer)]Integer[elseif (castType.type=DataType::DateTime)]DateTime[elseif (castType.type=DataType::Boolean)]Boolean[elseif (castType.type=DataType::Double)]Double[elseif (castType.type=DataType::Float)]Float[else]None)[/if] VALIDATED')
+else:
+	print('[aContract.type/] [aContract.name/]_[if (castType.type=DataType::String)]String[elseif (castType.type=DataType::Time)]Time[elseif (castType.type=DataType::Integer)]Integer[elseif (castType.type=DataType::DateTime)]DateTime[elseif (castType.type=DataType::Boolean)]Boolean[elseif (castType.type=DataType::Double)]Double[elseif (castType.type=DataType::Float)]Float[else]None)[/if] NOT VALIDATED')
+							[/let]																						[comment CLOSE assigns the variable to be of type CastType/]
 						[elseif (v.oclIsTypeOf(SpecialValue))]															[comment OPEN checks that the variable is of type SpecialValue/]
 							[let sv : SpecialValue = v.oclAsType(SpecialValue)]											[comment OPEN assigns the variable to be of type SpecialValue/]
 								[if (v.quantity <> null)]																[comment OPEN checks that the quantity is not null (there are not operators or quants)/]
