@@ -508,6 +508,33 @@
       </contractDefinition>
     </contractdefinition>
     <contractdefinition
+        name="categoricalToContinuous_castType_PRECONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          name="categoricalToContinuous_castType_PRE_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="categoricalToContinuous_PRE_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:CastTypeDef"
+            name="categoricalToContinuous_PRE_castType"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="categoricalToContinuous_castType_POSTCONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          type="POSTCONDITION"
+          name="categoricalToContinuous_castType_POST_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="categoricalToContinuous_POST_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:CastTypeDef"
+            name="categoricalToContinuous_POST_castType"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
         name="categoricalToContinuous_castType_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
@@ -519,14 +546,14 @@
             xsi:type="ContractDefinition:DataFieldDef"
             name="categoricalToContinuous_castType_INV_output_datafield"/>
         <thendefinition
-            ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
+            ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@ifdefinition.0"
             name="categoricalToContinuous_castType_INV_THEN">
           <dataResult
               xsi:type="ContractDefinition:CastTypeDef"
               name="categoricalToContinuous_castType_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
-            thendefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0"
+            thendefinition="//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@thendefinition.0"
             name="categoricalToContinuous_castType_INV_IF">
           <dataCondition
               xsi:type="ContractDefinition:CastTypeDef"

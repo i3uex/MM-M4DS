@@ -1849,6 +1849,54 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@parameterdefinition.0"/>
     </parameter>
     <contract
+        name="stringToNumber(TERRITORY)_castType_PRECONDITION">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1"/>
+      <contract
+          xsi:type="Contract:ValueRange"
+          name="stringToNumber(TERRITORY)_PRE_valueRange">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@inputPort.0/@datafield.0"
+            name="stringToNumber(TERRITORY)_PRE_input_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@in.0"/>
+        </in>
+        <value
+            xsi:type="Contract:CastType">
+          <castTypeDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
+        </value>
+        <valueRangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition"/>
+      </contract>
+    </contract>
+    <contract
+        name="stringToNumber(TERRITORY)_castType_POSTCONDITION">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2"/>
+      <contract
+          xsi:type="Contract:ValueRange"
+          type="POSTCONDITION"
+          name="stringToNumber(TERRITORY)_POST_valueRange">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@outputPort.0/@datafield.0"
+            name="stringToNumber(TERRITORY)_POST_output_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@in.0"/>
+        </in>
+        <value
+            xsi:type="Contract:CastType"
+            type="Integer">
+          <castTypeDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@valuedefinition.0"/>
+        </value>
+        <valueRangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition"/>
+      </contract>
+    </contract>
+    <contract
         name="stringToNumber(TERRITORY)_specialValue_INVARIANT">
       <contractDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
@@ -1874,7 +1922,7 @@
             href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition"/>
         <if
             belongOp="NOTBELONG"
-            then="//@dataprocessing.8/@contract.0/@contract/@then.0"
+            then="//@dataprocessing.8/@contract.2/@contract/@then.0"
             name="INV_specialValue_if_TERRITORY">
           <ifDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
@@ -1885,58 +1933,8 @@
           </dataCondition>
         </if>
         <then
-            if="//@dataprocessing.8/@contract.0/@contract/@if.0"
+            if="//@dataprocessing.8/@contract.2/@contract/@if.0"
             name="INV_specialValue_then_TERRITORY"
-            belongOp="NOTBELONG">
-          <thenDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
-          <dataResult
-              xsi:type="Contract:SpecialValue">
-            <specialValueDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@dataResult"/>
-          </dataResult>
-        </then>
-      </contract>
-    </contract>
-    <contract
-        name="stringToNumber(Instate)_specialValue_INVARIANT">
-      <contractDefinition
-          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
-      <contract
-          xsi:type="Contract:Condition"
-          type="INVARIANT"
-          name="INV_specialValue_condition_Instate">
-        <in
-            xsi:type="Contract:DataField"
-            dataField="//@dataprocessing.8/@inputPort.0/@datafield.1"
-            name="INV_specialValue_input_datafield_Instate">
-          <dataFieldDef
-              href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@in.0"/>
-        </in>
-        <out
-            xsi:type="Contract:DataField"
-            dataField="//@dataprocessing.8/@outputPort.0/@datafield.1"
-            name="INV_specialValue_output_datafield_Instate">
-          <dataFieldDef
-              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@out.0"/>
-        </out>
-        <conditionDef
-            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition"/>
-        <if
-            belongOp="NOTBELONG"
-            then="//@dataprocessing.8/@contract.1/@contract/@then.0"
-            name="INV_specialValue_if_Instate">
-          <ifDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
-          <dataCondition
-              xsi:type="Contract:SpecialValue">
-            <specialValueDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
-          </dataCondition>
-        </if>
-        <then
-            if="//@dataprocessing.8/@contract.1/@contract/@if.0"
-            name="INV_specialValue_then_Instate"
             belongOp="NOTBELONG">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
@@ -1973,18 +1971,18 @@
         <conditionDef
             href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition"/>
         <if
-            then="//@dataprocessing.8/@contract.2/@contract/@then.0"
+            then="//@dataprocessing.8/@contract.3/@contract/@then.0"
             name="INV_castType_if_TERRITORY">
           <ifDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition
               xsi:type="Contract:CastType">
             <castTypeDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then
-            if="//@dataprocessing.8/@contract.2/@contract/@if.0"
+            if="//@dataprocessing.8/@contract.3/@contract/@if.0"
             name="INV_castType_then_TERRITORY">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
@@ -1992,7 +1990,105 @@
               xsi:type="Contract:CastType"
               type="Integer">
             <castTypeDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@dataResult"/>
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@thendefinition.0/@dataResult"/>
+          </dataResult>
+        </then>
+      </contract>
+    </contract>
+    <contract
+        name="stringToNumber(Instate)_castType_PRECONDITION">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1"/>
+      <contract
+          xsi:type="Contract:ValueRange"
+          name="stringToNumber(Instate)_PRE_valueRange">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@inputPort.0/@datafield.1"
+            name="stringToNumber(Instate)_PRE_input_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@in.0"/>
+        </in>
+        <value
+            xsi:type="Contract:CastType">
+          <castTypeDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
+        </value>
+        <valueRangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition"/>
+      </contract>
+    </contract>
+    <contract
+        name="stringToNumber(Instate)_castType_POSTCONDITION">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2"/>
+      <contract
+          xsi:type="Contract:ValueRange"
+          type="POSTCONDITION"
+          name="stringToNumber(Instate)_POST_valueRange">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@outputPort.0/@datafield.1"
+            name="stringToNumber(Instate)_POST_output_dataField">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@in.0"/>
+        </in>
+        <value
+            xsi:type="Contract:CastType"
+            type="Integer">
+          <castTypeDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition/@valuedefinition.0"/>
+        </value>
+        <valueRangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2/@contractDefinition"/>
+      </contract>
+    </contract>
+    <contract
+        name="stringToNumber(Instate)_specialValue_INVARIANT">
+      <contractDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
+      <contract
+          xsi:type="Contract:Condition"
+          type="INVARIANT"
+          name="INV_specialValue_condition_Instate">
+        <in
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@inputPort.0/@datafield.1"
+            name="INV_specialValue_input_datafield_Instate">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2/@contractDefinition/@in.0"/>
+        </in>
+        <out
+            xsi:type="Contract:DataField"
+            dataField="//@dataprocessing.8/@outputPort.0/@datafield.1"
+            name="INV_specialValue_output_datafield_Instate">
+          <dataFieldDef
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@out.0"/>
+        </out>
+        <conditionDef
+            href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition"/>
+        <if
+            belongOp="NOTBELONG"
+            then="//@dataprocessing.8/@contract.6/@contract/@then.0"
+            name="INV_specialValue_if_Instate">
+          <ifDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
+          <dataCondition
+              xsi:type="Contract:SpecialValue">
+            <specialValueDef
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
+          </dataCondition>
+        </if>
+        <then
+            if="//@dataprocessing.8/@contract.6/@contract/@if.0"
+            name="INV_specialValue_then_Instate"
+            belongOp="NOTBELONG">
+          <thenDefinition
+              href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
+          <dataResult
+              xsi:type="Contract:SpecialValue">
+            <specialValueDef
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
@@ -2022,18 +2118,18 @@
         <conditionDef
             href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition"/>
         <if
-            then="//@dataprocessing.8/@contract.3/@contract/@then.0"
+            then="//@dataprocessing.8/@contract.7/@contract/@then.0"
             name="INV_castType_if_Instate">
           <ifDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@ifdefinition.0"/>
           <dataCondition
               xsi:type="Contract:CastType">
             <castTypeDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
         </if>
         <then
-            if="//@dataprocessing.8/@contract.3/@contract/@if.0"
+            if="//@dataprocessing.8/@contract.7/@contract/@if.0"
             name="INV_castType_then_Instate">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0/@contractDefinition/@thendefinition.0"/>
@@ -2041,7 +2137,7 @@
               xsi:type="Contract:CastType"
               type="Integer">
             <castTypeDef
-                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0/@dataResult"/>
+                href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
         </then>
       </contract>
