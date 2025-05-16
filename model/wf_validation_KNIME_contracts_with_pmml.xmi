@@ -1199,6 +1199,7 @@
         </in>
         <value
             xsi:type="Contract:Interval"
+            leftMargin="-1000.0"
             rightMargin="1000.0"
             closureType="closedOpen">
           <intervalDef
