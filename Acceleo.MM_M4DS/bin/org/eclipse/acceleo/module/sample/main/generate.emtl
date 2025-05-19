@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
   <mtl:Module name="generate" nsURI="org::eclipse::acceleo::module::sample::main::generate" startHeaderPosition="83" endHeaderPosition="327">
     <documentation xsi:type="mtl:ModuleDocumentation">
-      <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
+      <body startPosition="32" endPosition="80" value="&#xD;&#xA;The documentation of the module generate.&#xD;&#xA;&#xD;&#xA;"/>
     </documentation>
     <input>
       <takesTypesFrom href="http://www.example.org/Library#/"/>
@@ -31,7 +31,7 @@
         </charset>
       </body>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="251" endPosition="327" value="&#xA;The documentation of the template generateElement.&#xA;@param aLibrary&#xA;&#xA;"/>
+        <body startPosition="251" endPosition="327" value="&#xD;&#xA;The documentation of the template generateElement.&#xD;&#xA;@param aLibrary&#xD;&#xA;&#xD;&#xA;"/>
         <parametersDocumentation name="aLibrary">
           <body value=""/>
         </parametersDocumentation>
