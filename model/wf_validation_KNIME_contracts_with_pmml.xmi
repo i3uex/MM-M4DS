@@ -403,7 +403,8 @@
       in="//@dataprocessing.1/@inputPort.0/@datafield.0 //@dataprocessing.1/@inputPort.0/@datafield.1"
       out="//@dataprocessing.1/@outputPort.0/@datafield.0 //@dataprocessing.1/@outputPort.0/@datafield.1"
       name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)"
-      origin_function="Missing Value">
+      origin_function="Missing Value"
+      initial_accumulated_processing="//@dataprocessing.0">
     <inputPort
         fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary"
@@ -683,7 +684,8 @@
       in="//@dataprocessing.2/@inputPort.0"
       out="//@dataprocessing.2/@outputPort.0"
       name="imputeMissingByMean(avg_income, distance)"
-      origin_function="Missing Value">
+      origin_function="Missing Value"
+      initial_accumulated_processing="//@dataprocessing.0">
     <inputPort
         fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByMean(avg_income, distance)_input_dataDictionary"
@@ -967,7 +969,8 @@
       in="//@dataprocessing.3/@inputPort.0/@datafield.0"
       out="//@dataprocessing.3/@outputPort.0/@datafield.0"
       name="imputeMissingByLinearInterpolation(satscore)"
-      origin_function="Missing Value">
+      origin_function="Missing Value"
+      initial_accumulated_processing="//@dataprocessing.0">
     <inputPort
         fileName="missing_output_dataDictionary.csv"
         name="imputeMissingByLinearInterpolation(satscore)_input_dataDictionary"
@@ -3160,7 +3163,8 @@
       in="//@dataprocessing.11/@inputPort.0/@datafield.0"
       out="//@dataprocessing.11/@outputPort.0/@datafield.0"
       name="binner(TERRITORY)"
-      origin_function="Numeric Binner">
+      origin_function="Numeric Binner"
+      initial_accumulated_processing="//@dataprocessing.10">
     <inputPort
         fileName="numericBinner_output_dataDictionary.csv"
         name="binner(TERRITORY)_input_dataDictionary"
@@ -3472,7 +3476,8 @@
       in="//@dataprocessing.12/@inputPort.0/@datafield.0"
       out="//@dataprocessing.12/@outputPort.0/@datafield.0"
       name="binner(satscore)"
-      origin_function="Numeric Binner">
+      origin_function="Numeric Binner"
+      initial_accumulated_processing="//@dataprocessing.10">
     <inputPort
         fileName="numericBinner_output_dataDictionary.csv"
         name="binner(satscore)_input_dataDictionary"
@@ -3750,7 +3755,8 @@
       in="//@dataprocessing.13/@inputPort.0/@datafield.0"
       out="//@dataprocessing.13/@outputPort.0/@datafield.0"
       name="binner(avg_income)"
-      origin_function="Numeric Binner">
+      origin_function="Numeric Binner"
+      initial_accumulated_processing="//@dataprocessing.10">
     <inputPort
         fileName="numericBinner_output_dataDictionary.csv"
         name="binner(avg_income)_input_dataDictionary"
