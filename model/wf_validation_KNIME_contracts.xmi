@@ -1192,8 +1192,7 @@
           href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:ValueRange"
-          name="rowFilterRange(init_span)_PRE_valueRange"
-          belongOp="NOTBELONG">
+          name="rowFilterRange(init_span)_PRE_valueRange">
         <in
             xsi:type="Contract:DataField"
             dataField="//@dataprocessing.4/@inputPort.0/@datafield.0"
@@ -1204,8 +1203,7 @@
         <value
             xsi:type="Contract:Interval"
             leftMargin="-1000.0"
-            rightMargin="1000.0"
-            closureType="closedOpen">
+            rightMargin="1000.0">
           <intervalDef
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
