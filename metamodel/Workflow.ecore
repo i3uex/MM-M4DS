@@ -116,7 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="missingValues" upperBound="-1"
         eType="#//ValueField" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="#//DataField"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" upperBound="-1" eType="#//DataField"
         eOpposite="#//DataField/out"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="#//DataField"
         eOpposite="#//DataField/in"/>
