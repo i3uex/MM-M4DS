@@ -937,33 +937,6 @@
         xsi:type="Library:DerivedFieldDef"
         name="join_param_derived_field"/>
     <contractdefinition
-        name="join_specialValue_INVARIANT">
-      <contractDefinition
-          xsi:type="ContractDefinition:ConditionDef"
-          name="join_specialValue_INV_condition">
-        <in
-            xsi:type="ContractDefinition:DataFieldDef"
-            name="join_specialValue_INV_input_datafield"/>
-        <out
-            xsi:type="ContractDefinition:DataFieldDef"
-            name="join_specialValue_INV_output_datafield"/>
-        <thendefinition
-            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
-            name="join_specialValue_INV_THEN">
-          <dataResult
-              xsi:type="ContractDefinition:SpecialValueDef"
-              name="join_specialValue_INV_valueResult"/>
-        </thendefinition>
-        <ifdefinition
-            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"
-            name="join_specialValue_INV_IF">
-          <dataCondition
-              xsi:type="ContractDefinition:SpecialValueDef"
-              name="join_specialValue_INV_valueCondition"/>
-        </ifdefinition>
-      </contractDefinition>
-    </contractdefinition>
-    <contractdefinition
         name="join_check_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
@@ -975,7 +948,7 @@
             xsi:type="ContractDefinition:DataFieldDef"
             name="join_check_INV_output_datafield"/>
         <thendefinition
-            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
+            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
             name="join_check_INV_THEN">
           <dataResult
               xsi:type="ContractDefinition:JoinDef"
@@ -989,7 +962,7 @@
           </dataResult>
         </thendefinition>
         <ifdefinition
-            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0"
+            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"
             name="join_check_INV_IF">
           <dataCondition
               xsi:type="ContractDefinition:IntervalDef"
