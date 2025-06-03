@@ -404,6 +404,7 @@
       </operandDef>
       <operandDef xsi:type="Library:FieldDef" name="join_op_field" datafielddefinition="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"/>
     </parameterdefinition>
+    <parameterdefinition xsi:type="Library:DerivedFieldDef" name="join_param_derived_field"/>
     <contractdefinition name="join_specialValue_INVARIANT">
       <contractDefinition xsi:type="ContractDefinition:ConditionDef" name="join_specialValue_INV_condition">
         <in xsi:type="ContractDefinition:DataFieldDef" name="join_specialValue_INV_input_datafield"/>

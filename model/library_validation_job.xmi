@@ -933,6 +933,9 @@
           name="join_op_field"
           datafielddefinition="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"/>
     </parameterdefinition>
+    <parameterdefinition
+        xsi:type="Library:DerivedFieldDef"
+        name="join_param_derived_field"/>
     <contractdefinition
         name="join_specialValue_INVARIANT">
       <contractDefinition
