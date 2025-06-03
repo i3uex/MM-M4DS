@@ -604,7 +604,7 @@ else:
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										field_in='[df.dataField.displayName/]', field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
+										field_out='[df.dataField.out.displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([df.dataField.displayName/]) BelongOpIn:[if (if_cond.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] BelongOpOut:[if (th.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([df.dataField.displayName/]) BelongOpIn:[if (if_cond.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] BelongOpOut:[if (th.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] NOT VALIDATED')
@@ -622,7 +622,7 @@ else:
 if contract_invariants.check_inv_missing_value_missing_value(data_dictionary_in=[dd_in.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										data_dictionary_out=[dd_in.dataDictionary.out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 										belong_op_in=Belong([if (if_cond.belongOp=BelongOp::BELONG)]0[else]1[/if]), belong_op_out=Belong([if (th.belongOp=BelongOp::BELONG)]0[else]1[/if]),
-										field_in=None, field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
+										field_out=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) BelongOpIn:[if (if_cond.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] BelongOpOut:[if (th.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) BelongOpIn:[if (if_cond.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] BelongOpOut:[if (th.belongOp=BelongOp::BELONG)]Belong[else]NotBelong[/if] NOT VALIDATED')
@@ -870,7 +870,7 @@ dictionary_[th.thenDefinition.name/]={[for (operand : Operand | jointhen.operand
 if contract_invariants.check_inv_join(data_dictionary_in=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df,
 							data_dictionary_out=[df.dataField.eContainer(Workflow::DataDictionary).out.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 							dictionary=dictionary_[th.thenDefinition.name/],
-							field_in='[df.dataField.displayName/]', field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
+							field_out='[df.dataField.eContainer(Workflow::DataDictionary).out.datafield->first().displayName/]', origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([df.dataField.displayName/]) JoinInputs:[for (operand : Operand | jointhen.operand)][if (operand.previous_operand=null)][if (operand.oclIsKindOf(OpField))][let field : OpField=operand.oclAsType(OpField)][field.datafield.dataField.displayName/][/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)][fv.value/][/let][/if][/if][/for] VALIDATED')
 else:
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([df.dataField.displayName/]) JoinInputs:[for (operand : Operand | jointhen.operand)][if (operand.previous_operand=null)][if (operand.oclIsKindOf(OpField))][let field : OpField=operand.oclAsType(OpField)][field.datafield.dataField.displayName/][/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)][fv.value/][/let][/if][/if][/for] NOT VALIDATED')
