@@ -1034,6 +1034,32 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=[if not dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim().indexOf('.')>0)][dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim()/].parquet[/if]')[else][dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df.copy()[/if]
 		[/for]																																							[comment CLOSE traverse all the input DataDictionaries/]
 		[for (p : Parameter | dataProcessing.parameter)]																												[comment OPEN traverse all the parameters in the DataProcessing/]
+			[if (p.oclIsKindOf(DerivedField))]																															[comment OPEN checks that the parameter is a DerivedField/]
+				[let derf : DerivedField = p.oclAsType(DerivedField)]																									[comment OPEN assigns the parameter to be a DerivedField/]
+					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
+[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
+															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
+															  field_in = '[if (derf.der_dataField._in->size() = 1)][derf.der_dataField._in.displayName/][else][derf.der_dataField._in->at(1).displayName/][/if]', field_out = '[derf.der_dataField.displayName/]')
+
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+								[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
+										[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+										[/if]																															[comment CLOSE checks if the Environment is Local/]
+									[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
+								[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])
+								[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+							[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+						[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
+					[/for]																																				[comment CLOSE traverse all the input DataDictionaries/]
+				[/let]																																					[comment CLOSE assigns the parameter to be a DerivedField/]
+			[/if]																																						[comment CLOSE checks that the parameter is a DerivedField/]
 		    [if (p.oclIsKindOf(ImputeType))]																															[comment OPEN checks that the parameter is an ImputeType/]
 		        [let imType : ImputeType = p.oclAsType(ImputeType)]																										[comment OPEN assigns the parameter to be an ImputeType/]
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse all the input DataDictionaries (in theory there is only 1)/]
@@ -1189,32 +1215,6 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[/let]																																				[comment OPEN assigns the parameter to be an DiscretizeBin/]
 				[/if]																																					[comment CLOSE checks that the parameter is an DiscretizeBin/]
 			[/if]																																						[comment CLOSE checks that the DataProcessing is a Binner (interval_FixValue)/]
-			[if (p.oclIsKindOf(DerivedField))]																															[comment OPEN checks that the parameter is a DerivedField/]
-				[let derf : DerivedField = p.oclAsType(DerivedField)]																									[comment OPEN assigns the parameter to be a DerivedField/]
-					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
-[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
-															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_dataField.displayName/]')
-
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
-						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
-							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
-								[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
-									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
-										[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-										[/if]																															[comment CLOSE checks if the Environment is Local/]
-									[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
-								[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])
-								[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
-							[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
-						[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
-					[/for]																																				[comment CLOSE traverse all the input DataDictionaries/]
-				[/let]																																					[comment CLOSE assigns the parameter to be a DerivedField/]
-			[/if]																																						[comment CLOSE checks that the parameter is a DerivedField/]
 			[if (dataProcessing.dataProcessingDefinition.name='categoricalToContinuous')]																				[comment OPEN checks that the DataProcessing is categoricalToContinuous(StringToNumber)/]
 				[if (p.oclIsKindOf(CastType))]																															[comment OPEN checks that the parameter is a CastType/]
 					[let cast : CastType = p.oclAsType(CastType)]																										[comment OPEN assigns the variable to be a CastType/]
