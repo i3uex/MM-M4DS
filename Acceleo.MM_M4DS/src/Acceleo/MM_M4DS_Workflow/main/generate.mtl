@@ -1039,7 +1039,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  field_in = '[if (derf.der_dataField._in->size() = 1)][derf.der_dataField._in.displayName/][else][derf.der_dataField._in->at(1).displayName/][/if]', field_out = '[derf.der_dataField.displayName/]')
+															  field_in = '[derf.der_dataField._in->first().displayName/]', field_out = '[derf.der_dataField.displayName/]')
 
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
 						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
