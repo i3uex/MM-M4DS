@@ -30,7 +30,7 @@ else:
 								[if (v.quantity <> null)]																[comment OPEN checks that the quantity is not null (there is an operator and a quant)/]
 									[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks that the quantity is of type Absolute/]
 										[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the variable to be of type Absolute/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [dp.origin_function/]([df.dataField.displayName/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -38,7 +38,7 @@ else:
 										[/let]																			[comment CLOSE assigns the variable to be of type Absolute/]
 									[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks that the quantity is of type Percent/]
 										[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the variable to be of type Percent/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [dp.origin_function/]([df.dataField.displayName/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -46,7 +46,7 @@ else:
 										[/let]																			[comment CLOSE assigns the variable to be of type Percent/]
 									[/if]																				[comment CLOSE checks that the quantity is of type Absolute or Percent/]
 								[else]																					[comment OPEN checks that the quantity not null (there are not operators or quants)/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field='[df.dataField.displayName/]',
 								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[dp.origin_function/]"):
 	print('[aContract.type/] [dp.origin_function/]([df.dataField.displayName/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -214,7 +214,7 @@ else:
 									[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
 										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the variable to be an AbsoluteValue/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -222,7 +222,7 @@ else:
 											[/let]																			[comment CLOSE assigns the variable to be an AbsoluteValue/]
 										[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the quantity is a Percent/]
 											[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the variable to be a Percent/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -230,7 +230,7 @@ else:
 											[/let]																			[comment CLOSE assigns the variable to be a Percent/]
 										[/if]																				[comment CLOSE checks if the quantity is an AbsoluteValue or a Percent/]
 									[else]																					[comment OPEN checks if the quantity is null/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -346,7 +346,7 @@ else:
 									[if (v.quantity <> null)]																[comment OPEN checks if the quantity is not null/]
 										[if(v.quantity.oclIsTypeOf(AbsoluteValue))]											[comment OPEN checks if the quantity is an AbsoluteValue/]
 											[let av : AbsoluteValue = v.quantity.oclAsType(AbsoluteValue)]					[comment OPEN assigns the parameter to be an AbsoluteValue/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=[av.value/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -354,7 +354,7 @@ else:
 											[/let]																			[comment CLOSE assigns the parameter to be an AbsoluteValue/]
 										[elseif (v.quantity.oclIsTypeOf(Percent))]											[comment OPEN checks if the parameter is a Percent/]
 											[let per : Percent = v.quantity.oclAsType(Percent)]								[comment OPEN assigns the parameter to be a Percent/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_rel=[per.percent/], quant_op=Operator([if(v.quantity.operator=Operator::greatherEqual)]0[elseif(v.quantity.operator=Operator::greather)]1[elseif(v.quantity.operator=Operator::lessEqual)]2[elseif(v.quantity.operator=Operator::less)]3[elseif(v.quantity.operator=Operator::equal)]4[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
@@ -362,7 +362,7 @@ else:
 											[/let]																			[comment CLOSE assigns the parameter to be a Percent/]
 										[/if]																				[comment CLOSE checks if the parameter is a Percent/]
 									[else]																					[comment OPEN checks if the quantity is null/]
-if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
+if contract_pre_post.check_fix_value_range([if (fv.dataType=DataType::String or fv.dataType=DataType::Time or fv.dataType=DataType::DateTime)]value='[fv.value/]'[else]value=[fv.value/][/if], is_substring=[if (fv.subStr=true)]True[elseif (fv.subStr=false)]False[/if], data_dictionary=[dd_out.name.replaceAll('[(),-/\\s]+', '_')/]_df, belong_op=Belong([if (vr.belongOp=BelongOp::BELONG)]0[else]1[/if]), field=None,
 								quant_abs=None, quant_rel=None, quant_op=None, origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
 	print('[aContract.type/] [aContract.eContainer(DataProcessing).origin_function/]([aContract.eContainer(DataProcessing).eContainer(Workflow).environment.path/]) FixValue:[fv.value/] VALIDATED')
 else:
