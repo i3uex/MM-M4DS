@@ -353,6 +353,12 @@
         </ifdefinition>
       </contractDefinition>
     </contractdefinition>
+    <contractdefinition name="mathOperation_zeroDivision_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="mathOperation_zeroDivision_PRE_valueRange" belongOp="NOTBELONG">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="mathOperation_zeroDivision_PRE_input_datafield"/>
+        <valuedefinition xsi:type="ContractDefinition:FixValueDef" name="mathOperation_zeroDivision_PRE_fix_value"/>
+      </contractDefinition>
+    </contractdefinition>
     <inputPort name="mathOperation_input_DataDictionary">
       <datafielddefinition xsi:type="Library:ContinuousDef" name="mathOperation_input_DataField"/>
     </inputPort>
