@@ -15,169 +15,169 @@
         xsi:type="Library:Job"
         href="library_validation.xmi#//@dataprocessingdefinition.9"/>
     <inputPort
-        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="wf_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.0"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="wf_imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.1"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="wf_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.2"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="wf_imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.3"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="wf_imputeMissingByMean(avg_income, distance)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.4"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="wf_mputeMissingByMean(avg_income, distance)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.5"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_input_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_input_dataDictionary.csv"
         name="wf_imputeMissingByLinearInterpolation(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.6"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="wf_imputeMissingByLinearInterpolation(satscore)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.7"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/missing_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/missing_output_dataDictionary.csv"
         name="wf_rowFilterRange(init_span)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.8"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
         name="wf_rowFilterRange(init_span)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.9"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/rowFilter_output_dataDictionary.csv"
         name="wf_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.10"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
         name="wf_columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.11"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/columnFilter_output_dataDictionary.csv"
         name="wf_Mapping(TERRITORY)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.12"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
         name="wf_Mapping(TERRITORY)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.13"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/ruleEngine_territory_output_dataDictionary.csv"
         name="wf_mapping(Instate)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.14"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
         name="wf_mapping(Instate)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.15"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/ruleEngine_instate_output_dataDictionary.csv"
         name="wf_stringToNumber(TERRITORY, Instate)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.16"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
         name="wf_stringToNumber(TERRITORY, Instate)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.17"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/stringToNumber_output_dataDictionary.csv"
         name="wf_imputeOutlierByClosest(avg_income, distance, Instate)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.18"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="wf_imputeOutlierByClosest(avg_income, distance, Instate)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.19"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="wf_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.20"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="wf_binner(TOTAL_CONTACTS, SELF_INIT_CNTCTS, SOLICITED_CNTCTS)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.21"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="wf_binner(TERRITORY)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.22"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="wf_binner(TERRITORY)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.23"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="wf_binner(satscore)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.24"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="wf_binner(satscore)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.25"/>
     </inputPort>
     <inputPort
-        path="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericOutliers_output_dataDictionary.csv"
         name="wf_binner(avg_income)_input_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.26"/>
     </inputPort>
     <outputPort
-        path="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
+        fileName="./python_dataDictionaries/numericBinner_output_dataDictionary.csv"
         name="wf_binner(avg_income)_output_dataDictionary">
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.9/@outputPort.0"/>
