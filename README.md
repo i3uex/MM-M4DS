@@ -10,61 +10,61 @@ Additionally, the project contains an Acceleo project, embedded in the root dire
 
 To use this project properly, you must follow the next steps:
 
-1. Clone this project to your Eclipse Modeling Framework (EMF) IDE. If you are not able to clone it with Eclipse, you can just download the project from [MM-M4DS](https://github.com/i3uex/MM-M4DS) and import it with Eclipse IDE with "File" → "Import..." → "Existing projects into workspace" → "Select archive file" and select the corresponding zip file with the downloaded project.
+- Clone this EMF project to your Eclipse Modeling Framework (EMF) IDE. If you are not able to clone it with Eclipse, 
+  you can just download the project from [MM-M4DS](https://github.com/i3uex/MM-M4DS) and import it with Eclipse IDE 
+  by selecting "File" → "Import..." → "Existing projects into workspace" → "Select archive file" and choosing the 
+  corresponding zip file with the downloaded project.
 
-2. In this step, you can explore/modify the different metamodels designed in the project stored in `metamodel` directory (.aird files), the different models created and stored in `model` directory and the validation library `library_validation.xmi` stored in model directory.
+
+- After importing the project, you must copy the mapped model to the `model` directory and remove residual DataProcessing,
+  Links, and Files related to non-existing nodes in the `library_validation.xmi` file.
 
 ## Acceleo Project Configuration
 
 To use the code generation capabilities of Acceleo with this project, follow these steps to properly set up and execute the code generation process:
 
-1. Create the Acceleo Project in Eclipse
+- Open Eclipse IDE and create the Acceleo Project in Eclipse, by going to File → New → Project...
 
-    Open Eclipse and go to File → New → Project....
+- Choose Acceleo Project and click Next.
 
-    Choose Acceleo Project and click Next.
+- Set the Project name to Acceleo.MM_M4DS and click Next.
 
-    Set the Project name to Acceleo.MM_M4DS.
+- In the Metamodel URIs field, click in the `+` button, browse in the `Runtime Version` and select the URIs from the .ecore metamodels (Workflow, Library, ContractDef, Contract, and Environment).
 
-    Click Next.
+- In Type, select Library.
 
-    In the Metamodel URIs field, browse and select the URIs from the .ecore metamodels (Workflow, Library, ContractDef, Contract and Environment).
+- In the template section check the options: "Generate documentation" "Generate file" and "Main template."
 
-    In Type, select Library.
-    
-    In template section check the options: "Generate documentation", "Generate file" and "Main template".
+- Leave the default values for other fields and click Finish. This will create a working Acceleo project structure with a src directory containing a sample .mtl file.
 
-    Leave the default values for other fields and click Finish.
+- Replace the bin, src, and META-INF folders with the ones from the existing Acceleo.MM_M4DS/src directory of the repository.
 
-    This will create a working Acceleo project structure with a src directory containing a sample .mtl file.
+- Ensure that the directory structure (i.e., the package structure) is preserved.
 
-2. Replace Template Code with the Project Templates
+- If prompted by Eclipse, refresh the project (right-click on the project and select Refresh or press F5).
 
-    Copy all .mtl files and any necessary helper Java files from the existing Acceleo.MM_M4DS/src directory of the repository into the src folder of the created Acceleo project.
+- Once the templates are in place, and the project is configured, to generate code from the model located in `prueba_M4DS` project, right-click on the main .mtl file (located at `Acceleo.MM_M4DS/src/Acceleo/MM_M4DS_Workflow/main/generate.mtl`) in the src folder.
 
-    Ensure that the directory structure (i.e., the package structure) is preserved.
+- Select Run As → Run Configurations... and create a new Acceleo Application configuration.
 
-    If prompted by Eclipse, refresh the project (right-click on the project and select Refresh or press F5).
+- In the Project field, select the Acceleo.MM_M4DS project.
 
-3. Generate Code from a Model
+- In the Main class field, select the main .mtl file (`Acceleo.MM_M4DS_Workflow.main`).
 
-    Once the templates are in place and the project is configured:
+- In the Model field, click Browse Workspace and select the desired .xmi model file from the model/ directory (e.g., wf_validation_KNIME_contracts.xmi).
 
-    Right-click on the main .mtl file (e.g., GenerateAll.mtl) in the src folder.
+- In the Target field, choose or create a destination folder (e.g., Acceleo.MM_M4DS/Generated/) where the generated code will be placed.
 
-    Select Run As → Launch Acceleo Application.
+- Click Run to execute the code generation. After waiting for the process to complete, you should see the generated code in the specified target directory.
 
-    In the Model field, click Browse Workspace and select the desired .xmi model file from the model/ directory (e.g., wf_validation_KNIME_contracts.xmi).
-
-    In the Target field, choose or create a destination folder (e.g., Acceleo.MM_M4DS/Generated/) where the generated code will be placed.
-
-    Click Run to execute the code generation.
-
-4. Output Files
-
-The generated code will appear in the directory specified in the Target field. 
-
-
+When the code generation is completed, you will find six files in the `generated_code` directory:
+- `deploy_docker_app.sh`: A script to deploy the contract validation application in a Docker container.
+- `Dockerfile`: A Dockerfile to build the Docker image for the contract validation application using a [Python 3.11-slim](https://hub.docker.com/layers/library/python/3.11-slim/images/sha256-1591aa8c01b5b37ab31dbe5662c5bdcf40c2f1bce4ef1c1fd24802dae3d01052?context=explore) image as the base image a cloning the [Python contract validation library](https://github.com/i3uex/MD4DSP-m2python) repository.
+- `workflow_scripts.sh`: A shell script that contains the application main process to convert dataDictionaries to the parquet unified data format and initialized the application menu.
+- `fileFormatting.py`: A Python script that contains the file formatting functions to convert the dataDictionaries to the parquet unified data format.
+- `contracts_Job_Model_data_set_with_metanode_KNIME_.py`: A Python script that contains the contract validation calls for the MD4DSP workflow (only contract validations).
+- `dataProcessing_Job_Model_data_set_with_metanode_KNIME_.py`: A Python script that contains the data processing calls for the MD4DSP workflow (data transformations and contract validations).
+- `transformations_Job_Model_data_set_with_metanode_KNIME_.py`: A Python script that contains the data transformations calls for the MD4DSP workflow (just data transformations).
 
 ## Project Structure
 ```bash
