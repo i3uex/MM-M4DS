@@ -131,10 +131,6 @@
         eType="ecore:EClass Library.ecore#//ContinuousDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
         upperBound="-1" eType="#//Interval" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thousandsSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="&quot;&quot;"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="."/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
