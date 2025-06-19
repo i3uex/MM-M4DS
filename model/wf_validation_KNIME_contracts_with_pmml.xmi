@@ -4,10 +4,9 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:Contract="https://www.example.org/contract"
-    xmlns:Environment="https://www.example.org/environment"
     xmlns:Library="http://www.example.org/Library"
     xmlns:Workflow="https://www.example.org/workflow"
-    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
+    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="Model data set with metanode (KNIME)">
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
@@ -564,7 +563,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:FixValue"
-              name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_FIX_VALUE"
+              name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_input_dataField_FIX_VALUE"
               value="Unknown">
             <fixValueDef
                 href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
@@ -1196,11 +1195,11 @@
           href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:ValueRange"
-          name="rowFilterRange(init_span)_PRE_valueRange">
+          name="rowFilter(init_span)_PRE_valueRange">
         <in
             xsi:type="Contract:DataField"
             dataField="//@dataprocessing.4/@inputPort.0/@datafield.0"
-            name="rowFilterRange(init_span)_PRE_input_dataField">
+            name="rowFilter(init_span)_PRE_input_dataField">
           <dataFieldDef
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.0/@contractDefinition/@in.0"/>
         </in>
@@ -1216,13 +1215,13 @@
       </contract>
     </contract>
     <contract
-        name="rowFilterRange(init_span)_POSTCONDITION">
+        name="rowFilter(init_span)_POSTCONDITION">
       <contractDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
           type="POSTCONDITION"
-          name="rowFilterRange(init_span)_POST_valueRange"
+          name="rowFilter(init_span)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
@@ -1240,59 +1239,6 @@
         </value>
         <valueRangeDef
             href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1/@contractDefinition"/>
-      </contract>
-    </contract>
-    <contract
-        name="rowFilterRange(init_span)_INVARIANT">
-      <contractDefinition
-          href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2"/>
-      <contract
-          xsi:type="Contract:Condition"
-          type="INVARIANT"
-          name="rowFilterRange(init_span)_INV_condition">
-        <in
-            xsi:type="Contract:DataField"
-            dataField="//@dataprocessing.4/@inputPort.0/@datafield.0"
-            name="rowFilterRange(init_span)_INV_input_dataField">
-          <dataFieldDef
-              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@in.0"/>
-        </in>
-        <out
-            xsi:type="Contract:DataField"
-            dataField="//@dataprocessing.4/@outputPort.0/@datafield.0"
-            name="rowFilterRange(init_span)_INV_output_dataField">
-          <dataFieldDef
-              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@out.0"/>
-        </out>
-        <conditionDef
-            href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition"/>
-        <if
-            then="//@dataprocessing.4/@contract.2/@contract/@then.0"
-            name="rowFilterRange(init_span)_INV_IF">
-          <ifDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
-          <dataCondition
-              xsi:type="Contract:Interval"
-              leftMargin="-10000.0"
-              closureType="closedClosed">
-            <intervalDef
-                href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
-          </dataCondition>
-        </if>
-        <then
-            if="//@dataprocessing.4/@contract.2/@contract/@if.0"
-            name="rowFilterRange(init_span)_INV_THEN"
-            belongOp="NOTBELONG">
-          <thenDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
-          <dataResult
-              xsi:type="Contract:Interval"
-              leftMargin="-10000.0"
-              closureType="closedClosed">
-            <intervalDef
-                href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
-          </dataResult>
-        </then>
       </contract>
     </contract>
   </dataprocessing>
@@ -1445,70 +1391,11 @@
         <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
         <field
-            dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
-        <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
         <field
+            dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
+        <field
             dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
-      </contract>
-    </contract>
-    <contract
-        name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INVARIANT">
-      <contractDefinition
-          href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2"/>
-      <contract
-          xsi:type="Contract:Condition"
-          type="INVARIANT"
-          name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_condition">
-        <in
-            xsi:type="Contract:DataDictionary"
-            dataDictionary="//@dataprocessing.5/@inputPort.0">
-          <dataDictionaryDef
-              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@in.0"/>
-        </in>
-        <out
-            xsi:type="Contract:DataDictionary"
-            dataDictionary="//@dataprocessing.5/@outputPort.0">
-          <dataDictionaryDef
-              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@out.0"/>
-        </out>
-        <conditionDef
-            href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition"/>
-        <if
-            then="//@dataprocessing.5/@contract.2/@contract/@then.0"
-            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_IF">
-          <ifDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.0"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.1"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.2"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.4"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.3"/>
-          <dataCondition
-              xsi:type="Contract:Field"
-              dataField="//@dataprocessing.5/@inputPort.0/@datafield.5"/>
-        </if>
-        <then
-            if="//@dataprocessing.5/@contract.2/@contract/@if.0"
-            name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_THEN">
-          <thenDefinition
-              href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
-          <dataResult
-              xsi:type="Contract:Interval">
-            <intervalDef
-                href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
-          </dataResult>
-        </then>
       </contract>
     </contract>
   </dataprocessing>
@@ -2506,7 +2393,7 @@
       <contract
           xsi:type="Contract:ValueRange"
           type="POSTCONDITION"
-          name="imputeOutlierByClosest(Instate)_POST_valueRange"
+          name="imputeOutlierByClosest(Instate)_POST_valueRange´"
           belongOp="NOTBELONG">
         <in
             xsi:type="Contract:DataField"
@@ -3877,6 +3764,7 @@
   </dataprocessing>
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
+      outgoing="//@link.13"
       incoming="//@link.12"
       in="//@dataprocessing.13/@inputPort.0/@datafield.0"
       out="//@dataprocessing.13/@outputPort.0/@datafield.0"
@@ -4117,6 +4005,32 @@
       </contract>
     </contract>
   </dataprocessing>
+  <dataprocessing
+      xsi:type="Workflow:PMMLModel"
+      incoming="//@link.13"
+      in="//@dataprocessing.14/@inputPort.0"
+      out="//@dataprocessing.14/@outputPort.0"
+      name="pmmlTransformations"
+      filePath="/home/carlos/Descargas/PMMLModel/PMMLModel/students_decisionTree_PMML.pmml">
+    <inputPort
+        fileName="numericBinner_output_dataDictionary.csv"
+        name="pmml_input_dataDictionary"
+        out="//@dataprocessing.14/@outputPort.0">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@inputPort.0"/>
+    </inputPort>
+    <outputPort
+        fileName="pmml_output_dataDictionary.csv"
+        name="pmml_output_dataDictionary"
+        in="//@dataprocessing.14/@inputPort.0">
+      <dataDictionaryDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@outputPort.0"/>
+    </outputPort>
+    <dataProcessingDefinition
+        xsi:type="Library:Transformation"
+        href="library_validation.xmi#//@dataprocessingdefinition.10"/>
+    <test path="resultados"/>
+  </dataprocessing>
   <link source="//@dataprocessing.0"
       target="//@dataprocessing.1"
       name="imputeMissingByMostFrequent(sex, IRISCHOOL, ETHNICITY)-imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)"/>
@@ -4156,47 +4070,7 @@
   <link source="//@dataprocessing.12"
       target="//@dataprocessing.13"
       name="binner(satscore)-binner(avg_income)"/>
-  <environment
-      xsi:type="Environment:Local"
-      name="test_docker_refactor"
-      path="./wf_validation_contracts"
-      containerName="docker-contracts"
-      imageName="ubuntu-22.04"
-      imageTag="latest">
-    <storage
-        xsi:type="Environment:LocalFolder"
-        storageName="dataset1"
-        folderPath="/home/carlosbc24/PycharmProjects/knime2model_MD4DSP/input_KNIME_workflows/paper_workflows/Model_data_set_with_metanode/knime_dataDictionaries">
-      <file
-          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.1/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.2/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.3/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.4/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.5/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.6/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.7/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.8/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.9/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.10/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.11/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.12/@inputPort.0"/>
-      <file
-          dataDictionary="//@dataprocessing.13/@inputPort.0"/>
-    </storage>
-    <developmentTool
-        version="3.11"/>
-  </environment>
+  <link source="//@dataprocessing.13"
+      target="//@dataprocessing.14"
+      name="binner-pmml"/>
 </Workflow:Workflow>
