@@ -708,8 +708,7 @@
           name="imputeMissingByMeandistance)_input_dataField"
           dataType="Double"
           displayName="distance"
-          out="//@dataprocessing.2/@outputPort.0/@datafield.1"
-          numDecimals="4">
+          out="//@dataprocessing.2/@outputPort.0/@datafield.1">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -742,8 +741,7 @@
           name="imputeMissingByMean(distance)_output_dataField"
           dataType="Double"
           displayName="distance"
-          in="//@dataprocessing.2/@inputPort.0/@datafield.1"
-          numDecimals="4">
+          in="//@dataprocessing.2/@inputPort.0/@datafield.1">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -1146,8 +1144,7 @@
           xsi:type="Workflow:Continuous"
           name="rowFilterRange(init_span)_input_dataField"
           dataType="Integer"
-          displayName="init_span"
-          numDecimals="2">
+          displayName="init_span">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.8/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -1166,8 +1163,7 @@
           xsi:type="Workflow:Continuous"
           name="rowFilterRange(init_span)_output_dataField"
           dataType="Integer"
-          displayName="init_span"
-          numDecimals="2">
+          displayName="init_span">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.8/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -1844,8 +1840,7 @@
           name="stringToNumber(Instate)_output_dataField"
           dataType="Integer"
           displayName="Instate"
-          in="//@dataprocessing.8/@inputPort.0/@datafield.1"
-          numDecimals="0">
+          in="//@dataprocessing.8/@inputPort.0/@datafield.1">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.6/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2177,8 +2172,7 @@
           name="imputeOutlierByClosest(avg_income)_input_dataField"
           dataType="Double"
           displayName="avg_income"
-          out="//@dataprocessing.9/@outputPort.0/@datafield.0"
-          numDecimals="11">
+          out="//@dataprocessing.9/@outputPort.0/@datafield.0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2190,8 +2184,7 @@
           name="imputeOutlierByClosest(distance)_input_dataField"
           dataType="Double"
           displayName="distance"
-          out="//@dataprocessing.9/@outputPort.0/@datafield.1"
-          numDecimals="11">
+          out="//@dataprocessing.9/@outputPort.0/@datafield.1">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2204,7 +2197,7 @@
           name="imputeOutlierByClosest(Instate)_input_dataField"
           displayName="Instate"
           out="//@dataprocessing.9/@outputPort.0/@datafield.2"
-          numDecimals="11">
+          numDecimals="0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2223,8 +2216,7 @@
           name="imputeOutlierByClosest(avg_income)_output_dataField"
           dataType="Double"
           displayName="avg_income"
-          in="//@dataprocessing.9/@inputPort.0/@datafield.0"
-          numDecimals="11">
+          in="//@dataprocessing.9/@inputPort.0/@datafield.0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2236,8 +2228,7 @@
           name="imputeOutlierByClosest(distance)_output_dataField"
           dataType="Double"
           displayName="distance"
-          in="//@dataprocessing.9/@inputPort.0/@datafield.1"
-          numDecimals="11">
+          in="//@dataprocessing.9/@inputPort.0/@datafield.1">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -2250,7 +2241,7 @@
           name="imputeOutlierByClosest(Instate)_output_dataField"
           displayName="Instate"
           in="//@dataprocessing.9/@inputPort.0/@datafield.2"
-          numDecimals="11">
+          numDecimals="0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
@@ -3510,8 +3501,7 @@
           name="binner(satscore)_input_dataField"
           dataType="Integer"
           displayName="satscore"
-          out="//@dataprocessing.12/@outputPort.0/@datafield.0"
-          numDecimals="0">
+          out="//@dataprocessing.12/@outputPort.0/@datafield.0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0"/>
         <interval
@@ -3790,8 +3780,7 @@
           name="binner(avg_income)_input_dataField"
           dataType="Integer"
           displayName="avg_income"
-          out="//@dataprocessing.13/@outputPort.0/@datafield.0"
-          numDecimals="0">
+          out="//@dataprocessing.13/@outputPort.0/@datafield.0">
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.7/@inputPort.0/@datafielddefinition.0"/>
         <interval
