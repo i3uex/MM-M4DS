@@ -9,6 +9,9 @@
 [if (aContract._in->exists(df | df.oclIsTypeOf(DataField)))]															[comment OPEN checks that the contract data input is a DataField/]
 	[for (odf : Object | aContract._in->select(odf | odf.oclIsTypeOf(DataField)))]
     	[let df : DataField = odf.oclAsType(DataField)]
+			[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
+			[/if]
 [comment]The contracts below are of type FieldRange[/comment]
 			[if (aContract.oclIsTypeOf(FieldRange))]																	[comment OPEN checks that the contract is of type FieldRange (usually a Pre or Post condition)/]
 				[let fr : FieldRange = aContract.oclAsType(FieldRange)]													[comment OPEN assigns the variable to be of type FieldRange/]
@@ -184,6 +187,11 @@ else:
 				[if (aContract.type=ContractType::PRECONDITION)]															[comment OPEN checks if it is a Precondition/]					
 					[for (dd_in : Workflow::DataDictionary | aContract.eContainer(Workflow::DataProcessing).inputPort)]		[comment OPEN traverse all the input DataDictionaries/]
 field_list_[fr.fieldRangeDef.name/]=['['/][for (field : Field | fr.field) separator(', ')]'[field.dataField.displayName/]'[/for][']'/]
+						[for (field : Field | fr.field)]	
+							[if (field.dataField.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [field.dataField.oclAsType(Continuous).numDecimals/], '[field.dataField.displayName/]')
+							[/if]
+						[/for]
 if contract_pre_post.check_field_range(fields=field_list_[fr.fieldRangeDef.name/],
 							data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
 							belong_op=Belong([if (fr.belongOp=BelongOp::BELONG)]0[else]1[/if]), origin_function="[aContract.eContainer(DataProcessing).origin_function/]"):
@@ -485,6 +493,9 @@ else:
 [let cond : Condition = aContract.oclAsType(Condition)]																													[comment OPEN assigns the contract to be of type Condition (Invariants)/]
 	[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 		[let df : DataField = odf.oclAsType(DataField)]																													[comment OPEN assigns the variable to be of type DataField/]
+			[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
+			[/if]
 			[let firstIf : If = cond._if->first()]																														[comment OPEN assigns the variable to be the first If/]
 				[if (firstIf.belongOp=BelongOp::BELONG)]																												[comment OPEN checks that belongOp_in is BELONG/]
 [comment]The code below generates the call to invariants of type FixValue-FixValue[/comment]
@@ -576,6 +587,9 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 				[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																									[comment OPEN checks that the input is a DataField/]
 					[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 						[let df : DataField = odf.oclAsType(DataField)]																									[comment OPEN assigns the variable to be of type DataField/]
+							[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
+							[/if]
 							[for (dde : DataDictionaryElement | if_cond.dataCondition)]
 								[if (dde.oclIsKindOf(RowValue))]
 									[let v : RowValue = dde.oclAsType(RowValue)]
@@ -640,6 +654,9 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 			[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																										[comment OPEN checks that the input is a DataField/]
 				[for (odf : Object | cond.out->select(odf | odf.oclIsTypeOf(DataField)))]
 					[let df : DataField = odf.oclAsType(DataField)]																										[comment OPEN assigns the variable to be of type DataField/]
+						[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([df.dataField._in.eContainer(Workflow::DataDictionary)->first().name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
+						[/if]
 						[let th : Then = if_cond._then.oclAsType(Then)]																									[comment OPEN assigns the variable to be of type Then/]
 							[for (dde : DataDictionaryElement | if_cond.dataCondition)]
 								[if (dde.oclIsKindOf(RowValue))]
@@ -670,6 +687,9 @@ else:
 				[/for]
 				[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 					[let df : DataField = odf.oclAsType(DataField)]																												[comment OPEN assigns the variable to be of type DataField/]
+						[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
+						[/if]
 						[let th : Then = if_cond._then.oclAsType(Then)]																											[comment OPEN assigns the variable to be of type Then/]
 							[for (dde : DataDictionaryElement | if_cond.dataCondition)]
 								[if (dde.oclIsKindOf(RowValue))]
