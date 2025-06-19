@@ -9,7 +9,7 @@
 [if (aContract._in->exists(df | df.oclIsTypeOf(DataField)))]															[comment OPEN checks that the contract data input is a DataField/]
 	[for (odf : Object | aContract._in->select(odf | odf.oclIsTypeOf(DataField)))]
     	[let df : DataField = odf.oclAsType(DataField)]
-			[if (df.oclIsTypeOf(Continuous))]
+			[if (df.oclIsTypeOf(Continuous) and df.dataField.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
 			[/if]
 [comment]The contracts below are of type FieldRange[/comment]
@@ -493,7 +493,7 @@ else:
 [let cond : Condition = aContract.oclAsType(Condition)]																													[comment OPEN assigns the contract to be of type Condition (Invariants)/]
 	[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 		[let df : DataField = odf.oclAsType(DataField)]																													[comment OPEN assigns the variable to be of type DataField/]
-			[if (df.oclIsTypeOf(Continuous))]
+			[if (df.oclIsTypeOf(Continuous) and df.dataField.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
 			[/if]
 			[let firstIf : If = cond._if->first()]																														[comment OPEN assigns the variable to be the first If/]
@@ -587,7 +587,7 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 				[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																									[comment OPEN checks that the input is a DataField/]
 					[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 						[let df : DataField = odf.oclAsType(DataField)]																									[comment OPEN assigns the variable to be of type DataField/]
-							[if (df.oclIsTypeOf(Continuous))]
+							[if (df.oclIsTypeOf(Continuous) and df.dataField.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
 							[/if]
 							[for (dde : DataDictionaryElement | if_cond.dataCondition)]
@@ -654,7 +654,7 @@ raise Exception("It is not yet contemplated to have an invariant with data dicti
 			[if (cond._in->exists(df | df.oclIsTypeOf(DataField)))]																										[comment OPEN checks that the input is a DataField/]
 				[for (odf : Object | cond.out->select(odf | odf.oclIsTypeOf(DataField)))]
 					[let df : DataField = odf.oclAsType(DataField)]																										[comment OPEN assigns the variable to be of type DataField/]
-						[if (df.oclIsTypeOf(Continuous))]
+						[if (df.oclIsTypeOf(Continuous) and df.dataField.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([df.dataField._in.eContainer(Workflow::DataDictionary)->first().name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
 						[/if]
 						[let th : Then = if_cond._then.oclAsType(Then)]																									[comment OPEN assigns the variable to be of type Then/]
@@ -687,7 +687,7 @@ else:
 				[/for]
 				[for (odf : Object | cond._in->select(odf | odf.oclIsTypeOf(DataField)))]
 					[let df : DataField = odf.oclAsType(DataField)]																												[comment OPEN assigns the variable to be of type DataField/]
-						[if (df.oclIsTypeOf(Continuous))]
+						[if (df.oclIsTypeOf(Continuous) and df.dataField.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([df.dataField.eContainer(Workflow::DataDictionary).name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.dataField.oclAsType(Continuous).numDecimals/], '[df.dataField.displayName/]')
 						[/if]
 						[let th : Then = if_cond._then.oclAsType(Then)]																											[comment OPEN assigns the variable to be of type Then/]
