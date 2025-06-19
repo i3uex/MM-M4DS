@@ -29,6 +29,7 @@ import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -351,6 +352,7 @@ import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -707,6 +709,7 @@ generateWorkflow()
 import pandas as pd
 import numpy as np
 import functions.data_transformations as data_transformations
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -978,7 +981,9 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 data_type_input_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (map.mapOperation=MapOperation::VALUE_MAPPING)]MapOperation(0)[elseif (map.mapOperation=MapOperation::SUBSTRING)]MapOperation(1)[/if][/let][/if][/for][']'/]
-
+					[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+					[/if]
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = data_type_input_list,
@@ -1066,7 +1071,9 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 						[if dd_in.datafield->notEmpty()]																												[comment OPEN checks that there is at least DataField/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[mv.value/]'[else][mv.value/][/if][/for][']'/]
-
+								[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+								[/if]
 								[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]																	[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 					            	[if (imType.oclIsKindOf(FixValue))]																									[comment OPEN checks that the ImputeType is a FixValue/]
 		        	    				[let fv : FixValue = imType.oclAsType(FixValue)]																				[comment OPEN assigns the ImputeType as a FixValue/]
@@ -1175,6 +1182,9 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse all the input DataDictionaries (in theory there is only 1)/]
 							[if dd_in.datafield->notEmpty()]																											[comment OPEN checks that there is at least DataField/]
 								[for (df : DataField | dd_in.datafield)]																								[comment OPEN traverse all the DataFields in the input DataDictionary/]
+									[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+									[/if]
 									[for (interval : Interval | binner.interval)]																						[comment OPEN traverse all the intervals in the binner/]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
@@ -1220,6 +1230,9 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[let cast : CastType = p.oclAsType(CastType)]																										[comment OPEN assigns the variable to be a CastType/]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse the input DataDictionaries/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse the DataFields/]
+								[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
 																field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
@@ -1250,7 +1263,11 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 						[let fValue : FilterValue = p.oclAsType(FilterValue)]																							[comment OPEN assigns the variable to be a FilterValue/]
 columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
-
+						[for (df : DataField | dd_in.datafield)]
+							[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+							[/if]
+						[/for]
 							[if (not fValue.primitive->isEmpty())]																										[comment OPEN checks that the list of primitives is not empty/]
 filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][if (prim.dataType.toString() = 'String' or prim.dataType.toString() = 'Date' or prim.dataType.toString() = 'DateTime')]'[prim.value/]'[else][prim.value/][/if][/for][']'/]
 
@@ -1309,7 +1326,11 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 					[let field : FieldRange = p.oclAsType(FieldRange)]																											[comment OPEN assigns the variable to be a field/]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse all the input DataDictionaries/]
 field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
-
+							[for (df : DataField | dd_in.datafield)]
+								[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+								[/if]
+							[/for]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																columns=field_list_[field.fieldDef.name/], belong_op=Belong.[field.operator/])
 
@@ -1338,6 +1359,9 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 					[let mathOp : MathOp = p.oclAsType(MathOp)]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
+								[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
 															[for (operand : Operand | mathOp.operand)][if (operand.next_operand<>null)][if (operand.oclIsKindOf(Field))][let fop : Field = operand.oclAsType(Field)]firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,[/let][else][let fop : FixValue = operand.oclAsType(FixValue)]firstOperand=[fop.value.value/], isFieldFirst=False,[/let][/if][if (operand.next_operand.oclIsKindOf(Field))][let sop : Field = operand.next_operand.oclAsType(Field)]secondOperand='[sop.datafield.displayName/]', isFieldSecond=True[/let][else][let sop : FixValue = operand.next_operand.oclAsType(FixValue)]secondOperand=[sop.value.value/], isFieldSecond=False[/let][/if][/if][/for])
@@ -1370,6 +1394,9 @@ dictionary_[join.joinDef.name/]={[for (operand : Operand | join.operand)][if (op
 
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
+								[if (df.oclIsTypeOf(Continuous))]
+data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_join(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																dictionary=dictionary_[join.joinDef.name/], field_out='[df.displayName/]')
 
