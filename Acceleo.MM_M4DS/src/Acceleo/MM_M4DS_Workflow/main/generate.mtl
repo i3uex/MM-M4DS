@@ -1071,6 +1071,7 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 						[if dd_in.datafield->notEmpty()]																												[comment OPEN checks that there is at least DataField/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[mv.value/]'[else][mv.value/][/if][/for][']'/]
+data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, missing_invalid_list=missing_values_list, common_missing_invalid_list=['['/]'', '?', '.','null','none','na'[']'/], field='[df.displayName/]')
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
 data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
