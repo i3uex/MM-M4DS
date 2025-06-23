@@ -21,16 +21,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifdefinition" lowerBound="1"
         upperBound="-1" eType="#//IfDefinition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RangeDefinition" abstract="true" eSuperTypes="#//ContractDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RangeDefinition" abstract="true" eSuperTypes="#//ContractDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="IfDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="thendefinition" lowerBound="1"
         eType="#//ThenDefinition" eOpposite="#//ThenDefinition/ifdefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataCondition" lowerBound="1"
         upperBound="-1" eType="#//ValueDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThenDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifdefinition" lowerBound="1"
@@ -38,7 +35,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataResult" lowerBound="1"
         eType="#//ValueDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="belongOp" eType="#//BelongOp"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueRangeDefinition" eSuperTypes="#//RangeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="valuedefinition" lowerBound="1"
@@ -85,10 +81,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SpecialValueDef" eSuperTypes="#//ValueDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//SpecialValue"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="BelongOp">
-    <eLiterals name="BELONG"/>
-    <eLiterals name="NOTBELONG" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MathOpDef" eSuperTypes="#//ValueDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operanddef" lowerBound="2"
