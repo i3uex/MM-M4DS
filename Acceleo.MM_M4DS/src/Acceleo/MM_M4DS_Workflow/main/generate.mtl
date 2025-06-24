@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'http://www.example.org/Library', 'https://www.example.org/environment')]
+[module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'http://www.example.org/Library', 'https://www.example.org/environment', 'https://www.example.org/contractDef')]
 
 [import Acceleo::MM_M4DS_contract::main::generate/]
 
@@ -29,6 +29,7 @@ import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
 import functions.data_transformations as data_transformations
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -45,26 +46,41 @@ def generateWorkflow():
 	#-----------------New DataProcessing-----------------
 						[for (dc : DataDictionary | ps.inputPort)]																							[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks that the environment is local/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet('[if (ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.startsWith('.'))][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path/][/if]/data/[if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if]')[else]pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')[/if]
 							[/if]																															[comment CLOSE checks that the environment is local/]
 
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																								[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]																			[comment OPEN assigns the variable to be of type DataProcessing/]
+	[generateDataSmells(d)/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::PRECONDITION)]																		[comment OPEN checks if the if the contract is a Precondition/]
+									[if (c.contract.oclIsTypeOf(ValueRange))]
+										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																													[comment CLOSE checks if the if the contract is a Precondition/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+									[elseif (c.contract.oclIsTypeOf(FieldRange))]
+										[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+									[/if]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d, d)/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::POSTCONDITION)]																		[comment OPEN checks if the if the contract is a Postcondition/]
+									[if (c.contract.oclIsTypeOf(ValueRange))]
+										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
+									[elseif (c.contract.oclIsTypeOf(FieldRange))]
+										[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
 									[/if]																													[comment CLOSE checks if the if the contract is a Postcondition/]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::INVARIANT)]																			[comment OPEN checks if the if the contract is a Invariant/]
+									[if (c.contract.oclIsTypeOf(Condition))]
+										[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
 									[/if]																													[comment CLOSE checks if the if the contract is a Invariant/]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 							[/let]																															[comment CLOSE assigns the variable to be of type DataProcessing/]
@@ -82,7 +98,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environmenr/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -104,20 +120,35 @@ def generateWorkflow():
 									[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]															[comment OPEN assigns the variables to be a DataProcessing/]
 										[if (ps.oclIsKindOf(DataProcessing))]																				[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 											[let d : DataProcessing = ps.oclAsType(DataProcessing)]															[comment OPEN assigns the variables to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::PRECONDITION)]														[comment OPEN checks if the if the contract is a Precondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-													[/if]																									[comment CLOSE checks if the if the contract is a Precondition/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[/if]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dataP, d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if the if the contract is a Postcondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Postcondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Postcondition/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::INVARIANT)]															[comment OPEN checks if the if the contract is a Invariant/]
+													[if (c.contract.oclIsTypeOf(Condition))]
+														[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Invariant/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Invariant/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 											[/let]																											[comment CLOSE assigns the variables to be a DataProcessing/]
@@ -153,7 +184,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variables to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variables to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -175,20 +206,35 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::PRECONDITION)]														[comment OPEN checks if the if the contract is a Precondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-													[/if]																									[comment CLOSE checks if the if the contract is a Precondition/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[/if]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dataP, d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if the if the contract is a Postcondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Postcondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Postcondition/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::INVARIANT)]															[comment OPEN checks if the if the contract is a Invariant/]
+													[if (c.contract.oclIsTypeOf(Condition))]
+														[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Invariant/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Invariant/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 											[/let]																											[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -226,14 +272,14 @@ generateWorkflow()
 [if (pstep.incoming <> null)]																		[comment OPEN checks that it is not the first data processing/]
 	[if (pstep.incoming.source.dataProcessingDefinition.name<>'split')]								[comment OPEN checks if the operation is not split/]
 		[for (dd_in : DataDictionary | pstep.inputPort)]											[comment OPEN traverse all the input datasets in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.name.replaceAll('[(),-/\\s]+', '_')/])
+	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dd_in.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 		[/for]																						[comment CLOSE traverse all the input datasets in the ProcessingStep/]
 
 	[else]																							[comment OPEN checks that the operation is split/]
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]											[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 				[/if]																				[comment CLOSE checks that both datasets are the same/]
 			[/for]																					[comment CLOSE read the previous DataProcessing output datasets/]
 		[/for]																						[comment CLOSE read all the input datasets and store them/]
@@ -241,7 +287,7 @@ generateWorkflow()
 [else]																								[comment OPEN checks if it is the first data processing/]
 	[for (dc : DataDictionary | pstep.inputPort)]													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 		[/if]																						[comment CLOSE checks if it is a local file/]
 
 	[/for]																							[comment CLOSE read all the input datasets and store them/]
@@ -250,20 +296,35 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]														[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]								[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::PRECONDITION)]								[comment OPEN checks if the if the contract is a Precondition/]
+					[if (c.contract.oclIsTypeOf(ValueRange))]
+						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d_or)/]
-					[/if]																			[comment CLOSE checks if the if the contract is a Precondition/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+					[elseif (c.contract.oclIsTypeOf(FieldRange))]
+						[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+					[/if]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(dw, d_or)/]	
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::POSTCONDITION)]								[comment OPEN checks if the if the contract is a Postcondition/]
+					[if (c.contract.oclIsTypeOf(ValueRange))]
+						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Postcondition/]
+					[elseif (c.contract.oclIsTypeOf(FieldRange))]
+						[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
 					[/if]																			[comment CLOSE checks if the if the contract is a Postcondition/]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::INVARIANT)]									[comment OPEN checks if the if the contract is a Invariant/]
+					[if (c.contract.oclIsTypeOf(Condition))]
+						[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
 					[/if]																			[comment CLOSE checks if the if the contract is a Invariant/]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 			[/let]																					[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -288,7 +349,7 @@ generateWorkflow()
 	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]															[comment OPEN checks that the operation is not split/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
 			[for (dd_in : DataDictionary | ps.inputPort)]																		[comment OPEN traverse all the input datasets in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
+	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]')
 			[/for]																												[comment CLOSE traverse all the input datasets in the ProcessingStep/]
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 
@@ -306,27 +367,42 @@ generateWorkflow()
 [else]																															[comment CLOSE checks that it is not the first data processing/]
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if][/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
 [/if]																															[comment CLOSE checks whether it is the first data processing or not/]
 [if (ps.oclIsKindOf(DataProcessing))]																							[comment OPEN checks that the ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																		[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
+			[if (c.contract.oclIsTypeOf(ValueRange))]
+				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-			[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
+			[elseif (c.contract.oclIsTypeOf(FieldRange))]
+				[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
+			[/if]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[generateCallTransformation(d, d)/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
+			[if (c.contract.oclIsTypeOf(ValueRange))]
+				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Postcondition/]
+			[elseif (c.contract.oclIsTypeOf(FieldRange))]
+				[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
 			[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
+			[if (c.contract.oclIsTypeOf(Condition))]
+				[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Invariant/]
 			[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[/let]																														[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -351,6 +427,7 @@ import pandas as pd
 import numpy as np
 import functions.contract_invariants as contract_invariants
 import functions.contract_pre_post as contract_pre_post
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -367,7 +444,7 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]															[comment OPEN assigns the variable to be a Transformation/]
 						[for (dc : DataDictionary | ps.inputPort)]																							[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																					[comment OPEN checks if it is a container/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if][/if]')
 							[/if]																															[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
@@ -380,19 +457,34 @@ def generateWorkflow():
 						[/for]																																[comment CLOSE read all the output datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																								[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]																			[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::PRECONDITION)]																		[comment OPEN checks if the if the contract is a Precondition/]
+									[if (c.contract.oclIsTypeOf(ValueRange))]
+										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-									[/if]																													[comment CLOSE checks if the if the contract is a Precondition/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+									[elseif (c.contract.oclIsTypeOf(FieldRange))]
+										[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+									[/if]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::POSTCONDITION)]																		[comment OPEN checks if the if the contract is a Postcondition/]
+									[if (c.contract.oclIsTypeOf(ValueRange))]
+										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
+									[elseif (c.contract.oclIsTypeOf(FieldRange))]
+										[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]					[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
 									[/if]																													[comment CLOSE checks if the if the contract is a Postcondition/]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
-									[if (c.contract.type=ContractType::INVARIANT)]																			[comment OPEN checks if the if the contract is a Invariant/]
+									[if (c.contract.oclIsTypeOf(Condition))]
+										[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]							[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+										[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
 									[/if]																													[comment CLOSE checks if the if the contract is a Invariant/]
 								[/for]																														[comment CLOSE traverse all the contracts in the DataProcessing/]
 							[/let]																															[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -410,7 +502,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -432,19 +524,34 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::PRECONDITION)]														[comment OPEN checks if the if the contract is a Precondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-													[/if]																									[comment CLOSE checks if the if the contract is a Precondition/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[/if]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if the if the contract is a Postcondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Postcondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Postcondition/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::INVARIANT)]															[comment OPEN checks if the if the contract is a Invariant/]
+													[if (c.contract.oclIsTypeOf(Condition))]
+														[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Invariant/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Invariant/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 											[/let]																											[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -484,7 +591,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																							[comment OPEN checks if the argument is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]																[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]																			[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																														[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																															[comment CLOSE checks if the argument is a DataDictionary/]
@@ -506,19 +613,34 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::PRECONDITION)]														[comment OPEN checks if the if the contract is a Precondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-													[/if]																									[comment CLOSE checks if the if the contract is a Precondition/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
+													[/if]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::POSTCONDITION)]														[comment OPEN checks if the if the contract is a Postcondition/]
+													[if (c.contract.oclIsTypeOf(ValueRange))]
+														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Postcondition/]
+													[elseif (c.contract.oclIsTypeOf(FieldRange))]
+														[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Precondition/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Postcondition/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
-													[if (c.contract.type=ContractType::INVARIANT)]															[comment OPEN checks if the if the contract is a Invariant/]
+													[if (c.contract.oclIsTypeOf(Condition))]
+														[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+														[/if]																								[comment CLOSE checks if the if the contract is a Invariant/]
 													[/if]																									[comment CLOSE checks if the if the contract is a Invariant/]
 												[/for]																										[comment CLOSE traverse all the contracts in the DataProcessing/]
 											[/let]																											[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -563,7 +685,7 @@ generateWorkflow()
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]							[comment OPEN checks if it is a local file/]
 	if os.path.exists([dc.name.replaceAll('[(),-/\\s]+', '_')/]):
-		[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
+		[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 						
 			[/if]																					[comment CLOSE checks if it is a local file/]
 		[/for]																						[comment CLOSE read all the input datasets and store them/]
@@ -579,7 +701,7 @@ generateWorkflow()
 		[for (dc : DataDictionary | pstep.inputPort)]												[comment OPEN read all the input datasets and store them/]
 			[for (dc_out : DataDictionary | pstep.incoming.source.outputPort)]						[comment OPEN read the previous DataProcessing output datasets/]
 				[if (dc.fileName.trim() = dc_out.fileName)]											[comment OPEN checks that both datasets are the same/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 
 				[/if]																				[comment CLOSE checks that both datasets are the same/]
 			[/for]																					[comment CLOSE read the previous DataProcessing output datasets/]
@@ -588,7 +710,7 @@ generateWorkflow()
 [else]																								[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | pstep.inputPort)]													[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]								[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet([ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().name.replaceAll('[(),-/\\s]+', '_')/])[else]pd.read_parquet([dc.name.replaceAll('[(),-/\\s]+', '_')/])[/if]
 		[/if]
 
 	[/for]																							[comment CLOSE read all the input datasets and store them/]
@@ -604,19 +726,34 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]								[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::PRECONDITION)]								[comment OPEN checks if the if the contract is a Precondition/]
+					[if (c.contract.oclIsTypeOf(ValueRange))]
+						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d_or)/]
-					[/if]																			[comment CLOSE checks if the if the contract is a Precondition/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+					[elseif (c.contract.oclIsTypeOf(FieldRange))]
+						[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
+					[/if]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::POSTCONDITION)]								[comment OPEN checks if the if the contract is a Postcondition/]
+					[if (c.contract.oclIsTypeOf(ValueRange))]
+						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Postcondition/]
+					[elseif (c.contract.oclIsTypeOf(FieldRange))]
+						[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]	[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Precondition/]
 					[/if]																			[comment CLOSE checks if the if the contract is a Postcondition/]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
-					[if (c.contract.type=ContractType::INVARIANT)]									[comment OPEN checks if the if the contract is a Invariant/]
+					[if (c.contract.oclIsTypeOf(Condition))]
+						[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]			[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d_or)/]
+						[/if]																		[comment CLOSE checks if the if the contract is a Invariant/]
 					[/if]																			[comment CLOSE checks if the if the contract is a Invariant/]
 				[/for]																				[comment CLOSE traverse all the contracts in the DataProcessing/]
 			[/let]																					[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -641,7 +778,7 @@ generateWorkflow()
 	[if (ps.incoming.source.dataProcessingDefinition.name<>'split')]															[comment OPEN checks that the operation is not split/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and/]
 			[for (dd_in : DataDictionary | ps.inputPort)]																		[comment OPEN traverse all the input DataDictionaries in the ProcessingStep/]
-	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')
+	[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df=[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet('[if (ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.startsWith('.'))][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path/][/if]/data/[if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if]')[else]pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]')[/if]
 			[/for]																												[comment CLOSE traverse all the input DataDictionaries in the ProcessingStep/]
 		[/if]																													[comment CLOSE checks if it is a local file/]
 
@@ -660,7 +797,7 @@ generateWorkflow()
 [else]																															[comment OPEN checks that there is not a previous DataProcessing/]
 	[for (dc : DataDictionary | ps.inputPort)]																					[comment OPEN read all the input datasets and store them/]
 		[if (ps.eContainer(Workflow).environment.oclIsKindOf(Local))]															[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.startsWith('.'))][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.eContainer(Workflow).environment.path/][/if]/data/[if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (ps.eContainer(Workflow).environment.path.startsWith('.'))][ps.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][ps.eContainer(Workflow).environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if][/if]')
 		[/if]																													[comment CLOSE checks if it is a local file and a container or a local environment/]
 	[/for]																														[comment CLOSE read all the input datasets and store them/]
 [/if]																															[comment CLOSE checks if there is a previous DataProcessingor not/]
@@ -673,19 +810,34 @@ generateWorkflow()
 [/for]																															[comment CLOSE read all the output datasets and store them/]
 [if (ps.oclIsKindOf(DataProcessing))]																							[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																		[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::PRECONDITION)]																	[comment OPEN checks if the if the contract is a Precondition/]
+			[if (c.contract.oclIsTypeOf(ValueRange))]
+				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
 	[generateCallContract(c.contract, d)/]
-			[/if]																												[comment CLOSE checks if the if the contract is a Precondition/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
+			[elseif (c.contract.oclIsTypeOf(FieldRange))]
+				[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
+	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
+			[/if]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::POSTCONDITION)]																	[comment OPEN checks if the if the contract is a Postcondition/]
+			[if (c.contract.oclIsTypeOf(ValueRange))]
+				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
 	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Postcondition/]
+			[elseif (c.contract.oclIsTypeOf(FieldRange))]
+				[if (c.contract.oclAsType(Contract::FieldRange).fieldRangeDef.type=ContractType::POSTCONDITION)]				[comment OPEN checks if the if the contract is a Postcondition/]
+	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Precondition/]
 			[/if]																												[comment CLOSE checks if the if the contract is a Postcondition/]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
-			[if (c.contract.type=ContractType::INVARIANT)]																		[comment OPEN checks if the if the contract is a Invariant/]
+			[if (c.contract.oclIsTypeOf(Condition))]
+				[if (c.contract.oclAsType(Contract::Condition).conditionDef.type=ContractType::INVARIANT)]						[comment OPEN checks if the if the contract is a Invariant/]
 	[generateCallContract(c.contract, d)/]
+				[/if]																											[comment CLOSE checks if the if the contract is a Invariant/]
 			[/if]																												[comment CLOSE checks if the if the contract is a Invariant/]
 		[/for]																													[comment CLOSE traverse all the contracts in the DataProcessing/]
 	[/let]																														[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -707,6 +859,7 @@ generateWorkflow()
 import pandas as pd
 import numpy as np
 import functions.data_transformations as data_transformations
+import functions.data_smells as data_smells
 from helpers.enumerations import Belong, Operator, Operation, SpecialType, DataType, DerivedType, Closure, FilterType, MapOperation, MathOperator
 from helpers.logger import set_logger
 import pyarrow
@@ -723,12 +876,14 @@ def generateWorkflow():
 					[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]										[comment OPEN assigns the variable to be a Tranformation/]
 						[for (dc : DataDictionary | ps.inputPort)]																		[comment OPEN read all the input datasets and store them/]
 							[if (aWorkflow.environment.oclIsKindOf(Local))]																[comment OPEN checks if it is a local file and a container/]
-	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if]')
+	[dc.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dc.fileName.trim().indexOf('.')>0)][dc.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dc.fileName.trim()/].parquet[/if][/if]')
 							[/if]																										[comment CLOSE checks if it is a local file and a container or a local environment/]
 
 						[/for]																											[comment CLOSE read all the input datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]														[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
+
 	[generateCallTransformation(d, d)/]
 							[/let]																										[comment CLOSE assigns the variable to be a DataProcessing/]
 						[/if]																											[comment CLOSE checks if the actual ProcessingStep is a DataProcessing/]
@@ -745,7 +900,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -766,6 +921,8 @@ def generateWorkflow():
 									[if (pstep.oclIsKindOf(DataProcessing))]															[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 										[let dp : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 											[if (pstep.incoming = null and pstep.outgoing=null)]										[comment OPEN checks if it is isolated/]
+[generateDataSmells(d)/]
+
 [generateCallTransformation(dp, d)/]
 											[/if]																						[comment CLOSE checks if it is isolated/]
 										[/let]																							[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -800,7 +957,7 @@ def generateWorkflow():
 							[if (arg.oclIsKindOf(DataDictionary))]																		[comment OPEN checks if it is a DataDictionary/]
 								[let dd_in : DataDictionary = arg.oclAsType(DataDictionary)]											[comment OPEN assigns the variable to be a DataDictionary/]
 									[if (aWorkflow.environment.oclIsKindOf(Local))]														[comment OPEN checks if it is a local file and a container/]
-	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if]'
+	[dd_in.dataDictionaryDefinition.boundTo.name.replaceAll('[(),-/\\s]+', '_')/]='[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if not ps.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()][if (ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim().indexOf('.')>0)][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][ps.oclAsType(DataProcessing).initial_accumulated_processing.inputPort->first().fileName.trim()/].parquet[/if][else][if (dd_in.fileName.trim().indexOf('.')>0)][dd_in.fileName.replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.fileName.trim()/].parquet[/if][/if]'
 									[/if]																								[comment CLOSE checks if it is a local file and a container or a local environment/]
 								[/let]																									[comment CLOSE assigns the variable to be a DataDictionary/]
 							[/if]																										[comment CLOSE checks if it is a DataDictionary/]
@@ -821,6 +978,8 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]												[comment OPEN checks if it is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dp : DataProcessing = pstep.oclAsType(DataProcessing)]									[comment OPEN assigns the variable to be a DataProcessing/]
+[generateDataSmells(d)/]
+
 [generateCallTransformation(dp, d)/]
 											[/let]																						[comment CLOSE assigns the variable to be a DataProcessing/]
 										[/if]																							[comment CLOSE checks if the original ProcessingStep is a DataProcessing/]
@@ -884,6 +1043,8 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]									[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]													[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]							[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
+
 	[generateCallTransformation(dw, d_or)/]
 			[/let]																				[comment CLOSE assigns the variable to be a DataProcessing/]
 		[/if]																					[comment CLOSE checks if the actual ProcessingStep is a DataProcessing/]
@@ -931,6 +1092,8 @@ generateWorkflow()
 [/if]																																							[comment CLOSE checks if there is an incoming link or not/]
 [if (ps.oclIsKindOf(DataProcessing))]																															[comment OPEN checks if the ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																										[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
+
 	[generateCallTransformation(d, d)/]
 	[/let]																																						[comment CLOSE assigns the variable to be a DataProcessing/]
 [elseif (ps.oclIsKindOf(PMMLModel))]																															[comment OPEN checks if the ProcessingStep is a PMMLModel/]
@@ -978,7 +1141,8 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 data_type_input_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (map.mapOperation=MapOperation::VALUE_MAPPING)]MapOperation(0)[elseif (map.mapOperation=MapOperation::SUBSTRING)]MapOperation(1)[/if][/let][/if][/for][']'/]
-
+					[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+					[/if]
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, input_values_list=input_values_list,
 															  output_values_list=output_values_list,
 						                                      data_type_input_list = data_type_input_list,
@@ -1031,16 +1195,43 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 [comment]The code below generates the transformations different from mapping for every field[/comment]
 	[if (dataProcessing.dataProcessingDefinition.name<>'mapping')]																									[comment OPEN checks that the DataProcessing is not a Mapping/]
 		[for (dd_in : DataDictionary | dataProcessing.inputPort)]																										[comment OPEN traverse all the input DataDictionaries/]
-[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df.copy()
+[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=[if not dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing->isEmpty()]pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim().indexOf('.')>0)][dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dataProcessing.oclAsType(DataProcessing).initial_accumulated_processing.outputPort->first().fileName.trim()/].parquet[/if]')[else][dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df.copy()[/if]
 		[/for]																																							[comment CLOSE traverse all the input DataDictionaries/]
 		[for (p : Parameter | dataProcessing.parameter)]																												[comment OPEN traverse all the parameters in the DataProcessing/]
+			[if (p.oclIsKindOf(DerivedField))]																															[comment OPEN checks that the parameter is a DerivedField/]
+				[let derf : DerivedField = p.oclAsType(DerivedField)]																									[comment OPEN assigns the parameter to be a DerivedField/]
+					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
+[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
+															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
+															  field_in = '[derf.der_dataField._in->first().displayName/]', field_out = '[derf.der_dataField.displayName/]')
+
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+								[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
+										[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+										[/if]																															[comment CLOSE checks if the Environment is Local/]
+									[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
+								[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])
+								[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+							[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+						[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
+					[/for]																																				[comment CLOSE traverse all the input DataDictionaries/]
+				[/let]																																					[comment CLOSE assigns the parameter to be a DerivedField/]
+			[/if]																																						[comment CLOSE checks that the parameter is a DerivedField/]
 		    [if (p.oclIsKindOf(ImputeType))]																															[comment OPEN checks that the parameter is an ImputeType/]
 		        [let imType : ImputeType = p.oclAsType(ImputeType)]																										[comment OPEN assigns the parameter to be an ImputeType/]
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse all the input DataDictionaries (in theory there is only 1)/]
 						[if dd_in.datafield->notEmpty()]																												[comment OPEN checks that there is at least DataField/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[mv.value/]'[else][mv.value/][/if][/for][']'/]
-
+								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+								[/if]
 								[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]																	[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 					            	[if (imType.oclIsKindOf(FixValue))]																									[comment OPEN checks that the ImputeType is a FixValue/]
 		        	    				[let fv : FixValue = imType.oclAsType(FixValue)]																				[comment OPEN assigns the ImputeType as a FixValue/]
@@ -1149,6 +1340,8 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse all the input DataDictionaries (in theory there is only 1)/]
 							[if dd_in.datafield->notEmpty()]																											[comment OPEN checks that there is at least DataField/]
 								[for (df : DataField | dd_in.datafield)]																								[comment OPEN traverse all the DataFields in the input DataDictionary/]
+									[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+									[/if]
 									[for (interval : Interval | binner.interval)]																						[comment OPEN traverse all the intervals in the binner/]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															  left_margin=[interval.leftMargin/], right_margin=[interval.rightMargin/],
@@ -1189,40 +1382,16 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[/let]																																				[comment OPEN assigns the parameter to be an DiscretizeBin/]
 				[/if]																																					[comment CLOSE checks that the parameter is an DiscretizeBin/]
 			[/if]																																						[comment CLOSE checks that the DataProcessing is a Binner (interval_FixValue)/]
-			[if (p.oclIsKindOf(DerivedField))]																															[comment OPEN checks that the parameter is a DerivedField/]
-				[let derf : DerivedField = p.oclAsType(DerivedField)]																									[comment OPEN assigns the parameter to be a DerivedField/]
-					[for (dd_in : DataDictionary | dataProcessing.inputPort)]																							[comment OPEN traverse al the input DataDictionaries/]
-[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_derived_field(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
-															  data_type_output = [if (derf.der_dataField.dataType=DataType::String)]DataType(0)[elseif (derf.der_dataField.dataType=DataType::Time)]DataType(1)[elseif (derf.der_dataField.dataType=DataType::Integer)]DataType(2)[elseif (derf.der_dataField.dataType=DataType::DateTime)]DataType(3)[elseif (derf.der_dataField.dataType=DataType::Boolean)]DataType(4)[elseif (derf.der_dataField.dataType=DataType::Double)]DataType(5)[elseif (derf.der_dataField.dataType=DataType::Float)]DataType(6)[else]None[/if],
-															  field_in = '[derf.der_dataField._in.displayName/]', field_out = '[derf.der_dataField.displayName/]')
-
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
-						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
-							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
-								[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
-									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
-										[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
-										[/if]																															[comment CLOSE checks if the Environment is Local/]
-									[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
-								[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])	
-[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])
-								[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
-							[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
-						[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
-					[/for]																																				[comment CLOSE traverse all the input DataDictionaries/]
-				[/let]																																					[comment CLOSE assigns the parameter to be a DerivedField/]
-			[/if]																																						[comment CLOSE checks that the parameter is a DerivedField/]
 			[if (dataProcessing.dataProcessingDefinition.name='categoricalToContinuous')]																				[comment OPEN checks that the DataProcessing is categoricalToContinuous(StringToNumber)/]
 				[if (p.oclIsKindOf(CastType))]																															[comment OPEN checks that the parameter is a CastType/]
 					[let cast : CastType = p.oclAsType(CastType)]																										[comment OPEN assigns the variable to be a CastType/]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse the input DataDictionaries/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse the DataFields/]
+								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
-																field='[df.displayName/]')
+																field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 
 							[/for]																																		[comment CLOSE traverse the DataFields/]
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
@@ -1250,7 +1419,10 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 						[let fValue : FilterValue = p.oclAsType(FilterValue)]																							[comment OPEN assigns the variable to be a FilterValue/]
 columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
-
+						[for (df : DataField | dd_in.datafield)]
+							[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+							[/if]
+						[/for]
 							[if (not fValue.primitive->isEmpty())]																										[comment OPEN checks that the list of primitives is not empty/]
 filter_fix_value_list_[fValue.filterValueDef.name/]=['['/][for (prim : Primitive | fValue.primitive) separator (', ')][if (prim.dataType.toString() = 'String' or prim.dataType.toString() = 'Date' or prim.dataType.toString() = 'DateTime')]'[prim.value/]'[else][prim.value/][/if][/for][']'/]
 
@@ -1309,7 +1481,10 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 					[let field : FieldRange = p.oclAsType(FieldRange)]																											[comment OPEN assigns the variable to be a field/]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse all the input DataDictionaries/]
 field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
-
+							[for (df : DataField | dd_in.datafield)]
+								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+								[/if]
+							[/for]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																columns=field_list_[field.fieldDef.name/], belong_op=Belong.[field.operator/])
 
@@ -1338,9 +1513,11 @@ field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) 
 					[let mathOp : MathOp = p.oclAsType(MathOp)]
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
+								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
-															[for (operand : Operand | mathOp.operand)][if (operand.next_operand<>null)][if (operand.oclIsKindOf(Field))][let fop : Field = operand.oclAsType(Field)]firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,[/let][else][let fop : FixValue = operand.oclAsType(FixValue)]firstOperand='[fop.value.value/]', isFieldFirst=False,[/let][/if][if (operand.next_operand.oclIsKindOf(Field))][let sop : Field = operand.next_operand.oclAsType(Field)]secondOperand='[sop.datafield.displayName/]', isFieldSecond=True[/let][else][let sop : FixValue = operand.next_operand.oclAsType(FixValue)]secondOperand='[sop.value.value/]', isFieldSecond=False[/let][/if][/if][/for])
+															[for (operand : Operand | mathOp.operand)][if (operand.next_operand<>null)][if (operand.oclIsKindOf(Field))][let fop : Field = operand.oclAsType(Field)]firstOperand='[fop.datafield.displayName/]', isFieldFirst=True,[/let][else][let fop : FixValue = operand.oclAsType(FixValue)]firstOperand=[fop.value.value/], isFieldFirst=False,[/let][/if][if (operand.next_operand.oclIsKindOf(Field))][let sop : Field = operand.next_operand.oclAsType(Field)]secondOperand='[sop.datafield.displayName/]', isFieldSecond=True[/let][else][let sop : FixValue = operand.next_operand.oclAsType(FixValue)]secondOperand=[sop.value.value/], isFieldSecond=False[/let][/if][/if][/for])
 							[/for]
 
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
@@ -1370,6 +1547,8 @@ dictionary_[join.joinDef.name/]={[for (operand : Operand | join.operand)][if (op
 
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
+								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
+								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_join(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																dictionary=dictionary_[join.joinDef.name/], field_out='[df.displayName/]')
 
@@ -1403,6 +1582,38 @@ dictionary_[join.joinDef.name/]={[for (operand : Operand | join.operand)][if (op
 
 [template public joinOperands(operand : Operand)]
 [if (operand.oclIsKindOf(Field))][let field : Field=operand.oclAsType(Field)], '[field.datafield.displayName/]': True[/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)], '[fv.value.value/]': False[/let][/if][if (operand.next_operand<>null)][joinOperands(operand.next_operand)/][/if]
+[/template]
+
+
+[template public generateDataSmells(dataProcessing : DataProcessing)]
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (df.oclIsKindOf(Continuous) and df.oclAsType(Continuous).numDecimals<>null)]
+data_smells.check_precision_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										expected_decimals=[df.oclAsType(Continuous).numDecimals/], field='[df.displayName/]')
+		[/if]
+	[/for]
+[/for]
+
+common_invalid_list=['['/]'inf', '-inf', 'nan'[']'/]
+common_missing_list=['['/]'', '?', '.','null','none','na'[']'/]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+list_missing=['['/][for (v : ValueField | df.missingValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+list_invalid=['['/][for (v : ValueField | df.invalidValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+
+data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, 
+													missing_invalid_list=[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]list_invalid, common_missing_invalid_list=common_invalid_list[elseif (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]list_missing, common_missing_invalid_list=common_missing_list[else]['['/][']'/], common_missing_invalid_list=common_missing_list[/if], field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+
+	[/for]
+[/for]
 [/template]
 
 
@@ -1702,7 +1913,7 @@ from pandas import json_normalize
 			[for (fi : File | f.file)]																						[comment OPEN traverse the files in the folder/]
 				
 				[if (fi.type=FileType::CSV)]																				[comment OPEN checks if the file is csv/]
-[fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]')
+[fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]'[if (fi.csv_thousandsSep<>'""')], thousands = '[fi.csv_thousandsSep/]'[/if], decimal = '[fi.csv_decimalSep/]')
 [fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::EXCEL)]																			[comment OPEN checks if the file is excel/]
 [fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].xlsx[/if]')
