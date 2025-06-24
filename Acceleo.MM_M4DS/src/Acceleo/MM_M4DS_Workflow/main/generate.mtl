@@ -1611,7 +1611,12 @@ data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
 data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
 
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType/])
 	[/for]
 [/for]
 [/template]
