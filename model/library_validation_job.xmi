@@ -212,6 +212,7 @@
         name="rowFilterPrimitive_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterPrimitive_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -281,6 +282,7 @@
         name="columnFilter_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="columnFilter_INV_condition">
         <in
             xsi:type="ContractDefinition:DataDictionaryDef"
@@ -484,6 +486,7 @@
         name="categoricalToContinuous_specialValue_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="categoricalToContinuous_specialValue_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -538,6 +541,7 @@
         name="categoricalToContinuous_castType_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="categoricalToContinuous_castType_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -682,8 +686,7 @@
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="rowFilterRange_POST_valueRange"
-          belongOp="NOTBELONG">
+          name="rowFilterRange_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="rowFilterRange_POST_input_dataField"/>
@@ -696,6 +699,7 @@
         name="rowFilterRange_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterRange_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -758,8 +762,7 @@
         name="mathOperation_PRECONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          name="mathOperation_PRE_valueRange"
-          belongOp="NOTBELONG">
+          name="mathOperation_PRE_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="mathOperation_PRE_input_datafield"/>
@@ -773,8 +776,7 @@
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="mathOperation_POST_valueRange"
-          belongOp="NOTBELONG">
+          name="mathOperation_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="mathOperation_POST_input_datafield"/>
@@ -822,8 +824,7 @@
         name="mathOperation_zeroDivision_PRECONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          name="mathOperation_zeroDivision_PRE_valueRange"
-          belongOp="NOTBELONG">
+          name="mathOperation_zeroDivision_PRE_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="mathOperation_zeroDivision_PRE_input_datafield"/>
@@ -892,6 +893,7 @@
         name="rowFilterMissing_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterMissing_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -954,6 +956,7 @@
         name="join_check_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="join_check_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"

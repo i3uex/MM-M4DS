@@ -183,7 +183,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="POST_value_range_impute_sex_columns"
           belongOp="NOTBELONG">
         <in
@@ -208,7 +207,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="POST_value_range_impute_IRSCHOOL_columns"
           belongOp="NOTBELONG">
         <in
@@ -233,7 +231,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="POST_value_range_impute_ETHNICITY_columns"
           belongOp="NOTBELONG">
         <in
@@ -258,7 +255,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_condition_impute_sex_columns">
         <in
             xsi:type="Contract:DataField"
@@ -306,7 +302,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_condition_impute_IRSCHOOL_columns">
         <in
             xsi:type="Contract:DataField"
@@ -354,7 +349,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.0/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_condition_impute_ETHNICITY_columns">
         <in
             xsi:type="Contract:DataField"
@@ -503,7 +497,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -528,7 +521,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -608,7 +600,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeMissingByFixValue(ACADEMIC_INTEREST_1)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -633,7 +624,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.1/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeMissingByFixValue(ACADEMIC_INTEREST_1)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -822,7 +812,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeMissingByMean(avg_income)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -847,7 +836,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeMissingByMean(distance)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -872,7 +860,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeMissingByMean(avg_income)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -921,7 +908,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeMissingByMean(distance)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -1061,7 +1047,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeMissingByLinearInterpolation(satscore)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -1086,7 +1071,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeMissingByLinearInterpolation(satscore)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -1221,7 +1205,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.2/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="rowFilterRange(init_span)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -1248,7 +1231,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="rowFilterRange(init_span)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -1427,7 +1409,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:FieldRange"
-          type="POSTCONDITION"
           name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_POST_fieldRange"
           belongOp="NOTBELONG">
         <in
@@ -1458,7 +1439,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.3/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_INV_condition">
         <in
             xsi:type="Contract:DataDictionary"
@@ -1605,7 +1585,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="mapping(TERRITORY)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -1637,7 +1616,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="Mapping(TERRITORY)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -1799,7 +1777,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="mapping(Instate)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -1831,7 +1808,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.4/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="mapping(Instate)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -2002,7 +1978,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="stringToNumber(TERRITORY)_POST_valueRange">
         <in
             xsi:type="Contract:DataField"
@@ -2027,7 +2002,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_specialValue_condition_TERRITORY">
         <in
             xsi:type="Contract:DataField"
@@ -2077,7 +2051,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_castType_condition_TERRITORY">
         <in
             xsi:type="Contract:DataField"
@@ -2149,7 +2122,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="stringToNumber(Instate)_POST_valueRange">
         <in
             xsi:type="Contract:DataField"
@@ -2174,7 +2146,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_specialValue_condition_Instate">
         <in
             xsi:type="Contract:DataField"
@@ -2224,7 +2195,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.6/@contractdefinition.0"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_castType_condition_Instate">
         <in
             xsi:type="Contract:DataField"
@@ -2453,7 +2423,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeOutlierByClosest(avg_income)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2479,7 +2448,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeOutlierByClosest(distance)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2505,7 +2473,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="imputeOutlierByClosest(Instate)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2531,7 +2498,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeOutlierByClosest(avg_income)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -2581,7 +2547,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeOutlierByClosest(distance)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -2631,7 +2596,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.5/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="imputeOutlierByClosest(Instate)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -2897,7 +2861,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(TOTAL_CONTACTS)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2924,7 +2887,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(SELF_INIT_CNTCTS)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2951,7 +2913,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(SOLICITED_CNTCTS)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -2978,7 +2939,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="binner(TOTAL_CONTACTS)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -3081,7 +3041,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="INV_binner_condition_SELF_INIT_CNTCTS">
         <in
             xsi:type="Contract:DataField"
@@ -3184,7 +3143,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="binner(SOLICITED_CNTCTS)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -3420,7 +3378,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(TERRITORY)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -3446,7 +3403,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="binner(TERRITORY)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -3724,7 +3680,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(satscore)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -3751,7 +3706,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="binner(satscore)_INV_condition">
         <in
             xsi:type="Contract:DataField"
@@ -3890,7 +3844,7 @@
       <datafield
           xsi:type="Workflow:Continuous"
           name="binner(avg_income)_input_dataField"
-          dataType="Integer"
+          dataType="Float"
           displayName="avg_income"
           out="//@dataprocessing.13/@outputPort.0/@datafield.0">
         <continuousDef
@@ -3992,7 +3946,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.1"/>
       <contract
           xsi:type="Contract:ValueRange"
-          type="POSTCONDITION"
           name="binner(avg_income)_POST_valueRange"
           belongOp="NOTBELONG">
         <in
@@ -4019,7 +3972,6 @@
           href="library_validation.xmi#//@dataprocessingdefinition.7/@contractdefinition.2"/>
       <contract
           xsi:type="Contract:Condition"
-          type="INVARIANT"
           name="binner(avg_income)_INV_condition">
         <in
             xsi:type="Contract:DataField"
