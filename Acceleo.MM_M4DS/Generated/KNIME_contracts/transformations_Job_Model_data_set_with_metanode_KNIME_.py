@@ -35,9 +35,9 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='IRSCHOOL')
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='ETHNICITY')
 	
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='IRSCHOOL', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='ETHNICITY', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='sex', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='IRSCHOOL', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df, field='ETHNICITY', expected_type=DataType.STRING)
 	
 
 	imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_transformed=imputeMissingByMostFrequent_sex_IRISCHOOL_ETHNICITY__input_dataDictionary_df.copy()
@@ -84,8 +84,8 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2')
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_1')
 	
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_1', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_2', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_df, field='ACADEMIC_INTEREST_1', expected_type=DataType.STRING)
 	
 
 	imputeMissingByFixValue_ACADEMIC_INTEREST_2_ACADEMIC_INTEREST_1__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/missing_output_dataDictionary.parquet')
@@ -130,8 +130,8 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income')
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='distance')
 	
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income', expected_type=DataType.Double)
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='distance', expected_type=DataType.Double)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='avg_income', expected_type=DataType.DOUBLE)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByMean_avg_income_distance__input_dataDictionary_df, field='distance', expected_type=DataType.DOUBLE)
 	
 
 	imputeMissingByMean_avg_income_distance__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/missing_output_dataDictionary.parquet')
@@ -168,7 +168,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df, field='satscore')
 	
-	data_smells.check_types_as_string(data_dictionary=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df, field='satscore', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=imputeMissingByLinearInterpolation_satscore__input_dataDictionary_df, field='satscore', expected_type=DataType.INTEGER)
 	
 
 	imputeMissingByLinearInterpolation_satscore__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/missing_output_dataDictionary.parquet')
@@ -197,7 +197,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=rowFilterRange_init_span__input_dataDictionary_df, field='init_span')
 	
-	data_smells.check_types_as_string(data_dictionary=rowFilterRange_init_span__input_dataDictionary_df, field='init_span', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=rowFilterRange_init_span__input_dataDictionary_df, field='init_span', expected_type=DataType.INTEGER)
 	
 
 	rowFilterRange_init_span__input_dataDictionary_transformed=rowFilterRange_init_span__input_dataDictionary_df.copy()
@@ -271,12 +271,12 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='stuemail')
 	data_smells.check_integer_as_floating_point(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='CONTACT_CODE1')
 	
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='TRAVEL_INIT_CNTCTS', expected_type=DataType.Integer)
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='REFERRAL_CNTCTS', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='telecq', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='interest', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='stuemail', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='CONTACT_CODE1', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='TRAVEL_INIT_CNTCTS', expected_type=DataType.INTEGER)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='REFERRAL_CNTCTS', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='telecq', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='interest', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='stuemail', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df, field='CONTACT_CODE1', expected_type=DataType.STRING)
 	
 
 	columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_transformed=columnFilter_TRAVEL_INIT_CNTCTS_REFERRAL_CNCTS_telecq_interest_stuemail_CONTACT_CODE1__input_dataDictionary_df.copy()
@@ -303,7 +303,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=mapping_TERRITORY__input_dataDictionary_df, field='TERRITORY')
 	
-	data_smells.check_types_as_string(data_dictionary=mapping_TERRITORY__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=mapping_TERRITORY__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.STRING)
 	
 
 	input_values_list=['A', 'N']
@@ -336,7 +336,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=mapping_Instate__input_dataDictionary_df, field='Instate')
 	
-	data_smells.check_types_as_string(data_dictionary=mapping_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=mapping_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.STRING)
 	
 
 	input_values_list=['Y', 'N']
@@ -375,8 +375,8 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='TERRITORY')
 	data_smells.check_integer_as_floating_point(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='Instate')
 	
-	data_smells.check_types_as_string(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.String)
-	data_smells.check_types_as_string(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.STRING)
+	data_smells.check_types_as_string(data_dictionary=stringToNumber_TERRITORY_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.STRING)
 	
 
 	stringToNumber_TERRITORY_Instate__input_dataDictionary_transformed=stringToNumber_TERRITORY_Instate__input_dataDictionary_df.copy()
@@ -421,9 +421,9 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='distance')
 	data_smells.check_integer_as_floating_point(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='Instate')
 	
-	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='avg_income', expected_type=DataType.Double)
-	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='distance', expected_type=DataType.Double)
-	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.String)
+	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='avg_income', expected_type=DataType.DOUBLE)
+	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='distance', expected_type=DataType.DOUBLE)
+	data_smells.check_types_as_string(data_dictionary=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df, field='Instate', expected_type=DataType.STRING)
 	
 
 	imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_transformed=imputeOutlierByClosest_avg_income_distance_Instate__input_dataDictionary_df.copy()
@@ -482,9 +482,9 @@ def generateWorkflow():
 	data_smells.check_integer_as_floating_point(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SELF_INIT_CNTCTS')
 	data_smells.check_integer_as_floating_point(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SOLICITED_CNTCTS')
 	
-	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='TOTAL_CONTACTS', expected_type=DataType.Integer)
-	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SELF_INIT_CNTCTS', expected_type=DataType.Integer)
-	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SOLICITED_CNTCTS', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='TOTAL_CONTACTS', expected_type=DataType.INTEGER)
+	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SELF_INIT_CNTCTS', expected_type=DataType.INTEGER)
+	data_smells.check_types_as_string(data_dictionary=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df, field='SOLICITED_CNTCTS', expected_type=DataType.INTEGER)
 	
 
 	binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_transformed=binner_TOTAL_CONTACTS_SELF_INIT_CNTCTS_SOLICITED_CNTCTS__input_dataDictionary_df.copy()
@@ -608,7 +608,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=binner_TERRITORY__input_dataDictionary_df, field='TERRITORY')
 	
-	data_smells.check_types_as_string(data_dictionary=binner_TERRITORY__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=binner_TERRITORY__input_dataDictionary_df, field='TERRITORY', expected_type=DataType.INTEGER)
 	
 
 	binner_TERRITORY__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/numericBinner_output_dataDictionary.parquet')
@@ -690,7 +690,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=binner_satscore__input_dataDictionary_df, field='satscore')
 	
-	data_smells.check_types_as_string(data_dictionary=binner_satscore__input_dataDictionary_df, field='satscore', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=binner_satscore__input_dataDictionary_df, field='satscore', expected_type=DataType.INTEGER)
 	
 
 	binner_satscore__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/numericBinner_output_dataDictionary.parquet')
@@ -761,7 +761,7 @@ def generateWorkflow():
 	
 	data_smells.check_integer_as_floating_point(data_dictionary=binner_avg_income__input_dataDictionary_df, field='avg_income')
 	
-	data_smells.check_types_as_string(data_dictionary=binner_avg_income__input_dataDictionary_df, field='avg_income', expected_type=DataType.Integer)
+	data_smells.check_types_as_string(data_dictionary=binner_avg_income__input_dataDictionary_df, field='avg_income', expected_type=DataType.INTEGER)
 	
 
 	binner_avg_income__input_dataDictionary_transformed=pd.read_parquet('/wf_validation_contracts/data/numericBinner_output_dataDictionary.parquet')

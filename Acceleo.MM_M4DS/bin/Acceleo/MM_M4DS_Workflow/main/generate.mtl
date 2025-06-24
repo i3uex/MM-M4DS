@@ -1616,7 +1616,7 @@ data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceA
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType/])
+data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/])
 	[/for]
 [/for]
 [/template]
