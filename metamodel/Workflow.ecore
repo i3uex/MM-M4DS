@@ -26,6 +26,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataProcessingDefinition"
         lowerBound="1" eType="ecore:EClass Library.ecore#//DataProcessingDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="origin_function" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Link">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -115,7 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="missingValues" upperBound="-1"
         eType="#//ValueField" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="#//DataField"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" upperBound="-1" eType="#//DataField"
         eOpposite="#//DataField/out"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="#//DataField"
         eOpposite="#//DataField/in"/>
@@ -130,10 +131,7 @@
         eType="ecore:EClass Library.ecore#//ContinuousDef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
         upperBound="-1" eType="#//Interval" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thousandsSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="&quot;&quot;"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalSep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="."/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numDecimals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -245,6 +243,8 @@
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contract" upperBound="-1"
         eType="#//Contract" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial_accumulated_processing"
+        eType="#//DataProcessing"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Test">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

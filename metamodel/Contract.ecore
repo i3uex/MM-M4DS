@@ -2,17 +2,11 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Contract" nsURI="https://www.example.org/contract" nsPrefix="Contract">
   <eClassifiers xsi:type="ecore:EClass" name="Contract" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContractType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" upperBound="-1"
         eType="#//Object" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="out" upperBound="-1" eType="#//Object"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ContractType">
-    <eLiterals name="PRECONDITION"/>
-    <eLiterals name="POSTCONDITION" value="1"/>
-    <eLiterals name="INVARIANT" value="2" literal="INVARIANT"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Condition" eSuperTypes="#//Contract">
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionDef" lowerBound="1"

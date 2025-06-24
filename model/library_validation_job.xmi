@@ -212,6 +212,7 @@
         name="rowFilterPrimitive_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterPrimitive_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -281,6 +282,7 @@
         name="columnFilter_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="columnFilter_INV_condition">
         <in
             xsi:type="ContractDefinition:DataDictionaryDef"
@@ -484,6 +486,7 @@
         name="categoricalToContinuous_specialValue_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="categoricalToContinuous_specialValue_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -508,9 +511,37 @@
       </contractDefinition>
     </contractdefinition>
     <contractdefinition
+        name="categoricalToContinuous_castType_PRECONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          name="categoricalToContinuous_castType_PRE_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="categoricalToContinuous_PRE_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:CastTypeDef"
+            name="categoricalToContinuous_PRE_castType"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="categoricalToContinuous_castType_POSTCONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          type="POSTCONDITION"
+          name="categoricalToContinuous_castType_POST_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="categoricalToContinuous_POST_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:CastTypeDef"
+            name="categoricalToContinuous_POST_castType"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
         name="categoricalToContinuous_castType_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="categoricalToContinuous_castType_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -519,14 +550,14 @@
             xsi:type="ContractDefinition:DataFieldDef"
             name="categoricalToContinuous_castType_INV_output_datafield"/>
         <thendefinition
-            ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
+            ifdefinition="//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@ifdefinition.0"
             name="categoricalToContinuous_castType_INV_THEN">
           <dataResult
               xsi:type="ContractDefinition:CastTypeDef"
               name="categoricalToContinuous_castType_INV_valueResult"/>
         </thendefinition>
         <ifdefinition
-            thendefinition="//@dataprocessingdefinition.6/@contractdefinition.1/@contractDefinition/@thendefinition.0"
+            thendefinition="//@dataprocessingdefinition.6/@contractdefinition.3/@contractDefinition/@thendefinition.0"
             name="categoricalToContinuous_castType_INV_IF">
           <dataCondition
               xsi:type="ContractDefinition:CastTypeDef"
@@ -655,8 +686,7 @@
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="rowFilterRange_POST_valueRange"
-          belongOp="NOTBELONG">
+          name="rowFilterRange_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="rowFilterRange_POST_input_dataField"/>
@@ -669,6 +699,7 @@
         name="rowFilterRange_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterRange_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -711,6 +742,9 @@
       in="//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"
       out="//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0">
     <parameterdefinition
+        xsi:type="Library:DerivedFieldDef"
+        name="mathOperation_param_derived_field"/>
+    <parameterdefinition
         xsi:type="Library:MathOpDef"
         name="mathOperation_param_mathop">
       <operandDef
@@ -728,8 +762,7 @@
         name="mathOperation_PRECONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          name="mathOperation_PRE_valueRange"
-          belongOp="NOTBELONG">
+          name="mathOperation_PRE_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="mathOperation_PRE_input_datafield"/>
@@ -743,8 +776,7 @@
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
           type="POSTCONDITION"
-          name="mathOperation_POST_valueRange"
-          belongOp="NOTBELONG">
+          name="mathOperation_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="mathOperation_POST_input_datafield"/>
@@ -786,6 +818,19 @@
               xsi:type="ContractDefinition:IntervalDef"
               name="mathOperation_INV_valueCondition"/>
         </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition
+        name="mathOperation_zeroDivision_PRECONDITION">
+      <contractDefinition
+          xsi:type="ContractDefinition:ValueRangeDefinition"
+          name="mathOperation_zeroDivision_PRE_valueRange">
+        <in
+            xsi:type="ContractDefinition:DataFieldDef"
+            name="mathOperation_zeroDivision_PRE_input_datafield"/>
+        <valuedefinition
+            xsi:type="ContractDefinition:FixValueDef"
+            name="mathOperation_zeroDivision_PRE_fix_value"/>
       </contractDefinition>
     </contractdefinition>
     <inputPort
@@ -848,6 +893,7 @@
         name="rowFilterMissing_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="rowFilterMissing_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -903,37 +949,14 @@
           name="join_op_field"
           datafielddefinition="//@dataprocessingdefinition.11/@inputPort.0/@datafielddefinition.0"/>
     </parameterdefinition>
-    <contractdefinition
-        name="join_specialValue_INVARIANT">
-      <contractDefinition
-          xsi:type="ContractDefinition:ConditionDef"
-          name="join_specialValue_INV_condition">
-        <in
-            xsi:type="ContractDefinition:DataFieldDef"
-            name="join_specialValue_INV_input_datafield"/>
-        <out
-            xsi:type="ContractDefinition:DataFieldDef"
-            name="join_specialValue_INV_output_datafield"/>
-        <thendefinition
-            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
-            name="join_specialValue_INV_THEN">
-          <dataResult
-              xsi:type="ContractDefinition:SpecialValueDef"
-              name="join_specialValue_INV_valueResult"/>
-        </thendefinition>
-        <ifdefinition
-            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"
-            name="join_specialValue_INV_IF">
-          <dataCondition
-              xsi:type="ContractDefinition:SpecialValueDef"
-              name="join_specialValue_INV_valueCondition"/>
-        </ifdefinition>
-      </contractDefinition>
-    </contractdefinition>
+    <parameterdefinition
+        xsi:type="Library:DerivedFieldDef"
+        name="join_param_derived_field"/>
     <contractdefinition
         name="join_check_INVARIANT">
       <contractDefinition
           xsi:type="ContractDefinition:ConditionDef"
+          type="INVARIANT"
           name="join_check_INV_condition">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
@@ -942,7 +965,7 @@
             xsi:type="ContractDefinition:DataFieldDef"
             name="join_check_INV_output_datafield"/>
         <thendefinition
-            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@ifdefinition.0"
+            ifdefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@ifdefinition.0"
             name="join_check_INV_THEN">
           <dataResult
               xsi:type="ContractDefinition:JoinDef"
@@ -956,7 +979,7 @@
           </dataResult>
         </thendefinition>
         <ifdefinition
-            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.1/@contractDefinition/@thendefinition.0"
+            thendefinition="//@dataprocessingdefinition.11/@contractdefinition.0/@contractDefinition/@thendefinition.0"
             name="join_check_INV_IF">
           <dataCondition
               xsi:type="ContractDefinition:IntervalDef"

@@ -1170,6 +1170,7 @@
       <matchingvalue
           xsi:type="Workflow:Range"
           name="rowFilterRange(init_span)_param_range"
+          clousure="closedOpen"
           minInfinity="true">
         <rangeDef
             href="library_validation.xmi#//@dataprocessingdefinition.8/@parameterdefinition.1"/>
@@ -1259,6 +1260,7 @@
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0"/>
           <dataCondition
               xsi:type="Contract:Interval"
+              leftMargin="-1000.0"
               closureType="closedClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
@@ -1266,11 +1268,13 @@
         </if>
         <then
             if="//@dataprocessing.4/@contract.2/@contract/@if.0"
-            name="rowFilterRange(init_span)_INV_THEN">
+            name="rowFilterRange(init_span)_INV_THEN"
+            belongOp="NOTBELONG">
           <thenDefinition
               href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0"/>
           <dataResult
               xsi:type="Contract:Interval"
+              leftMargin="-1000.0"
               closureType="closedClosed">
             <intervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.8/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>

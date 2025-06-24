@@ -403,10 +403,15 @@
         href="library_validation.xmi#//@dataprocessingdefinition.1"/>
     <parameter
         xsi:type="Workflow:FixValue"
-        name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue"
-        value="Unknown">
+        name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_fixValue">
       <fixValueDef
           href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0"/>
+      <value
+          name="imputeMissingByFixValue(ACADEMIC_INTEREST_2, ACADEMIC_INTEREST_1)_param_primitive"
+          value="Unknown">
+        <primitiveDef
+            href="library_validation.xmi#//@dataprocessingdefinition.1/@parameterdefinition.0/@value"/>
+      </value>
     </parameter>
     <contract
         name="imputeMissingByFixValue(ACADEMIC_INTEREST_2)_PRECONDITION">
@@ -1102,17 +1107,15 @@
         href="library_validation.xmi#//@dataprocessingdefinition.2"/>
     <parameter
         xsi:type="Workflow:FilterValue"
-        name="rowFilter(init_span)_param_rowFilter"
-        primitive="//@dataprocessing.4/@parameter.1">
+        name="rowFilter(init_span)_param_rowFilter">
       <filterValueDef
           href="library_validation.xmi#//@dataprocessingdefinition.2/@parameterdefinition.0"/>
-    </parameter>
-    <parameter
-        xsi:type="Workflow:Primitive"
-        name="rowFilter(init_span)_param_primitive"
-        value="0">
-      <primitiveDef
-          href="library_validation.xmi#//@dataprocessingdefinition.2/@parameterdefinition.1"/>
+      <primitive
+          name="rowFilter(init_span)_param_primitive"
+          value="0">
+        <primitiveDef
+            href="library_validation.xmi#//@dataprocessingdefinition.2/@parameterdefinition.0/@primitivedef.0"/>
+      </primitive>
     </parameter>
     <contract
         name="rowFilter(init_span)_PRECONDITION">
@@ -1211,10 +1214,10 @@
         xsi:type="Library:Transformation"
         href="library_validation.xmi#//@dataprocessingdefinition.3"/>
     <parameter
-        xsi:type="Workflow:Field"
+        xsi:type="Workflow:FieldRange"
         name="columnFilter(TRAVEL_INIT_CNTCTS, REFERRAL_CNCTS, telecq, interest, stuemail, CONTACT_CODE1)_param_field"
         dataField="//@dataprocessing.5/@inputPort.0/@datafield.0 //@dataprocessing.5/@inputPort.0/@datafield.1">
-      <fieldDef
+      <fieldRangeDef
           href="library_validation.xmi#//@dataprocessingdefinition.3/@parameterdefinition.0"/>
     </parameter>
     <contract
@@ -3711,6 +3714,108 @@
       <dataDictionaryDefinition
           href="library_validation.xmi#//@dataprocessingdefinition.7/@outputPort.0"/>
     </outputPort>
+  </dataprocessing>
+  <dataprocessing
+      name="mappingSubString">
+    <dataProcessingDefinition
+        xsi:type="Library:Transformation"
+        href="library_validation.xmi#//@dataprocessingdefinition.4"/>
+    <parameter
+        xsi:type="Workflow:Map"
+        inValue="-"
+        outvalue=" "
+        mapOperation="SUBSTRING">
+      <mapDefinition
+          href="library_validation.xmi#//@dataprocessingdefinition.4/@parameterdefinition.0"/>
+    </parameter>
+    <contract>
+      <contract
+          xsi:type="Contract:Condition">
+        <if>
+          <valueCondition
+              xsi:type="Contract:FixValue"
+              value="-"
+              SubStr="true"/>
+          <valueCondition
+              xsi:type="Contract:FixValue"
+              value=" "
+              SubStr="true"/>
+        </if>
+      </contract>
+    </contract>
+  </dataprocessing>
+  <dataprocessing
+      name="mathOperationFieldFixValue">
+    <dataProcessingDefinition
+        xsi:type="Library:Transformation"
+        href="library_validation.xmi#//@dataprocessingdefinition.9"/>
+    <parameter
+        xsi:type="Workflow:MathOp">
+      <firstOperand
+          xsi:type="Workflow:OpField"
+          datafield="//@dataprocessing.15/@inputPort.0/@datafield.0">
+        <opFieldDef
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@firstOperand"/>
+      </firstOperand>
+      <secondOperand
+          xsi:type="Workflow:OpFixValue">
+        <value>
+          <primitiveDef
+              href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@secondOperand/@value"/>
+        </value>
+        <opFixValueDef
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0/@secondOperand"/>
+      </secondOperand>
+      <mathOpDef
+          href="library_validation.xmi#//@dataprocessingdefinition.9/@parameterdefinition.0"/>
+    </parameter>
+    <inputPort>
+      <datafield
+          xsi:type="Workflow:Continuous"
+          name="IN">
+        <continuousDef
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@inputPort.0/@datafielddefinition.0"/>
+      </datafield>
+    </inputPort>
+    <outputPort>
+      <datafield
+          xsi:type="Workflow:Continuous"
+          name="OUT">
+        <continuousDef
+            href="library_validation.xmi#//@dataprocessingdefinition.9/@outputPort.0/@datafielddefinition.0"/>
+      </datafield>
+    </outputPort>
+  </dataprocessing>
+  <dataprocessing
+      name="mathOperationFieldField">
+    <dataProcessingDefinition
+        xsi:type="Library:Transformation"
+        href="library_validation.xmi#//@dataprocessingdefinition.10"/>
+    <parameter
+        xsi:type="Workflow:MathOp">
+      <firstOperand
+          xsi:type="Workflow:OpField"
+          datafield="//@dataprocessing.16/@inputPort.0/@datafield.0">
+        <opFieldDef
+            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@firstOperand"/>
+      </firstOperand>
+      <secondOperand
+          xsi:type="Workflow:OpField"
+          datafield="//@dataprocessing.16/@inputPort.0/@datafield.1">
+        <opFieldDef
+            href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0/@secondOperand"/>
+      </secondOperand>
+      <mathOpDef
+          href="library_validation.xmi#//@dataprocessingdefinition.10/@parameterdefinition.0"/>
+    </parameter>
+    <inputPort>
+      <datafield
+          xsi:type="Workflow:Continuous"
+          name="IN1"/>
+      <datafield
+          xsi:type="Workflow:Continuous"
+          name="IN2"/>
+    </inputPort>
   </dataprocessing>
   <link source="//@dataprocessing.0"
       target="//@dataprocessing.1"
