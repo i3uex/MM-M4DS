@@ -52,6 +52,7 @@ def generateWorkflow():
 						[/for]																																[comment CLOSE read all the input datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																								[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]																			[comment OPEN assigns the variable to be of type DataProcessing/]
+	[generateDataSmells(d)/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.oclIsTypeOf(ValueRange))]
 										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
@@ -119,6 +120,7 @@ def generateWorkflow():
 									[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]															[comment OPEN assigns the variables to be a DataProcessing/]
 										[if (ps.oclIsKindOf(DataProcessing))]																				[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 											[let d : DataProcessing = ps.oclAsType(DataProcessing)]															[comment OPEN assigns the variables to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
 													[if (c.contract.oclIsTypeOf(ValueRange))]
 														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -204,6 +206,7 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
 													[if (c.contract.oclIsTypeOf(ValueRange))]
 														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -293,6 +296,7 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]														[comment OPEN checks that the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]								[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
 					[if (c.contract.oclIsTypeOf(ValueRange))]
 						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -370,6 +374,7 @@ generateWorkflow()
 [/if]																															[comment CLOSE checks whether it is the first data processing or not/]
 [if (ps.oclIsKindOf(DataProcessing))]																							[comment OPEN checks that the ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																		[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
 			[if (c.contract.oclIsTypeOf(ValueRange))]
 				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
@@ -452,6 +457,7 @@ def generateWorkflow():
 						[/for]																																[comment CLOSE read all the output datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																								[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]																			[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 								[for (c : Contract | d.contract)]																							[comment OPEN traverse all the contracts in the DataProcessing/]
 									[if (c.contract.oclIsTypeOf(ValueRange))]
 										[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]						[comment OPEN checks if the if the contract is a Precondition/]
@@ -518,6 +524,7 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
 													[if (c.contract.oclIsTypeOf(ValueRange))]
 														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -606,6 +613,7 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]																	[comment OPEN checks if the dataProcessing is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dataP : DataProcessing = pstep.oclAsType(DataProcessing)]													[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 												[for (c : Contract | dataP.contract)]																		[comment OPEN traverse all the contracts in the DataProcessing/]
 													[if (c.contract.oclIsTypeOf(ValueRange))]
 														[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -718,6 +726,7 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]								[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
 				[for (c : Contract | dw.contract)]													[comment OPEN traverse all the contracts in the DataProcessing/]
 					[if (c.contract.oclIsTypeOf(ValueRange))]
 						[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]		[comment OPEN checks if the if the contract is a Precondition/]
@@ -801,6 +810,7 @@ generateWorkflow()
 [/for]																															[comment CLOSE read all the output datasets and store them/]
 [if (ps.oclIsKindOf(DataProcessing))]																							[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																		[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
 		[for (c : Contract | d.contract)]																						[comment OPEN traverse all the contracts in the DataProcessing/]
 			[if (c.contract.oclIsTypeOf(ValueRange))]
 				[if (c.contract.oclAsType(Contract::ValueRange).valueRangeDef.type=ContractType::PRECONDITION)]					[comment OPEN checks if the if the contract is a Precondition/]
@@ -872,6 +882,8 @@ def generateWorkflow():
 						[/for]																											[comment CLOSE read all the input datasets and store them/]
 						[if (ps.oclIsKindOf(DataProcessing))]																			[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 							[let d : DataProcessing = ps.oclAsType(DataProcessing)]														[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
+
 	[generateCallTransformation(d, d)/]
 							[/let]																										[comment CLOSE assigns the variable to be a DataProcessing/]
 						[/if]																											[comment CLOSE checks if the actual ProcessingStep is a DataProcessing/]
@@ -909,6 +921,8 @@ def generateWorkflow():
 									[if (pstep.oclIsKindOf(DataProcessing))]															[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 										[let dp : DataProcessing = pstep.oclAsType(DataProcessing)]										[comment OPEN assigns the variable to be a DataProcessing/]
 											[if (pstep.incoming = null and pstep.outgoing=null)]										[comment OPEN checks if it is isolated/]
+[generateDataSmells(d)/]
+
 [generateCallTransformation(dp, d)/]
 											[/if]																						[comment CLOSE checks if it is isolated/]
 										[/let]																							[comment CLOSE assigns the variable to be a DataProcessing/]
@@ -964,6 +978,8 @@ def generateWorkflow():
 									[if (pstep.incoming = null and pstep.outgoing=null)]												[comment OPEN checks if it is isolated/]
 										[if (pstep.oclIsKindOf(DataProcessing))]														[comment OPEN checks if the original ProcessingStep is a DataProcessing/]
 											[let dp : DataProcessing = pstep.oclAsType(DataProcessing)]									[comment OPEN assigns the variable to be a DataProcessing/]
+[generateDataSmells(d)/]
+
 [generateCallTransformation(dp, d)/]
 											[/let]																						[comment CLOSE assigns the variable to be a DataProcessing/]
 										[/if]																							[comment CLOSE checks if the original ProcessingStep is a DataProcessing/]
@@ -1027,6 +1043,8 @@ generateWorkflow()
 	[let dw : DataProcessing = pstep.oclAsType(DataProcessing)]									[comment OPEN assigns the variable to be a DataProcessing/]
 		[if (ps.oclIsKindOf(DataProcessing))]													[comment OPEN checks if the actual ProcessingStep is a DataProcessing/]
 			[let d_or : DataProcessing = ps.oclAsType(DataProcessing)]							[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d_or)/]
+
 	[generateCallTransformation(dw, d_or)/]
 			[/let]																				[comment CLOSE assigns the variable to be a DataProcessing/]
 		[/if]																					[comment CLOSE checks if the actual ProcessingStep is a DataProcessing/]
@@ -1074,6 +1092,8 @@ generateWorkflow()
 [/if]																																							[comment CLOSE checks if there is an incoming link or not/]
 [if (ps.oclIsKindOf(DataProcessing))]																															[comment OPEN checks if the ProcessingStep is a DataProcessing/]
 	[let d : DataProcessing = ps.oclAsType(DataProcessing)]																										[comment OPEN assigns the variable to be a DataProcessing/]
+	[generateDataSmells(d)/]
+
 	[generateCallTransformation(d, d)/]
 	[/let]																																						[comment CLOSE assigns the variable to be a DataProcessing/]
 [elseif (ps.oclIsKindOf(PMMLModel))]																															[comment OPEN checks if the ProcessingStep is a PMMLModel/]
@@ -1122,7 +1142,6 @@ data_type_input_list=['['/][for (aParameter : Parameter | dataProcessing.paramet
 data_type_output_list=['['/][for (aParameter : Parameter | dataProcessing.parameter) separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (df.dataType=DataType::String)]DataType(0)[elseif (df.dataType=DataType::Time)]DataType(1)[elseif (df.dataType=DataType::Integer)]DataType(2)[elseif (df.dataType=DataType::DateTime)]DataType(3)[elseif (df.dataType=DataType::Boolean)]DataType(4)[elseif (df.dataType=DataType::Double)]DataType(5)[elseif (df.dataType=DataType::Float)]DataType(6)[else]None[/if][/let][/if][/for][']'/]
 map_operation_list=['['/][for (aParameter : Parameter | dataProcessing.parameter)  separator(', ')][if (aParameter.oclIsTypeOf(Map))][let map : Map = aParameter.oclAsType(Map)][if (map.mapOperation=MapOperation::VALUE_MAPPING)]MapOperation(0)[elseif (map.mapOperation=MapOperation::SUBSTRING)]MapOperation(1)[/if][/let][/if][/for][']'/]
 					[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 					[/if]
 [dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=data_transformations.transform_fix_value_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, input_values_list=input_values_list,
 															  output_values_list=output_values_list,
@@ -1212,7 +1231,6 @@ output_values_list=['['/][for (aParameter : Parameter | dataProcessing.parameter
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse all the DataFields in the input DataDictionary (the same as in the output DataDictionary)/]
 missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(', ')][if (df.dataType=DataType::String or df.dataType=DataType::DateTime or df.dataType=DataType::Time)]'[mv.value/]'[else][mv.value/][/if][/for][']'/]
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
 								[if (dataProcessing.dataProcessingDefinition.name='imputeByFixValue')]																	[comment OPEN checks that the DataProcessing is an imputeByFixValue(SpecialValue_FixValue)/]
 					            	[if (imType.oclIsKindOf(FixValue))]																									[comment OPEN checks that the ImputeType is a FixValue/]
@@ -1323,7 +1341,6 @@ data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_
 							[if dd_in.datafield->notEmpty()]																											[comment OPEN checks that there is at least DataField/]
 								[for (df : DataField | dd_in.datafield)]																								[comment OPEN traverse all the DataFields in the input DataDictionary/]
 									[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 									[/if]
 									[for (interval : Interval | binner.interval)]																						[comment OPEN traverse all the intervals in the binner/]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_interval_fix_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
@@ -1371,7 +1388,6 @@ data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]																						[comment OPEN traverse the input DataDictionaries/]
 							[for (df : DataField | dd_in.datafield)]																									[comment OPEN traverse the DataFields/]
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_cast_type(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																data_type_output= [if (cast.type=DataType::String)]DataType(0)[elseif (cast.type=DataType::Time)]DataType(1)[elseif (cast.type=DataType::Integer)]DataType(2)[elseif (cast.type=DataType::DateTime)]DataType(3)[elseif (cast.type=DataType::Boolean)]DataType(4)[elseif (cast.type=DataType::Double)]DataType(5)[elseif (cast.type=DataType::Float)]DataType(6)[else]None[/if],
@@ -1405,7 +1421,6 @@ data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_
 columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
 						[for (df : DataField | dd_in.datafield)]
 							[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 							[/if]
 						[/for]
 							[if (not fValue.primitive->isEmpty())]																										[comment OPEN checks that the list of primitives is not empty/]
@@ -1468,7 +1483,6 @@ closure_type_list_[fValue.filterValueDef.name/]=['['/][for (range : Range | filt
 field_list_[field.fieldDef.name/]=['['/][for (df : DataField | field.dataField) separator (', ')]'[df.displayName/]'[/for][']'/]
 							[for (df : DataField | dd_in.datafield)]
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
 							[/for]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_filter_columns(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
@@ -1500,7 +1514,6 @@ data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_math_operation(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 															[if (mathOp.operator=MathOperator::SUM)]math_op=MathOperator(0)[elseif (mathOp.operator=MathOperator::SUBSTRACT)]math_op=MathOperator(1)[elseif (mathOp.operator=MathOperator::MULTIPLY)]math_op=MathOperator(2)[elseif (mathOp.operator=MathOperator::DIVIDE)]math_op=MathOperator(3)[/if], field_out='[df.displayName/]',
@@ -1535,7 +1548,6 @@ dictionary_[join.joinDef.name/]={[for (operand : Operand | join.operand)][if (op
 						[for (dd_in : DataDictionary | dataProcessing.inputPort)]
 							[for (df : DataField | dd_in.out.datafield)]
 								[if (df.oclIsTypeOf(Continuous) and df.oclAsType(Continuous).numDecimals <> null)]
-data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed, [df.oclAsType(Continuous).numDecimals/], '[df.displayName/]')
 								[/if]
 [dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_join(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
 																dictionary=dictionary_[join.joinDef.name/], field_out='[df.displayName/]')
@@ -1570,6 +1582,43 @@ data_smells.check_precision_consistency([dd_in.name.replaceAll('[(),-/\\s]+', '_
 
 [template public joinOperands(operand : Operand)]
 [if (operand.oclIsKindOf(Field))][let field : Field=operand.oclAsType(Field)], '[field.datafield.displayName/]': True[/let][elseif (operand.oclIsKindOf(FixValue))][let fv : FixValue=operand.oclAsType(FixValue)], '[fv.value.value/]': False[/let][/if][if (operand.next_operand<>null)][joinOperands(operand.next_operand)/][/if]
+[/template]
+
+
+[template public generateDataSmells(dataProcessing : DataProcessing)]
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (df.oclIsKindOf(Continuous) and df.oclAsType(Continuous).numDecimals<>null)]
+data_smells.check_precision_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
+										expected_decimals=[df.oclAsType(Continuous).numDecimals/], field='[df.displayName/]')
+		[/if]
+	[/for]
+[/for]
+
+common_invalid_list=['['/]'inf', '-inf', 'nan'[']'/]
+common_missing_list=['['/]'', '?', '.','null','none','na'[']'/]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+list_missing=['['/][for (v : ValueField | df.missingValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+list_invalid=['['/][for (v : ValueField | df.invalidValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+
+data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, 
+													missing_invalid_list=[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]list_invalid, common_missing_invalid_list=common_invalid_list[elseif (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]list_missing, common_missing_invalid_list=common_missing_list[else]['['/][']'/], common_missing_invalid_list=common_missing_list[/if], field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType/])
+	[/for]
+[/for]
 [/template]
 
 
