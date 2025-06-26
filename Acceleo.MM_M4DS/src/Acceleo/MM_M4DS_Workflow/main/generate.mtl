@@ -2,11 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-<<<<<<< HEAD
-[module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'http://www.example.org/Library', 'https://www.example.org/environment')]
-=======
 [module generate('https://www.example.org/workflow', 'https://www.example.org/contract', 'http://www.example.org/Library', 'https://www.example.org/environment', 'https://www.example.org/contractDef')]
->>>>>>> develop
 
 [import Acceleo::MM_M4DS_contract::main::generate/]
 
