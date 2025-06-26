@@ -30,7 +30,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
     <eLiterals name="String"/>
@@ -56,16 +55,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="FilterValueDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FilterValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchingvaluedef" upperBound="-1"
-        eType="#//MatchingValueDef"/>
+        eType="#//MatchingValueDef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primitivedef" upperBound="-1"
-        eType="#//PrimitiveDef"/>
+        eType="#//PrimitiveDef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MatchingValueDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="RangeDef" eSuperTypes="#//MatchingValueDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//Range"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MissingValuesDef" eSuperTypes="#//MatchingValueDef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//MissingValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//SpecialValues"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DiscretizeBinDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DiscretizeBin"/>
@@ -94,16 +93,37 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContinuousDef" eSuperTypes="#//DataFieldDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Continuous"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateDef" eSuperTypes="#//DataFieldDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Date"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValueDef" eSuperTypes="#//ImputeTypeDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DerivedValue"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumOpDef" eSuperTypes="#//ImputeTypeDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//NumOp"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FixValueDef" eSuperTypes="#//ImputeTypeDef">
+  <eClassifiers xsi:type="ecore:EClass" name="FixValueDef" eSuperTypes="#//ImputeTypeDef #//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FixValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//PrimitiveDef"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldDef" eSuperTypes="#//ParameterDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldRangeDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//FieldRange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MathOpDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//MathOp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operandDef" lowerBound="2"
+        upperBound="2" eType="#//OperandDef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinDef" eSuperTypes="#//ParameterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Join"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operandDef" lowerBound="1"
+        upperBound="-1" eType="#//OperandDef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperandDef" abstract="true" eSuperTypes="#//ParameterDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldDef" eSuperTypes="#//OperandDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//OpField"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datafielddefinition" lowerBound="1"
+        eType="#//DataFieldDefinition"/>
   </eClassifiers>
 </ecore:EPackage>
