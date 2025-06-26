@@ -19,16 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-<<<<<<< HEAD
-Export-Package: Acceleo.MM_M4DS_Library,
- Acceleo.MM_M4DS_Library.main,
- Acceleo.MM_M4DS_Workflow,
- Acceleo.MM_M4DS_Workflow.main,
- Acceleo.MM_M4DS_contract,
- Acceleo.MM_M4DS_contract.main,
- Acceleo.MM_M4DS_contractDefinition,
- Acceleo.MM_M4DS_contractDefinition.main
-=======
 Export-Package: Acceleo.MM_M4DS_contract,
  Acceleo.MM_M4DS_contract.main,
  Acceleo.MM_M4DS_contractDefinition,
@@ -39,5 +29,4 @@ Export-Package: Acceleo.MM_M4DS_contract,
  Acceleo.MM_M4DS_main.main,
  Acceleo.MM_M4DS_Workflow,
  Acceleo.MM_M4DS_Workflow.main
->>>>>>> develop
 
