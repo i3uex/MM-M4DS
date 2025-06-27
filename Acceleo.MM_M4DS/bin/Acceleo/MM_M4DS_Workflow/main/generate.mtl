@@ -1619,6 +1619,76 @@ data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceA
 data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/])
 	[/for]
 [/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_special_character_spacing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (df.oclIsKindOf(Continuous))]
+			[let cont : Continuous = df.oclAsType(Continuous)]
+				[for (interval : Interval | cont.interval)]
+data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value=[interval.leftMargin/], max_value=[interval.rightMargin/], field='[df.displayName/]')
+				[/for]
+			[/let]
+		[/if]
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (dataProcessing.eContainer(Workflow).environment.storage->first().oclIsKindOf(Folder))]
+			[let folder : Folder = dataProcessing.eContainer(Workflow).environment.storage->first().oclAsType(Folder)]
+data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [if (folder.file->first().csv_decimalSep<>null)]decimal_sep='[folder.file->first().csv_decimalSep/]',[/if] [if (folder.file->first().csv_thousandsSep<>null and folder.file->first().csv_thousandsSep<>'')]thousand_sep='[folder.file->first().csv_thousandsSep/]',[/if] field='[df.displayName/]')
+			[/let]
+		[else]
+data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+		[/if]
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (df.oclIsKindOf(Date))]
+			[let dfDate : Date = df.oclAsType(Date)]
+data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[dfDate.dataType.toString().toUpper()/], field='[df.displayName/]')
+			[/let]
+		[/if]
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+	[/for]
+[/for]
+
+[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+	[for (df : DataField | dd_in.datafield)]
+		[if (df.oclIsKindOf(Date))]
+			[let date : Date = df.oclAsType(Date)]
+				[for (intervalDate : IntervalDate | date.interval)]
+data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]')
+				[/for]
+			[/let]
+		[/if]
+	[/for]
+[/for]
 [/template]
 
 
@@ -1918,7 +1988,7 @@ from pandas import json_normalize
 			[for (fi : File | f.file)]																						[comment OPEN traverse the files in the folder/]
 				
 				[if (fi.type=FileType::CSV)]																				[comment OPEN checks if the file is csv/]
-[fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]'[if (fi.csv_thousandsSep<>'""')], thousands = '[fi.csv_thousandsSep/]'[/if], decimal = '[fi.csv_decimalSep/]')
+[fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_csv('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].csv[/if]', sep = '[fi.csv_sep/]'[if (fi.csv_thousandsSep<>null and fi.csv_thousandsSep<>'')], thousands = '[fi.csv_thousandsSep/]'[/if][if (fi.csv_decimalSep<>null)], decimal = '[fi.csv_decimalSep/]'[/if])
 [fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/].to_parquet('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][fi.dataDictionary.fileName.trim()/].parquet[/if]')
 				[elseif (fi.type=FileType::EXCEL)]																			[comment OPEN checks if the file is excel/]
 [fi.dataDictionary.name.replaceAll('[(),-/\\s]+', '_')/]=pd.read_excel('[if (aWorkflow.environment.path.startsWith('.'))][aWorkflow.environment.path.replaceFirst('./', '/')/][else][aWorkflow.environment.path/][/if]/data/[if (fi.dataDictionary.fileName.trim().indexOf('.')>0)][fi.dataDictionary.fileName.trim()/][else][fi.dataDictionary.fileName.trim()/].xlsx[/if]')
