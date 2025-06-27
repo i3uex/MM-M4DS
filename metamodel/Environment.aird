@@ -8,7 +8,7 @@
     <semanticResources>ContractDef.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_ApPC8H9kEe-AmY73InPaCQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BEro0H9kEe-AmY73InPaCQ" name="Environment class diagram" repPath="#_BEmJQH9kEe-AmY73InPaCQ" changeId="1750238656686">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BEro0H9kEe-AmY73InPaCQ" name="Environment class diagram" repPath="#_BEmJQH9kEe-AmY73InPaCQ" changeId="1751027438229">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Environment.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -386,7 +386,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_HZOas5EYEe-fB6vaxdGvSw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_HZMlgZEYEe-fB6vaxdGvSw" fontName="Ubuntu" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HZMlgpEYEe-fB6vaxdGvSw" x="795" y="448" width="188" height="120"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HZMlgpEYEe-fB6vaxdGvSw" x="786" y="448" width="207" height="119"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_PdfMEJEYEe-fB6vaxdGvSw" type="2003" element="_PdOGUJEYEe-fB6vaxdGvSw">
           <children xmi:type="notation:Node" xmi:id="_PdfME5EYEe-fB6vaxdGvSw" type="5007"/>
@@ -701,7 +701,7 @@
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_KMLqgZEYEe-fB6vaxdGvSw" routing="Tree"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_KMLqgpEYEe-fB6vaxdGvSw" fontName="Ubuntu" fontHeight="8"/>
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KMLqg5EYEe-fB6vaxdGvSw" points="[0, -50, -2, 152]$[2, -202, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KMNfsJEYEe-fB6vaxdGvSw" id="(0.3172043010752688,0.41525423728813554)"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KMNfsJEYEe-fB6vaxdGvSw" id="(0.33170731707317075,0.4188034188034187)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KMNfsZEYEe-fB6vaxdGvSw" id="(0.41581632653061223,0.12318840579710146)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_RrxBgJEYEe-fB6vaxdGvSw" type="4001" element="_RrvMVpEYEe-fB6vaxdGvSw" source="_PdfMEJEYEe-fB6vaxdGvSw" target="_qAXf0JBSEe-YY63I5wA7XA">
@@ -830,7 +830,7 @@
           <styles xmi:type="notation:FontStyle" xmi:id="_lL-l4pElEe-ImtuUEfVO0g" fontColor="7490599" fontName="Ubuntu" fontHeight="8"/>
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_lL-l45ElEe-ImtuUEfVO0g" points="[4, -4, -133, -253]$[118, -4, -19, -253]$[118, 249, -19, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lL-l6pElEe-ImtuUEfVO0g" id="(0.9726027397260274,0.4696969696969697)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lL-l65ElEe-ImtuUEfVO0g" id="(0.20967741935483872,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lL-l65ElEe-ImtuUEfVO0g" id="(0.2341463414634146,0.0)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_riEn0J2zEe-Xns69up0PgQ" type="4001" element="_riCy9J2zEe-Xns69up0PgQ" source="_OxgmgJ2zEe-Xns69up0PgQ" target="_CKpLW39kEe-AmY73InPaCQ">
           <children xmi:type="notation:Node" xmi:id="_riEn1J2zEe-Xns69up0PgQ" type="6001">
@@ -1610,7 +1610,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_VfQ7cEwcEfC1ENQRgg52zg" name="csv_thousandsSep : EString = &quot;&quot;" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_VfQ7cEwcEfC1ENQRgg52zg" name="csv_thousandsSep : EString" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Environment.ecore#//File/csv_thousandsSep"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Environment.ecore#//File/csv_thousandsSep"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_UCmTtkwdEfC1ENQRgg52zg" labelAlignment="LEFT">
