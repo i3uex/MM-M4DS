@@ -1590,7 +1590,7 @@ dictionary_[join.joinDef.name/]={[for (operand : Operand | join.operand)][if (op
 	[for (df : DataField | dd_in.datafield)]
 		[if (df.oclIsKindOf(Continuous) and df.oclAsType(Continuous).numDecimals<>null)]
 data_smells.check_precision_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df,
-										expected_decimals=[df.oclAsType(Continuous).numDecimals/], field='[df.displayName/]')
+										expected_decimals=[df.oclAsType(Continuous).numDecimals/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 		[/if]
 	[/for]
 [/for]
@@ -1604,31 +1604,31 @@ list_missing=['['/][for (v : ValueField | df.missingValues) separator(',')][if (
 list_invalid=['['/][for (v : ValueField | df.invalidValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
 
 data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, 
-													missing_invalid_list=[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]list_invalid, common_missing_invalid_list=common_invalid_list[elseif (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]list_missing, common_missing_invalid_list=common_missing_list[else]['['/][']'/], common_missing_invalid_list=common_missing_list[/if], field='[df.displayName/]')
+													missing_invalid_list=[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]list_invalid, common_missing_invalid_list=common_invalid_list[elseif (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]list_missing, common_missing_invalid_list=common_missing_list[else]['['/][']'/], common_missing_invalid_list=common_missing_list[/if], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/])
+data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/], origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_special_character_spacing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_special_character_spacing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
@@ -1637,7 +1637,7 @@ data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),
 		[if (df.oclIsKindOf(Continuous))]
 			[let cont : Continuous = df.oclAsType(Continuous)]
 				[for (interval : Interval | cont.interval)]
-data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value=[interval.leftMargin/], max_value=[interval.rightMargin/], field='[df.displayName/]')
+data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value=[interval.leftMargin/], max_value=[interval.rightMargin/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 				[/for]
 			[/let]
 		[/if]
@@ -1646,7 +1646,7 @@ data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
@@ -1654,10 +1654,10 @@ data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-
 	[for (df : DataField | dd_in.datafield)]
 		[if (dataProcessing.eContainer(Workflow).environment.storage->first().oclIsKindOf(Folder))]
 			[let folder : Folder = dataProcessing.eContainer(Workflow).environment.storage->first().oclAsType(Folder)]
-data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [if (folder.file->first().csv_decimalSep<>null)]decimal_sep='[folder.file->first().csv_decimalSep/]',[/if] [if (folder.file->first().csv_thousandsSep<>null and folder.file->first().csv_thousandsSep<>'')]thousand_sep='[folder.file->first().csv_thousandsSep/]',[/if] field='[df.displayName/]')
+data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, [if (folder.file->first().csv_decimalSep<>null)]decimal_sep='[folder.file->first().csv_decimalSep/]',[/if] [if (folder.file->first().csv_thousandsSep<>null and folder.file->first().csv_thousandsSep<>'')]thousand_sep='[folder.file->first().csv_thousandsSep/]',[/if] field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 			[/let]
 		[else]
-data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 		[/if]
 	[/for]
 [/for]
@@ -1666,7 +1666,7 @@ data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll(
 	[for (df : DataField | dd_in.datafield)]
 		[if (df.oclIsKindOf(Date))]
 			[let dfDate : Date = df.oclAsType(Date)]
-data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[dfDate.dataType.toString().toUpper()/], field='[df.displayName/]')
+data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[dfDate.dataType.toString().toUpper()/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 			[/let]
 		[/if]
 	[/for]
@@ -1674,7 +1674,7 @@ data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
-data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]')
+data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 	[/for]
 [/for]
 
@@ -1683,7 +1683,7 @@ data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceA
 		[if (df.oclIsKindOf(Date))]
 			[let date : Date = df.oclAsType(Date)]
 				[for (intervalDate : IntervalDate | date.interval)]
-data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]')
+data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 				[/for]
 			[/let]
 		[/if]
