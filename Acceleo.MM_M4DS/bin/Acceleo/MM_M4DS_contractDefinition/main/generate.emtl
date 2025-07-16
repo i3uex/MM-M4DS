@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
   <mtl:Module name="generate" nsURI="Acceleo::MM_M4DS_contractDefinition::main::generate" startHeaderPosition="83" endHeaderPosition="221">
     <documentation xsi:type="mtl:ModuleDocumentation">
-      <body startPosition="32" endPosition="80" value="&#xD;&#xA;The documentation of the module generate.&#xD;&#xA;&#xD;&#xA;"/>
+      <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
     </documentation>
     <input>
       <takesTypesFrom href="https://www.example.org/contractDef#/"/>
@@ -10,7 +10,7 @@
     <ownedModuleElement xsi:type="mtl:Template" name="generateContractDef" visibility="Public">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="145" endPosition="221" value="&#xD;&#xA;The documentation of the template generateElement.&#xD;&#xA;@param aLibrary&#xD;&#xA;&#xD;&#xA;"/>
+        <body startPosition="145" endPosition="221" value="&#xA;The documentation of the template generateElement.&#xA;@param aLibrary&#xA;&#xA;"/>
         <parametersDocumentation name="aLibrary">
           <body value=""/>
         </parametersDocumentation>
