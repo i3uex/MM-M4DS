@@ -1600,8 +1600,12 @@ common_missing_list=['['/]'', '?', '.','null','none','na'[']'/]
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
+		[if (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]
 list_missing=['['/][for (v : ValueField | df.missingValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+		[/if]
+		[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]
 list_invalid=['['/][for (v : ValueField | df.invalidValues) separator(',')][if (df.dataType=DataType::Integer or df.dataType=DataType::Float or df.dataType=DataType::Boolean or df.dataType=DataType::Double)][v.value/][else]'[v.value/]'[/if][/for][']'/]
+		[/if]
 
 data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, 
 													missing_invalid_list=[if (df.missingValues->isEmpty() and not df.invalidValues->isEmpty())]list_invalid, common_missing_invalid_list=common_invalid_list[elseif (not df.missingValues->isEmpty() and df.invalidValues->isEmpty())]list_missing, common_missing_invalid_list=common_missing_list[else]['['/][']'/], common_missing_invalid_list=common_missing_list[/if], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
