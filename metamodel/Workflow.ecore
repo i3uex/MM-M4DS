@@ -133,21 +133,9 @@
         upperBound="-1" eType="#//Interval" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numDecimals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
-        eType="#//IntervalDate" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dateDef" lowerBound="1"
-        eType="ecore:EClass Library.ecore#//DateDef" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntervalDate">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Contract">
@@ -287,5 +275,25 @@
         upperBound="-1" eType="#//Operand" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="joinDef" lowerBound="1"
         eType="ecore:EClass Library.ecore#//JoinDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateRange" eSuperTypes="#//MatchingValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"
+        defaultValueLiteral="closedClosed"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rangeDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//DateRangeDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//DataField">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intervaldate" lowerBound="1"
+        upperBound="-1" eType="#//IntervalDate" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dateDef" lowerBound="1"
+        eType="ecore:EClass Library.ecore#//DateDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervalDate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clousure" eType="#//ClosureType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
 </ecore:EPackage>
