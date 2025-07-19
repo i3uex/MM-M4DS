@@ -1616,7 +1616,6 @@ data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.
 	[for (df : DataField | dd_in.datafield)]
 data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/], origin_function="[dataProcessing.origin_function/]")
-data_smells.check_special_character_spacing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
@@ -1626,6 +1625,18 @@ data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceA
 data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value=[interval.leftMargin/], max_value=[interval.rightMargin/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 				[/for]
 			[/let]
+		[elseif (df.oclIsKindOf(Categorical))]
+data_smells.check_number_string_size(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+data_smells.check_special_character_spacing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+data_smells.check_string_casing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+		[elseif (df.oclIsKindOf(Date))]
+			[let date : Date = df.oclAsType(Date)]
+data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[date.dataType.toString().toUpper()/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+				[for (intervalDate : IntervalDate | date.intervaldate)]
+data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+				[/for]
+data_smells.check_suspect_far_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+			[/let]
 		[/if]
 		[if (dataProcessing.eContainer(Workflow).environment.storage->first().oclIsKindOf(Folder))]
 			[let folder : Folder = dataProcessing.eContainer(Workflow).environment.storage->first().oclAsType(Folder)]
@@ -1634,14 +1645,7 @@ data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll(
 		[else]
 data_smells.check_separating_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 		[/if]
-		[if (df.oclIsKindOf(Date))]
-			[let date : Date = df.oclAsType(Date)]
-data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[date.dataType.toString().toUpper()/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
-				[for (intervalDate : IntervalDate | date.interval)]
-data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
-				[/for]
-			[/let]
-		[/if]
+		
 	[/for]
 [/for]
 [/template]
