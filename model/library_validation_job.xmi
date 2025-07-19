@@ -1028,7 +1028,8 @@
         name="rowFilterDateRange_POSTCONDITION">
       <contractDefinition
           xsi:type="ContractDefinition:ValueRangeDefinition"
-          type="POSTCONDITION">
+          type="POSTCONDITION"
+          name="rowFilterDateRange_POST_valueRange">
         <in
             xsi:type="ContractDefinition:DataFieldDef"
             name="rowFilterDateRange_POST_input_dataField"/>
