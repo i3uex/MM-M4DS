@@ -4,9 +4,10 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:Contract="https://www.example.org/contract"
+    xmlns:Environment="https://www.example.org/environment"
     xmlns:Library="http://www.example.org/Library"
     xmlns:Workflow="https://www.example.org/workflow"
-    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
+    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="join_example">
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
@@ -178,4 +179,21 @@
       </contract>
     </contract>
   </dataprocessing>
+  <environment
+      xsi:type="Environment:Local"
+      name="test_docker_refactor"
+      path="./wf_validation_contracts"
+      containerName="docker-contracts"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
+    <storage
+        xsi:type="Environment:LocalFolder"
+        storageName="dataset1"
+        folderPath="../knime_dataDictionaries">
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
+    </storage>
+    <developmentTool
+        version="3.11"/>
+  </environment>
 </Workflow:Workflow>

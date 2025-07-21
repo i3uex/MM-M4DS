@@ -4,9 +4,10 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:Contract="https://www.example.org/contract"
+    xmlns:Environment="https://www.example.org/environment"
     xmlns:Library="http://www.example.org/Library"
     xmlns:Workflow="https://www.example.org/workflow"
-    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
+    xsi:schemaLocation="https://www.example.org/contract ../metamodel/Contract.ecore https://www.example.org/environment ../metamodel/Environment.ecore http://www.example.org/Library ../metamodel/Library.ecore https://www.example.org/workflow ../metamodel/Workflow.ecore"
     name="rowFilterDateRange_example">
   <dataprocessing
       xsi:type="Workflow:DataProcessing"
@@ -25,8 +26,8 @@
           displayName="track_album_release_date"
           out="//@dataprocessing.0/@outputPort.0/@datafield.0">
         <intervaldate
-            rightMargin="2025-07-20T00:00:00.000+0200"
-            leftMargin="2025-07-19T00:00:00.000+0200"/>
+            rightMargin="2025-07-20"
+            leftMargin="2025-07-19"/>
         <dateDef
             href="library_validation.xmi#//@dataprocessingdefinition.12/@inputPort.0/@datafielddefinition.0"/>
       </datafield>
@@ -44,9 +45,9 @@
           displayName="track_album_release_date"
           in="//@dataprocessing.0/@inputPort.0/@datafield.0">
         <intervaldate
-            rightMargin="2025-07-20T00:00:00.000+0200"
+            rightMargin="2025-07-20"
             clousure="closedClosed"
-            leftMargin="2025-07-19T00:00:00.000+0200"/>
+            leftMargin="2025-07-19"/>
         <dateDef
             href="library_validation.xmi#//@dataprocessingdefinition.12/@outputPort.0/@datafielddefinition.0"/>
       </datafield>
@@ -61,14 +62,14 @@
         name="rowFilterDateRange(track_album_release_date)_param_filter">
       <filterValueDef
           href="library_validation.xmi#//@dataprocessingdefinition.12/@parameterdefinition.0"/>
-    </parameter>
-    <parameter
-        xsi:type="Workflow:DateRange"
-        name="rowFilterDateRange(track_album_release_date)_param_date"
-        max="1970-07-18T23:00:00.000+0100"
-        min="1956-12-31T23:00:00.000+0100">
-      <rangeDef
-          href="library_validation.xmi#//@dataprocessingdefinition.12/@parameterdefinition.1"/>
+      <matchingvalue
+          xsi:type="Workflow:DateRange"
+          name="rowFilterDateRange(track_album_release_date)_param_date"
+          max="1970-07-18"
+          min="1956-12-31">
+        <rangeDef
+            href="library_validation.xmi#//@dataprocessingdefinition.12/@parameterdefinition.1"/>
+      </matchingvalue>
     </parameter>
     <contract
         name="rowFilterDateRange(track_album_release_date)_PRECONDITION">
@@ -87,8 +88,8 @@
         <value
             xsi:type="Contract:DateInterval"
             closureType="closedClosed"
-            leftMargin="1956-12-31T23:00:00.000+0100"
-            rightMargin="1970-07-18T23:00:00.000+0100">
+            leftMargin="1956-12-31"
+            rightMargin="1970-07-18">
           <dateIntervalDef
               href="library_validation.xmi#//@dataprocessingdefinition.12/@contractdefinition.0/@contractDefinition/@valuedefinition.0"/>
         </value>
@@ -113,8 +114,8 @@
         <value
             xsi:type="Contract:DateInterval"
             closureType="closedClosed"
-            leftMargin="1956-12-31T23:00:00.000+0100"
-            rightMargin="1970-07-18T23:00:00.000+0100">
+            leftMargin="1956-12-31"
+            rightMargin="1970-07-18">
           <dateIntervalDef
               href="library_validation.xmi#//@dataprocessingdefinition.12/@contractdefinition.1/@contractDefinition/@valuedefinition.0"/>
         </value>
@@ -153,8 +154,8 @@
           <dataCondition
               xsi:type="Contract:DateInterval"
               closureType="closedClosed"
-              leftMargin="1956-12-31T23:00:00.000+0100"
-              rightMargin="1970-07-18T23:00:00.000+0100">
+              leftMargin="1956-12-31"
+              rightMargin="1970-07-18">
             <dateIntervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.12/@contractdefinition.2/@contractDefinition/@ifdefinition.0/@dataCondition.0"/>
           </dataCondition>
@@ -168,8 +169,8 @@
           <dataResult
               xsi:type="Contract:DateInterval"
               closureType="closedClosed"
-              leftMargin="1956-12-31T23:00:00.000+0100"
-              rightMargin="1970-07-18T23:00:00.000+0100">
+              leftMargin="1956-12-31"
+              rightMargin="1970-07-18">
             <dateIntervalDef
                 href="library_validation.xmi#//@dataprocessingdefinition.12/@contractdefinition.2/@contractDefinition/@thendefinition.0/@dataResult"/>
           </dataResult>
@@ -177,4 +178,21 @@
       </contract>
     </contract>
   </dataprocessing>
+  <environment
+      xsi:type="Environment:Local"
+      name="test_docker_refactor"
+      path="./wf_validation_contracts"
+      containerName="docker-contracts"
+      imageName="ubuntu-22.04"
+      imageTag="latest">
+    <storage
+        xsi:type="Environment:LocalFolder"
+        storageName="dataset1"
+        folderPath="../knime_dataDictionaries">
+      <file
+          dataDictionary="//@dataprocessing.0/@inputPort.0"/>
+    </storage>
+    <developmentTool
+        version="3.11"/>
+  </environment>
 </Workflow:Workflow>
