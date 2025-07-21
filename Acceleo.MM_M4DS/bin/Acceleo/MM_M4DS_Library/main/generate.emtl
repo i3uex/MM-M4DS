@@ -7,7 +7,7 @@
     <input>
       <takesTypesFrom href="http://www.example.org/Library#/"/>
     </input>
-    <imports href="platform:/resource/Acceleo.MM_M4DS/bin/Acceleo/MM_M4DS_Workflow/main/generate.emtl#/0"/>
+    <imports href="../../MM_M4DS_Workflow/main/generate.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateLibrary" visibility="Public" main="true">
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <documentation xsi:type="mtl:ModuleElementDocumentation">

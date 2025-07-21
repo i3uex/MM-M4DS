@@ -1414,6 +1414,47 @@ missing_values_list=['['/][for (mv : ValueField | df.missingValues) separator(',
 					[/let]																																				[comment CLOSE assigns the variable to be a CastType/]
 				[/if]																																					[comment CLOSE checks that the parameter is a CastType/]
 			[/if]																																						[comment CLOSE checks that the DataProcessing is categoricalToContinuous(StringToNumber)/]
+			[if (dataProcessing.dataProcessingDefinition.name='rowFilterDateRange')]
+				[if (p.oclIsKindOf(FilterValue))]
+					[for (dd_in : DataDictionary | dataProcessing.inputPort)]
+						[let fValue : FilterValue = p.oclAsType(FilterValue)]																							[comment OPEN assigns the variable to be a FilterValue/]
+columns_[fValue.filterValueDef.name/]=['['/][for (df : DataField | dd_in.datafield) separator (', ')]'[df.displayName/]'[/for][']'/]
+							[if (not fValue.matchingvalue->isEmpty())]																									[comment OPEN checks that the list of MatchingValues is not empty/]
+								[let filteredSet : OrderedSet(DateRange) = fValue.matchingvalue->select(e | e.oclIsKindOf(DateRange))]									[comment OPEN assigns to a set only the DateRange/]
+									[if (not filteredSet->isEmpty())]																									[comment OPEN checks that the list of DateRange is not empty/]
+filter_range_left_values_list_[fValue.filterValueDef.name/]=['['/][for (dateRange : DateRange | filteredSet) separator(', ')]pd.Timestamp('[dateRange.min/]')[/for][']'/]
+filter_range_right_values_list_[fValue.filterValueDef.name/]=['['/][for (dateRange : DateRange | filteredSet) separator(', ')]pd.Timestamp('[dateRange.max/]')[/for][']'/]
+closure_type_list_[fValue.filterValueDef.name/]=['['/][for (dateRange : DateRange | filteredSet) separator(', ')]Closure([if (dateRange.clousure=ClosureType::openOpen)]0[elseif(dateRange.clousure=ClosureType::openClosed)]1[elseif(dateRange.clousure=ClosureType::closedOpen)]2[elseif(dateRange.clousure=ClosureType::closedClosed)]3[/if])[/for][']'/]
+
+[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed=data_transformations.transform_filter_rows_date_range(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed,
+																										       columns=columns_[fValue.filterValueDef.name/],
+																										       left_margin_list=filter_range_left_values_list_[fValue.filterValueDef.name/],
+																										       right_margin_list=filter_range_right_values_list_[fValue.filterValueDef.name/],
+																										       filter_type=FilterType([if (fValue.filterType=FilterType::EXCLUDE)]0[else]1[/if]),
+																										       closure_type_list=closure_type_list_[fValue.filterValueDef.name/])
+									[/if]																																[comment CLOSE checks that the list of Range is not empty/]
+								[/let]																																	[comment CLOSE assigns to a set only the Range/]
+							[/if]																																		[comment CLOSE checks that the list of MatchingValues is not empty/]
+						[/let]																																			[comment CLOSE assigns the variable to be a FilterValue/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_transformed
+						[if (dw_modified.dataProcessingDefinition.oclIsKindOf(Library::DataProcessingDefinition))]														[comment OPEN checks if the DataProcessing contains a DataProcessingDefinition/]
+							[let dpd : Library::DataProcessingDefinition = dw_modified.dataProcessingDefinition.oclAsType(Library::DataProcessingDefinition)]			[comment OPEN assigns the variable to be a DataProcessingDefinition/]
+								[if (dpd.oclIsKindOf(Library::Transformation))]																							[comment OPEN checks if the DataProcessingDefinition is a Transformation/]
+									[let libT : Library::Transformation = dpd.oclAsType(Library::Transformation)]														[comment OPEN assigns the variable to be a Transformation/]
+										[if (dataProcessing.eContainer(Workflow).environment.oclIsKindOf(Local))]														[comment OPEN checks if the Environment is Local/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet('[if (dataProcessing.eContainer(Workflow).environment.path.startsWith('.'))][dataProcessing.eContainer(Workflow).environment.path.replaceFirst('./', '/')/][else][dataProcessing.eContainer(Workflow).environment.path/][/if]/data/[if (dd_in.out.fileName.trim().indexOf('.')>0)][dd_in.out.fileName.trim().replaceAll('\\.(.*?)(\\s|$)', '.parquet')/][else][dd_in.out.fileName.trim()/].parquet[/if]')
+										[/if]																															[comment CLOSE checks if the Environment is Local/]
+									[/let]																																[comment CLOSE assigns the variable to be a Transformation/]
+								[elseif (dpd.oclIsKindOf(Library::Job))]																								[comment OPEN checks if the DataProcessingDefinition is a Job/]
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df.to_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])	
+[dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/]_df=pd.read_parquet([dd_in.out.name.replaceAll('[(),-/\\s]+', '_')/])
+								[/if]																																	[comment CLOSE checks if the DataProcessingDefinition is a Transformation or a Job/]
+							[/let]																																		[comment CLOSE assigns the variable to be a DataProcessingDefinition/]
+						[/if]																																			[comment CLOSE checks if the DataProcessing contains a DataProcessingDefinition/]
+					[/for]																																				[comment CLOSE traverse all the input DataDictionaries/]
+				[/if]																																					[comment CLOSE checks that the parameter is a FilterValue/]
+			[/if]								
 			[if (dataProcessing.dataProcessingDefinition.name='rowFilterPrimitive' or dataProcessing.dataProcessingDefinition.name='rowFilterRange' or dataProcessing.dataProcessingDefinition.name='rowFilterMissing')]							[comment OPEN checks that the DataProcessing is rowFilter/]
 				[if (p.oclIsKindOf(FilterValue))]																														[comment OPEN checks that the parameter is a FilterValue/]
 					[for (dd_in : DataDictionary | dataProcessing.inputPort)]
@@ -1633,7 +1674,7 @@ data_smells.check_string_casing(data_dictionary=[dd_in.name.replaceAll('[(),-/\\
 			[let date : Date = df.oclAsType(Date)]
 data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[date.dataType.toString().toUpper()/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 				[for (intervalDate : IntervalDate | date.intervaldate)]
-data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value='[intervalDate.leftMargin/]', max_value='[intervalDate.rightMargin/]', field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+data_smells.check_suspect_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_date='[intervalDate.leftMargin/]', max_date='[intervalDate.rightMargin/]', field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 				[/for]
 data_smells.check_suspect_far_date_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 			[/let]
