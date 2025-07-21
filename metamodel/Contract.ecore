@@ -199,8 +199,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataDictionaryElement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="DateInterval" eSuperTypes="#//RowValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="closureType" eType="#//ClosureType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dateIntervalDef" lowerBound="1"
         eType="ecore:EClass ContractDef.ecore#//DateIntervalDef"/>
   </eClassifiers>
