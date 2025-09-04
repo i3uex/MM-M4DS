@@ -1655,16 +1655,18 @@ data_smells.check_missing_invalid_value_consistency(data_dictionary=[dd_in.name.
 
 [for (dd_in : DataDictionary | dataProcessing.inputPort)]
 	[for (df : DataField | dd_in.datafield)]
+        [if (df.dataType=DataType::Integer)]
 data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
-data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/], origin_function="[dataProcessing.origin_function/]")
-data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+        [elseif (df.dataType=DataType::Date or df.dataType=DataType::DateTime)]
 data_smells.check_date_as_datetime(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_ambiguous_datetime_format(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
-		[if (df.oclIsKindOf(Continuous))]
+		[elseif (df.oclIsKindOf(Continuous))]
 			[let cont : Continuous = df.oclAsType(Continuous)]
 				[for (interval : Interval | cont.interval)]
+data_smells.check_suspect_precision(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_suspect_distribution(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, min_value=[interval.leftMargin/], max_value=[interval.rightMargin/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_intermingled_data_type(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+data_smells.check_integer_as_floating_point(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
                 [/for]
 			[/let]
 		[elseif (df.oclIsKindOf(Categorical))]
@@ -1676,6 +1678,7 @@ data_smells.check_contracted_text(data_dictionary=[dd_in.name.replaceAll('[(),-/
 data_smells.check_abbreviation_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_syntactic_synonym(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
 data_smells.check_ambiguous_value(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
+data_smells.check_types_as_string(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, field='[df.displayName/]', expected_type=DataType.[df.dataType.toString().toUpperCase()/], origin_function="[dataProcessing.origin_function/]")
         [elseif (df.oclIsKindOf(Date))]
 			[let date : Date = df.oclAsType(Date)]
 data_smells.check_date_time_consistency(data_dictionary=[dd_in.name.replaceAll('[(),-/\\s]+', '_')/]_df, expected_type=DataType.[date.dataType.toString().toUpper()/], field='[df.displayName/]', origin_function="[dataProcessing.origin_function/]")
