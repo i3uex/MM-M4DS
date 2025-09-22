@@ -99,4 +99,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="OpFieldDef" eSuperTypes="#//OperandDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//OpField"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateIntervalDef" eSuperTypes="#//ValueDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//DateInterval"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -691,8 +691,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="9.0"
-            rightMargin="202.0"/>
+            leftMargin="9782.0"
+            rightMargin="200002.0"/>
       </datafield>
       <datafield
           xsi:type="Workflow:Continuous"
@@ -703,8 +703,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="0.791"
-            rightMargin="3882.192"
+            leftMargin="0.79"
+            rightMargin="3882.193"
             clousure="closedClosed"/>
       </datafield>
       <dataDictionaryDefinition
@@ -724,8 +724,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="9.0"
-            rightMargin="202.0"/>
+            leftMargin="9782.0"
+            rightMargin="200002.0"/>
       </datafield>
       <datafield
           xsi:type="Workflow:Continuous"
@@ -736,8 +736,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="0.791"
-            rightMargin="3882.192"
+            leftMargin="0.79"
+            rightMargin="3882.193"
             clousure="closedClosed"/>
       </datafield>
       <dataDictionaryDefinition
@@ -2259,8 +2259,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="9.0"
-            rightMargin="202.0"/>
+            leftMargin="9782.0"
+            rightMargin="200002.0"/>
       </datafield>
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2271,8 +2271,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@inputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="0.791"
-            rightMargin="3882.192"
+            leftMargin="0.79"
+            rightMargin="3882.193"
             clousure="closedClosed"/>
       </datafield>
       <datafield
@@ -2303,8 +2303,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="9.0"
-            rightMargin="202.0"/>
+            leftMargin="9782.0"
+            rightMargin="200002.0"/>
       </datafield>
       <datafield
           xsi:type="Workflow:Continuous"
@@ -2315,8 +2315,8 @@
         <continuousDef
             href="library_validation.xmi#//@dataprocessingdefinition.5/@outputPort.0/@datafielddefinition.0"/>
         <interval
-            leftMargin="0.791"
-            rightMargin="3882.192"
+            leftMargin="0.79"
+            rightMargin="3882.193"
             clousure="closedClosed"/>
       </datafield>
       <datafield
@@ -4118,7 +4118,7 @@
     <storage
         xsi:type="Environment:LocalFolder"
         storageName="dataset1"
-        folderPath="/mnt/c/Users/Usuario/PycharmProjects/knime2model_MD4DSP/input_KNIME_workflows/paper_workflows/Model_data_set_with_metanode/knime_dataDictionaries">
+        folderPath="../knime_dataDictionaries">
       <file
           dataDictionary="//@dataprocessing.0/@inputPort.0"/>
       <file

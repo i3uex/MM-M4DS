@@ -433,4 +433,38 @@
       <datafielddefinition xsi:type="Library:CategoricalDef" name="join_output_DataField"/>
     </outputPort>
   </dataprocessingdefinition>
+  <dataprocessingdefinition xsi:type="Library:Transformation" name="rowFilterDateRange" in="//@dataprocessingdefinition.12/@inputPort.0/@datafielddefinition.0" out="//@dataprocessingdefinition.12/@outputPort.0/@datafielddefinition.0">
+    <parameterdefinition xsi:type="Library:FilterValueDef" name="rowFilterDateRange_param_filter"/>
+    <parameterdefinition xsi:type="Library:DateRangeDef" name="rowFilterDateRange_param_date_range"/>
+    <contractdefinition name="rowFilterDateRange_PRECONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" name="rowFilterDateRange_PRE_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilterDateRange_PRE_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:DateIntervalDef" name="rowFilterDateRange_PRE_date_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="rowFilterDateRange_POSTCONDITION">
+      <contractDefinition xsi:type="ContractDefinition:ValueRangeDefinition" type="POSTCONDITION" name="rowFilterDateRange_POST_valueRange">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilterDateRange_POST_input_dataField"/>
+        <valuedefinition xsi:type="ContractDefinition:DateIntervalDef" name="rowFilterDateRange_POST_date_interval"/>
+      </contractDefinition>
+    </contractdefinition>
+    <contractdefinition name="rowFilterDateRange_INVARIANT">
+      <contractDefinition xsi:type="ContractDefinition:ConditionDef" type="INVARIANT" name="rowFilterDateRange_INV_condition">
+        <in xsi:type="ContractDefinition:DataFieldDef" name="rowFilterDateRange_INV_input_dataField"/>
+        <out xsi:type="ContractDefinition:DataFieldDef" name="rowFilterDateRange_INV_output_dataField"/>
+        <thendefinition ifdefinition="//@dataprocessingdefinition.12/@contractdefinition.2/@contractDefinition/@ifdefinition.0" name="rowFilterDateRange_INV_THEN">
+          <dataResult xsi:type="ContractDefinition:DateIntervalDef" name="rowFilterDateRange_INV_valueResult"/>
+        </thendefinition>
+        <ifdefinition thendefinition="//@dataprocessingdefinition.12/@contractdefinition.2/@contractDefinition/@thendefinition.0" name="rowFilterDateRange_INV_IF">
+          <dataCondition xsi:type="ContractDefinition:DateIntervalDef" name="rowFilterDateRange_INV_valueCondition"/>
+        </ifdefinition>
+      </contractDefinition>
+    </contractdefinition>
+    <inputPort name="rowFilterDateRange_input_DataDictionary">
+      <datafielddefinition xsi:type="Library:DateDef" name="rowFilterDateRange_input_DataField"/>
+    </inputPort>
+    <outputPort name="rowFilterDateRange_output_DataDictionary">
+      <datafielddefinition xsi:type="Library:DateDef" name="rowFilterDateRange_output_DataField"/>
+    </outputPort>
+  </dataprocessingdefinition>
 </Library:Library>

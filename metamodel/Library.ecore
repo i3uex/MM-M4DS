@@ -31,15 +31,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="DataType">
-    <eLiterals name="String"/>
-    <eLiterals name="Time" value="1"/>
-    <eLiterals name="Integer" value="2"/>
-    <eLiterals name="DateTime" value="3"/>
-    <eLiterals name="Boolean" value="4"/>
-    <eLiterals name="Double" value="5"/>
-    <eLiterals name="Float" value="6"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MapDef" eSuperTypes="#//ParameterDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Map"/>
   </eClassifiers>
@@ -93,9 +84,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContinuousDef" eSuperTypes="#//DataFieldDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Continuous"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DateDef" eSuperTypes="#//DataFieldDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Date"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedValueDef" eSuperTypes="#//ImputeTypeDef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DerivedValue"/>
   </eClassifiers>
@@ -125,5 +113,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Contract.ecore#//OpField"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datafielddefinition" lowerBound="1"
         eType="#//DataFieldDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateRangeDef" eSuperTypes="#//MatchingValueDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//DateRange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateDef" eSuperTypes="#//DataFieldDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundTo" eType="ecore:EClass Workflow.ecore#//Date"/>
   </eClassifiers>
 </ecore:EPackage>
