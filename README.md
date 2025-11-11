@@ -1,4 +1,3 @@
-
 # MM-M4DSP - Metamodels, Validation library, Models and Code Generation
 
 This repository includes an Eclipse Modeling Framework (EMF) project with the metamodels ContractDef, Library, Environment, Workflow and Contract designs, the validation library specification with different transformations available and its associated contracts. It also includes some models that comply with the Workflow metamodel, which includes the perspective or conceptual model (Workflow), as well as the operational model (Environment).
@@ -126,7 +125,7 @@ prueba_M4DS/
 
 ## Authors
 
-- [Francisco Javier Melchor González](https://www.github.com/franjmelchor)
+- [Fran Melchor](https://www.github.com/franjmelchor)
 - [Carlos Breuer Carrasco](https://www.github.com/carlosbc24)
 - [Carlos Cambero Rojas](https://www.github.com/CCamberoR)
 
